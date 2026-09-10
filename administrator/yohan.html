@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agent-Crypto · Yohan Operator</title>
+  <style>
+    html, body { margin:0; width:100%; height:100%; overflow:hidden; background:#020914; }
+    #yohanApp { display:block; width:100vw; height:100vh; border:0; }
+  </style>
+</head>
+<body>
+  <iframe
+    id="yohanApp"
+    title="Agent-Crypto · Yohan Operator"
+    src="./index.html?view=intermediate&profile=yohan"
+    allow="fullscreen"
+  ></iframe>
+  <script>
+    (() => {
+      "use strict";
+      const frame = document.getElementById("yohanApp");
+      frame.addEventListener("load", () => {
+        try {
+          const doc = frame.contentDocument;
+          if (!doc || doc.getElementById("erithYohanOperatorAdmin406053Script")) return;
+          const script = doc.createElement("script");
+          script.id = "erithYohanOperatorAdmin406053Script";
+          script.src = "./js/yohan-operator-admin-406053.js";
+          script.defer = true;
+          (doc.body || doc.documentElement).appendChild(script);
+        } catch (error) {
+          console.error("Yohan operator profile injection failed", error);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

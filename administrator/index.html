@@ -3,16 +3,49 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="atlas-build" content="40.6.51" />
+  <meta name="atlas-build" content="40.6.53" />
   <meta name="atlas-engine-build" content="38.15.11" />
-  <meta name="administrator-build" content="40.6.51" />
+  <meta name="administrator-build" content="40.6.53" />
   <meta name="administrator-revision" content="V7" />
-  <meta name="administrator-release" content="AETHER FINISHING · DENSITY READABILITY FIDELITY LOCK" />
+  <meta name="administrator-release" content="AETHER UI FINISHING II · SEMANTIC FIT LOCK" />
   <meta name="atlas-runtime-contract" content="runtime-truth-v1" />
-  <meta name="atlas-asset-token" content="market-core-v2.0-alpha-build-40.6.51" />
+  <meta name="atlas-asset-token" content="market-core-v2.0-alpha-build-40.6.53" />
   <meta name="atlas-workspace-profile" content="decision-workspace-multicollector-current-journal" />
-  <title>Agent-Crypto @erith.IA — Build 40.6.51 · Administrator</title>
+  <title>Agent-Crypto @erith.IA — Build 40.6.53 · Administrator</title>
   <meta name="description" content="Observatoire crypto prudent @erith.IA : livecheck, marché, risques, modèle mathématique, anti-FOMO." />
+
+  <!-- 40.6.52 — warm the existing Aether master backplate before explicit operator open.
+       Static presentation asset only: no API fetch, no timer, no observer, no storage. -->
+  <link rel="preload" as="image" type="image/png" fetchpriority="low"
+        href="./assets/aether/aether-observatory-master-fidelity-406049.png"
+        data-aether-backplate-preload-406052="true" />
+  <script id="aetherBackplateWarmCache406052">
+    (() => {
+      const root = document.documentElement;
+      const src = new URL('./assets/aether/aether-observatory-master-fidelity-406049.png', document.baseURI).href;
+      root.dataset.aetherBackplateWarm406052 = 'warming';
+      const image = new Image();
+      image.decoding = 'async';
+      try { image.fetchPriority = 'low'; } catch (_) {}
+      let settled = false;
+      const mark = state => {
+        if (settled) return;
+        settled = true;
+        root.dataset.aetherBackplateWarm406052 = state;
+      };
+      image.addEventListener('load', () => {
+        const decoded = typeof image.decode === 'function' ? image.decode() : Promise.resolve();
+        Promise.resolve(decoded).catch(() => {}).then(() => mark('ready'));
+      }, { once: true });
+      image.addEventListener('error', () => mark('fallback'), { once: true });
+      image.src = src;
+      globalThis.AetherBackplateWarmCache406052 = Object.freeze({
+        src,
+        image,
+        state: () => root.dataset.aetherBackplateWarm406052 || 'unknown'
+      });
+    })();
+  </script>
 
   <script id="atlasFirstPaintRolePreseed40399">
     /* 40.3.99 — FIRST-PAINT ROLE PRESEED
@@ -100,7 +133,7 @@
   <link rel="stylesheet" href="./admin-windows.css" />
   <link rel="stylesheet" href="./admin-visual-assets.css?v=administrator-build-40.4.255" />
   <link rel="stylesheet" href="./admin-ribbons.css?v=administrator-build-40.6.49" />
-  <link rel="stylesheet" href="./aether-406051.css?v=administrator-build-40.6.51" />
+  <link rel="stylesheet" href="./aether-406051.css?v=administrator-build-40.6.53" />
   <link rel="stylesheet" href="./admin-window-menu-uniform.css" />
   <link rel="stylesheet" href="./admin-firefox-compositor.css" />
   <link rel="stylesheet" href="./admin-visual-cache.css" />

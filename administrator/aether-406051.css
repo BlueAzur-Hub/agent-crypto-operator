@@ -455,3 +455,173 @@
   .aether46-core > b,
   .aether46-core > p:nth-of-type(2) { display:none !important; }
 }
+
+/* ========================================================================== 
+   40.6.53 — AETHER UI FINISHING II · SEMANTIC FIT LOCK
+   Presentation only. 40.6.52 preload, 40.6.51 radial geometry and 40.6.46
+   Window Manager behavior are preserved. No stage/card coordinates change.
+   Goal: keep semantic titles and primary values readable before tertiary text
+   is allowed to consume the painted capsule lanes.
+   ========================================================================== */
+
+/* Header contract: semantic title owns the left lane, transient state yields. */
+.aether46-card header span {
+  min-width:0 !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+.aether46-card header b {
+  flex:0 1 auto !important;
+  max-width:42% !important;
+  font-size:clamp(6.5px,.43cqw,8px) !important;
+}
+
+/* Long fixed titles get their own optical fit instead of being cut mid-word. */
+.aether46-card[data-aether-card-406046="events"] header span {
+  flex:1 1 auto !important;
+  max-width:none !important;
+  font-size:clamp(9px,.70cqw,12px) !important;
+  letter-spacing:.008em !important;
+  overflow:visible !important;
+  text-overflow:clip !important;
+}
+.aether46-card[data-aether-card-406046="events"] header b {
+  flex:0 0 auto !important;
+  max-width:none !important;
+  margin-left:.15cqw !important;
+  font-size:clamp(6.5px,.40cqw,7.5px) !important;
+}
+.aether46-card[data-aether-card-406046="market"] header span,
+.aether46-card[data-aether-card-406046="sources"] header span {
+  font-size:clamp(10px,.76cqw,13px) !important;
+  letter-spacing:.018em !important;
+}
+.aether46-card[data-aether-card-406046="oracle"] header span,
+.aether46-card[data-aether-card-406046="weather"] header span {
+  font-size:clamp(9.5px,.72cqw,12px) !important;
+  letter-spacing:.018em !important;
+}
+
+/* Sources: preserve the four-column D, but allocate width by semantic pressure. */
+.aether46-source-metrics {
+  grid-template-columns:.82fr .78fr .82fr 1.22fr !important;
+  gap:.06cqw !important;
+}
+.aether46-source-metrics div { padding-right:.04cqw !important; }
+.aether46-source-metrics small {
+  font-size:clamp(5.8px,.34cqw,6.8px) !important;
+  letter-spacing:-.01em !important;
+}
+.aether46-source-metrics strong {
+  font-size:clamp(8px,.51cqw,10px) !important;
+  letter-spacing:-.01em !important;
+}
+
+/* Market: breadth first, five-coin strip second; dynamic state cannot eat MARCHÉ. */
+.aether46-card[data-aether-card-406046="market"] header b {
+  max-width:38% !important;
+  font-size:clamp(6px,.38cqw,7.5px) !important;
+}
+.aether46-breadth {
+  justify-content:space-between !important;
+  gap:1px !important;
+  font-size:clamp(7px,.43cqw,8.5px) !important;
+}
+.aether46-breadth strong { font-size:clamp(8.5px,.53cqw,10px) !important; }
+.aether46-coins { gap:1px !important; }
+.aether46-coins b { font-size:clamp(6px,.36cqw,7.5px) !important; }
+.aether46-coins strong { font-size:clamp(6px,.38cqw,8px) !important; letter-spacing:-.015em !important; }
+
+/* Events: keep three first-glance rows and reclaim width for the headline. */
+.aether46-events [data-aether46-events] {
+  gap:1px !important;
+  max-height:3.78cqw !important;
+}
+.aether46-event-row {
+  grid-template-columns:1.80cqw 2.20cqw minmax(0,1fr) !important;
+  gap:.12cqw !important;
+}
+.aether46-event-row time,
+.aether46-event-row b,
+.aether46-event-row span {
+  font-size:clamp(6px,.37cqw,7.5px) !important;
+  line-height:1.02 !important;
+}
+
+/* Oracle: four facts remain visible, with width biased toward scenario/confidence. */
+.aether46-oracle-metrics {
+  grid-template-columns:.64fr 1.12fr .92fr 1fr !important;
+  gap:.05cqw !important;
+}
+.aether46-oracle-metrics div { padding-right:.04cqw !important; }
+.aether46-oracle-metrics small {
+  font-size:clamp(5.6px,.33cqw,6.5px) !important;
+  letter-spacing:-.01em !important;
+}
+.aether46-oracle-metrics strong {
+  font-size:clamp(7.5px,.47cqw,9.5px) !important;
+  letter-spacing:-.015em !important;
+}
+.aether46-card[data-aether-card-406046="oracle"] header b {
+  max-width:48% !important;
+  font-size:clamp(6px,.38cqw,7.5px) !important;
+}
+
+/* Weather: preserve all three values; prose remains the first element to yield. */
+.aether46-weather-metrics {
+  grid-template-columns:1.18fr .68fr 1.10fr !important;
+  gap:.08cqw !important;
+}
+.aether46-weather-metrics small {
+  font-size:clamp(5.8px,.34cqw,6.8px) !important;
+  letter-spacing:-.01em !important;
+}
+.aether46-weather-metrics strong {
+  font-size:clamp(8px,.50cqw,10px) !important;
+  letter-spacing:-.01em !important;
+}
+.aether46-card[data-aether-card-406046="weather"] header b {
+  max-width:34% !important;
+  font-size:clamp(6px,.38cqw,7.5px) !important;
+}
+
+/* Top-right status strip: keep operational state + time legible in the normal window. */
+.aether46-system-banner > div:first-child b {
+  font-size:clamp(6.8px,.46cqw,8.5px) !important;
+  letter-spacing:-.01em !important;
+}
+.aether46-system-banner > div:first-child span {
+  font-size:clamp(6.5px,.42cqw,8px) !important;
+  letter-spacing:-.01em !important;
+}
+.aether46-clock small { font-size:clamp(6px,.36cqw,7.5px) !important; }
+.aether46-clock strong { font-size:clamp(12px,.82cqw,16px) !important; }
+
+/* Normal 1200–1380 stage: title legibility is non-negotiable. */
+@container aether49 (max-width: 1380px) {
+  .aether46-card[data-aether-card-406046="events"] header span { font-size:10px !important; }
+  .aether46-card[data-aether-card-406046="market"] header span,
+  .aether46-card[data-aether-card-406046="sources"] header span { font-size:10px !important; }
+  .aether46-card[data-aether-card-406046="oracle"] header span,
+  .aether46-card[data-aether-card-406046="weather"] header span { font-size:9.5px !important; }
+  .aether46-source-metrics strong { font-size:8.2px !important; }
+  .aether46-oracle-metrics strong { font-size:7.8px !important; }
+  .aether46-weather-metrics strong { font-size:8.2px !important; }
+}
+
+/* Compact radial stage: keep fixed semantic titles; transient state yields first. */
+@container aether49 (max-width: 1120px) {
+  .aether46-card[data-aether-card-406046="events"] header span { font-size:9px !important; }
+  .aether46-card[data-aether-card-406046="events"] header b { display:block !important; font-size:6px !important; }
+  .aether46-card[data-aether-card-406046="market"] header span,
+  .aether46-card[data-aether-card-406046="sources"] header span { font-size:9.5px !important; }
+  .aether46-card[data-aether-card-406046="oracle"] header span,
+  .aether46-card[data-aether-card-406046="weather"] header span { font-size:9px !important; }
+  .aether46-source-metrics small,
+  .aether46-oracle-metrics small,
+  .aether46-weather-metrics small { font-size:5.6px !important; }
+  .aether46-source-metrics strong,
+  .aether46-weather-metrics strong { font-size:7.5px !important; }
+  .aether46-oracle-metrics strong { font-size:7px !important; }
+}
+
