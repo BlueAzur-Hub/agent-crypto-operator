@@ -1,0 +1,92 @@
+{
+  "schema": "agent_crypto_classic_presentation_boundaries_v2",
+  "build": "38.15.16",
+  "parent_build": "38.15.15",
+  "mode": "Web Classic",
+  "release": "CLASSIC MODULAR PRESENTATION MIGRATION SEAL",
+  "state": "ALL_DECLARED_CLASSIC_PRESENTATION_BOUNDARIES_EXTRACTED_BOOT_PARITY",
+  "runtime_integration": "PARSER_BLOCKING_TRANSPORT_MIRRORS_NO_FETCH",
+  "purpose": "Complete the Classic presentation-boundary migration without transplanting Administrator-specific UI/runtime owners. Preserve boot-time DOM parity and protected Market Core / CURRENT behavior.",
+  "protected_runtime": {
+    "market_core": "38.15.11",
+    "binance_live": "UNCHANGED",
+    "historical_graph": "UNCHANGED",
+    "atlas_current": "UNCHANGED",
+    "nox": "UNCHANGED",
+    "aerith": "UNCHANGED",
+    "oracle_engine": "UNCHANGED",
+    "learning_01_11": "UNCHANGED",
+    "indexeddb_schema": "UNCHANGED",
+    "bridge_expected": "V1.9.11",
+    "bridge_protocol": "UNCHANGED",
+    "ollama_contract": "UNCHANGED"
+  },
+  "boundaries": [
+    {
+      "id": "atlas",
+      "view": "views/atlas.html",
+      "transport": "js/views/atlas-presentation.js",
+      "state": "EXTRACTED_PARSER_BLOCKING_BOOT_PARITY",
+      "runtime_owner_changed": false
+    },
+    {
+      "id": "oracle",
+      "view": "views/oracle.html",
+      "transport": "js/views/oracle-presentation.js",
+      "state": "EXTRACTED_CLASSIC_ANALYSIS_DECISION_FAMILY_BOOT_PARITY",
+      "note": "Classic has no standalone Administrator Oracle Suite; this boundary contains the native Classic analysis/decision family (multi-horizon through No-FOMO) and imports no Administrator Oracle UI.",
+      "runtime_owner_changed": false
+    },
+    {
+      "id": "operations",
+      "view": "views/operations.html",
+      "transport": "js/views/operations-presentation.js",
+      "state": "EXTRACTED_PREPARATION_OPERATIONS_FAMILY_BOOT_PARITY",
+      "runtime_owner_changed": false
+    },
+    {
+      "id": "system",
+      "view": "views/system.html",
+      "transport": "js/views/system-presentation.js",
+      "state": "EXTRACTED_EXPERIMENTATION_SYSTEM_FAMILY_BOOT_PARITY",
+      "runtime_owner_changed": false
+    },
+    {
+      "id": "projects",
+      "view": "views/projects.html",
+      "transport": "js/views/projects-presentation.js",
+      "state": "EXTRACTED_MISSIONS_PROJECTS_FAMILY_BOOT_PARITY",
+      "runtime_owner_changed": false
+    }
+  ],
+  "runtime_delta": {
+    "dom_extraction": true,
+    "view_fetch": false,
+    "parser_blocking_transport_mount": true,
+    "new_timer": false,
+    "new_observer": false,
+    "new_event_listener": false,
+    "new_websocket": false,
+    "new_network_owner": false,
+    "new_storage_owner": false,
+    "indexeddb_change": false,
+    "atlas_scheduler_change": false,
+    "current_fingerprint_logic_change": false,
+    "oracle_engine_change": false
+  },
+  "seal_scope": "PRESENTATION_ARCHITECTURE_MIGRATION_COMPLETE_RUNTIME_NEUTRAL",
+  "not_claimed": [
+    "No claim of true-lazy hydration for protected analytical/runtime owners.",
+    "No claim that hidden presentation equals stopped engine.",
+    "No import of Administrator-specific Window Manager, chrome, Oracle Suite or runtime hacks."
+  ],
+  "acceptance_gate": [
+    "Build 38.15.16 visible and cache-consistent.",
+    "Classic visual/function parity preserved.",
+    "Market Core 38.15.11 / Binance 5/5 / historical graph intact.",
+    "Atlas CURRENT / NØX / Aerith / IndexedDB intact.",
+    "Bridge V1.9.11 recognized.",
+    "All five declared presentation boundaries reconstruct before app.js boot with identical ID order/count.",
+    "Firefox operator evidence is the final authority for seal acceptance."
+  ]
+}

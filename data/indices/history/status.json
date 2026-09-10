@@ -1,0 +1,50 @@
+{
+  "schema": "agent_crypto_historical_depth_status_v1",
+  "build": "40.4.197",
+  "domain": "indices",
+  "status": "ready",
+  "generated_at": "2026-09-10T07:30:23.057Z",
+  "horizons": {
+    "5a": {
+      "ready": true,
+      "resolution": "1wk",
+      "assets": 5,
+      "min_span_years": 5.009,
+      "max_span_years": 5.012,
+      "min_points": 263,
+      "max_points": 263,
+      "path": "data/indices/history/5a.json"
+    },
+    "10a": {
+      "ready": true,
+      "resolution": "1wk",
+      "assets": 5,
+      "min_span_years": 9.994,
+      "max_span_years": 10.012,
+      "min_points": 522,
+      "max_points": 524,
+      "path": "data/indices/history/10a.json"
+    },
+    "max": {
+      "ready": true,
+      "resolution": "mixed:1mo,3mo",
+      "assets": 5,
+      "min_span_years": 36.53,
+      "max_span_years": 41.774,
+      "min_points": 157,
+      "max_points": 440,
+      "path": "data/indices/history/max.json"
+    }
+  },
+  "integrity": {
+    "no_invented_values": true,
+    "provider_series_preserved": true,
+    "provider_granularity_recorded": true,
+    "horizon_subsets_are_deterministic": true,
+    "coverage_duration_validated": true,
+    "lazy_browser_load_required": true,
+    "boot_payload_forbidden": true,
+    "orders_allowed": false
+  },
+  "errors": []
+}

@@ -1,0 +1,22 @@
+AGENT-CRYPTO 40.4.85 — SAME-LANE AETHER + SYSTEM TRUE-DEMAND
+
+Operator geometry locked from the 28/08 screenshot clarification:
+STATE A — one normal row only:
+[ Relancer ][ Rafraîchir ][ DÉCISION ][ SOURCES ][ DATE / HEURE ]
+
+STATE B — same exact row / same height:
+[ ♥ AETHER · Atlas CURRENT · Oracle · Sources · Book · Dernière veille → ]
+
+Then STATE A returns. There is no permanent second row. The Aether line moves horizontally while visible.
+Implementation is CSS/compositor-only: no new JavaScript interval, scheduler, observer, polling or market fetch.
+The existing ♥ Aether menu button and four-line lazy detail panel are preserved.
+
+Runtime migration continuation:
+- System Storage Health DOM is detached after canonical handlers bind; compact placeholder remains.
+- Grey Plate Forensic DOM is detached after canonical handlers bind; compact placeholder remains.
+- Exact original DOM nodes restore only on explicit operator click/hash demand.
+- Existing Simulation / Commandes / Backend / Safety / Physical Security closed-body residency stays active.
+- No clone, fetch, timer, observer, storage write, schema change or engine OFF is introduced.
+
+Protected unchanged:
+Market Core 38.15.11 · Binance LIVE · Graphique · Target Top 5 · Atlas CURRENT · Oracle engine · Bridge protocol · IndexedDB schemas · Window Manager.

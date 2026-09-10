@@ -1,0 +1,15 @@
+/* 40.6.23 — Aerith-10 Creator portal fallback · presentation only */
+.aerith10-creator-stage{min-height:0!important;height:auto!important;background:linear-gradient(145deg,rgba(12,18,32,.96),rgba(18,15,31,.94))!important;border-color:rgba(223,166,255,.22)!important;padding:0!important}
+.aerith10-creator-hint{display:none!important}
+.aerith10-portal-406023{position:relative;display:grid;gap:15px;min-height:330px;padding:28px clamp(18px,4vw,54px);overflow:hidden;background:radial-gradient(circle at 82% 16%,rgba(233,135,255,.14),transparent 28%),radial-gradient(circle at 16% 84%,rgba(81,220,255,.10),transparent 30%),linear-gradient(135deg,rgba(20,27,49,.96),rgba(12,18,31,.98));color:#dcecf6}
+.aerith10-portal-406023::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.65),transparent 82%)}
+.aerith10-portal-kicker{position:relative;font-size:11px;font-weight:950;letter-spacing:.16em;color:#ffb8e9;text-transform:uppercase}
+.aerith10-portal-406023 h3{position:relative;margin:0;color:#fff0cf;font-size:clamp(20px,2.1vw,30px);line-height:1.15;text-shadow:0 0 18px rgba(255,187,231,.12)}
+.aerith10-portal-copy{position:relative;max-width:920px;margin:0;color:#b9c9da;font-size:12px;line-height:1.55}
+.aerith10-portal-flow{position:relative;display:grid;grid-template-columns:repeat(7,minmax(88px,1fr));gap:7px}
+.aerith10-portal-flow span{display:flex;align-items:center;gap:7px;min-height:44px;padding:8px 9px;border:1px solid rgba(221,168,255,.18);border-radius:11px;background:rgba(7,15,27,.58);color:#cbd8e7;font-size:10px;font-weight:800}
+.aerith10-portal-flow b{display:grid;place-items:center;flex:0 0 24px;height:24px;border-radius:999px;border:1px solid rgba(255,187,231,.28);color:#ffd0ec;background:rgba(194,92,210,.12)}
+.aerith10-portal-actions{position:relative;display:flex;gap:9px;flex-wrap:wrap}.aerith10-portal-actions .btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}.aerith10-portal-forge{border-color:rgba(255,211,118,.24)!important;color:#ffe7a7!important}
+.aerith10-portal-truth{position:relative;padding-top:10px;border-top:1px solid rgba(255,255,255,.07);color:#7f94a7;font-size:9px;letter-spacing:.05em}.aerith10-portal-truth span{color:#d7a6ff;font-weight:900}
+@media(max-width:1100px){.aerith10-portal-flow{grid-template-columns:repeat(4,minmax(100px,1fr))}}
+@media(max-width:700px){.aerith10-portal-406023{padding:20px 14px}.aerith10-portal-flow{grid-template-columns:repeat(2,minmax(110px,1fr))}.aerith10-portal-actions .btn{width:100%}}

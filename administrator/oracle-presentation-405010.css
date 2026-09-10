@@ -1,0 +1,126 @@
+/* Agent-Crypto @erith.IA — 40.5.10
+   ORACLE PRESENTATION + COMPACT M/G THEME TOGGLE LOCK
+   Presentation only. Oracle runtime, Evidence, Source Health and Market Core stay untouched. */
+
+/* Heavy Oracle summaries: icon | title/subtitle stack | action.
+   This corrects the presentation owner only; no Oracle markup is rebuilt. */
+body.atlas-admin-v3 #oracle-analysis-suite .atlas-oracle-suite-subsection > summary.atlas-collapse-summary,
+body.atlas-administrator-mirror #oracle-analysis-suite .atlas-oracle-suite-subsection > summary.atlas-collapse-summary{
+  display:grid!important;
+  grid-template-columns:34px minmax(0,1fr) auto!important;
+  align-items:center!important;
+  column-gap:12px!important;
+  row-gap:2px!important;
+  width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+  padding:12px 16px!important;
+}
+body.atlas-admin-v3 #oracle-analysis-suite .atlas-oracle-suite-subsection > summary .atlas-collapse-icon,
+body.atlas-administrator-mirror #oracle-analysis-suite .atlas-oracle-suite-subsection > summary .atlas-collapse-icon{
+  grid-column:1!important;
+  align-self:center!important;
+  margin:0!important;
+}
+body.atlas-admin-v3 #oracle-analysis-suite .atlas-oracle-suite-subsection > summary .atlas-collapse-copy,
+body.atlas-administrator-mirror #oracle-analysis-suite .atlas-oracle-suite-subsection > summary .atlas-collapse-copy{
+  grid-column:2!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  gap:3px!important;
+  min-width:0!important;
+  width:auto!important;
+  margin:0!important;
+}
+body.atlas-admin-v3 #oracle-analysis-suite .atlas-oracle-suite-subsection > summary .atlas-collapse-title,
+body.atlas-administrator-mirror #oracle-analysis-suite .atlas-oracle-suite-subsection > summary .atlas-collapse-title{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  line-height:1.15!important;
+  white-space:normal!important;
+}
+body.atlas-admin-v3 #oracle-analysis-suite .atlas-oracle-suite-subsection > summary .atlas-collapse-subtitle,
+body.atlas-administrator-mirror #oracle-analysis-suite .atlas-oracle-suite-subsection > summary .atlas-collapse-subtitle{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  line-height:1.25!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+  opacity:.82!important;
+}
+body.atlas-admin-v3 #oracle-analysis-suite .atlas-oracle-suite-subsection > summary .atlas-collapse-state,
+body.atlas-administrator-mirror #oracle-analysis-suite .atlas-oracle-suite-subsection > summary .atlas-collapse-state{
+  grid-column:3!important;
+  justify-self:end!important;
+  align-self:center!important;
+  margin:0!important;
+  white-space:nowrap!important;
+}
+
+/* Keep the validated M/G theme owner compact.
+   M = Metal, G = Glass; handler and storage ownership remain unchanged. */
+body.atlas-administrator-mirror .hero-top .status-stack > #atlasThemeGlassToggle404300{
+  flex:0 0 42px!important;
+  width:42px!important;
+  min-width:42px!important;
+  max-width:42px!important;
+  height:42px!important;
+  min-height:42px!important;
+  padding:0!important;
+  margin:0!important;
+  border-radius:50%!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:hidden!important;
+  white-space:nowrap!important;
+  font-size:0!important;
+  line-height:1!important;
+  letter-spacing:0!important;
+}
+body.atlas-administrator-mirror .hero-top .status-stack > #atlasThemeGlassToggle404300::before{
+  content:"M";
+  display:block;
+  font:950 12px/1 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  letter-spacing:.04em;
+  color:#e8edf1;
+}
+body.atlas-administrator-mirror .hero-top .status-stack > #atlasThemeGlassToggle404300[aria-pressed="true"]::before{
+  content:"G";
+  color:#eaffff;
+}
+body.atlas-administrator-mirror .hero-top .status-stack > .sigil{display:none!important;}
+
+@media (max-width:1200px){
+  body.atlas-administrator-mirror .hero-top .status-stack > #atlasThemeGlassToggle404300{
+    flex-basis:38px!important;
+    width:38px!important;
+    min-width:38px!important;
+    max-width:38px!important;
+    height:38px!important;
+    min-height:38px!important;
+  }
+  body.atlas-admin-v3 #oracle-analysis-suite .atlas-oracle-suite-subsection > summary.atlas-collapse-summary,
+  body.atlas-administrator-mirror #oracle-analysis-suite .atlas-oracle-suite-subsection > summary.atlas-collapse-summary{
+    grid-template-columns:30px minmax(0,1fr) auto!important;
+    column-gap:9px!important;
+    padding:10px 12px!important;
+  }
+}
+@media (max-width:760px){
+  body.atlas-admin-v3 #oracle-analysis-suite .atlas-oracle-suite-subsection > summary.atlas-collapse-summary,
+  body.atlas-administrator-mirror #oracle-analysis-suite .atlas-oracle-suite-subsection > summary.atlas-collapse-summary{
+    grid-template-columns:28px minmax(0,1fr)!important;
+  }
+  body.atlas-admin-v3 #oracle-analysis-suite .atlas-oracle-suite-subsection > summary .atlas-collapse-state,
+  body.atlas-administrator-mirror #oracle-analysis-suite .atlas-oracle-suite-subsection > summary .atlas-collapse-state{
+    grid-column:2!important;
+    justify-self:start!important;
+    font-size:11px!important;
+  }
+}

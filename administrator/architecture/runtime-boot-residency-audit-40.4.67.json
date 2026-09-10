@@ -1,0 +1,60 @@
+{
+  "schema": "agent_crypto_runtime_migration_wave3_atlas_source_lazy_v1",
+  "build": "40.4.67",
+  "parent_build": "40.4.66",
+  "operator_checkpoint_40466": {
+    "status": "STABLE_OPERATOR_ACCEPTANCE",
+    "interaction": "fluid_reactive",
+    "grey_zones": "normal_only",
+    "remaining_issue": "heavy presentation hydration/scroll + cold boot"
+  },
+  "atlas_before": {
+    "transport": "js/views/atlas-presentation.js 40.4.1 generated full markup",
+    "legacy_preprocessor": "js/views/atlas-peripheral-lazy.js",
+    "boot_behavior": "full Atlas string parsed and major DOM inserted before late detach/strip",
+    "transport_bytes_public_reference": 73765
+  },
+  "atlas_after": {
+    "transport": "js/views/atlas-presentation.js 40.4.67 shell + source lazy",
+    "legacy_preprocessor_loaded": false,
+    "boot_full_atlas_markup": false,
+    "source": "views/atlas.html",
+    "source_fetch": "first Atlas disclosure only; same-origin default cache / revalidation",
+    "second_level_lazy": [
+      "stable-stack",
+      "analytical-truth",
+      "frame-truth",
+      "current-truth",
+      "book-readonly",
+      "knowledge-library"
+    ],
+    "post_hydration_paint_isolation": "content-visibility:auto"
+  },
+  "runtime_rebind": {
+    "owner": "app.js AgentCryptoAtlasLateHydration40467",
+    "idempotent": true,
+    "scopes": [
+      "local-ai",
+      "auto-reader",
+      "shared-memory",
+      "github-memory",
+      "current-audit",
+      "book-knowledge"
+    ],
+    "current_engine_restarted": false,
+    "bridge_engine_restarted": false
+  },
+  "protected": [
+    "Market Core 38.15.11",
+    "Binance canonical LIVE",
+    "Graph Context V7/IndexedDB",
+    "Atlas CURRENT fingerprint/cadence",
+    "NØX/Aerith chain",
+    "Oracle/Evidence",
+    "Bridge R13/V1.9.11",
+    "Private Backend V1.4.0",
+    "Source Intelligence V1.3",
+    "Scanner archive 240"
+  ],
+  "next": "40.4.68 System resident presentation reduction only after 40.4.67 operator validation; Oracle heavy bodies are already true-lazy in 40.4.41."
+}

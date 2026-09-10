@@ -1,0 +1,1624 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="atlas-build" content="38.15.16" />
+  <meta name="atlas-runtime-contract" content="runtime-truth-v1" />
+  <meta name="atlas-asset-token" content="market-core-v2.0-alpha-build-38.15.16" />
+  <meta name="atlas-workspace-profile" content="decision-workspace-multicollector-current-journal" />
+  <title>Agent-Crypto @erith.IA — Market Core V2.0-Alpha · Build 38.15.16</title>
+  <meta name="description" content="Observatoire crypto prudent @erith.IA : livecheck, marché, risques, modèle mathématique, anti-FOMO." />
+  <link rel="stylesheet" href="./style.css?v=market-core-v2.0-alpha-build-38.15.16" />
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <main class="shell compact-ui terminal-ui">
+    <header class="hero glass" id="accueil">
+      <div class="hero-top">
+        <div class="title-block">
+          <p class="eyebrow">ERITH.IA · MARKETS OBSERVATORY</p>
+          <div class="brand-account-row">
+            <h1 class="brandline"><span>Agent-Crypto</span> <strong>@erith.IA</strong></h1>
+            <div class="atlas-view-switcher" role="group" aria-label="Choisir la vue de l’interface">
+              <button class="atlas-view-button atlas-view-button-basic" id="btnBasicViewToggle"
+                      type="button" data-atlas-view-mode="essential" aria-pressed="true"
+                      aria-label="Ouvrir la vue basique">
+                <svg class="atlas-view-button-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+                  <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+                  <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+                  <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+                </svg>
+                <span>Vue Basique</span>
+              </button>
+              <button class="atlas-view-button atlas-view-button-intermediate" id="btnIntermediateViewToggle"
+                      type="button" data-atlas-view-mode="intermediate" aria-pressed="false"
+                      aria-label="Ouvrir la vue intermédiaire">
+                <svg class="atlas-view-button-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3 3.5 7.5 12 12l8.5-4.5L12 3Z"></path>
+                  <path d="m3.5 12 8.5 4.5 8.5-4.5"></path>
+                  <path d="m3.5 16.5 8.5 4.5 8.5-4.5"></path>
+                </svg>
+                <span>Vue intermédiaire</span>
+              </button>
+              <button class="atlas-view-button atlas-view-button-admin" id="btnAdminAccountToggle"
+                      type="button" data-atlas-view-mode="advanced" aria-pressed="false"
+                      aria-label="Ouvrir l’administration locale">
+                <svg class="atlas-view-button-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3 19 6v5c0 4.6-2.8 8.1-7 10-4.2-1.9-7-5.4-7-10V6l7-3Z"></path>
+                  <path d="M9.5 12.2 11.2 14l3.7-4"></path>
+                </svg>
+                <span id="adminAccountLinkText">Administration</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="status-stack" aria-label="Statuts">
+          <button
+            class="pill ok atlas-version-control"
+            id="atlasVersionControl"
+            type="button"
+            data-state="current"
+            aria-live="polite"
+            aria-atomic="true"
+            aria-label="Version installée : Market Core V2.0-Alpha, Build 38.15.16"
+          >
+            <span id="atlasVersionControlText">Market Core V2.0-Alpha · Build 38.15.16</span>
+          </button>
+          <span class="pill warn" id="liveStatus">Livecheck requis</span>
+          <span class="pill warn atlas-metals-live-status"
+                id="atlasMetalsLiveStatus"
+                hidden>
+            Marché Métaux · 0/5
+          </span>
+          <span class="sigil">⌁</span>
+        </div>
+      </div>
+      <section class="atlas-v2-interface-bar" aria-label="Raccourcis Agent-Crypto V2">
+        <div class="atlas-v2-mode-copy atlas-visually-hidden">
+          <b id="atlasV2ModeTitle">Essentiel</b>
+          <small id="atlasV2ModeDescription">Graphique · marché · sources.</small>
+          <span id="atlasV2ReleaseBadge">Market Core V2.0-Alpha · Build 38.15.16</span>
+        </div>
+
+        <nav class="nav atlas-v2-nav" aria-label="Raccourcis pratiques et administration">
+          <div class="atlas-v2-nav-group atlas-v2-nav-essential atlas-quick-dock"
+               aria-label="Raccourcis essentiels">
+            <a href="#livecheck" data-v2-level="essential" class="atlas-quick-link">
+              <span class="atlas-quick-icon" aria-hidden="true">⌁</span>
+              <span>Livecheck</span>
+            </a>
+            <a href="#market-workspace" data-v2-level="essential" class="atlas-quick-link">
+              <span class="atlas-quick-icon" aria-hidden="true">▦</span>
+              <span>Marché</span>
+            </a>
+            <a href="#analyste" data-v2-level="essential" class="atlas-quick-link">
+              <span class="atlas-quick-icon" aria-hidden="true">⌇</span>
+              <span>Graphique</span>
+            </a>
+            <a href="#sources" data-v2-level="essential" class="atlas-quick-link">
+              <span class="atlas-quick-icon" aria-hidden="true">↗</span>
+              <span>Sources</span>
+            </a>
+          </div>
+
+          <div class="atlas-v2-nav-group atlas-v2-nav-advanced atlas-admin-dock"
+               aria-label="Command Center Administrateur" hidden>
+            <div class="atlas-admin-command-bar" id="atlasAdminCommandBar">
+              <span class="atlas-admin-command-kicker" id="atlasCommandKicker">ADMIN</span>
+              <div class="atlas-admin-command-shortcuts" role="group" aria-label="Groupes du Command Center">
+                <button type="button" data-admin-cluster-target="decision" aria-controls="atlasAdminCenterDrawer" aria-expanded="false"><span>Décision</span><b>4</b></button>
+                <button type="button" data-admin-cluster-target="analysis" aria-controls="atlasAdminCenterDrawer" aria-expanded="false"><span>Analyse</span><b>5</b></button>
+                <button type="button" data-admin-cluster-target="system" aria-controls="atlasAdminCenterDrawer" aria-expanded="false"><span>Système</span><b>6</b></button>
+                <button type="button" data-admin-cluster-target="projects" aria-controls="atlasAdminCenterDrawer" aria-expanded="false"><span id="atlasProjectsShortcutLabel">Projets</span><b id="atlasProjectsShortcutCount">2</b></button>
+              </div>
+              <button class="atlas-admin-graph-toggle is-normal" id="atlasAdminGraphToggle" type="button"
+                      data-admin-graph-cycle aria-pressed="true"
+                      aria-controls="analyste"
+                      aria-label="Graphique en mode normal. Passer au mode Focus.">
+                <span>Vue</span><b id="atlasAdminGraphToggleState">Normal</b>
+              </button>
+              <button class="atlas-admin-center-toggle" id="atlasAdminCenterToggle" type="button" aria-expanded="false" aria-controls="atlasAdminCenterDrawer">
+                <span>Command Center</span><b id="atlasAdminCenterToggleState">Déployer +</b>
+              </button>
+            </div>
+
+            <div class="atlas-admin-command-drawer" id="atlasAdminCenterDrawer" hidden>
+              <div class="atlas-admin-command-drawer-head">
+                <div><span>COMMAND CENTER</span><strong id="atlasCommandTitle">Administration Agent-Crypto</strong></div>
+                <button type="button" id="atlasAdminCenterClose" aria-label="Fermer le Command Center">Fermer ×</button>
+              </div>
+              <div class="atlas-admin-command-grid">
+                <section class="atlas-admin-cluster" data-admin-cluster="decision" aria-label="Décision et veille">
+                  <span class="atlas-admin-cluster-label">Décision</span>
+                  <a href="#watchlist" data-v2-level="advanced" class="atlas-quick-link"><span class="atlas-quick-icon" aria-hidden="true">★</span><span>Watchlist</span></a>
+                  <a href="#decision-board" data-v2-level="advanced" class="atlas-quick-link"><span class="atlas-quick-icon" aria-hidden="true">✓</span><span>Décision</span></a>
+                  <a href="#news-sentinel" data-v2-level="advanced" class="atlas-quick-link"><span class="atlas-quick-icon" aria-hidden="true">≡</span><span>News</span></a>
+                  <a href="#nofomo" data-v2-level="advanced" class="atlas-quick-link"><span class="atlas-quick-icon" aria-hidden="true">⊘</span><span>No-FOMO</span></a>
+                </section>
+
+                <section class="atlas-admin-cluster" data-admin-cluster="analysis" aria-label="Analyse avancée">
+                  <span class="atlas-admin-cluster-label">Analyse</span>
+                  <div class="atlas-admin-graph-mode-control" role="group" aria-label="Mode du Graphique Analyste">
+                    <span class="atlas-admin-graph-mode-title"><i aria-hidden="true">⌇</i>Graphique</span>
+                    <div class="atlas-admin-graph-mode-buttons">
+                      <button type="button" data-admin-graph-mode="normal" class="is-active" aria-pressed="true">Normal</button>
+                      <button type="button" data-admin-graph-mode="focus" aria-pressed="false">Focus</button>
+                      <button type="button" data-admin-graph-mode="closed" aria-pressed="false">Fermé</button>
+                    </div>
+                  </div>
+                  <a href="#math" data-v2-level="advanced" class="atlas-quick-link"><span class="atlas-quick-icon" aria-hidden="true">Σ</span><span>Math</span></a>
+                  <a href="#multi-horizon" data-v2-level="advanced" class="atlas-quick-link"><span class="atlas-quick-icon" aria-hidden="true">≋</span><span>Horizons</span></a>
+                  <a href="#lecture-froide" data-v2-level="advanced" class="atlas-quick-link"><span class="atlas-quick-icon" aria-hidden="true">◌</span><span>Lecture</span></a>
+                  <a href="#risques" data-v2-level="advanced" class="atlas-quick-link"><span class="atlas-quick-icon" aria-hidden="true">△</span><span>Risques</span></a>
+                </section>
+
+                <section class="atlas-admin-cluster" data-admin-cluster="system" aria-label="Mémoire et système">
+                  <span class="atlas-admin-cluster-label">Système</span>
+                  <a href="#auto-reader" data-v2-level="advanced" class="atlas-quick-link"><span class="atlas-quick-icon" aria-hidden="true">▤</span><span>Reader</span></a>
+                  <a href="#shared-memory" data-v2-level="advanced" class="atlas-quick-link"><span class="atlas-quick-icon" aria-hidden="true">◇</span><span>Mémoire</span></a>
+                  <a href="#safety" data-v2-level="advanced" class="atlas-quick-link"><span class="atlas-quick-icon" aria-hidden="true">⌾</span><span>Sécurité</span></a>
+                  <a href="#simulation" data-v2-level="advanced" class="atlas-quick-link"><span class="atlas-quick-icon" aria-hidden="true">◫</span><span>Simulation</span></a>
+                  <a href="#commandes" data-v2-level="advanced" class="atlas-quick-link"><span class="atlas-quick-icon atlas-quick-icon-code" aria-hidden="true">&gt;_</span><span>Tests</span></a>
+                  <a href="#local-ai-hub" data-v2-level="advanced" class="atlas-quick-link"><span class="atlas-quick-icon" aria-hidden="true">✦</span><span>IA locale</span></a>
+                </section>
+
+                <section class="atlas-admin-cluster atlas-admin-cluster-projects" id="atlasProjectsCluster" data-admin-cluster="projects" aria-label="Projets ERITH.IA">
+                  <span class="atlas-admin-cluster-label" id="atlasProjectsClusterLabel">Projets</span>
+                  <a href="#missions-vie" id="atlasMissionsQuickLink" data-v2-level="project" class="atlas-quick-link"><span class="atlas-quick-icon" aria-hidden="true">◆</span><span>Projets</span></a>
+                  <a href="#forge-aerith" data-v2-level="project" class="atlas-quick-link atlas-forge-quick-link"><span class="atlas-quick-icon" aria-hidden="true">✦</span><span>Forge</span></a>
+                </section>
+              </div>
+              <div class="atlas-admin-command-footer">
+                <label class="atlas-v2-module-picker atlas-admin-module-picker">
+                  <span class="atlas-visually-hidden">Choisir un module administrateur</span>
+                  <select id="atlasV2AdvancedModuleSelect" aria-label="Choisir un module administrateur">
+                <option value="">Tous les modules administrateur…</option>
+                <optgroup label="Analyse & décision">
+                  <option value="math">Math — indice et mesures</option>
+                  <option value="multi-horizon">Multi-Horizon</option>
+                  <option value="news-sentinel">News Sentinel</option>
+                  <option value="news-plan">Référentiel News étendu</option>
+                  <option value="decision-board">Atlas Decision Board</option>
+                  <option value="lecture-froide">Lecture froide</option>
+                  <option value="debutant">Guides de lecture</option>
+                  <option value="watchlist">Watchlist &amp; alertes</option>
+                  <option value="impact">Impact / risques</option>
+                  <option value="nofomo">No-FOMO</option>
+                </optgroup>
+                <optgroup label="Intelligence, mémoire & création">
+                  <option value="local-ai-hub">Atlas / Aerith local</option>
+                  <option value="forge-aerith">Forge d’Aerith Pro</option>
+                  <option value="auto-reader">Auto Reader</option>
+                  <option value="shared-memory">Shared Memory</option>
+                  <option value="github-memory">GitHub Memory</option>
+                </optgroup>
+                <optgroup label="Préparation & opérations">
+                  <option value="situation">Situation du projet</option>
+                  <option value="questionnaire">Questionnaire</option>
+                  <option value="briefing">Briefing</option>
+                  <option value="planning">Plan exchange</option>
+                </optgroup>
+                <optgroup label="Expérimentation & système">
+                  <option value="simulation">Simulation</option>
+                  <option value="commandes">Tests / Commandes</option>
+                  <option value="backend">Backend / API</option>
+                  <option value="safety">Sécurité</option>
+                  <option value="physical-security">Protection physique</option>
+                </optgroup>
+                <optgroup id="atlasPrivateMissionsOptionGroup" label="Missions @erith.IA — privées">
+                  <option value="missions-vie">Registre des projets</option>
+                  <option value="fonds-erith-ia">Fonds ERITH.IA</option>
+                  <option value="association-erith-ia">Association ERITH.IA</option>
+                  <option value="aerith-enfance">Aerith Enfance</option>
+                  <option value="aerith-animaux">Aerith Animaux</option>
+                  <option value="aerith-terre-vivante">Aerith Terre Vivante</option>
+                </optgroup>
+                <optgroup label="Fin de page">
+                  <option value="mesure-audience">Audience</option>
+                  <option value="sources">Sources</option>
+                </optgroup>
+              </select>
+                </label>
+                <button class="atlas-v2-module-open" id="btnOpenAdvancedModule" type="button">Ouvrir le module</button>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </section>
+
+      <section class="command-bar" id="livecheck">
+        <button class="btn primary" id="btnLivecheck">Relancer maintenant</button>
+        <button class="btn" id="btnRefresh">Rafraîchir marché</button>
+        <div class="source-card live-decision" id="decisionCard" data-v2-complete-control>
+          <span>Décision tableau</span>
+          <strong id="tableDecision">Refusé avant Livecheck</strong>
+        </div>
+        <div class="source-card" id="sourceActiveCard">
+          <span>Source active</span>
+          <strong id="sourceName">Aucune source consultée</strong>
+        </div>
+        <div class="source-card" id="sourceTimeCard">
+          <span>Heure données</span>
+          <strong id="sourceTime">—</strong>
+        </div>
+      </section>
+
+      <section class="command-bar atlas-metals-command-bar"
+               id="atlasMetalsCommandBar"
+               aria-label="État du marché Métaux"
+               hidden>
+        <div class="source-card atlas-metals-adapter-lock">
+          <span>Connexion</span>
+          <strong id="atlasMetalsConnectionState">PRIX NON CONNECTÉS · STRUCTURE DISPONIBLE</strong>
+        </div>
+        <div class="source-card live-decision">
+          <span>État du domaine</span>
+          <strong id="atlasMetalsHeaderDecision">
+            PANIER MÉTAUX 5/5 · COTATIONS 0/5
+          </strong>
+        </div>
+        <div class="source-card">
+          <span>Sources préparées</span>
+          <strong id="atlasMetalsHeaderSources">
+            USGS · IEA · RMIS · BANQUE MONDIALE
+          </strong>
+        </div>
+        <div class="source-card">
+          <span>Données Métaux</span>
+          <strong id="atlasMetalsHeaderTime">
+            Aucune cotation horodatée
+          </strong>
+        </div>
+      </section>
+    </header>
+
+    <dialog class="atlas-access-dialog" id="atlasAccessDialog" aria-labelledby="atlasAccessTitle">
+      <form class="atlas-access-card" id="atlasAccessForm" method="dialog">
+        <div class="atlas-access-head">
+          <div>
+            <p class="eyebrow">ACCÈS LOCAL · RYZEN 7</p>
+            <h2 id="atlasAccessTitle">Accès privé Agent-Crypto</h2>
+          </div>
+          <button class="atlas-access-close" id="atlasAccessClose" type="button" aria-label="Fermer">×</button>
+        </div>
+        <div class="atlas-access-profiles" aria-label="Profils d’accès">
+          <article class="is-active">
+            <span>Propriétaire</span><b>Christophe</b><small>Administration complète · Atlas · Aerith</small>
+          </article>
+          <article class="is-planned" aria-disabled="true">
+            <span>Opérateur secondaire</span><b>Profil opérateur</b><small>Rôle secondaire prévu avec le Bridge local</small>
+          </article>
+        </div>
+        <p class="atlas-access-intro" id="atlasAccessIntro">Crée un mot de passe local pour ce navigateur. Il ne sera jamais enregistré en clair.</p>
+        <label class="atlas-access-field">
+          <span>Mot de passe local</span>
+          <input id="atlasAccessSecret" type="password" minlength="6" autocomplete="current-password" required />
+        </label>
+        <label class="atlas-access-field" id="atlasAccessConfirmField">
+          <span>Confirmer le mot de passe</span>
+          <input id="atlasAccessConfirm" type="password" minlength="6" autocomplete="new-password" />
+        </label>
+        <p class="atlas-access-status" id="atlasAccessStatus" role="status" aria-live="polite">Configuration locale en attente.</p>
+        <div class="atlas-access-actions">
+          <button class="btn primary" id="atlasAccessSubmit" type="submit">Créer l’accès Christophe</button>
+          <button class="btn" id="atlasAccessCancel" type="button">Annuler</button>
+        </div>
+        <p class="atlas-access-warning"><b>Verrou d’interface local V1.</b> Il masque l’administration dans ce navigateur, sans remplacer le futur Bridge privé du Ryzen.</p>
+      </form>
+    </dialog>
+
+<section class="metrics metrics-prime is-metrics-hidden" id="marche" hidden aria-hidden="true">
+      <article class="metric glass">
+        <span>Capitalisation Top 250</span>
+        <strong id="metricMarketCap">—</strong>
+        <small id="metricMarketCapHint">Donnée non récupérée</small>
+      </article>
+      <article class="metric glass">
+        <span>Volume Top 250 · 24h</span>
+        <strong id="metricVolume">—</strong>
+        <small id="metricVolumeHint">Donnée non récupérée</small>
+      </article>
+      <article class="metric glass">
+        <span>Poids BTC · Top 250</span>
+        <strong id="metricBtcDom">—</strong>
+        <small id="metricBtcDomHint">Donnée non récupérée</small>
+      </article>
+      <article class="metric glass">
+        <span>État des données</span>
+        <strong id="metricSources">0/8</strong>
+        <small id="metricSourcesHint">0/8 interrogées</small>
+      </article>
+    </section>
+
+    
+
+
+    <section class="atlas-market-zone" id="market-zone" aria-label="Zone marché Atlas">
+    <section class="analyst-deck champagne-clean-lens detail-collapsed" id="analyste">
+      <article class="panel glass chart-panel">
+        <div class="section-head compact chart-v2-recovery-line">
+          <div class="chart-v2-title-block atlas-market-domain-title-block">
+            <button class="atlas-market-domain-switch"
+                    id="atlasMarketDomainSwitch"
+                    type="button"
+                    data-domain="crypto"
+                    aria-pressed="false"
+                    aria-label="Marché Crypto actif. Cliquer pour afficher le marché Métaux.">
+              <span>MARCHÉ</span>
+              <b id="atlasMarketDomainSwitchValue">CRYPTO</b>
+            </button>
+            <h2 id="selectedAssetTitle" class="atlas-visually-hidden" aria-live="polite">Bitcoin — BTC</h2>
+          </div>
+          <div class="chart-head-actions chart-v2-toolbar">
+            <div class="chart-v2-toolbar-row chart-v2-toolbar-reading">
+              <span class="chart-v2-toolbar-label">Lecture</span>
+              <div class="chart-v2-control-deck" aria-label="Options Graphique Analyste V2">
+                <div class="chart-v2-toggle-group"><span>Vue</span><button class="chart-v2-toggle is-active" type="button" data-chart-view="price">Prix</button><button class="chart-v2-toggle" type="button" data-chart-view="base100">Base 100</button></div>
+                <div class="chart-v2-toggle-group"><span>Échelle</span><button class="chart-v2-toggle is-active" type="button" data-chart-scale="linear">Normale</button><button class="chart-v2-toggle" type="button" data-chart-scale="logarithmic">Log</button></div>
+                <div class="chart-v2-toggle-group"><span>Afficher</span><button class="chart-v2-toggle is-active" type="button" data-chart-display="volume">Volume</button><button class="chart-v2-toggle" type="button" data-chart-display="legend" aria-pressed="false">Légende</button><button class="chart-v2-toggle is-active" type="button" data-chart-display="analysis" aria-pressed="true" aria-label="Afficher ou masquer l’analyse quantitative superposée">Analyse</button></div>
+              </div>
+            </div>
+            <div class="chart-v2-toolbar-row chart-v2-toolbar-period">
+              <span class="chart-v2-toolbar-label">Période</span>
+              <div class="period-tabs" aria-label="Période graphique">
+                <button class="period-btn active" data-period="1">24h</button>
+                <button class="period-btn" data-period="7">7j</button>
+                <button class="period-btn" data-period="30">30j</button>
+                <button class="period-btn" data-period="60">60j</button>
+                <button class="period-btn" data-period="90">90j</button>
+                <button class="period-btn" data-period="365">1a</button>
+                <button class="period-btn period-btn-max" id="btnChartMaxPeriod" aria-label="Mesurer la couverture historique maximale réellement reçue" data-period="36500">Max ?</button>
+              </div>
+              <small class="chart-v2-period-truth" id="chartMaxPeriodTruth">Max non mesuré</small>
+            </div>
+            <div class="chart-v2-toolbar-row chart-v2-toolbar-comparison">
+              <span class="chart-v2-toolbar-label">Comparaison</span>
+              <div class="compare-actions" aria-label="Actions de comparaison">
+              <span class="compare-action-group compare-action-group-mode" aria-label="Mode de comparaison">
+                <button class="compare-btn active" id="btnChartSolo" aria-label="Ouvrir uniquement l’actif principal" type="button">Solo</button>
+                <button class="compare-btn" id="btnChartTop3" aria-label="Comparer Bitcoin, Ethereum et BNB" type="button">Top 3</button>
+                <button class="compare-btn" id="btnChartTop5" aria-label="Comparer Bitcoin, Ethereum, BNB, XRP et Solana" type="button">Top 5</button>
+              </span>
+              <span class="compare-action-group compare-action-group-market" aria-label="Sélections automatiques du marché">
+                <button class="compare-btn compare-btn-mover" id="btnChartGainers" aria-label="Comparer les cinq plus fortes hausses" type="button">Hausses 5</button>
+                <button class="compare-btn compare-btn-mover" id="btnChartLosers" aria-label="Comparer les cinq plus fortes baisses" type="button">Baisses 5</button>
+                <button class="compare-btn" id="btnChartVolume5" aria-label="Comparer les cinq plus gros volumes" type="button">Volumes 5</button>
+              </span>
+              <span class="compare-action-group compare-action-group-state" aria-label="État du graphique">
+                <button class="compare-btn" id="btnChartReset" aria-label="Réinitialiser le graphique sur Bitcoin en 24 heures" type="button">Réinit.</button>
+                <button class="compare-btn compare-btn-clear" id="btnChartClear" aria-label="Retirer tous les actifs du graphique" type="button">Vider</button>
+              </span>
+              </div>
+            </div>
+          </div>
+            <div class="chart-head-actions atlas-metals-unified-toolbar atlas-parallel-market-controls" id="atlasMetalsUnifiedToolbar" aria-label="Réglages du marché Métaux" hidden>
+              <div role="group" aria-label="Vue Métaux">
+                <span>Vue</span>
+                <button type="button" data-metals-view="price" class="is-active">Prix</button>
+                <button type="button" data-metals-view="base100">Base 100</button>
+              </div>
+              <div role="group" aria-label="Période Métaux">
+                <span>Période</span>
+                <button type="button" data-metals-period="1" class="is-unavailable" title="Historique intraday non disponible ; l’archive publique est quotidienne" aria-label="24 heures non mesurées, historique intraday requis">24h</button>
+                <button type="button" data-metals-period="7" class="is-active">7j</button>
+                <button type="button" data-metals-period="30">30j</button>
+                <button type="button" data-metals-period="90">90j</button>
+                <button type="button" data-metals-period="365">1a</button>
+              </div>
+              <div role="group" aria-label="Section Métaux">
+                <span>Section</span>
+                <button type="button" data-metals-section="prices" class="is-active">Cours des métaux</button>
+                <button type="button" data-metals-section="critical">Matériaux critiques</button>
+              </div>
+            </div>
+        </div>
+        <div class="chart-shell">
+
+          <div class="atlas-chart-insight-overlay" id="atlasChartInsightOverlay"
+               aria-label="Synthèse quantitative superposée au graphique"
+               aria-live="polite">
+            <strong id="atlasChartInsightOverlayTitle">ANALYSE DU MARCHÉ</strong>
+            <span id="atlasChartInsightOverlaySeries">Historique en attente</span>
+            <small id="atlasChartInsightOverlaySummary">Aucune mesure historique réelle disponible.</small>
+          </div>
+          <div class="comparison-selection atlas-visually-hidden" id="comparisonSelection" aria-live="polite">
+            <span class="compare-hint">BTC seul · clique une autre ligne du MARKET SNAPSHOT pour comparer</span>
+          </div>
+          <div class="chart-v2-legend" id="chartV2Legend" hidden></div>
+          <canvas id="mainChart" width="980" height="260" aria-label="Graphique prix ou comparaison normalisée. Survole librement les courbes pour afficher les valeurs."></canvas>
+          <div class="atlas-chart-tooltip" id="atlasChartTooltip" role="tooltip" aria-hidden="true" hidden></div>
+          <div class="atlas-chart-refresh" id="atlasChartRefresh" role="status" aria-live="polite" aria-hidden="true" hidden><span id="atlasChartRefreshText">Mise à jour du graphe…</span></div>
+
+          <section class="atlas-parallel-market-foundation"
+                   id="atlasParallelMarketFoundation"
+                   aria-label="Fondation du marché Métaux"
+                   hidden>
+            <header class="atlas-parallel-market-head">
+              <div>
+                <span class="eyebrow">MARCHÉS PARALLÈLES · FOUNDATION</span>
+                <h3>Or, argent, métaux précieux et industriels</h3>
+                <p id="atlasMetalsFoundationIntro">Aucun cours n’est affiché tant qu’un adaptateur de données réel n’est pas connecté.</p>
+              </div>
+              <div class="atlas-parallel-market-status">
+                <span>COURS <b id="atlasMetalsFoundationCourseState">NON CONNECTÉS</b></span>
+                <span>USGS <b>PRÉPARÉ</b></span>
+              </div>
+            </header>
+
+            <div class="atlas-parallel-market-view" data-metals-view-panel="prices">
+              <section class="atlas-metals-empty-chart"
+                       id="atlasMetalsEmptyChart"
+                       aria-label="Cadre graphique Métaux sans données">
+                <header>
+                  <div>
+                    <span>GRAPHIQUE MÉTAUX</span>
+                    <b id="atlasMetalsChartMode">PRIX · 7J</b>
+                  </div>
+                  <small id="atlasMetalsChartSource">Source réelle requise</small>
+                </header>
+                <div class="atlas-metals-empty-chart-stage">
+                  <span class="atlas-metals-axis-y">VALEUR</span>
+                  <span class="atlas-metals-axis-x">TEMPS</span>
+                  <canvas id="atlasMetalsChartCanvas" aria-label="Courbes réelles des métaux sélectionnés. Déplacer le pointeur pour inspecter chaque point historique." hidden></canvas>
+
+<aside class="atlas-metals-chart-market-panel"
+       id="atlasMetalsChartMarketPanel"
+       role="tooltip"
+       aria-label="Inspecteur historique des courbes Métaux"
+       aria-hidden="true"
+       hidden>
+  <header>
+    <div>
+      <strong>PRIX HISTORIQUE</strong>
+      <small id="atlasMetalsChartMarketOrigin">Déplacer le pointeur sur le graphique</small>
+    </div>
+    <time id="atlasMetalsChartMarketTime" datetime="">—</time>
+  </header>
+
+  <div class="atlas-metals-chart-market-rows" role="list">
+    <div role="listitem" data-metals-chart-market-row="gold" style="--atlas-metal-series-color:#ffd05a" hidden>
+      <span class="atlas-metals-chart-market-identity"><i aria-hidden="true"></i><b>XAU</b><small>Or</small></span>
+      <span class="atlas-metals-chart-market-color-bridge" aria-hidden="true"><i></i></span>
+      <span class="atlas-metals-chart-market-values"><strong data-metals-chart-market-price>—</strong><em data-metals-chart-market-change>—</em></span>
+    </div>
+    <div role="listitem" data-metals-chart-market-row="silver" style="--atlas-metal-series-color:#b9c8d6" hidden>
+      <span class="atlas-metals-chart-market-identity"><i aria-hidden="true"></i><b>XAG</b><small>Argent</small></span>
+      <span class="atlas-metals-chart-market-color-bridge" aria-hidden="true"><i></i></span>
+      <span class="atlas-metals-chart-market-values"><strong data-metals-chart-market-price>—</strong><em data-metals-chart-market-change>—</em></span>
+    </div>
+    <div role="listitem" data-metals-chart-market-row="platinum" style="--atlas-metal-series-color:#57d7e8" hidden>
+      <span class="atlas-metals-chart-market-identity"><i aria-hidden="true"></i><b>XPT</b><small>Platine</small></span>
+      <span class="atlas-metals-chart-market-color-bridge" aria-hidden="true"><i></i></span>
+      <span class="atlas-metals-chart-market-values"><strong data-metals-chart-market-price>—</strong><em data-metals-chart-market-change>—</em></span>
+    </div>
+    <div role="listitem" data-metals-chart-market-row="palladium" style="--atlas-metal-series-color:#c78be6" hidden>
+      <span class="atlas-metals-chart-market-identity"><i aria-hidden="true"></i><b>XPD</b><small>Palladium</small></span>
+      <span class="atlas-metals-chart-market-color-bridge" aria-hidden="true"><i></i></span>
+      <span class="atlas-metals-chart-market-values"><strong data-metals-chart-market-price>—</strong><em data-metals-chart-market-change>—</em></span>
+    </div>
+    <div role="listitem" data-metals-chart-market-row="copper" style="--atlas-metal-series-color:#ff8150" hidden>
+      <span class="atlas-metals-chart-market-identity"><i aria-hidden="true"></i><b>HG</b><small>Cuivre</small></span>
+      <span class="atlas-metals-chart-market-color-bridge" aria-hidden="true"><i></i></span>
+      <span class="atlas-metals-chart-market-values"><strong data-metals-chart-market-price>—</strong><em data-metals-chart-market-change>—</em></span>
+    </div>
+  </div>
+
+  <footer>
+    <b id="atlasMetalsChartMarketPeriod">PÉRIODE ACTIVE · —</b>
+    <span id="atlasMetalsChartMarketSource">Yahoo Finance Futures · point historique</span>
+  </footer>
+</aside>
+                  <div class="atlas-metals-empty-chart-message" id="atlasMetalsChartMessage">
+                    <b id="atlasMetalsChartMessageTitle">AUCUNE COTATION CONNECTÉE</b>
+                    <span id="atlasMetalsChartMessageText">Le cadre est prêt. Aucune courbe ni valeur n’est inventée.</span>
+                  </div>
+                  <div class="atlas-metals-empty-chart-legend"
+                       id="atlasMetalsChartLegend"
+                       aria-label="Légende Métaux préparée">
+                    <span data-metal-legend="gold">XAU</span>
+                    <span data-metal-legend="silver">XAG</span>
+                    <span data-metal-legend="platinum">XPT</span>
+                    <span data-metal-legend="palladium">XPD</span>
+                    <span data-metal-legend="copper">HG</span>
+                    <button type="button"
+                            data-metals-all-series
+                            aria-pressed="false"
+                            aria-label="Comparer les cinq métaux en Base 100"
+                            title="Afficher XAU, XAG, XPT, XPD et HG sur une même base 100">TOUS</button>
+                  </div>
+                </div>
+                <div class="atlas-metals-result-headline" id="atlasMetalsResultHeadline" data-state="loading" aria-live="polite">
+                  <span id="atlasMetalsResultIdentity">OR · XAU · 7 JOURS</span>
+                  <b id="atlasMetalsResultValue">HISTORIQUE EN CHARGEMENT</b>
+                  <small id="atlasMetalsResultDetail">Lecture des séances Futures publiques réelles…</small>
+                </div>
+              </section>
+
+              <div class="atlas-metals-basket" id="atlasMetalsBasket" aria-label="Panier initial Métaux">
+                <button type="button" data-metal-id="gold" aria-pressed="true"><b>XAU</b><span>Or</span><small>USD / once troy</small></button>
+                <button type="button" data-metal-id="silver" aria-pressed="true"><b>XAG</b><span>Argent</span><small>USD / once troy</small></button>
+                <button type="button" data-metal-id="platinum" aria-pressed="true"><b>XPT</b><span>Platine</span><small>USD / once troy</small></button>
+                <button type="button" data-metal-id="palladium" aria-pressed="true"><b>XPD</b><span>Palladium</span><small>USD / once troy</small></button>
+                <button type="button" data-metal-id="copper" aria-pressed="true"><b>HG</b><span>Cuivre</span><small>USD / livre</small></button>
+              </div>
+
+              <div class="atlas-metals-graph-market-note">
+                <b>TABLEAU COMPLET DANS MARKET SNAPSHOT</b>
+                <span>Le graphique reste dédié aux trajectoires ; le Market conserve les colonnes, filtres et états de source.</span>
+              </div>
+
+              <div class="atlas-metals-table-wrap atlas-metals-graph-legacy-table" id="atlasMetalsGraphLegacyTable" hidden aria-hidden="true">
+                <table class="atlas-metals-foundation-table">
+                  <thead>
+                    <tr><th>Métal</th><th>Symbole</th><th>Unité</th><th>Prix</th><th>État</th></tr>
+                  </thead>
+                  <tbody id="atlasMetalsFoundationRows">
+                    <tr data-metal-row="gold"><td>Or</td><td>XAU</td><td>USD / once troy</td><td>—</td><td>Adaptateur requis</td></tr>
+                    <tr data-metal-row="silver"><td>Argent</td><td>XAG</td><td>USD / once troy</td><td>—</td><td>Adaptateur requis</td></tr>
+                    <tr data-metal-row="platinum"><td>Platine</td><td>XPT</td><td>USD / once troy</td><td>—</td><td>Adaptateur requis</td></tr>
+                    <tr data-metal-row="palladium"><td>Palladium</td><td>XPD</td><td>USD / once troy</td><td>—</td><td>Adaptateur requis</td></tr>
+                    <tr data-metal-row="copper"><td>Cuivre</td><td>HG</td><td>USD / livre</td><td>—</td><td>Adaptateur requis</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="atlas-parallel-market-view"
+                 data-metals-view-panel="critical"
+                 hidden>
+              <div class="atlas-critical-materials-grid">
+                <article>
+                  <span>BASE STRUCTURELLE</span>
+                  <h4>USGS · Mineral Commodity Summaries</h4>
+                  <p>Production, réserves, dépendance aux importations, usages et statistiques annuelles.</p>
+                  <b>IMPORT NON CONNECTÉ</b>
+                </article>
+                <article>
+                  <span>CONTRAT MÉTIER</span>
+                  <h4>Rare Earth Sentinel</h4>
+                  <p>Mine → séparation → oxyde → métal → alliage → aimant → composant.</p>
+                  <b>AUCUN FAUX COURS LIVE</b>
+                </article>
+                <article>
+                  <span>EXTENSIONS PRÉVUES</span>
+                  <h4>Lithium · cobalt · graphite · terres rares</h4>
+                  <p>Observatoire structurel et industriel, distinct du graphique de cotation.</p>
+                  <b>PHASE ULTÉRIEURE</b>
+                </article>
+              </div>
+            </div>
+
+            <footer class="atlas-parallel-market-foot">
+              <span id="atlasMetalsSelectionSummary">5 métaux sélectionnés · XAU / XAG / XPT / XPD / HG</span>
+              <small id="atlasMetalsFoundationTruth">Source de cotation absente · aucun prix inventé</small>
+            </footer>
+          </section>
+
+          <div class="atlas-workspace-reprise" id="atlasWorkspaceReprise"
+               data-state="current"
+               aria-label="Reprise locale de l’espace de travail"
+               aria-live="polite">
+            <span class="atlas-workspace-reprise-kicker" id="atlasWorkspaceRepriseKicker">ESPACE ACTUEL</span>
+            <b id="atlasWorkspaceReprisePrimary">24 h · Solo · Prix EUR · Normale</b>
+            <small id="atlasWorkspaceRepriseSecondary">Volume · Analyse · Vue Normal · choix locaux uniquement</small>
+            <span class="atlas-workspace-slots"
+                  id="atlasWorkspaceSlots"
+                  role="group"
+                  aria-label="Mémoires rapides du graphique">
+              <button class="atlas-workspace-slot"
+                      type="button"
+                      data-workspace-slot="A"
+                      data-state="empty"
+                      aria-label="Mémoire A vide. Cliquer pour enregistrer la configuration actuelle.">A</button>
+              <button class="atlas-workspace-slot"
+                      type="button"
+                      data-workspace-slot="B"
+                      data-state="empty"
+                      aria-label="Mémoire B vide. Cliquer pour enregistrer la configuration actuelle.">B</button>
+              <button class="atlas-workspace-slot"
+                      type="button"
+                      data-workspace-slot="C"
+                      data-state="empty"
+                      aria-label="Mémoire C vide. Cliquer pour enregistrer la configuration actuelle.">C</button>
+            </span>
+          </div>
+        </div>
+        <div class="atlas-metals-domain-status"
+             id="atlasMetalsDomainStatus"
+             role="status"
+             aria-live="polite"
+             hidden>
+          <b>MARCHÉ MÉTAUX</b>
+          <span id="atlasMetalsDomainStatusText">5 actifs sélectionnés · source de cotation non connectée</span>
+        </div>
+        <div class="chart-caption" id="chartCaption">
+          <span id="atlasChartCaptionCrypto">CoinGecko construit un Market Frame commun pouvant contenir jusqu’à 250 actifs validés en EUR. Les vues 50, 100 et Tous lisent cette même photo ; Binance actualise les prix compatibles en direct et CoinGecko complète les autres actifs. Sélectionne un actif pour charger son historique réel Binance ou CoinGecko à la demande.</span>
+          <span id="atlasChartCaptionMetals" hidden>Fondation Métaux active : panier, unités, séparation des caches et emplacement USGS sont préparés. Aucun cours ne sera affiché avant connexion d’une source réelle.</span>
+        </div>
+      </article>
+
+      <article class="panel glass detail-panel clean-lens-detail-panel" id="detailPanel">
+        <button class="section-head compact detail-panel-toggle" id="detailPanelToggle" type="button" data-clean-lens-action="toggle" aria-expanded="true" aria-controls="detailPanelBody" aria-label="Réduire ou afficher le détail actif">
+          <span class="detail-panel-toggle-title">
+            <span class="eyebrow">DÉTAIL ACTIF</span>
+            <strong>Lecture technique</strong>
+          </span>
+          <span class="detail-panel-toggle-state" id="detailPanelToggleState">Réduire ◀</span>
+        </button>
+
+        <div class="detail-project-visual" aria-hidden="true">
+          <span>Agent-Crypto · Aerith-10</span>
+        </div>
+
+        <div class="detail-panel-body" id="detailPanelBody">
+          <div class="detail-compact-strip" id="detailCompactStrip" aria-label="Résumé compact de l’actif">
+            <span data-detail-semantic="identity"><small>Actif</small><b id="detailCompactAsset">En attente</b></span>
+            <span data-detail-semantic="price"><small>Prix EUR</small><b id="detailCompactPrice">—</b></span>
+            <span data-detail-semantic="decision"><small>Décision</small><b id="detailCompactDecision">—</b></span>
+            <span data-detail-semantic="change"><small>24 h</small><b id="detailCompactChange">—</b></span>
+          </div>
+
+          <details class="atlas-detail-subwindow atlas-primary-detail-window" id="detailAssetWindow" data-detail-window="asset">
+            <summary>
+              <span><b>Fiche active</b><small>prix · source · période · intégrité</small></span>
+              <em data-window-state>Ouvrir</em>
+            </summary>
+            <div class="atlas-detail-subwindow-body">
+              <div class="detail-grid clean-lens-detail-grid" id="assetDetailGrid">
+                <div><b>Actif</b><span>En attente</span></div>
+                <div><b>Type</b><span>—</span></div>
+                <div><b>Décision</b><span>—</span></div>
+                <div><b>Ratio vol/cap</b><span>—</span></div>
+              </div>
+              <p class="why-box clean-lens-why-box" id="assetDetailWhy">Livecheck requis avant lecture détaillée.</p>
+            </div>
+          </details>
+
+          <details class="atlas-source-dock atlas-detail-subwindow" id="source-dock" data-detail-window="source" aria-labelledby="sourceDockTitle">
+            <summary class="source-dock-summary">
+              <span>
+                <small class="eyebrow">SOURCE DOCK</small>
+                <b id="sourceDockTitle">Market Portals</b>
+                <i id="sourceDockAsset">Aucun actif sélectionné</i>
+              </span>
+              <em id="sourceDockCompactState">En attente</em>
+            </summary>
+            <div class="source-dock-body">
+              <div class="source-dock-command">
+                <div class="source-dock-status" id="sourceDockStatus" role="status" aria-live="polite">
+                  En attente de sélection
+                </div>
+                <button class="source-dock-refresh" id="btnSourceDockRefresh" aria-label="Actualiser les métadonnées CoinGecko" type="button">Actualiser</button>
+              </div>
+              <div class="source-dock-portals" id="sourceDockPortals" aria-label="Portails de l’actif sélectionné">
+                <span class="source-portal is-disabled">CoinGecko</span>
+                <span class="source-portal is-disabled">Site officiel</span>
+                <span class="source-portal is-disabled">Explorateur</span>
+                <span class="source-portal is-disabled">Whitepaper</span>
+                <span class="source-portal is-disabled">Code source</span>
+                <span class="source-portal is-disabled">Communauté</span>
+              </div>
+              <div class="source-dock-meta">
+                <span><b>Origine</b><small id="sourceDockOrigin">CoinGecko · en attente</small></span>
+                <span><b>Dernière lecture</b><small id="sourceDockUpdated">—</small></span>
+              </div>
+            </div>
+          </details>
+
+          <details class="clean-lens-disclosure atlas-detail-subwindow" id="detailSourcesWindow" data-detail-window="sources">
+            <summary><span>Sources et état des données</span><small>marché · spot · historique</small><em data-window-state>Ouvrir</em></summary>
+            <div class="broker-strip" id="brokerStrip" aria-label="État atomique des données">
+              <div><span>Market Frame</span><b id="brokerMarket">En attente</b><small id="brokerMarketTime">—</small></div>
+              <div><span>Prix actuel</span><b id="brokerSpot">En attente</b><small id="brokerSpotTime">—</small></div>
+              <div><span>Historique</span><b id="brokerChart">En attente</b><small id="brokerChartTime">—</small></div>
+            </div>
+          </details>
+
+          <details class="clean-lens-disclosure atlas-detail-subwindow" id="detailNetworkWindow" data-detail-window="network">
+            <summary><span>Réseau, cache et latence</span><small>diagnostic avancé</small><em data-window-state>Ouvrir</em></summary>
+            <div class="diagnostic-strip" id="atlasDiagnosticStrip" aria-label="Diagnostic technique compact">
+              <div><span>Source marché</span><b id="diagSourceMode">En attente</b><small id="diagSourceDetail">—</small></div>
+              <div><span>Latence marché</span><b id="diagMarketLatency">—</b><small id="diagUsdLatency">USD : —</small></div>
+              <div><span>Graphique / cache</span><b id="diagChartMode">En attente</b><small id="diagChartLatency">Latence : —</small></div>
+              <div><span>Retries / erreur</span><b id="diagRetryCount">0 retry</b><small id="diagLastError">Aucune erreur</small></div>
+            </div>
+          </details>
+
+          <details class="clean-lens-disclosure clean-lens-integrity atlas-detail-subwindow" id="detailIntegrityWindow" data-detail-window="integrity">
+            <summary><span>Intégrité graphique</span><small>devise · couverture · cohérence</small><em data-window-state>Ouvrir</em></summary>
+            <p>Le moteur conserve la courbe canonique de Multi Horizon : données CoinGecko EUR, période active, couverture réelle, dernier point et écart spot/courbe. Aucune série n’est inventée.</p>
+          </details>
+</div>
+      </article>
+
+      <article class="panel glass atlas-metals-detail-panel"
+               id="atlasMetalsDetailPanel"
+               aria-label="Lecture Métaux"
+               hidden>
+        <header class="atlas-metals-detail-head">
+          <span class="eyebrow">DÉTAIL ACTIF</span>
+          <strong>Lecture Métaux</strong>
+          <small>Metals Sentinel · observation seulement</small>
+        </header>
+
+        <div class="atlas-metals-detail-strip">
+          <span><small>Métal</small><b id="atlasMetalsDetailName">Or</b></span>
+          <span><small>Symbole</small><b id="atlasMetalsDetailSymbol">XAU</b></span>
+          <span><small>Cours</small><b id="atlasMetalsDetailPrice">—</b></span>
+          <span><small>Décision</small><b id="atlasMetalsDetailDecision">Observation</b></span>
+        </div>
+
+        <section class="atlas-metals-detail-card atlas-metals-human-reading"
+                 id="atlasMetalsHumanReading"
+                 data-state="loading"
+                 aria-live="polite">
+          <header>
+            <div>
+              <b>Lecture synthétique</b>
+              <small id="atlasMetalsHumanReadingPeriod">Période active</small>
+            </div>
+            <em id="atlasMetalsHumanReadingState">Observation</em>
+          </header>
+          <strong id="atlasMetalsHumanReadingTitle">Or · lecture historique</strong>
+          <p id="atlasMetalsHumanReadingSummary">Lecture des séances Futures publiques réelles…</p>
+          <p class="atlas-metals-human-reading-context" id="atlasMetalsHumanReadingContext">Comparaison des horizons en préparation.</p>
+          <small class="atlas-metals-human-reading-source" id="atlasMetalsHumanReadingSource">Historique Futures uniquement · aucune prévision.</small>
+        </section>
+
+        <section class="atlas-metals-detail-card">
+          <header>
+            <b>Fiche métal</b>
+            <small>identité · rôle · unité · sélection</small>
+          </header>
+          <div class="atlas-metals-detail-grid">
+            <span><b>Famille</b><small id="atlasMetalsDetailFamily">Précieux monétaire</small></span>
+            <span><b>Unité</b><small id="atlasMetalsDetailUnit">USD / once troy</small></span>
+            <span><b>État des données</b><small id="atlasMetalsDetailDataState">Structure publique disponible</small></span>
+            <span><b>Sélection graphique</b><small id="atlasMetalsDetailSelection">Incluse</small></span>
+          </div>
+        </section>
+
+        <section class="atlas-metals-detail-card">
+          <header>
+            <b>Metals Sentinel</b>
+            <small>structure publique · millésime 2025</small>
+          </header>
+          <div class="atlas-metals-sentinel-gates">
+            <span><b>Production monde</b><small id="atlasMetalsStructuralProduction">Chargement…</small></span>
+            <span><b>Réserves monde</b><small id="atlasMetalsStructuralReserves">Chargement…</small></span>
+            <span><b>Producteurs</b><small id="atlasMetalsStructuralProducers">Chargement…</small></span>
+            <span><b>Usages</b><small id="atlasMetalsStructuralUses">Chargement…</small></span>
+            <span><b>Statut UE</b><small id="atlasMetalsStructuralEu">Chargement…</small></span>
+          </div>
+        </section>
+
+        <section class="atlas-metals-detail-card atlas-metals-source-dock"
+                 id="atlasMetalsSourceDock">
+          <header>
+            <div>
+              <span class="eyebrow">SOURCES DE L’ACTIF</span>
+              <b id="atlasMetalsSourceDockTitle">Références préparées</b>
+            </div>
+            <em id="atlasMetalsSourceDockState">0 source connectée</em>
+          </header>
+          <div class="atlas-metals-source-list"
+               id="atlasMetalsSourceList"
+               aria-live="polite">
+            <span><b>Registre local</b><small>Chargement de la fondation des sources</small><em>EN ATTENTE</em></span>
+          </div>
+        </section>
+
+        <section class="atlas-metals-detail-card atlas-metals-integrity">
+          <header>
+            <b>Intégrité des données</b>
+            <small>vérité · unités · séparation</small>
+          </header>
+          <p id="atlasMetalsIntegrityText">
+            Aucun prix, historique ou score n’est calculé sans source réelle, unité explicite et horodatage vérifiable.
+          </p>
+        </section>
+      </article>
+
+      <button class="detail-panel-rail" id="detailPanelRail" type="button" data-clean-lens-action="toggle" aria-label="Afficher ou masquer le détail actif">
+        <span>DÉTAIL ACTIF <b aria-hidden="true">▼</b></span>
+      </button>
+    </section>
+
+
+
+    <section class="market-ribbon-stack" id="market-workspace" aria-label="Bandeaux marché V2">
+      <section class="top5-ribbon glass" aria-label="Top 5 crypto en direct">
+        <button type="button" class="market-ribbon-label target-top5-cycle-control" id="targetTop5Cycle" data-cycle-preset="rank-5"
+                aria-label="Afficher la vue graphique suivante" title="Vue suivante : Hausses 5">
+          <span id="targetTop5CycleLabel">TARGET TOP 5 LIVE</span>
+          <small id="targetTop5CycleSymbols">BTC · ETH · BNB · XRP · SOL</small>
+          <span class="target-top5-cycle-button" id="targetTop5CycleButton" aria-hidden="true"><span>↻</span></span>
+        </button>
+        <div class="top5-track" id="top5Track">
+          <span class="market-ribbon-empty">Livecheck requis</span>
+        </div>
+      </section>
+
+      <section class="ticker glass market-flow-ribbon" aria-label="Flux du reste du marché">
+        <button type="button" class="market-flow-label" id="marketFlowCycle"
+                aria-label="Filtrer Market Flow : afficher uniquement les hausses" title="Filtrer : hausses uniquement">
+          <span id="marketFlowCycleLabel">MARKET FLOW</span>
+          <i class="market-flow-cycle-icon" aria-hidden="true">↻</i>
+        </button>
+        <div class="market-flow-viewport">
+          <div class="ticker-track" id="tickerTrack">
+            <span>Livecheck requis · aucune donnée chiffrée chargée · pas de tableau fictif · </span>
+            <span>Agent-Crypto @erith.IA observe, vérifie, classe, refuse l’invention · </span>
+          </div>
+        </div>
+      </section>
+    </section>
+
+
+    <section class="atlas-metals-math-host"
+             id="atlasMetalsMathHost"
+             aria-label="Math Core Métaux"
+             hidden></section>
+
+
+    <section class="atlas-metals-market-area"
+             id="atlasMetalsMarketArea"
+             aria-label="Market Métaux"
+             hidden>
+      <section class="atlas-metals-market-ribbons" aria-label="Rubans du marché Métaux">
+        <article class="atlas-metals-target-ribbon glass">
+          <div class="atlas-metals-ribbon-label">
+            <span>TARGET MÉTAUX</span>
+            <small id="atlasMetalsTargetSymbols">XAU · XAG · XPT · XPD · HG</small>
+          </div>
+          <div class="atlas-metals-target-track" id="atlasMetalsTargetTrack">
+            <button type="button" data-metals-market-card="gold"><b>XAU</b><span>Or</span><em>—</em></button>
+            <button type="button" data-metals-market-card="silver"><b>XAG</b><span>Argent</span><em>—</em></button>
+            <button type="button" data-metals-market-card="platinum"><b>XPT</b><span>Platine</span><em>—</em></button>
+            <button type="button" data-metals-market-card="palladium"><b>XPD</b><span>Palladium</span><em>—</em></button>
+            <button type="button" data-metals-market-card="copper"><b>HG</b><span>Cuivre</span><em>—</em></button>
+          </div>
+        </article>
+
+        <article class="atlas-metals-flow-ribbon glass">
+          <div class="atlas-metals-ribbon-label">
+            <span>METALS FLOW</span>
+            <small>Lecture par familles</small>
+          </div>
+          <div class="atlas-metals-flow-track">
+            <span><b>Précieux monétaires</b><small>XAU · XAG</small><em>USGS 2026</em></span>
+            <span><b>Précieux industriels</b><small>XPT · XPD</small><em>USGS + RMIS</em></span>
+            <span><b>Industriel</b><small>HG</small><em>USGS + IEA</em></span>
+            <span><b>Matériaux critiques</b><small>USGS · IEA</small><em>Structurel</em></span>
+          </div>
+        </article>
+      </section>
+
+      <section class="atlas-metals-market-grid">
+        <article class="panel glass atlas-metals-market-snapshot"
+                 id="atlasMetalsMarketSnapshot">
+          <header class="atlas-metals-market-head">
+            <div>
+              <span class="eyebrow">ESPACE 02 · MARKET MÉTAUX</span>
+              <h2>Market Métaux précieux et industriels</h2>
+              <p id="atlasMetalsMarketIntro">Tableau, filtres, structure physique et sources Métaux. Les prix restent vides tant qu’aucune cotation réelle n’est connectée.</p>
+            </div>
+            <div class="atlas-metals-market-source-state">
+              <span>COURS <b id="atlasMetalsMarketCourseState">NON CONNECTÉS</b></span>
+              <span>STRUCTURE <b id="atlasMetalsStructureState">USGS 2026</b></span>
+            </div>
+          </header>
+
+          <div class="atlas-metals-market-tools" role="group" aria-label="Filtres Market Métaux">
+            <span>Famille</span>
+            <button type="button" data-metals-market-filter="all" class="is-active">Tous</button>
+            <button type="button" data-metals-market-filter="monetary">Précieux monétaires</button>
+            <button type="button" data-metals-market-filter="precious-industrial">Précieux industriels</button>
+            <button type="button" data-metals-market-filter="industrial">Industriels</button>
+          </div>
+
+          <div class="atlas-metals-market-table-wrap">
+            <table class="atlas-metals-market-table">
+              <thead>
+                <tr>
+                  <th>Métal</th>
+                  <th>Symbole</th>
+                  <th>Famille</th>
+                  <th>Unité</th>
+                  <th>Cours</th>
+                  <th>Variation</th>
+                  <th>Source</th>
+                  <th>État</th>
+                </tr>
+              </thead>
+              <tbody id="atlasMetalsMarketRows">
+                <tr data-metals-market-row="gold" data-metals-market-family="monetary"><td>Or</td><td>XAU</td><td>Précieux monétaire</td><td>USD / once troy</td><td>—</td><td>—</td><td>USGS 2026</td><td>Structure disponible</td></tr>
+                <tr data-metals-market-row="silver" data-metals-market-family="monetary"><td>Argent</td><td>XAG</td><td>Précieux monétaire et industriel</td><td>USD / once troy</td><td>—</td><td>—</td><td>USGS 2026</td><td>Structure disponible</td></tr>
+                <tr data-metals-market-row="platinum" data-metals-market-family="precious-industrial"><td>Platine</td><td>XPT</td><td>Précieux industriel</td><td>USD / once troy</td><td>—</td><td>—</td><td>USGS 2026</td><td>Structure disponible</td></tr>
+                <tr data-metals-market-row="palladium" data-metals-market-family="precious-industrial"><td>Palladium</td><td>XPD</td><td>Précieux industriel</td><td>USD / once troy</td><td>—</td><td>—</td><td>USGS 2026</td><td>Structure disponible</td></tr>
+                <tr data-metals-market-row="copper" data-metals-market-family="industrial"><td>Cuivre</td><td>HG</td><td>Industriel</td><td>USD / livre</td><td>—</td><td>—</td><td>USGS 2026</td><td>Structure disponible</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <footer class="atlas-metals-market-footer">
+            <b id="atlasMetalsMarketStatus">5 actifs · aucun cours inventé</b>
+            <span>USGS 2026 · IEA 2026 · RMIS 2023 · aucun prix inventé.</span>
+          </footer>
+        </article>
+
+        <aside class="panel glass atlas-metals-market-registry"
+               id="atlasMetalsMarketRegistry">
+          <header>
+            <span class="eyebrow">SOURCES STRUCTURELLES</span>
+            <h3>Production, réserves, usages et criticité</h3>
+          </header>
+          <div class="atlas-metals-registry-list"
+               id="atlasMetalsRegistryList"
+               aria-live="polite">
+            <span><b>Registre local</b><small>Chargement des sources qualifiées</small><em>EN ATTENTE</em></span>
+          </div>
+          <p id="atlasMetalsRegistrySummary">
+            Registre public versionné · chargement en cours.
+          </p>
+        </aside>
+      </section>
+    </section>
+
+
+    <div class="math-top-dock" id="mathTopDock" hidden></div>
+    <section class="layout-two market-workspace-grid" id="marketWorkspaceGrid">
+      <article class="panel glass wide market-snapshot-panel" id="marketSnapshotPanel">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">MARKET SNAPSHOT</p>
+            <h2>Prix du marché des cryptomonnaies</h2>
+          </div>
+          <label class="search-box">
+            <span>⌕</span>
+            <input id="searchInput" type="search" placeholder="Filtrer : bitcoin, eth, sol..." autocomplete="off" />
+          </label>
+        </div>
+
+
+        <div class="market-tools" id="marketTools">
+          <div class="filter-chips" aria-label="Filtres actifs">
+            <button class="filter-btn active" data-filter="all">Tous</button>
+            <button class="filter-btn" data-filter="pillar">BTC / ETH</button>
+            <button class="filter-btn" data-filter="stablecoin">Stablecoins</button>
+            <button class="filter-btn" data-filter="major">Altcoins majeurs</button>
+            <button class="filter-btn" data-filter="speculative">Spéculatifs</button>
+          </div>
+          <div class="market-universe-mode" id="marketUniverseMode" role="group" aria-label="Nombre d’actifs affichés dans le Market Snapshot">
+            <span>Vue Market</span>
+            <button type="button" class="is-active" data-market-limit="50" aria-pressed="true">50</button>
+            <button type="button" data-market-limit="100" aria-pressed="false">100</button>
+            <button type="button" data-market-limit="250" aria-pressed="false">250</button>
+            <small id="marketUniverseStatus">Univers CoinGecko : en attente</small>
+          </div>
+          <div class="market-column-mode" role="group" aria-label="Colonnes du Market Snapshot"><span>Colonnes</span><button type="button" class="is-active" data-market-columns="essential">Essentiel</button><button type="button" data-market-columns="complete">Complet</button></div>
+          <label class="sort-box">
+            <span>Tri</span>
+            <select id="sortSelect">
+              <option value="rank-asc">Rang marché</option>
+              <option value="score-desc">Score décroissant</option>
+              <option value="volume-desc">Volume 24h</option>
+              <option value="change24-desc">24h hausse</option>
+              <option value="change24-asc">24h baisse</option>
+              <option value="ratio-desc">Vol/Cap</option>
+            </select>
+          </label>
+        </div>
+
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Rang</th>
+                <th>Crypto</th>
+                <th>Prix</th>
+                <th title="Variation 24 h de la cotation observée affichée">24h</th>
+                <th title="Variation marché 7 j du snapshot CoinGecko">7j</th>
+                <th class="market-col-advanced">Market Cap</th>
+                <th class="market-col-advanced">Volume 24h</th>
+                <th>Comparaison</th>
+                <th class="market-col-advanced">Indice</th>
+                <th class="market-col-advanced">Lecture</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="marketRows">
+              <tr><td colspan="11" class="empty">Livecheck requis. Aucun prix inventé.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note" id="tableNote">Les données chiffrées apparaissent uniquement si une source réelle répond.</p>
+      </article>
+
+      <aside class="panel glass score-panel atlas-math-dock" id="math" data-math-dock="side">
+        <div class="atlas-math-dock-head">
+          <div>
+            <p class="eyebrow">ATLAS MATH CORE V3</p>
+            <h2>Risque historique et qualité de série</h2>
+            <p class="atlas-math-context-line" id="atlasMathContextLine">Contexte Market : en attente</p>
+          </div>
+          <div class="atlas-math-dock-actions" role="group" aria-label="Position Atlas Math Core">
+            <button type="button" data-math-position="top" aria-label="Déployer Atlas Math Core au-dessus du Market Snapshot">Dessus</button>
+            <button type="button" data-math-position="side" class="is-active" aria-label="Afficher Atlas Math Core à droite du Market Snapshot">Latéral</button>
+            <button type="button" data-math-position="rail" aria-label="Réduire Atlas Math Core en rail">Réduire</button>
+          </div>
+        </div>
+        <button class="atlas-math-rail-trigger" id="atlasMathRailTrigger" type="button" data-math-position="side" aria-label="Déployer Atlas Math Core">
+          <span class="atlas-math-rail-content">
+            <b class="atlas-math-rail-medallion" id="atlasMathRailScore">—</b>
+          </span>
+        </button>
+        <div class="score-ring" id="scoreRing" style="--score:0">
+          <span id="scoreValue">—</span>
+          <small id="scoreLabel">En attente</small>
+        </div>
+        <p class="muted-line">Lecture humaine d’abord · mesures factuelles et limites visibles.</p>
+        <div class="atlas-human-verdict" id="atlasHumanVerdict">
+          <b>Lecture factuelle :</b> en attente du Livecheck.<br>
+          <b>Faits :</b> aucune source marché n’a encore répondu.<br>
+          <b>Limites :</b> aucune conclusion sans données.
+        </div>
+        <div class="atlas-summary-grid" id="atlasSummaryGrid">
+          <div><span>Série réelle</span><b>En attente</b></div>
+          <div><span>Volatilité fenêtre</span><b>En attente</b></div>
+          <div><span>Drawdown maximal</span><b>En attente</b></div>
+          <div><span>VaR 95 % / pas</span><b>En attente</b></div>
+        </div>
+        <details class="atlas-tech-details">
+          <summary aria-label="Ouvrir ou réduire les mesures historiques, la méthode et les limites"><span>Mesures historiques, méthode et limites</span></summary>
+          <section class="atlas-score-components" aria-label="Composantes de l’indice heuristique">
+            <h3>Composantes de l’indice</h3>
+            <div class="breakdown" id="scoreBreakdown">
+              <div><span>Information</span><b>—</b></div>
+              <div><span>Marché</span><b>—</b></div>
+              <div><span>Liquidité</span><b>—</b></div>
+              <div><span>Momentum</span><b>—</b></div>
+              <div><span>Pénalité</span><b>—</b></div>
+            </div>
+          </section>
+          <div class="atlas-math-core" id="atlasMathCorePanel">
+            <div class="atlas-math-card"><span>Actif</span><b>—</b><small>Livecheck requis</small></div>
+            <div class="atlas-math-card"><span>Couverture des données</span><b>—</b><small>En attente</small></div>
+            <div class="atlas-math-card"><span>Variation 24 h</span><b>—</b><small>En attente</small></div>
+            <div class="atlas-math-card"><span>Variation 7 j</span><b>—</b><small>En attente</small></div>
+            <div class="atlas-math-card"><span>Ratio volume / capitalisation</span><b>—</b><small>En attente</small></div>
+            <div class="atlas-math-card"><span>Cohérence des horizons</span><b>—</b><small>En attente</small></div>
+            <div class="atlas-math-card"><span>Amplitude observée 24 h</span><b>—</b><small>En attente</small></div>
+            <div class="atlas-math-card"><span>Risque global</span><b>Non évalué</b><small>Données partielles</small></div>
+          </div>
+        </details>
+        <div class="atlas-verdict" id="atlasMathVerdict"><b>Mode observation</b> · aucune exécution réelle</div>
+      </aside>
+    </section>
+
+
+
+
+    </section>
+    <section class="atlas-metals-analysis-foundation"
+             id="atlasMetalsAnalysisFoundation"
+             aria-labelledby="atlasMetalsAnalysisTitle"
+             hidden>
+      <header class="atlas-metals-analysis-family">
+        <span class="atlas-layout-family-index" aria-hidden="true">01</span>
+        <div>
+          <p>PARCOURS MÉTAUX</p>
+          <h2 id="atlasMetalsAnalysisTitle">Analyse Métaux & décision</h2>
+          <span>Comparer les horizons, qualifier les sources et séparer cotation, macro, industrie et provenance.</span>
+        </div>
+        <span class="atlas-layout-family-signal" aria-hidden="true"></span>
+      </header>
+
+      <section class="panel glass atlas-metals-analysis-panel">
+        <div class="section-head compact">
+          <div>
+            <p class="eyebrow">ANALYSE MÉTAUX MULTI-HORIZON</p>
+            <h2 id="atlasMetalsAnalysisAssetTitle">Or · XAU</h2>
+          </div>
+          <span class="pill warn" id="atlasMetalsAnalysisState">Structure 2025</span>
+        </div>
+
+        <p class="atlas-metals-analysis-intro" id="atlasMetalsAnalysisIntro">
+          Données structurelles publiques séparées des cotations : aucun mouvement ni score n’est inventé.
+        </p>
+
+        <div class="atlas-metals-analysis-grid">
+          <article>
+            <span>COTATION</span>
+            <b id="atlasMetalsAnalysisQuoteState">Non connectée</b>
+            <small id="atlasMetalsAnalysisQuoteDetail">Aucun prix ni OHLC importé.</small>
+          </article>
+          <article>
+            <span>MACRO</span>
+            <b id="atlasMetalsAnalysisMacroState">Chargement…</b>
+            <small id="atlasMetalsAnalysisMacroDetail">Sources publiques en lecture.</small>
+          </article>
+          <article>
+            <span>OFFRE-DEMANDE</span>
+            <b id="atlasMetalsAnalysisOfferState">Chargement…</b>
+            <small id="atlasMetalsAnalysisOfferDetail">Production et réserves en lecture.</small>
+          </article>
+          <article>
+            <span>PHYSIQUE & PROVENANCE</span>
+            <b id="atlasMetalsAnalysisPhysicalState">Chargement…</b>
+            <small id="atlasMetalsAnalysisPhysicalDetail">Principaux producteurs en lecture.</small>
+          </article>
+        </div>
+
+        <div class="atlas-metals-analysis-horizons" aria-label="Évolutions historiques réelles par horizon">
+          <span data-metals-analysis-horizon="7"><b>7 jours</b><small>Calcul en attente</small></span>
+          <span data-metals-analysis-horizon="30"><b>30 jours</b><small>Calcul en attente</small></span>
+          <span data-metals-analysis-horizon="90"><b>90 jours</b><small>Calcul en attente</small></span>
+          <span data-metals-analysis-horizon="365"><b>1 an</b><small>Calcul en attente</small></span>
+        </div>
+
+        <footer>
+          <b>Décision humaine uniquement</b>
+          <span id="atlasMetalsAnalysisProvenance">USGS MCS 2026 · données 2025e · prix non connectés.</span>
+        </footer>
+      </section>
+
+      <section class="atlas-shared-synthesis-card atlas-metals-report-memory"
+               id="atlasMetalsReportCard"
+               data-state="empty"
+               aria-labelledby="atlasMetalsReportTitle">
+        <div class="atlas-shared-synthesis-head">
+          <div>
+            <p class="eyebrow">SOUS-SECTION PERMANENTE · MÉTAUX PRÉCIEUX</p>
+            <h4 id="atlasMetalsReportTitle">Rapport Métaux public automatique</h4>
+            <p id="atlasMetalsReportStatus" role="status" aria-live="polite">En attente du premier collecteur public automatique · aucune action Ryzen requise.</p>
+          </div>
+          <span class="pill warn" id="atlasMetalsReportBadge">Prêt</span>
+        </div>
+
+        <div class="atlas-shared-synthesis-meta" aria-label="État de la mémoire Métaux">
+          <article><span>Snapshot</span><b id="atlasMetalsReportSnapshot">—</b></article>
+          <article><span>Origine publique</span><b id="atlasMetalsReportOrigin">—</b></article>
+          <article><span>Cotations Métaux</span><b id="atlasMetalsReportQuotes">0/5</b></article>
+          <article><span>Historique réel</span><b id="atlasMetalsReportHistory">0 séance Futures</b></article>
+          <article><span>Conservation IndexedDB</span><b id="atlasMetalsReportPersistence">Non enregistrée</b></article>
+        </div>
+
+        <section class="atlas-metals-comparison" id="atlasMetalsComparison" aria-labelledby="atlasMetalsComparisonTitle">
+          <header class="atlas-metals-comparison-head">
+            <div>
+              <p class="eyebrow">COMPARAISON RÉELLE · DEUX DERNIÈRES SÉANCES FUTURES</p>
+              <h5 id="atlasMetalsComparisonTitle">Évolution constatée des cinq métaux</h5>
+              <p id="atlasMetalsComparisonWindow">Historique insuffisant pour établir une comparaison.</p>
+            </div>
+            <span class="pill warn" id="atlasMetalsComparisonSummary">0 comparé</span>
+          </header>
+
+          <div class="atlas-metals-comparison-table-wrap">
+            <table class="atlas-metals-comparison-table">
+              <thead>
+                <tr>
+                  <th>Métal</th>
+                  <th>Séance précédente</th>
+                  <th>Dernière séance</th>
+                  <th>Écart réel</th>
+                  <th>Variation</th>
+                  <th>Tendance</th>
+                </tr>
+              </thead>
+              <tbody id="atlasMetalsComparisonRows">
+                <tr><td colspan="6">Aucune comparaison disponible.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="atlas-metals-snapshot-strip" id="atlasMetalsSnapshotStrip" aria-label="Séances Futures Métaux conservées">
+            <span>Aucune séance Futures conservée.</span>
+          </div>
+          <small id="atlasMetalsComparisonNote">Calcul sur les relevés publics conservés · aucune prévision · aucune clé fournisseur.</small>
+        </section>
+
+        <div class="atlas-shared-synthesis-content" id="atlasMetalsReportContent">
+          <p class="atlas-local-response-empty">Aucun rapport public disponible. L’interface le construira automatiquement après réception d’un panier public 5/5 valide.</p>
+        </div>
+
+        <div class="atlas-shared-synthesis-actions">
+          <button type="button" id="btnAtlasMetalsReportCopy" disabled>Copier le rapport</button>
+          <button type="button" id="btnAtlasMetalsReportExportMd" disabled>Exporter .md</button>
+        </div>
+        <small class="atlas-shared-synthesis-note">Données publiées automatiquement · rapport construit dans l’interface · lecture identique Ryzen et Transformer Book · aucune publication manuelle.</small>
+      </section>
+    </section>
+
+    <section class="atlas-layout-family atlas-layout-family-analysis" aria-labelledby="atlasLayoutFamily01">
+      <span class="atlas-layout-family-index" aria-hidden="true">01</span>
+      <div class="atlas-layout-family-copy">
+        <p>PARCOURS ADMINISTRATEUR</p>
+        <h2 id="atlasLayoutFamily01">Analyse & décision</h2>
+        <span>Comprendre les horizons, les événements, les risques et les limites avant toute conclusion.</span>
+      </div>
+      <span class="atlas-layout-family-signal" aria-hidden="true"></span>
+    </section>
+
+    <div id="oracle-view-host" data-oracle-presentation-host="38.15.16" aria-hidden="true"></div>
+    <script src="./js/views/oracle-presentation.js?v=market-core-v2.0-alpha-build-38.15.16"></script>
+    </section>
+      </div>
+    </details>
+
+    <section class="atlas-layout-family atlas-layout-family-intelligence" aria-labelledby="atlasLayoutFamily02">
+      <span class="atlas-layout-family-index" aria-hidden="true">02</span>
+      <div class="atlas-layout-family-copy">
+        <p>PARCOURS ADMINISTRATEUR</p>
+        <h2 id="atlasLayoutFamily02">Intelligence, mémoire & création</h2>
+        <span>Interroger Atlas et Aerith, conserver les repères, puis ouvrir la Forge sans quitter le parcours.</span>
+      </div>
+      <span class="atlas-layout-family-signal" aria-hidden="true"></span>
+    </section>
+
+    <div id="atlas-view-host" data-atlas-presentation-host="38.15.16" aria-hidden="true"></div>
+    <script src="./js/views/atlas-presentation.js?v=market-core-v2.0-alpha-build-38.15.16"></script>
+
+    <details class="atlas-collapse glass forge-aerith-collapse forge-aerith-embedded-collapse atlas-family-member atlas-tone-creation" data-collapse-key="forge-aerith" id="forge-aerith" data-layout-family="creation">
+  <summary class="atlas-collapse-summary">
+    <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+    <span class="atlas-collapse-title">✦ Forge d’Aerith Pro</span>
+    <span class="atlas-collapse-subtitle">Atelier Créatrice · huit étapes · imports · audit · exports</span>
+  </summary>
+
+  <div class="atlas-collapse-body">
+    <section class="panel glass forge-aerith-panel forge-aerith-embedded-panel forge-workshop-only-panel" aria-labelledby="forge-aerith-title">
+      <div class="forge-embedded-toolbar forge-workshop-toolbar">
+        <div class="forge-embedded-identity forge-workshop-identity">
+          <strong id="forge-aerith-title">Forge d’Aerith Pro · Atelier Créatrice</strong>
+          <span id="forgeEmbeddedStatus">Chargement de l’atelier en huit étapes…</span>
+        </div>
+
+        <a
+          class="btn secondary forge-embedded-fullscreen"
+          href="../atlas_10_full/index.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Ouvrir la Forge complète ↗
+        </a>
+      </div>
+
+      <div class="forge-embedded-stage forge-workshop-stage" id="forgeEmbeddedStage">
+        <div class="forge-embedded-loading" id="forgeEmbeddedLoading" role="status">
+          Préparation de l’Atelier Créatrice…
+        </div>
+
+        <iframe
+          id="forgeAerithEmbedded"
+          class="forge-embedded forge-workshop-embedded"
+          src="../atlas_10_full/index.html#unifiedForge"
+          title="Forge d’Aerith Pro — Atelier Créatrice en huit étapes"
+          loading="lazy">
+        </iframe>
+      </div>
+    </section>
+  </div>
+</details>
+
+    <details class="atlas-collapse glass atlas-family-member atlas-tone-intelligence" data-collapse-key="auto-reader" data-layout-family="intelligence">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">Atlas Auto Reader</span>
+        <span class="atlas-collapse-subtitle">Collecte autonome du marché</span>
+      </summary>
+      <div class="atlas-collapse-body">
+
+<section class="panel glass auto-reader-panel memory-truth-panel" id="auto-reader">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">ATLAS AUTO READER</p>
+          <h2>Collecte locale vérifiable</h2>
+          <p class="planning-intro">Le navigateur collecte uniquement lorsque l’Auto Reader est actif et que cet onglet reste visible. Fermer la page arrête cette collecte locale.</p>
+        </div>
+        <span class="pill ok" id="autoModeStatus">Auto actif</span>
+      </div>
+
+      <div class="auto-actions">
+        <button class="btn small primary" id="btnAutoToggle" type="button">Auto ON</button>
+        <button class="btn small" id="btnAutoNow" type="button">Lecture maintenant</button>
+        <div class="auto-cadence-lock" aria-label="Cadences verrouillées">
+          <span><b>Marché</b><em>60 s</em></span>
+          <span><b>Spot</b><em>30 s</em></span>
+          <span><b>Historique</b><em>5 min</em></span>
+        </div>
+      </div>
+
+      <div class="auto-grid memory-truth-grid">
+        <article><b>Auto Reader</b><span id="autoReaderTruth">ACTIF</span></article>
+        <article><b>Onglet / collecte</b><span id="autoVisibilityTruth">Visible</span></article>
+        <article><b>Dernière lecture</b><span id="autoLastRead">En attente</span></article>
+        <article><b>Prochaine lecture</b><span id="autoNextRead">Préparation</span></article>
+        <article><b>Cadence marché</b><span id="autoActiveCadence">60 secondes</span></article>
+        <article><b>Snapshots locaux</b><span id="autoSnapshots">0</span></article>
+        <article><b>Dernier snapshot local</b><span id="autoLastSnapshotTruth">Aucun</span></article>
+        <article><b>Collecteur de ce Firefox</b><span id="autoCollectorTruth">En attente</span></article>
+        <article><b>État marché</b><span id="autoMarketPulse">En attente</span></article>
+        <article><b>Watchlist</b><span id="autoWatchStatus">BTC · ETH · SOL</span></article>
+        <article><b>Écriture GitHub</b><span id="autoGithubWriteTruth">NON · lecture seule</span></article>
+      </div>
+
+      <pre class="auto-reader-output" id="autoReaderOutput">Atlas Auto Reader prêt. La première lecture locale se lance automatiquement si l’onglet reste visible.</pre>
+    </section>
+      </div>
+    </details>
+
+    <details class="atlas-collapse glass atlas-family-member atlas-tone-intelligence" data-collapse-key="shared-memory" data-layout-family="intelligence">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">Shared Memory</span>
+        <span class="atlas-collapse-subtitle">Export / import par machine</span>
+      </summary>
+      <div class="atlas-collapse-body">
+
+
+    <section class="panel glass shared-memory-panel" id="shared-memory">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">ATLAS SHARED MARKET MEMORY</p>
+          <h2>Machine collectrice + export / import</h2>
+          <p class="planning-intro">Configuration à faire une seule fois par machine. Les imports fusionnent les snapshots sans prouver que les autres machines collectent encore actuellement.</p>
+        </div>
+        <span class="pill" id="collectorIdentityBadge">Collecteur local</span>
+      </div>
+
+      <div class="collector-id-row">
+        <label class="sort-box collector-id-box">
+          <span>ID collecteur</span>
+          <input id="collectorIdInput" type="text" placeholder="transformer-book-christophe" />
+        </label>
+        <button class="btn small primary" id="btnSaveCollectorId" type="button">Sauver ID une fois</button>
+        <button class="btn small" id="btnExportAutoMemory" type="button">Exporter mémoire JSON</button>
+        <label class="btn small file-like" for="autoMemoryImport">Importer mémoire de marché</label>
+        <input id="autoMemoryImport" type="file" accept=".json,application/json" hidden />
+        <button class="btn small danger" id="btnClearAutoMemory" type="button">Effacer mémoire locale</button>
+      </div>
+
+      <div class="shared-grid">
+        <article><b>Machine configurée</b><span id="sharedCollectorId">Non défini</span></article>
+        <article><b>Total disponible</b><span id="sharedLocalCount">0 snapshots fusionnés</span></article>
+        <article><b>Collecteurs présents</b><span id="sharedCollectorsCount">0</span></article>
+        <article><b>Dernière opération</b><span id="sharedLastImport">Aucun import</span></article>
+      </div>
+
+      <section class="memory-coverage-panel" id="memoryCoveragePanel" aria-labelledby="memoryCoverageTitle">
+        <div class="memory-coverage-head">
+          <div>
+            <p class="eyebrow">MEMORY HISTORY COVERAGE</p>
+            <h3 id="memoryCoverageTitle">Couverture temporelle et qualité des données</h3>
+            <small>Snapshots de marché et séries graphiques CoinGecko sont mesurés séparément.</small>
+          </div>
+          <button class="btn small" id="btnRecalculateCoverage" type="button">Recalculer</button>
+        </div>
+
+        <div class="memory-coverage-kpis">
+          <article><span>Première trace</span><b id="memoryCoverageFirst">Aucune</b></article>
+          <article><span>Dernière trace</span><b id="memoryCoverageLast">Aucune</b></article>
+          <article><span>Durée réelle</span><b id="memoryCoverageSpan">0 s</b></article>
+          <article><span>Snapshots valides</span><b id="memoryCoverageValid">0/0</b></article>
+          <article><span>Cadence médiane</span><b id="memoryCoverageCadence">—</b></article>
+          <article><span>Plus grand trou</span><b id="memoryCoverageLargestGap">—</b></article>
+        </div>
+
+        <div class="memory-horizon-grid" id="memoryHorizonGrid" aria-label="Couverture par horizon">
+          <article data-horizon="1"><span>24 h</span><b>Mémoire insuffisante</b><small>Graphique : à charger</small></article>
+          <article data-horizon="7"><span>7 jours</span><b>Mémoire insuffisante</b><small>Graphique : à charger</small></article>
+          <article data-horizon="30"><span>30 jours</span><b>Mémoire insuffisante</b><small>Graphique : à charger</small></article>
+          <article data-horizon="60"><span>60 jours</span><b>Mémoire insuffisante</b><small>Graphique : à charger</small></article>
+          <article data-horizon="90"><span>90 jours</span><b>Mémoire insuffisante</b><small>Graphique : à charger</small></article>
+        </div>
+
+        <div class="memory-collector-quality" id="memoryCollectorQuality">
+          <span class="collector-truth-empty">Aucun collecteur exploitable.</span>
+        </div>
+
+        <pre class="memory-coverage-output" id="memoryCoverageOutput">Analyse de couverture en attente.</pre>
+      </section>
+
+      <pre class="shared-memory-output" id="sharedMemoryOutput">Statut import/export affiché ici. Un import réussi indique les snapshots ajoutés, le total et les collecteurs fusionnés.</pre>
+    </section>
+      </div>
+    </details>
+
+
+
+
+    <details class="atlas-collapse glass atlas-family-member atlas-tone-intelligence" data-collapse-key="github-memory" data-layout-family="intelligence">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">GitHub Memory</span>
+        <span class="atlas-collapse-subtitle">Mémoire commune GitHub</span>
+      </summary>
+      <div class="atlas-collapse-body">
+
+
+    <section class="panel glass github-memory-panel memory-truth-panel" id="github-memory">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">ATLAS GITHUB SHARED MEMORY</p>
+          <h2>Mémoire commune GitHub — vérité de chargement</h2>
+          <p class="planning-intro">Lecture automatique une fois au démarrage depuis <code>data/latest.json</code>. Le bouton ci-dessous force seulement une nouvelle lecture. Le frontend public ne peut pas écrire dans GitHub.</p>
+        </div>
+        <span class="pill" id="githubMemoryStatus">Auto en attente</span>
+      </div>
+
+      <div class="github-actions">
+        <button class="btn small primary" id="btnLoadGithubMemory" type="button">Forcer une nouvelle lecture GitHub</button>
+      </div>
+
+      <div class="github-grid memory-truth-grid">
+        <article><b>Auto-chargement au démarrage</b><span id="githubMemoryAuto">En attente</span></article>
+        <article><b>Dernière tentative</b><span id="githubMemoryAutoAttempt">Aucune</span></article>
+        <article><b>Dernier succès</b><span id="githubMemorySuccess">Aucun</span></article>
+        <article><b>Dernier relevé GitHub</b><span id="githubMemoryLatest">Non chargé</span></article>
+        <article><b>Snapshots GitHub lus</b><span id="githubMemoryRecords">0</span></article>
+        <article><b>Snapshots locaux disponibles</b><span id="githubMemoryLocal">0</span></article>
+        <article><b>Nouveaux lors de la dernière fusion</b><span id="githubMemoryAdded">0</span></article>
+        <article><b>Collecteurs présents dans GitHub</b><span id="githubMemoryCollectors">Aucun</span></article>
+        <article><b>Fusion locale</b><span id="githubMemoryFusion">En attente</span></article>
+        <article><b>Écriture GitHub depuis cette page</b><span id="githubMemoryWrite">NON · lecture seule</span></article>
+      </div>
+
+      <div class="collector-truth-list" id="collectorTruthList" aria-label="Présence réelle des collecteurs en mémoire">
+        <span class="collector-truth-empty">Aucun collecteur présent dans la mémoire locale.</span>
+      </div>
+
+      <pre class="github-memory-output" id="githubMemoryOutput">Lecture GitHub automatique en attente. La mémoire locale reste disponible même si GitHub ne répond pas.</pre>
+    </section>
+      </div>
+    </details>
+
+    <section class="atlas-layout-family atlas-layout-family-operations" aria-labelledby="atlasLayoutFamily03">
+      <span class="atlas-layout-family-index" aria-hidden="true">03</span>
+      <div class="atlas-layout-family-copy">
+        <p>PARCOURS ADMINISTRATEUR</p>
+        <h2 id="atlasLayoutFamily03">Préparation & opérations</h2>
+        <span>Suivre l’état du projet, cadrer l’opérateur et préparer les accès sans action financière réelle.</span>
+      </div>
+      <span class="atlas-layout-family-signal" aria-hidden="true"></span>
+    </section>
+
+    <details class="atlas-collapse glass atlas-family-member atlas-tone-operations" data-collapse-key="situation" data-layout-family="operations">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">Situation du projet</span>
+        <span class="atlas-collapse-subtitle">Synthèse d’état</span>
+      </summary>
+      <div class="atlas-collapse-body">
+
+
+
+
+
+
+
+
+
+    <div id="operations-view-host" data-operations-presentation-host="38.15.16" aria-hidden="true"></div>
+    <script src="./js/views/operations-presentation.js?v=market-core-v2.0-alpha-build-38.15.16"></script>
+      </div>
+    </details>
+
+    <section class="atlas-layout-family atlas-layout-family-system" aria-labelledby="atlasLayoutFamily04">
+      <span class="atlas-layout-family-index" aria-hidden="true">04</span>
+      <div class="atlas-layout-family-copy">
+        <p>PARCOURS ADMINISTRATEUR</p>
+        <h2 id="atlasLayoutFamily04">Expérimentation & système</h2>
+        <span>Simuler, tester, préparer le backend et vérifier les verrous de sécurité.</span>
+      </div>
+      <span class="atlas-layout-family-signal" aria-hidden="true"></span>
+    </section>
+
+    <details class="atlas-collapse glass atlas-family-member atlas-tone-experiment" data-collapse-key="simulation" data-layout-family="experiment">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">Simulation</span>
+        <span class="atlas-collapse-subtitle">Paper trading local</span>
+      </summary>
+      <div class="atlas-collapse-body">
+
+
+
+    <div id="system-view-host" data-system-presentation-host="38.15.16" aria-hidden="true"></div>
+    <script src="./js/views/system-presentation.js?v=market-core-v2.0-alpha-build-38.15.16"></script>
+      </div>
+    </details>
+
+
+
+
+
+
+    <div id="projects-view-host" data-projects-presentation-host="38.15.16" aria-hidden="true"></div>
+    <script src="./js/views/projects-presentation.js?v=market-core-v2.0-alpha-build-38.15.16"></script>
+      </div>
+    </details>
+
+    <details class="atlas-collapse glass life-project-collapse" data-collapse-key="mesure-audience" id="mesure-audience">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">📊 Mesure d’audience</span>
+        <span class="atlas-collapse-subtitle">Activité, appareil, réseau et fonctions consultées</span>
+      </summary>
+      <div class="atlas-collapse-body">
+        <section class="panel glass life-project audience-live-panel">
+          <div class="life-project-head"><div><p class="eyebrow">AUDIENCE V2 · MOTEUR DE SESSION</p><h2>Mesure d’audience active et traçable</h2></div><span class="life-status" id="audienceModuleStatus">Initialisation</span></div>
+          <div class="audience-live-grid audience-v2-grid">
+            <article><b>IP publique</b><span id="audienceIp">En attente</span></article>
+            <article><b>Localisation approximative</b><span id="audienceLocation">En attente</span></article>
+            <article><b>Appareil</b><span id="audienceDevice">En attente</span></article>
+            <article><b>Identifiant de participation</b><span id="audienceMember">visiteur non nommé</span></article>
+            <article><b>État de session</b><span id="audienceSessionState">Ouverture</span></article>
+            <article><b>Durée de session</b><span id="audienceDuration">0 s</span></article>
+            <article><b>Événements créés</b><span id="audienceCreated">0</span></article>
+            <article><b>Tentatives d’envoi</b><span id="audienceAttempted">0</span></article>
+            <article><b>Remis au navigateur</b><span id="audienceSubmitted">0</span></article>
+            <article><b>Échecs locaux</b><span id="audienceFailed">0</span></article>
+            <article><b>Heartbeat</b><span id="audienceHeartbeat">En attente</span></article>
+            <article><b>Dernier événement</b><span id="audienceLast">—</span></article>
+          </div>
+          <div class="audience-v2-delivery" aria-label="États de livraison Audience V2">
+            <span id="audienceDeliveryCreated">Créé · 0</span>
+            <span id="audienceDeliveryEncrypted">Chiffré · 0</span>
+            <span id="audienceDeliveryAttempted">Tenté · 0</span>
+            <span id="audienceDeliverySubmitted">Remis navigateur · 0</span>
+            <span id="audienceDeliveryConfirmed">Réception confirmée · console 26.45</span>
+          </div>
+          <div class="audience-v2-actions">
+            <button class="btn ghost" id="btnAudienceExport" type="button">Exporter diagnostic session</button>
+            <span id="audienceQueueState">Journal local : 0 événement</span>
+          </div>
+          <p class="life-rule"><b>Audience V2 :</b> chaque événement reçoit un identifiant unique, un numéro de séquence, un état local de livraison et une session horodatée. Le navigateur peut confirmer la création, le chiffrement, la tentative et la remise technique. La récupération, le déchiffrement et l’archivage seront confirmés par la console privée V2 de la version 26.45.</p>
+        </section>
+      </div>
+    </details>
+
+    <details class="atlas-collapse glass live-sources-collapse" id="liveSourcesCollapse" data-collapse-key="sources">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">Sources</span>
+        <span class="atlas-collapse-subtitle">Diagnostic des sources</span>
+      </summary>
+      <div class="atlas-collapse-body">
+
+
+
+    <section class="panel glass" id="sources">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">LIVE SOURCES</p>
+          <h2>Sources testées et statut</h2>
+        <p class="source-bottom-note">Diagnostic source principal en bas de page : CoinGecko est critique pour autoriser tableau, prix et graphiques.</p>
+        </div>
+        <span class="pill" id="sourceDecision">Refusé avant Livecheck</span>
+      </div>
+      <div class="source-grid" id="sourceGrid"></div>
+      <p class="source-help">Les sources avec clé API privée ne doivent jamais être exposées dans GitHub Pages. Cette version publique privilégie les endpoints publics et un refus propre en cas d’échec.</p>
+    </section>
+      </div>
+    </details>
+
+    <footer class="footer atlas-release-footer" aria-label="Informations Agent-Crypto">
+      <span id="footerRelease">Agent-Crypto @erith.IA · Market Core · CLASSIC · Build 38.15.16</span>
+      <span id="footerTruthRule">Observatoire prudent · aucune recommandation financière</span>
+      <a class="privacy-footer-line" href="#mesure-audience" data-v2-complete-control>Binance · CoinGecko · diagnostic</a>
+    </footer>
+  </main>
+
+  <aside class="atlas-help-layer" id="atlasHelpLayer" role="tooltip" aria-hidden="true" hidden></aside>
+  <div class="atlas-help-live" id="atlasHelpLive" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+  <script src="./app.js?v=market-core-v2.0-alpha-build-38.15.16"></script>
+</body>
+</html>

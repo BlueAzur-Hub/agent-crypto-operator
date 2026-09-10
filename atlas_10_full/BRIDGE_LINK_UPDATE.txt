@@ -1,0 +1,8 @@
+OLD
+../atlas_10_full_crypto/
+
+NEW
+../atlas_10_full/
+
+FULL URL
+https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/atlas_10_full/

@@ -1,0 +1,70 @@
+{
+  "schema": "agent_crypto_metals_history_index_v1",
+  "version": "2.3.0",
+  "directory": "data/metals/history",
+  "history_response": "public_1y.json",
+  "entries": [
+    {
+      "asset_id": "gold",
+      "symbol": "XAU",
+      "provider_symbol": "GC=F",
+      "file": "../series/gold.json",
+      "points": 262,
+      "oldest_at": "2025-08-25T04:00:00.000Z",
+      "newest_at": "2026-09-09T04:00:00.000Z",
+      "provider_id": "yahoo_finance"
+    },
+    {
+      "asset_id": "silver",
+      "symbol": "XAG",
+      "provider_symbol": "SI=F",
+      "file": "../series/silver.json",
+      "points": 262,
+      "oldest_at": "2025-08-25T04:00:00.000Z",
+      "newest_at": "2026-09-09T04:00:00.000Z",
+      "provider_id": "yahoo_finance"
+    },
+    {
+      "asset_id": "platinum",
+      "symbol": "XPT",
+      "provider_symbol": "PL=F",
+      "file": "../series/platinum.json",
+      "points": 262,
+      "oldest_at": "2025-08-25T04:00:00.000Z",
+      "newest_at": "2026-09-09T04:00:00.000Z",
+      "provider_id": "yahoo_finance"
+    },
+    {
+      "asset_id": "palladium",
+      "symbol": "XPD",
+      "provider_symbol": "PA=F",
+      "file": "../series/palladium.json",
+      "points": 262,
+      "oldest_at": "2025-08-25T04:00:00.000Z",
+      "newest_at": "2026-09-09T04:00:00.000Z",
+      "provider_id": "yahoo_finance"
+    },
+    {
+      "asset_id": "copper",
+      "symbol": "HG",
+      "provider_symbol": "HG=F",
+      "file": "../series/copper.json",
+      "points": 262,
+      "oldest_at": "2025-08-25T04:00:00.000Z",
+      "newest_at": "2026-09-09T04:00:00.000Z",
+      "provider_id": "yahoo_finance"
+    }
+  ],
+  "files": 6,
+  "snapshots": 262,
+  "oldest_at": "2025-08-25T04:00:00.000Z",
+  "newest_at": "2026-09-09T04:00:00.000Z",
+  "updated_at": "2026-09-09T22:32:28.708Z",
+  "integrity": {
+    "fabricated_points_forbidden": true,
+    "crypto_history_reuse_forbidden": true,
+    "source_time_preserved": true,
+    "duplicate_snapshot_ids_forbidden": true,
+    "complete_five_asset_snapshots_only": true
+  }
+}

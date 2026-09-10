@@ -1,0 +1,128 @@
+{
+  "core/AERITH_10_CREATRICE_MULTI_AGENT_CORE.md": {
+    "target": "AERITH_10_CREATRICE/CORE/AERITH_10_CREATRICE_MULTI_AGENT_CORE.md",
+    "present": true,
+    "same": true,
+    "sha": "1b9da54d34d303be7f3da905af09dae57c9cca45f25ee703f92a76887b8118af",
+    "out_sha": "1b9da54d34d303be7f3da905af09dae57c9cca45f25ee703f92a76887b8118af"
+  },
+  "core/AERITH_10_CREATRICE_PERSONA_OPERATING_LAYER.md": {
+    "target": "AERITH_10_CREATRICE/CORE/AERITH_10_CREATRICE_PERSONA_OPERATING_LAYER.md",
+    "present": true,
+    "same": true,
+    "sha": "c7eda8974f438dff8665d717fe314f30b8f52453632087806a975dd1a76f654a",
+    "out_sha": "c7eda8974f438dff8665d717fe314f30b8f52453632087806a975dd1a76f654a"
+  },
+  "modules/aerith_10_creatrice/01_AERITH_10_MODULE_SCENOGRAPHIE_LIVE_STARS_FR.md": {
+    "target": "AERITH_10_CREATRICE/SOURCES/modules/aerith_10_creatrice/01_AERITH_10_MODULE_SCENOGRAPHIE_LIVE_STARS_FR.md",
+    "present": true,
+    "same": true,
+    "sha": "37ca2a882c4e617ef2fd0c238f0c9dbb7cad8773ab4fe858a2781633faa22254",
+    "out_sha": "37ca2a882c4e617ef2fd0c238f0c9dbb7cad8773ab4fe858a2781633faa22254"
+  },
+  "modules/aerith_10_creatrice/02_AERITH_10_MODULE_REALISATION_CINEMA_CLIP_VIDEASTE_FR.md": {
+    "target": "AERITH_10_CREATRICE/SOURCES/modules/aerith_10_creatrice/02_AERITH_10_MODULE_REALISATION_CINEMA_CLIP_VIDEASTE_FR.md",
+    "present": true,
+    "same": true,
+    "sha": "e99385a69aa9e68f1aa5829204d3892eb174c06e0d2d02057edbc214a772c18c",
+    "out_sha": "e99385a69aa9e68f1aa5829204d3892eb174c06e0d2d02057edbc214a772c18c"
+  },
+  "modules/aerith_10_creatrice/03_AERITH_10_MODULE_MUSIC_VIDEO_GRAMMAR_FR.md": {
+    "target": "AERITH_10_CREATRICE/SOURCES/modules/aerith_10_creatrice/03_AERITH_10_MODULE_MUSIC_VIDEO_GRAMMAR_FR.md",
+    "present": true,
+    "same": true,
+    "sha": "79fcc4d3d2a5c7166a0520e8eda5bf30d9bbc0277f0b49c5f66817c7427b888c",
+    "out_sha": "79fcc4d3d2a5c7166a0520e8eda5bf30d9bbc0277f0b49c5f66817c7427b888c"
+  },
+  "modules/aerith_10_creatrice/04_AERITH_10_MODULE_AUDIO_VISUAL_SYNC_LUMIERE_MUSICALE_FR.md": {
+    "target": "AERITH_10_CREATRICE/SOURCES/modules/aerith_10_creatrice/04_AERITH_10_MODULE_AUDIO_VISUAL_SYNC_LUMIERE_MUSICALE_FR.md",
+    "present": true,
+    "same": true,
+    "sha": "4c03b2aae76c6fff5ed59539999276d9fdf94cd3255df2166ffb7adf70f7679e",
+    "out_sha": "4c03b2aae76c6fff5ed59539999276d9fdf94cd3255df2166ffb7adf70f7679e"
+  },
+  "modules/aerith_10_creatrice/05_AERITH_10_MODULE_ARCHITECTURE_SCENIQUE_ESPACES_SPECTACULAIRES_FR.md": {
+    "target": "AERITH_10_CREATRICE/SOURCES/modules/aerith_10_creatrice/05_AERITH_10_MODULE_ARCHITECTURE_SCENIQUE_ESPACES_SPECTACULAIRES_FR.md",
+    "present": true,
+    "same": true,
+    "sha": "22bec6d114afbd1f2ce38582a4a4c884830f47e9876ea1d4b7b7339d3274964c",
+    "out_sha": "22bec6d114afbd1f2ce38582a4a4c884830f47e9876ea1d4b7b7339d3274964c"
+  },
+  "modules/aerith_10_creatrice/06_AERITH_10_MODULE_LIVE_CAMERA_VERTICAL_IMPACT_FR.md": {
+    "target": "AERITH_10_CREATRICE/SOURCES/modules/aerith_10_creatrice/06_AERITH_10_MODULE_LIVE_CAMERA_VERTICAL_IMPACT_FR.md",
+    "present": true,
+    "same": true,
+    "sha": "60a67d1e25a3895508574b649f96236d2f42a3015b4ef2bdd4770aa6deb1c7eb",
+    "out_sha": "60a67d1e25a3895508574b649f96236d2f42a3015b4ef2bdd4770aa6deb1c7eb"
+  },
+  "modules/aerith_10_creatrice/07_AERITH_10_MODULE_MOVEMENT_DIRECTION_CORPS_FOULE_FR.md": {
+    "target": "AERITH_10_CREATRICE/SOURCES/modules/aerith_10_creatrice/07_AERITH_10_MODULE_MOVEMENT_DIRECTION_CORPS_FOULE_FR.md",
+    "present": true,
+    "same": true,
+    "sha": "7e8a605df0b45d8c708f2769ffb14441e48240bea061c2a474a8f84286248273",
+    "out_sha": "7e8a605df0b45d8c708f2769ffb14441e48240bea061c2a474a8f84286248273"
+  },
+  "modules/aerith_10_creatrice/08_AERITH_10_MODULE_ANTI_AI_SLOP_QUALITE_HUMAINE_FR.md": {
+    "target": "AERITH_10_CREATRICE/SOURCES/modules/aerith_10_creatrice/08_AERITH_10_MODULE_ANTI_AI_SLOP_QUALITE_HUMAINE_FR.md",
+    "present": true,
+    "same": true,
+    "sha": "dc793a706015315d7ce122c8b63182558e3d5c25d9327dce12862519cc589827",
+    "out_sha": "dc793a706015315d7ce122c8b63182558e3d5c25d9327dce12862519cc589827"
+  },
+  "modules/aerith_10_creatrice/09_AERITH_10_STYLE_LOCK_PARADISE_LIFESTYLE_PREMIUM_FR.md": {
+    "target": "AERITH_10_CREATRICE/SOURCES/modules/aerith_10_creatrice/09_AERITH_10_STYLE_LOCK_PARADISE_LIFESTYLE_PREMIUM_FR.md",
+    "present": true,
+    "same": true,
+    "sha": "158f262038496e96d0b4af2b95271f4c6b4258cbb043ca62ed1c9221655970bc",
+    "out_sha": "158f262038496e96d0b4af2b95271f4c6b4258cbb043ca62ed1c9221655970bc"
+  },
+  "modules/aerith_10_creatrice/10_AERITH_10_MODULE_ESPRIT_D_CREATION_DESTINATION_FR.md": {
+    "target": "AERITH_10_CREATRICE/SOURCES/modules/aerith_10_creatrice/10_AERITH_10_MODULE_ESPRIT_D_CREATION_DESTINATION_FR.md",
+    "present": true,
+    "same": true,
+    "sha": "6ca7440d1d7cd2232f7dca5621308468944e8adcd988527f6c651f070e61bce4",
+    "out_sha": "6ca7440d1d7cd2232f7dca5621308468944e8adcd988527f6c651f070e61bce4"
+  },
+  "modules/aerith_10_creatrice/11_AERITH_10_MODULE_STAR_SILHOUETTE_COSTUME_PRESENCE_FR.md": {
+    "target": "AERITH_10_CREATRICE/SOURCES/modules/aerith_10_creatrice/11_AERITH_10_MODULE_STAR_SILHOUETTE_COSTUME_PRESENCE_FR.md",
+    "present": true,
+    "same": true,
+    "sha": "d78699d21c2692a4f06a4b92fc703f09995a638bfce0059ffb09cd29e2d02373",
+    "out_sha": "d78699d21c2692a4f06a4b92fc703f09995a638bfce0059ffb09cd29e2d02373"
+  },
+  "modules/aerith_10_creatrice/12_AERITH_10_MODULE_DAVINCI_MONTAGE_RYTHME_MUSICAL_FR.md": {
+    "target": "AERITH_10_CREATRICE/SOURCES/modules/aerith_10_creatrice/12_AERITH_10_MODULE_DAVINCI_MONTAGE_RYTHME_MUSICAL_FR.md",
+    "present": true,
+    "same": true,
+    "sha": "ff2a3cea641eef2237da1f3ae8ab77d73112866b371474980f9fe21e959efa6b",
+    "out_sha": "ff2a3cea641eef2237da1f3ae8ab77d73112866b371474980f9fe21e959efa6b"
+  },
+  "modules/aerith_10_creatrice/13_AERITH_10_MODULE_LOOK_BIBLE_COLOR_GRADING_FR.md": {
+    "target": "AERITH_10_CREATRICE/SOURCES/modules/aerith_10_creatrice/13_AERITH_10_MODULE_LOOK_BIBLE_COLOR_GRADING_FR.md",
+    "present": true,
+    "same": true,
+    "sha": "b3b1123325b474da348e9b4ba03a5ffa23720291da8949d7a54bd79c7b27bc02",
+    "out_sha": "b3b1123325b474da348e9b4ba03a5ffa23720291da8949d7a54bd79c7b27bc02"
+  },
+  "modules/aerith_10_creatrice/14_AERITH_10_MODULE_CONTINUITY_LAST_FRAME_LEGO_CONTROL_FR.md": {
+    "target": "AERITH_10_CREATRICE/SOURCES/modules/aerith_10_creatrice/14_AERITH_10_MODULE_CONTINUITY_LAST_FRAME_LEGO_CONTROL_FR.md",
+    "present": true,
+    "same": true,
+    "sha": "02d40081d42274ba12718b5698a8c9879995a29041b01f01c761c976a4476120",
+    "out_sha": "02d40081d42274ba12718b5698a8c9879995a29041b01f01c761c976a4476120"
+  },
+  "modules/aerith_10_creatrice/15_AERITH_10_MODULE_COMFYUI_WORKFLOW_VISUAL_RULE_FR.md": {
+    "target": "AERITH_10_CREATRICE/SOURCES/modules/aerith_10_creatrice/15_AERITH_10_MODULE_COMFYUI_WORKFLOW_VISUAL_RULE_FR.md",
+    "present": true,
+    "same": true,
+    "sha": "9e90cfa729d85f78c31090b4c0b47ed8263f6bce87452e22704176c06e099798",
+    "out_sha": "9e90cfa729d85f78c31090b4c0b47ed8263f6bce87452e22704176c06e099798"
+  },
+  "modules/aerith_10_creatrice/README.md": {
+    "target": "AERITH_10_CREATRICE/SOURCES/modules/aerith_10_creatrice/README.md",
+    "present": true,
+    "same": true,
+    "sha": "57709e80aeff480ab3c4abd772b8a5fb7a797802629b67120832f72b7b184a06",
+    "out_sha": "57709e80aeff480ab3c4abd772b8a5fb7a797802629b67120832f72b7b184a06"
+  }
+}

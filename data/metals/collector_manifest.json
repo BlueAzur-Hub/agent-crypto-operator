@@ -1,0 +1,52 @@
+{
+  "schema": "agent_crypto_public_metals_collection_manifest_v1",
+  "version": "2.3.0",
+  "generated_at": "2026-09-09T22:32:28.708Z",
+  "build_target": "28.2.67",
+  "state": "ready",
+  "assets": [
+    "XAU",
+    "XAG",
+    "XPT",
+    "XPD",
+    "HG"
+  ],
+  "current_provider": "gold_api",
+  "history_provider": "yahoo_finance",
+  "fx_provider": "ecb",
+  "status": "ready",
+  "errors": [],
+  "files": {
+    "latest": "data/metals/latest.json",
+    "status": "data/metals/status.json",
+    "history": "data/metals/history/public_1y.json",
+    "intraday_24h": "data/metals/history/intraday_24h.json",
+    "spot_history": "data/metals/history/spot_48h.json",
+    "history_index": "data/metals/history/index.json",
+    "fx": "data/metals/fx/usd_eur.json",
+    "series": [
+      "data/metals/series/gold.json",
+      "data/metals/series/silver.json",
+      "data/metals/series/platinum.json",
+      "data/metals/series/palladium.json",
+      "data/metals/series/copper.json"
+    ]
+  },
+  "integrity": {
+    "no_api_key": true,
+    "no_manual_ryzen_publication": true,
+    "crypto_data_untouched": true,
+    "current_and_history_decoupled": true,
+    "current_quotes_survive_history_failure": true,
+    "five_of_five_current_required_for_green_run": true,
+    "minimum_one_year_history_required_when_published": true,
+    "spot_and_futures_series_separated": true,
+    "immediate_intraday_futures_enabled": true,
+    "intraday_interval": "5m",
+    "intraday_window_hours": 24,
+    "rolling_spot_archive_enabled": true,
+    "spot_history_retention_hours": 48,
+    "last_valid_data_preserved_on_failure": true
+  },
+  "fingerprint": "sha256:62adc51415aeb9eecb6800ceddbad0af14b8e9d09cabfb858aa3101e4efef711"
+}

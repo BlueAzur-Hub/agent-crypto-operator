@@ -1,0 +1,244 @@
+/* ============================================================================
+   Agent-Crypto @erith.IA — Administrator 40.3.36
+   PARKER LEWIS CAN'T LOSE · TECHNICAL READING CLASSIC OPACITY MIRROR LOCK
+
+   CODE ONLY / CSS ONLY visual owner.
+   Parent: 40.3.35.
+
+   Operator request:
+   - keep the Administrator metallic theme, current private/default portrait,
+     current geometry and all Technical Reading interactions;
+   - reproduce the readable opacity hierarchy of the Web Classic Technical
+     Reading instead of the Administrator near-zero/full-clear experiment.
+
+   Classic opacity references (Web Classic style.css):
+   - global panel token: rgba(10,22,38,.76)
+   - Technical Reading panel stages: rgba(4,13,26,.94) → rgba(3,10,21,.90)
+   - primary detail cells: rgba(2,9,18,.72/.74)
+   - disclosure/source shells: rgba(3,11,22,.48)
+
+   Important Firefox constraint:
+   - opacity is restored with ordinary alpha backgrounds only;
+   - backdrop-filter remains disabled here to avoid reintroducing compositor cost.
+
+   This file owns ONLY Technical Reading surface opacity/contrast. It does not own
+   layout, position, size, portrait source/crop, data, Market, Graph, Oracle, Math,
+   Atlas, Window Manager, storage, Bridge or offscreen paint behavior.
+   ============================================================================ */
+
+:root {
+  --atlas-tr-classic-panel-top: rgba(4,13,26,.94);
+  --atlas-tr-classic-panel-bottom: rgba(3,10,21,.90);
+  --atlas-tr-classic-primary: rgba(2,9,18,.74);
+  --atlas-tr-classic-secondary: rgba(3,11,22,.64);
+  --atlas-tr-classic-shell: rgba(3,11,22,.48);
+  --atlas-tr-classic-control: rgba(2,9,18,.58);
+  --atlas-tr-classic-cyan-line: rgba(98,236,255,.20);
+  --atlas-tr-classic-gold-line: rgba(255,216,135,.20);
+}
+
+/* Final visual owner: restore the Classic dark panel grammar behind the current
+   full-frame metallic portrait. Geometry and image source remain untouched. */
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens:not(.detail-collapsed)
+#detailPanel.clean-lens-detail-panel {
+  background:
+    linear-gradient(180deg,
+      var(--atlas-tr-classic-panel-top),
+      var(--atlas-tr-classic-panel-bottom)) !important;
+  border-color: rgba(98,236,255,.24) !important;
+  box-shadow: 0 18px 42px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,255,255,.025) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Preserve the selected/private/default portrait at full strength. */
+body.atlas-administrator-mirror #detailPanel .detail-project-visual.admin-tech-r3,
+body.atlas-administrator-mirror #detailPanel .detail-project-visual.admin-tech-r3 > .admin-tech-portrait-r3 {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* Header: Classic-like opaque/readable title plate. */
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel > .detail-panel-toggle {
+  background: rgba(4,13,26,.80) !important;
+  background-image: none !important;
+  border-color: rgba(98,236,255,.22) !important;
+  box-shadow: inset 0 -1px 0 rgba(255,216,135,.08) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Structural body stays transparent: only meaningful Classic cards carry alpha,
+   preventing accidental alpha stacking across the whole portrait. */
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel > .detail-panel-body,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .detail-grid,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .broker-strip,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .diagnostic-strip,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .source-dock-portals {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Four principal facts and the canonical detail grid reproduce the dense Classic
+   card value (72–74% dark alpha). */
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .detail-compact-strip > span,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .atlas-primary-detail-window .clean-lens-detail-grid > div,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .detail-grid > div,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .broker-strip > div,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .diagnostic-strip > div {
+  background: var(--atlas-tr-classic-primary) !important;
+  background-image: none !important;
+  border-color: rgba(255,255,255,.15) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Disclosure / Source Dock shells match the Classic 48% shell grammar. */
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .atlas-detail-subwindow,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .atlas-source-dock {
+  background: var(--atlas-tr-classic-shell) !important;
+  background-image: none !important;
+  border-color: var(--atlas-tr-classic-cyan-line) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.018) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Closed/open headers are one step denser than their shells, as in Classic. */
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .atlas-detail-subwindow > summary,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .atlas-source-dock > summary,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel details > summary {
+  background: var(--atlas-tr-classic-secondary) !important;
+  background-image: none !important;
+  border-color: var(--atlas-tr-classic-cyan-line) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Expanded bodies regain an opaque reading bed but never become a full-page veil. */
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel details[open] > .atlas-detail-subwindow-body,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel details[open] > .source-dock-body {
+  background: rgba(3,10,21,.58) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Why / integrity / Source Dock secondary rows: readable without reaching the
+   74% primary-card density. */
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .clean-lens-why-box,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .why-box,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel #detailIntegrityWindow p,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .source-dock-command,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .source-dock-status,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .source-dock-meta > span,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel [data-window-state] {
+  background: rgba(2,9,18,.62) !important;
+  background-image: none !important;
+  border-color: rgba(255,255,255,.13) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Interactive controls/portals receive a Classic dark-metal button plate. */
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .source-portal,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .source-dock-refresh,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel button:not(.detail-panel-toggle),
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel a {
+  background: var(--atlas-tr-classic-control) !important;
+  background-image: none !important;
+  border-color: rgba(98,236,255,.18) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Identity chip returns to the readable Classic-style plate. */
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .detail-project-visual.admin-tech-r3 > span {
+  background: rgba(2,8,17,.62) !important;
+  background-image: none !important;
+  border-color: var(--atlas-tr-classic-gold-line) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Text remains fully opaque. No geometry, font-size or wrapping owner here. */
+body.atlas-administrator-mirror #detailPanel :is(h2,h3,h4,h5,b,strong,span,small,p,em,i,button,summary,a) {
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.96), 0 0 3px rgba(0,0,0,.72) !important;
+}
+
+@media print {
+  body.atlas-administrator-mirror #detailPanel.clean-lens-detail-panel {
+    background: #07111d !important;
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Forge d’Aerith Pro · V3.3R7 AIDE CRÉATION GUIDÉE",
+  "initial_errors": [],
+  "pack_score": "18 / 18\nsources reconnues",
+  "source_status": "PACK COMPLET",
+  "imports": "18",
+  "verify_status": "SOURCES RÉELLES",
+  "core_preview_has_title": true,
+  "final_status": "PRÊT · 24 FICHIERS",
+  "forge_button": "FORGER LE ZIP FINAL · 24 FICHIERS",
+  "forge_disabled": false,
+  "preview_count": 24,
+  "full_zip_count": 24,
+  "full_has_readme": true,
+  "full_has_module15": true,
+  "minimal_button": "FORGER LE ZIP FINAL · 8 FICHIERS",
+  "minimal_disabled": false,
+  "minimal_zip_count": 8,
+  "targeted_button": "FORGER LE ZIP FINAL · 11 FICHIERS",
+  "targeted_disabled": false,
+  "targeted_zip_count": 11,
+  "errors": []
+}

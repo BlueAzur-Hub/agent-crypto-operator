@@ -1,0 +1,14 @@
+{
+  "name": "FORGE_AERITH_PRO_V3_3R9_VAULT_EXACT_RESTORE",
+  "baseline_commit": "52a0ab7ac5bb2b0313ae53b24cff4f86a2813d2f",
+  "baseline_files": {
+    "app.js_git_blob": "7ccd79894c54213a36656d9c1080516d85988f9f",
+    "index.html_git_blob": "6a3af7e87d26c8fe07993544058ac003d9a1e175",
+    "forge-data.js_git_blob": "e8588f53e3343a664377692e81eed746755dc068",
+    "flower-girls-registry.js_git_blob": "dc8f18aa35889531ab8cf96e350b6b906015d786",
+    "style.css_git_blob": "584b58681c6eda9638f9fb58b37d500d1a24e27c"
+  },
+  "visual_patch_only": true,
+  "hero_background_preserved": "aerith_7_world.webp",
+  "creator_visual": "assets/themes/aerith_10_creatrice_vault.png"
+}

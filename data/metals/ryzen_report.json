@@ -1,0 +1,725 @@
+{
+  "schema": "agent_crypto_metals_ryzen_report_v1",
+  "storage_schema": "agent_crypto_metals_ryzen_report_indexeddb_v1",
+  "build": "28.2.57R3",
+  "generated_at": "2026-08-01T08:04:18Z",
+  "snapshot_at": "2026-08-01T05:22:16Z",
+  "fingerprint": "sha256:18372f9b2b89f167ab6bc9bf562f44b27fdd1bc34a81e778bd9b4ed193a2fcb8",
+  "origin": {
+    "machine": "ryzen7",
+    "label": "Ryzen 7 · Bridge V1.8.0",
+    "mode": "interface_subsection"
+  },
+  "status": {
+    "quotes": 5,
+    "expected": 5,
+    "history_snapshots": 2,
+    "observation_only": true,
+    "human_validation_required": true,
+    "provider_requests_for_report": 0
+  },
+  "source": {
+    "status": "ready",
+    "provider_id": "metals_dev",
+    "provider_name": "Metals.Dev",
+    "last_success_at": "2026-08-01T05:22:16Z",
+    "public_sources": [
+      "USGS",
+      "IEA",
+      "RMIS",
+      "Banque mondiale"
+    ]
+  },
+  "snapshot": {
+    "schema": "agent_crypto_metals_snapshot_v1",
+    "version": "1.1.0",
+    "snapshot_id": "ryzen7-metals-2026-08-01T05-22-16Z",
+    "saved_at": "2026-08-01T05:22:16Z",
+    "source_mode": "local_bridge_archive",
+    "provider_id": "metals_dev",
+    "provider_name": "Metals.Dev",
+    "assets_expected": [
+      "gold",
+      "silver",
+      "platinum",
+      "palladium",
+      "copper"
+    ],
+    "assets_count": 5,
+    "quote_currencies": [
+      "USD"
+    ],
+    "quotes": [
+      {
+        "asset_id": "gold",
+        "domain": "metals",
+        "symbol": "XAU",
+        "source_id": "metals_dev",
+        "source_name": "Metals.Dev",
+        "instrument_type": "spot_reference",
+        "currency": "USD",
+        "unit": "troy_ounce",
+        "price": 4043.21,
+        "bid": null,
+        "ask": null,
+        "change": 0,
+        "change_percent": 0,
+        "source_time": "2026-08-01T05:22:16.000Z",
+        "received_at": "2026-08-01T05:22:16.000Z",
+        "data_state": "data_delayed",
+        "delay_seconds": null,
+        "licence_state": "provider_terms",
+        "provenance_note": "Cotations réelles Metals.Dev reçues par le Bridge local Ryzen 7."
+      },
+      {
+        "asset_id": "silver",
+        "domain": "metals",
+        "symbol": "XAG",
+        "source_id": "metals_dev",
+        "source_name": "Metals.Dev",
+        "instrument_type": "spot_reference",
+        "currency": "USD",
+        "unit": "troy_ounce",
+        "price": 57.5605,
+        "bid": null,
+        "ask": null,
+        "change": 0,
+        "change_percent": 0,
+        "source_time": "2026-08-01T05:22:16.000Z",
+        "received_at": "2026-08-01T05:22:16.000Z",
+        "data_state": "data_delayed",
+        "delay_seconds": null,
+        "licence_state": "provider_terms",
+        "provenance_note": "Cotations réelles Metals.Dev reçues par le Bridge local Ryzen 7."
+      },
+      {
+        "asset_id": "platinum",
+        "domain": "metals",
+        "symbol": "XPT",
+        "source_id": "metals_dev",
+        "source_name": "Metals.Dev",
+        "instrument_type": "spot_reference",
+        "currency": "USD",
+        "unit": "troy_ounce",
+        "price": 1640.1,
+        "bid": null,
+        "ask": null,
+        "change": 0,
+        "change_percent": 0,
+        "source_time": "2026-08-01T05:22:16.000Z",
+        "received_at": "2026-08-01T05:22:16.000Z",
+        "data_state": "data_delayed",
+        "delay_seconds": null,
+        "licence_state": "provider_terms",
+        "provenance_note": "Cotations réelles Metals.Dev reçues par le Bridge local Ryzen 7."
+      },
+      {
+        "asset_id": "palladium",
+        "domain": "metals",
+        "symbol": "XPD",
+        "source_id": "metals_dev",
+        "source_name": "Metals.Dev",
+        "instrument_type": "spot_reference",
+        "currency": "USD",
+        "unit": "troy_ounce",
+        "price": 1279.99,
+        "bid": null,
+        "ask": null,
+        "change": 0,
+        "change_percent": 0,
+        "source_time": "2026-08-01T05:22:16.000Z",
+        "received_at": "2026-08-01T05:22:16.000Z",
+        "data_state": "data_delayed",
+        "delay_seconds": null,
+        "licence_state": "provider_terms",
+        "provenance_note": "Cotations réelles Metals.Dev reçues par le Bridge local Ryzen 7."
+      },
+      {
+        "asset_id": "copper",
+        "domain": "metals",
+        "symbol": "HG",
+        "source_id": "metals_dev",
+        "source_name": "Metals.Dev",
+        "instrument_type": "spot_reference",
+        "currency": "USD",
+        "unit": "pound",
+        "price": 6.5625,
+        "bid": null,
+        "ask": null,
+        "change": 0,
+        "change_percent": 0,
+        "source_time": "2026-08-01T05:22:16.000Z",
+        "received_at": "2026-08-01T05:22:16.000Z",
+        "data_state": "data_delayed",
+        "delay_seconds": null,
+        "licence_state": "provider_terms",
+        "provenance_note": "Cotations réelles Metals.Dev reçues par le Bridge local Ryzen 7."
+      }
+    ],
+    "state": "ready",
+    "integrity": {
+      "quotes_connected": true,
+      "no_invented_values": true,
+      "crypto_data_reuse_forbidden": true,
+      "source_timestamp_required": true,
+      "received_timestamp_required": true,
+      "currency_required_for_numeric_price": true,
+      "unit_required_for_numeric_price": true,
+      "single_snapshot_must_not_draw_chart": true,
+      "local_import_requires_real_source": true,
+      "secret_fields_forbidden": true
+    }
+  },
+  "history": [
+    {
+      "schema": "agent_crypto_metals_snapshot_v1",
+      "version": "1.1.0",
+      "snapshot_id": "ryzen7-metals-2026-08-01T04-49-01Z",
+      "saved_at": "2026-08-01T04:49:01Z",
+      "source_mode": "local_bridge_archive",
+      "provider_id": "metals_dev",
+      "provider_name": "Metals.Dev",
+      "assets_expected": [
+        "gold",
+        "silver",
+        "platinum",
+        "palladium",
+        "copper"
+      ],
+      "assets_count": 5,
+      "quote_currencies": [
+        "USD"
+      ],
+      "quotes": [
+        {
+          "asset_id": "gold",
+          "domain": "metals",
+          "symbol": "XAU",
+          "source_id": "metals_dev",
+          "source_name": "Metals.Dev",
+          "instrument_type": "spot_reference",
+          "currency": "USD",
+          "unit": "troy_ounce",
+          "price": 4043.21,
+          "bid": null,
+          "ask": null,
+          "change": 0,
+          "change_percent": 0,
+          "source_time": "2026-08-01T04:49:01.000Z",
+          "received_at": "2026-08-01T04:49:01.000Z",
+          "data_state": "data_delayed",
+          "delay_seconds": null,
+          "licence_state": "provider_terms",
+          "provenance_note": "Cotations réelles Metals.Dev reçues par le Bridge local Ryzen 7."
+        },
+        {
+          "asset_id": "silver",
+          "domain": "metals",
+          "symbol": "XAG",
+          "source_id": "metals_dev",
+          "source_name": "Metals.Dev",
+          "instrument_type": "spot_reference",
+          "currency": "USD",
+          "unit": "troy_ounce",
+          "price": 57.5605,
+          "bid": null,
+          "ask": null,
+          "change": 0,
+          "change_percent": 0,
+          "source_time": "2026-08-01T04:49:01.000Z",
+          "received_at": "2026-08-01T04:49:01.000Z",
+          "data_state": "data_delayed",
+          "delay_seconds": null,
+          "licence_state": "provider_terms",
+          "provenance_note": "Cotations réelles Metals.Dev reçues par le Bridge local Ryzen 7."
+        },
+        {
+          "asset_id": "platinum",
+          "domain": "metals",
+          "symbol": "XPT",
+          "source_id": "metals_dev",
+          "source_name": "Metals.Dev",
+          "instrument_type": "spot_reference",
+          "currency": "USD",
+          "unit": "troy_ounce",
+          "price": 1640.1,
+          "bid": null,
+          "ask": null,
+          "change": 0,
+          "change_percent": 0,
+          "source_time": "2026-08-01T04:49:01.000Z",
+          "received_at": "2026-08-01T04:49:01.000Z",
+          "data_state": "data_delayed",
+          "delay_seconds": null,
+          "licence_state": "provider_terms",
+          "provenance_note": "Cotations réelles Metals.Dev reçues par le Bridge local Ryzen 7."
+        },
+        {
+          "asset_id": "palladium",
+          "domain": "metals",
+          "symbol": "XPD",
+          "source_id": "metals_dev",
+          "source_name": "Metals.Dev",
+          "instrument_type": "spot_reference",
+          "currency": "USD",
+          "unit": "troy_ounce",
+          "price": 1279.99,
+          "bid": null,
+          "ask": null,
+          "change": 0,
+          "change_percent": 0,
+          "source_time": "2026-08-01T04:49:01.000Z",
+          "received_at": "2026-08-01T04:49:01.000Z",
+          "data_state": "data_delayed",
+          "delay_seconds": null,
+          "licence_state": "provider_terms",
+          "provenance_note": "Cotations réelles Metals.Dev reçues par le Bridge local Ryzen 7."
+        },
+        {
+          "asset_id": "copper",
+          "domain": "metals",
+          "symbol": "HG",
+          "source_id": "metals_dev",
+          "source_name": "Metals.Dev",
+          "instrument_type": "spot_reference",
+          "currency": "USD",
+          "unit": "pound",
+          "price": 6.5625,
+          "bid": null,
+          "ask": null,
+          "change": 0,
+          "change_percent": 0,
+          "source_time": "2026-08-01T04:49:01.000Z",
+          "received_at": "2026-08-01T04:49:01.000Z",
+          "data_state": "data_delayed",
+          "delay_seconds": null,
+          "licence_state": "provider_terms",
+          "provenance_note": "Cotations réelles Metals.Dev reçues par le Bridge local Ryzen 7."
+        }
+      ],
+      "state": "ready",
+      "integrity": {
+        "quotes_connected": true,
+        "no_invented_values": true,
+        "crypto_data_reuse_forbidden": true,
+        "source_timestamp_required": true,
+        "received_timestamp_required": true,
+        "currency_required_for_numeric_price": true,
+        "unit_required_for_numeric_price": true,
+        "single_snapshot_must_not_draw_chart": true,
+        "local_import_requires_real_source": true,
+        "secret_fields_forbidden": true
+      }
+    },
+    {
+      "schema": "agent_crypto_metals_snapshot_v1",
+      "version": "1.1.0",
+      "snapshot_id": "ryzen7-metals-2026-08-01T05-22-16Z",
+      "saved_at": "2026-08-01T05:22:16Z",
+      "source_mode": "local_bridge_archive",
+      "provider_id": "metals_dev",
+      "provider_name": "Metals.Dev",
+      "assets_expected": [
+        "gold",
+        "silver",
+        "platinum",
+        "palladium",
+        "copper"
+      ],
+      "assets_count": 5,
+      "quote_currencies": [
+        "USD"
+      ],
+      "quotes": [
+        {
+          "asset_id": "gold",
+          "domain": "metals",
+          "symbol": "XAU",
+          "source_id": "metals_dev",
+          "source_name": "Metals.Dev",
+          "instrument_type": "spot_reference",
+          "currency": "USD",
+          "unit": "troy_ounce",
+          "price": 4043.21,
+          "bid": null,
+          "ask": null,
+          "change": 0,
+          "change_percent": 0,
+          "source_time": "2026-08-01T05:22:16.000Z",
+          "received_at": "2026-08-01T05:22:16.000Z",
+          "data_state": "data_delayed",
+          "delay_seconds": null,
+          "licence_state": "provider_terms",
+          "provenance_note": "Cotations réelles Metals.Dev reçues par le Bridge local Ryzen 7."
+        },
+        {
+          "asset_id": "silver",
+          "domain": "metals",
+          "symbol": "XAG",
+          "source_id": "metals_dev",
+          "source_name": "Metals.Dev",
+          "instrument_type": "spot_reference",
+          "currency": "USD",
+          "unit": "troy_ounce",
+          "price": 57.5605,
+          "bid": null,
+          "ask": null,
+          "change": 0,
+          "change_percent": 0,
+          "source_time": "2026-08-01T05:22:16.000Z",
+          "received_at": "2026-08-01T05:22:16.000Z",
+          "data_state": "data_delayed",
+          "delay_seconds": null,
+          "licence_state": "provider_terms",
+          "provenance_note": "Cotations réelles Metals.Dev reçues par le Bridge local Ryzen 7."
+        },
+        {
+          "asset_id": "platinum",
+          "domain": "metals",
+          "symbol": "XPT",
+          "source_id": "metals_dev",
+          "source_name": "Metals.Dev",
+          "instrument_type": "spot_reference",
+          "currency": "USD",
+          "unit": "troy_ounce",
+          "price": 1640.1,
+          "bid": null,
+          "ask": null,
+          "change": 0,
+          "change_percent": 0,
+          "source_time": "2026-08-01T05:22:16.000Z",
+          "received_at": "2026-08-01T05:22:16.000Z",
+          "data_state": "data_delayed",
+          "delay_seconds": null,
+          "licence_state": "provider_terms",
+          "provenance_note": "Cotations réelles Metals.Dev reçues par le Bridge local Ryzen 7."
+        },
+        {
+          "asset_id": "palladium",
+          "domain": "metals",
+          "symbol": "XPD",
+          "source_id": "metals_dev",
+          "source_name": "Metals.Dev",
+          "instrument_type": "spot_reference",
+          "currency": "USD",
+          "unit": "troy_ounce",
+          "price": 1279.99,
+          "bid": null,
+          "ask": null,
+          "change": 0,
+          "change_percent": 0,
+          "source_time": "2026-08-01T05:22:16.000Z",
+          "received_at": "2026-08-01T05:22:16.000Z",
+          "data_state": "data_delayed",
+          "delay_seconds": null,
+          "licence_state": "provider_terms",
+          "provenance_note": "Cotations réelles Metals.Dev reçues par le Bridge local Ryzen 7."
+        },
+        {
+          "asset_id": "copper",
+          "domain": "metals",
+          "symbol": "HG",
+          "source_id": "metals_dev",
+          "source_name": "Metals.Dev",
+          "instrument_type": "spot_reference",
+          "currency": "USD",
+          "unit": "pound",
+          "price": 6.5625,
+          "bid": null,
+          "ask": null,
+          "change": 0,
+          "change_percent": 0,
+          "source_time": "2026-08-01T05:22:16.000Z",
+          "received_at": "2026-08-01T05:22:16.000Z",
+          "data_state": "data_delayed",
+          "delay_seconds": null,
+          "licence_state": "provider_terms",
+          "provenance_note": "Cotations réelles Metals.Dev reçues par le Bridge local Ryzen 7."
+        }
+      ],
+      "state": "ready",
+      "integrity": {
+        "quotes_connected": true,
+        "no_invented_values": true,
+        "crypto_data_reuse_forbidden": true,
+        "source_timestamp_required": true,
+        "received_timestamp_required": true,
+        "currency_required_for_numeric_price": true,
+        "unit_required_for_numeric_price": true,
+        "single_snapshot_must_not_draw_chart": true,
+        "local_import_requires_real_source": true,
+        "secret_fields_forbidden": true
+      }
+    }
+  ],
+  "collector": {
+    "schema": "agent_crypto_metals_collector_status_v1",
+    "status": "ready",
+    "provider_id": "metals_dev",
+    "provider_name": "Metals.Dev",
+    "last_success_at": "2026-08-01T05:22:16Z",
+    "assets_expected": 5,
+    "assets_received": 5,
+    "history": {
+      "directory": "history/",
+      "index": "history/index.json",
+      "files": 2,
+      "snapshots": 2,
+      "oldest_at": "2026-08-01T04:49:01Z",
+      "newest_at": "2026-08-01T05:22:16Z"
+    }
+  },
+  "assets": [
+    {
+      "id": "gold",
+      "name": "Or",
+      "symbol": "XAU",
+      "family": null,
+      "quote": {
+        "asset_id": "gold",
+        "symbol": "XAU",
+        "price": 4043.21,
+        "currency": "USD",
+        "unit": "troy_ounce",
+        "change_percent": 0,
+        "data_state": "data_delayed",
+        "source_id": "metals_dev",
+        "source_name": "Metals.Dev",
+        "source_time": "2026-08-01T05:22:16Z",
+        "received_at": "2026-08-01T05:22:16Z"
+      },
+      "history": {
+        "count": 2,
+        "change_percent": 0,
+        "label": "2 relevés réels · évolution observée 0,00 %"
+      },
+      "history_points": [
+        {
+          "time": "2026-08-01T04:49:01Z",
+          "price": 4043.21,
+          "currency": "USD",
+          "unit": "troy_ounce"
+        },
+        {
+          "time": "2026-08-01T05:22:16Z",
+          "price": 4043.21,
+          "currency": "USD",
+          "unit": "troy_ounce"
+        }
+      ],
+      "structure": {
+        "production": "3 300 t · 2025e",
+        "reserves": "66 000 t",
+        "producers": "Chine · Russie · Australie",
+        "uses": "Bijouterie · réserve · électronique",
+        "eu_status": "Non classé UE 2023",
+        "source_ids": [
+          "usgs_mcs_2026",
+          "world_bank_pink_sheet_2026"
+        ]
+      }
+    },
+    {
+      "id": "silver",
+      "name": "Argent",
+      "symbol": "XAG",
+      "family": null,
+      "quote": {
+        "asset_id": "silver",
+        "symbol": "XAG",
+        "price": 57.5605,
+        "currency": "USD",
+        "unit": "troy_ounce",
+        "change_percent": 0,
+        "data_state": "data_delayed",
+        "source_id": "metals_dev",
+        "source_name": "Metals.Dev",
+        "source_time": "2026-08-01T05:22:16Z",
+        "received_at": "2026-08-01T05:22:16Z"
+      },
+      "history": {
+        "count": 2,
+        "change_percent": 0,
+        "label": "2 relevés réels · évolution observée 0,00 %"
+      },
+      "history_points": [
+        {
+          "time": "2026-08-01T04:49:01Z",
+          "price": 57.5605,
+          "currency": "USD",
+          "unit": "troy_ounce"
+        },
+        {
+          "time": "2026-08-01T05:22:16Z",
+          "price": 57.5605,
+          "currency": "USD",
+          "unit": "troy_ounce"
+        }
+      ],
+      "structure": {
+        "production": "26 000 t · 2025e",
+        "reserves": "610 000 t",
+        "producers": "Mexique · Pérou · Chine",
+        "uses": "Électronique · solaire · investissement",
+        "eu_status": "Non classé UE 2023",
+        "source_ids": [
+          "usgs_mcs_2026",
+          "world_bank_pink_sheet_2026"
+        ]
+      }
+    },
+    {
+      "id": "platinum",
+      "name": "Platine",
+      "symbol": "XPT",
+      "family": null,
+      "quote": {
+        "asset_id": "platinum",
+        "symbol": "XPT",
+        "price": 1640.1,
+        "currency": "USD",
+        "unit": "troy_ounce",
+        "change_percent": 0,
+        "data_state": "data_delayed",
+        "source_id": "metals_dev",
+        "source_name": "Metals.Dev",
+        "source_time": "2026-08-01T05:22:16Z",
+        "received_at": "2026-08-01T05:22:16Z"
+      },
+      "history": {
+        "count": 2,
+        "change_percent": 0,
+        "label": "2 relevés réels · évolution observée 0,00 %"
+      },
+      "history_points": [
+        {
+          "time": "2026-08-01T04:49:01Z",
+          "price": 1640.1,
+          "currency": "USD",
+          "unit": "troy_ounce"
+        },
+        {
+          "time": "2026-08-01T05:22:16Z",
+          "price": 1640.1,
+          "currency": "USD",
+          "unit": "troy_ounce"
+        }
+      ],
+      "structure": {
+        "production": "170 000 kg · 2025e",
+        "reserves": "> 76 000 t PGM",
+        "producers": "Afrique du Sud · Russie · Zimbabwe",
+        "uses": "Catalyse · chimie · bijouterie · hydrogène",
+        "eu_status": "Critique + stratégique UE",
+        "source_ids": [
+          "usgs_mcs_2026",
+          "rmis_eu_2023"
+        ]
+      }
+    },
+    {
+      "id": "palladium",
+      "name": "Palladium",
+      "symbol": "XPD",
+      "family": null,
+      "quote": {
+        "asset_id": "palladium",
+        "symbol": "XPD",
+        "price": 1279.99,
+        "currency": "USD",
+        "unit": "troy_ounce",
+        "change_percent": 0,
+        "data_state": "data_delayed",
+        "source_id": "metals_dev",
+        "source_name": "Metals.Dev",
+        "source_time": "2026-08-01T05:22:16Z",
+        "received_at": "2026-08-01T05:22:16Z"
+      },
+      "history": {
+        "count": 2,
+        "change_percent": 0,
+        "label": "2 relevés réels · évolution observée 0,00 %"
+      },
+      "history_points": [
+        {
+          "time": "2026-08-01T04:49:01Z",
+          "price": 1279.99,
+          "currency": "USD",
+          "unit": "troy_ounce"
+        },
+        {
+          "time": "2026-08-01T05:22:16Z",
+          "price": 1279.99,
+          "currency": "USD",
+          "unit": "troy_ounce"
+        }
+      ],
+      "structure": {
+        "production": "190 000 kg · 2025e",
+        "reserves": "> 76 000 t PGM",
+        "producers": "Russie · Afrique du Sud · Canada",
+        "uses": "Catalyse auto · électronique · chimie",
+        "eu_status": "Critique + stratégique UE",
+        "source_ids": [
+          "usgs_mcs_2026",
+          "rmis_eu_2023"
+        ]
+      }
+    },
+    {
+      "id": "copper",
+      "name": "Cuivre",
+      "symbol": "HG",
+      "family": null,
+      "quote": {
+        "asset_id": "copper",
+        "symbol": "HG",
+        "price": 6.5625,
+        "currency": "USD",
+        "unit": "pound",
+        "change_percent": 0,
+        "data_state": "data_delayed",
+        "source_id": "metals_dev",
+        "source_name": "Metals.Dev",
+        "source_time": "2026-08-01T05:22:16Z",
+        "received_at": "2026-08-01T05:22:16Z"
+      },
+      "history": {
+        "count": 2,
+        "change_percent": 0,
+        "label": "2 relevés réels · évolution observée 0,00 %"
+      },
+      "history_points": [
+        {
+          "time": "2026-08-01T04:49:01Z",
+          "price": 6.5625,
+          "currency": "USD",
+          "unit": "pound"
+        },
+        {
+          "time": "2026-08-01T05:22:16Z",
+          "price": 6.5625,
+          "currency": "USD",
+          "unit": "pound"
+        }
+      ],
+      "structure": {
+        "production": "23 Mt · 2025e",
+        "reserves": "980 Mt",
+        "producers": "Chili · RDC · Pérou",
+        "uses": "Construction · réseaux · électronique",
+        "eu_status": "Stratégique UE 2023",
+        "source_ids": [
+          "usgs_mcs_2026",
+          "iea_critical_minerals_2026",
+          "rmis_eu_2023",
+          "world_bank_pink_sheet_2026"
+        ]
+      }
+    }
+  ],
+  "warnings": [
+    "Cotations différées : XAU / XAG / XPT / XPD / HG."
+  ],
+  "report_markdown": "**1. État de la collecte**\n- Origine : Ryzen 7 · Bridge V1.8.0.\n- Snapshot : 01/08/2026 07:22:16 · couverture 5/5.\n- Source de cotation : Metals.Dev · état ready.\n- L’inscription du rapport et sa lecture depuis l’Interface ne déclenchent aucune requête Metals.Dev.\n\n**2. Panier Métaux précieux et industriels**\n- Or (XAU) : 4 043,21 USD · variation fournisseur 0,00 % · Donnée différée.\n- Argent (XAG) : 57,5605 USD · variation fournisseur 0,00 % · Donnée différée.\n- Platine (XPT) : 1 640,1 USD · variation fournisseur 0,00 % · Donnée différée.\n- Palladium (XPD) : 1 279,99 USD · variation fournisseur 0,00 % · Donnée différée.\n- Cuivre (HG) : 6,5625 USD · variation fournisseur 0,00 % · Donnée différée.\n\n**3. Lecture des cotations**\n- Les cinq cotations attendues sont présentes.\n- Les niveaux de prix sont conservés dans leur devise et leur unité source ; aucune normalisation artificielle n’est appliquée.\n- Une variation fournisseur reste séparée de la variation calculée entre snapshots locaux.\n\n**4. Historique réel et comparaison**\n- 2 snapshots réels conservés.\n- XAU : 2 relevés réels · évolution observée 0,00 %.\n- XAG : 2 relevés réels · évolution observée 0,00 %.\n- XPT : 2 relevés réels · évolution observée 0,00 %.\n- XPD : 2 relevés réels · évolution observée 0,00 %.\n- HG : 2 relevés réels · évolution observée 0,00 %.\n\n**5. Structure physique et sources publiques**\n- XAU : production 3 300 t · 2025e · réserves 66 000 t · producteurs Chine · Russie · Australie · usages Bijouterie · réserve · électronique · UE Non classé UE 2023.\n- XAG : production 26 000 t · 2025e · réserves 610 000 t · producteurs Mexique · Pérou · Chine · usages Électronique · solaire · investissement · UE Non classé UE 2023.\n- XPT : production 170 000 kg · 2025e · réserves > 76 000 t PGM · producteurs Afrique du Sud · Russie · Zimbabwe · usages Catalyse · chimie · bijouterie · hydrogène · UE Critique + stratégique UE.\n- XPD : production 190 000 kg · 2025e · réserves > 76 000 t PGM · producteurs Russie · Afrique du Sud · Canada · usages Catalyse auto · électronique · chimie · UE Critique + stratégique UE.\n- HG : production 23 Mt · 2025e · réserves 980 Mt · producteurs Chili · RDC · Pérou · usages Construction · réseaux · électronique · UE Stratégique UE 2023.\n- Sources préparées : USGS · IEA · RMIS · Banque mondiale.\n\n**6. Contradictions et données manquantes**\n- Cotations différées : XAU / XAG / XPT / XPD / HG.\n- Les deux relevés disponibles présentent les mêmes valeurs ; aucune trajectoire directionnelle ne peut être déduite.\n\n**7. Ce qu’il faut surveiller ensuite**\n- Ajouter un nouveau relevé réel seulement lorsque le marché ou la source a effectivement évolué.\n- Contrôler la continuité des cinq symboles XAU / XAG / XPT / XPD / HG.\n- Comparer les trajectoires uniquement lorsque deux snapshots horodatés ou plus existent.\n- Distinguer les cotations Metals.Dev des données structurelles USGS, IEA, RMIS et Banque mondiale.\n\n**8. Limites et stop point**\n- Observation uniquement : aucune prévision, aucun ordre et aucun signal d’exécution.\n- Arrêter toute comparaison si les dates, devises, unités ou états de données ne sont plus cohérents.\n- Les données structurelles décrivent production, réserves et usages ; elles ne remplacent jamais une cotation de marché.\n- Validation humaine obligatoire.\n\n**9. Conclusion du rapport Métaux Ryzen**\n- Le panier Métaux est complet 5/5. Les variations affichées reposent uniquement sur les relevés réels conservés ; elles décrivent l’état observé et non une évolution future."
+}

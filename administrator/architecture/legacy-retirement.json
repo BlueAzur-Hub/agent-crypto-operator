@@ -1,0 +1,99 @@
+{
+  "schema": "agent_crypto_legacy_retirement_v1",
+  "build": "40.4.48",
+  "parent_build": "40.4.47",
+  "purpose": "Retire proven dead owners without deleting protected or still-referenced implementation files.",
+  "policy": {
+    "loaded_reference_required_before_keep": true,
+    "no_delete_without_owner_proof": true,
+    "market_core_protected": "38.15.11",
+    "runtime_behavior_change": false
+  },
+  "items": [
+    {
+      "path": "js/views/oracle-ui-continuity.js",
+      "state": "RETIRED_TOMBSTONE",
+      "former_build": "40.4.6",
+      "former_blob_sha": "ae313bb97942840ee0cfaf33f51c88db171b5c2b",
+      "replacement_owner": "js/views/oracle-presentation.js",
+      "loaded_by_index": false,
+      "proof": "exclusive accordion absorbed by canonical Oracle presentation owner in 40.4.41"
+    },
+    {
+      "path": "js/views/oracle-demand-residency.js",
+      "state": "RETIRED_TOMBSTONE",
+      "former_build": "40.4.16",
+      "former_blob_sha": "0cf190fdebc0cc7c5a32839fef35ab58c0bb0bae",
+      "replacement_owner": "js/views/oracle-presentation.js",
+      "loaded_by_index": false,
+      "proof": "true-lazy hydration supersedes closed-body detach owner"
+    },
+    {
+      "path": "inline style[data-aether-oracle-ui-continuity=\"40.4.6\"]",
+      "state": "RETIRED_MIGRATED",
+      "replacement_owner": "admin-oracle.css",
+      "loaded_by_index": false,
+      "proof": "exact CSS moved byte-for-byte from inline block to canonical stylesheet"
+    },
+    {
+      "path": "admin-learning-journey-recovery-40422.css",
+      "state": "RETIRED_TOMBSTONE",
+      "blob_sha": "41d9a93b97c7827344b4dfd0ca4ed353ef74c5de",
+      "replacement_owner": "admin-learning-journey.css",
+      "loaded_directly_by_index": false,
+      "still_required_by_import": false,
+      "proof": "40.4.48 canonical stylesheet contains the validated rule body directly; no @import remains. Historical path is inert tombstone.",
+      "former_build": "40.4.22"
+    },
+    {
+      "path": "admin-aether-cumulative-40396.css",
+      "state": "RETIRED_TOMBSTONE",
+      "former_build": "40.3.96",
+      "former_blob_sha": "21e93c8f4a20015063f558a155bb2252a1d32f14",
+      "replacement_owner": [
+        "admin-chronos.css",
+        "admin-firefox-safe-paint.css"
+      ],
+      "loaded_by_index": false,
+      "proof": "40.4.46 splits the exact functional rule families at the former late-cascade position; index no longer references the cumulative filename."
+    },
+    {
+      "path": "admin-offscreen-paint-gate.css",
+      "state": "RETIRED_TOMBSTONE",
+      "former_build": "40.3.35",
+      "former_blob_sha": "8ed6af8cf3951ca7fba46d6763fb1cb4f9484c46",
+      "replacement_owner": "none — runtime intentionally retired in 40.3.40",
+      "loaded_by_index": false,
+      "proof": "Current index has no reference; canonical lineage records offscreen paint runtime retirement in 40.3.40."
+    },
+    {
+      "path": "js/admin-offscreen-paint-gate.js",
+      "state": "RETIRED_TOMBSTONE",
+      "former_build": "40.3.35",
+      "former_blob_sha": "d3a33264436e4258c1c730b5c045b8fd89344213",
+      "replacement_owner": "none — runtime intentionally retired in 40.3.40",
+      "loaded_by_index": false,
+      "proof": "Current index has no reference; canonical lineage records offscreen paint runtime retirement in 40.3.40."
+    },
+    {
+      "path": "js/views/learning-presentation.js::string-parser-gate",
+      "state": "RETIRED_REGRESSION",
+      "retired_in": "40.4.47",
+      "reason": "Operator evidence: Learning/Simulation modules disappeared after pre-parse substring removal. Replaced by safe post-parse DOM sibling detachment.",
+      "replacement": "System mount first → safe DOM detach → on-demand hydration"
+    }
+  ],
+  "retired_count": 7,
+  "hold_count": 0,
+  "next": "No additional legacy retirement build is planned. Delete historical tombstone files only in a separately proven repository-cleanup operation if ever desired.",
+  "closure": {
+    "state": "CLOSED",
+    "active_legacy_dependency_count": 0,
+    "unsafe_string_parser_gate": "RETIRED_REGRESSION",
+    "learning_recovery_css_dependency": "RETIRED",
+    "oracle_legacy_owners": "RETIRED",
+    "offscreen_paint_gate": "RETIRED",
+    "cumulative_40396_owner": "RETIRED_SPLIT",
+    "rule": "Historical tombstones may remain in the repository as evidence, but none are canonical runtime or CSS dependencies."
+  }
+}

@@ -1,0 +1,717 @@
+<details class="atlas-collapse glass atlas-local-ai-collapse atlas-family-member atlas-tone-intelligence" data-collapse-key="local-ai-hub" data-layout-family="intelligence">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">Atlas-10 + Aerith-10 Crypto</span>
+        <span class="atlas-collapse-subtitle">Profils locaux du Ryzen · Ollama / LM Studio / AnythingLLM</span>
+      </summary>
+      <div class="atlas-collapse-body">
+        <section class="panel glass atlas-local-ai-hub" id="local-ai-hub" aria-labelledby="local-ai-title">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">LOCAL AI PROFILES · RYZEN 7</p>
+              <h2 id="local-ai-title">Deux présences complémentaires</h2>
+              <p class="planning-intro">Atlas cartographie, vérifie et structure. Aerith explique, accompagne et protège le discernement. Aucun appel API OpenAI payant.</p>
+            </div>
+            <span class="pill warn" id="localBridgeStatus">Bridge local non connecté</span>
+          </div>
+
+          <div class="atlas-local-profile-grid">
+            <article class="atlas-local-profile atlas-profile-emperor">
+              <div class="atlas-local-profile-visual" role="img" aria-label="Atlas-10 Crypto, Empereur solaire"></div>
+              <div class="atlas-local-profile-copy">
+                <span class="atlas-local-profile-kicker">CARTOGRAPHE ANALYTIQUE</span>
+                <h3>Atlas-10 Crypto</h3>
+                <p>Data Truth, Math Oracle, contradiction, risque, interface et synthèse factuelle.</p>
+                <div class="atlas-local-profile-tags"><span>Atlas</span><span>Math</span><span>Risque</span></div>
+                <a class="btn primary atlas-local-download" href="../atlas_10_full_crypto/downloads/ATLAS_10_CRYPTO_LOCAL_PACK_V1_0.zip" download>Télécharger Atlas-10</a>
+              </div>
+            </article>
+
+            <article class="atlas-local-profile atlas-profile-aerith">
+              <div class="atlas-local-profile-visual" role="img" aria-label="Aerith-10 Crypto, analyste et pédagogue"></div>
+              <div class="atlas-local-profile-copy">
+                <span class="atlas-local-profile-kicker">ANALYSTE · PÉDAGOGUE · NO-FOMO</span>
+                <h3>Aerith-10 Crypto</h3>
+                <p>Lecture humaine, explication, psychologie prudente, No-FOMO et libre arbitre.</p>
+                <div class="atlas-local-profile-tags"><span>Aerith</span><span>Pédagogie</span><span>Discernement</span></div>
+                <a class="btn primary atlas-local-download" href="../atlas_10_full_crypto/downloads/AERITH_10_CRYPTO_LOCAL_PACK_V1_0.zip" download>Télécharger Aerith-10</a>
+              </div>
+            </article>
+          </div>
+
+          <div class="atlas-local-runtime-grid">
+            <article><span>Moteur principal</span><b>Ollama · gpt-oss:20b-32k</b><small>Modèle neutre requis · 127.0.0.1:11434</small></article>
+            <article><span>Moteur alternatif</span><b>LM Studio</b><small>Optionnel · activation manuelle dans le Bridge</small></article>
+            <article><span>Bibliothèque optionnelle</span><b>AnythingLLM</b><small>RAG et documentation, non requis</small></article>
+            <article><span>Transformer Book</span><b>Aucun Ollama · aucun Bridge</b><small>Lecture/import des résultats Ryzen uniquement. Un autre PC producteur serait une configuration distincte.</small></article>
+          </div>
+
+          <div class="atlas-local-bridge-actions">
+            <button class="btn" id="btnLocalBridgeProbe" type="button">Tester le Bridge du Ryzen</button>
+            <span id="localBridgeDetail">Lecture seule préparée · aucune action exchange · aucun wallet.</span>
+          </div>
+
+          <section class="atlas-local-dialogue" id="atlasLocalDialogue" aria-labelledby="atlasLocalDialogueTitle">
+            <div class="atlas-local-dialogue-head">
+              <img
+                class="atlas-local-dialogue-atmosphere"
+                src="./assets/images/atlas_aerith_dialogue_chamber_bg.png"
+                alt=""
+                width="2048"
+                height="682"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
+                aria-hidden="true"
+              />
+              <div class="atlas-local-dialogue-copy">
+                <p class="eyebrow">DIALOGUE LOCAL · SNAPSHOT AGENT-CRYPTO</p>
+                <h3 id="atlasLocalDialogueTitle">Interroger Atlas-10 ou Aerith-10</h3>
+                <p>La page transmet un contrat factuel déterministe au Bridge local. Le rapport reste calculé par Agent-Crypto ; Atlas et Aerith ajoutent seulement un commentaire local contrôlé.</p>
+              </div>
+              <span class="pill warn" id="atlasLocalDialogueBadge">Contrat factuel V2</span>
+            </div>
+
+            <div class="atlas-local-profile-switch" role="group" aria-label="Profil des analyses rapides">
+              <button type="button" class="is-active" data-atlas-local-profile="atlas" aria-pressed="true">
+                <b>Atlas-10</b><span>Vérité des données · Math · contradictions</span>
+              </button>
+              <button type="button" data-atlas-local-profile="aerith" aria-pressed="false">
+                <b>Aerith-10</b><span>Explication · discernement · No-FOMO</span>
+              </button>
+              <small id="atlasLocalRuntime">Ryzen : moteur local en attente · Book : aucun moteur local</small>
+            </div>
+
+            <div class="atlas-local-quick-actions" aria-label="Analyses locales rapides">
+              <button type="button" data-atlas-local-summary="market">Résumer le marché</button>
+              <button type="button" data-atlas-local-summary="top5">Analyser le Top 5</button>
+              <button type="button" data-atlas-local-summary="math">Expliquer le Math Core</button>
+              <button type="button" data-atlas-local-summary="contradictions">Contrôler les contradictions</button>
+            </div>
+
+
+            <section class="atlas-analysis-progress" id="atlasAnalysisProgressCard" data-phase="idle" aria-labelledby="atlasAnalysisProgressTitle">
+              <div class="atlas-analysis-progress-head">
+                <div>
+                  <span class="eyebrow">PIPELINE LOCAL · UN SEUL CYCLE CURRENT</span>
+                  <b id="atlasAnalysisProgressTitle">Atlas-10 prêt à analyser</b>
+                </div>
+                <div class="atlas-analysis-progress-readout">
+                  <strong id="atlasAnalysisProgressPercent">0 %</strong>
+                  <span id="atlasAnalysisProgressState">IDLE</span>
+                </div>
+              </div>
+              <div class="atlas-analysis-progress-track" aria-hidden="true"><span id="atlasAnalysisProgressBar"></span></div>
+              <div class="atlas-analysis-progress-nodes" aria-label="Étapes de la chaîne Atlas, NØX et Aerith">
+                <span data-atlas-progress-node="1"><i>01</i><b>Marché</b></span>
+                <span data-atlas-progress-node="2"><i>02</i><b>Top 5</b></span>
+                <span data-atlas-progress-node="3"><i>03</i><b>Math Core</b></span>
+                <span data-atlas-progress-node="4"><i>04</i><b>Contradictions</b></span>
+                <span data-atlas-progress-node="nox"><i>NØX</i><b>No-FOMO</b></span>
+                <span data-atlas-progress-node="aerith"><i>A</i><b>Aerith</b></span>
+              </div>
+              <p id="atlasAnalysisProgressDetail">Un seul snapshot figé est utilisé pour les rapports et la conclusion.</p>
+              <div class="atlas-device-compute-control" id="atlasDeviceComputeControl" data-compute-role="production">
+                <div class="atlas-device-compute-copy">
+                  <span class="eyebrow">RÔLE DE CE POSTE · PERSISTANT DANS CE FIREFOX</span>
+                  <b id="atlasDeviceComputeStatus">RYZEN · Production locale autorisée · Transformer Book = lecture seule sans Ollama/Bridge.</b>
+                  <small>Sur le Transformer Book, choisis STOP une seule fois (ou importe directement un export Ryzen) : aucun Ollama, aucun Bridge et aucune génération locale ne sont requis.</small>
+                </div>
+                <div class="atlas-device-compute-actions" role="group" aria-label="Autoriser ou arrêter le calcul local sur ce poste">
+                  <button type="button" data-atlas-compute-role="production" aria-pressed="true">Production locale</button>
+                  <button type="button" data-atlas-compute-role="observer" aria-pressed="false">STOP ce poste · lecture seule</button>
+                </div>
+              </div>
+            </section>
+
+            <div id="atlasCurrentAnalysisBannerMount" class="atlas-current-analysis-banner-mount" aria-live="polite" aria-atomic="true"></div>
+
+            <div class="atlas-local-dialogue-grid">
+              <div class="atlas-local-question-panel">
+                <label for="atlasLocalQuestion">Question libre</label>
+                <textarea id="atlasLocalQuestion" rows="7" maxlength="4000"
+                  placeholder="Écris ou adapte ta question locale.">Analyse la situation actuelle du marché à partir du snapshot Agent-Crypto. Distingue les prix Binance, le marché CoinGecko, le graphique, le Math Core, News Sentinel, la Watchlist, les contradictions et les données manquantes. Ne suppose aucun portefeuille. Termine par les limites et le stop point.</textarea>
+                <div class="atlas-local-question-actions atlas-question-router-37" role="group" aria-label="Router la question libre">
+                  <button class="btn primary" id="btnAtlasQuestionAtlas37" type="button">Question → Atlas-10</button>
+                  <button class="btn" id="btnAtlasQuestionAerith37" type="button">Question → Aerith-10</button>
+                  <button class="btn" id="btnAtlasQuestionChain37" type="button">Question → Atlas puis Aerith</button>
+                  <button class="btn" id="btnAtlasLocalClear" type="button">Vider</button>
+                  <button class="btn" id="btnAtlasLocalAsk" type="button" hidden aria-hidden="true" tabindex="-1">Routeur historique</button>
+                </div>
+                <small class="atlas-question-router-note-386"><b>Trois routes distinctes :</b> Atlas = lecture technique · Aerith = explication pédagogique · Atlas puis Aerith = analyse suivie d’une relecture. Ces boutons ne sont pas les quatre rapports CURRENT.</small>
+                <p class="atlas-question-scope-37">Question libre = bac séparé. Elle lit le snapshot, la mémoire et les rapports disponibles, mais ne redémarre pas CURRENT et n’écrase jamais la conclusion Aerith du pipeline.</p>
+                <p class="atlas-local-dialogue-status" id="atlasLocalDialogueStatus">Ryzen : choisis Atlas, Aerith ou Atlas → Aerith. Book : consultation uniquement, sans moteur local.</p>
+              </div>
+
+              <article class="atlas-local-response-panel" aria-live="polite" data-atlas-response-view="conclusion">
+                <div class="atlas-local-response-head">
+                  <div>
+                    <span id="atlasLocalResponseEyebrow">CONCLUSION AERITH-10 CRYPTO</span>
+                    <b id="atlasLocalResponseTitle">En attente des quatre rapports Atlas-10</b>
+                  </div>
+                  <div class="atlas-local-response-tools">
+                    <div class="atlas-local-response-tabs" role="tablist" aria-label="Choisir la réponse locale affichée">
+                      <button type="button" class="is-active" data-atlas-response-tab="conclusion" role="tab" aria-selected="true">Conclusion</button>
+                      <button type="button" data-atlas-response-tab="question" role="tab" aria-selected="false">Question libre</button>
+                    </div>
+                    <button type="button" id="btnAtlasLocalConclusion" disabled>Régénérer</button>
+                    <button type="button" id="btnAtlasLocalCopy" disabled>Copier</button>
+                    <button type="button" id="btnAtlasLocalExport" disabled>Exporter .md</button>
+                  </div>
+                </div>
+                <div class="atlas-local-response-content" id="atlasLocalResponse"><p class="atlas-local-response-empty">La conclusion Aerith-10 Crypto apparaîtra automatiquement ici lorsque les quatre rapports Atlas-10 seront prêts.</p></div>
+                <small id="atlasLocalResponseMeta">Lecture seule · conclusion après 4/4 CURRENT du même fingerprint · aucune validation humaine requise</small>
+              </article>
+            </div>
+
+            <section class="atlas-local-report-suite" id="atlasLocalReportSuite" aria-labelledby="atlasLocalReportsTitle">
+              <div class="atlas-local-report-suite-head">
+                <div>
+                  <p class="eyebrow">RAPPORT LOCAL ATLAS-10 · SNAPSHOT VALIDÉ</p>
+                  <h4 id="atlasLocalReportsTitle">Analyse automatique en quatre lectures</h4>
+                  <p id="atlasLocalReportsStatus">En attente d’un snapshot complet et du Bridge local.</p>
+                </div>
+                <div class="atlas-local-response-tools" role="group" aria-label="Mode de lancement Atlas">
+                  <span class="pill" id="atlasClassicAnalysisModeBadge">Atlas · MANUEL</span>
+                  <button class="btn" id="btnAtlasClassicModeAuto" type="button" aria-pressed="false">AUTO</button>
+                  <button class="btn primary" id="btnAtlasClassicModeManual" type="button" aria-pressed="true">MANUEL</button>
+                  <button class="btn atlas-local-run-all" id="btnAtlasLocalRunAll" type="button">Analyse complète</button>
+                </div>
+              </div>
+
+              <div class="atlas-local-report-grid">
+                <details class="atlas-local-report-card" data-atlas-report-card="market">
+                  <summary>
+                    <span class="atlas-local-report-index">01</span>
+                    <span><b>Résumé du marché</b><small id="atlasLocalReportMetaMarket">En attente</small></span>
+                    <em id="atlasLocalReportStateMarket">—</em><span class="atlas-local-report-toggle" aria-hidden="true">⌄</span>
+                  </summary>
+                  <div class="atlas-local-report-card-body">
+                    <div class="atlas-local-report-content" id="atlasLocalReportMarket"><p class="atlas-local-response-empty">Aucun rapport généré.</p></div>
+                    <div class="atlas-local-report-actions">
+                      <button type="button" data-atlas-report-copy="market" disabled>Copier</button>
+                      <button type="button" data-atlas-report-export="market" disabled>Exporter .md</button>
+                    </div>
+                  </div>
+                </details>
+
+                <details class="atlas-local-report-card" data-atlas-report-card="top5">
+                  <summary>
+                    <span class="atlas-local-report-index">02</span>
+                    <span><b>Analyse du Top 5</b><small id="atlasLocalReportMetaTop5">En attente</small></span>
+                    <em id="atlasLocalReportStateTop5">—</em><span class="atlas-local-report-toggle" aria-hidden="true">⌄</span>
+                  </summary>
+                  <div class="atlas-local-report-card-body">
+                    <div class="atlas-local-report-content" id="atlasLocalReportTop5"><p class="atlas-local-response-empty">Aucun rapport généré.</p></div>
+                    <div class="atlas-local-report-actions">
+                      <button type="button" data-atlas-report-copy="top5" disabled>Copier</button>
+                      <button type="button" data-atlas-report-export="top5" disabled>Exporter .md</button>
+                    </div>
+                  </div>
+                </details>
+
+                <details class="atlas-local-report-card" data-atlas-report-card="math">
+                  <summary>
+                    <span class="atlas-local-report-index">03</span>
+                    <span><b>Math Core expliqué</b><small id="atlasLocalReportMetaMath">En attente</small></span>
+                    <em id="atlasLocalReportStateMath">—</em><span class="atlas-local-report-toggle" aria-hidden="true">⌄</span>
+                  </summary>
+                  <div class="atlas-local-report-card-body">
+                    <div class="atlas-local-report-content" id="atlasLocalReportMath"><p class="atlas-local-response-empty">Aucun rapport généré.</p></div>
+                    <div class="atlas-local-report-actions">
+                      <button type="button" data-atlas-report-copy="math" disabled>Copier</button>
+                      <button type="button" data-atlas-report-export="math" disabled>Exporter .md</button>
+                    </div>
+                  </div>
+                </details>
+
+                <details class="atlas-local-report-card" data-atlas-report-card="contradictions">
+                  <summary>
+                    <span class="atlas-local-report-index">04</span>
+                    <span><b>Contradictions</b><small id="atlasLocalReportMetaContradictions">En attente</small></span>
+                    <em id="atlasLocalReportStateContradictions">—</em><span class="atlas-local-report-toggle" aria-hidden="true">⌄</span>
+                  </summary>
+                  <div class="atlas-local-report-card-body">
+                    <div class="atlas-local-report-content" id="atlasLocalReportContradictions"><p class="atlas-local-response-empty">Aucun rapport généré.</p></div>
+                    <div class="atlas-local-report-actions">
+                      <button type="button" data-atlas-report-copy="contradictions" disabled>Copier</button>
+                      <button type="button" data-atlas-report-export="contradictions" disabled>Exporter .md</button>
+                    </div>
+                  </div>
+                </details>
+              </div>
+
+              <small class="atlas-local-report-suite-meta" id="atlasLocalReportsMeta">Lecture seule · quatre tâches séquentielles · aucune exécution financière</small>
+            </section>
+
+            <section class="atlas-shared-synthesis-card" id="atlasSharedSynthesisCard" data-state="empty" aria-labelledby="atlasSharedSynthesisTitle">
+              <div class="atlas-shared-synthesis-head">
+                <div>
+                  <p class="eyebrow">SOUS-SECTION PERMANENTE · ATLAS-10 / AERITH-10</p>
+                  <h4 id="atlasSharedSynthesisTitle">Rapports Atlas et conclusion Aerith inscrits dans l’Interface</h4>
+                  <p id="atlasSharedSynthesisStatus" role="status" aria-live="polite">En attente · la sous-section se remplit après les quatre rapports Atlas et la conclusion Aerith.</p>
+                </div>
+                <span class="pill warn" id="atlasSharedSynthesisBadge">Prêt</span>
+              </div>
+
+              <section class="atlas-stable-stack" id="atlasStableStack" data-runtime="waiting" aria-labelledby="atlasStableStackTitle">
+                <div class="atlas-stable-stack-head">
+                  <div>
+                    <p class="eyebrow">PILE STABLE CONSOLIDÉE · PRODUCTION / LECTURE</p>
+                    <h5 id="atlasStableStackTitle">Interface, Control Center, Bridge et mémoire réunis dans un état unique</h5>
+                  </div>
+                  <span class="pill warn" id="atlasStableStackBadge">En attente</span>
+                </div>
+                <div class="atlas-stable-stack-grid" aria-label="État de la pile Agent-Crypto">
+                  <article><span>Interface</span><b>Build 38.15.14</b><small>CLASSIC · MODULAR PRESENTATION BOUNDARY SCAFFOLD · runtime 38.15.13 conservé</small></article>
+                  <article><span>Control Center</span><b>V2.3.2R5</b><small>Daily Pilotage Lock · base stable restaurée</small></article>
+                  <article><span>Bridge Atlas</span><b id="atlasStableStackBridge">V1.9.5 · non détecté</b><small id="atlasStableStackBridgeDetail">Lecture conservée sans moteur local.</small></article>
+                  <article><span>Ollama</span><b id="atlasStableStackOllama">gpt-oss:20b-32k · non détecté</b><small id="atlasStableStackOllamaDetail">Requis uniquement pour produire de nouveaux rapports.</small></article>
+                  <article><span>Poste actuel</span><b id="atlasStableStackStation">Poste de lecture</b><small id="atlasStableStackStationDetail">La synthèse reste consultable sans Bridge.</small></article>
+                  <article><span>Rapports Atlas</span><b id="atlasStableStackReports">0/4</b><small>Chaîne séquentielle protégée.</small></article>
+                  <article><span>Conclusion Aerith</span><b id="atlasStableStackConclusion">Absente</b><small>Disponible automatiquement après 4/4 CURRENT.</small></article>
+                  <article><span>Mémoire locale</span><b id="atlasStableStackMemory">IndexedDB · en attente</b><small>Persistance navigateur, sans publication GitHub.</small></article>
+                </div>
+                <p class="atlas-stable-stack-status" id="atlasStableStackStatus" role="status" aria-live="polite">Pile canonique reconnue · aucune publication GitHub · aucune action financière.</p>
+              </section>
+
+              <section class="atlas-analytical-truth" id="atlasAnalyticalTruth" data-state="waiting" aria-labelledby="atlasAnalyticalTruthTitle">
+                <div class="atlas-analytical-truth-head">
+                  <div>
+                    <p class="eyebrow">VÉRITÉ ANALYTIQUE · EMPREINTE V2</p>
+                    <h5 id="atlasAnalyticalTruthTitle">Contexte, sources, preuves et qualité statistique vérifiables</h5>
+                  </div>
+                  <span class="pill warn" id="atlasAnalyticalTruthBadge">En attente</span>
+                </div>
+                <div class="atlas-analytical-truth-grid" aria-label="État de la vérité analytique">
+                  <article><span>Contexte</span><b id="atlasTruthContext">En attente</b><small id="atlasTruthContextDetail">Aucun snapshot analytique V2 calculé.</small></article>
+                  <article><span>Empreinte</span><b id="atlasTruthFingerprint">—</b><small id="atlasTruthFingerprintDetail">SHA-256 canonique.</small></article>
+                  <article><span>Sources</span><b id="atlasTruthSources">—</b><small id="atlasTruthSourcesDetail">Direct, conservé, cache, archive ou indisponible.</small></article>
+                  <article><span>Preuves News</span><b id="atlasTruthNews">—</b><small id="atlasTruthNewsDetail">Impact séparé de la confiance.</small></article>
+                  <article><span>Math Core</span><b id="atlasTruthMath">—</b><small id="atlasTruthMathDetail">Mesures publiées, dégradées ou bloquées.</small></article>
+                  <article><span>Contradictions</span><b id="atlasTruthContradictions">—</b><small id="atlasTruthContradictionsDetail">Limites et stop gates structurés.</small></article>
+                  <article><span>Analyse</span><b id="atlasTruthAnalysis">Non produite</b><small id="atlasTruthAnalysisDetail">Les quatre rapports et la conclusion restent transactionnels.</small></article>
+                </div>
+                <details class="atlas-analytical-truth-details" id="atlasAnalyticalTruthDetails">
+                  <summary>Voir la preuve analytique</summary>
+                  <div class="atlas-analytical-truth-detail-grid">
+                    <article><h6>Contexte lié</h6><ul id="atlasTruthContextList"><li>Aucun contexte calculé.</li></ul></article>
+                    <article><h6>Source Truth V2</h6><ul id="atlasTruthSourceList"><li>Aucune source normalisée.</li></ul></article>
+                    <article><h6>Evidence Layer</h6><ul id="atlasTruthEvidenceList"><li>Aucun événement directeur.</li></ul></article>
+                    <article><h6>Quality Gates</h6><ul id="atlasTruthMathList"><li>Aucune mesure évaluée.</li></ul></article>
+                    <article><h6>Contradictions</h6><ul id="atlasTruthContradictionList"><li>Aucune contradiction structurée.</li></ul></article>
+                  </div>
+                </details>
+                <p class="atlas-analytical-truth-status" id="atlasAnalyticalTruthStatus" role="status" aria-live="polite">Empreinte V2 en attente · aucune action financière.</p>
+              </section>
+
+              <section class="atlas-frame-truth" id="atlasFrameTruth" data-state="waiting" aria-labelledby="atlasFrameTruthTitle">
+                <div class="atlas-frame-truth-head">
+                  <div>
+                    <p class="eyebrow">COHÉRENCE TEMPORELLE · SNAPSHOT / LIVE</p>
+                    <h5 id="atlasFrameTruthTitle">Distinguer ce qui a été analysé de ce qui bouge maintenant</h5>
+                  </div>
+                  <span class="pill warn" id="atlasFrameTruthBadge">En attente</span>
+                </div>
+                <div class="atlas-frame-truth-grid">
+                  <article>
+                    <span>Snapshot analysé</span>
+                    <b id="atlasFrameTruthSnapshot">Aucun CURRENT</b>
+                    <small id="atlasFrameTruthSnapshotDetail">Le CURRENT reste figé ; un nouveau cycle part uniquement lorsqu’un nouveau snapshot canonique qualifié est disponible.</small>
+                  </article>
+                  <article>
+                    <span>Marché live actuel</span>
+                    <b id="atlasFrameTruthLive">En attente</b>
+                    <small id="atlasFrameTruthLiveDetail">Les prix peuvent continuer à évoluer sans relancer Atlas.</small>
+                  </article>
+                </div>
+                <p id="atlasFrameTruthStatus">Un écart entre CURRENT et LIVE est normal : il ne transforme pas automatiquement l’analyse terminée en historique.</p>
+              </section>
+
+
+              <section class="atlas-current-truth-33" id="atlasCurrentTruth33" data-state="waiting" aria-labelledby="atlasCurrentTruth33Title">
+                <div class="atlas-current-truth-33-head">
+                  <div>
+                    <p class="eyebrow">CURRENT TRUTH · ÉTAT TRANSACTIONNEL</p>
+                    <h5 id="atlasCurrentTruth33Title">Pourquoi cette analyse est CURRENT — et ce qui appartient seulement au LIVE</h5>
+                    <p>Ce panneau ne déclenche aucun calcul. Il relit uniquement l’état déjà produit par le pipeline et sépare le snapshot analytique du marché qui continue à bouger.</p>
+                  </div>
+                  <span class="pill warn" id="atlasCurrentTruth33Badge">En attente</span>
+                </div>
+                <div class="atlas-current-truth-33-grid" aria-label="Vérité du CURRENT">
+                  <article><span>Fingerprint</span><b id="atlasCurrentTruthFingerprint33">—</b><small id="atlasCurrentTruthFingerprint33Detail">Aucun CURRENT validé.</small></article>
+                  <article><span>Snapshot Binance</span><b id="atlasCurrentTruthBinance33">—</b><small id="atlasCurrentTruthBinance33Detail">Les cinq cotations directes doivent appartenir au même snapshot.</small></article>
+                  <article><span>Atlas</span><b id="atlasCurrentTruthAtlas33">0/4</b><small id="atlasCurrentTruthAtlas33Detail">Même fingerprint requis.</small></article>
+                  <article><span>NØX</span><b id="atlasCurrentTruthNox33">En attente</b><small>Contrôle No-FOMO du même cycle.</small></article>
+                  <article><span>Aerith</span><b id="atlasCurrentTruthAerith33">En attente</b><small id="atlasCurrentTruthAerith33Detail">Conclusion du même fingerprint.</small></article>
+                  <article><span>IndexedDB</span><b id="atlasCurrentTruthDb33">En attente</b><small id="atlasCurrentTruthDb33Detail">Persistance de la synthèse locale.</small></article>
+                  <article><span>Moteur local</span><b id="atlasCurrentTruthEngine33">En attente</b><small id="atlasCurrentTruthEngine33Detail">STOP-ONCE après CURRENT.</small></article>
+                  <article><span>LIVE maintenant</span><b id="atlasCurrentTruthLive33">—</b><small id="atlasCurrentTruthLive33Detail">Indépendant du CURRENT une fois le cycle fermé.</small></article>
+                </div>
+                <p class="atlas-current-truth-33-status" id="atlasCurrentTruth33Status">Aucun CURRENT à certifier pour l’instant.</p>
+              </section>
+
+              <section class="atlas-memory-intelligence" id="atlasMemoryIntelligence" data-state="waiting" aria-labelledby="atlasMemoryIntelligenceTitle">
+                <div class="atlas-memory-intelligence-head">
+                  <div>
+                    <p class="eyebrow">MEMORY INTELLIGENCE · 3 / 5 / 10 RELEVÉS</p>
+                    <h5 id="atlasMemoryIntelligenceTitle">Continuité, persistance et confirmation multi-collecteurs</h5>
+                    <p>Lecture rétrospective des snapshots déjà mémorisés. Aucune prévision et aucun ordre ne sont produits.</p>
+                  </div>
+                  <span class="pill warn" id="atlasMemoryIntelligenceBadge">Mémoire en attente</span>
+                </div>
+                <div class="atlas-memory-ledger-35" id="atlasMemoryLedger35" aria-label="Séparation mémoire marché et CURRENT">
+                  <article><span>Observations marché</span><b id="atlasMemoryMarketCount35">0</b><small>Relevés de marché distincts, sans les confondre avec un CURRENT analytique.</small></article>
+                  <article><span>CURRENT analytiques</span><b id="atlasMemoryCurrentCount35">0</b><small>Un cycle fermé Atlas 4/4 → NØX → Aerith = une unité analytique.</small></article>
+                  <article><span>Collecteurs</span><b id="atlasMemoryCollectorCount35">0</b><small>Origines mémoire connues ; une trace ne prouve jamais qu’une machine est en ligne.</small></article>
+                  <article><span>Base 3 / 5 / 10</span><b id="atlasMemoryBasis35">CURRENT</b><small id="atlasMemoryBasisDetail35">Les horizons analytiques privilégient les CURRENT réellement terminés.</small></article>
+                </div>
+                <div class="atlas-memory-horizon-grid" aria-label="Tendances mémoire multi-horizon">
+                  <article><span>3 relevés</span><b id="atlasMemoryTrend3">—</b><small id="atlasMemoryTrend3Detail">Collecte insuffisante.</small></article>
+                  <article><span>5 relevés</span><b id="atlasMemoryTrend5">—</b><small id="atlasMemoryTrend5Detail">Collecte insuffisante.</small></article>
+                  <article><span>10 relevés</span><b id="atlasMemoryTrend10">—</b><small id="atlasMemoryTrend10Detail">Collecte insuffisante.</small></article>
+                </div>
+                <div class="atlas-memory-intelligence-grid">
+                  <article><span>Persistance du mouvement</span><b id="atlasMemoryPersistence">—</b><small id="atlasMemoryPersistenceDetail">BTC / ETH / SOL.</small></article>
+                  <article><span>Confirmation collecteurs</span><b id="atlasMemoryCollectors">—</b><small id="atlasMemoryCollectorsDetail">Comparaison des dernières observations disponibles.</small></article>
+                  <article><span>Local ↔ GitHub</span><b id="atlasMemoryDivergence">—</b><small id="atlasMemoryDivergenceDetail">Écart de prix entre mémoires lorsque comparable.</small></article>
+                  <article><span>Secteurs persistants</span><b id="atlasMemorySectors">—</b><small id="atlasMemorySectorsDetail">Catégories répétées dans la mémoire.</small></article>
+                  <article><span>Anomalie volume / capitalisation</span><b id="atlasMemoryAnomaly">—</b><small id="atlasMemoryAnomalyDetail">Lecture descriptive du dernier snapshot.</small></article>
+                  <article><span>Pump isolé</span><b id="atlasMemoryPump">—</b><small id="atlasMemoryPumpDetail">Mouvement fort sans continuité suffisante.</small></article>
+                  <article class="atlas-memory-ledger-34"><span>Capture mémoire CURRENT</span><b id="atlasMemoryCurrentLedger34">En attente</b><small id="atlasMemoryCurrentLedger34Detail">Les CURRENT terminés sont distingués des simples observations marché.</small><em class="pill warn" id="atlasMemoryCurrentLedger34Badge">En attente d’un CURRENT</em></article>
+                  <article class="atlas-memory-confidence"><span>Confiance de continuité des données</span><b id="atlasMemoryConfidence">—</b><small id="atlasMemoryConfidenceDetail">Ne mesure pas la probabilité d’une hausse ou d’une baisse.</small></article>
+                </div>
+                <div class="atlas-memory-intelligence-actions">
+                  <button type="button" id="btnAtlasMemoryRefresh">Actualiser la lecture mémoire</button>
+                  <button type="button" id="btnAtlasMemoryReconcile34">Diagnostic · Réconcilier CURRENT</button>
+                  <button type="button" id="btnAtlasMemoryExport">Exporter Memory Intelligence .md</button>
+                </div>
+                <p id="atlasMemoryIntelligenceStatus">La lecture démarre dès que plusieurs snapshots distincts sont présents.</p>
+              </section>
+    <section class="decision-board glass atlas-family-member atlas-tone-analysis" id="decision-board" aria-label="Atlas Decision Board" data-layout-family="analysis">
+      <div class="section-head compact">
+        <div>
+          <p class="eyebrow">ATLAS DECISION BOARD V2 · MEMORY INTELLIGENCE</p>
+          <h2>Décision froide + continuité mémoire</h2>
+        </div>
+        <span class="pill warn" id="decisionBoardStatus">Mémoire en attente</span>
+      </div>
+
+      <p class="decision-board-rule">
+        Atlas croise le snapshot courant, la mémoire 3/5/10, les collecteurs et les contradictions. Il produit un état de travail descriptif, jamais un ordre financier.
+      </p>
+
+      <section class="atlas-operator-summary-35" id="atlasOperatorSummary35" data-state="waiting" aria-label="Résumé opérateur déterministe">
+        <div class="atlas-operator-summary-35-head">
+          <div><span class="eyebrow">LECTURE OPÉRATEUR · DÉTERMINISTE</span><b>Le haut résume ; les détails Atlas restent auditables dessous.</b></div>
+          <span class="pill warn" id="atlasOperatorSummaryBadge35">En attente</span>
+        </div>
+        <div class="atlas-operator-summary-35-grid">
+          <article><span>État</span><b id="atlasOperatorState35">En attente</b><small id="atlasOperatorStateDetail35">Le gate direct reste prioritaire.</small></article>
+          <article><span>Mémoire</span><b id="atlasOperatorMemory35">0 CURRENT</b><small id="atlasOperatorMemoryDetail35">3 / 5 / 10 en collecte.</small></article>
+          <article><span>Mouvements</span><b id="atlasOperatorMoves35">—</b><small id="atlasOperatorMovesDetail35">BTC / ETH / BNB / XRP / SOL.</small></article>
+          <article><span>Risques</span><b id="atlasOperatorRisk35">À vérifier</b><small id="atlasOperatorRiskDetail35">Anomalies et preuve restent séparées.</small></article>
+          <article><span>NØX</span><b id="atlasOperatorNox35">En attente</b><small id="atlasOperatorNoxDetail35">No-FOMO du CURRENT.</small></article>
+          <article><span>Aerith</span><b id="atlasOperatorAerith35">En attente</b><small id="atlasOperatorAerithDetail35">Conclusion du même fingerprint.</small></article>
+        </div>
+      </section>
+
+
+
+
+
+      <details class="atlas-decision-detail" id="atlasDecisionBoardDetails" open>
+        <summary>Détails Atlas · mouvements, anomalies, catégories et contexte News</summary>
+        <div class="atlas-decision-detail-body">
+      <div class="decision-board-grid" id="decisionBoardGrid">
+        <article class="decision-card">
+          <b>Mouvements à vérifier</b>
+          <span>Livecheck requis.</span>
+        </article>
+        <article class="decision-card">
+          <b>Repères à comparer</b>
+          <span>BTC / ETH / SOL après données live.</span>
+        </article>
+        <article class="decision-card">
+          <b>Anomalies</b>
+          <span>Aucune lecture sans source réelle.</span>
+        </article>
+        <article class="decision-card">
+          <b>Lecture secteurs</b>
+          <span>En attente de mémoire Atlas.</span>
+        </article>
+        <article class="decision-card">
+          <b>Mémoire comparable</b>
+          <span>Snapshots Ryzen / Book / GitHub après collecte.</span>
+        </article>
+        <article class="decision-card decision-card-wide">
+          <b>Décision froide</b>
+          <span>Observer, comparer et valider humainement.</span>
+        </article>
+      </div>
+      <div class="decision-news-bridge" id="decisionNewsBridge">
+        <div><span>Contexte News Sentinel</span><b id="decisionNewsState">Chargement de l’archive mondiale</b></div>
+        <div><span>Impact / preuve</span><b id="decisionNewsImpact">En attente</b></div>
+        <div><span>Décision événementielle</span><b id="decisionNewsAction">Collecte à vérifier</b></div>
+      </div>
+        </div>
+      </details>
+
+      <div class="decision-board-verdict" id="decisionBoardVerdict">
+        Décision Atlas : attendre le Livecheck. Pas de prix fictif, pas de signal magique.
+      </div>
+
+      <div class="decision-memory-v2" id="decisionMemoryV2" aria-label="Decision Board V2 Memory Intelligence">
+        <article><span>Horizons mémoire</span><b id="decisionMemoryHorizons">3/5/10 en collecte</b><small id="decisionMemoryHorizonsDetail">La mémoire ne prédit pas le marché.</small></article>
+        <article><span>Persistance</span><b id="decisionMemoryPersistence">—</b><small id="decisionMemoryPersistenceDetail">BTC / ETH / SOL.</small></article>
+        <article><span>Collecteurs</span><b id="decisionMemoryCollectors">—</b><small id="decisionMemoryCollectorsDetail">Confirmation multi-machines si disponible.</small></article>
+        <article><span>Local ↔ GitHub</span><b id="decisionMemoryDivergence">—</b><small id="decisionMemoryDivergenceDetail">Comparaison descriptive.</small></article>
+        <article><span>Confiance continuité</span><b id="decisionMemoryConfidence">—</b><small id="decisionMemoryConfidenceDetail">Jamais une probabilité de gain.</small></article>
+        <article class="decision-memory-v2-action"><span>État de travail</span><b id="decisionMemoryAction">COLLECTER</b><small id="decisionMemoryActionDetail">Observer, comparer, vérifier.</small></article>
+      </div>
+
+      <div class="decision-memory-compare" id="decisionMemoryCompare">
+        <div class="decision-memory-compare-head">
+          <div>
+            <b>Comparer les deux derniers CURRENT</b>
+            <span id="decisionMemoryCompareMeta">Deux snapshots distincts sont nécessaires.</span>
+          </div>
+          <div class="decision-memory-compare-actions">
+            <button type="button" id="btnDecisionBoardRefresh">Actualiser</button>
+            <button type="button" id="btnDecisionBoardExport">Exporter Decision Board .md</button>
+          </div>
+        </div>
+        <div class="decision-memory-timeline" id="decisionMemoryTimeline" aria-live="polite">Mémoire en collecte.</div>
+        <div class="decision-memory-deltas" id="decisionMemoryDeltas">Aucune comparaison disponible.</div>
+      </div>
+    </section>
+
+              <section class="atlas-scanner-truth-37" id="atlasScannerTruth37" data-state="waiting" aria-labelledby="atlasScannerTruthTitle37">
+                <div class="atlas-scanner-truth-37-head">
+                  <div>
+                    <p class="eyebrow">SCANNER TRUTH · HAUSSES / BAISSES / VOLUMES</p>
+                    <h5 id="atlasScannerTruthTitle37">Classement marché, cotation observée et qualité de source séparés</h5>
+                    <p>Le classement vient du snapshot marché. La cotation terminale peut venir de Binance directe, d’une collecte ou du snapshot CoinGecko. Aucun classement n’est un conseil.</p>
+                  </div>
+                  <span class="pill warn" id="atlasScannerTruthBadge37">En attente</span>
+                </div>
+                <div class="atlas-scanner-truth-37-meta">
+                  <article><span>Snapshot scanner</span><b id="atlasScannerTruthSnapshot37">—</b><small id="atlasScannerTruthSnapshotDetail37">Collecte automatique.</small></article>
+                  <article><span>Source classement</span><b id="atlasScannerTruthRanking37">CoinGecko Market Snapshot</b><small>Hausses/Baisses = variation marché ; Volumes = volume 24 h.</small></article>
+                  <article><span>Règle cotation</span><b id="atlasScannerTruthQuoteRule37">Binance si sûre → sinon marché</b><small>La provenance reste affichée pour chaque actif.</small></article>
+                  <article><span>Historique séries</span><b id="atlasScannerTruthHistory37">Bridge/Binance → Binance → CoinGecko</b><small>Cache/archive uniquement s’ils sont explicitement identifiés comme tels.</small></article>
+                </div>
+                <div class="atlas-scanner-truth-37-grid">
+                  <article data-scanner-truth="gainers"><span>HAUSSES 5</span><b id="atlasScannerGainersTitle37">En attente</b><div id="atlasScannerGainersRows37" class="atlas-scanner-truth-rows"></div></article>
+                  <article data-scanner-truth="losers"><span>BAISSES 5</span><b id="atlasScannerLosersTitle37">En attente</b><div id="atlasScannerLosersRows37" class="atlas-scanner-truth-rows"></div></article>
+                  <article data-scanner-truth="volume"><span>VOLUMES 5</span><b id="atlasScannerVolumeTitle37">En attente</b><div id="atlasScannerVolumeRows37" class="atlas-scanner-truth-rows"></div></article>
+                </div>
+                <div class="atlas-scanner-truth-37-actions">
+                  <button type="button" id="btnAtlasScannerTruthRefresh37">Diagnostic · relire le scanner</button>
+                </div>
+                <p id="atlasScannerTruthStatus37">Le panneau se remplit automatiquement avec le Market Snapshot et le collecteur scanner déjà existants.</p>
+              </section>
+
+              <section class="atlas-current-journal-33" id="atlasCurrentJournal33" data-state="waiting" aria-labelledby="atlasCurrentJournal33Title">
+                <div class="atlas-current-journal-33-head">
+                  <div>
+                    <p class="eyebrow">JOURNAL DES CURRENT · INDEX LOCAL</p>
+                    <h5 id="atlasCurrentJournal33Title">Cycles Atlas → NØX → Aerith réellement terminés sur ce Firefox</h5>
+                    <p>Le journal enregistre uniquement un cycle lorsqu’il atteint CURRENT. Il n’invente pas les anciennes analyses et n’enregistre aucune opération financière.</p>
+                  </div>
+                  <span class="pill warn" id="atlasCurrentJournal33Badge">0 CURRENT</span>
+                </div>
+                <div class="atlas-current-journal-33-actions">
+                  <button type="button" id="btnAtlasCurrentJournalRefresh33">Actualiser</button>
+                  <button type="button" id="btnAtlasCurrentJournalExport33">Exporter journal CURRENT .md</button>
+                </div>
+                <div class="atlas-current-journal-33-list" id="atlasCurrentJournal33List" aria-live="polite">
+                  <p class="atlas-local-response-empty">Le premier CURRENT terminé sous cette version apparaîtra ici.</p>
+                </div>
+                <section class="atlas-current-journal-detail-35" id="atlasCurrentJournalDetail35" hidden aria-live="polite">
+                  <div class="atlas-current-journal-detail-35-head">
+                    <div><span class="eyebrow">ARCHIVE CURRENT · LECTURE SEULE</span><b id="atlasCurrentJournalDetailTitle35">CURRENT</b><small id="atlasCurrentJournalDetailMeta35">Sélectionne un CURRENT du journal.</small></div>
+                    <button type="button" id="btnAtlasCurrentJournalClose35">Fermer</button>
+                  </div>
+                  <div class="atlas-current-journal-detail-35-body" id="atlasCurrentJournalDetailBody35"></div>
+                </section>
+                <p class="atlas-current-journal-33-status" id="atlasCurrentJournal33Status">Journal local prêt · aucun ancien cycle n’est fabriqué.</p>
+              </section>
+
+
+    <details class="atlas-collapse glass atlas-family-member atlas-tone-intelligence" data-collapse-key="multi-collector-operator" data-layout-family="intelligence">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">Multi-Collector & Operator Console</span>
+        <span class="atlas-collapse-subtitle">Concordance mémoire · rôle local · handoff</span>
+      </summary>
+      <div class="atlas-collapse-body">
+        <section class="panel glass atlas-multi-collector-panel" id="atlasMultiCollectorOperator" data-state="waiting">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">ATLAS MULTI-COLLECTOR · OPERATOR CONSOLE</p>
+              <h2>Comparer les collecteurs sans inventer leur présence en ligne</h2>
+              <p class="planning-intro">Cette console lit uniquement les snapshots déjà mémorisés. « Récent » signifie trace mémoire récente, jamais machine actuellement connectée. Le profil opérateur reste local à ce Firefox et ne constitue pas une authentification.</p>
+            </div>
+            <span class="pill warn" id="atlasMultiCollectorBadge">Collecte en cours</span>
+          </div>
+
+          <div class="atlas-operator-local-grid">
+            <label class="sort-box atlas-operator-field">
+              <span>Alias local</span>
+              <input id="atlasOperatorAlias" type="text" maxlength="40" placeholder="Opérateur secondaire" autocomplete="off" />
+            </label>
+            <label class="sort-box atlas-operator-field">
+              <span>Profil de travail</span>
+              <select id="atlasOperatorRole">
+                <option value="owner">Propriétaire local</option>
+                <option value="operator">Opérateur autorisé</option>
+                <option value="reader">Lecture seule</option>
+              </select>
+            </label>
+            <button class="btn small primary" id="btnAtlasOperatorSave" type="button">Sauver le profil local</button>
+            <button class="btn small" id="btnAtlasOperatorApplyDevice" type="button">Aligner le rôle du poste</button>
+            <button class="btn small" id="btnAtlasOperatorExport" type="button">Exporter handoff .md</button>
+          </div>
+
+          <div class="atlas-multi-collector-kpis">
+            <article><span>Profil local</span><b id="atlasOperatorProfileStatus">—</b><small id="atlasOperatorProfileDetail">Aucune authentification distante.</small></article>
+            <article><span>Collecteur de ce poste</span><b id="atlasMultiCollectorLocalId">—</b><small id="atlasMultiCollectorLocalDetail">ID technique local.</small></article>
+            <article><span>Collecteurs en mémoire</span><b id="atlasMultiCollectorCount">0</b><small id="atlasMultiCollectorCountDetail">Présence mémoire uniquement.</small></article>
+            <article><span>Comparables maintenant</span><b id="atlasMultiCollectorComparable">0</b><small id="atlasMultiCollectorComparableDetail">Fenêtre temporelle 20 min.</small></article>
+            <article><span>Concordance Top 5</span><b id="atlasMultiCollectorConsensus">Insuffisante</b><small id="atlasMultiCollectorConsensusDetail">Deux collecteurs comparables minimum.</small></article>
+            <article><span>Rôle calcul de ce poste</span><b id="atlasMultiCollectorDeviceRole">—</b><small id="atlasMultiCollectorDeviceRoleDetail">Production ou STOP lecture seule.</small></article>
+          </div>
+
+          <div class="atlas-multi-collector-assets" id="atlasMultiCollectorAssets" aria-label="Concordance inter-collecteurs du Top 5">
+            <span class="collector-truth-empty">Deux collecteurs comparables sont nécessaires pour calculer une concordance.</span>
+          </div>
+
+          <div class="atlas-multi-collector-list" id="atlasMultiCollectorList" aria-label="Dernières traces des collecteurs">
+            <span class="collector-truth-empty">Aucune trace collecteur disponible.</span>
+          </div>
+
+          <pre class="shared-memory-output" id="atlasMultiCollectorOutput">Console en attente de mémoire. Aucun statut « en ligne » n’est déduit d’un ancien snapshot.</pre>
+        </section>
+      </div>
+    </details>
+
+              <section class="atlas-book-readonly" id="atlasBookReadOnlyKnowledge" data-state="waiting" aria-labelledby="atlasBookReadOnlyTitle">
+                <div class="atlas-book-readonly-head">
+                  <div>
+                    <p class="eyebrow">SHARED READ-ONLY KNOWLEDGE · RYZEN → BOOK</p>
+                    <h5 id="atlasBookReadOnlyTitle">Miroir automatique Ryzen → Transformer Book</h5>
+                    <p>Le Book reste sans Ollama ni Bridge. Il peut maintenant surveiller automatiquement un miroir public <code>book_mirror.json</code> en lecture seule ; si aucun miroir n’est publié, l’import JSON manuel reste le secours explicite.</p>
+                  </div>
+                  <span class="pill warn" id="atlasBookReadOnlyBadge">En attente</span>
+                </div>
+                <div class="atlas-book-transfer-guide-342" id="atlasBookTransferGuide342" aria-label="Lecture Ryzen vers Transformer Book">
+                  <article data-step="1">
+                    <span>MODE NORMAL · AUTOMATIQUE</span>
+                    <b>Ryzen construit · Book consulte</b>
+                    <small>Si <code>book_mirror.json</code> est publié par un canal de confiance, le Book le vérifie automatiquement et importe tout nouveau fingerprint. Aucun Ollama, aucun Bridge et aucun clic de lecture ne sont requis sur le Book.</small>
+                  </article>
+                  <div class="atlas-book-transfer-arrow-342" aria-hidden="true">→</div>
+                  <article data-step="2">
+                    <span>MODE SECOURS · MANUEL</span>
+                    <b>JSON uniquement si le miroir manque</b>
+                    <small>Depuis le Ryzen : « Secours · Exporter JSON ». Sur le Book : « Secours · Charger JSON Ryzen ». L’import force la lecture seule et affiche la synthèse sans moteur local.</small>
+                  </article>
+                </div>
+                <p class="atlas-book-transfer-role-342" id="atlasBookTransferRoleGuide342">Détection du rôle de ce poste…</p>
+                <section class="atlas-book-mirror-36" id="atlasBookMirror36" data-state="waiting" aria-labelledby="atlasBookMirrorTitle36">
+                  <div class="atlas-book-mirror-36-head">
+                    <div>
+                      <span class="eyebrow">BOOK MIRROR · LECTURE AUTOMATIQUE</span>
+                      <b id="atlasBookMirrorTitle36">Le Book surveille un miroir public sans moteur local</b>
+                      <small>Chemin attendu : <code>./book_mirror.json</code>. Aucun token GitHub n’est placé dans la page publique.</small>
+                    </div>
+                    <span class="pill warn" id="atlasBookMirrorBadge36">Non vérifié</span>
+                  </div>
+                  <div class="atlas-book-mirror-36-grid">
+                    <article><span>État miroir</span><b id="atlasBookMirrorState36">En attente</b><small id="atlasBookMirrorStateDetail36">Le Book vérifie automatiquement si un fichier miroir public existe.</small></article>
+                    <article><span>Dernière vérification</span><b id="atlasBookMirrorCheck36">—</b><small id="atlasBookMirrorCheckDetail36">Lecture réseau uniquement.</small></article>
+                    <article><span>Dernier fingerprint importé</span><b id="atlasBookMirrorFingerprint36">—</b><small>Aucun CURRENT local n’est créé par le Book.</small></article>
+                  </div>
+                  <div class="atlas-book-mirror-36-actions">
+                    <button type="button" id="btnAtlasBookMirrorCheck36">Diagnostic · vérifier maintenant</button>
+                    <button type="button" id="btnAtlasBookMirrorExport36">Publication contrôlée · préparer book_mirror.json</button>
+                  </div>
+                  <p id="atlasBookMirrorStatus36">Lecture automatique inactive tant que ce poste n’est pas en rôle Book/STOP.</p>
+                </section>
+                <div class="atlas-book-readonly-grid">
+                  <article><span>Rôle de ce poste</span><b id="atlasBookReadOnlyRole">—</b><small id="atlasBookReadOnlyRoleDetail">Production ou STOP/lecture seule.</small></article>
+                  <article><span>Dictionnaire permanent</span><b id="atlasBookReadOnlyDictionary">Disponible</b><small>Ne dépend ni d’Aerith ni d’une conclusion locale.</small></article>
+                  <article><span>Dernière synthèse partagée</span><b id="atlasBookReadOnlySynthesis">Aucune</b><small id="atlasBookReadOnlySynthesisDetail">Charge un export Ryzen si ce poste est le Book.</small></article>
+                  <article><span>Memory Intelligence</span><b id="atlasBookReadOnlyMemory">—</b><small id="atlasBookReadOnlyMemoryDetail">Lecture de la mémoire déjà disponible dans ce navigateur.</small></article>
+                  <article><span>Calcul local</span><b id="atlasBookReadOnlyCompute">—</b><small id="atlasBookReadOnlyComputeDetail">Le mode STOP ne contacte jamais le Bridge.</small></article>
+                </div>
+                <div class="atlas-book-readonly-actions">
+                  <button type="button" id="btnAtlasBookOpenDictionary">Ouvrir le dictionnaire</button>
+                  <button type="button" id="btnAtlasBookExport">Secours · Exporter JSON</button>
+                  <button type="button" id="btnAtlasBookImport">Secours · Charger JSON Ryzen</button>
+                  <button type="button" id="btnAtlasBookReadSynthesis" disabled>Relire la synthèse Aerith</button>
+                </div>
+                <p id="atlasBookReadOnlyStatus">Lecture seule prête · le Book ne calcule rien. Miroir public automatique si disponible ; JSON manuel uniquement en secours.</p>
+              </section>
+
+              <section class="atlas-knowledge-library" id="atlasKnowledgeLibrary" data-state="ready" aria-labelledby="atlasKnowledgeLibraryTitle">
+                <div class="atlas-knowledge-library-head">
+                  <div>
+                    <p class="eyebrow">BIBLIOTHÈQUE PÉDAGOGIQUE PERMANENTE · SANS BRIDGE</p>
+                    <h5 id="atlasKnowledgeLibraryTitle">Dictionnaire Crypto / Banque / Bourse disponible sur tous les postes</h5>
+                    <p>Cette bibliothèque appartient à l’interface elle-même : elle reste disponible sur le Ryzen comme sur le Transformer Book en mode STOP, sans Atlas, Aerith ni Ollama.</p>
+                  </div>
+                  <span class="pill ok" id="atlasKnowledgeLibraryBadge">Disponible hors ligne locale</span>
+                </div>
+                <div class="atlas-knowledge-library-controls">
+                  <label for="atlasKnowledgeSearch">Rechercher un terme</label>
+                  <input id="atlasKnowledgeSearch" type="search" autocomplete="off" placeholder="Ex. volatilité, VaR, spread, blockchain…" />
+                  <button type="button" id="btnAtlasKnowledgeClear">Tout afficher</button>
+                  <span id="atlasKnowledgeCount" aria-live="polite">—</span>
+                </div>
+                <details class="atlas-knowledge-library-details" id="atlasKnowledgeLibraryDetails">
+                  <summary>Ouvrir le dictionnaire permanent</summary>
+                  <div class="atlas-knowledge-library-grid" id="atlasKnowledgeLibraryGrid" aria-live="polite"></div>
+                </details>
+                <p class="atlas-knowledge-library-status" id="atlasKnowledgeLibraryStatus">Chargement du dictionnaire statique…</p>
+              </section>
+
+
+
+
+
+
+              <div class="atlas-shared-synthesis-meta" aria-label="État de la synthèse partagée">
+                <article><span>Snapshot</span><b id="atlasSharedSynthesisSnapshot">—</b></article>
+                <article><span>Origine</span><b id="atlasSharedSynthesisOrigin">—</b></article>
+                <article><span>Rapports Atlas</span><b id="atlasSharedSynthesisReports">0/4</b></article>
+                <article><span>Conclusion Aerith</span><b id="atlasSharedSynthesisConclusion">Absente</b></article>
+                <article><span>Conservation IndexedDB</span><b id="atlasSharedSynthesisPersistence">Non enregistrée</b></article>
+              </div>
+
+              <div class="atlas-shared-synthesis-content" id="atlasSharedSynthesisContent">
+                <p class="atlas-local-response-empty">Aucune synthèse inscrite. Sur le Ryzen, cette sous-section se remplit automatiquement après les quatre rapports Atlas et la conclusion Aerith.</p>
+              </div>
+
+              <details class="atlas-shared-conclusion" id="atlasSharedConclusionDetails">
+                <summary>Conclusion Aerith-10 Crypto complète</summary>
+                <div id="atlasSharedConclusionContent"><p class="atlas-local-response-empty">Aucune conclusion conservée.</p></div>
+              </details>
+
+              <div class="atlas-shared-synthesis-actions">
+                <button type="button" id="btnAtlasSharedCopy" disabled>Copier la synthèse</button>
+                <button type="button" id="btnAtlasSharedReadReports" disabled>Lire les quatre rapports</button>
+                <button type="button" id="btnAtlasSharedReadConclusion" disabled>Lire la conclusion</button>
+                <button type="button" id="btnAtlasSharedExportJson" disabled>Exporter JSON Book</button>
+                <button type="button" id="btnAtlasSharedExportMd" disabled>Exporter .md</button>
+                <button type="button" id="btnAtlasDiagnosticBundle">Exporter diagnostic</button>
+                <label class="btn file-like" for="atlasSharedSynthesisImport">Importer synthèse Atlas/Aerith</label>
+                <input id="atlasSharedSynthesisImport" type="file" accept=".json,application/json" hidden />
+              </div>
+              <small class="atlas-shared-synthesis-note" id="atlasSharedSynthesisNote">Sous-section intégrée à l’Interface · 4 rapports + conclusion · persistance IndexedDB · aucune popup · aucune publication GitHub depuis le navigateur.</small>
+            </section>
+          </section>
+        </section>
+      </div>
+    </details>

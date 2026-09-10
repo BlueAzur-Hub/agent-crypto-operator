@@ -1,0 +1,16 @@
+{
+  "status": "PRÊT · 17 FICHIERS",
+  "button": "FORGER LE ZIP FINAL · 17 FICHIERS",
+  "disabled": false,
+  "errors": [
+    "console:Failed to load resource: net::ERR_FAILED",
+    "console:Failed to load resource: net::ERR_FAILED",
+    "console:Failed to load resource: net::ERR_FAILED",
+    "console:Failed to load resource: net::ERR_FAILED",
+    "console:Failed to load resource: net::ERR_FAILED",
+    "console:Failed to load resource: net::ERR_FAILED",
+    "console:Failed to load resource: net::ERR_FAILED",
+    "console:Failed to load resource: net::ERR_FAILED"
+  ],
+  "count": 17
+}

@@ -1,0 +1,38 @@
+{
+  "version": "V3.3R7 AIDE CRÉATION GUIDÉE",
+  "creator_complete": {
+    "sources_recognized": "18 / 18 sources reconnues",
+    "final_status": "PRÊT · 24 FICHIERS",
+    "button": "FORGER LE ZIP FINAL · 24 FICHIERS",
+    "zip_count": 24,
+    "router_readme_present": true,
+    "module_15_present": true,
+    "javascript_errors": []
+  },
+  "creator_minimal": {
+    "button": "FORGER LE ZIP FINAL · 8 FICHIERS",
+    "zip_count": 8
+  },
+  "creator_targeted_14_15": {
+    "button": "FORGER LE ZIP FINAL · 11 FICHIERS",
+    "zip_count": 11
+  },
+  "creator_incomplete_pack": {
+    "sources_recognized": "17 / 18",
+    "status": "À COMPLÉTER",
+    "forge_disabled": true
+  },
+  "byte_identity": {
+    "same_sources": 18,
+    "total_sources": 18,
+    "result": true
+  },
+  "public_crypto_mock": {
+    "status": "PRÊT · 17 FICHIERS",
+    "button": "FORGER LE ZIP FINAL · 17 FICHIERS",
+    "zip_count": 17,
+    "functional_result": true
+  },
+  "private_sources_embedded_in_public_candidate": 0,
+  "github_push": false
+}

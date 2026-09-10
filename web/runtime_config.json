@@ -1,0 +1,26 @@
+{
+  "schema": "agent_crypto_runtime_config_v1",
+  "assets": {
+    "atlas_math_core_background": "assets/images/atlas_math_core_observatory_bg.png",
+    "missions_de_vie_constellation_background": "assets/images/missions_de_vie_constellation_bg.png",
+    "atlas_aerith_dialogue_chamber_background": "assets/images/atlas_aerith_dialogue_chamber_bg.png"
+  },
+  "registries": {
+    "market_assets": "market_asset_registry.json",
+    "market_sources": "market_source_registry.json",
+    "market_data_contract": "market_data_contract.json",
+    "bridge_market_adapter_contract": "bridge_market_adapter_contract.json",
+    "metals_structural": "metals_structural_registry.json",
+    "metals_quote_adapter_contract": "metals_quote_adapter_contract.json",
+    "metals_snapshot": "../data/metals/latest.json",
+    "metals_collector_status": "../data/metals/status.json",
+    "metals_history_index": "../data/metals/history/index.json",
+    "metals_import_template": "../data/metals/import_template.json",
+    "metals_public_history": "../data/metals/history/public_1y.json",
+    "metals_fx_usd_eur": "../data/metals/fx/usd_eur.json",
+    "metals_spot_history": "../data/metals/history/spot_48h.json",
+    "metals_intraday_24h": "../data/metals/history/intraday_24h.json",
+    "crypto_public_market": "../data/crypto/latest.json",
+    "crypto_public_market_status": "../data/crypto/status.json"
+  }
+}

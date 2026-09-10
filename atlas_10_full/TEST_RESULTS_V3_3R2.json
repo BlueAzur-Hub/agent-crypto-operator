@@ -1,0 +1,37 @@
+{
+  "version": "V3.3R2-candidate-locale",
+  "tested_on": "2026-07-26",
+  "github_modified": false,
+  "checks": {
+    "hero_title_exact": true,
+    "creator_default_profile": true,
+    "creator_advisor_distinct": true,
+    "existing_profile_proposal_hidden": true,
+    "new_aerith_proposal_available": true,
+    "new_aerith_level_not_forced": true,
+    "aerith_7_proposal_names_supported": true,
+    "creator_final_export_ready_after_import": true,
+    "core_export_byte_exact": true,
+    "persona_export_byte_exact": true,
+    "proposal_absent_from_final_zip": true,
+    "canonical_paths_preserve_underscores": true,
+    "platform_brand_names_absent": true,
+    "javascript_syntax_valid": true,
+    "browser_console_errors": []
+  },
+  "creator_export_entries": [
+    "AERITH_10_CREATRICE/README_FIRST.md",
+    "AERITH_10_CREATRICE/BOOT_AERITH_10_CREATRICE.md",
+    "AERITH_10_CREATRICE/MANIFESTE_AERITH_10_CREATRICE.md",
+    "AERITH_10_CREATRICE/BLOCK_LLM_AERITH_10_CREATRICE.md",
+    "AERITH_10_CREATRICE/GITHUB_HTTP_RAW_AERITH_10_CREATRICE.md",
+    "AERITH_10_CREATRICE/PROFILE_SPEC_AERITH_10_CREATRICE.json",
+    "AERITH_10_CREATRICE/CORE/AERITH_10_CREATRICE_MULTI_AGENT_CORE.md",
+    "AERITH_10_CREATRICE/CORE/AERITH_10_CREATRICE_PERSONA_OPERATING_LAYER.md"
+  ],
+  "aerith_7_proposal_example": [
+    "AERITH_7_BIBLIOTHECAIRE_PROPOSAL/AERITH_7_BIBLIOTHECAIRE_MULTI_AGENT_CORE_PROPOSAL.md",
+    "AERITH_7_BIBLIOTHECAIRE_PROPOSAL/AERITH_7_BIBLIOTHECAIRE_PERSONA_OPERATING_LAYER_PROPOSAL.md",
+    "AERITH_7_BIBLIOTHECAIRE_PROPOSAL/AERITH_7_BIBLIOTHECAIRE_DESIGN_BRIEF.md"
+  ]
+}

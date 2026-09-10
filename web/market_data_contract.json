@@ -1,0 +1,133 @@
+{
+  "schema": "agent_crypto_market_data_contract_v1",
+  "version": "1.0.0",
+  "published_at": "2026-07-31T20:19:32Z",
+  "null_policy": {
+    "missing_numeric_value": null,
+    "display_value": "—",
+    "zero_is_missing": false,
+    "invented_fallback_forbidden": true
+  },
+  "states": [
+    "direct",
+    "data_current",
+    "data_delayed",
+    "data_historical",
+    "date_unqualified",
+    "source_disconnected",
+    "adapter_required",
+    "licence_to_verify"
+  ],
+  "instrument_types": [
+    "spot",
+    "spot_aggregate",
+    "future",
+    "official_benchmark",
+    "official_market",
+    "structural",
+    "macro",
+    "regulatory"
+  ],
+  "quote_record": {
+    "required": [
+      "domain",
+      "asset_id",
+      "symbol",
+      "source_id",
+      "instrument_type",
+      "currency",
+      "unit",
+      "source_time",
+      "received_at",
+      "data_state"
+    ],
+    "numeric_nullable": [
+      "price",
+      "bid",
+      "ask",
+      "change",
+      "change_percent"
+    ],
+    "fields": {
+      "domain": "string",
+      "asset_id": "string",
+      "symbol": "string",
+      "instrument": "string|null",
+      "instrument_type": "enum",
+      "source_id": "string",
+      "market": "string|null",
+      "price": "number|null",
+      "currency": "string|null",
+      "unit": "string|null",
+      "bid": "number|null",
+      "ask": "number|null",
+      "change": "number|null",
+      "change_percent": "number|null",
+      "source_time": "ISO-8601|null",
+      "received_at": "ISO-8601",
+      "declared_delay_seconds": "number|null",
+      "data_state": "enum",
+      "licence_state": "string"
+    }
+  },
+  "series_record": {
+    "required": [
+      "domain",
+      "asset_id",
+      "source_id",
+      "period",
+      "interval",
+      "currency",
+      "unit",
+      "points",
+      "received_at",
+      "data_state"
+    ],
+    "point_fields": [
+      "time",
+      "open",
+      "high",
+      "low",
+      "close",
+      "volume"
+    ],
+    "empty_points_allowed": true,
+    "fabricated_points_forbidden": true
+  },
+  "structural_fact": {
+    "required": [
+      "domain",
+      "asset_id",
+      "metric",
+      "year",
+      "source_id",
+      "publication_version"
+    ],
+    "value_nullable": true,
+    "official_estimate_must_be_labelled": true
+  },
+  "timestamp_policy": {
+    "preserve": [
+      "source_time",
+      "received_at",
+      "cached_at",
+      "rendered_at"
+    ],
+    "browser_time_must_not_replace_source_time": true
+  },
+  "cache_namespaces": [
+    "cache_crypto_market",
+    "cache_crypto_live",
+    "cache_crypto_history",
+    "cache_crypto_onchain",
+    "cache_metals_quotes",
+    "cache_metals_history",
+    "cache_metals_structural",
+    "cache_metals_macro",
+    "cache_metals_sources",
+    "cache_stocks_quotes",
+    "cache_stocks_history",
+    "cache_stocks_fundamentals",
+    "cache_stocks_regulatory"
+  ]
+}

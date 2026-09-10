@@ -1,0 +1,459 @@
+{
+  "schema": "agent_crypto_metals_structural_registry_v1",
+  "version": "1.0.0",
+  "published_at": "2026-07-31T22:58:46Z",
+  "reference_year": 2025,
+  "language": "fr",
+  "price_policy": {
+    "quotes_connected": false,
+    "historical_prices_imported": false,
+    "scores_computed": false,
+    "no_invented_values": true
+  },
+  "publication": {
+    "primary_report": "USGS Mineral Commodity Summaries 2026",
+    "primary_report_version": "1.3",
+    "primary_report_revised": "2026-05-27",
+    "primary_data_year": 2025,
+    "estimate_marker": "2025e"
+  },
+  "sources": [
+    {
+      "id": "usgs_mcs_2026",
+      "name": "U.S. Geological Survey",
+      "short_name": "USGS",
+      "title": "Mineral Commodity Summaries 2026",
+      "role": "production_reserves_uses",
+      "status_label": "DONNÉES 2025",
+      "status_tone": "structural",
+      "publication_date": "2026-02-06",
+      "revised_date": "2026-05-27",
+      "version": "1.3",
+      "licence": "U.S. public domain · citation demandée",
+      "url": "https://pubs.usgs.gov/publication/mcs2026"
+    },
+    {
+      "id": "iea_critical_minerals_2026",
+      "name": "International Energy Agency",
+      "short_name": "IEA",
+      "title": "Critical Minerals Data Explorer",
+      "role": "demand_scenarios",
+      "status_label": "SCÉNARIOS 2026",
+      "status_tone": "macro",
+      "updated_date": "2026-07-27",
+      "licence": "CC BY 4.0",
+      "url": "https://www.iea.org/data-and-statistics/data-tools/critical-minerals-data-explorer"
+    },
+    {
+      "id": "rmis_eu_2023",
+      "name": "EU Raw Materials Information System",
+      "short_name": "RMIS",
+      "title": "EU Critical and Strategic Raw Materials 2023",
+      "role": "eu_criticality",
+      "status_label": "STATUT UE",
+      "status_tone": "reference",
+      "reference_year": 2023,
+      "licence": "Portail public UE · conditions de réutilisation à respecter",
+      "url": "https://rmis.jrc.ec.europa.eu/eu-critical-raw-materials"
+    },
+    {
+      "id": "world_bank_pink_sheet_2026",
+      "name": "World Bank",
+      "short_name": "Banque mondiale",
+      "title": "Commodity Markets · Pink Sheet",
+      "role": "monthly_history_catalogue",
+      "status_label": "HISTORIQUE PUBLIC",
+      "status_tone": "historical",
+      "updated_month": "2026-07",
+      "import_state": "not_imported",
+      "licence": "Conditions de réutilisation de la source à respecter",
+      "url": "https://www.worldbank.org/en/research/commodity-markets"
+    }
+  ],
+  "assets": [
+    {
+      "id": "gold",
+      "symbol": "XAU",
+      "name": "Or",
+      "family": "Précieux monétaire",
+      "data_year": 2025,
+      "estimate": true,
+      "production": {
+        "world_value": 3300,
+        "unit": "metric_tonnes",
+        "display": "3 300 t · 2025e",
+        "top_producers": [
+          {
+            "country": "Chine",
+            "value": 380
+          },
+          {
+            "country": "Russie",
+            "value": 310
+          },
+          {
+            "country": "Australie",
+            "value": 280
+          },
+          {
+            "country": "Canada",
+            "value": 200
+          },
+          {
+            "country": "États-Unis",
+            "value": 160
+          }
+        ],
+        "top_display": "Chine · Russie · Australie"
+      },
+      "reserves": {
+        "world_value": 66000,
+        "unit": "metric_tonnes",
+        "display": "66 000 t",
+        "scope": "gold"
+      },
+      "uses": {
+        "items": [
+          "Bijouterie",
+          "Réserve de valeur",
+          "Électronique",
+          "Aérospatial"
+        ],
+        "display": "Bijouterie · réserve · électronique"
+      },
+      "supply_chain": {
+        "classification": "production_diversified",
+        "display": "Production répartie · rôle monétaire mondial",
+        "detail": "Production répartie entre plusieurs grands pays ; demande monétaire, joaillière et technologique."
+      },
+      "eu_status": {
+        "critical_2023": false,
+        "strategic_2023": false,
+        "display": "Non classé UE 2023"
+      },
+      "macro": {
+        "title": "Historique public disponible",
+        "detail": "Banque mondiale · série mensuelle non importée dans cette Build."
+      },
+      "analysis": {
+        "offer_title": "3 300 t produites · 66 000 t de réserves",
+        "offer_detail": "Estimations mondiales USGS pour 2025.",
+        "physical_title": "Chine · Russie · Australie",
+        "physical_detail": "Principaux producteurs ; rôle monétaire et industriel."
+      },
+      "source_ids": [
+        "usgs_mcs_2026",
+        "world_bank_pink_sheet_2026"
+      ]
+    },
+    {
+      "id": "silver",
+      "symbol": "XAG",
+      "name": "Argent",
+      "family": "Précieux monétaire et industriel",
+      "data_year": 2025,
+      "estimate": true,
+      "production": {
+        "world_value": 26000,
+        "unit": "metric_tonnes",
+        "display": "26 000 t · 2025e",
+        "top_producers": [
+          {
+            "country": "Mexique",
+            "value": 6300
+          },
+          {
+            "country": "Pérou",
+            "value": 3600
+          },
+          {
+            "country": "Chine",
+            "value": 3400
+          },
+          {
+            "country": "Bolivie",
+            "value": 1500
+          },
+          {
+            "country": "Chili",
+            "value": 1400
+          }
+        ],
+        "top_display": "Mexique · Pérou · Chine"
+      },
+      "reserves": {
+        "world_value": 610000,
+        "unit": "metric_tonnes",
+        "display": "610 000 t",
+        "scope": "silver"
+      },
+      "uses": {
+        "items": [
+          "Électrique et électronique",
+          "Photovoltaïque",
+          "Investissement physique",
+          "Joaillerie"
+        ],
+        "display": "Électronique · solaire · investissement"
+      },
+      "supply_chain": {
+        "classification": "byproduct_sensitive",
+        "display": "Sous-produit polymétallique · offre dépendante",
+        "detail": "Une grande part de l’argent provient de mines de plomb-zinc, cuivre et or."
+      },
+      "eu_status": {
+        "critical_2023": false,
+        "strategic_2023": false,
+        "display": "Non classé UE 2023"
+      },
+      "macro": {
+        "title": "Historique public disponible",
+        "detail": "Banque mondiale · série mensuelle non importée dans cette Build."
+      },
+      "analysis": {
+        "offer_title": "26 000 t produites · 610 000 t de réserves",
+        "offer_detail": "Offre sensible aux chaînes polymétalliques.",
+        "physical_title": "Mexique · Pérou · Chine",
+        "physical_detail": "Production concentrée et souvent issue de sous-produits."
+      },
+      "source_ids": [
+        "usgs_mcs_2026",
+        "world_bank_pink_sheet_2026"
+      ]
+    },
+    {
+      "id": "platinum",
+      "symbol": "XPT",
+      "name": "Platine",
+      "family": "Précieux industriel",
+      "data_year": 2025,
+      "estimate": true,
+      "production": {
+        "world_value": 170000,
+        "unit": "kilograms",
+        "display": "170 000 kg · 2025e",
+        "top_producers": [
+          {
+            "country": "Afrique du Sud",
+            "value": 120000
+          },
+          {
+            "country": "Russie",
+            "value": 20000
+          },
+          {
+            "country": "Zimbabwe",
+            "value": 18000
+          },
+          {
+            "country": "Canada",
+            "value": 5000
+          },
+          {
+            "country": "États-Unis",
+            "value": 1800
+          }
+        ],
+        "top_display": "Afrique du Sud · Russie · Zimbabwe"
+      },
+      "reserves": {
+        "world_value": 76000000,
+        "operator": ">",
+        "unit": "kilograms_pgm_content",
+        "display": "> 76 000 t PGM",
+        "scope": "combined_platinum_group_metals"
+      },
+      "uses": {
+        "items": [
+          "Catalyse automobile",
+          "Industrie chimique",
+          "Bijouterie",
+          "Hydrogène"
+        ],
+        "display": "Catalyse · chimie · bijouterie · hydrogène"
+      },
+      "supply_chain": {
+        "classification": "high_geographic_concentration",
+        "display": "Forte concentration en Afrique du Sud",
+        "detail": "La production mondiale de platine dépend fortement de l’Afrique du Sud."
+      },
+      "eu_status": {
+        "critical_2023": true,
+        "strategic_2023": true,
+        "group": "Platinum Group Metals",
+        "display": "Critique + stratégique UE"
+      },
+      "macro": {
+        "title": "Cycle automobile et industriel",
+        "detail": "Demande liée aux catalyseurs, à la chimie et aux technologies hydrogène."
+      },
+      "analysis": {
+        "offer_title": "170 000 kg produits · réserves PGM > 76 000 t",
+        "offer_detail": "Réserves publiées pour le groupe des platinoïdes.",
+        "physical_title": "Afrique du Sud dominante",
+        "physical_detail": "Risque géographique élevé ; Russie et Zimbabwe en relais."
+      },
+      "source_ids": [
+        "usgs_mcs_2026",
+        "rmis_eu_2023"
+      ]
+    },
+    {
+      "id": "palladium",
+      "symbol": "XPD",
+      "name": "Palladium",
+      "family": "Précieux industriel",
+      "data_year": 2025,
+      "estimate": true,
+      "production": {
+        "world_value": 190000,
+        "unit": "kilograms",
+        "display": "190 000 kg · 2025e",
+        "top_producers": [
+          {
+            "country": "Russie",
+            "value": 84000
+          },
+          {
+            "country": "Afrique du Sud",
+            "value": 70000
+          },
+          {
+            "country": "Canada",
+            "value": 16000
+          },
+          {
+            "country": "Zimbabwe",
+            "value": 15000
+          },
+          {
+            "country": "États-Unis",
+            "value": 6200
+          }
+        ],
+        "top_display": "Russie · Afrique du Sud · Canada"
+      },
+      "reserves": {
+        "world_value": 76000000,
+        "operator": ">",
+        "unit": "kilograms_pgm_content",
+        "display": "> 76 000 t PGM",
+        "scope": "combined_platinum_group_metals"
+      },
+      "uses": {
+        "items": [
+          "Catalyse automobile",
+          "Électronique",
+          "Industrie chimique",
+          "Recyclage"
+        ],
+        "display": "Catalyse auto · électronique · chimie"
+      },
+      "supply_chain": {
+        "classification": "high_geographic_concentration",
+        "display": "Russie + Afrique du Sud dominantes",
+        "detail": "La production est fortement concentrée en Russie et en Afrique du Sud."
+      },
+      "eu_status": {
+        "critical_2023": true,
+        "strategic_2023": true,
+        "group": "Platinum Group Metals",
+        "display": "Critique + stratégique UE"
+      },
+      "macro": {
+        "title": "Cycle automobile et recyclage",
+        "detail": "Demande liée aux catalyseurs ; recyclage secondaire important."
+      },
+      "analysis": {
+        "offer_title": "190 000 kg produits · réserves PGM > 76 000 t",
+        "offer_detail": "Réserves publiées pour le groupe des platinoïdes.",
+        "physical_title": "Russie + Afrique du Sud",
+        "physical_detail": "Concentration élevée et dépendance aux chaînes automobiles."
+      },
+      "source_ids": [
+        "usgs_mcs_2026",
+        "rmis_eu_2023"
+      ]
+    },
+    {
+      "id": "copper",
+      "symbol": "HG",
+      "name": "Cuivre",
+      "family": "Industriel",
+      "data_year": 2025,
+      "estimate": true,
+      "production": {
+        "world_value": 23000000,
+        "unit": "metric_tonnes",
+        "display": "23 Mt · 2025e",
+        "refinery_world_value": 29000000,
+        "refinery_display": "29 Mt raffinées",
+        "top_producers": [
+          {
+            "country": "Chili",
+            "value": 5300000
+          },
+          {
+            "country": "RDC",
+            "value": 3200000
+          },
+          {
+            "country": "Pérou",
+            "value": 2700000
+          },
+          {
+            "country": "Chine",
+            "value": 1800000
+          },
+          {
+            "country": "Russie",
+            "value": 1300000
+          }
+        ],
+        "top_display": "Chili · RDC · Pérou"
+      },
+      "reserves": {
+        "world_value": 980000000,
+        "unit": "metric_tonnes",
+        "display": "980 Mt",
+        "scope": "copper"
+      },
+      "uses": {
+        "items": [
+          "Construction",
+          "Réseaux électriques",
+          "Électronique",
+          "Transport"
+        ],
+        "display": "Construction · réseaux · électronique"
+      },
+      "supply_chain": {
+        "classification": "mine_refinery_mismatch",
+        "display": "Mines Amérique/Afrique · raffinage chinois",
+        "detail": "Le Chili domine l’extraction tandis que la Chine concentre fortement le raffinage."
+      },
+      "eu_status": {
+        "critical_2023": false,
+        "strategic_2023": true,
+        "display": "Stratégique UE 2023",
+        "note": "Inclus comme matière stratégique sans atteindre les deux seuils CRM."
+      },
+      "macro": {
+        "title": "Scénarios IEA 2026",
+        "detail": "Demande et offre projetées dans le Critical Minerals Data Explorer."
+      },
+      "analysis": {
+        "offer_title": "23 Mt extraites · 980 Mt de réserves",
+        "offer_detail": "29 Mt raffinées ; forte dissociation mines-raffinage.",
+        "physical_title": "Chili · RDC · Pérou",
+        "physical_detail": "Raffinage fortement concentré en Chine ; statut stratégique UE."
+      },
+      "source_ids": [
+        "usgs_mcs_2026",
+        "iea_critical_minerals_2026",
+        "rmis_eu_2023",
+        "world_bank_pink_sheet_2026"
+      ]
+    }
+  ]
+}

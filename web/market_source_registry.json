@@ -1,0 +1,909 @@
+{
+  "schema": "agent_crypto_market_source_registry_v1",
+  "version": "1.1.0",
+  "published_at": "2026-08-03T20:55:00Z",
+  "purpose": "Source roles, access constraints, licences and candidate coverage. No API key and no market value is stored.",
+  "status_states": [
+    "production",
+    "pilot_candidate",
+    "coverage_test_required",
+    "reference_license_required",
+    "structural_ready",
+    "macro_ready",
+    "historical_ready",
+    "regulatory_ready",
+    "professional_future",
+    "human_reference"
+  ],
+  "sources": [
+    {
+      "id": "coingecko",
+      "name": "CoinGecko",
+      "short_name": "CoinGecko",
+      "authority_type": "market_aggregator",
+      "domains": [
+        "crypto"
+      ],
+      "roles": [
+        "market_universe",
+        "rank",
+        "market_cap",
+        "volume",
+        "history"
+      ],
+      "asset_ids": [],
+      "coverage_summary": "Marché crypto agrégé, rangs, volumes et historiques.",
+      "status": "production",
+      "status_label": "PRODUCTION CRYPTO",
+      "status_tone": "ready",
+      "priority": 1,
+      "catalogue_order": 10,
+      "api_key_required": false,
+      "bridge_required": false,
+      "licence_state": "plan_dependent",
+      "source_timestamp": true,
+      "official_docs": "https://docs.coingecko.com/"
+    },
+    {
+      "id": "binance",
+      "name": "Binance Spot",
+      "short_name": "Binance",
+      "authority_type": "exchange",
+      "domains": [
+        "crypto"
+      ],
+      "roles": [
+        "direct_quote",
+        "websocket",
+        "trades",
+        "ohlc"
+      ],
+      "asset_ids": [],
+      "coverage_summary": "Cotations directes des paires disponibles.",
+      "status": "production",
+      "status_label": "PRODUCTION CRYPTO",
+      "status_tone": "ready",
+      "priority": 1,
+      "catalogue_order": 20,
+      "api_key_required": false,
+      "bridge_required": false,
+      "licence_state": "exchange_terms",
+      "source_timestamp": true,
+      "official_docs": "https://developers.binance.com/en/docs/introduction"
+    },
+    {
+      "id": "gold_api",
+      "name": "Gold API",
+      "short_name": "Gold API",
+      "authority_type": "public_market_api",
+      "domains": [
+        "metals"
+      ],
+      "roles": [
+        "current_indicative_quote"
+      ],
+      "asset_ids": [
+        "gold",
+        "silver",
+        "platinum",
+        "palladium",
+        "copper"
+      ],
+      "asset_notes": {
+        "gold": "XAU · cotation indicative courante · USD / once troy",
+        "silver": "XAG · cotation indicative courante · USD / once troy",
+        "platinum": "XPT · cotation indicative courante · USD / once troy",
+        "palladium": "XPD · cotation indicative courante · USD / once troy",
+        "copper": "HG · cotation indicative courante · USD / livre"
+      },
+      "coverage_summary": "Cotations indicatives actuelles XAU, XAG, XPT, XPD et HG ; publication indépendante de l’historique.",
+      "status": "production",
+      "status_label": "PRODUCTION PUBLIQUE",
+      "status_tone": "ready",
+      "priority": 1,
+      "catalogue_order": 70,
+      "api_key_required": false,
+      "bridge_required": false,
+      "licence_state": "public_terms",
+      "source_timestamp": true,
+      "official_docs": "https://gold-api.com/docs",
+      "blocking_for_current_quotes": true
+    },
+    {
+      "id": "yahoo_finance",
+      "name": "Yahoo Finance Futures",
+      "short_name": "Yahoo Futures",
+      "authority_type": "public_market_archive",
+      "domains": [
+        "metals",
+        "commodities"
+      ],
+      "roles": [
+        "daily_history",
+        "future_continuous"
+      ],
+      "asset_ids": [
+        "gold",
+        "silver",
+        "platinum",
+        "palladium",
+        "copper"
+      ],
+      "asset_notes": {
+        "gold": "GC=F · COMEX · historique quotidien 1 an",
+        "silver": "SI=F · COMEX · historique quotidien 1 an",
+        "platinum": "PL=F · NYMEX · historique quotidien 1 an",
+        "palladium": "PA=F · NYMEX · historique quotidien 1 an",
+        "copper": "HG=F · COMEX · historique quotidien 1 an · USD / livre"
+      },
+      "coverage_summary": "Historique Futures quotidien 1 an, séparé des cotations actuelles ; échec non bloquant.",
+      "status": "production",
+      "status_label": "ARCHIVE PUBLIQUE",
+      "status_tone": "historical",
+      "priority": 1,
+      "catalogue_order": 71,
+      "api_key_required": false,
+      "bridge_required": false,
+      "licence_state": "public_web_terms",
+      "source_timestamp": true,
+      "official_docs": "https://finance.yahoo.com/",
+      "transport": "browser_session_query2_query1",
+      "blocking_for_current_quotes": false
+    },
+    {
+      "id": "ecb",
+      "name": "Banque centrale européenne",
+      "short_name": "BCE",
+      "authority_type": "central_bank",
+      "domains": [
+        "macro",
+        "metals"
+      ],
+      "roles": [
+        "usd_eur_reference_rate"
+      ],
+      "asset_ids": [
+        "gold",
+        "silver",
+        "platinum",
+        "palladium",
+        "copper"
+      ],
+      "coverage_summary": "Taux de référence quotidien USD/EUR utilisé uniquement pour la conversion informative.",
+      "status": "production",
+      "status_label": "RÉFÉRENCE OFFICIELLE",
+      "status_tone": "macro",
+      "priority": 1,
+      "catalogue_order": 72,
+      "api_key_required": false,
+      "bridge_required": false,
+      "licence_state": "official_public_data",
+      "source_timestamp": true,
+      "official_docs": "https://data.ecb.europa.eu/"
+    },
+    {
+      "id": "coin_metrics",
+      "name": "Coin Metrics Community",
+      "short_name": "Coin Metrics",
+      "authority_type": "onchain_vendor",
+      "domains": [
+        "crypto"
+      ],
+      "roles": [
+        "network_metrics",
+        "onchain",
+        "history"
+      ],
+      "asset_ids": [],
+      "coverage_summary": "Métriques réseau et on-chain documentées.",
+      "status": "pilot_candidate",
+      "status_label": "ON-CHAIN CANDIDAT",
+      "status_tone": "candidate",
+      "priority": 3,
+      "catalogue_order": 30,
+      "api_key_required": false,
+      "bridge_required": true,
+      "licence_state": "community_non_commercial",
+      "source_timestamp": true,
+      "official_docs": "https://docs.coinmetrics.io/api"
+    },
+    {
+      "id": "etherscan",
+      "name": "Etherscan API V2",
+      "short_name": "Etherscan",
+      "authority_type": "blockchain_explorer",
+      "domains": [
+        "crypto"
+      ],
+      "roles": [
+        "transactions",
+        "contracts",
+        "balances",
+        "logs"
+      ],
+      "asset_ids": [],
+      "coverage_summary": "Preuves transactionnelles et contrats vérifiés.",
+      "status": "pilot_candidate",
+      "status_label": "EXPLORATEUR CANDIDAT",
+      "status_tone": "candidate",
+      "priority": 4,
+      "catalogue_order": 40,
+      "api_key_required": true,
+      "bridge_required": true,
+      "licence_state": "plan_dependent",
+      "source_timestamp": true,
+      "official_docs": "https://docs.etherscan.io/"
+    },
+    {
+      "id": "defillama",
+      "name": "DefiLlama",
+      "short_name": "DefiLlama",
+      "authority_type": "defi_aggregator",
+      "domains": [
+        "crypto"
+      ],
+      "roles": [
+        "tvl",
+        "stablecoins",
+        "dex_volume",
+        "fees"
+      ],
+      "asset_ids": [],
+      "coverage_summary": "Liquidité et activité DeFi.",
+      "status": "pilot_candidate",
+      "status_label": "DEFI CANDIDAT",
+      "status_tone": "candidate",
+      "priority": 5,
+      "catalogue_order": 50,
+      "api_key_required": false,
+      "bridge_required": true,
+      "licence_state": "endpoint_dependent",
+      "source_timestamp": true,
+      "official_docs": "https://defillama.com/docs/api"
+    },
+    {
+      "id": "glassnode",
+      "name": "Glassnode",
+      "short_name": "Glassnode",
+      "authority_type": "onchain_vendor",
+      "domains": [
+        "crypto"
+      ],
+      "roles": [
+        "advanced_onchain",
+        "professional_metrics"
+      ],
+      "asset_ids": [],
+      "coverage_summary": "Métriques avancées sous offre professionnelle.",
+      "status": "professional_future",
+      "status_label": "PHASE PROFESSIONNELLE",
+      "status_tone": "future",
+      "priority": 9,
+      "catalogue_order": 60,
+      "api_key_required": true,
+      "bridge_required": true,
+      "licence_state": "professional_plan",
+      "source_timestamp": true,
+      "official_docs": "https://docs.glassnode.com/"
+    },
+    {
+      "id": "amf",
+      "name": "Autorité des marchés financiers",
+      "short_name": "AMF",
+      "authority_type": "regulator",
+      "domains": [
+        "crypto",
+        "stocks",
+        "regulation"
+      ],
+      "roles": [
+        "france_register",
+        "warnings",
+        "provider_status"
+      ],
+      "asset_ids": [],
+      "coverage_summary": "Statut français des prestataires et alertes.",
+      "status": "regulatory_ready",
+      "status_label": "RÉGLEMENTAIRE",
+      "status_tone": "structural",
+      "priority": 2,
+      "catalogue_order": 70,
+      "api_key_required": false,
+      "bridge_required": true,
+      "licence_state": "public_authority",
+      "source_timestamp": true,
+      "official_docs": "https://www.amf-france.org/"
+    },
+    {
+      "id": "esma",
+      "name": "ESMA — MiCA",
+      "short_name": "ESMA",
+      "authority_type": "regulator",
+      "domains": [
+        "crypto",
+        "regulation"
+      ],
+      "roles": [
+        "mica_register",
+        "authorisations",
+        "whitepapers"
+      ],
+      "asset_ids": [],
+      "coverage_summary": "Registres européens MiCA.",
+      "status": "regulatory_ready",
+      "status_label": "RÉGLEMENTAIRE UE",
+      "status_tone": "structural",
+      "priority": 2,
+      "catalogue_order": 80,
+      "api_key_required": false,
+      "bridge_required": true,
+      "licence_state": "public_authority",
+      "source_timestamp": true,
+      "official_docs": "https://www.esma.europa.eu/"
+    },
+    {
+      "id": "alpha_vantage",
+      "name": "Alpha Vantage",
+      "short_name": "Alpha Vantage",
+      "authority_type": "vendor_api",
+      "domains": [
+        "metals",
+        "stocks",
+        "crypto",
+        "forex",
+        "macro"
+      ],
+      "roles": [
+        "quote",
+        "history",
+        "gold_silver_spot",
+        "stocks"
+      ],
+      "asset_ids": [
+        "gold",
+        "silver"
+      ],
+      "asset_notes": {
+        "gold": "XAU · spot agrégé et historique candidat",
+        "silver": "XAG · spot agrégé et historique candidat"
+      },
+      "coverage_summary": "Pilote XAU/XAG, actions, ETF et macro.",
+      "status": "pilot_candidate",
+      "status_label": "PILOTE XAU/XAG",
+      "status_tone": "candidate",
+      "priority": 1,
+      "catalogue_order": 100,
+      "api_key_required": true,
+      "bridge_required": true,
+      "licence_state": "plan_and_public_display_to_verify",
+      "source_timestamp": true,
+      "official_docs": "https://www.alphavantage.co/documentation/"
+    },
+    {
+      "id": "twelve_data",
+      "name": "Twelve Data",
+      "short_name": "Twelve Data",
+      "authority_type": "vendor_api",
+      "domains": [
+        "metals",
+        "stocks",
+        "crypto",
+        "forex"
+      ],
+      "roles": [
+        "quote",
+        "ohlc",
+        "history",
+        "websocket",
+        "multi_market"
+      ],
+      "asset_ids": [
+        "gold",
+        "silver",
+        "platinum",
+        "palladium",
+        "copper"
+      ],
+      "asset_notes": {
+        "gold": "XAU/USD · couverture à tester",
+        "silver": "XAG/USD · couverture à tester",
+        "platinum": "XPT/USD · couverture à tester",
+        "palladium": "XPD/USD · couverture à tester",
+        "copper": "Symbole et unité cuivre à qualifier"
+      },
+      "coverage_summary": "Candidat unifié Métaux + Bourse, couverture 5/5 à tester.",
+      "status": "coverage_test_required",
+      "status_label": "COUVERTURE À TESTER",
+      "status_tone": "candidate",
+      "priority": 2,
+      "catalogue_order": 110,
+      "api_key_required": true,
+      "bridge_required": true,
+      "licence_state": "plan_and_public_display_to_verify",
+      "source_timestamp": true,
+      "official_docs": "https://twelvedata.com/docs"
+    },
+    {
+      "id": "api_ninjas",
+      "name": "API Ninjas — Commodity Price",
+      "short_name": "API Ninjas",
+      "authority_type": "vendor_api",
+      "domains": [
+        "metals",
+        "commodities"
+      ],
+      "roles": [
+        "future_quote",
+        "history",
+        "commodity_snapshot"
+      ],
+      "asset_ids": [
+        "gold",
+        "silver",
+        "platinum",
+        "palladium",
+        "copper"
+      ],
+      "asset_notes": {
+        "gold": "Future roulant · ne pas appeler spot",
+        "silver": "Future roulant · ne pas appeler spot",
+        "platinum": "Future roulant · couverture candidate",
+        "palladium": "Future roulant · couverture candidate",
+        "copper": "Future roulant · unité contrat à qualifier"
+      },
+      "coverage_summary": "Futures candidats pour les cinq métaux.",
+      "status": "coverage_test_required",
+      "status_label": "FUTURES À TESTER",
+      "status_tone": "candidate",
+      "priority": 3,
+      "catalogue_order": 120,
+      "api_key_required": true,
+      "bridge_required": true,
+      "licence_state": "premium_for_public_or_commercial_use",
+      "source_timestamp": true,
+      "official_docs": "https://api-ninjas.com/api/commodityprice"
+    },
+    {
+      "id": "lbma",
+      "name": "London Bullion Market Association",
+      "short_name": "LBMA",
+      "authority_type": "official_benchmark",
+      "domains": [
+        "metals"
+      ],
+      "roles": [
+        "benchmark",
+        "clearing",
+        "methodology"
+      ],
+      "asset_ids": [
+        "gold",
+        "silver",
+        "platinum",
+        "palladium"
+      ],
+      "asset_notes": {
+        "gold": "Benchmark officiel · licence requise",
+        "silver": "Benchmark officiel · licence requise",
+        "platinum": "Référence de marché · licence à qualifier",
+        "palladium": "Référence de marché · licence à qualifier"
+      },
+      "coverage_summary": "Benchmarks officiels des métaux précieux.",
+      "status": "reference_license_required",
+      "status_label": "LICENCE REQUISE",
+      "status_tone": "license",
+      "priority": 4,
+      "catalogue_order": 130,
+      "api_key_required": false,
+      "bridge_required": true,
+      "licence_state": "licence_required",
+      "source_timestamp": true,
+      "official_docs": "https://www.lbma.org.uk/prices-and-data"
+    },
+    {
+      "id": "lme",
+      "name": "London Metal Exchange",
+      "short_name": "LME",
+      "authority_type": "official_exchange",
+      "domains": [
+        "metals"
+      ],
+      "roles": [
+        "official_price",
+        "stocks",
+        "contracts",
+        "warehouse"
+      ],
+      "asset_ids": [
+        "copper"
+      ],
+      "asset_notes": {
+        "copper": "Cuivre officiel · USD/tonne selon flux · licence requise"
+      },
+      "coverage_summary": "Cuivre industriel, stocks et contrats officiels.",
+      "status": "reference_license_required",
+      "status_label": "LICENCE REQUISE",
+      "status_tone": "license",
+      "priority": 4,
+      "catalogue_order": 140,
+      "api_key_required": false,
+      "bridge_required": true,
+      "licence_state": "licence_required",
+      "source_timestamp": true,
+      "official_docs": "https://www.lme.com/en/Market-data"
+    },
+    {
+      "id": "cme",
+      "name": "CME Group / COMEX / NYMEX",
+      "short_name": "CME",
+      "authority_type": "official_exchange",
+      "domains": [
+        "metals",
+        "commodities"
+      ],
+      "roles": [
+        "futures",
+        "options",
+        "volume",
+        "term_structure"
+      ],
+      "asset_ids": [
+        "gold",
+        "silver",
+        "platinum",
+        "palladium",
+        "copper"
+      ],
+      "asset_notes": {
+        "gold": "GC · futur officiel",
+        "silver": "SI · futur officiel",
+        "platinum": "PL · futur officiel",
+        "palladium": "PA · futur officiel",
+        "copper": "HG · futur officiel en USD/livre"
+      },
+      "coverage_summary": "Contrats futures et courbes à terme officielles.",
+      "status": "professional_future",
+      "status_label": "PHASE ULTÉRIEURE",
+      "status_tone": "future",
+      "priority": 5,
+      "catalogue_order": 150,
+      "api_key_required": true,
+      "bridge_required": true,
+      "licence_state": "subscription_and_licence_required",
+      "source_timestamp": true,
+      "official_docs": "https://www.cmegroup.com/market-data/market-data-api.html"
+    },
+    {
+      "id": "usgs",
+      "name": "USGS — Mineral Commodity Summaries",
+      "short_name": "USGS",
+      "authority_type": "public_authority",
+      "domains": [
+        "metals",
+        "critical_materials",
+        "commodities"
+      ],
+      "roles": [
+        "production",
+        "reserves",
+        "resources",
+        "import_dependence"
+      ],
+      "asset_ids": [
+        "gold",
+        "silver",
+        "platinum",
+        "palladium",
+        "copper"
+      ],
+      "asset_notes": {
+        "gold": "Production, réserves et dépendances",
+        "silver": "Production, réserves et dépendances",
+        "platinum": "PGM, production et réserves",
+        "palladium": "PGM, production et réserves",
+        "copper": "Production, réserves et dépendances"
+      },
+      "coverage_summary": "Données structurelles annuelles, aucun cours.",
+      "status": "structural_ready",
+      "status_label": "STRUCTUREL PRÊT",
+      "status_tone": "structural",
+      "priority": 2,
+      "catalogue_order": 160,
+      "api_key_required": false,
+      "bridge_required": true,
+      "licence_state": "public_with_attribution",
+      "source_timestamp": true,
+      "official_docs": "https://pubs.usgs.gov/publication/mcs2026"
+    },
+    {
+      "id": "iea",
+      "name": "International Energy Agency",
+      "short_name": "IEA",
+      "authority_type": "international_institution",
+      "domains": [
+        "metals",
+        "critical_materials",
+        "macro"
+      ],
+      "roles": [
+        "demand_scenarios",
+        "supply_chain",
+        "policy"
+      ],
+      "asset_ids": [
+        "platinum",
+        "palladium",
+        "copper"
+      ],
+      "asset_notes": {
+        "platinum": "PGM et usages de transition à documenter",
+        "palladium": "PGM et chaîne industrielle à documenter",
+        "copper": "Demande, concentration et transition énergétique"
+      },
+      "coverage_summary": "Scénarios et chaînes des matériaux critiques.",
+      "status": "structural_ready",
+      "status_label": "STRUCTUREL PRÊT",
+      "status_tone": "structural",
+      "priority": 3,
+      "catalogue_order": 170,
+      "api_key_required": false,
+      "bridge_required": true,
+      "licence_state": "dataset_specific",
+      "source_timestamp": true,
+      "official_docs": "https://www.iea.org/data-and-statistics/data-tools/critical-minerals-data-explorer"
+    },
+    {
+      "id": "rmis",
+      "name": "RMIS / JRC — Commission européenne",
+      "short_name": "RMIS",
+      "authority_type": "public_authority",
+      "domains": [
+        "metals",
+        "critical_materials",
+        "regulation"
+      ],
+      "roles": [
+        "eu_critical_status",
+        "profiles",
+        "trade",
+        "recycling"
+      ],
+      "asset_ids": [
+        "platinum",
+        "palladium",
+        "copper"
+      ],
+      "asset_notes": {
+        "platinum": "Profil UE et statut critique/stratégique",
+        "palladium": "Profil UE et dépendances",
+        "copper": "Profil UE, commerce et recyclage"
+      },
+      "coverage_summary": "Profils et criticité européenne.",
+      "status": "structural_ready",
+      "status_label": "RÉFÉRENCE UE",
+      "status_tone": "structural",
+      "priority": 4,
+      "catalogue_order": 180,
+      "api_key_required": false,
+      "bridge_required": true,
+      "licence_state": "download_specific",
+      "source_timestamp": true,
+      "official_docs": "https://rmis.jrc.ec.europa.eu/"
+    },
+    {
+      "id": "world_bank",
+      "name": "World Bank — Pink Sheet",
+      "short_name": "World Bank",
+      "authority_type": "international_institution",
+      "domains": [
+        "metals",
+        "commodities",
+        "macro"
+      ],
+      "roles": [
+        "monthly_history",
+        "annual_history",
+        "commodity_context"
+      ],
+      "asset_ids": [
+        "gold",
+        "silver",
+        "platinum",
+        "copper"
+      ],
+      "asset_notes": {
+        "gold": "Historique mensuel et annuel",
+        "silver": "Historique mensuel et annuel",
+        "platinum": "Historique mensuel selon série disponible",
+        "copper": "Historique mensuel et annuel"
+      },
+      "coverage_summary": "Historique mensuel, jamais source spot.",
+      "status": "historical_ready",
+      "status_label": "HISTORIQUE PRÊT",
+      "status_tone": "historical",
+      "priority": 5,
+      "catalogue_order": 190,
+      "api_key_required": false,
+      "bridge_required": true,
+      "licence_state": "public_dataset",
+      "source_timestamp": true,
+      "official_docs": "https://www.worldbank.org/en/research/commodity-markets"
+    },
+    {
+      "id": "fred",
+      "name": "FRED / ALFRED",
+      "short_name": "FRED",
+      "authority_type": "public_data_platform",
+      "domains": [
+        "metals",
+        "stocks",
+        "macro"
+      ],
+      "roles": [
+        "rates",
+        "inflation",
+        "dollar",
+        "industrial_cycle"
+      ],
+      "asset_ids": [
+        "gold",
+        "silver",
+        "platinum",
+        "palladium",
+        "copper"
+      ],
+      "asset_notes": {
+        "gold": "Dollar, taux réels et inflation",
+        "silver": "Dollar, taux et cycle industriel",
+        "platinum": "Cycle industriel et automobile",
+        "palladium": "Cycle industriel et automobile",
+        "copper": "Production industrielle, dollar et taux"
+      },
+      "coverage_summary": "Macro documentée, aucun cours intraday.",
+      "status": "macro_ready",
+      "status_label": "MACRO PRÊT",
+      "status_tone": "macro",
+      "priority": 5,
+      "catalogue_order": 200,
+      "api_key_required": true,
+      "bridge_required": true,
+      "licence_state": "series_source_dependent",
+      "source_timestamp": true,
+      "official_docs": "https://fred.stlouisfed.org/docs/api/fred/overview.html"
+    },
+    {
+      "id": "euronext",
+      "name": "Euronext",
+      "short_name": "Euronext",
+      "authority_type": "official_exchange",
+      "domains": [
+        "stocks",
+        "etf",
+        "indices",
+        "bonds"
+      ],
+      "roles": [
+        "official_quote",
+        "reference_data",
+        "history"
+      ],
+      "asset_ids": [],
+      "coverage_summary": "Future source officielle Bourse européenne.",
+      "status": "reference_license_required",
+      "status_label": "LICENCE REQUISE",
+      "status_tone": "license",
+      "priority": 3,
+      "catalogue_order": 210,
+      "api_key_required": true,
+      "bridge_required": true,
+      "licence_state": "licence_required",
+      "source_timestamp": true,
+      "official_docs": "https://www.euronext.com/en/data"
+    },
+    {
+      "id": "sec_edgar",
+      "name": "SEC EDGAR",
+      "short_name": "SEC EDGAR",
+      "authority_type": "public_authority",
+      "domains": [
+        "stocks",
+        "fundamentals",
+        "regulation"
+      ],
+      "roles": [
+        "filings",
+        "xbrl",
+        "company_facts"
+      ],
+      "asset_ids": [],
+      "coverage_summary": "Dépôts réglementaires et fondamentaux US.",
+      "status": "structural_ready",
+      "status_label": "FONDAMENTAUX PRÊTS",
+      "status_tone": "structural",
+      "priority": 3,
+      "catalogue_order": 220,
+      "api_key_required": false,
+      "bridge_required": true,
+      "licence_state": "public_fair_access",
+      "source_timestamp": true,
+      "official_docs": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces"
+    },
+    {
+      "id": "gia",
+      "name": "GIA Report Check",
+      "short_name": "GIA",
+      "authority_type": "laboratory",
+      "domains": [
+        "gemstones"
+      ],
+      "roles": [
+        "certificate_check"
+      ],
+      "asset_ids": [],
+      "coverage_summary": "Vérification humaine des rapports GIA.",
+      "status": "human_reference",
+      "status_label": "VÉRIFICATION HUMAINE",
+      "status_tone": "reference",
+      "priority": 2,
+      "catalogue_order": 230,
+      "api_key_required": false,
+      "bridge_required": false,
+      "licence_state": "no_public_api_assumed",
+      "source_timestamp": false,
+      "official_docs": "https://www.gia.edu/report-check"
+    },
+    {
+      "id": "cibjo",
+      "name": "CIBJO Blue Books",
+      "short_name": "CIBJO",
+      "authority_type": "standards_body",
+      "domains": [
+        "gemstones",
+        "metals"
+      ],
+      "roles": [
+        "nomenclature",
+        "standards",
+        "responsible_sourcing"
+      ],
+      "asset_ids": [],
+      "coverage_summary": "Nomenclature et standards volontaires.",
+      "status": "human_reference",
+      "status_label": "NORME DE RÉFÉRENCE",
+      "status_tone": "reference",
+      "priority": 6,
+      "catalogue_order": 240,
+      "api_key_required": false,
+      "bridge_required": false,
+      "licence_state": "edition_and_rights_to_verify",
+      "source_timestamp": false,
+      "official_docs": "https://cibjo.org/the-blue-books/"
+    },
+    {
+      "id": "gemdat",
+      "name": "Gemdat",
+      "short_name": "Gemdat",
+      "authority_type": "community_reference",
+      "domains": [
+        "gemstones"
+      ],
+      "roles": [
+        "education",
+        "properties",
+        "localities"
+      ],
+      "asset_ids": [],
+      "coverage_summary": "Référence pédagogique, jamais certification ou prix.",
+      "status": "human_reference",
+      "status_label": "RÉFÉRENCE HUMAINE",
+      "status_tone": "reference",
+      "priority": 8,
+      "catalogue_order": 250,
+      "api_key_required": false,
+      "bridge_required": false,
+      "licence_state": "content_rights_apply",
+      "source_timestamp": false,
+      "official_docs": "https://www.gemdat.org/"
+    }
+  ]
+}

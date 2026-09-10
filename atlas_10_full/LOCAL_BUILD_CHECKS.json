@@ -1,0 +1,8 @@
+{
+  "baseline_sha_locked": true,
+  "vault_image_present": true,
+  "refuses_simplified_fallback": true,
+  "loads_exact_five_baseline_files": true,
+  "patches_only_creator_visual_markers": true,
+  "checks_8_steps": true
+}

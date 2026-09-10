@@ -1,0 +1,42 @@
+{
+  "schema": "agent_crypto_markets_domain_canonical_v2",
+  "build": "40.4.213",
+  "parent_build": "40.4.212",
+  "release": "MARKET ARCHITECTURE TRUTH CONVERGENCE",
+  "protected_market_core": "38.15.11",
+  "order": ["crypto", "metals", "indices", "energy", "cross-market"],
+  "owners": {
+    "router": "js/market-stack.js",
+    "crypto_runtime": "app.js · Market Core 38.15.11",
+    "metals_runtime": "existing app.js Metals runtime + AtlasParallelMarketDemand40465.ensure",
+    "parallel_runtime": "js/parallel-markets.js",
+    "deep_reading": "js/market-reading-depth.js",
+    "version_display": "js/version-truth.js + release metadata"
+  },
+  "domains": {
+    "crypto": {"state": "ACTIVE_NATIVE", "mode": "native", "engine": "Market Core 38.15.11"},
+    "metals": {"state": "ACTIVE_NATIVE_DEMAND", "mode": "native", "engine": "existing Metals runtime"},
+    "indices": {"state": "ACTIVE_PARALLEL", "mode": "parallel", "source": "Yahoo Finance"},
+    "energy": {"state": "ACTIVE_PARALLEL", "mode": "parallel", "source": "Yahoo Finance", "scope": "Energy & commodities"},
+    "cross-market": {"state": "ACTIVE_PARALLEL", "mode": "parallel", "source": "canonical archives"}
+  },
+  "parallel_periods": ["24h", "7j", "30j", "60j", "90j", "1a", "5a", "10a", "max"],
+  "legacy": {
+    "40.4.166_parallel_router": "HISTORICAL_SUPERSEDED",
+    "40.4.167_market_cascade_shell": "HISTORICAL_SUPERSEDED",
+    "commodities_separate_domain": "SUPERSEDED_BY_ENERGY_SCOPE"
+  },
+  "invariants": {
+    "crypto_geometry_master": true,
+    "single_physical_market_surface": true,
+    "source_truth_per_domain": true,
+    "cross_domain_cache_reuse_forbidden": true,
+    "no_invented_values": true,
+    "no_new_market_engine": true,
+    "no_automatic_financial_action": true,
+    "new_timer": false,
+    "new_observer": false,
+    "new_fetch_owner": false,
+    "new_storage_owner": false
+  }
+}

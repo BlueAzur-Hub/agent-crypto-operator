@@ -1,0 +1,22 @@
+AGENT-CRYPTO 40.4.83 — OPERATOR UI NOTES PASS
+
+SCOPE
+Presentation-only pass requested from operator screenshot notes while runtime migration continues.
+
+1. CHRONOS
+Date, time, planetary day and planetary hour are centered inside sourceTimeCard.
+
+2. PASSIVE HEADER CONTEXT
+The time card uses its spare vertical space for four compact read-only signals:
+- Graphique current selection / Top 5;
+- Atlas CURRENT state;
+- Oracle asset/bias;
+- latest qualified News Sentinel event.
+The ribbon reuses the already existing Celestial/Chronos cadence. No interval, timeout loop, observer, animation, fetch or storage owner is added.
+
+3. GRAPH BARS
+Curve-following volume/shadow bars keep the exact existing geometry and now use atlasCryptoPalette(...).primary for single and comparison graphs.
+No data, scale, cache, handler or chart request path changes.
+
+PROTECTED
+40.4.82 Learning runtime true-demand; Market Core 38.15.11; Binance LIVE; Graph request/cache state; Top 5 handlers; CURRENT; Oracle engine; Bridge; IndexedDB; Window Manager.

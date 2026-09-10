@@ -1,0 +1,40 @@
+{
+  "schema": "agent_crypto_metals_collector_status_v1",
+  "version": "1.1.0",
+  "status": "ready",
+  "provider_id": "metals_dev",
+  "provider_name": "Metals.Dev",
+  "bridge_required": false,
+  "bridge_route": "/market/metals/snapshot",
+  "public_page_mode": "interface_report_reader",
+  "last_attempt_at": "2026-08-01T05:22:16Z",
+  "last_success_at": "2026-08-01T05:22:16Z",
+  "last_error": null,
+  "assets_expected": 5,
+  "assets_received": 5,
+  "quota": {
+    "plan": null,
+    "limit": null,
+    "remaining": null,
+    "period": null,
+    "reset_at": null
+  },
+  "history": {
+    "directory": "history/",
+    "index": "history/index.json",
+    "files": 2,
+    "snapshots": 2,
+    "oldest_at": "2026-08-01T04:49:01Z",
+    "newest_at": "2026-08-01T05:22:16Z"
+  },
+  "security": {
+    "api_key_present_in_public_files": false,
+    "browser_direct_keyed_request_forbidden": true,
+    "crypto_cache_separation_required": true,
+    "secret_fields_forbidden_in_import": true,
+    "provider_fetch_not_performed_by_public_page": true
+  },
+  "updated_at": "2026-08-01T06:45:00Z",
+  "local_import_tool": "../../tools/metals_snapshot_ingest.py",
+  "import_template": "import_template.json"
+}

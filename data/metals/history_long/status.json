@@ -1,0 +1,54 @@
+{
+  "schema": "agent_crypto_commodity_historical_depth_status_v1",
+  "build": "40.4.198",
+  "domain": "metals",
+  "status": "ready",
+  "generated_at": "2026-09-09T08:05:38.116Z",
+  "horizons": {
+    "5a": {
+      "ready": true,
+      "resolution": "1wk",
+      "assets": 5,
+      "min_span_years": 5.008,
+      "max_span_years": 5.008,
+      "min_points": 263,
+      "max_points": 263,
+      "path": "data/metals/history_long/5a.json"
+    },
+    "10a": {
+      "ready": true,
+      "resolution": "1wk",
+      "assets": 5,
+      "min_span_years": 10.01,
+      "max_span_years": 10.01,
+      "min_points": 524,
+      "max_points": 524,
+      "path": "data/metals/history_long/10a.json"
+    },
+    "max": {
+      "ready": true,
+      "resolution": "1mo",
+      "assets": 5,
+      "min_span_years": 26.022,
+      "max_span_years": 28.855,
+      "min_points": 268,
+      "max_points": 285,
+      "path": "data/metals/history_long/max.json"
+    }
+  },
+  "integrity": {
+    "no_invented_values": true,
+    "provider_series_preserved": true,
+    "provider_granularity_recorded": true,
+    "coverage_duration_validated": true,
+    "future_continuous_only": true,
+    "spot_semantics_forbidden": true,
+    "lazy_browser_load_required": true,
+    "boot_payload_forbidden": true,
+    "orders_allowed": false,
+    "spot_current_mixing_forbidden": true,
+    "current_gold_api_excluded": true,
+    "futures_history_only": true
+  },
+  "errors": []
+}

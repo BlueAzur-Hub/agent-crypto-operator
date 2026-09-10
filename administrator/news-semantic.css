@@ -1,0 +1,48 @@
+/* Agent-Crypto @erith.IA — News Sentinel Semantic Color Grammar
+   Build 40.4.302. Presentation only: category, criticality and evidence readability.
+   IMPORTANT: colors classify information; they never encode BUY/SELL direction. */
+
+#news-sentinel{
+  --news-family:#63e6f2;
+  --news-family-rgb:99,230,242;
+  --news-card-bg:rgba(5,18,29,.66);
+}
+
+#news-sentinel .news-live-item{
+  position:relative;
+  border-left:3px solid color-mix(in srgb,var(--news-family) 76%,transparent)!important;
+  background:
+    linear-gradient(100deg,rgba(var(--news-family-rgb),.075),transparent 25%),
+    var(--news-card-bg)!important;
+  transition:border-color .18s ease,box-shadow .18s ease,background-color .18s ease;
+}
+#news-sentinel .news-live-item::before{
+  content:"";
+  position:absolute;inset:0 auto 0 0;width:1px;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(var(--news-family-rgb),.80),transparent);
+}
+#news-sentinel .news-live-item .news-live-type{color:var(--news-family)!important;text-shadow:0 0 12px rgba(var(--news-family-rgb),.18)}
+#news-sentinel .news-live-item h4{color:#f4f8fb!important}
+#news-sentinel .news-live-item .news-live-meta span{border-color:rgba(var(--news-family-rgb),.22)!important;background:rgba(var(--news-family-rgb),.045)!important}
+#news-sentinel .news-live-item.active{border-color:rgba(var(--news-family-rgb),.72)!important;box-shadow:inset 0 0 0 1px rgba(var(--news-family-rgb),.18),0 0 22px rgba(var(--news-family-rgb),.10)!important}
+
+#news-sentinel .news-live-item[data-news-family="security"]{--news-family:#ff657d;--news-family-rgb:255,101,125}
+#news-sentinel .news-live-item[data-news-family="liquidity"]{--news-family:#ff7aa8;--news-family-rgb:255,122,168}
+#news-sentinel .news-live-item[data-news-family="leverage"]{--news-family:#ff9b55;--news-family-rgb:255,155,85}
+#news-sentinel .news-live-item[data-news-family="macro"]{--news-family:#ffd166;--news-family-rgb:255,209,102}
+#news-sentinel .news-live-item[data-news-family="institutional"]{--news-family:#b794ff;--news-family-rgb:183,148,255}
+#news-sentinel .news-live-item[data-news-family="regulation"]{--news-family:#d77dff;--news-family-rgb:215,125,255}
+#news-sentinel .news-live-item[data-news-family="market"]{--news-family:#5de6f1;--news-family-rgb:93,230,241}
+
+/* Criticality controls intensity only, never market direction. */
+#news-sentinel .news-live-item[data-news-severity="critical"]{box-shadow:inset 0 0 0 1px rgba(var(--news-family-rgb),.20),0 0 20px rgba(var(--news-family-rgb),.075)}
+#news-sentinel .news-live-item[data-news-severity="high"]{box-shadow:inset 0 0 0 1px rgba(var(--news-family-rgb),.12)}
+#news-sentinel .news-live-item[data-news-severity="medium"]{opacity:.97}
+#news-sentinel .news-live-item[data-news-severity="low"]{opacity:.92}
+
+/* Evidence is expressed by edge style, not a bullish/bearish color. */
+#news-sentinel .news-live-item[data-news-evidence="weak"]{border-left-style:dashed!important}
+#news-sentinel .news-live-item[data-news-evidence="medium"] .news-live-meta span:nth-child(2){opacity:.82}
+#news-sentinel .news-live-item[data-news-evidence="strong"] .news-live-meta span:nth-child(2){font-weight:850}
+
+@media (prefers-reduced-motion:reduce){#news-sentinel .news-live-item{transition:none}}

@@ -1,0 +1,93 @@
+{
+  "schema": "agent_crypto_runtime_boot_residency_audit_v5",
+  "build": "40.4.70",
+  "parent_build": "40.4.69",
+  "state": "candidate_requires_firefox_operator_validation",
+  "operator_evidence": {
+    "40.4.66": "operator-described stable/reactive witness",
+    "40.4.67_40.4.69": "source-lazy migration branch; 40.4.69 still reported sustained input/scroll stalls",
+    "40.4.70_target": "remove same-turn late-DOM bind/render cliff without rolling back the migration"
+  },
+  "migration_completion": {
+    "two_level_source_lazy_preserved": true,
+    "secondary_roots": 12,
+    "critical_bind_before_replay": true,
+    "bounded_paint_handoff": true,
+    "scope_timing_exposed": true,
+    "runtime_recomputed_on_hydration": false,
+    "second_engine_added": false
+  },
+  "static_validation": {
+    "app.js": {
+      "sha256": "2c74edf5be27925c67adc31444c08c6b6d1c9a028761264e903747071bd14c9f",
+      "bytes": 3093523,
+      "setInterval_calls": 12,
+      "setTimeout_calls": 135,
+      "requestAnimationFrame_calls": 74,
+      "MutationObserver_calls": 3,
+      "IntersectionObserver_calls": 1,
+      "fetch_calls": 19
+    },
+    "js/app.js": {
+      "sha256": "ed87ce39da509bad677ac2d22614c069f6fdabbb556caca7be27993bd9ca0bbe",
+      "bytes": 119908,
+      "setInterval_calls": 0,
+      "setTimeout_calls": 0,
+      "requestAnimationFrame_calls": 1,
+      "MutationObserver_calls": 2,
+      "IntersectionObserver_calls": 0,
+      "fetch_calls": 0
+    },
+    "js/views/atlas-presentation.js": {
+      "sha256": "84ee6e038791bee77dee7ec18ce3e6993d27153528df71f95fd0d29ecfa1f1c7",
+      "bytes": 28285,
+      "setInterval_calls": 0,
+      "setTimeout_calls": 0,
+      "requestAnimationFrame_calls": 3,
+      "MutationObserver_calls": 0,
+      "IntersectionObserver_calls": 0,
+      "fetch_calls": 1
+    },
+    "js/views/presentation-boundaries.js": {
+      "sha256": "7c4c6866894655f5be394f89955551959536aafc5e7738082fad6d6c381c2939",
+      "bytes": 5443,
+      "setInterval_calls": 0,
+      "setTimeout_calls": 0,
+      "requestAnimationFrame_calls": 0,
+      "MutationObserver_calls": 0,
+      "IntersectionObserver_calls": 0,
+      "fetch_calls": 0
+    },
+    "index_html": {
+      "sha256": "71dc6642982f8415daca673119e16d932a9846f40d88416f7267b824e6bb3c04"
+    },
+    "json_parse": "PASS",
+    "html_ids": "661/661 unique",
+    "new_recurring_timer": 0,
+    "new_observer": 0,
+    "new_network_owner": 0,
+    "bounded_one_shot_paint_handoff_callsite_delta": "atlas-presentation.js requestAnimationFrame callsites 2 → 3; one coalesced scope replay handoff, no loop"
+  },
+  "protected": {
+    "market_core": "38.15.11",
+    "bridge": "R13 / V1.9.11",
+    "private_backend": "V1.4.0 READ ONLY",
+    "current": true,
+    "oracle": true,
+    "indexeddb": true,
+    "scanner_history": true,
+    "window_manager": true
+  },
+  "operator_acceptance_required": [
+    "Admin gate remains responsive",
+    "first Atlas disclosure paints without prolonged grey/black stall",
+    "AUTO/MANUEL reacts immediately",
+    "Question Atlas/Aerith reacts",
+    "CURRENT presentation replays after paint",
+    "Decision Board/Memory/Scanner/Journal/Multi-Collector/Book hydrate on demand",
+    "close/reopen Atlas does not duplicate handlers or engines",
+    "return to Graph/scroll remains responsive"
+  ],
+  "diagnostic_surface": "ErithAtlasPresentation40470.snapshot().scope_timings",
+  "stop_condition": "If sustained Firefox stalls persist, use the per-scope critical/replay timings to isolate the expensive existing owner. Do not add a second scheduler, delete history, or modify protected engines."
+}

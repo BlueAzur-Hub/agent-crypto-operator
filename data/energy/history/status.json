@@ -1,0 +1,51 @@
+{
+  "schema": "agent_crypto_commodity_historical_depth_status_v1",
+  "build": "40.4.198",
+  "domain": "energy",
+  "status": "ready",
+  "generated_at": "2026-09-09T08:05:22.472Z",
+  "horizons": {
+    "5a": {
+      "ready": true,
+      "resolution": "1wk",
+      "assets": 3,
+      "min_span_years": 5.008,
+      "max_span_years": 5.008,
+      "min_points": 263,
+      "max_points": 263,
+      "path": "data/energy/history/5a.json"
+    },
+    "10a": {
+      "ready": true,
+      "resolution": "1wk",
+      "assets": 3,
+      "min_span_years": 10.01,
+      "max_span_years": 10.01,
+      "min_points": 524,
+      "max_points": 524,
+      "path": "data/energy/history/10a.json"
+    },
+    "max": {
+      "ready": true,
+      "resolution": "1mo",
+      "assets": 3,
+      "min_span_years": 19.108,
+      "max_span_years": 26.022,
+      "min_points": 198,
+      "max_points": 268,
+      "path": "data/energy/history/max.json"
+    }
+  },
+  "integrity": {
+    "no_invented_values": true,
+    "provider_series_preserved": true,
+    "provider_granularity_recorded": true,
+    "coverage_duration_validated": true,
+    "future_continuous_only": true,
+    "spot_semantics_forbidden": true,
+    "lazy_browser_load_required": true,
+    "boot_payload_forbidden": true,
+    "orders_allowed": false
+  },
+  "errors": []
+}

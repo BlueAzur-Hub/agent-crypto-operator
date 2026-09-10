@@ -1,0 +1,17 @@
+{
+  "package": "FORGE_AERITH_PRO_V3_3R9_VAULT_SKIN_ONLY_COMPLETE",
+  "type": "visual_skin_only",
+  "baseline_commit": "52a0ab7ac5bb2b0313ae53b24cff4f86a2813d2f",
+  "modified_files": [
+    "style.css",
+    "assets/themes/aerith_10_creatrice_vault.png"
+  ],
+  "forbidden_files_not_modified": [
+    "index.html",
+    "app.js",
+    "forge-data.js",
+    "flower-girls-registry.js"
+  ],
+  "functional_code_change": false,
+  "visual_theme": "The Vault"
+}

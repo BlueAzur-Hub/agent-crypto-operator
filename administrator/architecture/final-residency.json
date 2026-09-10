@@ -1,0 +1,91 @@
+{
+  "schema": "agent_crypto_administrator_final_residency_v1",
+  "build": "40.4.48",
+  "parent_build": "40.4.47",
+  "purpose": "Final Administrator residency inventory after Projects/Operations/System/Atlas/Oracle/Learning migration waves.",
+  "runtime_policy": {
+    "market_core": "PROTECTED_RESIDENT",
+    "no_new_timer_observer_network_storage_owner": true,
+    "firefox_operator_runtime_is_final_authority": true,
+    "web_classic_reference": "38.15.13",
+    "administrator_performance_target": "Web-Classic-class responsiveness"
+  },
+  "rows": [
+    {
+      "component": "Market Core / Binance / graph runtime",
+      "state": "RESIDENT_PROTECTED",
+      "owner": "app.js"
+    },
+    {
+      "component": "Projects heavy bodies",
+      "state": "TRUE_LAZY",
+      "owner": "js/views/projects-presentation.js + views/projects.html"
+    },
+    {
+      "component": "Operations heavy bodies",
+      "state": "TRUE_LAZY",
+      "owner": "js/views/operations-presentation.js + views/operations.html"
+    },
+    {
+      "component": "System peripherals: Tests/Backend/Safety/Physical Security",
+      "state": "TRUE_LAZY",
+      "owner": "js/views/system-presentation.js + views/system.html"
+    },
+    {
+      "component": "Storage Health / Grey Plate / Simulation runtime",
+      "state": "RESIDENT_PROTECTED",
+      "owner": "System/app.js"
+    },
+    {
+      "component": "Learning Journey heavy presentation",
+      "state": "DEMAND_HYDRATED_SAFE_DOM",
+      "owner": "js/views/learning-presentation.js + views/system.html"
+    },
+    {
+      "component": "Learning runtime/progress/IndexedDB",
+      "state": "RESIDENT_PROTECTED",
+      "owner": "app.js"
+    },
+    {
+      "component": "Atlas Auto Reader / Shared Memory / GitHub Memory / Book+Knowledge heavy bodies",
+      "state": "TRUE_LAZY_PARTIAL_FAMILY",
+      "owner": "js/views/atlas-peripheral-lazy.js + views/atlas.html"
+    },
+    {
+      "component": "Atlas CURRENT runtime",
+      "state": "RESIDENT_PROTECTED",
+      "owner": "app.js + IndexedDB"
+    },
+    {
+      "component": "Oracle heavy presentation",
+      "state": "TRUE_LAZY",
+      "owner": "js/views/oracle-presentation.js + views/oracle.html"
+    },
+    {
+      "component": "Oracle engine/Evidence/calibration/history",
+      "state": "RESIDENT_PROTECTED",
+      "owner": "app.js"
+    },
+    {
+      "component": "Window Manager",
+      "state": "RESIDENT_CANONICAL",
+      "owner": "js/core/admin-window-manager.js"
+    }
+  ],
+  "closed_debts": [
+    "Administrator role/URL truth",
+    "Atlas F5 visibility lag",
+    "Administrator-vs-Classic performance gap",
+    "Oracle transitional presentation owners",
+    "Learning unsafe string parser gate",
+    "Learning recovery CSS import dependency",
+    "40.3.96 cumulative CSS owner",
+    "40.3.35 offscreen paint gate"
+  ],
+  "monitor_only": [
+    "Firefox compositor/grey-plate recurrence",
+    "Transformer Book operator parity",
+    "GitHub Pages propagation/cache"
+  ],
+  "result": "Administrator migration architecture is functionally complete pending one 40.4.48 smoke test."
+}

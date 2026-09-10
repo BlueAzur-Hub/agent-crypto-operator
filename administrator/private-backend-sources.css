@@ -1,0 +1,23 @@
+/* Agent-Crypto @erith.IA — 40.4.62 · Private Backend Source Matrix · presentation only */
+.private-backend-v1{margin:18px 0 0;padding:18px;border:1px solid rgba(88,220,226,.24);border-radius:16px;background:rgba(3,15,25,.72)}
+.private-backend-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}.private-backend-head h3{margin:.2rem 0 .35rem}.private-backend-head p:last-child{margin:0;color:var(--muted,#9cb2c5)}
+.private-backend-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}.private-backend-actions span{font-size:.86rem;color:var(--muted,#9cb2c5)}
+.private-backend-source-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0}.private-backend-source-grid article{padding:12px;border:1px solid rgba(118,168,205,.18);border-radius:12px;background:rgba(7,23,36,.74)}.private-backend-source-grid span,.private-backend-source-grid small{display:block}.private-backend-source-grid span{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:#9fc6de}.private-backend-source-grid b{display:block;margin:.3rem 0;color:#eaf6ff}.private-backend-source-grid small{color:#91aabd}
+.private-backend-table-wrap{overflow:auto;border:1px solid rgba(118,168,205,.18);border-radius:12px}.private-backend-table{width:100%;border-collapse:collapse;min-width:760px}.private-backend-table th,.private-backend-table td{padding:10px 12px;border-bottom:1px solid rgba(118,168,205,.12);text-align:left}.private-backend-table thead th{font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:#9fc6de}.private-backend-table tbody tr:last-child>*{border-bottom:0}.private-backend-table .is-ok{color:#74ffc4}.private-backend-table .is-watch{color:#ffd772}.private-backend-table .is-bad{color:#ff8f9d}.private-backend-table .is-muted{color:#91aabd}.private-backend-note{margin:10px 2px 0;color:#91aabd;font-size:.84rem}
+@media(max-width:900px){.private-backend-source-grid{grid-template-columns:1fr}.private-backend-head{flex-direction:column}}
+
+.private-context-v2{margin-top:18px;padding-top:16px;border-top:1px solid rgba(161,107,255,.24)}
+.private-context-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}.private-context-head h4{margin:.2rem 0 .35rem;font-size:1rem}.private-context-head p:last-child{margin:0;color:var(--muted,#9cb2c5)}
+.private-defi-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:12px 0}.private-defi-grid article{padding:12px;border:1px solid rgba(161,107,255,.18);border-radius:12px;background:rgba(12,18,38,.68)}.private-defi-grid span,.private-defi-grid small{display:block}.private-defi-grid span{font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#c4adff}.private-defi-grid b{display:block;margin:.28rem 0;color:#f2edff}.private-defi-grid small{color:#91aabd}.private-context-table td{font-size:.82rem}.private-context-table td:nth-child(2),.private-context-table td:nth-child(4){max-width:260px}
+@media(max-width:1100px){.private-defi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.private-defi-grid{grid-template-columns:1fr}.private-context-head{flex-direction:column}}
+
+
+/* 40.4.60 · Source Intelligence V1.2 AUTO presentation only */
+.private-intelligence-v1{margin-top:18px;padding-top:16px;border-top:1px solid rgba(89,226,198,.24)}
+.private-intelligence-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0}.private-intelligence-grid article{padding:12px;border:1px solid rgba(89,226,198,.18);border-radius:12px;background:rgba(6,28,31,.62)}.private-intelligence-grid span,.private-intelligence-grid small{display:block}.private-intelligence-grid span{font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#8ce8d2}.private-intelligence-grid b{display:block;margin:.28rem 0;color:#effffb}.private-intelligence-grid small{color:#91aabd}
+@media(max-width:1000px){.private-intelligence-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.private-intelligence-grid{grid-template-columns:1fr}}
+
+/* 40.4.60 identity hardening: six bounded fact cards; no blur/animation added. */
+.private-intelligence-grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));}

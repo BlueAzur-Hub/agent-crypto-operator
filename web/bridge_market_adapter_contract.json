@@ -1,0 +1,119 @@
+{
+  "schema": "agent_crypto_bridge_market_adapter_contract_v1",
+  "version": "1.0.0",
+  "published_at": "2026-07-31T20:19:32Z",
+  "security": {
+    "api_keys_in_browser_forbidden": true,
+    "api_keys_in_public_repository_forbidden": true,
+    "bridge_required_for_keyed_sources": true,
+    "logs_must_redact_secrets": true
+  },
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/market/metals/quote",
+      "query": [
+        "symbol"
+      ],
+      "response_contract": "quote_record"
+    },
+    {
+      "method": "GET",
+      "path": "/market/metals/series",
+      "query": [
+        "symbol",
+        "period",
+        "interval"
+      ],
+      "response_contract": "series_record"
+    },
+    {
+      "method": "GET",
+      "path": "/market/metals/snapshot",
+      "query": [],
+      "response_contract": "quote_record[]"
+    },
+    {
+      "method": "GET",
+      "path": "/market/metals/source-status",
+      "query": [],
+      "response_contract": "source_status[]"
+    },
+    {
+      "method": "GET",
+      "path": "/market/structural/usgs",
+      "query": [
+        "commodity",
+        "year"
+      ],
+      "response_contract": "structural_fact[]"
+    },
+    {
+      "method": "GET",
+      "path": "/market/structural/iea",
+      "query": [
+        "mineral",
+        "scenario"
+      ],
+      "response_contract": "structural_fact[]"
+    },
+    {
+      "method": "GET",
+      "path": "/market/macro/fred",
+      "query": [
+        "series_id"
+      ],
+      "response_contract": "series_record"
+    },
+    {
+      "method": "GET",
+      "path": "/market/stocks/quote",
+      "query": [
+        "symbol"
+      ],
+      "response_contract": "quote_record"
+    },
+    {
+      "method": "GET",
+      "path": "/market/stocks/series",
+      "query": [
+        "symbol",
+        "period",
+        "interval"
+      ],
+      "response_contract": "series_record"
+    }
+  ],
+  "response_envelope": {
+    "ok": "boolean",
+    "data": "object|array|null",
+    "source": {
+      "id": "string|null",
+      "name": "string|null",
+      "source_time": "ISO-8601|null",
+      "received_at": "ISO-8601|null",
+      "declared_delay_seconds": "number|null",
+      "licence_state": "string|null"
+    },
+    "cache": {
+      "hit": "boolean",
+      "age_seconds": "number|null",
+      "namespace": "string|null"
+    },
+    "error": {
+      "code": "string|null",
+      "message": "string|null",
+      "retryable": "boolean"
+    }
+  },
+  "error_states": [
+    "invalid_symbol",
+    "adapter_required",
+    "source_disconnected",
+    "quota_exceeded",
+    "licence_blocked",
+    "timeout",
+    "invalid_payload",
+    "date_unqualified"
+  ]
+}

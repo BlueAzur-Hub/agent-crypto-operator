@@ -1,0 +1,14 @@
+/* Agent-Crypto @erith.IA — Aether News Operator Context
+   Build 40.4.303. Visual semantics only; category color is not price direction. */
+#atlasAetherVeille4087{--aether-news-color:#60e5ef;--aether-news-rgb:96,229,239}
+#atlasAetherVeille4087[data-news-family="security"]{--aether-news-color:#ff657d;--aether-news-rgb:255,101,125}
+#atlasAetherVeille4087[data-news-family="liquidity"]{--aether-news-color:#ff7aa8;--aether-news-rgb:255,122,168}
+#atlasAetherVeille4087[data-news-family="leverage"]{--aether-news-color:#ff9b55;--aether-news-rgb:255,155,85}
+#atlasAetherVeille4087[data-news-family="macro"]{--aether-news-color:#ffd166;--aether-news-rgb:255,209,102}
+#atlasAetherVeille4087[data-news-family="institutional"]{--aether-news-color:#b794ff;--aether-news-rgb:183,148,255}
+#atlasAetherVeille4087[data-news-family="regulation"]{--aether-news-color:#d77dff;--aether-news-rgb:215,125,255}
+#atlasAetherVeille4087[data-news-family="market"]{--aether-news-color:#60e5ef;--aether-news-rgb:96,229,239}
+#atlasAetherVeille4087 .atlas-aether-veille-brand-4087{color:var(--aether-news-color)!important;text-shadow:0 0 12px rgba(var(--aether-news-rgb),.24)}
+#atlasAetherVeille4087 .atlas-aether-veille-meta-4087{border-color:rgba(var(--aether-news-rgb),.34)!important;background:rgba(var(--aether-news-rgb),.075)!important}
+#atlasAetherVeille4087[data-news-severity="critical"]{box-shadow:inset 0 -1px 0 rgba(var(--aether-news-rgb),.28),0 0 20px rgba(var(--aether-news-rgb),.07)!important}
+#atlasAetherVeille4087[data-news-severity="high"]{box-shadow:inset 0 -1px 0 rgba(var(--aether-news-rgb),.18)!important}

@@ -1,0 +1,37 @@
+{
+  "schema": "agent_crypto_operator_ui_followups_v2",
+  "build": "40.4.69",
+  "parent_build": "40.4.68",
+  "runtime_loaded": false,
+  "purpose": "Preserve bounded operator UI debts while runtime migration remains the priority; no item here adds a runtime owner until explicitly implemented.",
+  "items": [
+    {
+      "id": "secondary-operator-capabilities-copy",
+      "state": "done-40.4.68",
+      "request": "Opérateur secondaire: remplacer capacités restreintes par capacités étendues dans la carte opérateur uniquement.",
+      "guard": "Bridge security capability wording remains restricted by design."
+    },
+    {
+      "id": "aether-menu-heart",
+      "state": "pending-post-migration",
+      "request": "Ajouter ♥ Aether au menu supérieur comme synthèse légère de l’état existant.",
+      "constraints": [
+        "no new engine",
+        "no polling",
+        "no new storage owner",
+        "listen/read existing Atlas/Oracle/Sources/Book truth only"
+      ]
+    },
+    {
+      "id": "aether-top-ribbon",
+      "state": "pending-post-migration",
+      "request": "Utiliser la bande supérieure pour un ruban Aether compact: CURRENT/Atlas, Oracle, Sources et dernière News significative.",
+      "constraints": [
+        "reuse existing events/state",
+        "no recurring timer",
+        "no canonical price ownership",
+        "no CURRENT recompute"
+      ]
+    }
+  ]
+}

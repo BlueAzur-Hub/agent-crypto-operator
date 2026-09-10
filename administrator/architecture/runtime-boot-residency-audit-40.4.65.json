@@ -1,0 +1,326 @@
+{
+  "schema": "agent_crypto_runtime_boot_residency_audit_v1",
+  "build": "40.4.65",
+  "audited_base": "40.4.64",
+  "purpose": "Runtime phase-2 wave 2: remove secondary Metals network/IndexedDB owners from default Crypto boot, relieve Celestial closed cadence, and move ordinary version awareness outside first boot burst. Protected analytical engines unchanged.",
+  "operator_evidence": {
+    "firefox_warning_reproduced": true,
+    "grey_plate_reproduced": true,
+    "backend_40_4_60_acceptance_passed": true,
+    "auth_priority_40_4_61_improved_gate": true,
+    "scanner_40_4_62_not_sufficient_as_single_cause": true,
+    "firefox_40_4_63_boot_slow_reproduced": true,
+    "ryzen_40_4_63_boot_fan_ramp_observed": true,
+    "40_4_63_runtime_migration_audit_confirmed": true,
+    "40464_operator_responsiveness_major_improvement": true,
+    "40464_cold_boot_still_about_seconds": 30,
+    "40465_target": "cold_boot_secondary_owner_contention"
+  },
+  "measured_entrypoint": {
+    "index_html_bytes": 435601,
+    "app_js_bytes": 3076859,
+    "js_app_js_bytes": 117622,
+    "script_tags_total": 36,
+    "external_classic_scripts": 28,
+    "parser_blocking_external_scripts": 28,
+    "inline_script_blocks": 8,
+    "inline_js_bytes": 90187,
+    "large_inline_blocks": [
+      {
+        "id": "atlasDebtSettlement4055Runtime",
+        "bytes": 48935
+      },
+      {
+        "id": "atlasTechnicalStaticThemeController40269",
+        "bytes": 15084
+      },
+      {
+        "id": "atlasRollingHighBreakout40271",
+        "bytes": 10207
+      },
+      {
+        "id": "adminVisualAssets40269",
+        "bytes": 8095
+      },
+      {
+        "id": "atlasSectionIconographyRuntime40269",
+        "bytes": 4081
+      },
+      {
+        "id": "(anonymous)",
+        "bytes": 1748
+      },
+      {
+        "id": "atlasFirstPaintRolePreseed40399",
+        "bytes": 1682
+      },
+      {
+        "id": "atlasFirstPaintBodyRolePreseed40399",
+        "bytes": 355
+      }
+    ]
+  },
+  "app_js_static_owner_counts": {
+    "setTimeout": 135,
+    "setInterval": 12,
+    "requestAnimationFrame": 74,
+    "JSON.stringify": 117,
+    "JSON.parse": 63,
+    "localStorage.getItem": 91,
+    "localStorage.setItem": 93,
+    "MutationObserver": 8,
+    "IntersectionObserver": 2,
+    "fetch": 19,
+    "WebSocket": 34
+  },
+  "js_app_js_static_owner_counts": {
+    "setTimeout": 0,
+    "setInterval": 0,
+    "requestAnimationFrame": 1,
+    "JSON.stringify": 2,
+    "JSON.parse": 3,
+    "localStorage.getItem": 14,
+    "localStorage.setItem": 13,
+    "MutationObserver": 2,
+    "IntersectionObserver": 0,
+    "fetch": 0,
+    "WebSocket": 0
+  },
+  "index_static_owner_counts": {
+    "setTimeout": 7,
+    "setInterval": 2,
+    "requestAnimationFrame": 0,
+    "JSON.stringify": 3,
+    "JSON.parse": 2,
+    "localStorage.getItem": 4,
+    "localStorage.setItem": 3,
+    "MutationObserver": 2,
+    "IntersectionObserver": 0,
+    "fetch": 1,
+    "WebSocket": 0
+  },
+  "parser_blocking_script_order": [
+    "./js/admin-visual-cache.js?v=administrator-build-40.4.62",
+    "./js/views/oracle-presentation.js?v=administrator-build-40.4.62",
+    "./js/views/atlas-peripheral-lazy.js?v=administrator-build-40.4.62",
+    "./js/views/atlas-presentation.js?v=administrator-build-40.4.62",
+    "./js/views/operations-presentation.js?v=administrator-build-40.4.62",
+    "./js/views/system-presentation.js?v=administrator-build-40.4.62",
+    "./js/views/learning-presentation.js?v=administrator-build-40.4.62",
+    "./js/views/projects-presentation.js?v=administrator-build-40.4.62",
+    "https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js",
+    "./app.js?v=market-core-v2.0-alpha-build-40.4.65",
+    "./js/market-memory.js?v=administrator-build-40.4.62",
+    "./js/analytical-memory.js?v=administrator-build-40.4.62",
+    "./js/market-memory-collector.js?v=administrator-build-40.4.62",
+    "./js/decision-board.js?v=administrator-build-40.4.62",
+    "./js/retrospective-validation.js?v=administrator-build-40.4.62",
+    "./js/multi-collector-concordance.js?v=administrator-build-40.4.62",
+    "./js/memory-health-audit.js?v=administrator-build-40.4.62",
+    "./js/core/admin-window-manager.js?v=administrator-build-40.4.62",
+    "./js/views/presentation-boundaries.js?v=administrator-build-40.4.62",
+    "./js/views/view-lifecycle.js?v=administrator-build-40.4.62",
+    "./js/app.js?v=administrator-build-40.4.65",
+    "./js/views/projects-demand-residency.js?v=administrator-build-40.4.62",
+    "./js/views/operations-demand-residency.js?v=administrator-build-40.4.62",
+    "./js/views/system-demand-residency.js?v=administrator-build-40.4.62",
+    "./js/views/private-backend-sources.js?v=administrator-build-40.4.62",
+    "./js/views/atlas-family-demand-residency.js?v=administrator-build-40.4.62",
+    "./js/layout-repair.js?v=administrator-build-40.4.62",
+    "./js/views/peripheral-diagnostics-loader.js?v=administrator-build-40.4.64"
+  ],
+  "resident_interval_inventory": [
+    {
+      "owner": "newsFeedUpdateCountdown",
+      "period_ms": 1000,
+      "file": "app.js",
+      "role": "News countdown presentation",
+      "runtime_40_4_64": "OPEN_DISCLOSURE_ONLY",
+      "gate": "details#news-sentinel.open && document visible"
+    },
+    {
+      "owner": "updateAutoCountdown",
+      "period_ms": 1000,
+      "file": "app.js",
+      "role": "Auto Reader countdown presentation",
+      "runtime_40_4_64": "HYDRATED_OPEN_DISCLOSURE_ONLY",
+      "gate": "details[data-collapse-key=auto-reader].open && body resident && document visible"
+    },
+    {
+      "owner": "atlasRenderAudienceStatus",
+      "period_ms": 1000,
+      "file": "app.js",
+      "role": "Audience presentation",
+      "runtime_40_4_64": "OPEN_DISCLOSURE_ONLY",
+      "gate": "details#mesure-audience.open && document visible"
+    },
+    {
+      "owner": "AtlasCelestialClock4055",
+      "period_ms": 1000,
+      "file": "index.html inline atlasDebtSettlement4055Runtime",
+      "role": "AstroCycle presentation"
+    },
+    {
+      "owner": "atlasV2SyncMathRail + atlasV2DecisionLockRefresh",
+      "period_ms": 2000,
+      "file": "app.js",
+      "role": "shared UI sync"
+    },
+    {
+      "owner": "atlasExchangeWatchdog",
+      "period_ms": 5000,
+      "file": "app.js",
+      "role": "Binance/WebSocket watchdog"
+    },
+    {
+      "owner": "atlasOracleOutcomeRun + Long Shadow",
+      "period_ms": 15000,
+      "file": "app.js",
+      "role": "Oracle outcome/status"
+    },
+    {
+      "owner": "atlasBookMirrorFetch36",
+      "period_ms": 20000,
+      "file": "app.js",
+      "role": "Book Mirror observer path"
+    },
+    {
+      "owner": "AgentCryptoBreakoutContext40271",
+      "period_ms": 30000,
+      "file": "index.html inline atlasRollingHighBreakout40271",
+      "role": "Rolling High presentation"
+    },
+    {
+      "owner": "atlasLocalBridgeAutoTick",
+      "period_ms": 60000,
+      "file": "app.js",
+      "role": "Bridge health"
+    },
+    {
+      "owner": "atlasScannerCollectorCapture/Flush",
+      "period_ms": 60000,
+      "file": "app.js",
+      "role": "Scanner collector"
+    },
+    {
+      "owner": "atlasRefreshMathFreshnessOnly",
+      "period_ms": 60000,
+      "file": "app.js",
+      "role": "Math freshness"
+    },
+    {
+      "owner": "atlasAudienceHeartbeat",
+      "period_ms": 90000,
+      "file": "app.js",
+      "role": "Audience heartbeat"
+    },
+    {
+      "owner": "atlasVersionCheck",
+      "period_ms": 180000,
+      "file": "app.js",
+      "role": "version awareness; version.json cache=no-store"
+    }
+  ],
+  "migration_truth": {
+    "presentation_migration": "SUBSTANTIAL_TRUE_LAZY_COMPLETE_OR_PARTIAL_BY_FAMILY",
+    "runtime_migration": "PHASE_2_WAVE_2_IMPLEMENTED",
+    "runtime_performance_complete": false,
+    "reason": "40.4.65 removes the entire Metals registry/structural/quote-history/report-restore bootstrap from default Crypto boot and fixes an AstroCycle 1s/duplicate even-minute presentation burden. Operator Firefox validation remains required before stop gate."
+  },
+  "boot_policy": {
+    "must_remain_resident": [
+      "Market Core/Binance LIVE/graph",
+      "Target Top 5 + minimal Math/Graph Context V7",
+      "Aether Trust minimal auth + Bridge health",
+      "canonical URL/role truth"
+    ],
+    "protected_no_extraction_yet": [
+      "Market Core 38.15.11",
+      "Atlas CURRENT 4/4 → NØX → Aerith",
+      "CURRENT fingerprint/cadence",
+      "Oracle analytical engine/Evidence",
+      "Bridge R13 / V1.9.11",
+      "Private Backend V1.4.0",
+      "IndexedDB CURRENT truth",
+      "Binance LIVE primary source"
+    ],
+    "phase2_demand_candidates": [
+      "Remaining large inline visual/celestial blocks if 40.4.65 cold boot still exceeds target",
+      "Secondary diagnostics/runtime not required for Crypto first interaction",
+      "Private Backend/API automatic presentation client only if regression tests prove it contributes materially"
+    ],
+    "phase2_extracted_40464": [
+      "Architecture Freeze diagnostic module: parser-blocking boot -> explicit demand load",
+      "Residency Audit diagnostic module: parser-blocking boot -> explicit demand load",
+      "News 1 s countdown: closed/offscreen dormant",
+      "Auto Reader 1 s countdown: unhydrated/closed dormant",
+      "Audience 1 s status renderer: closed/offscreen dormant"
+    ]
+  },
+  "cache_truth_40463": {
+    "previous_behavior": "Global build query token changed on essentially every local CSS/JS URL each release, invalidating browser reuse for byte-identical assets.",
+    "new_policy": "40.4.63 keeps 40.4.62 query tokens on byte-identical assets; only changed app.js and js/app.js entry URLs use 40.4.63.",
+    "functional_semantics_changed": false,
+    "market_data_changed": false
+  },
+  "next": {
+    "40.4.66": "Cumulative Firefox/runtime migration + Private Backend/Source Intelligence regression checkpoint and stop gate. Extract more only if measured evidence remains."
+  },
+  "phase2_wave1_40464": {
+    "state": "IMPLEMENTED_REQUIRES_FIREFOX_OPERATOR_VALIDATION",
+    "diagnostic_boot_scripts_before": 2,
+    "diagnostic_boot_scripts_after": 0,
+    "demand_loader_added": true,
+    "external_parser_blocking_scripts_before": 29,
+    "external_parser_blocking_scripts_after": 28,
+    "net_external_parser_blocking_delta": -1,
+    "architecture_freeze_bytes_deferred": 136250,
+    "residency_audit_bytes_deferred": null,
+    "news_countdown_recurring_when_closed": false,
+    "auto_reader_countdown_recurring_when_body_absent_or_closed": false,
+    "audience_status_recurring_when_closed": false,
+    "news_data_refresh_changed": false,
+    "market_pulse_changed": false,
+    "audience_heartbeat_changed": false,
+    "market_core_changed": false,
+    "current_changed": false,
+    "oracle_changed": false,
+    "bridge_changed": false,
+    "private_backend_changed": false,
+    "source_intelligence_changed": false,
+    "indexeddb_truth_changed": false,
+    "new_recurring_timer": false,
+    "new_observer": false,
+    "new_network_owner": false,
+    "new_storage_owner": false
+  },
+  "phase2_wave2_40465": {
+    "default_domain": "crypto",
+    "metals_eager_boot_removed": [
+      "atlasMarketRegistryLoad",
+      "atlasMetalsStructuralLoad",
+      "atlasMetalsQuoteFoundationLoad",
+      "atlasMetalsReportInit restore",
+      "atlasMetalsCursorInspectorInit"
+    ],
+    "metals_demand_entry": "AtlasParallelMarketDemand40465.ensure",
+    "restored_metals_domain_auto_ensure": true,
+    "ordinary_version_first_check_delay_ms_before": 2800,
+    "ordinary_version_first_check_delay_ms_after": 12000,
+    "celestial_open_cadence_ms": 1000,
+    "celestial_closed_cadence_ms": 30000,
+    "previous_multi_collector_behavior": "augmentMultiCollector could execute every second for the whole even minute because minute%2===0 was not edge-guarded",
+    "new_multi_collector_behavior": "at most once per even minute pulse; explicit operator/toggle/visibility events still refresh",
+    "market_core_changed": false,
+    "current_changed": false,
+    "oracle_changed": false,
+    "bridge_changed": false,
+    "private_backend_changed": false,
+    "source_intelligence_changed": false,
+    "indexeddb_truth_changed": false,
+    "new_recurring_timer": false,
+    "new_observer": false,
+    "new_network_owner": false,
+    "new_storage_owner": false
+  }
+}

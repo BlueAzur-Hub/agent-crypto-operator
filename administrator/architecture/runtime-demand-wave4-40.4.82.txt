@@ -1,0 +1,33 @@
+AGENT-CRYPTO 40.4.82 — RUNTIME PHASE-2 WAVE 4
+
+MISSION
+Move the Learning/Simulation cold-boot runtime behind explicit operator demand.
+
+BEFORE 40.4.82
+Normal Crypto boot, even with Simulation closed, scheduled:
+- Simulation form hydration/presentation helpers;
+- Learning Notebook IndexedDB initialization;
+- legacy Learning recovery/verification;
+- Expert Roadmap reconciliation + persist;
+- Learning archive -> Collector backfill;
+- several Learning presentation renders.
+
+AFTER 40.4.82
+Simulation closed at normal Crypto boot:
+- no Learning IndexedDB recovery;
+- no Learning roadmap reconciliation;
+- no Learning->Collector startup backfill;
+- no Learning presentation construction.
+
+Simulation opened by operator:
+- immediate lightweight Simulation render;
+- one-shot Learning runtime initialization;
+- same existing IndexedDB schemas and recovery functions;
+- final replay into the same DOM nodes;
+- no second engine, no late-DOM hydration.
+
+PROTECTED / UNCHANGED
+Market Core 38.15.11; Binance LIVE; Graphique; Target Top 5; Graph Context V7; Atlas CURRENT; fingerprint/cadence; Oracle; Bridge R13/V1.9.11; Backend V1.4.0; Scanner history; Window Manager; IndexedDB schemas/data.
+
+NO NEW
+recurring timer; observer; scheduler; WebSocket; fetch/network owner; storage owner.

@@ -1,0 +1,552 @@
+/* Agent-Crypto @erith.IA — Build 39.2.15 · Administrator Math Core Grid Background Lock
+   UI-only window layer. One stable handle; reduce keeps a visible restore bar; hide is recallable from WINDOW DECK. */
+
+:root{
+  --native-edge:rgba(205,220,232,.25);
+  --native-bg:rgba(11,15,19,.985);
+  --native-cyan:#72d8ff;
+  --native-gold:#e8c66e;
+  --native-violet:#a675ff;
+  --native-orange:#ff9969;
+  --native-green:#74e7bd;
+  --native-silver:#c8d3dc;
+}
+
+.admin-native-window-suppressed,
+.admin-native-domain-inactive{display:none!important;}
+
+.admin-native-anchor{position:relative;}
+.admin-native-tone-cyan{--native-accent:var(--native-cyan);}
+.admin-native-tone-gold{--native-accent:var(--native-gold);}
+.admin-native-tone-violet{--native-accent:var(--native-violet);}
+.admin-native-tone-orange{--native-accent:var(--native-orange);}
+.admin-native-tone-green{--native-accent:var(--native-green);}
+.admin-native-tone-silver{--native-accent:var(--native-silver);}
+
+/* Version hierarchy: global Agent-Crypto build is primary; Classic build is an engine component. */
+.admin-engine-badge{
+  border-color:rgba(200,211,220,.24)!important;
+  background:linear-gradient(180deg,rgba(214,224,232,.10),rgba(15,20,25,.58))!important;
+  color:#cdd7de!important;
+  font-size:10px!important;
+  letter-spacing:.035em;
+}
+.administrator-mirror-identity{margin-top:7px!important;}
+
+/* Controls attach to native panels only. Compact direct chrome, always reachable.
+   No dropdown, no hover-only disappearance: five stable actions with generous hit targets. */
+.admin-native-control-host{position:relative;}
+.admin-native-controls{
+  position:absolute;
+  top:8px;
+  right:10px;
+  z-index:2147481200;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:2px;
+  min-height:34px;
+  padding:4px 5px 4px 8px;
+  border-radius:10px;
+  background:linear-gradient(90deg,rgba(8,12,16,.12),rgba(13,18,22,.80));
+  box-shadow:0 8px 22px rgba(0,0,0,.18);
+  backdrop-filter:blur(8px) saturate(105%);
+  opacity:.78;
+  pointer-events:auto;
+  transition:opacity .12s ease,background .12s ease,box-shadow .12s ease;
+}
+.admin-native-controls:hover,
+.admin-native-controls:focus-within{
+  opacity:1;
+  background:linear-gradient(90deg,rgba(8,12,16,.20),rgba(13,18,22,.94));
+  box-shadow:0 10px 26px rgba(0,0,0,.30);
+}
+.admin-native-controls .admin-native-control{
+  width:27px!important;
+  height:27px!important;
+  min-width:27px!important;
+  min-height:27px!important;
+  padding:0!important;
+  display:grid!important;
+  place-items:center!important;
+  border:1px solid rgba(215,226,234,.20)!important;
+  border-radius:7px!important;
+  background:linear-gradient(180deg,rgba(36,47,55,.88),rgba(6,11,15,.94))!important;
+  color:#dce7ee!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.055)!important;
+  font:900 10px/1 ui-monospace,SFMono-Regular,Consolas,monospace!important;
+  cursor:pointer!important;
+  touch-action:none;
+}
+.admin-native-controls .admin-native-control:hover,
+.admin-native-controls .admin-native-control:focus-visible{
+  border-color:color-mix(in srgb,var(--native-accent,#72d8ff) 64%,rgba(215,226,234,.22))!important;
+  color:#fff!important;
+  box-shadow:0 0 15px color-mix(in srgb,var(--native-accent,#72d8ff) 14%,transparent)!important;
+  outline:none!important;
+}
+.admin-native-controls .admin-native-move{
+  color:#bfeeff!important;
+  border-color:rgba(114,216,255,.30)!important;
+}
+body.admin-native-free .admin-native-move{cursor:grab!important;}
+body.admin-native-dragging .admin-native-move{cursor:grabbing!important;}
+.admin-native-controls .admin-native-hide:hover,
+.admin-native-controls .admin-native-hide:focus-visible{
+  color:#ffd5c2!important;
+  border-color:rgba(255,143,94,.48)!important;
+  box-shadow:0 0 15px rgba(255,127,74,.11)!important;
+}
+
+/* Native control placement tuned for the actual cockpit. */
+#analyste.admin-native-anchor > .admin-native-controls{top:8px;right:9px;}
+#math.score-panel.admin-native-anchor > .admin-native-controls{
+  position:absolute!important;
+  top:auto!important;
+  right:8px!important;
+  bottom:8px!important;
+  left:auto!important;
+  transform:none!important;
+  z-index:2147481200!important;
+}
+#marketSnapshotPanel > .admin-native-controls,
+#atlasMetalsMarketSnapshot > .admin-native-controls{top:8px;right:10px;}
+.top5-ribbon > .admin-native-controls,
+.atlas-metals-target-ribbon > .admin-native-controls,
+.market-flow-ribbon > .admin-native-controls,
+.atlas-metals-flow-ribbon > .admin-native-controls{top:7px;right:8px;}
+.top5-ribbon > .admin-native-controls .admin-native-control,
+.atlas-metals-target-ribbon > .admin-native-controls .admin-native-control,
+.market-flow-ribbon > .admin-native-controls .admin-native-control,
+.atlas-metals-flow-ribbon > .admin-native-controls .admin-native-control{width:26px!important;height:26px!important;min-width:26px!important;min-height:26px!important;font-size:9px!important;}
+.atlas-layout-family.admin-native-anchor > .admin-native-controls{top:50%;right:16px;transform:translateY(-50%);}
+#missions-vie.admin-native-anchor > .admin-native-controls{top:14px;right:16px;}
+
+details.admin-native-anchor > summary{position:relative;}
+details.admin-native-anchor > summary .admin-native-controls{top:50%;right:8px;transform:translateY(-50%);}
+
+/* Minimize = compact visible bar. Hide = fully absent and recalled via WINDOW DECK. */
+.admin-native-minibar{
+  min-height:44px;
+  margin:8px 6px;
+  padding:7px 8px 7px 14px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto 32px;
+  align-items:center;
+  gap:7px;
+  border:1px solid color-mix(in srgb,var(--native-accent,#72d8ff) 34%,rgba(205,220,232,.18));
+  border-radius:10px;
+  background:linear-gradient(100deg,color-mix(in srgb,var(--native-accent,#72d8ff) 10%,rgba(28,34,39,.98)),rgba(10,14,18,.98) 58%,rgba(28,33,38,.98));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 8px 22px rgba(0,0,0,.24);
+}
+.admin-native-minibar-title{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:#e7edf1;
+  font:900 12px/1.15 Inter,ui-sans-serif,system-ui,sans-serif;
+}
+.admin-native-minibar .admin-native-control{width:auto!important;min-width:34px;height:28px!important;padding:0 10px!important;}
+.admin-native-minibar-restore{color:#c8f2ff!important;border-color:rgba(114,216,255,.32)!important;}
+.admin-native-minibar-hide{color:#d8c8c0!important;justify-self:end!important;width:30px!important;min-width:30px!important;padding:0!important;}
+
+/* Reduced windows keep one compact restore bar. Hidden windows leave the cockpit and remain recallable from WINDOW DECK. */
+
+
+.admin-native-control{
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(215,226,234,.20)!important;
+  border-radius:7px!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(0,0,0,.20))!important;
+  color:#dce5eb!important;
+  font:800 12px/1 ui-monospace,SFMono-Regular,Consolas,monospace!important;
+  cursor:pointer;
+}
+.admin-native-control:hover{
+  border-color:color-mix(in srgb,var(--native-accent,#72d8ff) 62%,rgba(215,226,234,.20))!important;
+  color:#f0fbff!important;
+}
+
+/* Floating shell is created only when a multi-node window is detached. It contains the real DOM nodes, never clones. */
+.admin-native-floating-shell{
+  position:fixed!important;
+  z-index:2147481800;
+  min-width:min(420px,calc(100vw - 24px));
+  min-height:90px;
+  max-width:calc(100vw - 24px);
+  max-height:calc(100vh - 24px);
+  overflow:auto;
+  resize:both;
+  padding:8px;
+  border:1px solid color-mix(in srgb,var(--native-accent,#72d8ff) 42%,rgba(205,220,232,.18));
+  border-radius:15px;
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.012) 0,rgba(255,255,255,.012) 1px,rgba(0,0,0,.018) 1px,rgba(0,0,0,.018) 3px),
+    linear-gradient(145deg,rgba(40,47,53,.99),var(--native-bg) 44%,rgba(20,25,30,.99));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 38px 130px rgba(0,0,0,.76),0 0 0 1px color-mix(in srgb,var(--native-accent,#72d8ff) 12%,transparent);
+  backdrop-filter:blur(18px) saturate(108%);
+}
+
+.admin-native-floating-titlebar{
+  position:sticky;
+  top:0;
+  z-index:2147482500;
+  min-height:42px;
+  margin:-2px -2px 8px;
+  padding:0 184px 0 12px;
+  display:flex;
+  align-items:center;
+  border:1px solid rgba(215,226,234,.16);
+  border-radius:10px;
+  background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(7,11,15,.90));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 8px 22px rgba(0,0,0,.22);
+  backdrop-filter:blur(12px);
+}
+.admin-native-floating-title{
+  min-width:0;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  color:#eef2f4;
+  font:900 12px/1.1 Inter,ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:.045em;
+}
+.admin-native-floating-titlebar > .admin-native-controls{
+  top:50%!important;
+  right:7px!important;
+  transform:translateY(-50%)!important;
+  opacity:1!important;
+}
+/* Once a real panel is detached, only the floating chrome remains visible. */
+.admin-native-floating-shell .admin-native-controls-native{display:none!important;}
+.admin-native-floating-shell .admin-native-controls-floating{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+}
+.admin-native-floating-shell > [data-admin-native-window]{margin-left:0!important;margin-right:0!important;}
+/* Single complex workspaces stay in their original DOM parent while floating.
+   This is critical for Graphique/Lecture and the domain-moving Math Core. */
+.admin-native-direct-floating{
+  position:fixed!important;
+  z-index:2147481800;
+  margin:0!important;
+  min-width:min(420px,calc(100vw - 24px))!important;
+  min-height:90px;
+  max-width:calc(100vw - 24px)!important;
+  max-height:calc(100vh - 24px)!important;
+  overflow:auto!important;
+  resize:both;
+  border:1px solid color-mix(in srgb,var(--native-accent,#72d8ff) 42%,rgba(205,220,232,.18))!important;
+  box-shadow:0 38px 130px rgba(0,0,0,.76),0 0 0 1px color-mix(in srgb,var(--native-accent,#72d8ff) 12%,transparent)!important;
+  backdrop-filter:blur(18px) saturate(108%);
+}
+
+
+/* Math Core Administrator polish: docked Classic behavior is untouched.
+   When detached it opens as a medium right-side instrument; maximize remains explicit. */
+#math.admin-native-direct-floating:not(.admin-native-maximized){
+  min-width:min(520px,calc(100vw - 24px))!important;
+  /* The window manager already writes the operator's real Math Core width
+     inline. Do not cap it at 760px: that cap was clipping the host background
+     while the native top-grid content continued to the right. */
+  max-width:calc(100vw - 24px)!important;
+}
+
+.admin-native-maximized{
+  resize:none!important;
+  max-width:none!important;
+  max-height:none!important;
+  overflow:auto!important;
+}
+.admin-native-moving{opacity:.94;box-shadow:0 44px 145px rgba(0,0,0,.82),0 0 0 1px color-mix(in srgb,var(--native-accent,#72d8ff) 34%,transparent)!important;}
+/* 40.1.30 — placeholder contract:
+   only non-reserved markers collapse to 0px.
+   Reserved markers keep the exact inline footprint measured before detachment. */
+.admin-native-placeholder:not([data-admin-native-placeholder-reserved="1"]){
+  height:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+}
+.admin-native-placeholder[data-admin-native-placeholder-reserved="1"]{
+  display:block!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  box-sizing:border-box!important;
+  padding:0!important;
+  border:0!important;
+}
+
+/* When Math Core leaves the crypto grid, Market Snapshot uses the available width.
+   Same principle if the Market Snapshot is removed and Math Core stays docked. */
+#marketWorkspaceGrid:has(#math.admin-native-direct-floating),
+#marketWorkspaceGrid:has(#math.admin-native-window-suppressed){grid-template-columns:minmax(0,1fr)!important;}
+#marketWorkspaceGrid:has(#math.admin-native-direct-floating) #marketSnapshotPanel,
+#marketWorkspaceGrid:has(#math.admin-native-window-suppressed) #marketSnapshotPanel{grid-column:1/-1!important;}
+
+@keyframes admin-native-focus-pulse{
+  0%{box-shadow:0 0 0 1px rgba(114,216,255,.03),0 0 0 rgba(114,216,255,0)}
+  35%{box-shadow:0 0 0 2px rgba(114,216,255,.42),0 0 38px rgba(114,216,255,.18)}
+  100%{box-shadow:0 0 0 1px rgba(114,216,255,.03),0 0 0 rgba(114,216,255,0)}
+}
+.admin-native-focus-pulse{animation:admin-native-focus-pulse .72s ease-out;}
+
+/* Window Deck: operational units only. */
+.admin-window-deck{
+  position:fixed;
+  right:14px;
+  bottom:62px;
+  z-index:2147483000;
+  width:min(540px,calc(100vw - 28px));
+  max-height:min(68vh,720px);
+  overflow:hidden;
+  border:1px solid rgba(215,225,235,.30);
+  border-radius:12px;
+  background:linear-gradient(155deg,rgba(46,53,60,.985),rgba(14,18,22,.99) 46%,rgba(27,32,37,.985));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.11),0 30px 90px rgba(0,0,0,.70);
+  backdrop-filter:blur(20px) saturate(110%);
+  color:#dce4ea;
+}
+.admin-window-deck[hidden]{display:none!important;}
+.admin-window-deck-head{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:8px;min-height:44px;padding:8px 10px 8px 13px;border-bottom:1px solid rgba(215,225,235,.15);background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(0,0,0,.12));letter-spacing:.12em;font:900 10px/1 Inter,ui-sans-serif,system-ui,sans-serif;}
+.admin-window-deck-count{min-width:26px;padding:4px 7px;border:1px solid rgba(114,216,255,.30);border-radius:999px;color:#bcefff;text-align:center;}
+.admin-window-deck-list{max-height:calc(min(68vh,720px) - 45px);overflow:auto;padding:7px;}
+.admin-window-deck-row{display:grid;grid-template-columns:minmax(0,1fr) 62px 28px 28px 28px 28px;align-items:center;gap:5px;min-height:40px;padding:4px 5px 4px 9px;border:1px solid transparent;border-radius:8px;}
+.admin-window-deck-row:hover{border-color:rgba(114,216,255,.15);background:rgba(114,216,255,.035);}
+.admin-window-deck-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#dce4e9;font:750 11px/1.2 Inter,ui-sans-serif,system-ui,sans-serif;}
+.admin-window-deck-state{color:#8fa4b3;font:850 8px/1 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.08em;text-align:right;}
+.admin-window-deck .admin-native-control{width:27px!important;height:25px!important;}
+
+.admin-mirror-bar-39-2-8{gap:5px;}
+.admin-mirror-bar-39-2-8 .admin-window-deck-toggle b,
+.admin-mirror-bar-39-2-8 .admin-mirror-brand b{color:#bcefff;font-weight:950;}
+
+@media (max-width:900px){
+  .admin-native-controls{opacity:1;}
+  .admin-native-floating-shell,.admin-native-direct-floating{min-width:calc(100vw - 24px)!important;}
+  .admin-window-deck{left:8px;right:8px;bottom:104px;width:auto;max-height:60vh;}
+  .admin-window-deck-list{max-height:calc(60vh - 45px);}
+  .admin-window-deck-row{grid-template-columns:minmax(0,1fr) 48px 28px 28px 28px 28px;}
+}
+
+
+/* ============================================================================
+   BUILD 39.2.11 — GHOST DOCK LOCK
+   Visual polish only: controls stay in the exact same position and keep the
+   same hit targets/semantics. At rest they recede into the metal; hovering the
+   parent operational window reveals them, direct hover gives full contrast.
+   ============================================================================ */
+.admin-native-controls{
+  opacity:.16;
+  background:linear-gradient(90deg,rgba(8,12,16,.015),rgba(13,18,22,.16));
+  box-shadow:none;
+  backdrop-filter:blur(5px) saturate(102%);
+  transition:opacity .14s ease,background .14s ease,box-shadow .14s ease;
+}
+.admin-native-controls .admin-native-control{
+  border-color:rgba(215,226,234,.10)!important;
+  background:linear-gradient(180deg,rgba(36,47,55,.30),rgba(6,11,15,.38))!important;
+  color:rgba(220,231,238,.58)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025)!important;
+}
+.admin-native-control-host:hover > .admin-native-controls,
+.admin-native-control-host:focus-within > .admin-native-controls,
+.admin-native-controls:hover,
+.admin-native-controls:focus-within{
+  opacity:.82;
+  background:linear-gradient(90deg,rgba(8,12,16,.10),rgba(13,18,22,.62));
+  box-shadow:0 8px 22px rgba(0,0,0,.16);
+}
+.admin-native-control-host:hover > .admin-native-controls .admin-native-control,
+.admin-native-control-host:focus-within > .admin-native-controls .admin-native-control{
+  border-color:rgba(215,226,234,.17)!important;
+  background:linear-gradient(180deg,rgba(36,47,55,.66),rgba(6,11,15,.76))!important;
+  color:rgba(232,241,246,.88)!important;
+}
+.admin-native-controls:hover,
+.admin-native-controls:focus-within{
+  opacity:1;
+  background:linear-gradient(90deg,rgba(8,12,16,.17),rgba(13,18,22,.88));
+  box-shadow:0 10px 26px rgba(0,0,0,.26);
+}
+.admin-native-controls:hover .admin-native-control,
+.admin-native-controls:focus-within .admin-native-control{
+  color:#eaf3f8!important;
+}
+
+/* The narrow live ribbons were the visually busiest areas: quieter at rest,
+   but the whole ribbon remains the reveal zone so the controls are easy to find. */
+.top5-ribbon > .admin-native-controls,
+.atlas-metals-target-ribbon > .admin-native-controls,
+.market-flow-ribbon > .admin-native-controls,
+.atlas-metals-flow-ribbon > .admin-native-controls{
+  opacity:.09;
+  background:linear-gradient(90deg,transparent,rgba(13,18,22,.10));
+}
+.top5-ribbon:hover > .admin-native-controls,
+.atlas-metals-target-ribbon:hover > .admin-native-controls,
+.market-flow-ribbon:hover > .admin-native-controls,
+.atlas-metals-flow-ribbon:hover > .admin-native-controls{
+  opacity:.72;
+}
+
+/* Market/Graph chrome should be known to exist without sitting on top of data. */
+#analyste.admin-native-anchor > .admin-native-controls,
+#marketSnapshotPanel > .admin-native-controls,
+#atlasMetalsMarketSnapshot > .admin-native-controls{
+  opacity:.12;
+}
+#analyste.admin-native-anchor:hover > .admin-native-controls,
+#marketSnapshotPanel:hover > .admin-native-controls,
+#atlasMetalsMarketSnapshot:hover > .admin-native-controls{
+  opacity:.78;
+}
+
+/* Reduced bars keep their title readable but the metal/chrome recedes until
+   the operator points at the bar. No layout shift, no semantic change. */
+.admin-native-minibar{
+  border-color:color-mix(in srgb,var(--native-accent,#72d8ff) 18%,rgba(205,220,232,.12));
+  background:linear-gradient(100deg,color-mix(in srgb,var(--native-accent,#72d8ff) 4%,rgba(28,34,39,.58)),rgba(10,14,18,.58) 58%,rgba(28,33,38,.60));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 5px 15px rgba(0,0,0,.12);
+  transition:background .14s ease,border-color .14s ease,box-shadow .14s ease;
+}
+.admin-native-minibar .admin-native-control{opacity:.34;transition:opacity .14s ease,border-color .14s ease,background .14s ease;}
+.admin-native-minibar:hover,
+.admin-native-minibar:focus-within{
+  border-color:color-mix(in srgb,var(--native-accent,#72d8ff) 32%,rgba(205,220,232,.18));
+  background:linear-gradient(100deg,color-mix(in srgb,var(--native-accent,#72d8ff) 8%,rgba(28,34,39,.90)),rgba(10,14,18,.90) 58%,rgba(28,33,38,.90));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 7px 20px rgba(0,0,0,.20);
+}
+.admin-native-minibar:hover .admin-native-control,
+.admin-native-minibar:focus-within .admin-native-control{opacity:.88;}
+.admin-native-minibar .admin-native-control:hover,
+.admin-native-minibar .admin-native-control:focus-visible{opacity:1;}
+
+/* Touch layouts cannot rely on hover: keep controls explicit there. */
+@media (hover:none),(pointer:coarse){
+  .admin-native-controls,
+  .top5-ribbon > .admin-native-controls,
+  .atlas-metals-target-ribbon > .admin-native-controls,
+  .market-flow-ribbon > .admin-native-controls,
+  .atlas-metals-flow-ribbon > .admin-native-controls,
+  #analyste.admin-native-anchor > .admin-native-controls,
+  #marketSnapshotPanel > .admin-native-controls,
+  #atlasMetalsMarketSnapshot > .admin-native-controls{opacity:.88;}
+  .admin-native-minibar .admin-native-control{opacity:.88;}
+}
+
+
+/* ============================================================================
+   BUILD 39.2.11 — GHOST DOCK LOCK
+   Visual-only polish for the global bottom Administrator dock.
+   The dock remains fully interactive and fixed in place, but becomes almost
+   ghosted at rest; parent hover/focus reveals it, direct button hover is crisp.
+   No window semantics, business runtime or hit target is changed.
+   ============================================================================ */
+.admin-mirror-bar.admin-mirror-bar-39-2-8{
+  opacity:.15;
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.004) 0,rgba(255,255,255,.004) 1px,rgba(0,0,0,.006) 1px,rgba(0,0,0,.006) 3px),
+    linear-gradient(180deg,rgba(47,54,62,.24),rgba(15,19,23,.22));
+  border-color:rgba(215,225,235,.08);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 8px 20px rgba(0,0,0,.10);
+  backdrop-filter:blur(10px) saturate(102%);
+  transition:opacity .16s ease,background .16s ease,border-color .16s ease,box-shadow .16s ease,backdrop-filter .16s ease;
+  pointer-events:auto;
+}
+.admin-mirror-bar.admin-mirror-bar-39-2-8 .admin-mirror-brand{
+  color:rgba(238,242,245,.50);
+  transition:color .16s ease;
+}
+.admin-mirror-bar.admin-mirror-bar-39-2-8 .admin-mirror-brand b,
+.admin-mirror-bar.admin-mirror-bar-39-2-8 .admin-window-deck-toggle b{
+  color:rgba(188,239,255,.60);
+}
+.admin-mirror-bar.admin-mirror-bar-39-2-8 button,
+.admin-mirror-bar.admin-mirror-bar-39-2-8 a{
+  border-color:rgba(215,225,235,.08);
+  background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(0,0,0,.055));
+  color:rgba(220,227,232,.56);
+  box-shadow:none;
+  transition:color .12s ease,border-color .12s ease,background .12s ease,box-shadow .12s ease;
+}
+.admin-mirror-bar.admin-mirror-bar-39-2-8:hover,
+.admin-mirror-bar.admin-mirror-bar-39-2-8:focus-within{
+  opacity:.72;
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.010) 0,rgba(255,255,255,.010) 1px,rgba(0,0,0,.014) 1px,rgba(0,0,0,.014) 3px),
+    linear-gradient(180deg,rgba(47,54,62,.76),rgba(15,19,23,.78));
+  border-color:rgba(215,225,235,.21);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 12px 30px rgba(0,0,0,.34);
+  backdrop-filter:blur(15px) saturate(106%);
+}
+.admin-mirror-bar.admin-mirror-bar-39-2-8:hover .admin-mirror-brand,
+.admin-mirror-bar.admin-mirror-bar-39-2-8:focus-within .admin-mirror-brand{
+  color:rgba(238,242,245,.90);
+}
+.admin-mirror-bar.admin-mirror-bar-39-2-8 button:hover,
+.admin-mirror-bar.admin-mirror-bar-39-2-8 button:focus-visible,
+.admin-mirror-bar.admin-mirror-bar-39-2-8 a:hover,
+.admin-mirror-bar.admin-mirror-bar-39-2-8 a:focus-visible{
+  color:#f3f8fb;
+  border-color:rgba(114,216,255,.42);
+  background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(0,0,0,.20));
+  box-shadow:0 0 16px rgba(114,216,255,.08);
+  outline:none;
+}
+/* The currently active layout control stays only slightly more legible at rest. */
+.admin-mirror-bar.admin-mirror-bar-39-2-8 [data-admin-layout-toggle][aria-pressed="true"]{
+  color:rgba(191,238,255,.72);
+  border-color:rgba(114,216,255,.17);
+}
+.admin-mirror-bar.admin-mirror-bar-39-2-8:hover [data-admin-layout-toggle][aria-pressed="true"],
+.admin-mirror-bar.admin-mirror-bar-39-2-8:focus-within [data-admin-layout-toggle][aria-pressed="true"]{
+  color:#bfeeff;
+  border-color:rgba(114,216,255,.46);
+}
+/* Touch cannot rely on hover: keep the global dock explicit. */
+@media (hover:none),(pointer:coarse){
+  .admin-mirror-bar.admin-mirror-bar-39-2-8{opacity:.78;}
+}
+
+
+/* ============================================================================
+   BUILD 39.2.11 — WORKSPACE FREEDOM LOCK
+   Final window-polish candidate: the operator shows only the surfaces needed for
+   the current task, while hidden/minimized surfaces keep their business runtime.
+   Math Core keeps Classic dock behavior; Administrator chrome is pinned to the
+   panel's far-right lower edge so no orphan close control can fall to the left.
+   ============================================================================ */
+#math.score-panel.admin-native-anchor > .admin-native-controls{
+  position:absolute!important;
+  top:auto!important;
+  right:8px!important;
+  bottom:8px!important;
+  left:auto!important;
+  margin:0!important;
+  transform:none!important;
+  z-index:2147481200!important;
+}
+#math.score-panel.admin-native-anchor{padding-bottom:max(12px,var(--math-admin-bottom-reserve,12px));}
+
+/* ============================================================================
+   BUILD 39.2.17 — MATH CORE HOST WIDTH FIT LOCK
+   Direct functional base: validated 39.2.11. 39.2.12–39.2.16 are not used
+   as Math Core background bases.
+
+   Scope: one CSS constraint only. The floating Math Core already receives its
+   real width as an inline geometry value from the existing Administrator window
+   manager. The old 760px !important max-width was overriding that real width,
+   so the #math host/background stopped while native top-grid content continued.
+
+   39.2.17 removes only that 760px ceiling. The existing #math background, border
+   and atmospheric ::after layer therefore follow the same real host width.
+   No extra backdrop, pseudo background, observer, DOM clone or geometry engine
+   is introduced.
+   ============================================================================ */

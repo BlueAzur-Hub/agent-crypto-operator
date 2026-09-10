@@ -1,0 +1,260 @@
+{
+  "schema": "agent_crypto_market_asset_registry_v1",
+  "version": "1.1.0",
+  "published_at": "2026-08-03T20:55:00Z",
+  "domain": "metals",
+  "purpose": "Canonical identity, family, instrument and unit metadata. No quote or fabricated numeric value is stored here.",
+  "defaults": {
+    "currency": "USD",
+    "quote_state": "adapter_required",
+    "data_state": "source_disconnected",
+    "display_null": "—"
+  },
+  "families": [
+    {
+      "id": "monetary",
+      "label": "Précieux monétaire",
+      "filter": "monetary"
+    },
+    {
+      "id": "monetary-industrial",
+      "label": "Précieux monétaire et industriel",
+      "filter": "monetary"
+    },
+    {
+      "id": "precious-industrial",
+      "label": "Précieux industriel",
+      "filter": "precious-industrial"
+    },
+    {
+      "id": "industrial",
+      "label": "Industriel",
+      "filter": "industrial"
+    }
+  ],
+  "assets": [
+    {
+      "id": "gold",
+      "name": "Or",
+      "symbol": "XAU",
+      "family_id": "monetary",
+      "family_label": "Précieux monétaire",
+      "asset_class": "precious_metal",
+      "default_currency": "USD",
+      "default_unit": "troy_ounce",
+      "display_unit": "USD / once troy",
+      "unit_state": "qualified",
+      "instrument_candidates": [
+        {
+          "symbol": "XAU/USD",
+          "instrument_type": "spot_aggregate_candidate",
+          "unit": "troy_ounce"
+        },
+        {
+          "symbol": "GC",
+          "instrument_type": "future_candidate",
+          "unit": "contract_defined"
+        }
+      ],
+      "quote_source_candidates": [
+        "alpha_vantage",
+        "twelve_data",
+        "api_ninjas",
+        "lbma",
+        "cme"
+      ],
+      "structural_source_candidates": [
+        "usgs",
+        "world_bank",
+        "fred"
+      ],
+      "periods": [
+        "24h",
+        "7d",
+        "30d",
+        "90d",
+        "1y"
+      ]
+    },
+    {
+      "id": "silver",
+      "name": "Argent",
+      "symbol": "XAG",
+      "family_id": "monetary-industrial",
+      "family_label": "Précieux monétaire et industriel",
+      "asset_class": "precious_metal",
+      "default_currency": "USD",
+      "default_unit": "troy_ounce",
+      "display_unit": "USD / once troy",
+      "unit_state": "qualified",
+      "instrument_candidates": [
+        {
+          "symbol": "XAG/USD",
+          "instrument_type": "spot_aggregate_candidate",
+          "unit": "troy_ounce"
+        },
+        {
+          "symbol": "SI",
+          "instrument_type": "future_candidate",
+          "unit": "contract_defined"
+        }
+      ],
+      "quote_source_candidates": [
+        "alpha_vantage",
+        "twelve_data",
+        "api_ninjas",
+        "lbma",
+        "cme"
+      ],
+      "structural_source_candidates": [
+        "usgs",
+        "world_bank",
+        "fred"
+      ],
+      "periods": [
+        "24h",
+        "7d",
+        "30d",
+        "90d",
+        "1y"
+      ]
+    },
+    {
+      "id": "platinum",
+      "name": "Platine",
+      "symbol": "XPT",
+      "family_id": "precious-industrial",
+      "family_label": "Précieux industriel",
+      "asset_class": "precious_metal",
+      "default_currency": "USD",
+      "default_unit": "troy_ounce",
+      "display_unit": "USD / once troy",
+      "unit_state": "qualified",
+      "instrument_candidates": [
+        {
+          "symbol": "XPT/USD",
+          "instrument_type": "spot_aggregate_candidate",
+          "unit": "troy_ounce"
+        },
+        {
+          "symbol": "PL",
+          "instrument_type": "future_candidate",
+          "unit": "contract_defined"
+        }
+      ],
+      "quote_source_candidates": [
+        "twelve_data",
+        "api_ninjas",
+        "lbma",
+        "cme"
+      ],
+      "structural_source_candidates": [
+        "usgs",
+        "iea",
+        "rmis"
+      ],
+      "periods": [
+        "24h",
+        "7d",
+        "30d",
+        "90d",
+        "1y"
+      ]
+    },
+    {
+      "id": "palladium",
+      "name": "Palladium",
+      "symbol": "XPD",
+      "family_id": "precious-industrial",
+      "family_label": "Précieux industriel",
+      "asset_class": "precious_metal",
+      "default_currency": "USD",
+      "default_unit": "troy_ounce",
+      "display_unit": "USD / once troy",
+      "unit_state": "qualified",
+      "instrument_candidates": [
+        {
+          "symbol": "XPD/USD",
+          "instrument_type": "spot_aggregate_candidate",
+          "unit": "troy_ounce"
+        },
+        {
+          "symbol": "PA",
+          "instrument_type": "future_candidate",
+          "unit": "contract_defined"
+        }
+      ],
+      "quote_source_candidates": [
+        "twelve_data",
+        "api_ninjas",
+        "lbma",
+        "cme"
+      ],
+      "structural_source_candidates": [
+        "usgs",
+        "iea",
+        "rmis"
+      ],
+      "periods": [
+        "24h",
+        "7d",
+        "30d",
+        "90d",
+        "1y"
+      ]
+    },
+    {
+      "id": "copper",
+      "name": "Cuivre",
+      "symbol": "HG",
+      "family_id": "industrial",
+      "family_label": "Industriel",
+      "asset_class": "industrial_metal",
+      "default_currency": "USD",
+      "default_unit": "pound",
+      "display_unit": "USD / livre",
+      "unit_state": "qualified_for_selected_source",
+      "instrument_candidates": [
+        {
+          "symbol": "HG",
+          "instrument_type": "future_candidate",
+          "unit": "pound",
+          "market": "COMEX"
+        },
+        {
+          "symbol": "LME Copper",
+          "instrument_type": "official_market_candidate",
+          "unit": "metric_ton",
+          "market": "LME"
+        }
+      ],
+      "quote_source_candidates": [
+        "gold_api",
+        "yahoo_finance",
+        "cme",
+        "lme"
+      ],
+      "structural_source_candidates": [
+        "usgs",
+        "iea",
+        "rmis",
+        "world_bank",
+        "fred"
+      ],
+      "periods": [
+        "24h",
+        "7d",
+        "30d",
+        "90d",
+        "1y"
+      ],
+      "selected_instrument": {
+        "symbol": "HG",
+        "provider_symbol": "HG=F",
+        "instrument_type": "future_continuous",
+        "unit": "pound",
+        "market": "COMEX"
+      }
+    }
+  ]
+}

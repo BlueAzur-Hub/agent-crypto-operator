@@ -1,0 +1,12 @@
+{
+  "schema": "agent_crypto_cross_historical_depth_status_v1",
+  "build": "40.4.202",
+  "status": "ready",
+  "horizons": [
+    "5a",
+    "10a",
+    "max"
+  ],
+  "lazy_browser_load_required": true,
+  "generated_at": "2026-09-03T04:49:16.065885Z"
+}

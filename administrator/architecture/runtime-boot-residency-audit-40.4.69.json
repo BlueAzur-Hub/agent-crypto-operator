@@ -1,0 +1,72 @@
+{
+  "schema": "agent_crypto_runtime_boot_residency_audit_v4",
+  "build": "40.4.69",
+  "parent_build": "40.4.68",
+  "state": "candidate_requires_firefox_operator_validation",
+  "operator_evidence": {
+    "40.4.68_result": "severe Firefox interaction/scroll latency after Atlas materialization; grey paint gaps and button delays reproduced by operator",
+    "cpu_gpu_note": "operator observed near-zero CPU/GPU while Firefox UI was unresponsive; treated as presentation/event/layout stall evidence, not proof of compute saturation"
+  },
+  "migration_completion": {
+    "atlas_boot": "family header + five first-level disclosure shells only",
+    "local_ai_first_open": "operational core only; heavy secondary readers replaced before DOM parse",
+    "second_level_targets": [
+      "stable-stack",
+      "analytical-truth",
+      "frame-truth",
+      "current-truth",
+      "memory-market",
+      "memory-analytical",
+      "decision-board",
+      "scanner-truth",
+      "current-journal",
+      "multi-collector",
+      "book-readonly",
+      "knowledge-library"
+    ],
+    "secondary_root_state": "data-atlas-hydration-40469=placeholder until canonical inner DOM is materialized",
+    "source_fetch": "one cached views/atlas.html promise reused across first- and second-level hydration",
+    "navigation": "ensureTarget hydrates owning first-level body before accepting an existing placeholder/root; secondary target then hydrates before scroll",
+    "late_dom_rendering": "presentation signatures are not committed when target DOM is absent; hydration invalidates presentation epoch before state replay",
+    "legacy_owner_retirement": [
+      "js/views/atlas-peripheral-lazy.js",
+      "js/views/atlas-family-demand-residency.js"
+    ]
+  },
+  "static_validation": {
+    "node_check": [
+      "app.js",
+      "js/app.js",
+      "js/views/atlas-presentation.js",
+      "js/views/presentation-boundaries.js"
+    ],
+    "second_level_transform_fixture": "PASS: 12/12 roots retained as placeholder shells; 12/12 heavy fixture bodies absent from local-ai first hydration; 12/12 canonical secondary sources remain extractable",
+    "duplicate_runtime_owner_expected": false,
+    "new_recurring_timer": false,
+    "new_observer": false,
+    "new_network_owner": false,
+    "new_storage_owner": false
+  },
+  "protected": {
+    "market_core": "38.15.11 unchanged",
+    "binance_canonical_live_owner": true,
+    "current_pipeline_cadence_changed": false,
+    "oracle_changed": false,
+    "bridge_changed": false,
+    "private_backend_changed": false,
+    "source_intelligence_changed": false,
+    "history_deleted": false
+  },
+  "operator_acceptance_required": [
+    "cold boot",
+    "Aether Trust authentication",
+    "first Atlas open",
+    "AUTO/MANUEL click response",
+    "open Decision Board",
+    "open Market/Analytical Memory",
+    "open Scanner/CURRENT Journal/Multi-Collector",
+    "scroll through Atlas with disclosures opened/closed",
+    "Book Mirror visibility from Transformer Book"
+  ],
+  "stop_condition": "If 40.4.69 still produces sustained Firefox input stalls, next diagnosis must instrument long tasks/layout/event dispatch around the specific hydrated scope; do not delete history or change protected engines."
+}

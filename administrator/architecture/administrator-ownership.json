@@ -1,0 +1,881 @@
+{
+  "schema": "agent_crypto_administrator_ownership_v1",
+  "build": "40.4.99",
+  "parent_build": "40.4.98",
+  "purpose": "Final seal of the completed Administrator runtime-demand migration using cumulative real Firefox operator evidence through 40.4.96. The unpublished 40.4.97 truth-convergence candidate is absorbed into this seal; no new extraction or business/runtime behavior change.",
+  "rules": {
+    "market_core_protected": "38.15.11",
+    "runtime_truth_precedes_presentation": true,
+    "no_new_timer_observer_network_storage_owner": false,
+    "firefox_operator_runtime_is_final_authority": true,
+    "40.4.53_network_exception": "Private Backend V1 adds explicit operator-demand local HTTP ownership only; no persistent poller, observer, storage write, exchange private API or trading action."
+  },
+  "owners": [
+    {
+      "component": "Market Core / live market runtime",
+      "owner": "app.js",
+      "state": "PROTECTED",
+      "notes": "38.15.11 behavior unchanged."
+    },
+    {
+      "component": "Market Snapshot heavy table presentation",
+      "owner": "app.js::atlasMarketTableWindowSync40493 + renderMarketTable + existing Window Manager market state",
+      "state": "TRUE_DEMAND_PRESENTATION_RUNTIME_RESIDENT",
+      "resident_truth": [
+        "Market Core 38.15.11",
+        "state.coins",
+        "Binance LIVE",
+        "Graph",
+        "Target Top 5",
+        "selected market/comparison state"
+      ],
+      "notes": "40.4.93 native Market UX is canonical: the existing Window Manager is the sole visibility owner. Normal/restored shows the table; Reduce/Hide releases generated rows; Restore rematerializes current rows. Search/filter/sort/universe controls never own visibility. The rejected 40.4.92 extra Show-table control does not exist.",
+      "visibility_owner": "existing Administrator Window Manager market state",
+      "materialize_when_native_state": [
+        "normal",
+        "restored"
+      ],
+      "release_when_native_state": [
+        "reduced",
+        "hidden"
+      ],
+      "operator_controls_do_not_own_visibility": [
+        "search",
+        "filters",
+        "sort",
+        "50/100/250/500/1000 universe controls"
+      ]
+    },
+    {
+      "component": "Administrator role + canonical URL truth",
+      "owner": "app.js::atlasV2CanonicalizeAdministratorUrl",
+      "state": "CANONICAL",
+      "introduced": "40.4.37",
+      "canonicalized": "40.4.39"
+    },
+    {
+      "component": "Administrator first-click entry intent",
+      "owner": "index.html::ErithAdminEntryIntentGate40449 → app.js::atlasAdminAccountToggleAction40449",
+      "state": "CANONICAL_ONE_SHOT_HANDOFF",
+      "introduced": "40.4.49",
+      "notes": "Captures at most one trusted Administration click before the parser-blocking shared runtime binds the canonical handler, then removes the temporary capture listener. No auth/session/storage/runtime ownership."
+    },
+    {
+      "component": "Administrator Window Manager",
+      "owner": "js/core/admin-window-manager.js",
+      "state": "PROTECTED_CANONICAL",
+      "notes": "40.4.39 does not modify manager behavior."
+    },
+    {
+      "component": "Administrator Atlas primary family visibility",
+      "owner": "js/app.js::ensureAdministratorAtlasVisible",
+      "state": "CANONICAL",
+      "introduced": "40.4.36",
+      "canonicalized": "40.4.39"
+    },
+    {
+      "component": "Presentation boundary registry",
+      "owner": "js/views/presentation-boundaries.js",
+      "state": "CANONICAL"
+    },
+    {
+      "component": "Projects presentation",
+      "owner": "js/views/projects-presentation.js + views/projects.html",
+      "state": "TRUE_LAZY_COMPLETE_CANONICAL_SINGLE_OWNER",
+      "notes": "40.4.89 retires the redundant projects-demand-residency parser owner; canonical shell + demand hydration remain owned by projects-presentation.js."
+    },
+    {
+      "component": "Operations presentation",
+      "owner": "js/views/operations-presentation.js + views/operations.html",
+      "state": "TRUE_LAZY_COMPLETE_CANONICAL_SINGLE_OWNER",
+      "notes": "40.4.89 retires the redundant operations-demand-residency parser owner; canonical shell + demand hydration remain owned by operations-presentation.js."
+    },
+    {
+      "component": "System peripheral presentation",
+      "owner": "js/views/system-presentation.js + views/system.html",
+      "state": "TRUE_LAZY_COMPLETE",
+      "protected_resident": [
+        "Storage Health",
+        "Grey Plate Forensic",
+        "Simulation runtime"
+      ],
+      "notes": "40.4.89 leaves Commandes/Backend/Safety/Physical Security true-lazy under system-presentation.js; Storage/Grey remain resident; Simulation retains the generic same-node closed-body residency owner."
+    },
+    {
+      "component": "System Simulation generic closed-body residency",
+      "owner": "js/views/system-demand-residency.js",
+      "state": "RESIDENT_PROTECTED_GENERIC_SIMULATION_ONLY",
+      "selectors": [
+        "details[data-collapse-key=\"simulation\"]"
+      ],
+      "notes": "40.4.89 consolidation: Commandes/Backend/Safety/Physical Security are excluded from the generic lifecycle because system-presentation.js already owns their true-lazy bodies. Storage Health and Grey Plate Forensic remain parser-mounted resident protected nodes."
+    },
+    {
+      "component": "Atlas presentation",
+      "owner": "js/views/atlas-presentation.js",
+      "state": "CANONICAL"
+    },
+    {
+      "component": "Atlas peripheral lazy presentation",
+      "owner": "js/views/atlas-peripheral-lazy.js + views/atlas.html",
+      "state": "TRUE_LAZY_PARTIAL",
+      "covered": [
+        "Auto Reader body",
+        "Shared Memory body",
+        "GitHub Memory body",
+        "Book/Knowledge bodies",
+        "CURRENT audit heavy bodies"
+      ]
+    },
+    {
+      "component": "Atlas CURRENT pipeline",
+      "owner": "app.js shared runtime + IndexedDB truth",
+      "state": "PROTECTED",
+      "notes": "4/4 → NØX → Aerith verified; no further extraction without proof."
+    },
+    {
+      "component": "Oracle presentation",
+      "owner": "js/views/oracle-presentation.js + admin-oracle.css + views/oracle.html",
+      "state": "TRUE_LAZY_COMPLETE_CANONICAL",
+      "notes": "Canonical true-lazy Oracle presentation. Since 40.4.96, Outcome/Long-Shadow follow explicit Oracle demand or new Evidence via one coalesced one-shot; the permanent 15 s outcome interval is retired. Oracle math/Evidence semantics remain protected."
+    },
+    {
+      "component": "Learning Journey 01→11 presentation CSS",
+      "owner": "admin-learning-journey.css",
+      "state": "CANONICAL_AUTONOMOUS",
+      "notes": "40.4.48 copies the exact validated 40.4.22 rule body into the canonical stylesheet. No @import remains; the recovery filename is historical-only."
+    },
+    {
+      "component": "Learning Journey runtime / progress / IndexedDB",
+      "owner": "app.js learning engine + atlasRebindLearningRuntime (97 complete DOM refs)",
+      "state": "PROTECTED_RUNTIME_TRUE_LAZY_PREPARSE_PRESENTATION",
+      "notes": "97/97 Learning/Expert refs rebind after first demand hydration. 40.4.95 removes only the canonical Learning presentation range before DOM parsing through an instance-scoped System host gate; 40.4.47 post-parse safe detach remains fallback. No progress reset, IndexedDB schema or storage migration."
+    },
+    {
+      "component": "Firefox compositor policy",
+      "owner": "admin-firefox-compositor.css",
+      "state": "CANONICAL_MONITOR",
+      "notes": "No new optimization while Administrator remains Web-Classic-class responsive."
+    },
+    {
+      "component": "Firefox safe-paint outer surface policy",
+      "owner": "admin-firefox-safe-paint.css",
+      "state": "CANONICAL",
+      "notes": "Validated 40.3.96 outer-paint rules split from the former cumulative owner; loaded at the same late-cascade position."
+    },
+    {
+      "component": "Learning Journey presentation transport",
+      "owner": "js/views/learning-parser-gate.js → js/views/system-presentation.js → js/views/learning-presentation.js + views/system.html",
+      "state": "TRUE_LAZY_PREPARSE_DEMAND_WITH_SAFE_POST_PARSE_FALLBACK",
+      "notes": "40.4.95 keeps System 40.4.24 byte-untouched. The gate replaces only Learning 01→11 with the recovered lightweight shell before insertAdjacentHTML DOM parsing; first disclosure hydrates from views/system.html, then rebinds the protected 40.4.42 runtime. Marker mismatch falls back to 40.4.47 post-parse recovery."
+    },
+    {
+      "component": "Chronos / planetary presentation",
+      "owner": "admin-chronos.css",
+      "state": "CANONICAL",
+      "notes": "40.4.46 splits the validated Chronos/planetary rules out of the former cumulative 40.3.96 file without selector/declaration changes."
+    },
+    {
+      "component": "Offscreen paint gate legacy files",
+      "owner": "admin-offscreen-paint-gate.css + js/admin-offscreen-paint-gate.js",
+      "state": "RETIRED_TOMBSTONE",
+      "notes": "40.3.40 already retired the offscreen paint runtime from canonical execution; current index does not load either file. 40.4.46 replaces both historical implementations with inert tombstones."
+    },
+    {
+      "component": "Atlas CURRENT presentation truth after late synthesis hydration",
+      "owner": "app.js::atlasCurrentPresentationNormalizePackage4050",
+      "state": "CANONICAL_PRESENTATION_GUARD",
+      "introduced": "40.4.50",
+      "notes": "Clears stale in-memory historical presentation flag only when transaction fingerprint and consumed canonical market id both match the already-closed CURRENT. No engine/storage/Bridge/Ollama ownership."
+    },
+    {
+      "component": "Atlas CURRENT pending canonical snapshot rearm",
+      "owner": "app.js::atlasCurrentPendingAutoKick4051",
+      "state": "CANONICAL_HANDOFF_GUARD",
+      "introduced": "40.4.52",
+      "notes": "Reuses the existing single CURRENT scheduler after successful Administrator auth or Bridge-ready transition only when a qualified canonical market snapshot differs from the last closed CURRENT. Same-snapshot health checks remain status-only; no new timer/observer/network/storage owner."
+    },
+    {
+      "component": "Private Local Backend / public source matrix",
+      "owner": "public client: js/views/private-backend-sources.js + private-backend-sources.css · local companion: private_backend.py V1.3.0",
+      "state": "SOURCE_INTELLIGENCE_AUTO_READ_ONLY_ATLAS_OPTIONAL",
+      "introduced": "40.4.53",
+      "endpoint": "127.0.0.1:8790",
+      "sources": [
+        "Binance direct EUR WebSocket (primary)",
+        "Kraken Public Spot REST (control)",
+        "Coinbase Exchange public market data (control)"
+      ],
+      "notes": "40.4.58 keeps Private Backend V1.3.0 unchanged, derives Source Intelligence headlessly, refreshes it automatically at bounded startup and after each finalized CURRENT, and exposes it to Atlas only as optional read-only transport context. No polling, storage write, canonical-price promotion or direct Atlas Internet access."
+    },
+    {
+      "component": "Version awareness / GitHub Pages propagation truth",
+      "owner": "app.js atlasFetchVersionManifest + atlasVersionCheck",
+      "state": "CANONICAL_SYNC_AWARE",
+      "introduced": "40.4.55",
+      "notes": "Readable manifest with transient build/token edge mismatch is classified as GitHub propagation, not application failure. Actual remote app verification remains mandatory before update."
+    },
+    {
+      "component": "Peripheral diagnostic demand loading",
+      "owner": "js/views/peripheral-diagnostics-loader.js",
+      "state": "CANONICAL_DEMAND_ONLY_DIAGNOSTIC_LOADER",
+      "introduced": "40.4.64",
+      "targets": [
+        "js/views/residency-audit.js",
+        "js/architecture-freeze.js"
+      ],
+      "notes": "Both diagnostic modules are removed from parser-blocking boot and are loaded only by explicit operator API/event request. No recurring timer, observer, network loop, storage owner or engine mutation."
+    },
+    {
+      "component": "Closed/offscreen 1 s presentation cadence gating",
+      "owner": "app.js::newsFeedSyncCountdownTimer40464 + atlasSyncAutoCountdownTimer40464 + atlasAudienceSyncRenderTimer40464",
+      "state": "CANONICAL_PRESENTATION_ONLY_GATE",
+      "introduced": "40.4.64",
+      "notes": "Only the 1 s UI refresh cadence is stopped while its own disclosure is closed/unhydrated or the document is hidden. News data refresh, Auto Reader market pulse and Audience heartbeat remain unchanged."
+    },
+    {
+      "component": "Administrator runtime migration final seal",
+      "owner": "40.4.98 manifest + operator evidence ledger",
+      "state": "SEALED",
+      "notes": "No new runtime owner. Cumulative Firefox evidence through 40.4.96 plus runtime-neutral 40.4.97 truth convergence closes the migration. Reopen only on reproduced regression."
+    },
+    {
+      "component": "Atlas HOT-shell / cold-body presentation router",
+      "owner": "js/views/atlas-presentation.js + js/views/atlas-peripheral-lazy.js + views/atlas.html",
+      "state": "CANDIDATE_PRECOMPILED_HOT_SHELL_COLD_ROUTER",
+      "introduced": "40.4.99",
+      "notes": "Replaces the 40.4.1 full parser-blocking Atlas transport + 40.4.35 runtime preprocess interception with the exact already-stripped HOT DOM compiled at build time. Atlas cockpit/Bridge/CURRENT compact truth remains resident. Existing cold bodies hydrate from canonical views/atlas.html on explicit demand. No engine/scheduler/storage owner added."
+    }
+  ],
+  "next": {
+    "after_40_4_96": "40.4.98 is the direct final seal over published 40.4.96 and absorbs the unpublished 40.4.97 truth-only prep candidate.",
+    "after_40_4_98": "Migration closed. Protect Market Core/Graph/Top5/Atlas CURRENT/Oracle/Learning/Bridge/Backend/Window Manager. Reopen only on a concrete reproduced regression.",
+    "after_40_4_99": "If Firefox confirms parity, protect this cold-router. Do not return to whole-Atlas source-lazy hydration; the 40.4.67 branch proved that architecture unsafe. Reopen Atlas only on reproduced regression or measured owner-specific debt."
+  },
+  "migration_summary": {
+    "state": "FINAL_ADMINISTRATOR_RUNTIME_MIGRATION_SEALED_40_4_98",
+    "functional_migrations_complete": true,
+    "presentation_migrations_complete": true,
+    "runtime_performance_migration_complete": true,
+    "final_operator_seal_complete": true,
+    "legacy_runtime_owners_active": 0,
+    "legacy_css_dependencies_active": 0,
+    "protected": [
+      "Market Core 38.15.11",
+      "Graphique + Target Top 5",
+      "Atlas CURRENT pipeline",
+      "Learning runtime + IndexedDB",
+      "Oracle engine/Evidence",
+      "Bridge + Private Backend",
+      "Window Manager behavior"
+    ],
+    "monitor_only": [
+      "Firefox sustained operator responsiveness",
+      "Transformer Book operator parity",
+      "GitHub Pages propagation/cache truth",
+      "new-canonical-snapshot auth/Bridge handoff"
+    ],
+    "operator_checkpoints": {
+      "40.4.93": "functional checkpoint recovered after 40.4.89 contention failure and 40.4.92 Market UX rejection",
+      "40.4.95": "Learning first-open/progression/IndexedDB observed intact",
+      "40.4.96": "Graph/Top5 7d operator report visible after Oracle interval retirement; CURRENT/Atlas truth remains coherent in exported report"
+    },
+    "next_product_work": "Migration closed. Resume ordinary product debt only; reopen performance migration solely on a reproduced operator regression.",
+    "final_operator_evidence": {
+      "runtime_build": "40.4.96",
+      "truth_only_build": "40.4.97 (unpublished candidate absorbed)",
+      "evidence": "real Firefox operator captures/exports across Graph/Top5, Market, Atlas/CURRENT, Oracle, Learning and cross-domain navigation",
+      "slow_page_banner_reproduced_after_recovery_line": false,
+      "seal_basis": "40.4.97 was runtime-neutral truth convergence over the operator-observed 40.4.96 runtime and is absorbed into 40.4.98 without requiring a separate public hop."
+    }
+  },
+  "current_truth": {
+    "rest_ui_convergence": "40.4.52 exact canonical market-id + verified CLOSED transaction proof; no compute/reopen"
+  },
+  "dex_defi_context_wave_2_40455": {
+    "owner": "private backend 127.0.0.1:8790 + js/views/private-backend-sources.js",
+    "sources": [
+      "DEX Screener public API",
+      "GeckoTerminal public API",
+      "DefiLlama free API"
+    ],
+    "mode": "READ_ONLY_CONTEXT_ONLY",
+    "trigger": "operator_only",
+    "cache_seconds": 60,
+    "cex_primary_unchanged": "Binance",
+    "canonical_price_created": false,
+    "trading_endpoint": false,
+    "notes": "DEX symbol/pool discovery is context and never identity proof or CEX price replacement."
+  },
+  "source_intelligence_v1_40456": {
+    "owner": "js/views/private-backend-sources.js + Private Backend V1.3.0",
+    "state": "AUTO_READ_ONLY_FACT_CONTRACT_ADDRESS_PROOF_ATLAS_FILTERED",
+    "contract": "agent_crypto_source_intelligence_v3",
+    "identity_level": "CHAIN_ALIAS_PLUS_INTER_PROVIDER_ADDRESS",
+    "address_level_proof": "INTER_PROVIDER_WHEN_AVAILABLE",
+    "atlas_consumer_enabled": true,
+    "new_polling": false,
+    "storage_owner_added": false,
+    "trade_endpoint": false
+  },
+  "identity_hardening_40457": {
+    "wrong_chain_symbol_collision_rejected": true,
+    "reversed_pair_price_reuse_forbidden": true,
+    "liquidity_ratio_review_threshold": 20.0,
+    "canonical_price_created": false,
+    "financial_signal": false
+  },
+  "automation_40458": {
+    "operator_click_required": false,
+    "startup_bounded": true,
+    "current_finalized_event": true,
+    "polling": false,
+    "backend_version_unchanged": "1.3.0",
+    "atlas_context_optional_read_only": true,
+    "current_fingerprint_unchanged": true,
+    "current_cadence_unchanged": true
+  },
+  "identity_proof_40459": {
+    "backend_version": "1.4.0",
+    "proof": "INTER_PROVIDER_TOKEN_ADDRESS_MATCH",
+    "mismatch_excluded_from_atlas": true,
+    "liquidity_review_excluded_from_atlas": true,
+    "current_fingerprint_unchanged": true,
+    "current_cadence_unchanged": true,
+    "market_core": "38.15.11 PROTECTED"
+  },
+  "backend_acceptance_40460": {
+    "scope": "presentation/client transport only",
+    "owner": "js/views/private-backend-sources.js",
+    "private_backend": "V1.4.0 preserved",
+    "bridge": "R13 / V1.9.11 protected and untouched",
+    "fixes": [
+      "CEX cold-path browser timeout alignment",
+      "DEX/DeFi cold-path timeout alignment",
+      "TRUE-LAZY state replay",
+      "startup retry false-success guard"
+    ],
+    "protected": [
+      "Market Core 38.15.11",
+      "Atlas CURRENT",
+      "Oracle",
+      "IndexedDB",
+      "Window Manager",
+      "Bridge R13"
+    ]
+  },
+  "operator_interaction_priority_40461": {
+    "owner": "app.js / ErithOperatorPriority40461",
+    "scope": "Aether Trust local authentication gate + immediate post-auth paint",
+    "scanner_capture_deferred": true,
+    "scanner_flush_deferred": true,
+    "source_intelligence_automatic_deferred": true,
+    "market_core_paused": false,
+    "current_paused": false,
+    "bridge_auth_paused": false,
+    "oracle_modified": false,
+    "new_interval": false,
+    "new_observer": false,
+    "goal": "operator typing/authentication wins main-thread priority over non-critical background work"
+  },
+  "scanner_quiet_serialization_40462": {
+    "owner": "app.js · Scanner Collector persistence boundary",
+    "archive_limit": 240,
+    "pending_limit": 60,
+    "parsed_runtime_immediate": true,
+    "json_stringify_in_capture_hot_path": false,
+    "quiet_idle_serialization": true,
+    "coalesced_latest_payload_per_key": true,
+    "operator_priority_respected": true,
+    "recent_operator_activity_guard_ms": 2200,
+    "market_chart_current_busy_guard": true,
+    "storage_relief_idb_primary_preserved": true,
+    "market_core_changed": false,
+    "current_changed": false,
+    "bridge_changed": false,
+    "private_backend_changed": false,
+    "new_interval": false,
+    "new_observer": false
+  },
+  "runtime_phase2_audit_40463": {
+    "owner": "architecture/runtime-boot-residency-audit-40.4.63.json",
+    "state": "AUDIT_COMPLETE_NO_RUNTIME_EXTRACTION_YET",
+    "presentation_migration_complete": true,
+    "runtime_performance_migration_complete": false,
+    "parser_blocking_external_scripts": 29,
+    "shared_app_js_bytes_base_40462": 3068141,
+    "inline_js_bytes": 89071,
+    "stable_unchanged_asset_cache_tokens": true,
+    "protected": [
+      "Market Core 38.15.11",
+      "Atlas CURRENT 4/4 → NØX → Aerith",
+      "CURRENT fingerprint/cadence",
+      "Oracle analytical engine/Evidence",
+      "Bridge R13 / V1.9.11",
+      "Private Backend V1.4.0",
+      "IndexedDB CURRENT truth",
+      "Binance LIVE primary source"
+    ],
+    "next": "40.4.64 first true peripheral runtime extraction"
+  },
+  "runtime_phase2_wave1_40464": {
+    "owner": "app.js + js/views/peripheral-diagnostics-loader.js + index.html",
+    "state": "IMPLEMENTED_REQUIRES_FIREFOX_OPERATOR_VALIDATION",
+    "parser_blocking_diagnostics_removed": [
+      "js/views/residency-audit.js",
+      "js/architecture-freeze.js"
+    ],
+    "demand_loader": "js/views/peripheral-diagnostics-loader.js",
+    "parser_blocking_external_scripts_before": 29,
+    "parser_blocking_external_scripts_after": 28,
+    "gated_1s_presentations": [
+      "News countdown",
+      "Atlas Auto Reader countdown",
+      "Audience status renderer"
+    ],
+    "data_cadences_preserved": [
+      "News refresh",
+      "Auto Reader market pulse",
+      "Audience heartbeat"
+    ],
+    "protected": [
+      "Market Core 38.15.11",
+      "Atlas CURRENT 4/4 → NØX → Aerith",
+      "CURRENT fingerprint/cadence",
+      "Oracle analytical engine/Evidence",
+      "Bridge R13 / V1.9.11",
+      "Private Backend V1.4.0",
+      "Source Intelligence V1.3",
+      "IndexedDB CURRENT truth",
+      "Binance LIVE primary source"
+    ],
+    "new_recurring_timer": false,
+    "new_observer": false,
+    "new_network_owner": false,
+    "new_storage_owner": false,
+    "next": "40.4.66 second extraction after Firefox validation"
+  },
+  "runtime_phase2_wave2_40465": {
+    "owner": "app.js + index.html",
+    "state": "IMPLEMENTED_REQUIRES_FIREFOX_OPERATOR_VALIDATION",
+    "default_market_domain": "crypto",
+    "metals_secondary_runtime_demand_only": true,
+    "metals_boot_network_when_crypto": false,
+    "metals_demand_owners": [
+      "public market registry",
+      "metals structural registry",
+      "metals quote/history archive",
+      "metals report IndexedDB restore"
+    ],
+    "metals_restored_domain_behavior": "If persisted domain is Metals, demand runtime starts automatically after domain restoration.",
+    "celestial_closed_cadence_ms": 30000,
+    "celestial_open_cadence_ms": 1000,
+    "multi_collector_even_minute_duplicate_guard": true,
+    "ordinary_version_first_check_delay_ms": 12000,
+    "protected": [
+      "Market Core 38.15.11",
+      "Binance LIVE primary",
+      "Atlas CURRENT 4/4 → NØX → Aerith",
+      "CURRENT fingerprint/cadence",
+      "Oracle analytical engine/Evidence",
+      "Bridge R13 / V1.9.11",
+      "Private Backend V1.4.0",
+      "Source Intelligence V1.3",
+      "IndexedDB CURRENT truth"
+    ],
+    "new_recurring_timer": false,
+    "new_observer": false,
+    "new_network_owner": false,
+    "new_storage_owner": false,
+    "next": "40.4.66 cumulative migration/backend regression checkpoint and stop gate"
+  },
+  "book_mirror_post_auth_reconcile_40466": {
+    "owner": "app.js::atlasBookMirrorBridgeReconcile40466",
+    "cause": "latest Ryzen synthesis can restore before Aether Trust / Bridge authorization; 40.3.77 correctly skips publication while unauthorized but had no post-auth reconciliation",
+    "fix": "one bounded post-auth reconciliation publishes the already-resident latest synthesis through the existing restricted Bridge capability",
+    "book_fetch_owner": "app.js::atlasBookMirrorFetch36",
+    "public_mirror": "./book_mirror.json",
+    "new_timer": false,
+    "new_observer": false,
+    "new_scheduler": false,
+    "generic_github_write_added": false,
+    "book_local_generation": false,
+    "market_core_changed": false,
+    "current_changed": false,
+    "bridge_protocol_changed": false
+  },
+  "runtime_phase2_wave3_40481": {
+    "owner": "app.js + stable 40.4.66 same-node demand residency",
+    "state": "IMPLEMENTED_REQUIRES_FIREFOX_OPERATOR_VALIDATION",
+    "base": "40.4.66 GOLDEN STABLE",
+    "strategy": "keep critical DOM ownership stable; make closed presentation runtimes dormant",
+    "demand_gated_presentations": [
+      "Simulation + Learning Journey render tree",
+      "Atlas Auto Reader long presentation",
+      "GitHub Shared Memory presentation",
+      "Decision Board long historical comparison"
+    ],
+    "same_node_open_replay": true,
+    "atlas_true_source_lazy_40467_reintroduced": false,
+    "late_dom_rebind_added": false,
+    "binance_watchdog_period_ms": 5000,
+    "binance_watchdog_forces_rest_each_tick": false,
+    "rest_existing_freshness_gate_preserved": true,
+    "protected": [
+      "Market Core 38.15.11",
+      "Binance LIVE primary",
+      "Target Top 5",
+      "Graphique",
+      "Graph Context V7",
+      "Atlas CURRENT 4/4 → NØX → Aerith",
+      "CURRENT fingerprint/cadence",
+      "Oracle analytical engine/Evidence",
+      "Bridge R13 / V1.9.11",
+      "Private Backend V1.4.0",
+      "IndexedDB CURRENT/Learning",
+      "Scanner history/memory",
+      "Window Manager",
+      "40.3.51→40.3.58 internal Atlas residency"
+    ],
+    "new_recurring_timer": false,
+    "new_observer": false,
+    "new_scheduler": false,
+    "new_network_owner": false,
+    "new_storage_owner": false,
+    "indexeddb_schema_changed": false
+  },
+  "runtime_phase2_wave4_40482": {
+    "owner": "app.js::atlasLearningRuntimeDemandEnsure4082",
+    "state": "IMPLEMENTED_REQUIRES_FIREFOX_OPERATOR_VALIDATION",
+    "parent": "40.4.81",
+    "strategy": "normal Crypto cold boot does not initialize Learning/Simulation IndexedDB recovery or learning→collector reconciliation until Simulation is opened",
+    "demand_only_runtime": [
+      "Learning Notebook IndexedDB restore/recovery",
+      "legacy Learning reconciliation",
+      "Expert Roadmap reconciliation",
+      "Learning archive → Collector backfill",
+      "Simulation/Learning presentation replay"
+    ],
+    "open_at_boot_parity": "If Simulation is genuinely open via restored/direct state, the same demand initializer runs once.",
+    "protected": [
+      "Market Core 38.15.11",
+      "Binance LIVE",
+      "Target Top 5",
+      "Graphique",
+      "Graph Context V7",
+      "Atlas CURRENT 4/4 → NØX → Aerith",
+      "CURRENT fingerprint/cadence",
+      "Oracle analytical engine/Evidence",
+      "Bridge R13 / V1.9.11",
+      "Private Backend V1.4.0",
+      "IndexedDB schemas/data",
+      "Scanner history/memory",
+      "Window Manager"
+    ],
+    "new_recurring_timer": false,
+    "new_observer": false,
+    "new_scheduler": false,
+    "new_network_owner": false,
+    "new_storage_owner": false,
+    "indexeddb_schema_changed": false
+  },
+  "runtime_migration": {
+    "ui_notes_40483": {
+      "scope": "presentation-only operator notes",
+      "clock_centered": true,
+      "header_context_owner": "existing Chronos/Celestial cadence; no new timer",
+      "header_context": [
+        "Graphique",
+        "Atlas CURRENT",
+        "Oracle",
+        "News Sentinel latest qualified event"
+      ],
+      "header_animation": false,
+      "chart_curve_following_bar_color": "atlasCryptoPalette(...).primary",
+      "chart_geometry_changed": false,
+      "market_core_changed": false,
+      "current_changed": false,
+      "bridge_changed": false,
+      "new_timer": false,
+      "new_observer": false,
+      "new_scheduler": false,
+      "new_network_owner": false,
+      "new_storage_owner": false
+    }
+  },
+  "aether_status_and_trust_gate_40484": {
+    "owner": "index.html Aether passive status UI + app.js Aether Trust auth sequencing",
+    "aether_menu_button_after_command_center": true,
+    "aether_panel_materialized_on_click": true,
+    "status_band_scope": "Decision / Sources / Chronos lane",
+    "news_motion": "CSS transform only; no timer",
+    "clock_centered": true,
+    "auth_background": "approved existing asset, direct eager load",
+    "gate_open_network_probe": false,
+    "bridge_auth": "existing canonical login on explicit submit",
+    "current_reconcile": "existing owner after second post-auth paint",
+    "book_reconcile": "existing owner after second post-auth paint",
+    "protected": [
+      "Market Core 38.15.11",
+      "Graphique",
+      "Target Top 5",
+      "Atlas CURRENT",
+      "Oracle engine",
+      "Bridge protocol",
+      "IndexedDB schemas",
+      "Window Manager"
+    ],
+    "new_interval": false,
+    "new_observer": false,
+    "new_scheduler": false,
+    "new_network_owner": false,
+    "new_storage_owner": false
+  },
+  "aether_header_and_system_demand_40485": {
+    "owner": "index.html same-lane CSS + js/views/system-demand-residency.js same-node diagnostic residency",
+    "normal_band": "Relancer + Rafraîchir + Décision + Sources + Date/Heure",
+    "aether_band": "same grid row and same height; full Aether synthesis horizontally drifting",
+    "permanent_second_row": false,
+    "alternation_owner": "CSS keyframes only",
+    "aether_menu_button_preserved": true,
+    "aether_lazy_panel_preserved": true,
+    "storage_health_boot_resident": false,
+    "grey_plate_forensic_boot_resident": false,
+    "diagnostic_restore": "explicit click/hash; exact same DOM node",
+    "existing_system_closed_body_residency_preserved": true,
+    "protected": [
+      "Market Core 38.15.11",
+      "Binance LIVE",
+      "Graphique",
+      "Target Top 5",
+      "Atlas CURRENT",
+      "Oracle engine",
+      "Bridge protocol",
+      "IndexedDB schemas",
+      "Window Manager"
+    ],
+    "new_interval": false,
+    "new_observer": false,
+    "new_scheduler": false,
+    "new_network_owner": false,
+    "new_storage_owner": false,
+    "clone_used": false
+  },
+  "owner_consolidation_40489": {
+    "parent": "40.4.88",
+    "projects_legacy_generic_residency_loaded": false,
+    "operations_legacy_generic_residency_loaded": false,
+    "system_generic_keys": [
+      "simulation"
+    ],
+    "system_true_lazy_peripherals": [
+      "commandes",
+      "backend",
+      "safety",
+      "physical-security"
+    ],
+    "storage_health_resident": true,
+    "grey_plate_forensic_resident": true,
+    "residency_audit_owner_aware": true,
+    "atlas_router_changed": false,
+    "atlas_generic_residency_changed": false,
+    "market_core": "38.15.11 PROTECTED",
+    "window_manager_changed": false,
+    "new_timer": false,
+    "new_observer": false,
+    "new_network_owner": false,
+    "new_storage_owner": false
+  },
+  "runtime_migration_40490": {
+    "operator_40489": "FAILED_FIREFOX_MAIN_THREAD_CONTENTION",
+    "graph_interaction_cross_render": "PATCH_SELECTION_ONLY",
+    "top5_series_market_rebuild": "RETIRED",
+    "binance_ui_paint": "500MS_COALESCED_ALL_CHANGED_IDS",
+    "binance_current_gate_sync": "TRANSITION_ONLY",
+    "atlas_missing_prerequisite_wait": "EVENT_DRIVEN_NO_READINESS_POLLING",
+    "current_boot_fallbacks": "REDUCED_AND_FINGERPRINT_DEDUPED",
+    "network_diagnostics": "DEMAND_ONLY",
+    "spot_pulse": "NO_FULL_MULTI_HORIZON_OR_FULL_MATH_RECOMPUTE",
+    "critical_dom_stable": true,
+    "atlas_removed": false,
+    "market_core": "38.15.11 PROTECTED",
+    "current_algorithm_changed": false,
+    "oracle_engine_changed": false,
+    "bridge_protocol_changed": false,
+    "indexeddb_schema_changed": false,
+    "new_recurring_timer": false,
+    "new_observer": false,
+    "new_websocket": false,
+    "new_network_owner": false,
+    "new_storage_owner": false
+  },
+  "runtime_migration_40491": {
+    "status": "ATLAS_MEMORY_PRESENTATION_TRUE_DEMAND_STORAGE_PARSE_RELIEF",
+    "operator_evidence_40490": "improved",
+    "auto_reader_runtime": "PRESERVED_60S_MARKET_30S_SPOT_5M_HISTORY",
+    "auto_memory_parse_cache": "ONE_PARSE_PER_MEMORY_REVISION",
+    "atlas_peripheral_boot_rebind": "RETIRED_ALL_SCOPE_BOOT_REPLAY",
+    "atlas_peripheral_hydration_owner": "js/views/atlas-peripheral-lazy.js -> AgentCryptoAtlasPeripheralRebind.rebind(scope)",
+    "memory_intelligence_presentation": "DEMAND_ONLY_WHEN_DISCLOSURE_OPEN",
+    "journal_heavy_dom": "DEMAND_ONLY_WHEN_DISCLOSURE_OPEN",
+    "decision_board_compact": "RESIDENT",
+    "current_memory_state": "RESIDENT_AND_RECONCILED",
+    "market_core": "PROTECTED_38.15.11",
+    "atlas_current": "PROTECTED",
+    "bridge": "PROTECTED",
+    "private_backend": "PROTECTED_V1.4.0",
+    "new_recurring_timer": false,
+    "new_observer": false,
+    "new_network_owner": false,
+    "new_storage_owner": false
+  },
+  "runtime_migration_40492": {
+    "status": "MARKET_SNAPSHOT_PRESENTATION_TRUE_DEMAND_FIREFOX_DOM_RELIEF",
+    "operator_evidence_40491": "improved",
+    "market_core": "PROTECTED_38.15.11_RESIDENT",
+    "market_snapshot_table": "ZERO_GENERATED_ROWS_AT_BOOT_EXPLICIT_DEMAND",
+    "market_table_close": "RELEASE_GENERATED_ROWS_KEEP_RUNTIME_STATE",
+    "binance_closed_table_dom_patch": "RETIRED",
+    "market_closed_integrity_repair": "RETIRED",
+    "graph": "PROTECTED_RESIDENT",
+    "target_top5": "PROTECTED_RESIDENT",
+    "selected_market_state": "PROTECTED_RESIDENT",
+    "auto_reader": "PRESERVED",
+    "atlas_current": "PROTECTED",
+    "oracle": "PROTECTED",
+    "bridge": "PROTECTED",
+    "private_backend": "PROTECTED_V1.4.0",
+    "new_recurring_timer": false,
+    "new_observer": false,
+    "new_network_owner": false,
+    "new_storage_owner": false
+  },
+  "runtime_migration_40493": {
+    "build": "40.4.93",
+    "parent": "40.4.92",
+    "operator_40492": "UX_FAIL",
+    "market_core_resident": true,
+    "normal_market_table_visible": true,
+    "reduce_releases_generated_rows": true,
+    "restore_rematerializes_rows": true,
+    "visibility_owner": "existing js/core/admin-window-manager.js market window",
+    "redundant_show_table_button_removed": true,
+    "window_manager_modified": false,
+    "new_timer": false,
+    "new_observer": false,
+    "new_network_owner": false,
+    "new_storage_owner": false
+  },
+  "runtime_migration_40494": {
+    "build": "40.4.94",
+    "parent": "40.4.93",
+    "scope": "SECONDARY_NEWS_EARLY_RESIDENCY_DOMCONTENTLOADED_RELIEF",
+    "owner": "js/views/secondary-domain-demand-residency.js",
+    "details": [
+      "#news-sentinel",
+      "#news-market-explanation",
+      "details[data-collapse-key=\"news-plan\"]"
+    ],
+    "static_body_elements_audited": 390,
+    "old_initial_detach": "window.load via shared presentation lifecycle",
+    "new_initial_detach": "DOMContentLoaded via existing registered toggle owner",
+    "same_node_restore_detach_preserved": true,
+    "news_summary_resident": true,
+    "news_runtime_network_gate_preserved": "news disclosure open + document visible",
+    "market_core": "PROTECTED_38.15.11",
+    "graph": "PROTECTED_RESIDENT",
+    "target_top5": "PROTECTED_RESIDENT",
+    "atlas_current": "PROTECTED",
+    "oracle": "PROTECTED",
+    "window_manager": "UNCHANGED",
+    "new_timer": false,
+    "new_observer": false,
+    "new_network_owner": false,
+    "new_storage_owner": false
+  },
+  "runtime_migration_40495": {
+    "build": "40.4.95",
+    "parent": "40.4.94",
+    "scope": "LEARNING_PREPARSE_TRUE_DEMAND_SAFE_RECOVERY_FALLBACK",
+    "preparse_gate": "js/views/learning-parser-gate.js",
+    "system_presentation_owner": "js/views/system-presentation.js@40.4.24",
+    "system_presentation_owner_changed": false,
+    "canonical_range": [
+      "#learningExerciseGuide",
+      "#expertLearningRoadmap"
+    ],
+    "boot_learning_full_range_expected": false,
+    "boot_learning_shell_expected": true,
+    "first_open_source": "views/system.html",
+    "first_open_static_fetch_max": 1,
+    "runtime_owner": "app.js",
+    "runtime_rebind": "atlasRebindLearningRuntime40442",
+    "runtime_refs_expected": 97,
+    "post_parse_40447_fallback_preserved": true,
+    "learning_progress_reset": false,
+    "indexeddb_schema_changed": false,
+    "simulation_truth_changed": false,
+    "market_core": "PROTECTED_38.15.11",
+    "graph": "PROTECTED_RESIDENT",
+    "target_top5": "PROTECTED_RESIDENT",
+    "atlas_current": "PROTECTED",
+    "oracle": "PROTECTED",
+    "bridge": "PROTECTED",
+    "window_manager": "UNCHANGED",
+    "new_timer": false,
+    "new_observer": false,
+    "new_business_network_owner": false,
+    "new_storage_owner": false
+  },
+  "runtime_migration_40496": {
+    "oracle_owner": "app.js::atlasOracleOutcomeSchedule",
+    "previous_idle_owner": "permanent 15 s setInterval after explicit Oracle init",
+    "new_idle_owner": "coalesced 2.5 s one-shot after explicit Oracle init or new Evidence capture",
+    "oracle_initialization_demand_only": true,
+    "outcome_semantics_changed": false,
+    "evidence_capture_semantics_changed": false,
+    "long_shadow_semantics_changed": false,
+    "market_core_changed": false,
+    "current_changed": false,
+    "bridge_changed": false,
+    "learning_40495_preserved": true,
+    "new_recurring_timer": false,
+    "recurring_timer_retired": true,
+    "new_observer": false,
+    "new_network_owner": false,
+    "new_storage_owner": false
+  },
+  "truth_convergence_40497": {
+    "build": "40.4.97",
+    "parent_build": "40.4.96",
+    "runtime_behavior_changed": false,
+    "removed_stale_claims": [
+      "40.4.92 extra Market Show-table control",
+      "40.4.94 migration-summary current-state pointer",
+      "40.4.95 publication identity expectation"
+    ],
+    "canonical_market_contract": "native Window Manager only",
+    "canonical_learning_contract": "40.4.95 pre-parse demand + safe 40.4.47 fallback + protected 97-ref runtime rebind",
+    "canonical_oracle_outcome_contract": "40.4.96 explicit-demand/new-Evidence one-shot; no permanent 15 s interval",
+    "final_firefox_seal_required": true
+  },
+  "post_migration_product_work_40499": {
+    "migration_reopened": false,
+    "base_seal": "40.4.98",
+    "scope": "parser/presentation transport debt",
+    "hot_at_boot": [
+      "Atlas cockpit",
+      "Bridge status",
+      "CURRENT pipeline compact truth",
+      "report compact summaries"
+    ],
+    "cold_on_demand": [
+      "Auto Reader detail",
+      "Shared/GitHub memory detail",
+      "CURRENT audit detail",
+      "Book/Knowledge detail"
+    ],
+    "current_pipeline": "PROTECTED",
+    "fingerprint_build_churn_guard": true
+  }
+}

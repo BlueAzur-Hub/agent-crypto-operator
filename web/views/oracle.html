@@ -1,0 +1,518 @@
+<section class="multi-horizon glass atlas-family-member atlas-tone-analysis" id="multi-horizon" aria-labelledby="multiHorizonTitle" data-layout-family="analysis">
+      <div class="section-head compact multi-horizon-head">
+        <div>
+          <p class="eyebrow">RÉSUMÉ DYNAMIQUE MULTI-HORIZON</p>
+          <h2 id="multiHorizonTitle">Lecture temporelle du mouvement</h2>
+        </div>
+        <span class="pill warn" id="multiHorizonStatus">Livecheck requis</span>
+      </div>
+
+      <p class="multi-horizon-summary" id="multiHorizonSummary">
+        Atlas expliquera ensemble les mouvements 24 h, 7 jours et 30 jours sans produire de conseil financier.
+      </p>
+
+      <div class="multi-horizon-grid" id="multiHorizonGrid">
+        <article class="horizon-card" data-horizon="24h">
+          <span>24 HEURES</span>
+          <b id="multiHorizon24Value">—</b>
+          <small id="multiHorizon24Label">En attente</small>
+        </article>
+        <article class="horizon-card" data-horizon="7d">
+          <span>7 JOURS</span>
+          <b id="multiHorizon7Value">—</b>
+          <small id="multiHorizon7Label">En attente</small>
+        </article>
+        <article class="horizon-card" data-horizon="30d">
+          <span>30 JOURS</span>
+          <b id="multiHorizon30Value">—</b>
+          <small id="multiHorizon30Label">En attente</small>
+        </article>
+      </div>
+
+      <div class="multi-horizon-meta" id="multiHorizonMeta">
+        <span>Spot : —</span>
+        <span>Écart courbe : —</span>
+        <span>Source : —</span>
+      </div>
+
+      <details class="multi-horizon-details" id="multiHorizonDetails">
+        <summary>Pourquoi cette lecture ?</summary>
+        <div id="multiHorizonTechnical">Les détails apparaîtront après le Livecheck.</div>
+      </details>
+    </section>
+
+    <details class="atlas-collapse glass news-sentinel-collapse atlas-family-member atlas-tone-analysis" id="news-sentinel" data-collapse-key="news-sentinel" data-layout-family="analysis">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-copy">
+          <span class="atlas-collapse-title">News Sentinel — veille événementielle</span>
+          <span class="atlas-collapse-subtitle">Monde + crypto filtrés par pertinence marché · sources · date · preuve</span>
+        </span>
+        <span class="news-collapse-live" aria-live="polite">
+          <b id="newsCollapseState">Flux en attente</b>
+          <small id="newsCollapseMeta">archive GitHub</small>
+        </span>
+        <span class="atlas-collapse-state" data-open-label="Replier" data-closed-label="Déplier">Déplier</span>
+      </summary>
+      <div class="atlas-collapse-body">
+        <section class="news-sentinel" aria-labelledby="newsSentinelTitle">
+          <div class="section-head compact news-sentinel-head">
+            <div>
+              <p class="eyebrow">NEWS SENTINEL V2 · WORLD-TO-MARKET LIVE FEED</p>
+              <h2 id="newsSentinelTitle">Actualités qualifiées, archive GitHub et dates vérifiables</h2>
+            </div>
+            <div class="news-sentinel-status-stack">
+              <span class="pill warn" id="newsSentinelState">Chargement du flux mondial</span>
+              <span class="pill" id="newsSentinelFeedCount">Flux 0 événement</span>
+              <span class="pill" id="newsSentinelMemoryCount">Manuel 0/120</span>
+            </div>
+          </div>
+
+          <p class="news-sentinel-intro">
+            Atlas lit une archive GitHub alimentée par des flux RSS/Atom mondiaux, économiques, institutionnels et crypto. Il conserve uniquement les événements ayant un lien plausible avec les marchés. Impact potentiel, causalité et réaction de prix restent trois niveaux analysés séparément.
+          </p>
+
+          <div class="news-live-toolbar">
+            <div>
+              <p class="eyebrow">FLUX MONDIAL QUALIFIÉ</p>
+              <h3>Événements récents</h3>
+              <small id="newsFeedUpdatedAt">Première archive en attente</small>
+              <small class="news-auto-check" id="newsFeedAutoState">Relecture automatique · 5 min</small>
+            </div>
+            <div class="news-live-actions">
+              <div class="news-live-filters" aria-label="Filtres du flux">
+                <button class="news-filter-btn active" type="button" data-news-filter="all" aria-label="Tous les événements"><span aria-hidden="true">◎</span><b>Tous</b></button>
+                <button class="news-filter-btn" type="button" data-news-filter="priority" aria-label="Événements prioritaires"><span aria-hidden="true">!</span><b>Prioritaires</b></button>
+                <button class="news-filter-btn" type="button" data-news-filter="primary" aria-label="Sources institutionnelles"><span aria-hidden="true">◆</span><b>Institutions</b></button>
+                <button class="news-filter-btn" type="button" data-news-filter="crypto" aria-label="Actualités crypto"><span aria-hidden="true">₿</span><b>Crypto</b></button>
+                <button class="news-filter-btn" type="button" data-news-filter="world" aria-label="Actualités mondiales"><span aria-hidden="true">◉</span><b>Monde</b></button>
+              </div>
+              <button class="btn small news-refresh-icon-btn" id="btnNewsRefresh" type="button" aria-label="Relire l’archive maintenant"><span aria-hidden="true">↻</span><b>Relire</b></button>
+            </div>
+          </div>
+
+          <div class="news-live-kpis">
+            <article><span>24 heures</span><b id="newsFeedEvents24">0 événement</b><small id="newsFeedPriority24">0 prioritaire</small></article>
+            <article><span>Sources</span><b id="newsFeedSources">0/0 disponibles</b><small id="newsFeedFailures">0 échec</small></article>
+            <article><span>État archive</span><b id="newsFeedArchiveState">En attente</b><small id="newsFeedArchiveAge">Heure inconnue</small></article>
+            <article><span>Relecture automatique</span><b id="newsFeedNextCheck">5 min</b><small id="newsFeedLastCheck">Aucun contrôle</small></article>
+            <article><span>Lecture de cette page</span><b id="newsPageReadState">Démarrage</b><small id="newsPageReadAt">Aucune lecture</small></article>
+            <article><span>Génération GitHub</span><b id="newsArchiveGenerationState">Inconnue</b><small id="newsArchiveGeneratedAt">Aucune archive</small></article>
+            <article><span>Depuis la dernière visite</span><b id="newsNewSinceVisit">0 nouvelle</b><small id="newsVisitTruth">Premier état local</small></article>
+            <article><span>Décision globale</span><b id="newsFeedDecision">Collecte en attente</b><small>Validation humaine</small></article>
+          </div>
+
+          <div class="news-live-list" id="newsLiveList" aria-live="polite">
+            <p class="news-history-empty">Le premier flux sera créé par GitHub Actions.</p>
+          </div>
+
+          <div class="news-sentinel-summary" id="newsSentinelSummary">
+            <article><span>Événement principal</span><b id="newsSentinelLast">—</b><small id="newsSentinelFreshness">Date non qualifiée</small></article>
+            <article><span>Niveau de preuve</span><b id="newsSentinelEvidence">—</b><small id="newsSentinelSourceClass">Source non qualifiée</small></article>
+            <article><span>Impact potentiel</span><b id="newsSentinelImpact">—</b><small id="newsSentinelDirection">Orientation indéterminée</small></article>
+            <article><span>Actifs / secteurs</span><b id="newsSentinelAssets">—</b><small id="newsSentinelSectors">—</small></article>
+            <article><span>Manipulation</span><b id="newsSentinelManipulation">—</b><small id="newsSentinelPriced">Réaction marché : à comparer</small></article>
+            <article class="news-summary-decision"><span>Décision Atlas</span><b id="newsSentinelDecision">Surveillance</b><small id="newsSentinelChecks">Attendre une information vérifiable.</small></article>
+          </div>
+
+          <details class="news-manual-disclosure">
+            <summary>Analyse manuelle et mémoire locale</summary>
+            <div class="news-sentinel-workbench">
+              <article class="news-entry-panel">
+                <div class="news-form-grid">
+                  <label class="news-field news-field-wide">
+                    <span>Titre de l’information</span>
+                    <input id="newsTitle" type="text" placeholder="Ex. Un régulateur publie une décision concernant un ETF crypto" autocomplete="off" />
+                  </label>
+                  <label class="news-field news-field-wide">
+                    <span>URL ou domaine de la source</span>
+                    <input id="newsSourceUrl" type="url" placeholder="https://source.example/article" autocomplete="off" />
+                  </label>
+                  <label class="news-field">
+                    <span>Nom de la source</span>
+                    <input id="newsSourceName" type="text" placeholder="SEC, Reuters, projet officiel…" autocomplete="off" />
+                  </label>
+                  <label class="news-field">
+                    <span>Date / heure de l’événement</span>
+                    <input id="newsEventTime" type="datetime-local" />
+                  </label>
+                  <label class="news-field">
+                    <span>Sources concordantes</span>
+                    <select id="newsSourceCount">
+                      <option value="1">1 source</option>
+                      <option value="2">2 sources</option>
+                      <option value="3">3 sources ou plus</option>
+                    </select>
+                  </label>
+                  <label class="news-field">
+                    <span>Statut déclaré</span>
+                    <select id="newsDeclaredStatus">
+                      <option value="unknown">À déterminer</option>
+                      <option value="confirmed">Confirmé / officiel</option>
+                      <option value="reported">Rapporté par la presse</option>
+                      <option value="rumor">Rumeur / non confirmé</option>
+                    </select>
+                  </label>
+                </div>
+
+                <label class="news-field news-field-wide news-text-field">
+                  <span>Contenu, annonce ou résumé factuel</span>
+                  <textarea id="newsInput" placeholder="Colle ici le texte d’une annonce, d’un communiqué, d’une actualité, d’un listing, d’un hack, d’une décision réglementaire ou d’une rumeur à vérifier."></textarea>
+                </label>
+
+                <div class="news-actions">
+                  <button class="btn primary" id="btnAnalyzeNews" type="button">Analyser et mémoriser</button>
+                  <button class="btn" id="btnNewsClearForm" type="button">Effacer le formulaire</button>
+                  <button class="btn ghost" id="btnNewsExport" type="button">Exporter JSON</button>
+                  <button class="btn ghost" id="btnNewsClearHistory" type="button">Vider l’historique</button>
+                </div>
+
+                <div class="analysis-box news-analysis-output" id="newsOutput">Aucune actualité analysée manuellement.</div>
+              </article>
+
+              <aside class="news-history-panel">
+                <div class="news-history-head">
+                  <div>
+                    <p class="eyebrow">MÉMOIRE LOCALE</p>
+                    <h3>Événements manuels</h3>
+                  </div>
+                  <span class="pill" id="newsHistoryStatus">0 événement</span>
+                </div>
+                <div class="news-history-list" id="newsHistoryList">
+                  <p class="news-history-empty">Aucun événement manuel mémorisé dans ce navigateur.</p>
+                </div>
+              </aside>
+            </div>
+          </details>
+
+          <details class="news-source-registry" id="newsSourceRegistry">
+            <summary>Sources collectées et niveaux de confiance</summary>
+            <div class="news-source-registry-grid">
+              <article><b>Institutions</b><span>SEC · CFTC · Réserve fédérale · BCE.</span><em>Sources primaires ; le contenu doit néanmoins être pertinent pour les marchés.</em></article>
+              <article><b>Presse mondiale / économie</b><span>BBC World · BBC Business · France 24.</span><em>Guerres, sanctions, taux, inflation, énergie et décisions politiques uniquement lorsqu’un lien marché est détecté.</em></article>
+              <article><b>Médias crypto</b><span>CoinDesk · Decrypt · Cointelegraph avec prudence.</span><em>Flux spécialisés ; la source primaire citée reste prioritaire.</em></article>
+              <article><b>Cybersécurité</b><span>CISA uniquement lorsqu’un lien crypto, exchange ou infrastructure financière est détecté.</span><em>Les alertes techniques générales sont filtrées.</em></article>
+            </div>
+            <p class="news-source-note">Collecte bornée par GitHub Actions, archive publique JSON, déduplication et conservation maximale de sept jours. Aucune collecte massive, aucune clé privée, aucun ordre financier.</p>
+          </details>
+        </section>
+      </div>
+    </details>
+
+    <details class="atlas-collapse glass atlas-family-member atlas-tone-analysis" data-collapse-key="news-plan" data-layout-family="analysis">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">News Sentinel — référentiel étendu</span>
+        <span class="atlas-collapse-subtitle">Sources d’information à surveiller</span>
+      </summary>
+      <div class="atlas-collapse-body">
+
+
+    <section class="panel glass news-plan" id="news-plan">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">NEWS SENTINEL — RÉFÉRENTIEL ÉTENDU</p>
+          <h2>Sources d’information à surveiller</h2>
+          <p class="planning-intro">
+            Les nouvelles ne déclenchent aucun achat. Elles classent seulement l’information : fiable, à vérifier, risquée, rumeur.
+          </p>
+        </div>
+        <span class="pill">Analyse, pas signal achat</span>
+      </div>
+
+      <div class="news-source-grid">
+        <div><b>Monde</b><span>Reuters · AP · AFP · BBC · Le Monde · Financial Times</span></div>
+        <div><b>Crypto</b><span>CoinDesk · The Block · Decrypt · Cointelegraph avec prudence</span></div>
+        <div><b>Institutions</b><span>AMF · ESMA · BCE · SEC · CFTC · banques centrales</span></div>
+        <div><b>Exchanges</b><span>Kraken · Bybit · Binance · status pages · maintenances API</span></div>
+      </div>
+
+      <div class="news-classifier-help">
+        <b>Lecture future :</b>
+        <span>source identifiée → fiabilité → impact possible → données à vérifier → action : attendre / surveiller / ignorer.</span>
+      </div>
+    </section>
+      </div>
+    </details>
+
+
+
+<details class="atlas-collapse glass atlas-family-member atlas-tone-analysis" data-collapse-key="lecture-verrou" id="lecture-froide" data-layout-family="analysis">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">Lecture froide + verrou</span>
+        <span class="atlas-collapse-subtitle">Snapshot d’observation et anti-hallucination</span>
+      </summary>
+      <div class="atlas-collapse-body">
+    <section class="quick-deck">
+      <article class="panel glass cold-read">
+        <p class="eyebrow">LECTURE FROIDE V2</p>
+        <h2>Lecture synthétique de la situation</h2>
+        <div id="coldRead">En attente du Livecheck. Aucun prix ni classement ne sera affiché sans source réelle.</div>
+      </article>
+      <article class="panel glass compact-panel">
+        <p class="eyebrow">VERROU DE DÉCISION V2</p>
+        <h2>Intégrité, ancienneté et décision humaine</h2>
+        <p class="rule-line warn-lock" id="trustLockText">En attente Livecheck. Pas de source marché active, pas de prix.</p>
+        <div class="decision-lock-v2-grid" aria-label="Contrôles du verrou V2">
+          <span><b>Données</b><small id="decisionLockData">En attente</small></span>
+          <span><b>Graphique</b><small id="decisionLockChart">En attente</small></span>
+          <span><b>News</b><small id="decisionLockNews">En attente</small></span>
+          <span><b>Décision</b><small id="decisionLockHuman">Humaine uniquement</small></span>
+        </div>
+      </article>
+    </section>
+      </div>
+    </details>
+
+    <details class="atlas-collapse glass v2-advanced-only atlas-family-member atlas-tone-analysis" data-collapse-key="mode-debutant-avance" data-v2-section="advanced" data-layout-family="analysis">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">Guides de lecture V2</span>
+        <span class="atlas-collapse-subtitle">Explications, résumé et détails techniques</span>
+      </summary>
+      <div class="atlas-collapse-body">
+    <section class="beginner-deck" id="debutant">
+      <article class="panel glass beginner-panel">
+        <div class="section-head compact">
+          <div>
+            <p class="eyebrow">MODE DÉBUTANT</p>
+            <h2>Lecture simple</h2>
+          </div>
+          <button class="btn small" id="btnToggleAdvanced" type="button">Masquer avancé</button>
+        </div>
+        <p id="beginnerSummary" class="simple-summary">
+          Lance Livecheck. L’interface expliquera ensuite ce que le tableau montre avec une lecture descriptive.
+        </p>
+        <div class="simple-grid">
+          <div><b>Capitalisation</b><span>Valeur totale estimée du marché crypto.</span></div>
+          <div><b>Volume 24h</b><span>Montant échangé sur 24 heures.</span></div>
+          <div><b>Dominance BTC</b><span>Poids de Bitcoin dans tout le marché.</span></div>
+          <div><b>Indice de veille</b><span>Lecture descriptive fondée sur les données chargées.</span></div>
+        </div>
+      </article>
+
+      <article class="panel glass advanced-panel" id="advancedPanel">
+        <div class="section-head compact">
+          <div>
+            <p class="eyebrow">MODE AVANCÉ</p>
+            <h2>Données conservées</h2>
+          </div>
+        </div>
+        <p class="rule-line">
+          Vue avancée : prix, variations, market cap, volume, ratio volume/market cap, type d’actif, score, source, heure, limites.
+        </p>
+        <div class="advanced-grid" id="advancedGrid">
+          <div><b>État</b><span>En attente de Livecheck</span></div>
+          <div><b>Données manquantes</b><span>Sécurité · social · on-chain</span></div>
+          <div><b>Règle</b><span>Pas de source live, pas de prix</span></div>
+        </div>
+      </article>
+    </section>
+      </div>
+    </details>
+
+    <details class="atlas-collapse glass atlas-family-member atlas-tone-analysis" data-collapse-key="watch-risques" data-layout-family="analysis">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title" id="watchRiskCollapseTitle">Watchlist V3</span>
+        <span class="atlas-collapse-subtitle" id="watchRiskCollapseSubtitle">Actifs suivis et conditions locales</span>
+      </summary>
+      <div class="atlas-collapse-body">
+    <section class="layout-two">
+      <article class="panel glass watch-v3-panel" id="watchlist">
+        <div class="section-head compact">
+          <div>
+            <p class="eyebrow">WATCHLIST MEMORY & ALERT CONDITIONS</p>
+            <h2>Actifs à observer — Atlas V3</h2>
+          </div>
+          <div class="watch-v3-status-stack">
+            <span class="pill ok" id="watchMemoryStatus">Mémoire locale</span>
+            <span class="pill" id="watchAlertStatus">0 condition</span>
+          </div>
+        </div>
+
+        <div class="watch-v2-note" id="watchBasketSummary">
+          Atlas Watchlist V3 : mémoire persistante, conditions locales et validation humaine.
+        </div>
+
+        <div class="watch-inputs watch-v3-add-row">
+          <input id="watchInput" type="text" placeholder="Ajouter : BTC, ETH, SOL, LINK, ONDO, TAO ou id CoinGecko" />
+          <input id="watchNoteInput" type="text" maxlength="120" placeholder="Note facultative pour cet actif" />
+          <button class="btn small primary" id="btnAddWatch" type="button">Ajouter</button>
+          <button class="btn small" id="btnSeedWatch" type="button">Réinitialiser les paniers</button>
+        </div>
+
+        <div class="watch-memory-kpis">
+          <article><span>Actifs mémorisés</span><b id="watchMemoryCount">0</b></article>
+          <article><span>Conditions actives</span><b id="watchConditionCount">0</b></article>
+          <article><span>Conditions atteintes</span><b id="watchTriggeredCount">0</b></article>
+          <article><span>Dernière évaluation</span><b id="watchLastEvaluation">Aucune</b></article>
+        </div>
+
+        <details class="watch-alert-console" open>
+          <summary>Créer une condition de surveillance</summary>
+          <div class="watch-alert-editor">
+            <label>
+              <span>Actif</span>
+              <select id="watchAlertCoin"></select>
+            </label>
+            <label>
+              <span>Mesure</span>
+              <select id="watchAlertMetric">
+                <option value="price_eur">Prix EUR</option>
+                <option value="change_24h">Variation 24 h</option>
+                <option value="math_score">Score Math</option>
+                <option value="volume_24h">Volume 24 h EUR</option>
+              </select>
+            </label>
+            <label>
+              <span>Condition</span>
+              <select id="watchAlertOperator">
+                <option value="gte">Supérieur ou égal à</option>
+                <option value="lte">Inférieur ou égal à</option>
+              </select>
+            </label>
+            <label>
+              <span>Seuil</span>
+              <input id="watchAlertThreshold" type="number" step="any" placeholder="Ex. 50000, -5 ou 75" />
+            </label>
+            <label class="watch-alert-note-field">
+              <span>Note</span>
+              <input id="watchAlertNote" type="text" maxlength="140" placeholder="Raison de la surveillance" />
+            </label>
+            <button class="btn small primary" id="btnAddWatchAlert" type="button">Ajouter la condition</button>
+          </div>
+          <p class="watch-alert-rule">
+            Évaluation locale sur le marché déjà chargé : aucune requête CoinGecko supplémentaire, aucune transaction, aucune notification système.
+          </p>
+        </details>
+
+        <div class="watch-alert-list" id="watchAlertList">
+          <p class="watch-empty">Aucune condition enregistrée.</p>
+        </div>
+
+        <details class="watch-memory-assets-disclosure">
+          <summary>Mémoire des actifs suivis</summary>
+          <div class="watch-memory-assets" id="watchMemoryAssets">
+            <p class="watch-empty">Aucun actif mémorisé.</p>
+          </div>
+        </details>
+
+        <div class="cards" id="watchCards">
+          <div class="mini-card muted">Aucune donnée watchlist chargée.</div>
+        </div>
+
+        <details class="watch-trigger-history">
+          <summary>Historique local des conditions atteintes</summary>
+          <div class="watch-history-actions">
+            <span id="watchHistoryCount">0 déclenchement</span>
+            <button class="btn small danger" id="btnClearWatchHistory" type="button">Vider l’historique</button>
+          </div>
+          <div class="watch-history-list" id="watchHistoryList">
+            <p class="watch-empty">Aucun déclenchement mémorisé.</p>
+          </div>
+        </details>
+      </article>
+
+      <article class="panel glass" id="risques">
+        <p class="eyebrow">RISK SENTINEL</p>
+        <h2>Validation croisée</h2>
+        <div class="risk-grid" id="riskGrid">
+          <div class="risk wait"><span>Marché</span><b>En attente</b></div>
+          <div class="risk warn"><span>Sécurité</span><b>Non vérifiée</b></div>
+          <div class="risk warn"><span>Social</span><b>Non vérifié</b></div>
+          <div class="risk warn"><span>On-chain</span><b>Non vérifié</b></div>
+        </div>
+        <p class="muted-line">Une validation marché ne remplace jamais la sécurité contrat.</p>
+        <div class="atlas-subpanel" id="atlasRiskMathPanel">
+          <b>Atlas Risk Math</b>
+          <span>En attente de données. Le risque est lu avant l’opportunité.</span>
+        </div>
+      </article>
+    </section>
+
+
+
+    <!-- Atlas memory and collectors truth panels -->
+      </div>
+    </details>
+
+    <details class="atlas-collapse glass atlas-family-member atlas-tone-analysis" data-collapse-key="impact" data-layout-family="analysis">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">Impact / risques</span>
+        <span class="atlas-collapse-subtitle">Lecture prudente</span>
+      </summary>
+      <div class="atlas-collapse-body">
+
+
+
+    <section class="panel glass impact-layer" id="impact">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">IMPACT CONCRET</p>
+          <h2>Ce que l’app fait vraiment maintenant</h2>
+          <p class="impact-intro">
+            Lecture simple : cette version explique le rôle de chaque bloc. Elle ne connecte aucun wallet, ne passe aucun ordre et ne manipule aucun argent réel.
+          </p>
+        </div>
+        <span class="pill">Compréhension d’abord</span>
+      </div>
+
+      <div class="impact-grid">
+        <article>
+          <b>Marché live</b>
+          <span>Observe prix, volume, capitalisation et graphiques depuis des sources publiques.</span>
+          <em>Impact : comprendre le marché sans agir.</em>
+        </article>
+        <article>
+          <b>Tests simples</b>
+          <span>Explique les plans, la sécurité, les sources et la simulation avec une carte humaine.</span>
+          <em>Impact : éviter le jargon développeur.</em>
+        </article>
+        <article>
+          <b>Simulation</b>
+          <span>Teste des achats / ventes fictifs avec un portefeuille virtuel local.</span>
+          <em>Impact : apprendre sans perdre d’argent.</em>
+        </article>
+        <article>
+          <b>Sécurité</b>
+          <span>Fige les règles : pas de clé privée, pas de retrait, pas d’ordre réel depuis la page publique.</span>
+          <em>Impact : empêcher les erreurs dangereuses.</em>
+        </article>
+      </div>
+
+      <div class="impact-status">
+        <div class="status-ok"><b>Déjà actif</b><span>Observation · graphiques · sources · commandes humaines · simulation locale.</span></div>
+        <div class="status-wait"><b>Pas encore actif</b><span>Connexion Kraken · wallet réel · accès distant · trading réel.</span></div>
+        <div class="status-lock"><b>Verrouillé</b><span>Tout passage argent réel exige backend privé, logs, validation humaine et sécurité physique.</span></div>
+      </div>
+    </section>
+      </div>
+    </details>
+
+    <details class="atlas-collapse glass atlas-family-member atlas-tone-analysis" data-collapse-key="nofomo-news" data-layout-family="analysis">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">No-FOMO</span>
+        <span class="atlas-collapse-subtitle">Refroidissement de décision</span>
+      </summary>
+      <div class="atlas-collapse-body">
+
+
+    <section class="layout-one nofomo-only">
+<article class="panel glass" id="nofomo">
+        <p class="eyebrow">NO-FOMO</p>
+        <h2>Refroidissement de décision</h2>
+        <blockquote>
+          Une occasion ratée ne coûte rien. Une mauvaise position peut coûter très cher.
+        </blockquote>
+        <textarea id="fomoInput" placeholder="Exemple : ce token a fait +300 %, j’ai peur de rater la suite..."></textarea>
+        <button class="btn primary" id="btnAnalyzeFomo">Analyser la FOMO</button>
+        <div class="analysis-box" id="fomoOutput">Aucune analyse lancée.</div>
+
+        <div class="atlas-subpanel" id="atlasNoFomoMathPanel">
+          <b>Atlas No-FOMO Math</b>
+          <span>Le signal peut être réel, mais l’entrée peut être trop tardive.</span>
+        </div>
+      </article>

@@ -1,0 +1,241 @@
+{
+  "schema": "agent_crypto_private_backend_sources_v5",
+  "build": "40.4.62",
+  "backend_version": "1.4.0",
+  "endpoint": "http://127.0.0.1:8790",
+  "binding": "loopback_only",
+  "mode": "READ_ONLY_PUBLIC_MARKET_DATA",
+  "cache": {
+    "type": "memory_only",
+    "ttl_seconds": 15,
+    "persistent": false
+  },
+  "sources": [
+    {
+      "id": "binance",
+      "role": "primary_live_direct_eur",
+      "endpoint_family": "existing Binance direct EUR WebSocket runtime",
+      "authentication": "none",
+      "write_capability": false,
+      "backend_transport": false
+    },
+    {
+      "id": "kraken",
+      "role": "secondary_spot_eur_control",
+      "endpoint_family": "https://api.kraken.com/0/public/Ticker",
+      "authentication": "none",
+      "write_capability": false
+    },
+    {
+      "id": "coinbase",
+      "role": "secondary_spot_eur_control",
+      "endpoint_family": "https://api.exchange.coinbase.com/products/{product_id}/stats",
+      "authentication": "none",
+      "write_capability": false
+    },
+    {
+      "id": "dexscreener",
+      "role": "dex_liquidity_context_only",
+      "endpoint_family": "https://api.dexscreener.com/latest/dex/search",
+      "authentication": "none",
+      "write_capability": false
+    },
+    {
+      "id": "geckoterminal",
+      "role": "dex_pool_crosscheck_context_only",
+      "endpoint_family": "https://api.geckoterminal.com/api/v2/search/pools",
+      "authentication": "none",
+      "write_capability": false
+    },
+    {
+      "id": "defillama",
+      "role": "defi_aggregate_context_only",
+      "endpoint_family": "https://api.llama.fi/overview/dexs/{chain}",
+      "authentication": "none",
+      "write_capability": false
+    }
+  ],
+  "forbidden": [
+    "orders",
+    "trading",
+    "wallet",
+    "withdrawal",
+    "seed",
+    "signature",
+    "private_exchange_api"
+  ],
+  "concordance": {
+    "purpose": "technical observation only",
+    "coherent_max_spread_pct": 0.25,
+    "watch_max_spread_pct": 0.75,
+    "canonical_price_created": false,
+    "financial_signal": false
+  },
+  "bridge_separation": {
+    "ollama_bridge_port": 8787,
+    "private_backend_port": 8790,
+    "same_process": false,
+    "reason": "separate IA-local ownership from external read-only source ownership"
+  },
+  "source_truth_cex": {
+    "primary": {
+      "id": "binance",
+      "owner": "app.js existing direct EUR WebSocket",
+      "network_owner_added": false
+    },
+    "controls": [
+      "kraken",
+      "coinbase"
+    ],
+    "merge_owner": "js/views/private-backend-sources.js",
+    "canonical_price_created": false,
+    "financial_signal": false,
+    "operator_refresh_only": true
+  },
+  "version_awareness": {
+    "manifest_token_mismatch": "SYNCING_NOT_FAILURE",
+    "network_or_json_failure": "FAILURE",
+    "remote_app_verification_still_required_before_update": true
+  },
+  "dex_defi_context_wave_2_40455": {
+    "owner": "private backend 127.0.0.1:8790 + js/views/private-backend-sources.js",
+    "sources": [
+      "DEX Screener public API",
+      "GeckoTerminal public API",
+      "DefiLlama free API"
+    ],
+    "mode": "READ_ONLY_CONTEXT_ONLY",
+    "trigger": "operator_only",
+    "cache_seconds": 90,
+    "cex_primary_unchanged": "Binance",
+    "canonical_price_created": false,
+    "trading_endpoint": false,
+    "notes": "DEX context remains non-canonical. 40.4.57 adds asset-specific network gates, rejects wrong-chain symbol collisions, preserves direct/reversed stable pairs, and flags >=20x liquidity/reserve disagreement for review."
+  },
+  "context_cache": {
+    "type": "memory_only",
+    "ttl_seconds": 90,
+    "persistent": false,
+    "operator_triggered": true
+  },
+  "source_intelligence_v1_40456": {
+    "owner": "js/views/private-backend-sources.js",
+    "inputs": [
+      "Binance live primary",
+      "Kraken/Coinbase CEX controls",
+      "DEX Screener/GeckoTerminal context",
+      "DefiLlama chain context"
+    ],
+    "contract": "agent_crypto_source_intelligence_v3",
+    "fields": [
+      "freshness",
+      "provenance",
+      "cex_concordance",
+      "dex_coverage",
+      "dex_identity_bounded",
+      "liquidity_anomaly_review",
+      "defi_chain_coverage",
+      "dex_identity_proved",
+      "address_mismatch",
+      "atlas_eligible"
+    ],
+    "trigger": "automatic_startup_and_current_finalized_with_manual_fallback",
+    "atlas_consumer_enabled": true,
+    "canonical_price_created": false,
+    "financial_signal": false,
+    "missing_data_fabricated": false,
+    "atlas_consumer_mode": "OPTIONAL_READ_ONLY_FILTERED"
+  },
+  "identity_hardening_40457": {
+    "owner": "Private Backend V1.3.0 + js/views/private-backend-sources.js",
+    "identity_level": "CHAIN_ALIAS_ONLY",
+    "address_level_proof": false,
+    "wrong_chain_symbol_collision_rejected": true,
+    "reversed_pair_price_reuse_forbidden": true,
+    "liquidity_ratio_review_threshold": 20.0,
+    "atlas_consumer_enabled": false,
+    "canonical_price_created": false,
+    "financial_signal": false,
+    "operator_trigger_only": true
+  },
+  "automation_40458": {
+    "owner": "js/views/private-backend-sources.js",
+    "operator_click_required": false,
+    "startup": "one idle attempt + at most 3 bounded retries when local backend is unavailable",
+    "startup_retry_delays_ms": [
+      5000,
+      15000,
+      30000
+    ],
+    "current_trigger": "agentcrypto:current-finalized",
+    "current_fingerprint_dedup": true,
+    "minimum_nonforced_refresh_ms": 240000,
+    "polling": false,
+    "persistent_timer": false,
+    "storage_write": false,
+    "network_owner": "existing loopback read-only backend only"
+  },
+  "atlas_optional_consumer_40458": {
+    "owner": "app.js::atlasSnapshotWithSourceIntelligence4058",
+    "source_contract": "agent_crypto_source_intelligence_v3",
+    "transport_contract": "agent_crypto_source_intelligence_atlas_context_v2",
+    "mode": "OPTIONAL_READ_ONLY_FILTERED_CONTEXT",
+    "attached_after_current_fingerprint": true,
+    "current_fingerprint_participation": false,
+    "current_cadence_unchanged": true,
+    "atlas_direct_internet_access": false,
+    "canonical_price_created": false,
+    "dex_price_promoted": false,
+    "financial_signal": false,
+    "missing_data_fabricated": false,
+    "bridge_update_required": false,
+    "bridge_reason": "existing Bridge validates strict_contract and transports additional read-only fields without changing canonical fingerprint",
+    "identity_filter": "PROVED_OR_CLEAN_BOUNDED"
+  },
+  "identity_proof_40459": {
+    "owner": "Private Backend V1.4.0 + js/views/private-backend-sources.js + app.js transport filter",
+    "identity_level": "CHAIN_ALIAS_PLUS_INTER_PROVIDER_ADDRESS",
+    "proof_rule": "PROVED only when DEX Screener and GeckoTerminal expose the same asset token address on the same allowed network",
+    "fallback": "BOUNDED when chain+alias are clean but address cross-check is unavailable or providers select different allowed networks",
+    "mismatch": "REVIEW_AND_ATLAS_EXCLUDED",
+    "liquidity_review": "ATLAS_EXCLUDED",
+    "atlas_eligible_states": [
+      "proved",
+      "bounded"
+    ],
+    "atlas_direct_internet_access": false,
+    "canonical_price_created": false,
+    "financial_signal": false,
+    "missing_data_fabricated": false
+  },
+  "cold_path_acceptance_40460": {
+    "owner": "js/views/private-backend-sources.js",
+    "backend_version": "1.4.0 unchanged",
+    "cex_timeout_ms": 16000,
+    "context_timeout_ms": 32000,
+    "reason": "browser deadline covers bounded backend cold path instead of aborting before a valid HTTP 200 response",
+    "lazy_state_replay": true,
+    "replay_emits_consumer_events": false,
+    "startup_success_requires_fresh_cex_and_context": true,
+    "polling_added": false,
+    "backend_change_required": false
+  },
+  "operator_priority_40461": {
+    "cooperative_gate": "ErithOperatorPriority40461",
+    "automatic_startup_deferred_while_auth_gate": true,
+    "automatic_current_finalized_deferred_while_auth_gate": true,
+    "manual_buttons_changed": false,
+    "inflight_network_abort_added": false,
+    "resume": "requestIdleCallback or bounded 900 ms fallback after operator-priority-release",
+    "polling_added": false,
+    "backend_version": "1.4.0",
+    "backend_modified": false
+  },
+  "scanner_contention_separation_40462": {
+    "private_backend_changed": false,
+    "backend_version": "1.4.0",
+    "source_intelligence_contract_changed": false,
+    "scanner_persistence_owner": "app.js",
+    "purpose": "keep private backend acceptance intact while moving Scanner serialization out of the interactive hot path"
+  }
+}

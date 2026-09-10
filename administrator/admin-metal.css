@@ -1,0 +1,351 @@
+/* Agent-Crypto @erith.IA — Administrator Mirror 39.1
+   Metal Base theme. Pure visual/runtime shell over the frozen Classic 38.15.11 engine.
+   No market, Atlas, NØX, Aerith, graph, cache or memory acquisition logic lives here. */
+
+:root{
+  --admin-metal-0:#090b0e;
+  --admin-metal-1:#101318;
+  --admin-metal-2:#171b20;
+  --admin-metal-3:#232930;
+  --admin-metal-4:#343c45;
+  --admin-silver:#c8d0d8;
+  --admin-platinum:#e7ebef;
+  --admin-cyan:#72d8ff;
+  --admin-cyan-soft:rgba(114,216,255,.18);
+  --admin-edge:rgba(214,224,234,.20);
+  --admin-edge-strong:rgba(214,224,234,.38);
+  --admin-shadow:0 18px 54px rgba(0,0,0,.52);
+
+  /* Classic semantic variables are retained, but moved to a metallic palette. */
+  --bg:#090b0e;
+  --panel:rgba(18,22,27,.91);
+  --line:rgba(210,220,230,.18);
+  --line2:rgba(210,220,230,.29);
+  --text:#edf0f3;
+  --text2:#c0c8d0;
+  --muted:#87919c;
+  --cyan:#72d8ff;
+  --gold:#cbd3da;
+  --green:#5be09b;
+  --red:#ff6a7f;
+  --orange:#e6ae67;
+}
+
+body.atlas-administrator-mirror{
+  color:var(--text);
+  background:
+    radial-gradient(circle at 18% -10%, rgba(138,154,171,.18), transparent 32rem),
+    radial-gradient(circle at 92% 12%, rgba(74,150,188,.10), transparent 32rem),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.014) 0,rgba(255,255,255,.014) 1px,rgba(0,0,0,.018) 1px,rgba(0,0,0,.018) 3px),
+    linear-gradient(145deg,#07090b 0%,#14181d 44%,#0a0d10 100%);
+}
+
+body.atlas-administrator-mirror .ambient{
+  background:
+    linear-gradient(118deg,rgba(255,255,255,.045),transparent 24%,rgba(121,139,156,.035) 46%,transparent 68%),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0,rgba(255,255,255,.012) 1px,transparent 1px,transparent 4px);
+}
+
+body.atlas-administrator-mirror .grid-overlay{
+  opacity:.13;
+  background-image:
+    linear-gradient(rgba(160,195,215,.055) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(160,195,215,.055) 1px,transparent 1px);
+  background-size:72px 72px;
+}
+
+body.atlas-administrator-mirror .shell{width:min(1660px,calc(100vw - 22px));}
+
+body.atlas-administrator-mirror .glass,
+body.atlas-administrator-mirror .panel,
+body.atlas-administrator-mirror .metric,
+body.atlas-administrator-mirror .source-card{
+  border-color:var(--admin-edge);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.045),inset 0 -1px 0 rgba(0,0,0,.34),var(--admin-shadow);
+}
+
+body.atlas-administrator-mirror .glass{
+  background:
+    linear-gradient(112deg,rgba(255,255,255,.052),transparent 16%,transparent 78%,rgba(255,255,255,.028)),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.008) 0,rgba(255,255,255,.008) 1px,rgba(0,0,0,.015) 1px,rgba(0,0,0,.015) 3px),
+    linear-gradient(145deg,rgba(35,41,47,.94),rgba(16,20,24,.94) 58%,rgba(29,34,40,.92));
+  backdrop-filter:blur(16px) saturate(105%);
+}
+
+body.atlas-administrator-mirror .hero{
+  border-color:rgba(215,225,235,.28);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.015) 28%,transparent 29%),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.012) 0,rgba(255,255,255,.012) 1px,rgba(0,0,0,.014) 1px,rgba(0,0,0,.014) 4px),
+    linear-gradient(135deg,rgba(48,55,63,.97),rgba(18,22,27,.97) 50%,rgba(31,37,43,.96));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 20px 60px rgba(0,0,0,.48);
+}
+
+body.atlas-administrator-mirror .eyebrow{color:#b9c9d5;text-shadow:0 0 14px rgba(114,216,255,.08);}
+body.atlas-administrator-mirror .brandline,
+body.atlas-administrator-mirror h1{color:#f2f4f6;text-shadow:0 2px 0 #000,0 0 24px rgba(173,204,222,.08);}
+body.atlas-administrator-mirror h1 strong{color:#d4dae0;}
+body.atlas-administrator-mirror h2,
+body.atlas-administrator-mirror h3{color:#e8edf1;}
+
+body.atlas-administrator-mirror .sigil{
+  color:#d8e0e6;
+  border-color:var(--admin-edge-strong);
+  background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(0,0,0,.20));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 0 20px rgba(114,216,255,.08);
+}
+
+body.atlas-administrator-mirror .nav,
+body.atlas-administrator-mirror .atlas-v2-nav{
+  border-color:rgba(205,218,230,.18);
+  background:linear-gradient(180deg,rgba(0,0,0,.31),rgba(255,255,255,.022));
+}
+
+body.atlas-administrator-mirror .nav a,
+body.atlas-administrator-mirror .atlas-quick-link,
+body.atlas-administrator-mirror .btn,
+body.atlas-administrator-mirror button{
+  transition:border-color .16s ease,background .16s ease,box-shadow .16s ease,transform .16s ease;
+}
+
+body.atlas-administrator-mirror .nav a,
+body.atlas-administrator-mirror .atlas-quick-link{
+  color:#dce2e7;
+  background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(0,0,0,.12));
+  border:1px solid rgba(210,220,230,.08);
+}
+body.atlas-administrator-mirror .nav a:hover,
+body.atlas-administrator-mirror .atlas-quick-link:hover{
+  border-color:rgba(114,216,255,.32);
+  box-shadow:0 0 0 1px rgba(114,216,255,.08),0 0 22px rgba(114,216,255,.07);
+}
+
+body.atlas-administrator-mirror .btn{
+  color:#e5eaee;
+  border-color:rgba(213,222,231,.20);
+  background:linear-gradient(180deg,rgba(255,255,255,.095),rgba(0,0,0,.16));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.055);
+}
+body.atlas-administrator-mirror .btn.primary{
+  color:#eef9ff;
+  border-color:rgba(114,216,255,.42);
+  background:linear-gradient(135deg,#32404a,#245d72 55%,#26323a);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 18px rgba(114,216,255,.08);
+}
+body.atlas-administrator-mirror .btn.ghost{color:#d2d8dd;border-color:rgba(210,220,230,.30);}
+
+body.atlas-administrator-mirror .pill{
+  border-color:rgba(210,220,230,.20);
+  color:#dfe5e9;
+  background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(0,0,0,.18));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.055);
+}
+body.atlas-administrator-mirror .pill.ok{color:#c9f6dc;background:linear-gradient(180deg,rgba(91,224,155,.16),rgba(24,74,50,.17));}
+body.atlas-administrator-mirror .pill.warn{color:#f0d7b4;background:linear-gradient(180deg,rgba(230,174,103,.14),rgba(82,56,24,.15));}
+body.atlas-administrator-mirror .pill.fail{color:#ffd1d8;background:linear-gradient(180deg,rgba(255,106,127,.15),rgba(78,25,34,.16));}
+
+body.atlas-administrator-mirror .atlas-collapse-summary{
+  background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(0,0,0,.055));
+}
+body.atlas-administrator-mirror .atlas-collapse[open] > .atlas-collapse-summary{
+  box-shadow:inset 0 -1px 0 rgba(114,216,255,.10);
+}
+
+body.atlas-administrator-mirror .atlas-family-member,
+body.atlas-administrator-mirror #market-zone,
+body.atlas-administrator-mirror #atlasMetalsAnalysisFoundation,
+body.atlas-administrator-mirror #multi-horizon,
+body.atlas-administrator-mirror #missions-vie{
+  position:relative;
+}
+
+/* Administrator identity strip — intentionally restrained for the Metal Base pass. */
+.admin-mirror-bar{
+  position:fixed;
+  right:14px;
+  bottom:14px;
+  z-index:2147482500;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:6px;
+  border:1px solid rgba(215,225,235,.30);
+  border-radius:10px;
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.014) 0,rgba(255,255,255,.014) 1px,rgba(0,0,0,.018) 1px,rgba(0,0,0,.018) 3px),
+    linear-gradient(180deg,rgba(47,54,62,.96),rgba(15,19,23,.96));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 15px 38px rgba(0,0,0,.55);
+  backdrop-filter:blur(16px);
+  font:800 10px/1.1 Inter,ui-sans-serif,system-ui,sans-serif;
+  color:#dce3e8;
+}
+.admin-mirror-brand{padding:0 7px;letter-spacing:.11em;color:#eef2f5;white-space:nowrap;}
+.admin-mirror-brand b{color:var(--admin-cyan);font-weight:950;}
+.admin-mirror-bar button,
+.admin-mirror-bar a{
+  min-height:27px;
+  border:1px solid rgba(215,225,235,.18);
+  border-radius:7px;
+  padding:5px 8px;
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.18));
+  color:#dce3e8;
+  font:850 9px/1 Inter,ui-sans-serif,system-ui,sans-serif;
+  text-decoration:none;
+  cursor:pointer;
+}
+.admin-mirror-bar button:hover,
+.admin-mirror-bar a:hover{border-color:rgba(114,216,255,.42);box-shadow:0 0 16px rgba(114,216,255,.08);}
+.admin-mirror-bar [data-admin-layout-toggle][aria-pressed="true"]{color:#bfeeff;border-color:rgba(114,216,255,.46);}
+
+/* Window controls sit over the existing Classic cards and do not rewrite their structure. */
+.admin-window-ready{isolation:isolate;}
+.admin-window-controls{
+  position:absolute;
+  top:6px;
+  right:7px;
+  z-index:90;
+  display:flex;
+  gap:3px;
+  opacity:.34;
+  transition:opacity .14s ease;
+  pointer-events:auto;
+}
+.admin-window-ready:hover > .admin-window-controls,
+.admin-window-ready:focus-within > .admin-window-controls,
+details.admin-window-ready > summary:hover .admin-window-controls{opacity:1;}
+
+details.admin-window-ready > summary{position:relative;padding-right:92px;}
+details.admin-window-ready > summary .admin-window-controls{top:50%;transform:translateY(-50%);right:8px;}
+
+.admin-window-control{
+  width:24px;
+  height:22px;
+  min-height:0!important;
+  padding:0!important;
+  border:1px solid rgba(215,225,235,.20)!important;
+  border-radius:5px!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(0,0,0,.20))!important;
+  color:#cdd5db!important;
+  font:900 11px/1 ui-monospace,SFMono-Regular,Consolas,monospace!important;
+  display:grid!important;
+  place-items:center!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
+  cursor:pointer;
+}
+.admin-window-control:hover{border-color:rgba(114,216,255,.48)!important;color:#eaf8ff!important;}
+.admin-window-drag{cursor:grab!important;touch-action:none;}
+body.admin-layout-free .admin-window-drag{color:#aeeaff!important;border-color:rgba(114,216,255,.38)!important;}
+body.admin-window-dragging,.admin-window-dragging *{cursor:grabbing!important;user-select:none!important;}
+
+.admin-floating{
+  position:fixed!important;
+  z-index:2147482000!important;
+  margin:0!important;
+  max-height:calc(100vh - 24px)!important;
+  overflow:auto!important;
+  border-color:rgba(114,216,255,.30)!important;
+  box-shadow:0 30px 90px rgba(0,0,0,.70),0 0 0 1px rgba(114,216,255,.08)!important;
+  resize:both;
+}
+.admin-floating > .admin-window-controls,
+.admin-floating > summary .admin-window-controls{opacity:1;}
+
+section.admin-minimized{
+  min-height:38px!important;
+  height:38px!important;
+  overflow:hidden!important;
+  padding:0 94px 0 12px!important;
+  display:flex!important;
+  align-items:center!important;
+}
+section.admin-minimized > *:not(.admin-window-controls){display:none!important;}
+section.admin-minimized::before{
+  content:attr(data-admin-window-title);
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:#d9e0e5;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.02em;
+}
+details.admin-minimized > :not(summary){display:none!important;}
+details.admin-minimized > summary{min-height:38px;}
+
+.admin-window-ready[data-admin-window-state="floating"] .admin-window-float{color:#aeeaff!important;}
+
+@media (max-width:900px){
+  .admin-mirror-bar{left:8px;right:8px;bottom:8px;justify-content:center;flex-wrap:wrap;}
+  .admin-mirror-brand{width:100%;text-align:center;}
+  .admin-window-controls{opacity:.72;}
+  .admin-floating{max-width:calc(100vw - 16px)!important;}
+}
+
+/* ============================================================================
+   Agent-Crypto @erith.IA — 40.4.161
+   ADMINISTRATOR STATE TRUTH & SECTION MAP · FAMILY HEADER CONTRACT
+
+   Visual/readability layer only:
+   - reuse the four canonical Administrator families already owned by Window Manager;
+   - expose stable scope/effect semantics without opening the family;
+   - do NOT infer Bridge, Atlas, source or runtime health from CSS;
+   - do NOT add timers, observers, storage, network, business state or new topology.
+   Runtime truth remains owned by the existing panels (Auto Reader, Source Truth,
+   Situation du projet, Simulation, Security and Backend/API).
+   ============================================================================ */
+body.atlas-administrator-mirror .atlas-layout-family > .atlas-layout-family-copy::after{
+  display:inline-flex;
+  align-items:center;
+  width:max-content;
+  max-width:100%;
+  margin-top:8px;
+  padding:5px 9px;
+  border:1px solid rgba(205,225,235,.18);
+  border-radius:999px;
+  background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(0,0,0,.16));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+  color:#cbd8df;
+  font:900 9px/1.2 Inter,ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+  white-space:normal;
+}
+body.atlas-administrator-mirror .atlas-layout-family-analysis > .atlas-layout-family-copy::after{
+  content:"ACTIF · PUBLIC + LOCAL · OBSERVATION / ANALYSE";
+  color:#bfefff;
+  border-color:rgba(98,236,255,.34);
+  background:linear-gradient(180deg,rgba(98,236,255,.10),rgba(5,28,39,.18));
+}
+body.atlas-administrator-mirror .atlas-layout-family-intelligence > .atlas-layout-family-copy::after{
+  content:"LOCAL · IA + MÉMOIRE + CRÉATION · RUNTIME DANS LA SECTION";
+  color:#e2ceff;
+  border-color:rgba(190,145,255,.34);
+  background:linear-gradient(180deg,rgba(174,119,255,.10),rgba(27,16,45,.18));
+}
+body.atlas-administrator-mirror .atlas-layout-family-operations > .atlas-layout-family-copy::after{
+  content:"PRÉPARATION · OPÉRATEUR · AUCUNE ACTION FINANCIÈRE RÉELLE";
+  color:#ffe1a3;
+  border-color:rgba(255,215,130,.34);
+  background:linear-gradient(180deg,rgba(255,215,130,.09),rgba(47,31,10,.18));
+}
+body.atlas-administrator-mirror .atlas-layout-family-system > .atlas-layout-family-copy::after{
+  content:"SIMULATION · SYSTÈME · LOCAL / READ-ONLY / VERROUS";
+  color:#bff7df;
+  border-color:rgba(91,224,155,.32);
+  background:linear-gradient(180deg,rgba(91,224,155,.09),rgba(8,43,29,.18));
+}
+body.atlas-administrator-mirror .atlas-layout-family-analysis > .atlas-layout-family-copy > p::after{
+  content:" · ÉTAT · PORTÉE · EFFET";
+  color:rgba(191,239,255,.78);
+  font-weight:900;
+  letter-spacing:.10em;
+}
+@media (max-width:900px){
+  body.atlas-administrator-mirror .atlas-layout-family > .atlas-layout-family-copy::after{
+    width:auto;
+    font-size:8px;
+    line-height:1.35;
+    border-radius:9px;
+  }
+}

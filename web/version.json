@@ -1,0 +1,87 @@
+{
+  "schema": "agent_crypto_version_manifest_v4",
+  "release": "Market Core V2.0-Alpha · Build 38.15.16 · CLASSIC MODULAR PRESENTATION MIGRATION SEAL",
+  "build": "38.15.16",
+  "asset_token": "market-core-v2.0-alpha-build-38.15.16",
+  "status": "classic_final_candidate_requires_firefox_operator_validation",
+  "parent_build": "38.15.15",
+  "engine": {
+    "name": "Market Core V2.0-Alpha",
+    "reference_build": "38.15.11",
+    "status": "protected"
+  },
+  "files": {
+    "app.js": {
+      "sha256": "32b2d33da2c3646b7a5d905662d3faaf293f870091ac3b201f79e9395a4b8d54"
+    },
+    "index.html": {
+      "sha256": "e38c652584848fa052176f1599cd6eda5ffc3b61cb291f264409de00c9ba67f5"
+    },
+    "classic-presentation-boundaries.json": {
+      "sha256": "3957e5cc64df60617c172f05aec3b0552e27abafc7f9c7917a812a7bd65eab46"
+    },
+    "views/atlas.html": {
+      "sha256": "df12f8862211cb59cdd609480947881b4c5b2cf2f9290588e71d7821c0574d93"
+    },
+    "views/oracle.html": {
+      "sha256": "bd0980a10a514ee217a8857819138b193487c8ffd7d5663d26f48871762340cd"
+    },
+    "views/operations.html": {
+      "sha256": "4396086ea097b01bb49417f4af98dc2637b9677262664cda4980caaebb681905"
+    },
+    "views/system.html": {
+      "sha256": "3dd2891694379aa05d25793bc86a426fe2d7da85f4db5d68297ad369c072c50c"
+    },
+    "views/projects.html": {
+      "sha256": "a0f70d4948e5d212c3129106384e99941d41aa35d679694a0dcd518655aa2195"
+    },
+    "js/views/atlas-presentation.js": {
+      "sha256": "f91803641902aabff0e031b750d04a3a72c3f4500d4b008ea4d63ecf7a2e1516"
+    },
+    "js/views/oracle-presentation.js": {
+      "sha256": "9ad304bb1ed5fd4ce7b9e9d8c0d3d57e96cdb7b9a26c7722b188c3e0ac7626d7"
+    },
+    "js/views/operations-presentation.js": {
+      "sha256": "3df090c021b9848c7e36741b1f92bedb00fdd9463468e28a8b85ad3769c29aab"
+    },
+    "js/views/system-presentation.js": {
+      "sha256": "0e2332e78f649288ada9e5b9212a78566c938a9db71bcb570372568ce6192fec"
+    },
+    "js/views/projects-presentation.js": {
+      "sha256": "1394e2fb0c72f9600814e90431b4a47d5b2fe8a23a8e3ef6bd159e195f695479"
+    }
+  },
+  "contracts": {
+    "presentation_migration": {
+      "boundaries": [
+        "atlas",
+        "oracle-classic-analysis-family",
+        "operations",
+        "system",
+        "projects"
+      ],
+      "strategy": "parser-blocking transport mirrors",
+      "runtime_fetch": false,
+      "new_runtime_owner": false,
+      "id_order_parity_required": true
+    },
+    "protected_runtime": {
+      "market_core": "38.15.11",
+      "atlas_current": true,
+      "atlas_scheduler": true,
+      "nox": true,
+      "aerith": true,
+      "oracle_engine": true,
+      "learning_journey_01_11": true,
+      "indexeddb_schema_changed": false,
+      "bridge_expected": "V1.9.11",
+      "bridge_protocol_changed": false
+    }
+  },
+  "notes": [
+    "Built cumulatively from published + Firefox-validated 38.15.15.",
+    "Classic has no standalone Administrator Oracle Suite; views/oracle.html extracts only the native Classic analysis/decision presentation family and imports no Administrator-specific UI.",
+    "All extracted presentation families are synchronously reconstructed before app.js executes; no false true-lazy claim is made for protected runtime owners.",
+    "Archive contains the full GitHub-relative tree under public/agent_crypto_erith_ia/web/."
+  ]
+}

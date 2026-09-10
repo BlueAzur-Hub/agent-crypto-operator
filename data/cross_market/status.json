@@ -1,0 +1,16 @@
+{
+  "schema": "agent_crypto_parallel_market_status_v1",
+  "build": "40.4.173",
+  "domain": "cross-market",
+  "status": "ready",
+  "generated_at": "2026-09-10T05:23:10.343Z",
+  "assets_expected": 5,
+  "assets_count": 5,
+  "integrity": {
+    "base100_only": true,
+    "no_inter_source_average": true,
+    "no_invented_values": true,
+    "source_series_remain_independent": true,
+    "orders_allowed": false
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema": "agent_crypto_runtime_migration_wave3_atlas_recovery_v1",
+  "build": "40.4.68",
+  "parent_build": "40.4.67",
+  "operator_regression_40467": {
+    "status": "REPRODUCED_FROM_OPERATOR_EXPORT_AND_SOURCE_AUDIT",
+    "symptoms": [
+      "Atlas first disclosure remains heavy",
+      "AUTO button does not react",
+      "Firefox can become temporarily non-responsive after Atlas hydration"
+    ],
+    "facts": [
+      "AUTO/MANUEL button nodes are source-lazy and do not exist during the historical boot microtask.",
+      "40.4.67 late local-ai rebind omitted atlasClassicAnalysisModeInit38155.",
+      "js/app.js Atlas Memory/Decision residency and Memory Health deferred reducers ran before the late Atlas nodes existed.",
+      "40.4.67 added content-visibility:auto to hydrated Atlas bodies despite earlier Firefox paint-gate retirement history."
+    ]
+  },
+  "recovery_40468": {
+    "auto_manual_late_rebind": true,
+    "auto_manual_binding_idempotent": true,
+    "atlas_inner_memory_residency_replayed_after_local_ai_hydration": true,
+    "memory_health_deferred_residency_replayed_after_local_ai_hydration": true,
+    "content_visibility_gate_removed": true,
+    "legacy_atlas_peripheral_lazy_loaded": false,
+    "source_lazy_shell_preserved": true,
+    "current_runtime_resident": true
+  },
+  "protected": [
+    "Market Core 38.15.11",
+    "Binance canonical LIVE",
+    "Graph Context V7/IndexedDB",
+    "Atlas CURRENT fingerprint/cadence",
+    "NØX/Aerith chain",
+    "Oracle/Evidence",
+    "Bridge R13/V1.9.11",
+    "Private Backend V1.4.0",
+    "Source Intelligence V1.3",
+    "Scanner archive 240"
+  ],
+  "no_new": {
+    "recurring_timer": true,
+    "observer": true,
+    "business_network_owner": true,
+    "storage_owner": true,
+    "financial_action": true
+  },
+  "ui_followup_file": "architecture/operator-ui-followups-40.4.68.json",
+  "next": "Validate 40.4.68 before any System extraction. 40.4.66 remains golden rollback checkpoint."
+}

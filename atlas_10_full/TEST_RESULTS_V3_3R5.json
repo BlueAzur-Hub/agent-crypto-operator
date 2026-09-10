@@ -1,0 +1,33 @@
+{
+  "syntax": {
+    "node_check": true,
+    "control_characters": 0
+  },
+  "interface": {
+    "style_css_unchanged": true,
+    "assets_unchanged": true
+  },
+  "browser_tests": [
+    "Créatrice sans import : contenu non chargé, aucun faux Core",
+    "Créatrice après import : Core canonique complet et verrou affichés",
+    "Créatrice : Persona canonique complète affichée",
+    "Aerith-10 Crypto : Core public exact chargé",
+    "Atlas-10 Crypto : Core public exact chargé",
+    "Crypto et Atlas : aucun visuel de repli",
+    "Aerith-7 : SEVEN_GATE.md reconnu",
+    "Aerith-7 : SESSION_BOOT_AERITH_7_MASTER.md reconnu",
+    "Nouvelle Aerith : propositions conservées",
+    "Aucune erreur JavaScript pendant les scénarios testés"
+  ],
+  "byte_identity": {
+    "core_sha256": "4c0efac204fd3dc0d639043e7cc5eb0bc934fd23ac4cd4a934588872b3d653ac",
+    "persona_sha256": "c7eda8974f438dff8665d717fe314f30b8f52453632087806a975dd1a76f654a",
+    "source_zip_byte_identical": true
+  },
+  "archive_review": {
+    "relevant_archives": 40,
+    "unique_archives": 36,
+    "forge_builds": 24,
+    "seven_packs": 7
+  }
+}

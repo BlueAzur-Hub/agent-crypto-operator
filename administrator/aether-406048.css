@@ -1,0 +1,275 @@
+/* Agent-Crypto 40.6.48 — AETHER MASTER IDENTITY BACKPLATE
+   Proven 40.6.46 window behavior preserved.
+   Fixed identity stays in the approved 1672×941 artwork; LIVE information stays DOM-owned. */
+
+#atlasAetherStatusPanel4084 {
+  --a48-ratio: 1.7768331562; /* 1672 / 941 */
+  position: fixed !important;
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  container-type: size !important;
+  background: #01050d !important;
+  background-image: none !important;
+  border: 1px solid rgba(72,216,255,.28) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 24px 68px rgba(0,0,0,.42), inset 0 0 0 1px rgba(255,255,255,.018) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+#atlasAetherStatusPanel4084[hidden] { display:none !important; }
+
+/* Keep a transparent drag lane for the existing native Window Manager. */
+#atlasAetherStatusPanel4084 > .atlas-aether-panel-head-4084 {
+  position:absolute !important;
+  inset:0 0 auto 0 !important;
+  height:34px !important;
+  min-height:34px !important;
+  z-index:120 !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  pointer-events:auto !important;
+}
+#atlasAetherStatusPanel4084 > .atlas-aether-panel-head-4084 > b {
+  position:absolute !important;
+  width:1px !important;
+  height:1px !important;
+  overflow:hidden !important;
+  clip:rect(0 0 0 0) !important;
+  clip-path:inset(50%) !important;
+  white-space:nowrap !important;
+}
+#atlasAetherStatusPanel4084 > .atlas-aether-panel-head-4084 > [data-aether-close-4084] {
+  position:absolute !important;
+  top:8px !important;
+  right:10px !important;
+  width:24px !important;
+  height:24px !important;
+  min-width:24px !important;
+  padding:0 !important;
+  border-radius:999px !important;
+  border:1px solid rgba(111,232,255,.28) !important;
+  background:rgba(1,10,22,.40) !important;
+  color:rgba(229,250,255,.78) !important;
+  font:800 15px/1 system-ui,sans-serif !important;
+  opacity:.34 !important;
+  cursor:pointer !important;
+  transition:opacity .16s ease, background .16s ease !important;
+}
+#atlasAetherStatusPanel4084:hover > .atlas-aether-panel-head-4084 > [data-aether-close-4084],
+#atlasAetherStatusPanel4084 > .atlas-aether-panel-head-4084 > [data-aether-close-4084]:focus-visible {
+  opacity:.92 !important;
+  background:rgba(2,19,35,.84) !important;
+}
+
+/* Clean break: even if an older script somehow injects a historical surface, it never participates. */
+#atlasAetherStatusPanel4084 > .aether-first-glance-grid-406030,
+#atlasAetherStatusPanel4084 > [data-aether-component-stage-406042],
+#atlasAetherStatusPanel4084 .aether42-backplate,
+#atlasAetherStatusPanel4084 .aether42-surface {
+  display:none !important;
+}
+
+.aether46-stage {
+  position:absolute !important;
+  z-index:40 !important;
+  left:50% !important;
+  top:50% !important;
+  width:min(100cqw, calc(100cqh * var(--a48-ratio))) !important;
+  height:min(100cqh, calc(100cqw / var(--a48-ratio))) !important;
+  aspect-ratio:1672/941 !important;
+  transform:translate(-50%,-50%) !important;
+  box-sizing:border-box !important;
+  overflow:hidden !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background-image:url('./assets/aether/aether-observatory-master-identity-ui-406048.png') !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+  background-size:100% 100% !important;
+  box-shadow:none !important;
+  filter:none !important;
+  isolation:isolate !important;
+  container-type:inline-size !important;
+  color:#eefaff !important;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif !important;
+}
+.aether46-stage *, .aether46-stage *::before, .aether46-stage *::after { box-sizing:border-box; }
+
+
+/* 40.6.48 — FIXED IDENTITY IS BAKED INTO THE APPROVED MASTER ARTWORK.
+   Do not duplicate it in DOM. */
+.aether46-static-title,
+.aether46-core-brand,
+.aether46-core-rule { display:none !important; }
+
+/* The top-right backplate already owns the luminous status dot. */
+.aether46-system-banner::before { display:none !important; }
+.aether46-system-banner {
+  padding-left:3.0cqw !important;
+  background:transparent !important;
+  border-color:transparent !important;
+  box-shadow:none !important;
+}
+
+/* Top-left identity — mirrors the approved reference, while remaining real DOM. */
+.aether46-static-title {
+  position:absolute; left:6.55%; top:3.15%; width:31%; z-index:4;
+  pointer-events:none; text-shadow:0 0 16px rgba(57,194,255,.34),0 2px 3px rgba(0,0,0,.74);
+}
+.aether46-static-title strong { display:block; color:#ffe6a6; font:700 2.05cqw/1.02 Georgia,'Times New Roman',serif; letter-spacing:.055em; }
+.aether46-static-title span { display:block; margin-top:.25cqw; color:#62cfff; font:800 1.02cqw/1.1 ui-sans-serif,system-ui; letter-spacing:.37em; }
+.aether46-static-title small { display:block; margin-top:.62cqw; color:#9fd9ef; font:700 .56cqw/1.15 ui-sans-serif,system-ui; letter-spacing:.23em; }
+
+/* Top-right operational strip. */
+.aether46-system-banner {
+  position:absolute; z-index:5; left:68.2%; top:3.35%; width:22.7%; height:6.3%;
+  display:grid; grid-template-columns:minmax(0,1fr) 36%; align-items:center; gap:.65cqw;
+  padding:.45cqw .75cqw .42cqw 3.1cqw;
+  border:1px solid rgba(65,221,255,.23); border-radius:.75cqw;
+  background:rgba(1,13,26,.47); box-shadow:inset 0 0 1.2cqw rgba(44,177,255,.035);
+}
+.aether46-system-banner::before {
+  content:''; position:absolute; left:1.05cqw; top:50%; width:.72cqw; height:.72cqw; transform:translateY(-50%);
+  border-radius:50%; background:#13e7c1; box-shadow:0 0 .8cqw rgba(19,231,193,.8);
+}
+.aether46-system-banner > div:first-child { min-width:0; }
+.aether46-system-banner > div:first-child b { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:#75dfff; font:800 .61cqw/1.1 ui-sans-serif,system-ui; }
+.aether46-system-banner > div:first-child span { display:block; margin-top:.20cqw; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:#4fffd4; font:800 .56cqw/1.1 ui-sans-serif,system-ui; }
+.aether46-clock { min-width:0; padding-left:.65cqw; border-left:1px solid rgba(96,210,255,.28); }
+.aether46-clock small { display:block; color:#b5dff0; font:700 .48cqw/1 ui-sans-serif,system-ui; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.aether46-clock strong { display:block; margin-top:.20cqw; color:#eaf7ff; font:800 1.05cqw/1 ui-sans-serif,system-ui; letter-spacing:.02em; }
+.aether46-quote { position:absolute; z-index:4; right:7.7%; top:10.6%; width:24%; color:rgba(231,239,246,.76); text-align:right; font:italic .56cqw/1.18 Georgia,serif; pointer-events:none; }
+.aether46-quote small { display:block; margin-top:.28cqw; color:#d7e7f1; font:600 .48cqw/1.1 ui-sans-serif,system-ui; }
+
+.aether46-grid { position:absolute; inset:0; z-index:3; margin:0; padding:0; }
+.aether46-card, .aether46-core {
+  position:absolute; margin:0; border:0; background:transparent; box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none;
+  color:#eefaff; overflow:hidden;
+}
+.aether46-card header { display:flex; align-items:center; justify-content:space-between; gap:.4cqw; margin:0 0 .42cqw; min-width:0; }
+.aether46-card header span { color:#5fdcff; font:850 .86cqw/1 ui-sans-serif,system-ui; letter-spacing:.055em; white-space:nowrap; }
+.aether46-card header b { color:#64ffd4; font:800 .56cqw/1 ui-sans-serif,system-ui; text-transform:uppercase; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.aether46-card footer { color:#86bfd7; font:650 .50cqw/1.12 ui-sans-serif,system-ui; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.aether46-card [data-tone="good"] { color:#5dffd0 !important; }
+.aether46-card [data-tone="warn"] { color:#ffcc60 !important; }
+.aether46-card [data-tone="danger"] { color:#ff737d !important; }
+.aether46-card [data-tone="muted"] { color:#7c9baa !important; }
+
+/* Exact painted-capsule coordinates from the 1672×941 approved empty backplate. */
+.aether46-card[data-aether-card-406046="system"]      { left:16.6%; top:16.0%; width:19.7%; height:12.0%; padding:1.02% .85% .72% 5.15%; }
+.aether46-card[data-aether-card-406046="sources"]     { left:17.0%; top:32.4%; width:18.0%; height:12.4%; padding:1.05% .80% .72% 5.0%; }
+.aether46-card[data-aether-card-406046="atlas"]       { left:17.0%; top:49.4%; width:18.1%; height:12.5%; padding:1.00% .78% .72% 5.0%; }
+.aether46-card[data-aether-card-406046="convergence"] { left:38.3%; top:7.0%;  width:22.3%; height:12.1%; padding:1.00% .92% .68% 5.0%; }
+.aether46-card[data-aether-card-406046="divergence"]  { left:62.6%; top:16.0%; width:19.8%; height:12.0%; padding:1.02% .82% .72% 5.15%; }
+.aether46-card[data-aether-card-406046="market"]      { left:64.0%; top:32.4%; width:18.0%; height:12.4%; padding:1.00% .75% .70% 3.8%; }
+.aether46-card[data-aether-card-406046="events"]      { left:64.0%; top:49.4%; width:18.0%; height:12.5%; padding:1.00% .78% .70% 3.8%; cursor:pointer; }
+.aether46-card[data-aether-card-406046="oracle"]      { left:26.3%; top:68.7%; width:19.2%; height:11.7%; padding:.92% .72% .60% 5.0%; }
+.aether46-card[data-aether-card-406046="weather"]     { left:53.4%; top:68.7%; width:19.0%; height:11.7%; padding:.92% .72% .60% 4.9%; }
+
+.aether46-system-metrics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.35cqw; margin:.05cqw 0 .40cqw; }
+.aether46-system-metrics div { min-width:0; border-right:1px solid rgba(111,211,255,.16); }
+.aether46-system-metrics div:last-child { border-right:0; }
+.aether46-system-metrics small, .aether46-source-metrics small, .aether46-oracle-metrics small, .aether46-weather-metrics small { display:block; color:#b4d3e0; font:650 .46cqw/1 ui-sans-serif,system-ui; }
+.aether46-system-metrics strong { display:block; margin-top:.22cqw; color:#fff1c8; font:850 .77cqw/1 ui-sans-serif,system-ui; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+.aether46-source-metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.24cqw; margin:.12cqw 0 .38cqw; }
+.aether46-source-metrics div { min-width:0; text-align:left; border-right:1px solid rgba(111,211,255,.14); }
+.aether46-source-metrics div:last-child { border-right:0; }
+.aether46-source-metrics strong { display:block; margin-top:.22cqw; color:#58ffd2; font:850 .67cqw/1 ui-sans-serif,system-ui; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+.aether46-atlas-main { display:flex; align-items:baseline; gap:.45cqw; min-width:0; }
+.aether46-atlas-main > strong { color:#ffe6a1; font:850 1.16cqw/1 ui-sans-serif,system-ui; white-space:nowrap; }
+.aether46-atlas-main > span { min-width:0; color:#f1f8fc; font:700 .57cqw/1.05 ui-sans-serif,system-ui; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.aether46-atlas-sub { display:flex; align-items:center; gap:.45cqw; margin-top:.44cqw; min-width:0; }
+.aether46-atlas-sub b { color:#62e9ff; font:800 .63cqw/1 ui-sans-serif,system-ui; }
+.aether46-atlas-sub span { color:#9ec3d5; font:650 .48cqw/1 ui-sans-serif,system-ui; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+.aether46-convergence-main { display:flex; align-items:baseline; gap:.38cqw; margin-top:.04cqw; }
+.aether46-convergence-main > strong { color:#ffe59a; font:850 1.40cqw/1 ui-sans-serif,system-ui; }
+.aether46-convergence-main > span { color:#d8f4ff; font:750 .71cqw/1 ui-sans-serif,system-ui; }
+.aether46-convergence-main > span b { color:#ffe59a; }
+.aether46-card[data-aether-card-406046="convergence"] footer { margin-top:.35cqw; color:#8dcff0; font-size:.62cqw; }
+.aether46-card[data-aether-card-406046="convergence"] footer b { color:#70dfff; }
+
+.aether46-card[data-aether-card-406046="divergence"] p { margin:.05cqw 0 .35cqw; max-height:2.45em; overflow:hidden; color:#eaf7ff; font:750 .68cqw/1.20 ui-sans-serif,system-ui; }
+.aether46-card[data-aether-card-406046="divergence"] footer b { color:#85e9ff; }
+
+.aether46-breadth { display:flex; align-items:center; gap:.45cqw; color:#e8f7ff; font:750 .55cqw/1 ui-sans-serif,system-ui; white-space:nowrap; }
+.aether46-breadth b { font-weight:750; }
+.aether46-breadth strong { color:#ffe7a0; font-size:.70cqw; }
+.aether46-breadth b:nth-child(2) strong { color:#ffcf72; }
+.aether46-breadth b:nth-child(3) strong { color:#6ff0ff; }
+.aether46-coins { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:.10cqw; margin-top:.55cqw; padding-top:.35cqw; border-top:1px solid rgba(99,210,255,.15); }
+.aether46-coins span { min-width:0; text-align:center; }
+.aether46-coins b { display:block; color:#7adfff; font:800 .47cqw/1 ui-sans-serif,system-ui; }
+.aether46-coins strong { display:block; margin-top:.18cqw; color:#ebf9ff; font:800 .50cqw/1 ui-sans-serif,system-ui; white-space:nowrap; }
+
+.aether46-events [data-aether46-events] { display:grid; gap:.17cqw; max-height:4.5cqw; overflow:hidden; }
+.aether46-event-row { display:grid; grid-template-columns:2.3cqw 2.7cqw minmax(0,1fr); gap:.25cqw; align-items:center; min-width:0; }
+.aether46-event-row time { color:#7deaff; font:700 .43cqw/1 ui-sans-serif,system-ui; }
+.aether46-event-row b { color:#79dfff; font:800 .43cqw/1 ui-sans-serif,system-ui; overflow:hidden; text-overflow:ellipsis; }
+.aether46-event-row span { color:#dbeaf2; font:650 .43cqw/1 ui-sans-serif,system-ui; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.aether46-empty { color:#94b8c8; font:650 .49cqw/1.2 ui-sans-serif,system-ui; }
+
+.aether46-oracle-metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.18cqw; margin-top:.08cqw; }
+.aether46-oracle-metrics div { min-width:0; padding-right:.15cqw; border-right:1px solid rgba(111,211,255,.14); }
+.aether46-oracle-metrics div:last-child { border-right:0; }
+.aether46-oracle-metrics strong { display:block; margin-top:.22cqw; color:#ffe39b; font:850 .60cqw/1 ui-sans-serif,system-ui; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+.aether46-weather-metrics { display:grid; grid-template-columns:1.25fr .7fr 1fr; gap:.30cqw; margin-top:.06cqw; }
+.aether46-weather-metrics div { min-width:0; border-right:1px solid rgba(111,211,255,.14); }
+.aether46-weather-metrics div:last-child { border-right:0; }
+.aether46-weather-metrics strong { display:block; margin-top:.22cqw; color:#75dfff; font:850 .64cqw/1 ui-sans-serif,system-ui; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.aether46-card[data-aether-card-406046="weather"] footer { margin-top:.40cqw; font-size:.45cqw; }
+
+/* 40.6.48 — Central LIVE embroidery begins BELOW the baked lotus/Aether identity.
+   Only variable attention data is drawn here. */
+.aether46-core {
+  left:39.3%; top:45.4%; width:21.4%; height:19.1%;
+  padding:.25% 1.0% .25%; text-align:center; color:#eefaff; overflow:visible;
+}
+.aether46-core > span { display:block; color:#ffe39b; font:800 .62cqw/1 ui-sans-serif,system-ui; letter-spacing:.17em; }
+.aether46-core > strong { display:block; margin-top:.24cqw; color:#ffe6a3; font:800 1.92cqw/1 Georgia,'Times New Roman',serif; text-shadow:0 0 .8cqw rgba(255,202,64,.24); }
+.aether46-core > small { display:block; margin-top:.32cqw; color:#ffe19a; font:750 .52cqw/1 ui-sans-serif,system-ui; }
+.aether46-core > b { display:block; margin-top:.40cqw; color:#ffe19a; font:800 .54cqw/1 ui-sans-serif,system-ui; }
+.aether46-core > p { margin:.14cqw auto 0; max-width:96%; max-height:2.2em; overflow:hidden; color:#e4f3fa; font:650 .49cqw/1.14 ui-sans-serif,system-ui; }
+.aether46-core > footer { margin-top:.30cqw; max-height:2.0em; overflow:hidden; color:#87b8ca; font:600 .41cqw/1.12 ui-sans-serif,system-ui; }
+
+.aether46-bottom-left, .aether46-bottom-right, .aether46-bottom-center { position:absolute; z-index:4; bottom:2.35%; color:#9bc6d8; pointer-events:none; text-shadow:0 1px 2px rgba(0,0,0,.7); }
+.aether46-bottom-left { left:13.7%; width:20%; font:650 .43cqw/1 ui-sans-serif,system-ui; }
+.aether46-bottom-right { right:13.6%; width:20%; text-align:right; font:650 .43cqw/1 ui-sans-serif,system-ui; }
+.aether46-bottom-left small, .aether46-bottom-right small { display:block; margin-top:.16cqw; font-size:.38cqw; letter-spacing:.08em; }
+.aether46-bottom-center { left:35%; width:30%; text-align:center; color:#d7e8f1; font:750 .49cqw/1 ui-sans-serif,system-ui; letter-spacing:.22em; }
+
+.aether46-actions { position:absolute; z-index:110; right:2.8%; bottom:2.1%; display:flex; gap:.32cqw; opacity:.22; transition:opacity .16s ease; }
+.aether46-stage:hover .aether46-actions, .aether46-actions:focus-within { opacity:.88; }
+.aether46-actions button { padding:.28cqw .48cqw; border:1px solid rgba(83,222,255,.27); border-radius:999px; background:rgba(1,11,23,.62); color:#dff8ff; font:750 .43cqw/1 ui-sans-serif,system-ui; cursor:pointer; }
+
+/* Windowed mode and F11/maximized are the SAME stage, only scaled. */
+#atlasAetherStatusPanel4084.admin-native-window-aether-watch,
+#atlasAetherStatusPanel4084.admin-native-window-aether-watch.admin-native-direct-floating,
+#atlasAetherStatusPanel4084.admin-native-window-aether-watch.admin-native-maximized {
+  overflow:hidden !important;
+  background:#01050d !important;
+  background-image:none !important;
+}
+#atlasAetherStatusPanel4084.admin-native-window-aether-watch.admin-native-maximized .aether46-stage {
+  width:min(100cqw, calc(100cqh * var(--a48-ratio))) !important;
+  height:min(100cqh, calc(100cqw / var(--a48-ratio))) !important;
+  transform:translate(-50%,-50%) !important;
+}
+
+@media (max-width: 900px) {
+  /* Preserve the exact Observatory rather than reflowing it into a dashboard. */
+  #atlasAetherStatusPanel4084 { overflow:auto !important; }
+  .aether46-stage { min-width:900px !important; min-height:506px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aether46-actions, #atlasAetherStatusPanel4084 > .atlas-aether-panel-head-4084 > [data-aether-close-4084] { transition:none !important; }
+}

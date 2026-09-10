@@ -1,0 +1,850 @@
+<section class="panel glass sim-layer" id="simulation">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">△ PAPER TRADING SANDBOX</p>
+          <h2>Simulation micro-transactions</h2>
+          <p class="sim-intro">
+            Portefeuille virtuel local avec profil débutant 100 €. Aucun ordre réel, aucune clé API, aucun wallet connecté. Sert à apprendre avant toute future connexion Kraken.
+          </p>
+        </div>
+        <span class="pill warn">Profil 100 €</span>
+      </div>
+
+      <div class="visual-identity-strip" aria-label="Identité visuelle Atlas et NØX">
+        <div class="visual-chip atlas-chip"><span class="section-icon">◇</span><div><b>Atlas-10 Crypto</b><em>analyse · mémoire · cartographie</em></div></div>
+        <div class="visual-chip oracle-chip"><span class="section-icon">∑</span><div><b>Math Oracle</b><em>scores · variations · prudence</em></div></div>
+        <div class="visual-chip nox-chip"><span class="section-icon">⊘</span><div><b>NØX Risk Auditor</b><em>refus · anti-FOMO · sécurité</em></div></div>
+      </div>
+
+      <div class="action-feedback neutral" id="actionFeedback" aria-live="polite">
+        <b>Assistant prêt</b>
+        <span>Chaque action importante affichera maintenant une confirmation claire ici.</span>
+      </div>
+
+      <div class="sim-profile-panel" id="simProfilePanel">
+        <div class="sim-profile-head">
+          <b>Profil actif : Solo Débutant 100 €</b>
+          <span id="simProfileStatus">BTC / ETH / SOL · ticket 5 € · maximum 10 € · exposition 30 €</span>
+        </div>
+        <div class="sim-profile-grid">
+          <div><b>Capital</b><span>100 € virtuels</span></div>
+          <div><b>Ticket conseillé</b><span>5 €</span></div>
+          <div><b>Maximum opération</b><span>10 €</span></div>
+          <div><b>Exposition maximale</b><span>30 €</span></div>
+          <div><b>Réserve minimale</b><span>70 €</span></div>
+          <div><b>Cryptos autorisées</b><span>BTC · ETH · SOL</span></div>
+        </div>
+      </div>
+
+      <div class="sim-grid">
+        <div class="sim-card"><b>Capital virtuel</b><span id="simCash">—</span></div>
+        <div class="sim-card"><b>Valeur positions</b><span id="simPositionsValue">—</span></div>
+        <div class="sim-card"><b>Total simulé</b><span id="simTotalValue">—</span></div>
+        <div class="sim-card"><b>P/L virtuel</b><span id="simPnL">—</span></div>
+      </div>
+
+      <div class="atlas-simulation-math" id="atlasSimulationMathPanel">
+        <b>Atlas Simulation Math</b>
+        <span>Simulation locale uniquement. Une simulation réussie n’autorise jamais une exécution réelle.</span>
+      </div>
+
+      <div class="icon-legend-panel" id="iconLegendPanel">
+        <div class="icon-legend-head"><div><p class="eyebrow">REPÈRES VISUELS</p><h3>Lire l’app plus vite</h3><p>Les icônes servent à reconnaître les zones : observer, apprendre, refuser, mémoriser, reprendre.</p></div><span class="pill ok">UI douce</span></div>
+        <div class="icon-legend-grid">
+          <article><span>◉</span><b>Observer</b><em>Livecheck et marché</em></article>
+          <article><span>△</span><b>Simuler</b><em>opérations fictives</em></article>
+          <article><span>⊘</span><b>Refuser</b><em>risque bloqué</em></article>
+          <article><span>✦</span><b>Apprendre</b><em>mode école</em></article>
+          <article><span>◇</span><b>Mémoriser</b><em>snapshots locaux</em></article>
+          <article><span>☉</span><b>Reprendre</b><em>pause et suite</em></article>
+        </div>
+      </div>
+
+      <div class="school-panel" id="schoolPanel">
+        <div class="school-head">
+          <div>
+            <p class="eyebrow">✦ MODE ÉCOLE GUIDÉ</p>
+            <h3>Apprendre sans deviner quoi taper</h3>
+            <p>Chaque bouton lance un test complet et explique le résultat. Aucun argent réel, aucune clé API, aucun wallet.</p>
+          </div>
+          <span class="pill ok">Guidé</span>
+        </div>
+
+        <div class="school-tests" aria-label="Tests guidés du simulateur">
+          <button class="school-test primary" data-school-test="safe_btc_5">
+            <b>1 · Tester une opération prudente</b>
+            <span>BTC 5 € · doit être accepté</span>
+          </button>
+          <button class="school-test" data-school-test="too_big_btc_50">
+            <b>2 · Tester une opération trop grosse</b>
+            <span>BTC 50 € · doit être refusé</span>
+          </button>
+          <button class="school-test" data-school-test="forbidden_doge_5">
+            <b>3 · Tester une crypto interdite</b>
+            <span>DOGE 5 € · doit être refusé</span>
+          </button>
+          <button class="school-test" data-school-test="fill_ceiling">
+            <b>4 · Remplir le plafond de sécurité</b>
+            <span>BTC 10 € + ETH 10 € + SOL 10 €</span>
+          </button>
+          <button class="school-test" data-school-test="exceed_ceiling">
+            <b>5 · Dépasser le plafond</b>
+            <span>Après 30 € exposés, BTC 5 € doit être refusé</span>
+          </button>
+          <button class="school-test reset" data-school-test="reset_100">
+            <b>Remettre le simulateur à 100 €</b>
+            <span>Repartir proprement</span>
+          </button>
+        </div>
+
+        <div class="school-result neutral" id="schoolResult">
+          <b>Mode école prêt</b>
+          <p>Clique un test. L’app écrit le résultat ici en français normal.</p>
+          <ul>
+            <li>Accepté = opération virtuelle autorisée par le profil.</li>
+            <li>Refusé = protection normale du profil débutant.</li>
+            <li>Rien ici ne peut acheter ou vendre réellement.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           40.4.22 — LEARNING JOURNEY 01→11 PRESENTATION RECOVERY
+           Canonical cockpit presentation restored from validated 28.3.x lineage.
+           Runtime / IndexedDB / learning engines remain owned by app.js.
+           ============================================================ -->
+      <section class="learning-exercise-guide" id="learningExerciseGuide" hidden aria-live="polite">
+        <div class="learning-exercise-guide-copy">
+          <p class="learning-breadcrumb" id="learningExerciseBreadcrumb">Cockpit › Module › Exercice</p>
+          <b id="learningExerciseGuideTitle">Exercice guidé</b>
+          <span id="learningExerciseGuideText">Le cockpit indiquera ici la mission exacte.</span>
+        </div>
+        <div class="learning-exercise-guide-actions">
+          <button class="btn small primary" id="btnLearningExerciseGuidePrimary" type="button">Exercice terminé</button>
+          <button class="btn small" id="btnLearningExerciseBack" type="button">Retour à ma session guidée</button>
+        </div>
+      </section>
+
+      <section class="learning-journey-cockpit" id="learningJourneyCockpit" aria-labelledby="learningCockpitTitle">
+        <div class="learning-cockpit-head">
+          <div>
+            <p class="eyebrow">☉ COCKPIT D’APPRENTISSAGE · ARGENT 100 % FICTIF</p>
+            <h3 id="learningCockpitTitle">Prochaine étape</h3>
+            <p>Le cockpit relie ton parcours expert, la simulation, les frais et le journal. Il ne donne aucun conseil d’achat et ne peut déclencher aucune opération réelle.</p>
+          </div>
+          <span class="pill ok" id="learningCockpitStatus">Session prête</span>
+        </div>
+
+        <div class="learning-cockpit-summary" aria-label="État actuel de l’apprentissage">
+          <article><b>Profil fictif actif</b><span id="learningCockpitProfile">Progression 1 000 €</span><em id="learningCockpitCapital">1 000 € virtuels</em></article>
+          <article><b>Progression 24 mois</b><span id="learningCockpitProgress">0 %</span><em id="learningCockpitModules">0/11 modules découverts</em></article>
+          <article><b>Portefeuille école</b><span id="learningCockpitPortfolio">Aucune position</span><em id="learningCockpitExposure">0 € exposé</em></article>
+          <article><b>Dernière preuve</b><span id="learningCockpitLastProof">Aucune simulation</span><em id="learningCockpitLastProofTime">Journal local vide</em></article>
+        </div>
+
+        <div class="learning-cockpit-focus">
+          <div class="learning-cockpit-focus-copy">
+            <p class="eyebrow">PROCHAINE ÉTAPE PERSONNELLE</p>
+            <h4 id="learningCockpitModule">01 · Marché et données</h4>
+            <p id="learningCockpitGoal">Commencer par lire les prix, les variations, le volume et la fraîcheur des sources.</p>
+            <div class="learning-cockpit-tags">
+              <span id="learningCockpitModuleState">À découvrir</span>
+              <span id="learningCockpitDuration">Session 15 min</span>
+              <span id="learningCockpitRisk">Aucun argent réel</span>
+            </div>
+          </div>
+          <div class="learning-help-setting">
+            <label for="learningHelpMode">Niveau des aides ⓘ</label>
+            <select id="learningHelpMode">
+              <option value="off">Désactivées</option>
+              <option value="short" selected>Courtes</option>
+              <option value="detailed">Détaillées</option>
+            </select>
+            <span id="learningHelpModeHint">Définition et valeur actuelle, sans panneau long.</span>
+          </div>
+        </div>
+
+        <section class="learning-primary-action" id="learningPrimaryActionPanel" data-state="read" aria-labelledby="learningPrimaryActionTitle">
+          <div class="learning-primary-action-copy">
+            <p class="learning-breadcrumb" id="learningBreadcrumb">Cockpit › Module 01 › Étape 1</p>
+            <span class="learning-primary-step" id="learningPrimaryStep">Étape 1/5</span>
+            <h4 id="learningPrimaryActionTitle">1. Comprendre les valeurs du marché</h4>
+            <p id="learningPrimaryActionText">Le cockpit affiche une seule action principale à la fois.</p>
+          </div>
+          <button class="btn primary learning-primary-button" id="btnLearningPrimaryAction" type="button" data-action="read">Ouvrir la leçon du Module 01</button>
+        </section>
+
+        <section class="learning-completion-panel" id="learningCompletionPanel" hidden aria-labelledby="learningCompletionTitle">
+          <div class="learning-completion-head">
+            <div>
+              <p class="eyebrow">✓ SESSION TERMINÉE ET ARCHIVÉE</p>
+              <h4 id="learningCompletionTitle">Module terminé</h4>
+              <p id="learningCompletionDate">La preuve d’archivage sera affichée ici.</p>
+            </div>
+            <span class="pill ok" id="learningCompletionBadge">5/5 étapes</span>
+          </div>
+          <div class="learning-completion-grid">
+            <article><b>Étapes</b><span id="learningCompletionSteps">5/5</span><em>Session complète</em></article>
+            <article><b>Notes conservées</b><span id="learningCompletionNotes">0 caractère</span><em>IndexedDB</em></article>
+            <article><b>Conclusion conservée</b><span id="learningCompletionTakeaway">0 caractère</span><em>IndexedDB</em></article>
+            <article><b>Progression</b><span id="learningCompletionProgress">0 %</span><em id="learningCompletionSessions">0 session archivée</em></article>
+          </div>
+          <div class="learning-completion-next">
+            <div><b>Étape suivante</b><span id="learningCompletionNextModule">02 · Spot et carnet d’ordres</span></div>
+            <button class="btn primary" id="btnLearningNextModule" type="button">Passer au module suivant</button>
+          </div>
+          <div class="learning-completion-actions">
+            <button class="btn small" id="btnLearningReviewCompleted" type="button">Relire cette session</button>
+            <button class="btn small" id="btnLearningExportCompleted" type="button">Exporter cette session .md</button>
+            <button class="btn small" id="btnLearningOpenNotebook" type="button">Voir mon carnet complet</button>
+          </div>
+        </section>
+
+        <div class="learning-restart-notice" id="learningRestartNotice">
+          <div>
+            <b id="learningMigrationNoticeTitle">Récupération automatique de ton carnet</b>
+            <span id="learningMigrationNoticeText">Aucun clic nécessaire. La copie utilise IndexedDB, même si le stockage local est plein.</span>
+          </div>
+          <button class="btn small" id="btnRestoreLegacyLearningRecovery" type="button" hidden>Voir le diagnostic</button>
+        </div>
+
+        <section class="learning-legacy-recovery" id="learningLegacyRecoveryPanel" aria-labelledby="learningLegacyRecoveryTitle" hidden>
+          <div class="learning-legacy-recovery-head">
+            <div>
+              <p class="eyebrow">⟲ RÉCUPÉRATION AUTOMATIQUE ET VÉRIFIÉE</p>
+              <h4 id="learningLegacyRecoveryTitle">Restaurer tes leçons précédentes</h4>
+              <p>La récupération se lance automatiquement. Elle lit uniquement ce Firefox, conserve les anciennes clés, écrit le nouveau carnet puis relit chaque résultat avant d’annoncer une réussite.</p>
+            </div>
+            <span class="pill warn" id="learningLegacyRecoveryStatus">RÉCUPÉRATION EN COURS</span>
+          </div>
+          <div class="learning-legacy-recovery-summary" id="learningLegacyRecoverySummary"></div>
+          <div class="learning-legacy-recovery-result" id="learningLegacyRecoveryResult" data-state="pending"></div>
+          <pre class="learning-legacy-recovery-preview" id="learningLegacyRecoveryPreview" hidden></pre>
+          <div class="learning-legacy-recovery-actions">
+            <button class="btn small" id="btnPreviewLegacyLearning" type="button">Voir le diagnostic</button>
+            <button class="btn small primary" id="btnImportLegacyLearning" type="button">Relancer uniquement en cas d’échec</button>
+            <button class="btn small" id="btnIgnoreLegacyLearning" type="button">Masquer le diagnostic</button>
+          </div>
+          <p class="learning-legacy-truth">L’ancien champ était limité à 800 caractères. Le Build restaure tout ce qui existe encore, vérifie la progression après écriture et ne prétend jamais reconstruire les caractères déjà coupés.</p>
+        </section>
+
+        <details class="learning-lesson-panel" id="learningLessonPanel">
+          <summary><span>LEÇON INTÉGRÉE AU COCKPIT</span><b id="learningLessonTitle">01 · Marché et données</b></summary>
+          <div class="learning-lesson-body">
+            <p class="learning-lesson-intro" id="learningLessonIntro"></p>
+            <div class="learning-lesson-grid">
+              <section><h5>Notions à comprendre</h5><ul id="learningLessonConcepts"></ul></section>
+              <section><h5>Exemple pédagogique</h5><p id="learningLessonExample"></p></section>
+              <section><h5>Données visibles dans ton interface</h5><ul id="learningLessonInterface"></ul></section>
+              <section><h5>Règle de sécurité</h5><p id="learningLessonSafety"></p></section>
+            </div>
+            <button class="btn small primary" id="btnMarkLessonRead" type="button">Valider l’étape 1 après lecture</button>
+          </div>
+        </details>
+
+        <section class="learning-foundation-panel" id="learningFoundationPanel" aria-labelledby="learningFoundationTitle">
+          <header class="learning-foundation-head">
+            <div>
+              <p class="eyebrow">PARCOURS DÉBUTANT DÉTAILLÉ · PÉDAGOGIE 28.3.44</p>
+              <h4 id="learningFoundationTitle">01 · Marché et données</h4>
+              <p id="learningFoundationPromise">Chaque notion est définie avant son utilisation.</p>
+            </div>
+          </header>
+          <div class="learning-foundation-status" id="learningFoundationStatus" aria-live="polite"></div>
+          <div class="learning-foundation-route" id="learningFoundationRoute" aria-label="Ordre exact du parcours"></div>
+          <div class="learning-foundation-steps" id="learningFoundationStepCards"></div>
+          <section class="learning-foundation-lab" id="learningFoundationLab" aria-label="Exercice pédagogique du module"></section>
+        </section>
+
+        <div class="learning-session-plan" id="learningSessionPlan">
+          <div class="learning-session-plan-head">
+            <div><b id="learningSessionTitle">Session du jour</b><span id="learningSessionProgress">0/5 étapes</span></div>
+            <button class="btn small danger" id="btnResetLearningJourney" type="button" aria-label="Repartir de zéro uniquement dans Agent-Crypto" title="Réinitialise uniquement le parcours Agent-Crypto : progression, notes, archives pédagogiques et simulations fictives. Market, Métaux, Bridge et réglages généraux sont conservés.">Repartir de zéro</button>
+          </div>
+          <div class="learning-evidence-lock" id="learningEvidenceLock" role="status" aria-live="polite">
+            <b>Validation automatique par preuves</b>
+            <span>Les cases ci-dessous sont des indicateurs, pas des commandes. Elles deviennent vertes uniquement après l’action exacte expliquée dans le parcours.</span>
+          </div>
+          <label><input type="checkbox" data-learning-step="read" /> <span><b id="learningStepReadTitle">1. Comprendre la leçon</b><em id="learningStepRead">Le contenu complet se trouve juste au-dessus, dans l’interface.</em><button class="btn small learning-step-action" type="button" data-learning-step-action="read">Ouvrir cette étape</button></span></label>
+          <label><input type="checkbox" data-learning-step="open" /> <span><b id="learningStepOpenTitle">2. Ouvrir le panneau exact</b><em id="learningStepOpen">Le Cockpit nomme le panneau et l’action attendue.</em><button class="btn small learning-step-action" type="button" data-learning-step-action="open">Ouvrir cette étape</button></span></label>
+          <label><input type="checkbox" data-learning-step="practice" /> <span><b id="learningStepPracticeTitle">3. Faire l’exercice expliqué</b><em id="learningStepPractice">Aucun argent réel et aucun ordre externe.</em><button class="btn small learning-step-action" type="button" data-learning-step-action="practice">Ouvrir cette étape</button></span></label>
+          <label><input type="checkbox" data-learning-step="verify" /> <span><b id="learningStepVerifyTitle">4. Lire le résultat expliqué</b><em id="learningStepVerify">Le résultat, son emplacement et son sens sont indiqués.</em><button class="btn small learning-step-action" type="button" data-learning-step-action="verify">Ouvrir cette étape</button></span></label>
+          <label><input type="checkbox" data-learning-step="note" /> <span><b id="learningStepNoteTitle">5. Écrire ta conclusion personnelle</b><em id="learningStepNote">La conclusion est séparée de tes notes longues et elle n’est pas tronquée.</em><button class="btn small learning-step-action" type="button" data-learning-step-action="note">Ouvrir cette étape</button></span></label>
+        </div>
+
+        <div class="learning-notebook-grid" id="learningNotebookGrid">
+          <section class="learning-auto-summary-panel" id="learningAutoSummaryPanel" hidden aria-labelledby="learningAutoSummaryTitle">
+            <span id="learningAutoSummaryTitle">Synthèse automatique — générée à partir des preuves</span>
+            <pre id="learningAutoSummaryText">La synthèse automatique apparaîtra ici lorsque les preuves du module seront validées.</pre>
+            <em id="learningAutoSummaryHint">Lecture seule · aucune conclusion n’est générée sans preuve.</em>
+          </section>
+          <label class="learning-session-note learning-session-note-free">
+            <span id="learningPersonalNotesLabel">Mes notes libres — sauvegarde automatique complète</span>
+            <textarea id="learningSessionNotesFree" placeholder="Écris seulement ce que tu veux retenir, vérifier ou reformuler avec tes propres mots. La synthèse automatique reste séparée."></textarea>
+            <em id="learningNotesCounter">0 caractère · sauvegarde locale complète</em>
+          </label>
+          <label class="learning-session-note learning-session-takeaway" id="learningTakeawayField">
+            <span>Ce que je retiens — conclusion personnelle (modules concernés)</span>
+            <small class="learning-conclusion-guide" id="learningConclusionGuide"><b>Modules concernés :</b> cette conclusion libre reste disponible pour les exercices qui la demandent. Le Module 01 utilise désormais une synthèse guidée et une réponse explicite.</small>
+            <textarea id="learningSessionNote" placeholder="Conclusion libre utilisée par les modules qui la demandent. Elle n’est pas obligatoire dans le Module 01."></textarea>
+            <em id="learningTakeawayCounter">0 caractère · sauvegarde locale complète</em>
+          </label>
+        </div>
+
+        <div class="learning-session-complete-action" id="learningCompletionAction">
+          <button class="btn primary" id="btnCompleteLearningSession" type="button" disabled>Terminer et archiver le module</button>
+          <span id="learningCompletionActionHint">Disponible après la validation technique des 5 étapes.</span>
+        </div>
+
+        <details class="learning-secondary-actions" id="learningSecondaryActions">
+          <summary>Autres actions et exports</summary>
+          <div class="learning-cockpit-actions" id="learningCockpitActions">
+            <button class="btn small" id="btnContinueLearning" type="button">Ouvrir la zone du module</button>
+            <button class="btn small" id="btnOpenLearningPractice" type="button">Ouvrir directement l’exercice</button>
+            <button class="btn small" id="btnOpenLearningProofs" type="button">Voir les preuves de simulation</button>
+            <button class="btn small" id="btnExportLearningSession" type="button">Exporter cette session .md</button>
+            <button class="btn small" id="btnExportLearningNotebook" type="button">Exporter mon carnet complet .md</button>
+            <button class="btn small" id="btnVerifyLearningIntegrity" type="button">Vérifier l’intégrité du parcours</button>
+          </div>
+          <section class="learning-integrity-panel" id="learningIntegrityPanel" hidden aria-labelledby="learningIntegrityTitle">
+            <header>
+              <div><b id="learningIntegrityTitle">Diagnostic non destructif du carnet</b><span>Lecture IndexedDB, brouillon, archives, feuille de route et séparation de la simulation.</span></div>
+              <span class="pill warn" id="learningIntegrityBadge">NON VÉRIFIÉ</span>
+            </header>
+            <div class="learning-integrity-summary" id="learningIntegritySummary"></div>
+            <pre class="learning-integrity-details" id="learningIntegrityDetails">Aucune vérification lancée.</pre>
+            <div class="learning-integrity-actions"><button class="btn small" id="btnExportLearningIntegrity" type="button" disabled>Télécharger le diagnostic JSON</button></div>
+            <p>Aucune réparation automatique, aucun reset et aucun effacement ne sont exécutés par ce diagnostic.</p>
+          </section>
+        </details>
+
+        <div class="learning-cockpit-reading" id="learningCockpitReading">Commence par lire la leçon intégrée. Tes notes sont sauvegardées automatiquement et intégralement dans ce navigateur.</div>
+      </section>
+
+      <section class="expert-roadmap-panel" id="expertLearningRoadmap" aria-labelledby="expertRoadmapTitle">
+        <div class="expert-roadmap-head">
+          <div>
+            <p class="eyebrow">◇ PARCOURS EXPERT · HORIZON 24 MOIS</p>
+            <h3 id="expertRoadmapTitle">Construire l’expertise sans brûler les étapes</h3>
+            <p>Progression locale et personnelle. Aucun score financier, aucune compétition et aucune fonction existante retirée.</p>
+          </div>
+          <span class="pill ok" id="expertRoadmapBadge">0 module pratiqué</span>
+        </div>
+        <div class="expert-roadmap-progress" aria-label="Progression du parcours expert">
+          <div><b id="expertRoadmapProgressText">0/11 modules découverts</b><span id="expertRoadmapMasteryText">0 pratiqué</span></div>
+          <div class="expert-roadmap-bar"><i id="expertRoadmapProgressBar"></i></div>
+        </div>
+        <div class="expert-roadmap-grid" id="expertRoadmapGrid"></div>
+        <div class="expert-roadmap-actions">
+          <button class="btn small primary" id="btnExportExpertRoadmap" type="button">Télécharger feuille de route .md</button>
+          <button class="btn small" id="btnResetExpertRoadmap" type="button">Réinitialiser seulement la feuille de route</button>
+        </div>
+        <p class="rule-line">Les états servent uniquement à organiser les révisions : À découvrir → Découvert → Compris → Pratiqué → À revoir.</p>
+      </section>
+
+
+      <div class="learning-panel" id="learningPanel">
+        <div class="learning-head">
+          <div>
+            <p class="eyebrow">✧ JOURNAL PÉDAGOGIQUE + DATA</p>
+            <h3>Transformer les tests en mémoire exploitable</h3>
+            <p>L’app résume ce que tu as testé, ce qu’elle a refusé, ce que ça apprend, puis prépare un export propre pour la future base locale.</p>
+          </div>
+          <span class="pill ok">Mémoire</span>
+        </div>
+
+        <div class="learning-actions">
+          <button class="btn small primary" id="btnBuildSimSummary" type="button">Résumer ma session</button>
+          <button class="btn small" id="btnDownloadLearningJournal" type="button">Télécharger journal .md</button>
+          <button class="btn small" id="btnDownloadSimJSON" type="button">Télécharger data JSON</button>
+        </div>
+
+        <div class="learning-grid">
+          <article>
+            <b>Ce que j’ai appris</b>
+            <span>Lecture humaine : prudence, refus, plafond, réserve.</span>
+          </article>
+          <article>
+            <b>Snapshot public</b>
+            <span>Données non sensibles : prix, variations, positions simulées.</span>
+          </article>
+          <article>
+            <b>Future base locale</b>
+            <span>Ton PC Ryzen 7 pourra stocker l’historique plus tard.</span>
+          </article>
+        </div>
+
+        <pre class="learning-output" id="simLearningOutput">Clique “Résumer ma session”. L’app générera une note lisible et un format de données public non sensible.</pre>
+      </div>
+
+      <div class="collector-panel" id="collectorPanel">
+        <div class="collector-head">
+          <div>
+            <p class="eyebrow">◇ DATA COLLECTOR LOCAL</p>
+            <h3>Commencer une mémoire qui grossit</h3>
+            <p>Enregistre des snapshots publics non sensibles dans ce navigateur. C’est une base d’entraînement locale, pas encore un backend Ryzen 7.</p>
+          </div>
+          <span class="pill ok">Local</span>
+        </div>
+
+        <div class="collector-actions">
+          <button class="btn small primary" id="btnSaveCollectorSnapshot" type="button">Enregistrer snapshot maintenant</button>
+          <button class="btn small" id="btnShowCollectorMemory" type="button">Voir mémoire locale</button>
+          <button class="btn small" id="btnDownloadCollectorJSON" type="button">Exporter mémoire JSON</button>
+          <button class="btn small" id="btnDownloadCollectorJSONL" type="button">Exporter mémoire JSONL</button>
+          <button class="btn small danger" id="btnClearCollectorMemory" type="button">Effacer mémoire locale</button>
+        </div>
+
+        <div class="collector-grid">
+          <article>
+            <b>Snapshots</b>
+            <span id="collectorCount">0 enregistré</span>
+          </article>
+          <article>
+            <b>Dernier enregistrement</b>
+            <span id="collectorLast">Aucun</span>
+          </article>
+          <article>
+            <b>Contenu</b>
+            <span>BTC / ETH / SOL + simulation + refus + profil</span>
+          </article>
+          <article>
+            <b>Sécurité</b>
+            <span>LocalStorage navigateur · aucune clé · aucun wallet</span>
+          </article>
+        </div>
+
+        <pre class="collector-output" id="collectorOutput">Mémoire locale prête. Clique “Enregistrer snapshot maintenant” après un Livecheck et quelques tests guidés.</pre>
+      </div>
+
+      <div class="memory-explorer-panel" id="memoryExplorerPanel">
+        <div class="memory-explorer-head">
+          <div>
+            <p class="eyebrow">◌ EXPLORATEUR DE MÉMOIRE</p>
+            <h3>Lire ce que la mémoire commence à montrer</h3>
+            <p>Compare les snapshots enregistrés, repère les variations BTC / ETH / SOL et résume les refus de sécurité.</p>
+          </div>
+          <span class="pill ok">Explorer</span>
+        </div>
+
+        <div class="memory-explorer-actions">
+          <button class="btn small primary" id="btnExploreMemory" type="button">Lire mémoire</button>
+          <button class="btn small" id="btnCompareMemory" type="button">Comparer premier / dernier</button>
+          <button class="btn small" id="btnSummarizeRefusals" type="button">Résumer refus</button>
+          <button class="btn small" id="btnDownloadMemoryReport" type="button">Télécharger rapport .md</button>
+        </div>
+
+        <div class="memory-explorer-grid">
+          <article>
+            <b>Lecture</b>
+            <span>Nombre de snapshots, dernier état, tags dominants.</span>
+          </article>
+          <article>
+            <b>Comparaison</b>
+            <span>Premier / dernier prix BTC, ETH, SOL si disponibles.</span>
+          </article>
+          <article>
+            <b>Refus</b>
+            <span>Montant trop gros, crypto interdite, plafond atteint.</span>
+          </article>
+          <article>
+            <b>Conclusion</b>
+            <span>Ce que la mémoire apprend au simulateur.</span>
+          </article>
+        </div>
+
+        <pre class="memory-explorer-output" id="memoryExplorerOutput">Explorateur prêt. Enregistre au moins un snapshot dans le Data Collector, puis clique “Lire mémoire”.</pre>
+      </div>
+
+      <div class="collection-plan-panel" id="collectionPlanPanel">
+        <div class="collection-plan-head">
+          <div>
+            <p class="eyebrow">⌁ PLAN DE COLLECTE GUIDÉ</p>
+            <h3>Construire une mémoire comparable</h3>
+            <p>Une comparaison utile demande plusieurs snapshots. Ce bloc guide la collecte sans backend, en attendant la future base Ryzen 7.</p>
+          </div>
+          <span class="pill ok">3 snapshots</span>
+        </div>
+
+        <div class="collection-progress">
+          <div class="collection-progress-top">
+            <b id="collectionProgressTitle">Objectif : 3 snapshots exploitables</b>
+            <span id="collectionProgressText">0/3</span>
+          </div>
+          <div class="collection-bar"><i id="collectionProgressBar"></i></div>
+        </div>
+
+        <div class="collection-plan-actions">
+          <button class="btn small primary" id="btnSaveReferenceSnapshot" type="button">1 · Snapshot de référence</button>
+          <button class="btn small" id="btnSaveAfterTestSnapshot" type="button">2 · Snapshot après test</button>
+          <button class="btn small" id="btnSaveLaterSnapshot" type="button">3 · Snapshot plus tard</button>
+          <button class="btn small" id="btnCollectionChecklist" type="button">Voir routine de collecte</button>
+          <button class="btn small" id="btnDownloadCollectionPlan" type="button">Télécharger plan .md</button>
+        </div>
+
+        <div class="collection-plan-grid">
+          <article>
+            <b>Référence</b>
+            <span>État de départ : marché + simulation actuelle.</span>
+          </article>
+          <article>
+            <b>Après test</b>
+            <span>État après refus ou opération prudente.</span>
+          </article>
+          <article>
+            <b>Plus tard</b>
+            <span>Nouvel état marché pour vraie comparaison.</span>
+          </article>
+          <article>
+            <b>Règle</b>
+            <span>2 snapshots minimum ; 3 snapshots conseillé.</span>
+          </article>
+        </div>
+
+        <pre class="collection-plan-output" id="collectionPlanOutput">Plan prêt. Commence par “Snapshot de référence”, puis ajoute un snapshot après test. La vraie comparaison devient utile avec au moins 2 snapshots.</pre>
+      </div>
+
+      <div class="agents-preview-panel" id="agentsPreviewPanel">
+        <div class="agents-preview-head"><div><p class="eyebrow">AGENTS À VENIR</p><h3>Atlas-10 Crypto + NØX Risk Auditor</h3><p>Préparation visuelle seulement : aucun agent autonome, aucun conseil financier, aucun trading réel.</p></div><span class="pill ok">Preview</span></div>
+        <div class="agents-preview-grid">
+          <article class="agent-card atlas"><span class="agent-glyph">◇</span><b>Atlas-10 Crypto</b><p>Cartographe analytique : lit les données, structure la mémoire, prépare les scénarios.</p></article>
+          <article class="agent-card aerith"><span class="agent-glyph">✦</span><b>Aerith-10 Crypto</b><p>Pédagogie et continuité : explique, relie, garde la logique humaine du simulateur.</p></article>
+          <article class="agent-card nox"><span class="agent-glyph">⊘</span><b>NØX Risk Auditor</b><p>Contradiction utile : détecte FOMO, excès, illusion de contrôle et risques bloqués.</p></article>
+        </div>
+      </div>
+
+      <div class="resume-assistant-panel" id="resumeAssistantPanel">
+        <div class="resume-assistant-head">
+          <div>
+            <p class="eyebrow">☉ ASSISTANT DE REPRISE</p>
+            <h3>Reprendre proprement après la pause</h3>
+            <p>Ce bloc prépare la suite : ce qui est validé, ce qui reste à faire, et la première action au réveil. Hotfix 7.1 : note lisible avec vrais retours ligne.</p>
+          </div>
+          <span class="pill ok">Reprise</span>
+        </div>
+
+        <div class="resume-assistant-actions">
+          <button class="btn small primary" id="btnShowWakePlan" type="button">Afficher reprise au réveil</button>
+          <button class="btn small" id="btnDownloadWakePlan" type="button">Télécharger reprise .md</button>
+          <button class="btn small" id="btnMarkPauseReady" type="button">Marquer prêt pour pause</button>
+        </div>
+
+        <div class="resume-assistant-grid">
+          <article><b>Validé</b><span>Mode école, mémoire, explorateur, plan de collecte.</span></article>
+          <article><b>À faire</b><span>Créer un 3e snapshot plus tard, puis comparer.</span></article>
+          <article><b>Suite</b><span>Préparer V1.2-local-plan après repos.</span></article>
+        </div>
+
+        <pre class="resume-assistant-output" id="resumeAssistantOutput">Prêt pour pause. Clique “Afficher reprise au réveil” pour générer la note de reprise.</pre>
+      </div>
+
+      <div class="sim-manual-title">Mode manuel avancé — utile plus tard, pas obligatoire pour apprendre</div>
+      <div class="sim-controls">
+        <label><span>Actif</span><input id="simSymbol" type="text" value="BTC" placeholder="BTC, ETH, SOL..." /></label>
+        <label><span>Montant €</span><input id="simAmount" type="number" min="1" step="1" value="5" /></label>
+        <button class="btn small primary" id="btnSimBuy">Simuler achat</button>
+        <button class="btn small" id="btnSimSell">Simuler vente</button>
+        <button class="btn small danger" id="btnSimReset">Reset simulation</button>
+      </div>
+
+      <div class="sim-test-hint">
+        Formulaire manuel : il sert aux essais libres. Pour apprendre, utilise d’abord les boutons du Mode École guidé au-dessus.
+      </div>
+
+      <div class="sim-columns">
+        <div>
+          <h3>Portefeuille virtuel</h3>
+          <div class="sim-positions" id="simPositions">Aucune position simulée.</div>
+        </div>
+        <div>
+          <h3>Journal simulation</h3>
+          <pre class="sim-log" id="simLog">Aucune simulation lancée.</pre>
+        </div>
+      </div>
+
+      <p class="rule-line warn-lock">
+        Verrou : la simulation ne remplace pas une stratégie. Tout passage réel devra exiger backend sécurisé, logs, limites, dry-run prolongé et validation humaine.
+      </p>
+    </section>
+      </div>
+    </details>
+
+    <details class="atlas-collapse glass atlas-family-member atlas-tone-experiment" data-collapse-key="commandes" data-layout-family="experiment">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">Tests / Commandes</span>
+        <span class="atlas-collapse-subtitle">Commandes simples</span>
+      </summary>
+      <div class="atlas-collapse-body">
+
+
+
+    <section class="panel glass command-layer" id="commandes">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">TESTS SIMPLES</p>
+          <h2>Tests simples de l’assistante</h2>
+          <p class="command-intro">
+            Clique un bouton, lis la carte verte. Le détail technique est replié et reste masqué pour la lecture normale.
+          </p>
+        </div>
+        <span class="pill warn">Dry-run only</span>
+      </div>
+
+      <div class="simple-command-guide" id="simpleCommandGuide">
+        <div><b>1</b><span>Clique un bouton.</span></div>
+        <div><b>2</b><span>Lis la carte verte.</span></div>
+        <div><b>3</b><span>Lis seulement la carte humaine.</span></div>
+        <div><b>✓</b><span>Rien ne peut acheter ou vendre ici.</span></div>
+      </div>
+
+      <div class="command-presets" aria-label="Commandes rapides">
+        <button class="cmd-preset" data-command="help">Aide</button>
+        <button class="cmd-preset" data-command="market_snapshot">Résumé marché</button>
+        <button class="cmd-preset" data-command="asset BTC">Lire BTC</button>
+        <button class="cmd-preset" data-command="chart BTC 24h">Graphique BTC</button>
+        <button class="cmd-preset" data-command="compare BTC ETH">Comparer BTC/ETH</button>
+        <button class="cmd-preset" data-command="sources">Sources</button>
+        <button class="cmd-preset" data-command="risk SOL">Risque SOL</button>
+        <button class="cmd-preset" data-command="simulation_profile">Profil 100€</button>
+        <button class="cmd-preset" data-command="sim_buy BTC 5">Simuler achat BTC 5€</button>
+        <button class="cmd-preset" data-command="sim_buy BTC 50">Test refus 50€</button>
+        <button class="cmd-preset" data-command="sim_buy DOGE 5">Test refus DOGE</button>
+        <button class="cmd-preset" data-command="portfolio">Portefeuille virtuel</button>
+        <button class="cmd-preset" data-command="planning">Plan projet</button>
+        <button class="cmd-preset" data-command="exchange_plan">Plan exchanges</button>
+        <button class="cmd-preset" data-command="news_sources">Sources info</button>
+        <button class="cmd-preset" data-command="situation">Situation</button>
+        <button class="cmd-preset" data-command="next_steps">Prochaines étapes</button>
+        <button class="cmd-preset" data-command="boundaries">Limites</button>
+        <button class="cmd-preset" data-command="questionnaire_status">Questionnaire</button>
+      </div>
+
+      <p class="command-helper-human"><b>Mode simple :</b> clique un bouton, lis la carte verte. Aucun détail technique brut, aucun prénom, aucune action financière réelle.</p>
+
+      <details class="manual-command-box">
+        <summary>Entrée manuelle avancée</summary>
+        <div class="command-line">
+        <span class="prompt">&gt;</span>
+        <input id="commandInput" type="text" placeholder="Tu peux cliquer les boutons. Exemple texte possible : Lire BTC, Plan architecture, Contrôle sécurité" autocomplete="off" />
+        <button class="btn small primary" id="btnRunCommand">Exécuter</button>
+      </div>
+      </details>
+
+      <div class="command-human" id="commandHuman">
+        <b>Lecture humaine</b>
+        <p>Clique un bouton au-dessus. La réponse importante apparaît ici. Les détails techniques bruts restent masqués.</p>
+      </div>
+
+      <pre class="command-output is-hidden" id="commandOutput" aria-hidden="true"></pre>
+
+      <div class="command-safety">
+        <span>Aucun buy/sell/order autorisé.</span>
+        <span>Mode public GitHub Pages.</span>
+        <span>Prépare Kraken / Bybit / Binance plus tard, via backend sécurisé.</span>
+      </div>
+    </section>
+      </div>
+    </details>
+
+    <details class="atlas-collapse glass atlas-family-member atlas-tone-system" data-collapse-key="backend" data-layout-family="system">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">Backend / API</span>
+        <span class="atlas-collapse-subtitle">Architecture future</span>
+      </summary>
+      <div class="atlas-collapse-body">
+
+
+
+    <section class="panel glass backend-layer" id="backend">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">ARCHITECTURE PRIVÉE</p>
+          <h2>Architecture public / privé / Kraken</h2>
+          <p class="backend-intro">
+            Plan de séparation : le site public reste sans clé et sans ordre réel. La future machine privée portera les accès, les logs, le kill switch et la simulation avancée.
+          </p>
+        </div>
+        <span class="pill warn">Plan, pas connexion réelle</span>
+      </div>
+
+      <div class="blueprint-flow">
+        <div class="blueprint-node public">
+          <b>Public</b>
+          <span>GitHub Pages</span>
+          <em>Observation · graphiques · commandes dry-run · aucune clé</em>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="blueprint-node private">
+          <b>Privé</b>
+          <span>Machine privée / backend local</span>
+          <em>Accès renforcé · logs · secrets chiffrés · kill switch</em>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="blueprint-node exchange">
+          <b>Exchange</b>
+          <span>Kraken d’abord</span>
+          <em>Lecture seule → simulation → validation humaine → réel verrouillé</em>
+        </div>
+      </div>
+
+      <div class="blueprint-grid">
+        <article>
+          <b>Ce qui reste public</b>
+          <span>Marché live, graphiques, watchlist, commandes IA observation, paper trading local.</span>
+        </article>
+        <article>
+          <b>Ce qui devient privé</b>
+          <span>Clés API, backend Kraken, accès distant, logs, moteur de simulation avancée.</span>
+        </article>
+        <article>
+          <b>Accès autorisés</b>
+          <span>2 opérateurs autorisés uniquement, comptes séparés, pas de mot de passe partagé en clair.</span>
+        </article>
+        <article>
+          <b>Interdits</b>
+          <span>Clé privée dans GitHub, clé de retrait, ordre réel depuis frontend, panneau admin public.</span>
+        </article>
+      </div>
+
+      <div class="backend-gates">
+        <div class="backend-gate done"><b>B1</b><span>Plan public/privé</span></div>
+        <div class="backend-gate active"><b>B2</b><span>Backend local</span></div>
+        <div class="backend-gate locked"><b>B3</b><span>Kraken lecture seule</span></div>
+        <div class="backend-gate locked"><b>B4</b><span>Logs + kill switch</span></div>
+        <div class="backend-gate locked"><b>B5</b><span>Simulation serveur</span></div>
+        <div class="backend-gate locked"><b>B6</b><span>Réel humain</span></div>
+      </div>
+
+      <div class="blueprint-actions">
+        <button class="cmd-preset" data-command="plan architecture">Plan architecture</button>
+        <button class="cmd-preset" data-command="kraken_readonly_plan">Plan Kraken lecture seule</button>
+        <button class="cmd-preset" data-command="remote_access_plan">Plan accès distant</button>
+        <button class="cmd-preset" data-command="security_review">Contrôle sécurité</button>
+      </div>
+
+      <p class="rule-line warn-lock">
+        Prochaine étape réelle : continuer la préparation sans clé réelle. Aucun ordre, aucun retrait, aucun secret dans le dépôt public.
+      </p>
+    </section>
+      </div>
+    </details>
+
+    <details class="atlas-collapse glass atlas-family-member atlas-tone-system" data-collapse-key="safety" data-layout-family="system">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">Sécurité</span>
+        <span class="atlas-collapse-subtitle">Verrous et limites</span>
+      </summary>
+      <div class="atlas-collapse-body">
+
+
+
+    <section class="panel glass safety-layer" id="safety">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">SÉCURITÉ</p>
+          <h2>Bac à sable · accès renforcé · arrêt d’urgence</h2>
+          <p class="safety-intro">
+            Cadrage confirmé avec opérateur autorisé : deux accès seulement, simulation obligatoire, aucune clé de retrait, modification possible en cas de défaillance.
+          </p>
+        </div>
+        <span class="pill warn">Sécurité d’abord</span>
+      </div>
+
+      <div class="safety-grid">
+        <article class="safety-card ok">
+          <b>Bac à sable</b>
+          <span>Simulation locale uniquement avant toute connexion réelle.</span>
+          <em>État : obligatoire</em>
+        </article>
+        <article class="safety-card">
+          <b>Accès renforcé</b>
+          <span>2 opérateurs autorisés uniquement. Aucun accès public.</span>
+          <em>À faire côté machine/backend</em>
+        </article>
+        <article class="safety-card">
+          <b>Clés API</b>
+          <span>Lecture seule d’abord. Aucune clé de retrait.</span>
+          <em>Jamais dans GitHub Pages</em>
+        </article>
+        <article class="safety-card danger">
+          <b>Kill switch</b>
+          <span>Arrêt manuel, révocation clés, gel simulation, export logs.</span>
+          <em>À préparer avant réel</em>
+        </article>
+      </div>
+
+      <div class="gate-grid">
+        <div class="gate done"><b>G1</b><span>Observatoire public</span></div>
+        <div class="gate done"><b>G2</b><span>Tests simples</span></div>
+        <div class="gate active"><b>G3</b><span>Paper trading</span></div>
+        <div class="gate locked"><b>G4</b><span>Lecture seule Kraken</span></div>
+        <div class="gate locked"><b>G5</b><span>Semi-auto humain</span></div>
+        <div class="gate locked"><b>G6</b><span>Réel micro verrouillé</span></div>
+      </div>
+
+      <div class="safety-actions">
+        <button class="cmd-preset" data-command="safety_plan">Plan sécurité</button>
+        <button class="cmd-preset" data-command="kill_switch">Arrêt urgence</button>
+        <button class="cmd-preset" data-command="access_plan">Plan accès</button>
+        <button class="cmd-preset" data-command="gates">Étapes sécurité</button>
+      </div>
+
+      <p class="rule-line warn-lock">
+        GitHub Pages reste observation + simulation. L’accès distant réel, les clés Kraken et les logs doivent vivre dans un backend ou une machine sécurisée hors dépôt public.
+      </p>
+    </section>
+      </div>
+    </details>
+
+    <details class="atlas-collapse glass atlas-family-member atlas-tone-system" data-collapse-key="physical-security" data-layout-family="system">
+      <summary class="atlas-collapse-summary">
+        <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
+        <span class="atlas-collapse-title">Sécurité physique</span>
+        <span class="atlas-collapse-subtitle">Accès réel et poste local</span>
+      </summary>
+      <div class="atlas-collapse-body">
+
+
+    <section class="panel glass physical-layer" id="physical-security">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">PHYSICAL SECURITY LAYER</p>
+          <h2>Ledger / clé physique / validation humaine</h2>
+          <p class="impact-intro">
+            Ledger peut servir de coffre matériel ou de validation physique future, mais ne remplace pas Kraken ni le backend sécurisé.
+          </p>
+        </div>
+        <span class="pill warn">Coffre, pas pilote IA</span>
+      </div>
+
+      <div class="physical-grid">
+        <article class="physical-card ok">
+          <b>Ledger</b>
+          <span>Wallet matériel / coffre froid / validation physique possible.</span>
+          <em>Ne doit jamais donner une liberté totale à l’IA.</em>
+        </article>
+        <article class="physical-card">
+          <b>Kraken</b>
+          <span>Exchange de référence : lecture seule d’abord, aucune clé de retrait.</span>
+          <em>Connexion réelle plus tard, via backend privé.</em>
+        </article>
+        <article class="physical-card">
+          <b>Clé physique</b>
+          <span>Peut renforcer l’accès machine ou l’autorisation humaine.</span>
+          <em>À préparer hors GitHub Pages.</em>
+        </article>
+        <article class="physical-card danger">
+          <b>Interdit</b>
+          <span>Seed phrase, clé privée, clé de retrait ou ordre réel dans le frontend public.</span>
+          <em>Blocage permanent.</em>
+        </article>
+      </div>
+
+      <div class="physical-rule">
+        <b>Règle simple :</b>
+        <span>L’IA peut observer et simuler. L’humain valide. Le matériel protège. Le réel reste verrouillé.</span>
+      </div>
+    </section>

@@ -1,0 +1,20 @@
+AGENT-CRYPTO 40.4.84 — AETHER NOTES + TRUST GATE PASS
+
+Exact operator-note contract restored from Fil.Crypto:
+- compact ♥ Aether button after Command Center;
+- lazy four-line Aether status panel on explicit click;
+- status ribbon occupies the Decision / Sources / Chronos band, not the Chronos card itself;
+- ribbon reads existing Atlas / Oracle / Sources / Book / latest News state only;
+- latest News drifts gently via CSS only, no timer/poller;
+- Chronos date/time remains centered in its own card;
+- crypto curve-following graph bars retain 40.4.83 palette behavior.
+
+Aether Trust continuation:
+- sanctuary background is eager/direct so the approved image does not wait for hidden-dialog lazy loading;
+- opening/focusing the gate launches no Bridge /auth/status request;
+- local password interaction owns first priority;
+- Bridge authentication still occurs on explicit validation;
+- CURRENT and Book reconciliation move behind a second post-auth paint boundary;
+- no Market Core / Graph / Top 5 / CURRENT algorithm / Oracle engine / Bridge protocol change.
+
+No new interval, observer, scheduler, network owner or storage owner.

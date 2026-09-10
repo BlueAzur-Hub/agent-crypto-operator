@@ -1,0 +1,58 @@
+{
+  "project": "Agent-Crypto @erith.IA",
+  "version": "1.1-alpha.8",
+  "status": "pedagogical icons and atlas nox visual preview",
+  "target_path": "public/agent_crypto_erith_ia/",
+  "web_entry": "public/agent_crypto_erith_ia/web/index.html",
+  "generated": "2026-07-20",
+  "hard_rule": "Pas de source live réellement consultée = pas de prix.",
+  "files": [
+    "MANIFEST.json",
+    "README.md",
+    "agent_crypto_erith_ia_chatgpt_instructions_fr.md",
+    "agent_crypto_erith_ia_commands_fr.md",
+    "agent_crypto_erith_ia_dashboard_spec_fr.md",
+    "agent_crypto_erith_ia_live_data_protocol_fr.md",
+    "agent_crypto_erith_ia_master_fr.md",
+    "agent_crypto_erith_ia_model_math_fr.md",
+    "agent_crypto_erith_ia_tests_fr.md",
+    "docs/CHANGELOG_V0_3.md",
+    "docs/notes_reprise_2026-07-20.md",
+    "docs/protocole_livecheck_fr.md",
+    "docs/sources_live_crypto_fr.md",
+    "modules/crypto_news_sentinel_fr_v1.md",
+    "modules/crypto_position_sentinel_fr_v1.md",
+    "modules/crypto_sentinel_fr_v2.md",
+    "modules/math_oracle_crypto_observation_fr_v1.md",
+    "modules/math_oracle_fr_source.md",
+    "modules/math_oracle_production_ia_fr_source.md",
+    "web/app.js",
+    "web/index.html",
+    "web/style.css"
+  ],
+  "name": "Agent-Crypto @erith.IA",
+  "updated": "2026-07-20",
+  "notes": [
+    "Added visual identity strip.",
+    "Added pedagogical icons.",
+    "Added Atlas-10 Crypto visual preview.",
+    "Added Aerith-10 Crypto visual preview.",
+    "Added NOX Risk Auditor visual preview.",
+    "No real trading added.",
+    "No private core or persona published."
+  ],
+  "archives_policy": "frozen_not_listed_in_public_manifest",
+  "profile": {
+    "name": "Solo Débutant 100 €",
+    "capital_virtual_eur": 100,
+    "allowed_symbols": [
+      "BTC",
+      "ETH",
+      "SOL"
+    ],
+    "default_ticket_eur": 5,
+    "max_per_operation_eur": 10,
+    "max_exposure_eur": 30,
+    "min_reserve_eur": 70
+  }
+}

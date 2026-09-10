@@ -1,0 +1,9 @@
+{
+  "only_skin_files_in_payload": true,
+  "no_js_present": true,
+  "no_html_present": true,
+  "baseline_css_pinned": true,
+  "vault_image_present": true,
+  "creator_visual_css_only": true,
+  "css_braces_balanced": true
+}

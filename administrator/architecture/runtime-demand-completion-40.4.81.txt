@@ -1,0 +1,19 @@
+AGENT-CRYPTO 40.4.81 — RUNTIME DEMAND COMPLETION AUDIT
+
+BASE
+40.4.66 GOLDEN STABLE runtime restored on current main.
+No 40.4.67→40.4.80 Atlas late-DOM/source-lazy owner is used.
+
+CHANGES
+- Simulation + Learning: DOM/bindings stay stable; render tree sleeps while disclosure is closed, full current state replays on open.
+- Auto Reader: data cadence unchanged; long detached presentation sleeps while closed and replays on open.
+- GitHub Memory: truth state still restores; panel presentation sleeps while closed and replays on open.
+- Decision Board: compact/HOT board remains; long historical comparison computes/materializes only while its details are open or export is explicitly requested.
+- Binance: 5 s WebSocket health watchdog remains; it no longer forces direct REST recovery on every pulse. Existing REST freshness gate + one-shot startup force remain.
+
+PROTECTED
+Market Core 38.15.11; Binance primary semantics; Top 5; Graph; CURRENT/fingerprint; 4/4→NØX→Aerith; Oracle; Bridge R13/V1.9.11; IndexedDB; Learning state; Scanner history; Window Manager; internal Atlas 40.3.51→40.3.58 residency.
+
+STATIC VERIFICATION
+Node syntax PASS; JSON PASS; HTML IDs unique; no new recurring timer, observer, WebSocket, fetch owner, scheduler or storage owner.
+Firefox operator validation is still required.

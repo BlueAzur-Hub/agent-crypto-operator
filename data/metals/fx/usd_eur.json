@@ -1,0 +1,66 @@
+{
+  "schema": "agent_crypto_fx_reference_v1",
+  "version": "2.3.0",
+  "pair": "USD/EUR",
+  "series_key": "EXR.D.USD.EUR.SP00.A",
+  "source_id": "ecb",
+  "source_name": "Banque centrale européenne",
+  "frequency": "daily",
+  "source_date": "2026-09-09",
+  "usd_per_eur": 1.1652,
+  "eur_per_usd": 0.8582217645039478,
+  "received_at": "2026-09-09T22:32:28.708Z",
+  "observations": [
+    {
+      "date": "2026-08-27",
+      "usd_per_eur": 1.1645,
+      "eur_per_usd": 0.8587376556462
+    },
+    {
+      "date": "2026-08-28",
+      "usd_per_eur": 1.1643,
+      "eur_per_usd": 0.8588851670531651
+    },
+    {
+      "date": "2026-08-31",
+      "usd_per_eur": 1.1596,
+      "eur_per_usd": 0.8623663332183512
+    },
+    {
+      "date": "2026-09-01",
+      "usd_per_eur": 1.159,
+      "eur_per_usd": 0.8628127696289905
+    },
+    {
+      "date": "2026-09-02",
+      "usd_per_eur": 1.1578,
+      "eur_per_usd": 0.8637070305752289
+    },
+    {
+      "date": "2026-09-03",
+      "usd_per_eur": 1.1615,
+      "eur_per_usd": 0.8609556607834696
+    },
+    {
+      "date": "2026-09-04",
+      "usd_per_eur": 1.1622,
+      "eur_per_usd": 0.8604371020478404
+    },
+    {
+      "date": "2026-09-07",
+      "usd_per_eur": 1.1622,
+      "eur_per_usd": 0.8604371020478404
+    },
+    {
+      "date": "2026-09-08",
+      "usd_per_eur": 1.1614,
+      "eur_per_usd": 0.8610297916307904
+    },
+    {
+      "date": "2026-09-09",
+      "usd_per_eur": 1.1652,
+      "eur_per_usd": 0.8582217645039478
+    }
+  ],
+  "provenance_note": "Taux de référence quotidien BCE ; conversion informative distincte des prix source USD."
+}

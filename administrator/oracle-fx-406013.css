@@ -1,0 +1,40 @@
+/* Agent-Crypto 40.6.13 — ORACLE RESTRAINED SEMANTIC FX
+   Isolated presentation owner. No Oracle/window geometry. */
+#atlasOracleV0 .atlas-oracle-hero{position:relative}
+#atlasOracleV0 .atlas-oracle-fx-toggle-406013{
+  position:absolute;z-index:4;top:5px;right:7px;display:inline-flex;align-items:center;gap:4px;
+  padding:2px 6px;border-radius:999px;border:1px solid rgba(129,196,221,.20);
+  background:rgba(5,17,27,.56);color:#a9bdc9;font:950 7px/1 system-ui,sans-serif;
+  letter-spacing:.08em;cursor:pointer;box-shadow:none
+}
+#atlasOracleV0 .atlas-oracle-fx-toggle-406013 .dot{font-size:8px;color:#72dfff;text-shadow:0 0 5px rgba(114,223,255,.22)}
+#atlasOracleV0 .atlas-oracle-fx-toggle-406013[aria-pressed="false"]{opacity:.58;border-color:rgba(255,255,255,.10)}
+#atlasOracleV0 .atlas-oracle-fx-toggle-406013[aria-pressed="false"] .dot{color:#71818a;text-shadow:none}
+
+/* Functional cards: green means hausse, red means baisse. No whole-column tint. */
+body.atlas-administrator-mirror #atlasOracleV0 .atlas-oracle-card.is-bull,
+body.atlas-admin-v3 #atlasOracleV0 .atlas-oracle-card.is-bull{
+  border-color:rgba(127,238,154,.48)!important;background:linear-gradient(115deg,rgba(55,150,88,.055),rgba(255,255,255,.012))!important
+}
+body.atlas-administrator-mirror #atlasOracleV0 .atlas-oracle-card.is-bear,
+body.atlas-admin-v3 #atlasOracleV0 .atlas-oracle-card.is-bear{
+  border-color:rgba(255,112,135,.48)!important;background:linear-gradient(115deg,rgba(157,47,67,.055),rgba(255,255,255,.012))!important
+}
+body.atlas-administrator-mirror #atlasOracleV0 .atlas-oracle-card.is-bull b,
+body.atlas-admin-v3 #atlasOracleV0 .atlas-oracle-card.is-bull b{color:#a8f5b8!important}
+body.atlas-administrator-mirror #atlasOracleV0 .atlas-oracle-card.is-bear b,
+body.atlas-admin-v3 #atlasOracleV0 .atlas-oracle-card.is-bear b{color:#ffabb8!important}
+
+/* Hero / crypto price follows dominant Oracle balance, but only this card. */
+#atlasOracleV0[data-oracle-bias-state="bull"] .atlas-oracle-hero{border-color:rgba(105,232,159,.38)!important}
+#atlasOracleV0[data-oracle-bias-state="bear"] .atlas-oracle-hero{border-color:rgba(255,130,148,.38)!important}
+#atlasOracleV0[data-oracle-bias-state="neutral"] .atlas-oracle-hero{border-color:rgba(98,236,255,.20)!important}
+#atlasOracleV0[data-oracle-bias-state="bull"] #atlasOraclePrice{color:#a9f7c8!important}
+#atlasOracleV0[data-oracle-bias-state="bear"] #atlasOraclePrice{color:#ffb0bd!important}
+#atlasOracleV0[data-oracle-bias-state="neutral"] #atlasOraclePrice{color:#dff9ff!important}
+
+/* FX only adds a restrained glow; semantic colors remain when FX is off. */
+#atlasOracleV0[data-oracle-fx="on"][data-oracle-bias-state="bull"] .atlas-oracle-hero{box-shadow:inset 0 0 12px rgba(82,223,142,.035)!important}
+#atlasOracleV0[data-oracle-fx="on"][data-oracle-bias-state="bear"] .atlas-oracle-hero{box-shadow:inset 0 0 12px rgba(255,98,126,.035)!important}
+#atlasOracleV0[data-oracle-fx="on"] .atlas-oracle-card.is-bull{box-shadow:inset 0 0 10px rgba(82,223,142,.025)!important}
+#atlasOracleV0[data-oracle-fx="on"] .atlas-oracle-card.is-bear{box-shadow:inset 0 0 10px rgba(255,98,126,.025)!important}

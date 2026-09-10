@@ -1,0 +1,79 @@
+/* ============================================================================
+   Agent-Crypto @erith.IA — Build 40.3.23
+   PARKER LEWIS CAN'T LOSE · FIREFOX COMPOSITOR ISOLATION LOCK
+
+   CODE ONLY / CSS ONLY compositor experiment.
+   Parent: 40.3.22 visual checkpoint.
+
+   Purpose:
+   - isolate Firefox repaint/compositing cost caused by backdrop filtering;
+   - preserve the exact 40.3.22 geometry, backgrounds, opacity, shadows, z-index,
+     Window Manager behavior, role behavior, data engines and user workspace;
+   - change ONE rendering variable only: backdrop-filter.
+
+   This file intentionally contains no layout, geometry, display, visibility,
+   transform, animation, data, navigation or persistence rule.
+   ============================================================================ */
+
+body.atlas-administrator-mirror.atlas-firefox-compositor-40323 .glass,
+body.atlas-administrator-mirror.atlas-firefox-compositor-40323 .admin-mirror-bar,
+body.atlas-administrator-mirror.atlas-firefox-compositor-40323 .admin-window-deck,
+body.atlas-administrator-mirror.atlas-firefox-compositor-40323 .admin-native-controls,
+body.atlas-administrator-mirror.atlas-firefox-compositor-40323 .admin-native-floating-shell,
+body.atlas-administrator-mirror.atlas-firefox-compositor-40323 .admin-native-direct-floating,
+body.atlas-administrator-mirror.atlas-firefox-compositor-40323 .admin-native-floating-titlebar,
+body.atlas-administrator-mirror.atlas-firefox-compositor-40323 #atlasOracleV0,
+body.atlas-administrator-mirror.atlas-firefox-compositor-40323 #analyste.champagne-clean-lens .chart-toolbar,
+body.atlas-administrator-mirror.atlas-firefox-compositor-40323 #analyste.champagne-clean-lens .chart-legend,
+body.atlas-administrator-mirror.atlas-firefox-compositor-40323 #analyste.champagne-clean-lens .chart-analysis-card,
+body.atlas-administrator-mirror.atlas-firefox-compositor-40323 #analyste.champagne-clean-lens .chart-memory-bar,
+body.atlas-administrator-mirror.atlas-firefox-compositor-40323 #missions-vie .life-missions-copy {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+
+/* ============================================================================
+   Agent-Crypto @erith.IA — Build 40.3.39
+   PARKER LEWIS CAN'T LOSE · FIREFOX GLOBAL BACKDROP COMPOSITOR LOCK
+
+   Cross-interface evidence:
+   - the transient grey repaint sheet is reproducible in Administrator AND Web Classic;
+   - both families contain backdrop-filter glass surfaces;
+   - 40.3.23 disabled backdrop-filter only on a bounded selector list.
+
+   40.3.39 changes ONE rendering variable in Administrator: every remaining
+   backdrop-filter is neutralized under the Administrator body. No layout,
+   visibility, position, transform, opacity, geometry, data, storage, chart,
+   Window Manager or navigation rule is changed here.
+   ============================================================================ */
+body.atlas-administrator-mirror *,
+body.atlas-administrator-mirror *::before,
+body.atlas-administrator-mirror *::after {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+
+/* ============================================================================
+   Agent-Crypto @erith.IA — Build 40.3.87
+   PARKER LEWIS CAN'T LOSE · AETHER FIREFOX FULL-VIEWPORT DECORATIVE LAYER
+   ISOLATION LOCK
+
+   Field evidence after 40.3.86:
+   - the grey repaint sheet still reproduces;
+   - wheel-specific DOM activity is therefore not accepted as the owner;
+   - the failure leaves the Administrator body/background visible while large
+     document content fails to repaint.
+
+   This pass changes one compositor variable only on Firefox:
+   retire the two decorative full-viewport fixed layers (.ambient/.grid-overlay).
+   They carry no data, hit targets, layout, Window Manager or analytical logic.
+   No timer, observer, scheduler, transform or content-visibility rule is added.
+   ============================================================================ */
+@supports (-moz-appearance:none) {
+  body.atlas-administrator-mirror .ambient,
+  body.atlas-administrator-mirror .grid-overlay {
+    display:none !important;
+  }
+}

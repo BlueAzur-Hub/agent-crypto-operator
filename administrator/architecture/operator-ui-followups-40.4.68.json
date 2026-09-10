@@ -1,0 +1,26 @@
+{
+  "schema": "agent_crypto_operator_ui_followups_v1",
+  "build": "40.4.68",
+  "runtime_loaded": false,
+  "purpose": "Persistent non-runtime ledger for small operator UI requests so migration/performance builds do not silently lose them.",
+  "items": [
+    {
+      "id": "secondary-operator-capabilities-copy",
+      "status": "DONE_40.4.68",
+      "request": "Secondary operator profile card should say capacités étendues instead of capacités restreintes.",
+      "scope": "Copy only; Bridge restricted-capability security wording is intentionally unchanged."
+    },
+    {
+      "id": "aether-menu",
+      "status": "TRACKED_FOR_POST_MIGRATION_UI_CHECKPOINT",
+      "request": "Add a compact ♥ Aether entry to the main menu.",
+      "constraint": "No new engine, polling loop, timer, IndexedDB owner or model invocation."
+    },
+    {
+      "id": "aether-status-ribbon",
+      "status": "TRACKED_FOR_POST_MIGRATION_UI_CHECKPOINT",
+      "request": "Use the upper status strip for a compact Aether synthesis: Atlas/CURRENT, Oracle, sources and latest News Sentinel item.",
+      "constraint": "Read existing states/events only; no duplicate calculations or data owners."
+    }
+  ]
+}

@@ -1,0 +1,1318 @@
+/* ============================================================
+   Agent-Crypto Administrator 39.4.5R4 — CLASSIC QUALITY VISUAL HOTFIX
+   CODE ONLY / CSS ONLY.
+   Base lineage: 39.4.5R3 -> Market Memory 39.4.4R1 LOCKED.
+   No image shipped. No JS. No engine. No memory. No Atlas.
+   Goal: reproduce Classic visual hierarchy with Administrator assets.
+   ============================================================ */
+
+:root{
+  --r4-ink:#06101d;
+  --r4-ink-2:#0a1726;
+  --r4-cyan:rgba(98,236,255,.92);
+  --r4-gold:rgba(255,215,130,.94);
+  --r4-line:rgba(98,236,255,.22);
+  --r4-line-gold:rgba(255,215,130,.24);
+  --r4-glass:rgba(5,14,25,.72);
+}
+
+/* Visible proof without touching the application build identity. */
+#atlasVersionControlText::after{
+  content:" · VISUAL R4";
+  color:#ffe2a0;
+  font-weight:950;
+}
+
+/* ------------------------------------------------------------
+   GRAPH — Classic principle:
+   scenery is clearly visible, chart remains readable, no black slab.
+   ------------------------------------------------------------ */
+body.atlas-administrator-mirror #analyste.champagne-clean-lens .chart-panel{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  background:rgba(3,10,18,.16)!important;
+  border-color:rgba(98,236,255,.22)!important;
+}
+body.atlas-administrator-mirror #analyste.champagne-clean-lens .chart-panel::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-3!important;
+  background-image:url("./assets/visual/admin-chart-office.png")!important;
+  background-size:cover!important;
+  background-position:center center!important;
+  background-repeat:no-repeat!important;
+  opacity:.92!important;
+  filter:saturate(.98) brightness(.86) contrast(1.02)!important;
+  transform:scale(1.002)!important;
+}
+body.atlas-administrator-mirror #analyste.champagne-clean-lens .chart-panel::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-2!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,rgba(2,8,17,.18),rgba(3,10,18,.34) 24%,rgba(3,10,18,.42) 50%,rgba(3,10,18,.28) 76%,rgba(2,8,17,.18)),
+    linear-gradient(180deg,rgba(2,8,17,.10),rgba(2,8,17,.28))!important;
+}
+body.atlas-administrator-mirror #analyste.champagne-clean-lens .chart-shell,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens .chart-stage,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens .chart-canvas-wrap{
+  background:transparent!important;
+}
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #mainChart{
+  background:transparent!important;
+  filter:drop-shadow(0 2px 2px rgba(0,0,0,.38))!important;
+}
+body.atlas-administrator-mirror #analyste.champagne-clean-lens .chart-toolbar,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens .chart-legend,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens .chart-analysis-card,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens .chart-memory-bar{
+  backdrop-filter:blur(8px)!important;
+}
+
+/* ------------------------------------------------------------
+   40.4.255 — TECHNICAL READING LEGACY 39.4.5R4 OWNER RETIRED
+
+   Obsolete 39.4.5R4 Technical Reading panel/host/portrait/cartouche/reset
+   declarations are retired rather than overridden again. The validated split is:
+   - canonical 40.4.253 owner below: geometry + portrait frame;
+   - admin-visual-cache.css 40.3.38: opacity + contrast;
+   - existing 40.2.69 / 40.2.88 runtime: source, RND, private picker + framing.
+   No Graph, Market, Atlas, Oracle, Math, RND asset or storage behavior changes.
+   ------------------------------------------------------------ */
+
+/* Remove every R1/R2 decorative strip/tool. */
+.admin-private-visual-tools,
+.admin-visual-strip,
+.admin-visual-command-hero,
+.admin-visual-summary-thumb{display:none!important}
+
+/* ------------------------------------------------------------
+   FAMILY EMBLEMS — Classic principle:
+   one strong visual signature per family, large enough to read.
+   ------------------------------------------------------------ */
+.atlas-layout-family.admin-family-emblem-host-r3{
+  position:relative!important;
+  min-height:150px!important;
+  padding:24px 190px 24px 28px!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  background:
+    linear-gradient(90deg,rgba(8,21,35,.95) 0 60%,rgba(8,21,35,.70) 78%,rgba(8,21,35,.40)),
+    radial-gradient(circle at 92% 50%,rgba(48,161,225,.12),transparent 28%)!important;
+  border:1px solid rgba(98,236,255,.18)!important;
+  border-left:4px solid rgba(98,236,255,.74)!important;
+  border-radius:16px!important;
+}
+.atlas-layout-family.admin-family-emblem-host-r3::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(135deg,rgba(255,255,255,.025),transparent 42%,rgba(255,215,130,.035));
+  pointer-events:none;
+}
+.admin-family-emblem-r3{
+  position:absolute!important;
+  right:24px!important;
+  top:50%!important;
+  width:138px!important;
+  height:138px!important;
+  transform:translateY(-50%)!important;
+  object-fit:contain!important;
+  opacity:1!important;
+  filter:drop-shadow(0 15px 26px rgba(0,0,0,.62)) drop-shadow(0 0 18px rgba(62,185,255,.12))!important;
+  pointer-events:none!important;
+  user-select:none!important;
+  z-index:2!important;
+}
+.atlas-layout-family.admin-family-emblem-host-r3::after{
+  content:""!important;
+  position:absolute!important;
+  right:-16px!important;
+  top:50%!important;
+  width:190px!important;
+  height:190px!important;
+  transform:translateY(-50%)!important;
+  border-radius:50%!important;
+  background:radial-gradient(circle,rgba(58,170,229,.14),transparent 68%)!important;
+  pointer-events:none!important;
+  z-index:1!important;
+}
+
+/* Sources: turn the row into a real illustrated module, not a tiny icon. */
+#liveSourcesCollapse>summary.atlas-collapse-summary.admin-summary-emblem-host-r3{
+  position:relative!important;
+  min-height:118px!important;
+  padding:22px 132px 22px 26px!important;
+  overflow:hidden!important;
+  background:
+    linear-gradient(90deg,rgba(8,22,35,.96),rgba(7,18,30,.80)),
+    radial-gradient(circle at 94% 50%,rgba(98,236,255,.12),transparent 24%)!important;
+  border:1px solid rgba(98,236,255,.22)!important;
+  border-left:4px solid rgba(98,236,255,.72)!important;
+  border-radius:14px!important;
+}
+.admin-summary-emblem-r3{
+  position:absolute!important;
+  right:20px!important;
+  top:50%!important;
+  width:92px!important;
+  height:92px!important;
+  transform:translateY(-50%)!important;
+  object-fit:contain!important;
+  opacity:1!important;
+  filter:drop-shadow(0 12px 22px rgba(0,0,0,.58))!important;
+  pointer-events:none!important;
+}
+
+/* Analytical Memory gets a visible object, not an almost invisible watermark. */
+#atlasAnalyticalMemory394.admin-analytical-emblem-host-r3{
+  position:relative!important;
+  overflow:hidden!important;
+  padding-right:180px!important;
+  background:
+    linear-gradient(90deg,rgba(8,20,34,.94) 0 70%,rgba(8,20,34,.66)),
+    radial-gradient(circle at 94% 32%,rgba(87,168,255,.11),transparent 28%)!important;
+}
+#atlasAnalyticalMemory394.admin-analytical-emblem-host-r3>.admin-analytical-emblem-r3{
+  position:absolute!important;
+  right:30px!important;
+  top:50%!important;
+  width:118px!important;
+  height:190px!important;
+  transform:translateY(-50%)!important;
+  object-fit:contain!important;
+  opacity:.94!important;
+  filter:drop-shadow(0 15px 28px rgba(0,0,0,.58))!important;
+  pointer-events:none!important;
+  z-index:0!important;
+}
+#atlasAnalyticalMemory394.admin-analytical-emblem-host-r3>:not(.admin-analytical-emblem-r3){
+  position:relative!important;
+  z-index:1!important;
+}
+
+/* ------------------------------------------------------------
+   MISSIONS DE VIE — use Classic artwork as an actual background.
+   CSS fallback makes it visible even if the atmosphere <img> fails.
+   ------------------------------------------------------------ */
+body.atlas-administrator-mirror #missions-vie.life-missions-intro{
+  position:relative!important;
+  min-height:360px!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  padding:38px 42px!important;
+  background:
+    linear-gradient(90deg,rgba(3,10,18,.86) 0 34%,rgba(3,10,18,.47) 67%,rgba(3,10,18,.26)),
+    url("./assets/images/missions_de_vie_constellation_bg.png") center/cover no-repeat!important;
+  border:1px solid rgba(255,215,130,.18)!important;
+}
+body.atlas-administrator-mirror #missions-vie .life-missions-atmosphere{
+  display:block!important;
+  visibility:visible!important;
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  opacity:.01!important; /* path is still kept alive by JS; CSS background does the visual work */
+  z-index:-3!important;
+}
+body.atlas-administrator-mirror #missions-vie::after{
+  content:none!important;
+}
+body.atlas-administrator-mirror #missions-vie .life-missions-copy{
+  position:relative!important;
+  z-index:2!important;
+  max-width:780px!important;
+  padding:18px 20px!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  border-radius:16px!important;
+  background:rgba(4,12,22,.46)!important;
+  backdrop-filter:blur(8px)!important;
+  box-shadow:0 16px 32px rgba(0,0,0,.22)!important;
+}
+body.atlas-administrator-mirror #missions-vie>.pill{
+  position:relative!important;
+  z-index:2!important;
+}
+
+/* Command Center: same Classic rule, atmospheric but readable. */
+#atlasAdminCenterDrawer.admin-command-observatory-r3{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  background:rgba(4,12,22,.72)!important;
+}
+#atlasAdminCenterDrawer.admin-command-observatory-r3::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-2!important;
+  background:url("./assets/visual/admin-command-observatory.png") center/cover no-repeat!important;
+  opacity:.62!important;
+  filter:brightness(.82) saturate(.92)!important;
+}
+#atlasAdminCenterDrawer.admin-command-observatory-r3::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-1!important;
+  background:linear-gradient(180deg,rgba(3,10,18,.28),rgba(3,10,18,.74))!important;
+}
+
+/* Global visual families: less dead-black, closer to Classic glass hierarchy. */
+body.atlas-administrator-mirror .atlas-collapse-summary{
+  background:linear-gradient(90deg,rgba(255,255,255,.050),rgba(255,255,255,.020))!important;
+}
+body.atlas-administrator-mirror .atlas-collapse-summary:hover{
+  background:linear-gradient(90deg,rgba(98,236,255,.080),rgba(255,215,130,.035))!important;
+}
+
+@media (max-width:1100px){
+  .atlas-layout-family.admin-family-emblem-host-r3{
+    min-height:126px!important;
+    padding-right:150px!important;
+  }
+  .admin-family-emblem-r3{width:110px!important;height:110px!important;right:18px!important}
+  #liveSourcesCollapse>summary.atlas-collapse-summary.admin-summary-emblem-host-r3{
+    min-height:100px!important;
+    padding-right:110px!important;
+  }
+  .admin-summary-emblem-r3{width:76px!important;height:76px!important}
+}
+
+@media (max-width:760px){
+  .atlas-layout-family.admin-family-emblem-host-r3{
+    min-height:116px!important;
+    padding:20px 110px 20px 20px!important;
+  }
+  .admin-family-emblem-r3{width:82px!important;height:82px!important;right:14px!important}
+  #atlasAnalyticalMemory394.admin-analytical-emblem-host-r3{padding-right:112px!important}
+  #atlasAnalyticalMemory394.admin-analytical-emblem-host-r3>.admin-analytical-emblem-r3{
+    width:72px!important;height:132px!important;right:18px!important;
+  }
+  body.atlas-administrator-mirror #missions-vie.life-missions-intro{
+    min-height:300px!important;
+    padding:26px 22px!important;
+  }
+}
+
+
+/* ==========================================================================
+   39.4.6R3 — CLASSIC TECHNICAL READING RESTORE + CLEAN CHROME LOCK
+   ========================================================================== */
+#atlasVersionControlText::after{content:none!important;display:none!important;}
+
+/* Image remains clickable for the private local picker, but the function is invisible. */
+body.atlas-administrator-mirror #detailPanel .detail-project-visual.admin-tech-r3::after{
+  content:none!important;opacity:0!important;
+}
+body.atlas-administrator-mirror #detailPanel .admin-tech-reset-r3{display:none!important;}
+body.atlas-administrator-mirror #detailPanel .atlas-detail-subwindow,
+body.atlas-administrator-mirror #detailPanel .detail-compact-strip{
+  width:100%!important;min-width:0!important;flex:0 0 auto!important;
+}
+
+/* 40.0.0R8 — FAMILY WINDOW MENU LAYOUT RESTORE LOCK
+   The historical 39.4.6R3 display:none removal remains preserved.
+   Visual opacity is owned uniformly by admin-window-menu-uniform.css. */
+
+
+/* ==========================================================================\n   39.4.6R4 — TECHNICAL READING FULL BACKGROUND + 10% GLASS LOCK\n\n   Operator contract:\n   - the selected/default Aerith image remains the panel background while Classic 136px internal frame spacing is preserved;\n   - Classic functional DOM stays present above it;\n   - functional surfaces use at most 10% dark background alpha;\n   - image picker remains invisible: click exposed image / transparent gaps;\n   - no Market/Memory/Atlas/Math/data-source behavior is changed.\n   ========================================================================== */
+
+/* The full right panel becomes the image canvas. */
+body.atlas-administrator-mirror #analyste.champagne-clean-lens:not(.detail-collapsed)
+#detailPanel.clean-lens-detail-panel{
+  isolation:isolate!important;
+  
+  background:rgba(2,8,16,.02)!important;
+  border-color:rgba(98,236,255,.24)!important;
+}
+
+/* Classic internal frame: 136px in-flow hero spacer; Aerith remains a full-panel background layer. */
+body.atlas-administrator-mirror #analyste.champagne-clean-lens:not(.detail-collapsed)
+#detailPanel .detail-project-visual.admin-tech-r3{
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  border:0!important;
+  border-radius:0!important;
+  
+  background:transparent!important;
+  box-shadow:none!important;
+  cursor:pointer!important;
+}
+body.atlas-administrator-mirror #detailPanel .detail-project-visual.admin-tech-r3>.admin-tech-portrait-r3{
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  opacity:1!important;
+  
+  
+  pointer-events:none!important;
+}
+
+/* No visible image-upload chrome. Existing local picker remains bound to image host. */
+body.atlas-administrator-mirror #detailPanel .detail-project-visual.admin-tech-r3::after,
+body.atlas-administrator-mirror #detailPanel .admin-tech-reset-r3{
+  content:none!important;
+  
+  opacity:0!important;
+}
+
+/* Keep the tiny identity tag, but never cover the portrait with an opaque plate. */
+body.atlas-administrator-mirror #detailPanel .detail-project-visual.admin-tech-r3>span{
+  
+  
+  
+  
+  
+  
+  border:1px solid rgba(255,215,130,.22)!important;
+  background:rgba(2,8,17,.10)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  box-shadow:none!important;
+}
+
+/* Title and all functional information float ABOVE the image. */
+body.atlas-administrator-mirror #detailPanel>.detail-panel-toggle{
+  
+  
+  background:rgba(2,8,17,.08)!important;
+  border-color:rgba(98,236,255,.16)!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+body.atlas-administrator-mirror #detailPanel>.detail-panel-body{
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  background:transparent!important;
+  pointer-events:none!important;
+  
+}
+body.atlas-administrator-mirror #detailPanel>.detail-panel-body>*{
+  pointer-events:auto!important;
+}
+
+/* Containers themselves stay clear to avoid stacked alpha becoming darker than 10%. */
+body.atlas-administrator-mirror #detailPanel .detail-compact-strip,
+body.atlas-administrator-mirror #detailPanel .atlas-detail-subwindow,
+body.atlas-administrator-mirror #detailPanel .atlas-detail-subwindow-body,
+body.atlas-administrator-mirror #detailPanel .source-dock-body,
+body.atlas-administrator-mirror #detailPanel .detail-grid,
+body.atlas-administrator-mirror #detailPanel .broker-strip,
+body.atlas-administrator-mirror #detailPanel .diagnostic-strip{
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Every visible cell / summary uses <= 10% dark alpha. Text remains fully opaque. */
+body.atlas-administrator-mirror #detailPanel .detail-compact-strip>span,
+body.atlas-administrator-mirror #detailPanel .atlas-detail-subwindow>summary,
+body.atlas-administrator-mirror #detailPanel .detail-grid>div,
+body.atlas-administrator-mirror #detailPanel .why-box,
+body.atlas-administrator-mirror #detailPanel .source-dock-command,
+body.atlas-administrator-mirror #detailPanel .source-dock-status,
+body.atlas-administrator-mirror #detailPanel .source-portal,
+body.atlas-administrator-mirror #detailPanel .source-dock-meta>span,
+body.atlas-administrator-mirror #detailPanel .broker-strip>div,
+body.atlas-administrator-mirror #detailPanel .diagnostic-strip>div,
+body.atlas-administrator-mirror #detailPanel .clean-lens-integrity>p{
+  background:rgba(2,8,17,.10)!important;
+  border-color:rgba(98,236,255,.16)!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Expanded bodies do not add a second dark layer over Aerith. */
+body.atlas-administrator-mirror #detailPanel details[open]>.atlas-detail-subwindow-body,
+body.atlas-administrator-mirror #detailPanel details[open]>.source-dock-body,
+body.atlas-administrator-mirror #detailPanel .source-dock-portals{
+  background:transparent!important;
+}
+
+/* Buttons/links remain usable but visually light. */
+body.atlas-administrator-mirror #detailPanel button:not(.detail-panel-toggle),
+body.atlas-administrator-mirror #detailPanel a,
+body.atlas-administrator-mirror #detailPanel .source-dock-refresh{
+  background:rgba(2,8,17,.10)!important;
+  box-shadow:none!important;
+}
+
+/* Keep labels readable over light parts of private images without dark slabs. */
+body.atlas-administrator-mirror #detailPanel strong,
+body.atlas-administrator-mirror #detailPanel b,
+body.atlas-administrator-mirror #detailPanel span,
+body.atlas-administrator-mirror #detailPanel small,
+body.atlas-administrator-mirror #detailPanel em,
+body.atlas-administrator-mirror #detailPanel i,
+body.atlas-administrator-mirror #detailPanel p{
+  text-shadow:0 1px 2px rgba(0,0,0,.88)!important;
+}
+
+/* R4 no longer removes Classic in-flow spacing; mobile keeps the same 136px frame contract. */
+@media (max-width:1100px){
+}
+@media (max-width:760px){
+}
+
+/* ==========================================================================\n   39.4.6R5 — TECHNICAL READING SIDE DOCK + DECORATIVE EMBLEM SCALE LOCK\n\n   Operator contract:\n   - desktop restores the canonical Graphique | Lecture technique side-by-side layout;\n   - the selected/default Aerith image still fills the whole Technical Reading frame;\n   - existing Classic functional DOM remains over the image on <=10% alpha surfaces;\n   - decorative emblems are background accents only: small, <=10% opacity, no layout reservation;\n   - no Market/Memory/Atlas/Math/data-source behavior is changed.\n   ========================================================================== */
+
+/* Keep R4 full-frame Aerith behaviour once the panel is back in its column. */
+body.atlas-administrator-mirror #analyste.champagne-clean-lens:not(.detail-collapsed)
+#detailPanel.clean-lens-detail-panel{
+  background:rgba(2,8,16,.02)!important;
+}
+
+/* --------------------------------------------------------------------------
+   DECORATIVE EMBLEMS — no more layout distortion.
+   They are now small background marks, never structural content.
+   -------------------------------------------------------------------------- */
+.atlas-layout-family.admin-family-emblem-host-r3{
+  min-height:0!important;
+  padding-right:28px!important;
+  overflow:hidden!important;
+}
+/* 40.0.0R8 — IMPORTANT: native five-button window chrome is structural UI,
+   not family content. The old broad child selector forced the control deck to
+   position:relative!important, inserted it into the 3-column family grid and
+   clipped it to the first 54px cell (only ~2 buttons remained visible). */
+.atlas-layout-family.admin-family-emblem-host-r3 > :not(.admin-family-emblem-r3):not(.admin-native-controls){
+  position:relative!important;
+  z-index:1!important;
+}
+.admin-family-emblem-r3{
+  position:absolute!important;
+  right:12px!important;
+  top:auto!important;
+  bottom:10px!important;
+  width:72px!important;
+  height:72px!important;
+  max-width:72px!important;
+  max-height:72px!important;
+  transform:none!important;
+  object-fit:contain!important;
+  opacity:.10!important;
+  filter:none!important;
+  z-index:0!important;
+  pointer-events:none!important;
+}
+.atlas-layout-family.admin-family-emblem-host-r3::after{
+  display:none!important;
+  content:none!important;
+}
+
+#liveSourcesCollapse>summary.atlas-collapse-summary.admin-summary-emblem-host-r3{
+  min-height:0!important;
+  padding-right:26px!important;
+  overflow:hidden!important;
+}
+#liveSourcesCollapse>summary.atlas-collapse-summary.admin-summary-emblem-host-r3 > :not(.admin-summary-emblem-r3){
+  position:relative!important;
+  z-index:1!important;
+}
+.admin-summary-emblem-r3{
+  position:absolute!important;
+  right:10px!important;
+  top:auto!important;
+  bottom:8px!important;
+  width:54px!important;
+  height:54px!important;
+  max-width:54px!important;
+  max-height:54px!important;
+  transform:none!important;
+  object-fit:contain!important;
+  opacity:.10!important;
+  filter:none!important;
+  z-index:0!important;
+  pointer-events:none!important;
+}
+
+#atlasAnalyticalMemory394.admin-analytical-emblem-host-r3{
+  padding-right:24px!important;
+  overflow:hidden!important;
+}
+#atlasAnalyticalMemory394.admin-analytical-emblem-host-r3>.admin-analytical-emblem-r3{
+  position:absolute!important;
+  right:12px!important;
+  top:auto!important;
+  bottom:10px!important;
+  width:58px!important;
+  height:88px!important;
+  max-width:58px!important;
+  max-height:88px!important;
+  transform:none!important;
+  object-fit:contain!important;
+  opacity:.10!important;
+  filter:none!important;
+  z-index:0!important;
+  pointer-events:none!important;
+}
+
+/* Mobile accents stay even smaller. */
+@media (max-width:760px){
+  .admin-family-emblem-r3{width:54px!important;height:54px!important;max-width:54px!important;max-height:54px!important;}
+  .admin-summary-emblem-r3{width:44px!important;height:44px!important;max-width:44px!important;max-height:44px!important;}
+  #atlasAnalyticalMemory394.admin-analytical-emblem-host-r3>.admin-analytical-emblem-r3{
+    width:46px!important;height:70px!important;max-width:46px!important;max-height:70px!important;
+  }
+}
+
+
+
+/* ==========================================================================\n   39.4.6R6 — FULL-WIDTH TECHNICAL READING + LOW-GLASS VISIBILITY LOCK\n\n   Operator contract:\n   - docked Graphique + Lecture technique spans the complete Market zone width;\n   - a one-time JS migration clears only stale Graphique floating geometry;\n   - Aerith remains the full-frame Technical Reading background;\n   - secondary functional surfaces are 3–6% dark alpha (never above 10%);\n   - Source Dock starts collapsed but remains fully functional/openable;\n   - decorative emblems stay small background accents and never reserve layout.\n   ========================================================================== */
+
+/* TECHNICAL READING — keep Aerith visually dominant. */
+body.atlas-administrator-mirror #detailPanel.clean-lens-detail-panel{
+  background:rgba(2,8,16,.01)!important;
+}
+body.atlas-administrator-mirror #detailPanel>.detail-panel-toggle{
+  background:rgba(2,8,17,.035)!important;
+  border-color:rgba(98,236,255,.12)!important;
+}
+body.atlas-administrator-mirror #detailPanel>.detail-panel-body{
+  
+  background:transparent!important;
+}
+
+/* Top four facts stay readable without becoming a dark band. */
+body.atlas-administrator-mirror #detailPanel .detail-compact-strip>span{
+  background:rgba(2,8,17,.055)!important;
+  border-color:rgba(98,236,255,.13)!important;
+  box-shadow:none!important;
+}
+
+/* Secondary Classic controls are deliberately almost transparent. */
+body.atlas-administrator-mirror #detailPanel .atlas-detail-subwindow>summary,
+body.atlas-administrator-mirror #detailPanel .detail-grid>div,
+body.atlas-administrator-mirror #detailPanel .why-box,
+body.atlas-administrator-mirror #detailPanel .source-dock-command,
+body.atlas-administrator-mirror #detailPanel .source-dock-status,
+body.atlas-administrator-mirror #detailPanel .source-portal,
+body.atlas-administrator-mirror #detailPanel .source-dock-meta>span,
+body.atlas-administrator-mirror #detailPanel .broker-strip>div,
+body.atlas-administrator-mirror #detailPanel .diagnostic-strip>div,
+body.atlas-administrator-mirror #detailPanel .clean-lens-integrity>p,
+body.atlas-administrator-mirror #detailPanel button:not(.detail-panel-toggle),
+body.atlas-administrator-mirror #detailPanel a,
+body.atlas-administrator-mirror #detailPanel .source-dock-refresh{
+  background:rgba(2,8,17,.035)!important;
+  border-color:rgba(98,236,255,.11)!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Compact rows = more exposed image, especially the lower half of the portrait. */
+body.atlas-administrator-mirror #detailPanel .atlas-detail-subwindow>summary{
+  min-height:34px!important;
+  padding:5px 7px!important;
+}
+body.atlas-administrator-mirror #detailPanel .source-dock-body,
+body.atlas-administrator-mirror #detailPanel .atlas-detail-subwindow-body{
+  padding-top:3px!important;
+  padding-bottom:3px!important;
+  background:transparent!important;
+}
+body.atlas-administrator-mirror #detailPanel .source-dock-portals{
+  gap:3px!important;
+  background:transparent!important;
+}
+body.atlas-administrator-mirror #detailPanel .source-portal{
+  padding:4px 5px!important;
+}
+
+/* Decorative emblems: even more discreet than R5, still outside normal flow. */
+.admin-family-emblem-r3{
+  width:56px!important;
+  height:56px!important;
+  max-width:56px!important;
+  max-height:56px!important;
+  opacity:.08!important;
+  right:10px!important;
+  bottom:8px!important;
+}
+.admin-summary-emblem-r3{
+  width:44px!important;
+  height:44px!important;
+  max-width:44px!important;
+  max-height:44px!important;
+  opacity:.08!important;
+  right:8px!important;
+  bottom:7px!important;
+}
+#atlasAnalyticalMemory394.admin-analytical-emblem-host-r3>.admin-analytical-emblem-r3{
+  width:44px!important;
+  height:64px!important;
+  max-width:44px!important;
+  max-height:64px!important;
+  opacity:.08!important;
+  right:10px!important;
+  bottom:8px!important;
+}
+
+
+/* ==========================================================================
+   39.4.6R7 — LEGACY OVERLAY PURGE + FULL-WIDTH DOCK LOCK
+
+   Root-cause correction only:
+   1) Classic still reserved a 300–330 px right padding between 901–1380 CSS px;
+      R5/R6 then added a real second grid column, double-reserving the detail width.
+   2) Classic detail pseudo-layers were still active: ::before opacity .96 and
+      ::after darkened progressively to .98 at the bottom. They obscured the
+      operator-selected Aerith image despite the R6 3–6% functional glass.
+   No data / Market / Memory / Atlas / Math / Window Manager behavior changes.
+   ========================================================================== */
+
+/* TECHNICAL READING IMAGE — purge the legacy Classic artwork + near-opaque
+   lower gradient. The private/default Aerith <img> remains the single visual
+   background; functional cells from R6 stay at 3.5–5.5% alpha. */
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens:not(.detail-collapsed)
+#detailPanel.clean-lens-detail-panel::before,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens:not(.detail-collapsed)
+#detailPanel.clean-lens-detail-panel::after{
+  content:none!important;
+  
+  visibility:hidden!important;
+  opacity:0!important;
+  background:none!important;
+  background-image:none!important;
+  filter:none!important;
+}
+
+/* ==========================================================================
+   39.4.6R8 — TECHNICAL READING ULTRA-LIGHT GLASS LOCK
+
+   Operator contract:
+   - preserve the validated R7 layout and full-frame private/default image;
+   - reduce ONLY Technical Reading glass/background coverage;
+   - keep text fully opaque and interactive controls functional;
+   - no Market / Memory / Atlas / Math / Window Manager behavior change.
+   ========================================================================== */
+
+body.atlas-administrator-mirror #detailPanel.clean-lens-detail-panel{
+  background:rgba(2,8,16,.002)!important;
+}
+
+body.atlas-administrator-mirror #detailPanel>.detail-panel-toggle{
+  background:rgba(2,8,17,.008)!important;
+  border-color:rgba(98,236,255,.085)!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Four top facts: light glass only. */
+body.atlas-administrator-mirror #detailPanel .detail-compact-strip>span{
+  background:rgba(2,8,17,.025)!important;
+  border-color:rgba(98,236,255,.10)!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Secondary Classic rows: almost clear. */
+body.atlas-administrator-mirror #detailPanel .atlas-detail-subwindow>summary,
+body.atlas-administrator-mirror #detailPanel .detail-grid>div,
+body.atlas-administrator-mirror #detailPanel .why-box,
+body.atlas-administrator-mirror #detailPanel .source-dock-command,
+body.atlas-administrator-mirror #detailPanel .source-dock-status,
+body.atlas-administrator-mirror #detailPanel .source-portal,
+body.atlas-administrator-mirror #detailPanel .source-dock-meta>span,
+body.atlas-administrator-mirror #detailPanel .broker-strip>div,
+body.atlas-administrator-mirror #detailPanel .diagnostic-strip>div,
+body.atlas-administrator-mirror #detailPanel .clean-lens-integrity>p,
+body.atlas-administrator-mirror #detailPanel button:not(.detail-panel-toggle),
+body.atlas-administrator-mirror #detailPanel a,
+body.atlas-administrator-mirror #detailPanel .source-dock-refresh{
+  background:rgba(2,8,17,.012)!important;
+  border-color:rgba(98,236,255,.075)!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Small image identity chip also becomes glass-light. */
+body.atlas-administrator-mirror #detailPanel .detail-project-visual.admin-tech-r3>span{
+  background:rgba(2,8,17,.025)!important;
+  border-color:rgba(255,215,130,.12)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  box-shadow:none!important;
+}
+
+/* Never reintroduce legacy dark overlays. */
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens:not(.detail-collapsed)
+#detailPanel.clean-lens-detail-panel::before,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens:not(.detail-collapsed)
+#detailPanel.clean-lens-detail-panel::after{
+  content:none!important;
+  
+  opacity:0!important;
+  background:none!important;
+}
+
+
+/* ==========================================================================
+   39.6.1 — TECHNICAL READING NEAR-CLEAR GLASS + HELP-LAYER OFF LOCK
+
+   DESIGN-ONLY CONTRACT:
+   - preserve R7 full-frame image + full-width Graphique/Detail geometry;
+   - keep the private/default image visually dominant;
+   - functional text remains opaque; surfaces are effectively clear;
+   - remove the coarse whole-page HELP LAYER from Administrator presentation;
+   - do not alter Market / Memory / Atlas / Math / Window Manager behavior.
+   ========================================================================== */
+
+body.atlas-administrator-mirror #detailPanel.clean-lens-detail-panel{
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+body.atlas-administrator-mirror #detailPanel>.detail-panel-toggle{
+  background:rgba(2,8,17,.002)!important;
+  border-color:rgba(98,236,255,.055)!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Primary facts: only 0.6% dark glass. */
+body.atlas-administrator-mirror #detailPanel .detail-compact-strip>span{
+  background:rgba(2,8,17,.006)!important;
+  border-color:rgba(98,236,255,.065)!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Secondary information: 0.2% dark glass — practically transparent. */
+body.atlas-administrator-mirror #detailPanel .atlas-detail-subwindow>summary,
+body.atlas-administrator-mirror #detailPanel .detail-grid>div,
+body.atlas-administrator-mirror #detailPanel .why-box,
+body.atlas-administrator-mirror #detailPanel .source-dock-command,
+body.atlas-administrator-mirror #detailPanel .source-dock-status,
+body.atlas-administrator-mirror #detailPanel .source-portal,
+body.atlas-administrator-mirror #detailPanel .source-dock-meta>span,
+body.atlas-administrator-mirror #detailPanel .broker-strip>div,
+body.atlas-administrator-mirror #detailPanel .diagnostic-strip>div,
+body.atlas-administrator-mirror #detailPanel .clean-lens-integrity>p,
+body.atlas-administrator-mirror #detailPanel button:not(.detail-panel-toggle),
+body.atlas-administrator-mirror #detailPanel a,
+body.atlas-administrator-mirror #detailPanel .source-dock-refresh{
+  background:rgba(2,8,17,.002)!important;
+  border-color:rgba(98,236,255,.050)!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Expanded bodies must never create a dark slab over the portrait. */
+body.atlas-administrator-mirror #detailPanel details[open]>.atlas-detail-subwindow-body,
+body.atlas-administrator-mirror #detailPanel details[open]>.source-dock-body,
+body.atlas-administrator-mirror #detailPanel .source-dock-portals,
+body.atlas-administrator-mirror #detailPanel .detail-grid,
+body.atlas-administrator-mirror #detailPanel .broker-strip,
+body.atlas-administrator-mirror #detailPanel .diagnostic-strip{
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Identity tag: visible text, almost no plate. */
+body.atlas-administrator-mirror #detailPanel .detail-project-visual.admin-tech-r3>span{
+  background:rgba(2,8,17,.004)!important;
+  border-color:rgba(255,215,130,.08)!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Preserve text contrast without reintroducing glass panels. */
+body.atlas-administrator-mirror #detailPanel strong,
+body.atlas-administrator-mirror #detailPanel b,
+body.atlas-administrator-mirror #detailPanel span,
+body.atlas-administrator-mirror #detailPanel small,
+body.atlas-administrator-mirror #detailPanel em,
+body.atlas-administrator-mirror #detailPanel i,
+body.atlas-administrator-mirror #detailPanel p,
+body.atlas-administrator-mirror #detailPanel a,
+body.atlas-administrator-mirror #detailPanel button{
+  text-shadow:0 1px 2px rgba(0,0,0,.92),0 0 2px rgba(0,0,0,.68)!important;
+}
+
+/* Administrator help routing is owned by app.js, not by a blanket CSS hide.
+   Generic coarse help is suppressed at the source in atlasHelpTargetFromNode().
+   The shared #atlasHelpLayer must remain available to the canonical Crypto Card. */
+
+
+/* ==========================================================================
+   39.6.2 — TECHNICAL READING FULL-CLEAR SURFACES LOCK
+
+   OPERATOR CONTRACT:
+   - preserve 39.6.1 geometry, image, text, semantic borders and interactions;
+   - remove ONLY the remaining dark/gradient fills from the visible
+     Technical Reading fact cards and functional rows;
+   - keep expanded bodies transparent;
+   - no Market / Memory / Atlas / Math / Window Manager behavior change.
+   ========================================================================== */
+
+/* Legacy parent shells were still carrying 44–48% dark backgrounds.
+   Clear the shells themselves before clearing their visible rows. */
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .atlas-detail-subwindow,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .atlas-source-dock{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Header toggle and the four primary fact cards: true clear background. */
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel > .detail-panel-toggle,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .detail-compact-strip > span{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Functional rows/cells: preserve text and borders, expose the portrait fully. */
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .atlas-detail-subwindow > summary,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .detail-grid > div,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .why-box,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .source-dock-command,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .source-dock-status,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .source-portal,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .source-dock-meta > span,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .broker-strip > div,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .diagnostic-strip > div,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .clean-lens-integrity > p{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Open sections must remain clear as well. */
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel details[open] > .atlas-detail-subwindow-body,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel details[open] > .source-dock-body,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .source-dock-portals,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .detail-grid,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .broker-strip,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens
+#detailPanel.clean-lens-detail-panel .diagnostic-strip{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* ============================================================================
+   TECHNICAL READING — CURRENT VISUAL OWNER · NEAR-ZERO GLASS
+   Historical oracles: 39.6.2 FULL-CLEAR + 39.8.0R1 NEAR-ZERO GLASS.
+   40.1.20 scope: transparency only.
+
+   CONTRACT:
+   - preserve 40.1.19 autonomous Classic-mirror geometry exactly;
+   - preserve portrait, text, borders, DOM and interactions;
+   - remove dark slabs from Technical Reading;
+   - keep functional surfaces at <= 0.018 alpha;
+   - no backdrop blur;
+   - no Market Flow / Graph / Math / Window Manager / memory behavior change.
+   ============================================================================ */
+
+/* Panel shell and legacy overlays: fully clear. */
+body.atlas-administrator-mirror #detailPanel.clean-lens-detail-panel,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+body.atlas-administrator-mirror #detailPanel.clean-lens-detail-panel::before,
+body.atlas-administrator-mirror #detailPanel.clean-lens-detail-panel::after,
+body.atlas-administrator-mirror #detailPanel .detail-panel-body::before,
+body.atlas-administrator-mirror #detailPanel .detail-panel-body::after,
+body.atlas-administrator-mirror #detailPanel .detail-project-visual::before,
+body.atlas-administrator-mirror #detailPanel .detail-project-visual::after,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel::before,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel::after{
+  content:none!important;
+  
+  opacity:0!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Structural bodies: clear.  The duplicated high-specificity selector is in the
+   SAME canonical owner rule so Classic-mirror !important rules cannot darken it. */
+body.atlas-administrator-mirror #detailPanel .detail-panel-body,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .detail-panel-body,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .source-dock-portals,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .detail-grid,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .broker-strip,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .diagnostic-strip{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* 0.8% glass — historical 39.8.0R1 value for secondary information. */
+body.atlas-administrator-mirror #detailPanel .atlas-detail-subwindow,
+body.atlas-administrator-mirror #detailPanel .atlas-detail-subwindow-body,
+body.atlas-administrator-mirror #detailPanel .source-dock-body,
+body.atlas-administrator-mirror #detailPanel .source-dock-command,
+body.atlas-administrator-mirror #detailPanel .source-dock-status,
+body.atlas-administrator-mirror #detailPanel .source-dock-meta,
+body.atlas-administrator-mirror #detailPanel .source-dock-meta>span,
+body.atlas-administrator-mirror #detailPanel .detail-grid>div,
+body.atlas-administrator-mirror #detailPanel .broker-strip>div,
+body.atlas-administrator-mirror #detailPanel .diagnostic-strip>div,
+body.atlas-administrator-mirror #detailPanel .clean-lens-why-box,
+body.atlas-administrator-mirror #detailPanel #detailIntegrityWindow p,
+body.atlas-administrator-mirror #detailPanel [data-window-state],
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .atlas-detail-subwindow,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .atlas-detail-subwindow-body,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .source-dock-body,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .source-dock-command,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .source-dock-status,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .source-dock-meta,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .source-dock-meta>span,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .atlas-primary-detail-window .clean-lens-detail-grid>div,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .broker-strip>div,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .diagnostic-strip>div,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .clean-lens-why-box,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel #detailIntegrityWindow p,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel [data-window-state]{
+  background:rgba(3,8,14,.008)!important;
+  background-color:rgba(3,8,14,.008)!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* 1.8% glass — historical 39.8.0R1 maximum for headers and primary facts. */
+body.atlas-administrator-mirror #detailPanel .detail-panel-toggle,
+body.atlas-administrator-mirror #detailPanel details>summary,
+body.atlas-administrator-mirror #detailPanel .detail-compact-strip,
+body.atlas-administrator-mirror #detailPanel .detail-compact-strip>span,
+body.atlas-administrator-mirror #detailPanel .source-dock-refresh,
+body.atlas-administrator-mirror #detailPanel .source-portal,
+body.atlas-administrator-mirror #detailPanel button:not(.detail-panel-toggle),
+body.atlas-administrator-mirror #detailPanel a,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel>.detail-panel-toggle,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel details>summary,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .detail-compact-strip,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .detail-compact-strip>span,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .source-dock-refresh,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel .source-portal,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel button:not(.detail-panel-toggle),
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel a{
+  background:rgba(3,8,14,.018)!important;
+  background-color:rgba(3,8,14,.018)!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Expanded bodies never become slabs. */
+body.atlas-administrator-mirror #detailPanel details[open]>.atlas-detail-subwindow-body,
+body.atlas-administrator-mirror #detailPanel details[open]>.source-dock-body,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel details[open]>.atlas-detail-subwindow-body,
+body.atlas-administrator-mirror #analyste.champagne-clean-lens #detailPanel.clean-lens-detail-panel details[open]>.source-dock-body{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+}
+
+/* Text contrast only; no opaque plate. */
+body.atlas-administrator-mirror #detailPanel :is(h2,h3,h4,h5,b,strong,span,small,p,button,summary){
+  text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 4px rgba(0,0,0,.78)!important;
+}
+
+/* ============================================================================
+   40.1.20 — AUTONOMOUS CLASSIC MIRROR + NEAR-ZERO GLASS LOCK
+
+   Geometry is owned by Administrator ./style.css, which carries the validated
+   Classic Technical Reading contract locally. This visual layer intentionally
+   does not redefine #analyste / direct chart / direct #detailPanel geometry.
+   Metal, private portrait, glass and window chrome remain Administrator-owned.
+   ============================================================================ */
+
+
+/* ==========================================================================
+   TECHNICAL_READING_CANONICAL_OWNER_404253
+   Agent-Crypto 40.4.253 — single canonical geometry/image owner + validated 136px internal frame.
+
+   Proven contract preserved:
+   - 28.2.5 / 28.2.9: graph owns workspace height; detail is an absolute
+     right dock; long detail content scrolls internally and never grows graph.
+   - 40.2.65: immersive selected/private portrait remains cover-rendered.
+   - 40.4.243: current 360px right-dock/full-panel portrait appearance retained.
+   - 40.4.253: intrinsic image aspect ratio must never own rendered height; the canonical image is a block-level 100% × 100% cover surface.
+   - 40.1.18 / Classic contract: 136px visual host remains in normal flow so
+     the compact ACTIF / PRIX / DÉCISION / 24H row keeps its validated vertical position.
+
+   This block owns geometry + portrait framing only. Opacity/contrast remains
+   owned by admin-visual-cache.css 40.3.38; no legacy Technical Reading geometry owner survives here.
+   No data, graph canvas, RND library, picker persistence or runtime owner here.
+   ========================================================================== */
+
+@media (min-width:901px){
+  body.atlas-administrator-mirror
+  #analyste.champagne-clean-lens:not(.detail-collapsed){
+    display:block!important;
+    position:relative!important;
+    padding-right:calc(var(--atlas-open-detail-width,360px) + 7px)!important;
+    grid-template-columns:none!important;
+    grid-template-rows:none!important;
+  }
+
+  body.atlas-administrator-mirror
+  #analyste.champagne-clean-lens:not(.detail-collapsed) > #detailPanel.atlas-tech-static-cycle.atlas-classic-web-tech-40261{
+    position:absolute!important;
+    top:0!important;
+    right:0!important;
+    bottom:0!important;
+    left:auto!important;
+    width:var(--atlas-open-detail-width,360px)!important;
+    min-width:0!important;
+    max-width:var(--atlas-open-detail-width,360px)!important;
+    height:100%!important;
+    min-height:0!important;
+    max-height:100%!important;
+    margin:0!important;
+    overflow:hidden!important;
+    display:flex!important;
+    flex-direction:column!important;
+    box-sizing:border-box!important;
+    z-index:30!important;
+  }
+}
+
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens:not(.detail-collapsed)
+#detailPanel.atlas-tech-static-cycle.atlas-classic-web-tech-40261::before,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens:not(.detail-collapsed)
+#detailPanel.atlas-tech-static-cycle.atlas-classic-web-tech-40261::after{
+  content:none!important;
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  background:none!important;
+  background-image:none!important;
+  filter:none!important;
+}
+
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens:not(.detail-collapsed)
+#detailPanel.atlas-tech-static-cycle.atlas-classic-web-tech-40261
+.detail-project-visual.admin-tech-r3{
+  /* 40.4.245 — restore the validated Classic internal frame:
+     the host reserves 136px in normal flow so ACTIF / PRIX / DÉCISION / 24H
+     starts lower again. The portrait itself remains the absolute full-panel
+     background through the existing .admin-tech-portrait-r3 rule below. */
+  position:static!important;
+  display:block!important;
+  width:100%!important;
+  height:136px!important;
+  min-width:0!important;
+  min-height:136px!important;
+  max-width:none!important;
+  max-height:136px!important;
+  margin:0 0 7px!important;
+  padding:0!important;
+  flex:0 0 136px!important;
+  aspect-ratio:auto!important;
+  overflow:visible!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  z-index:0!important;
+  isolation:isolate!important;
+  cursor:pointer!important;
+}
+
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens:not(.detail-collapsed)
+#detailPanel.atlas-tech-static-cycle.atlas-classic-web-tech-40261
+.detail-project-visual.admin-tech-r3 > .admin-tech-portrait-r3{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  min-width:100%!important;
+  min-height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:0!important;
+  box-sizing:border-box!important;
+  object-fit:cover!important;
+  object-position:var(--admin-tech-x,50%) var(--admin-tech-y,50%)!important;
+  opacity:1!important;
+  filter:none!important;
+  transform:none!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  user-select:none!important;
+}
+
+body.atlas-administrator-mirror #detailPanel .detail-project-visual.admin-tech-r3 > span{
+  position:absolute!important;
+  left:10px!important;
+  right:auto!important;
+  top:156px!important;
+  bottom:auto!important;
+  z-index:4!important;
+  max-width:calc(100% - 20px)!important;
+  padding:4px 7px!important;
+  border:1px solid rgba(255,215,130,.28)!important;
+  border-radius:999px!important;
+  color:#ffe2a0!important;
+  font-size:9px!important;
+  /* 40.4.253R2 — historical 40.2.83 contract: the Agent-Crypto · Aerith-10 cartouche
+     must sit in the breathing zone immediately above ACTIF / PRIX / DECISION / 24H.
+     The current 136px Classic host already absorbs the later geometry shift, so restore
+     only the historical minimum descent (52px), without moving the four cards. */
+  transform:translateY(52px)!important;
+}
+
+body.atlas-administrator-mirror #detailPanel .detail-project-visual.admin-tech-r3::after,
+body.atlas-administrator-mirror #detailPanel .admin-tech-reset-r3{
+  content:none!important;
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+}
+
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens:not(.detail-collapsed)
+#detailPanel.atlas-tech-static-cycle.atlas-classic-web-tech-40261 > .detail-panel-toggle,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens:not(.detail-collapsed)
+#detailPanel.atlas-tech-static-cycle.atlas-classic-web-tech-40261 > .atlas-tech-static-toolbar,
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens:not(.detail-collapsed)
+#detailPanel.atlas-tech-static-cycle.atlas-classic-web-tech-40261 > .detail-panel-body{
+  position:relative!important;
+  z-index:3!important;
+}
+
+body.atlas-administrator-mirror
+#analyste.champagne-clean-lens:not(.detail-collapsed)
+#detailPanel.atlas-tech-static-cycle.atlas-classic-web-tech-40261 > .detail-panel-body{
+  display:flex!important;
+  flex:1 1 auto!important;
+  flex-direction:column!important;
+  min-height:0!important;
+  width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  gap:5px!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain!important;
+  scrollbar-gutter:auto!important;
+  background:transparent!important;
+}

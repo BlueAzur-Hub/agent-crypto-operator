@@ -1,0 +1,62 @@
+{
+  "syntax": {
+    "node_check_app": true,
+    "node_check_data": true,
+    "control_characters": 0
+  },
+  "private_creator": {
+    "module_cards": 15,
+    "import_count": 18,
+    "final_status": "PRÊT",
+    "forge_enabled": true,
+    "button_text": "FORGER LE ZIP FINAL · 11 FICHIERS",
+    "page_errors": [],
+    "zip_file_count": 11,
+    "core_byte_identical": true,
+    "persona_byte_identical": true,
+    "router_byte_identical": true,
+    "module14_byte_identical": true,
+    "module15_byte_identical": true
+  },
+  "missing_sources": {
+    "final_status": "À COMPLÉTER",
+    "forge_disabled": true,
+    "page_errors": []
+  },
+  "routes": {
+    "expected": {
+      "music": 5,
+      "video": 4,
+      "keyframe": 4,
+      "quality": 1,
+      "wan": 1,
+      "workflow": 1,
+      "workflow-continuity": 2,
+      "full": 15
+    },
+    "actual": {
+      "music": 5,
+      "video": 4,
+      "keyframe": 4,
+      "quality": 1,
+      "wan": 1,
+      "workflow": 1,
+      "workflow-continuity": 2,
+      "full": 15
+    },
+    "all_correct": true
+  },
+  "public_crypto_mock": {
+    "counts_text": "8 référencés\n8 chargés\n8 actifs\n8 inclus",
+    "forge_enabled": true,
+    "page_errors": [],
+    "zip_file_count": 17,
+    "has_8_modules": true,
+    "has_router": true
+  },
+  "static_integrity": {
+    "assets_unchanged_from_r5": true,
+    "existing_interface_files_preserved": true,
+    "github_write_performed": false
+  }
+}

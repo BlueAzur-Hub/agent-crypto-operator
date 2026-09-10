@@ -1,0 +1,1398 @@
+/* ============================================================================
+   Agent-Crypto Administrator
+   UNIFORM FIVE-BUTTON WINDOW MENU CONTRACT
+
+   Operator contract:
+   - every Administrator five-button window menu uses ONE visual appearance;
+   - rest: ghosted but visible (.16);
+   - parent hover/focus: revealed (.82);
+   - direct menu hover/focus: full contrast (1);
+   - same metallic button surface everywhere;
+   - NO display override: canonical Window Manager still owns native/floating hide/show;
+   - NO business/runtime/data behavior changed.
+   ============================================================================ */
+
+/* One exact rest appearance for every native window-control deck. */
+body.atlas-administrator-mirror .admin-native-control-host > .admin-native-controls,
+body.atlas-administrator-mirror #analyste.admin-native-control-host > .admin-native-controls,
+body.atlas-administrator-mirror #marketSnapshotPanel.admin-native-control-host > .admin-native-controls,
+body.atlas-administrator-mirror #atlasMetalsMarketSnapshot.admin-native-control-host > .admin-native-controls,
+body.atlas-administrator-mirror #math.admin-native-control-host > .admin-native-controls,
+body.atlas-administrator-mirror #market-workspace .top5-ribbon.admin-native-control-host > .admin-native-controls,
+body.atlas-administrator-mirror #market-workspace .market-flow-ribbon.admin-native-control-host > .admin-native-controls,
+body.atlas-administrator-mirror .atlas-metals-target-ribbon.admin-native-control-host > .admin-native-controls,
+body.atlas-administrator-mirror .atlas-metals-flow-ribbon.admin-native-control-host > .admin-native-controls {
+  visibility:visible!important;
+  opacity:.16!important;
+  pointer-events:auto!important;
+  background:linear-gradient(90deg,rgba(8,12,16,.015),rgba(13,18,22,.16))!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(5px) saturate(102%)!important;
+  -webkit-backdrop-filter:blur(5px) saturate(102%)!important;
+  transition:opacity .14s ease,background .14s ease,box-shadow .14s ease!important;
+}
+
+/* Identical metallic buttons at rest. */
+body.atlas-administrator-mirror .admin-native-control-host > .admin-native-controls .admin-native-control,
+body.atlas-administrator-mirror #analyste.admin-native-control-host > .admin-native-controls .admin-native-control,
+body.atlas-administrator-mirror #market-workspace .top5-ribbon.admin-native-control-host > .admin-native-controls .admin-native-control,
+body.atlas-administrator-mirror #market-workspace .market-flow-ribbon.admin-native-control-host > .admin-native-controls .admin-native-control {
+  opacity:1!important;
+  border-color:rgba(215,226,234,.10)!important;
+  background:linear-gradient(180deg,rgba(36,47,55,.30),rgba(6,11,15,.38))!important;
+  color:rgba(220,231,238,.58)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025)!important;
+}
+
+/* Same reveal level when the operator enters a window. */
+body.atlas-administrator-mirror .admin-native-control-host:hover > .admin-native-controls,
+body.atlas-administrator-mirror .admin-native-control-host:focus-within > .admin-native-controls,
+body.atlas-administrator-mirror #analyste.admin-native-control-host:hover > .admin-native-controls,
+body.atlas-administrator-mirror #marketSnapshotPanel.admin-native-control-host:hover > .admin-native-controls,
+body.atlas-administrator-mirror #atlasMetalsMarketSnapshot.admin-native-control-host:hover > .admin-native-controls,
+body.atlas-administrator-mirror #math.admin-native-control-host:hover > .admin-native-controls,
+body.atlas-administrator-mirror #market-workspace .top5-ribbon.admin-native-control-host:hover > .admin-native-controls,
+body.atlas-administrator-mirror #market-workspace .market-flow-ribbon.admin-native-control-host:hover > .admin-native-controls,
+body.atlas-administrator-mirror .atlas-metals-target-ribbon.admin-native-control-host:hover > .admin-native-controls,
+body.atlas-administrator-mirror .atlas-metals-flow-ribbon.admin-native-control-host:hover > .admin-native-controls {
+  opacity:.82!important;
+  background:linear-gradient(90deg,rgba(8,12,16,.10),rgba(13,18,22,.62))!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.16)!important;
+}
+
+/* Direct menu interaction: exact same full-contrast behavior everywhere. */
+body.atlas-administrator-mirror .admin-native-control-host > .admin-native-controls:hover,
+body.atlas-administrator-mirror .admin-native-control-host > .admin-native-controls:focus-within,
+body.atlas-administrator-mirror #analyste.admin-native-control-host > .admin-native-controls:hover,
+body.atlas-administrator-mirror #market-workspace .top5-ribbon.admin-native-control-host > .admin-native-controls:hover,
+body.atlas-administrator-mirror #market-workspace .market-flow-ribbon.admin-native-control-host > .admin-native-controls:hover {
+  opacity:1!important;
+  background:linear-gradient(90deg,rgba(8,12,16,.17),rgba(13,18,22,.88))!important;
+  box-shadow:0 10px 26px rgba(0,0,0,.26)!important;
+}
+
+body.atlas-administrator-mirror .admin-native-control-host:hover > .admin-native-controls .admin-native-control,
+body.atlas-administrator-mirror .admin-native-control-host:focus-within > .admin-native-controls .admin-native-control {
+  border-color:rgba(215,226,234,.17)!important;
+  background:linear-gradient(180deg,rgba(36,47,55,.66),rgba(6,11,15,.76))!important;
+  color:rgba(232,241,246,.88)!important;
+}
+
+body.atlas-administrator-mirror .admin-native-control-host > .admin-native-controls:hover .admin-native-control,
+body.atlas-administrator-mirror .admin-native-control-host > .admin-native-controls:focus-within .admin-native-control {
+  color:#eaf3f8!important;
+}
+
+/* Touch cannot rely on hover. Same explicit fallback for every menu. */
+@media (hover:none),(pointer:coarse) {
+  body.atlas-administrator-mirror .admin-native-control-host > .admin-native-controls,
+  body.atlas-administrator-mirror #analyste.admin-native-control-host > .admin-native-controls,
+  body.atlas-administrator-mirror #market-workspace .top5-ribbon.admin-native-control-host > .admin-native-controls,
+  body.atlas-administrator-mirror #market-workspace .market-flow-ribbon.admin-native-control-host > .admin-native-controls {
+    opacity:.88!important;
+  }
+}
+
+/* ============================================================================
+   40.2.89 — GRAPH ANALYST TOOLBAR TURQUOISE ACTIVE + WHITE TEXT LOCK · VISUAL ONLY
+
+   Operator visual contract:
+   - available but inactive = neutral dark metallic / readable pale text;
+   - active / selected = luminous TURQUOISE/CYAN metallic surface + WHITE text;
+   - truly disabled = visibly GREYED, lower contrast, no hover lift;
+   - Max ? is neutral when inactive (no special gold treatment);
+   - Fiche uses the same active TURQUOISE/CYAN + WHITE grammar as every other active control;
+   - destructive Vider may keep a restrained red border/text cue while inactive;
+   - no DOM ownership, handlers, data source or chart geometry changes.
+   ============================================================================ */
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 {
+  --atlas-gm-border:rgba(183,202,214,.22);
+  --atlas-gm-border-soft:rgba(183,202,214,.13);
+  --atlas-gm-text:rgba(231,240,245,.88);
+  --atlas-gm-muted:rgba(177,196,208,.72);
+  --atlas-gm-label:#b9eff8;
+  --atlas-gm-active-text:#ffffff;
+  --atlas-gm-active-border:rgba(130,234,255,.92);
+  --atlas-gm-active-top:rgba(24,150,185,.94);
+  --atlas-gm-active-bottom:rgba(4,65,92,.98);
+  --atlas-gm-disabled-text:rgba(180,188,194,.42);
+  --atlas-gm-disabled-border:rgba(166,174,180,.10);
+  min-width:0!important;
+}
+
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toolbar-row {
+  border:1px solid var(--atlas-gm-border-soft)!important;
+  border-radius:10px!important;
+  background:linear-gradient(180deg,rgba(36,47,55,.28),rgba(5,10,14,.44))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 4px 12px rgba(0,0,0,.08)!important;
+}
+
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toolbar-label,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle-group > span {
+  color:var(--atlas-gm-label)!important;
+  font-weight:950!important;
+  letter-spacing:.105em!important;
+  text-transform:uppercase!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.5)!important;
+}
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toolbar-label {font-size:8.5px!important}
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle-group > span {font-size:7.5px!important}
+
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle-group,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-tabs,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-action-group {
+  border:1px solid rgba(183,202,214,.10)!important;
+  border-radius:8px!important;
+  background:linear-gradient(180deg,rgba(23,32,38,.32),rgba(4,8,12,.38))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.022)!important;
+}
+
+/* AVAILABLE / INACTIVE — neutral metallic, not "disabled". */
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-btn,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-btn {
+  min-height:25px!important;
+  border:1px solid var(--atlas-gm-border)!important;
+  border-radius:7px!important;
+  background:linear-gradient(180deg,rgba(49,62,71,.48),rgba(7,13,18,.72))!important;
+  color:var(--atlas-gm-text)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 1px 2px rgba(0,0,0,.20)!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.55)!important;
+  transition:border-color .12s ease,background .12s ease,color .12s ease,box-shadow .12s ease,transform .12s ease!important;
+  white-space:nowrap!important;
+}
+
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle:hover:not(:disabled):not([aria-disabled="true"]),
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-btn:hover:not(:disabled):not([aria-disabled="true"]),
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-btn:hover:not(:disabled):not([aria-disabled="true"]) {
+  border-color:rgba(130,234,255,.36)!important;
+  background:linear-gradient(180deg,rgba(48,86,100,.68),rgba(7,24,31,.88))!important;
+  color:#f5fbff!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.075),0 0 9px rgba(93,220,255,.07),0 3px 10px rgba(0,0,0,.22)!important;
+}
+
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle:focus-visible,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-btn:focus-visible,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-btn:focus-visible {
+  outline:2px solid rgba(98,236,255,.72)!important;
+  outline-offset:1px!important;
+}
+
+/* ACTIVE / SELECTED — ONE grammar: luminous turquoise/cyan metallic + white text. */
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle.is-active,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle[aria-pressed="true"],
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-btn.active,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-btn.active,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 #atlasTop5NativeFicheToggle40284.is-active,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 #atlasTop5NativeFicheToggle40284[aria-pressed="true"] {
+  border-color:var(--atlas-gm-active-border)!important;
+  background:linear-gradient(180deg,var(--atlas-gm-active-top),var(--atlas-gm-active-bottom))!important;
+  color:var(--atlas-gm-active-text)!important;
+  box-shadow:inset 0 0 0 1px rgba(205,250,255,.20),0 0 0 1px rgba(93,220,255,.24),0 0 15px rgba(93,220,255,.24)!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.64),0 0 7px rgba(225,252,255,.14)!important;
+}
+
+/* DISABLED really means disabled: greyed and visually inert. */
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle:disabled,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-btn:disabled,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-btn:disabled,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle[aria-disabled="true"],
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-btn[aria-disabled="true"],
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-btn[aria-disabled="true"] {
+  opacity:.58!important;
+  border-color:var(--atlas-gm-disabled-border)!important;
+  background:linear-gradient(180deg,rgba(65,68,71,.22),rgba(20,22,24,.46))!important;
+  color:var(--atlas-gm-disabled-text)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.02)!important;
+  text-shadow:none!important;
+  cursor:not-allowed!important;
+  filter:saturate(.35)!important;
+}
+
+/* Max ? is ordinary neutral when inactive: no gold exception. */
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-btn-max:not(.active) {
+  border-color:var(--atlas-gm-border)!important;
+  color:var(--atlas-gm-text)!important;
+}
+
+/* Vider keeps only a restrained destructive cue when inactive. */
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-btn-clear:not(.active) {
+  border-color:rgba(255,92,117,.22)!important;
+  color:rgba(255,215,221,.82)!important;
+}
+
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-period-truth {
+  color:rgba(181,199,211,.70)!important;
+  font-weight:800!important;
+}
+
+/* Transformer Book: preserve the 40.2.85 compact geometry, but raise text floor. */
+@media (max-width:1366px) {
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toolbar-row {padding:2px 3px!important}
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-control-deck,
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-tabs,
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-actions {gap:3px!important}
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle-group,
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-tabs,
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-action-group {padding:1px 2px!important}
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle,
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-btn,
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-btn {min-height:24px!important;padding:3px 6px!important;font-size:9px!important}
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toolbar-label {font-size:8px!important;letter-spacing:.08em!important}
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle-group > span {font-size:7.5px!important;letter-spacing:.07em!important}
+}
+
+/* ============================================================================
+   40.2.90 — SEMANTIC COLOR + ICONOGRAPHY PASS · VISUAL ONLY
+
+   Design contract:
+   - Administrator base remains blue-night / turquoise / white;
+   - semantic accents add controlled color to families and major sections;
+   - icons are code-only inline SVG from index.html, no asset file;
+   - no layout ownership, handler, data, chart, Oracle, Celestial or window-manager change;
+   - color is supplemental: labels/text remain present, never icon-only.
+   ============================================================================ */
+body.atlas-administrator-mirror.atlas-semantic-color-icons-40290 {
+  --atlas-sem-cyan:#76eaff;
+  --atlas-sem-teal:#73f0d1;
+  --atlas-sem-green:#8ce7a5;
+  --atlas-sem-gold:#ffd47f;
+  --atlas-sem-violet:#b9a7ff;
+  --atlas-sem-pink:#ff9ed7;
+  --atlas-sem-orange:#ffb36e;
+  --atlas-sem-blue:#83adff;
+}
+
+/* Command Center: icon + restrained semantic hue per function. */
+body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290] {
+  --atlas-semantic-color:var(--atlas-sem-cyan);
+  --atlas-semantic-rgb:118,234,255;
+  position:relative!important;
+  padding-left:27px!important;
+  border-color:rgba(var(--atlas-semantic-rgb),.24)!important;
+  background:linear-gradient(180deg,rgba(var(--atlas-semantic-rgb),.075),rgba(4,11,17,.62))!important;
+  transition:border-color .14s ease,background .14s ease,box-shadow .14s ease!important;
+}
+body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290="decision"]{--atlas-semantic-color:var(--atlas-sem-gold);--atlas-semantic-rgb:255,212,127}
+body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290="analysis"]{--atlas-semantic-color:var(--atlas-sem-cyan);--atlas-semantic-rgb:118,234,255}
+body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290="system"]{--atlas-semantic-color:var(--atlas-sem-teal);--atlas-semantic-rgb:115,240,209}
+body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290="projects"]{--atlas-semantic-color:var(--atlas-sem-violet);--atlas-semantic-rgb:185,167,255}
+body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290="view"]{--atlas-semantic-color:var(--atlas-sem-blue);--atlas-semantic-rgb:131,173,255}
+body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290="command"]{--atlas-semantic-color:var(--atlas-sem-cyan);--atlas-semantic-rgb:118,234,255}
+body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290]:hover,
+body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290][aria-expanded="true"] {
+  border-color:rgba(var(--atlas-semantic-rgb),.58)!important;
+  background:linear-gradient(180deg,rgba(var(--atlas-semantic-rgb),.15),rgba(4,15,23,.80))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 0 12px rgba(var(--atlas-semantic-rgb),.10)!important;
+}
+body.atlas-semantic-color-icons-40290 .atlas-admin-shortcut-icon-40290 {
+  position:absolute!important;left:8px!important;top:50%!important;transform:translateY(-50%)!important;
+  width:13px!important;height:13px!important;fill:none!important;stroke:var(--atlas-semantic-color)!important;
+  stroke-width:1.7!important;stroke-linecap:round!important;stroke-linejoin:round!important;pointer-events:none!important;
+  filter:drop-shadow(0 0 4px rgba(var(--atlas-semantic-rgb),.28));
+}
+
+/* Administrator family palette: same dark shell, different semantic rails. */
+body.atlas-semantic-color-icons-40290 .atlas-layout-family,
+body.atlas-semantic-color-icons-40290 .atlas-family-member {
+  --atlas-semantic-accent:var(--atlas-sem-cyan);
+  --atlas-semantic-accent-rgb:118,234,255;
+}
+body.atlas-semantic-color-icons-40290 .atlas-layout-family-analysis,
+body.atlas-semantic-color-icons-40290 .atlas-tone-analysis{--atlas-semantic-accent:var(--atlas-sem-cyan);--atlas-semantic-accent-rgb:118,234,255}
+body.atlas-semantic-color-icons-40290 .atlas-layout-family-intelligence,
+body.atlas-semantic-color-icons-40290 .atlas-tone-intelligence{--atlas-semantic-accent:var(--atlas-sem-violet);--atlas-semantic-accent-rgb:185,167,255}
+body.atlas-semantic-color-icons-40290 .atlas-layout-family-operations,
+body.atlas-semantic-color-icons-40290 .atlas-tone-operations{--atlas-semantic-accent:var(--atlas-sem-gold);--atlas-semantic-accent-rgb:255,212,127}
+body.atlas-semantic-color-icons-40290 .atlas-layout-family-system,
+body.atlas-semantic-color-icons-40290 .atlas-tone-system{--atlas-semantic-accent:var(--atlas-sem-teal);--atlas-semantic-accent-rgb:115,240,209}
+body.atlas-semantic-color-icons-40290 .atlas-tone-creation{--atlas-semantic-accent:var(--atlas-sem-pink);--atlas-semantic-accent-rgb:255,158,215}
+body.atlas-semantic-color-icons-40290 .atlas-tone-experiment{--atlas-semantic-accent:var(--atlas-sem-orange);--atlas-semantic-accent-rgb:255,179,110}
+
+body.atlas-semantic-color-icons-40290 .atlas-layout-family {
+  border-color:rgba(var(--atlas-semantic-accent-rgb),.24)!important;
+  background:linear-gradient(90deg,rgba(var(--atlas-semantic-accent-rgb),.09),rgba(7,15,23,.42) 34%,rgba(4,10,16,.55))!important;
+  box-shadow:inset 3px 0 0 rgba(var(--atlas-semantic-accent-rgb),.66),inset 0 1px 0 rgba(255,255,255,.025)!important;
+}
+body.atlas-semantic-color-icons-40290 .atlas-layout-family .atlas-layout-family-index,
+body.atlas-semantic-color-icons-40290 .atlas-layout-family .atlas-layout-family-copy>p {color:var(--atlas-semantic-accent)!important}
+body.atlas-semantic-color-icons-40290 .atlas-layout-family .atlas-layout-family-signal {
+  background:linear-gradient(90deg,var(--atlas-semantic-accent),transparent)!important;
+  box-shadow:0 0 10px rgba(var(--atlas-semantic-accent-rgb),.24)!important;
+}
+
+/* Family members get only a thin colored rail; no geometry rewrite. */
+body.atlas-semantic-color-icons-40290 .atlas-family-member {
+  border-color:rgba(var(--atlas-semantic-accent-rgb),.17)!important;
+  box-shadow:inset 2px 0 0 rgba(var(--atlas-semantic-accent-rgb),.48),0 8px 24px rgba(0,0,0,.08)!important;
+}
+body.atlas-semantic-color-icons-40290 details.atlas-family-member>summary.atlas-collapse-summary {
+  background:linear-gradient(90deg,rgba(var(--atlas-semantic-accent-rgb),.065),rgba(5,13,20,.18) 42%,transparent)!important;
+}
+body.atlas-semantic-color-icons-40290 details.atlas-family-member[open]>summary.atlas-collapse-summary {
+  box-shadow:inset 3px 0 0 rgba(var(--atlas-semantic-accent-rgb),.64)!important;
+}
+body.atlas-semantic-color-icons-40290 .atlas-family-member .eyebrow {color:var(--atlas-semantic-accent)!important}
+
+/* More variety inside the analysis family while keeping the same blue-night base. */
+body.atlas-semantic-color-icons-40290 #atlasBreakoutContext40271{--atlas-semantic-accent:var(--atlas-sem-green);--atlas-semantic-accent-rgb:140,231,165}
+body.atlas-semantic-color-icons-40290 #news-sentinel,
+body.atlas-semantic-color-icons-40290 #news-market-explanation{--atlas-semantic-accent:var(--atlas-sem-teal);--atlas-semantic-accent-rgb:115,240,209}
+body.atlas-semantic-color-icons-40290 #astrocycle-4055{--atlas-semantic-accent:var(--atlas-sem-gold);--atlas-semantic-accent-rgb:255,212,127}
+body.atlas-semantic-color-icons-40290 #celestial-sentinel-4055{--atlas-semantic-accent:var(--atlas-sem-violet);--atlas-semantic-accent-rgb:185,167,255}
+body.atlas-semantic-color-icons-40290 #atlasStorageHealth40198{--atlas-semantic-accent:var(--atlas-sem-teal);--atlas-semantic-accent-rgb:115,240,209}
+body.atlas-semantic-color-icons-40290 #atlasMetalsAnalysisFoundation{--atlas-semantic-accent:var(--atlas-sem-gold);--atlas-semantic-accent-rgb:255,212,127}
+
+/* Code-only section heading icons. Absolute placement keeps line-box geometry stable. */
+body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290 {
+  --atlas-semantic-color:var(--atlas-sem-cyan);
+  --atlas-semantic-rgb:118,234,255;
+  position:relative!important;
+  padding-left:31px!important;
+}
+body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="analysis"]{--atlas-semantic-color:var(--atlas-sem-cyan);--atlas-semantic-rgb:118,234,255}
+body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="intelligence"]{--atlas-semantic-color:var(--atlas-sem-violet);--atlas-semantic-rgb:185,167,255}
+body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="operations"]{--atlas-semantic-color:var(--atlas-sem-gold);--atlas-semantic-rgb:255,212,127}
+body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="system"]{--atlas-semantic-color:var(--atlas-sem-teal);--atlas-semantic-rgb:115,240,209}
+body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="metals"]{--atlas-semantic-color:var(--atlas-sem-gold);--atlas-semantic-rgb:255,212,127}
+body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="breakout"]{--atlas-semantic-color:var(--atlas-sem-green);--atlas-semantic-rgb:140,231,165}
+body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="oracle"]{--atlas-semantic-color:var(--atlas-sem-cyan);--atlas-semantic-rgb:118,234,255}
+body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="network"]{--atlas-semantic-color:var(--atlas-sem-blue);--atlas-semantic-rgb:131,173,255}
+body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="news"]{--atlas-semantic-color:var(--atlas-sem-teal);--atlas-semantic-rgb:115,240,209}
+body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="storage"]{--atlas-semantic-color:var(--atlas-sem-teal);--atlas-semantic-rgb:115,240,209}
+body.atlas-semantic-color-icons-40290 .atlas-heading-icon-40290 {
+  position:absolute!important;left:0!important;top:50%!important;transform:translateY(-50%)!important;
+  width:23px!important;height:23px!important;border-radius:8px!important;display:grid!important;place-items:center!important;
+  border:1px solid rgba(var(--atlas-semantic-rgb),.34)!important;
+  background:linear-gradient(180deg,rgba(var(--atlas-semantic-rgb),.13),rgba(4,12,18,.62))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 0 9px rgba(var(--atlas-semantic-rgb),.08)!important;
+  color:var(--atlas-semantic-color)!important;
+}
+body.atlas-semantic-color-icons-40290 .atlas-heading-icon-40290 svg {
+  width:14px!important;height:14px!important;fill:none!important;stroke:currentColor!important;stroke-width:1.7!important;stroke-linecap:round!important;stroke-linejoin:round!important;
+}
+
+/* Existing 40.2.69 semantic collapse icons: slightly richer, still restrained. */
+body.atlas-semantic-color-icons-40290 .atlas-collapse-summary>.atlas-section-icon-40269 {
+  background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(3,10,16,.50))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 0 10px rgba(98,236,255,.06)!important;
+}
+
+/* Book: preserve clarity; color stays, glow is reduced. */
+@media (max-width:1366px) {
+  body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290]{padding-left:23px!important}
+  body.atlas-semantic-color-icons-40290 .atlas-admin-shortcut-icon-40290{left:6px!important;width:11px!important;height:11px!important;filter:none!important}
+  body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290{padding-left:28px!important}
+  body.atlas-semantic-color-icons-40290 .atlas-heading-icon-40290{width:21px!important;height:21px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important}
+  body.atlas-semantic-color-icons-40290 .atlas-heading-icon-40290 svg{width:13px!important;height:13px!important}
+}
+
+/* ============================================================================
+   40.2.91 — ASTROCYCLE PLANETARY COLOR SEMANTICS · VISUAL ONLY
+
+   Operator mapping:
+   Saturne = rouge · Mars = orange · Soleil = jaune · Vénus = vert
+   Mercure = bleu · Lune = blanc/argent · Jupiter = doré.
+
+   Contract:
+   - planet color is a semantic accent, not a market signal;
+   - active/next timing state remains separate from planet identity;
+   - ChronosXP calculations, clock cadence, celestial transport and market logic unchanged;
+   - no layout/size/position ownership is introduced here.
+   ============================================================================ */
+body.atlas-astro-planet-colors-40291 {
+  --astro-saturn:#ff6f7d;
+  --astro-mars:#ff9d63;
+  --astro-sun:#ffe46f;
+  --astro-venus:#78e6a2;
+  --astro-mercury:#72bcff;
+  --astro-moon:#f3f6ff;
+  --astro-jupiter:#ffd17a;
+}
+
+body.atlas-astro-planet-colors-40291 [data-planet40291="saturn"]{--astro-planet:var(--astro-saturn);--astro-planet-rgb:255,111,125}
+body.atlas-astro-planet-colors-40291 [data-planet40291="mars"]{--astro-planet:var(--astro-mars);--astro-planet-rgb:255,157,99}
+body.atlas-astro-planet-colors-40291 [data-planet40291="sun"]{--astro-planet:var(--astro-sun);--astro-planet-rgb:255,228,111}
+body.atlas-astro-planet-colors-40291 [data-planet40291="venus"]{--astro-planet:var(--astro-venus);--astro-planet-rgb:120,230,162}
+body.atlas-astro-planet-colors-40291 [data-planet40291="mercury"]{--astro-planet:var(--astro-mercury);--astro-planet-rgb:114,188,255}
+body.atlas-astro-planet-colors-40291 [data-planet40291="moon"]{--astro-planet:var(--astro-moon);--astro-planet-rgb:243,246,255}
+body.atlas-astro-planet-colors-40291 [data-planet40291="jupiter"]{--astro-planet:var(--astro-jupiter);--astro-planet-rgb:255,209,122}
+
+/* 24 planetary-hour cells: thin planet rail + subtle atmosphere only. */
+body.atlas-astro-planet-colors-40291 .atlas-astro-hour-4055[data-planet40291]{
+  border-color:rgba(var(--astro-planet-rgb),.34)!important;
+  background:
+    linear-gradient(180deg,rgba(var(--astro-planet-rgb),.075),rgba(4,12,21,.61) 48%,rgba(4,12,21,.66))!important;
+  box-shadow:
+    inset 0 2px 0 rgba(var(--astro-planet-rgb),.55),
+    inset 0 1px 0 rgba(255,255,255,.025)!important;
+}
+body.atlas-astro-planet-colors-40291 .atlas-astro-hour-4055[data-planet40291] b{
+  color:var(--astro-planet)!important;
+  text-shadow:0 0 9px rgba(var(--astro-planet-rgb),.12)!important;
+}
+body.atlas-astro-planet-colors-40291 .atlas-astro-hour-4055[data-planet40291] small{
+  color:#9bafbb!important;
+}
+
+/* Current timing state = brighter planet color. Next = moderate preview.
+   State does not replace planet identity with a generic green/gold. */
+body.atlas-astro-planet-colors-40291 .atlas-astro-hour-4055[data-planet40291][data-state="active"]{
+  border-color:rgba(var(--astro-planet-rgb),.84)!important;
+  background:
+    linear-gradient(180deg,rgba(var(--astro-planet-rgb),.16),rgba(var(--astro-planet-rgb),.065) 42%,rgba(4,12,21,.67))!important;
+  box-shadow:
+    inset 0 2px 0 rgba(var(--astro-planet-rgb),.92),
+    inset 0 0 0 1px rgba(255,255,255,.055),
+    0 0 17px rgba(var(--astro-planet-rgb),.16)!important;
+}
+body.atlas-astro-planet-colors-40291 .atlas-astro-hour-4055[data-planet40291][data-state="next"]{
+  border-color:rgba(var(--astro-planet-rgb),.56)!important;
+  box-shadow:
+    inset 0 2px 0 rgba(var(--astro-planet-rgb),.72),
+    0 0 10px rgba(var(--astro-planet-rgb),.075)!important;
+}
+
+/* Current / next KPI cards receive the same planet identity. */
+body.atlas-astro-planet-colors-40291 .atlas-astro-kpis-4055 article[data-planet40291]{
+  border-color:rgba(var(--astro-planet-rgb),.34)!important;
+  background:
+    linear-gradient(135deg,rgba(var(--astro-planet-rgb),.09),rgba(3,12,22,.55) 48%)!important;
+  box-shadow:inset 3px 0 0 rgba(var(--astro-planet-rgb),.66)!important;
+}
+body.atlas-astro-planet-colors-40291 .atlas-astro-kpis-4055 article[data-planet40291] b{
+  color:var(--astro-planet)!important;
+  text-shadow:0 0 10px rgba(var(--astro-planet-rgb),.12)!important;
+}
+
+/* Book: keep the color code, reduce glow only. */
+@media (max-width:1366px){
+  body.atlas-astro-planet-colors-40291 .atlas-astro-hour-4055[data-planet40291],
+  body.atlas-astro-planet-colors-40291 .atlas-astro-kpis-4055 article[data-planet40291]{
+    box-shadow:inset 0 2px 0 rgba(var(--astro-planet-rgb),.58)!important;
+  }
+  body.atlas-astro-planet-colors-40291 .atlas-astro-hour-4055[data-planet40291][data-state="active"]{
+    box-shadow:inset 0 2px 0 rgba(var(--astro-planet-rgb),.90),0 0 9px rgba(var(--astro-planet-rgb),.10)!important;
+  }
+}
+
+/* ============================================================================
+   40.2.92 — SECTION AIR + TRANSPARENT EMBLEM SCALE LOCK · VISUAL ONLY
+
+   Intent:
+   - reduce "frame inside frame inside frame" without flattening information;
+   - keep one outer accordion/frame as the structural owner;
+   - inner analytical sections become open surfaces with rails/dividers;
+   - reuse already-published transparent Administrator emblems with zero layout reservation;
+   - preserve the 40.2.90 semantic palette and 40.2.91 AstroCycle planet colors.
+
+   Historical composition contract restored:
+   SYSTEM -> Expérimentation & système family
+   PROJECTS -> Préparation & opérations family
+   SOURCES -> actual Sources collapsed row
+   ANALYTICAL MEMORY -> one restrained watermark, never scattered thumbnails.
+   ============================================================================ */
+body.atlas-section-air-40292 {
+  --atlas-air-line:rgba(126,224,255,.16);
+  --atlas-air-soft:rgba(126,224,255,.035);
+  --atlas-air-text:#edf7fb;
+}
+
+/* The accordion is already the frame. Its body does not need a second shell. */
+body.atlas-section-air-40292 details.atlas-collapse[data-layout-family] > .atlas-collapse-body {
+  border:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+}
+
+/* Generic nested panel: keep spacing/content, remove redundant shell/shadow only. */
+body.atlas-section-air-40292 details.atlas-collapse[data-layout-family] > .atlas-collapse-body > section.panel.glass {
+  box-shadow:none!important;
+}
+
+/* ORACLE: outer Oracle accordion owns the frame. Inner subsections become open rails. */
+body.atlas-section-air-40292 #oracle-analysis-suite > .atlas-oracle-suite-body {
+  padding:8px 10px 10px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.atlas-section-air-40292 #oracle-analysis-suite .atlas-oracle-suite-subsection {
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+body.atlas-section-air-40292 #oracle-analysis-suite .atlas-oracle-suite-subsection + .atlas-oracle-suite-subsection {
+  border-top:1px solid rgba(126,224,255,.12)!important;
+}
+body.atlas-section-air-40292 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-summary {
+  min-height:48px!important;
+  padding:9px 10px!important;
+  border:0!important;
+  border-radius:0!important;
+  border-bottom:1px solid rgba(126,224,255,.10)!important;
+  background:linear-gradient(90deg,rgba(126,224,255,.055),rgba(4,12,18,.08) 45%,transparent)!important;
+  box-shadow:inset 2px 0 0 rgba(126,224,255,.42)!important;
+}
+body.atlas-section-air-40292 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body {
+  padding:5px 4px 11px 10px!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.atlas-section-air-40292 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body > .panel.glass,
+body.atlas-section-air-40292 #oracle-analysis-suite #oracle-lab-dashboard,
+body.atlas-section-air-40292 #oracle-analysis-suite #oracle-infrastructure-observatory {
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding-left:4px!important;
+  padding-right:4px!important;
+}
+
+/* Long Shadow remains a logical instrument, but loses the extra heavy outer box. */
+body.atlas-section-air-40292 #oracle-analysis-suite .atlas-oracle-long-shadow-40273 {
+  border-color:rgba(126,224,255,.10)!important;
+  background:linear-gradient(90deg,rgba(126,224,255,.028),transparent 42%)!important;
+  box-shadow:none!important;
+}
+
+/* NEWS -> MARKET: the report accordion owns the outside frame. */
+body.atlas-section-air-40292 #news-market-explanation > .news-market-report-body-40241 {
+  padding:6px 10px 10px!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 {
+  margin:0!important;
+  padding:8px 6px 6px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* Secondary report sections become rails/dividers; their inner metric cards stay intact. */
+body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 .news-reaction-timeline-40236,
+body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 .news-role-quality-40237,
+body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 .news-cross-layer-40238 {
+  margin:8px 0!important;
+  padding:10px 10px 9px 12px!important;
+  border-radius:0!important;
+  border-top:1px solid rgba(126,224,255,.12)!important;
+  border-right:0!important;
+  border-bottom:0!important;
+  background:linear-gradient(90deg,rgba(126,224,255,.022),transparent 48%)!important;
+  box-shadow:none!important;
+}
+body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 .news-reaction-timeline-40236 {
+  border-left:2px solid rgba(112,211,255,.52)!important;
+}
+body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 .news-role-quality-40237 {
+  border-left:2px solid rgba(185,167,255,.54)!important;
+}
+body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 .news-cross-layer-40238 {
+  border-left:2px solid rgba(115,240,209,.56)!important;
+}
+
+/* Keep verdict visually distinct, but lighter than a full nested panel. */
+body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 .news-market-verdict-40235 {
+  margin-top:8px!important;
+  border-width:1px 0 0 2px!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+
+/* Generic nested panels get air: one less shadow and slightly tighter vertical rhythm. */
+body.atlas-section-air-40292 details.atlas-collapse[data-layout-family] > .atlas-collapse-body > section.panel.glass:not(#newsMarketOperatorIntelligence40235) {
+  box-shadow:none!important;
+}
+
+/* --------------------------------------------------------------------------
+   EXISTING TRANSPARENT EMBLEMS — no new files, no layout reservation.
+   These nodes are already injected by adminVisualAssets40269 from repository assets.
+   -------------------------------------------------------------------------- */
+body.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 {
+  position:relative!important;
+  min-height:0!important;
+  padding-right:0!important;
+  overflow:hidden!important;
+}
+body.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3::after {
+  content:none!important;
+}
+body.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > .admin-family-emblem-r3 {
+  position:absolute!important;
+  right:14px!important;
+  top:clamp(56px,4.2vw,70px)!important;
+  bottom:auto!important;
+  width:54px!important;
+  height:54px!important;
+  transform:translateY(-50%)!important;
+  object-fit:contain!important;
+  opacity:.075!important;
+  filter:drop-shadow(0 0 10px rgba(98,236,255,.11))!important;
+  pointer-events:none!important;
+  z-index:0!important;
+}
+body.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > :not(.admin-family-emblem-r3) {
+  position:relative!important;
+  z-index:1!important;
+}
+
+/* 40.2.98 — Family Emblem Alignment Lock: family emblems align on the right-side signal axis, not the lower corner. */
+
+/* Sources archive emblem belongs to the real Sources row, small and non-reserving. */
+body.atlas-section-air-40292 #liveSourcesCollapse > summary.admin-summary-emblem-host-r3 {
+  position:relative!important;
+  min-height:0!important;
+  padding-right:66px!important;
+  overflow:hidden!important;
+}
+body.atlas-section-air-40292 #liveSourcesCollapse > summary.admin-summary-emblem-host-r3 > .admin-summary-emblem-r3 {
+  position:absolute!important;
+  right:10px!important;
+  top:50%!important;
+  width:54px!important;
+  height:54px!important;
+  transform:translateY(-50%)!important;
+  object-fit:contain!important;
+  opacity:.10!important;
+  filter:drop-shadow(0 0 10px rgba(98,236,255,.14))!important;
+  pointer-events:none!important;
+}
+
+/* Analytical Memory: one watermark only, as requested historically. */
+body.atlas-section-air-40292 #atlasAnalyticalMemory394.admin-analytical-emblem-host-r3 {
+  position:relative!important;
+  padding-right:0!important;
+  overflow:hidden!important;
+}
+body.atlas-section-air-40292 #atlasAnalyticalMemory394.admin-analytical-emblem-host-r3 > .admin-analytical-emblem-r3 {
+  position:absolute!important;
+  right:14px!important;
+  top:50%!important;
+  width:50px!important;
+  height:76px!important;
+  transform:translateY(-50%)!important;
+  object-fit:contain!important;
+  opacity:.09!important;
+  filter:drop-shadow(0 0 11px rgba(131,173,255,.14))!important;
+  pointer-events:none!important;
+  z-index:0!important;
+}
+body.atlas-section-air-40292 #atlasAnalyticalMemory394.admin-analytical-emblem-host-r3 > :not(.admin-analytical-emblem-r3) {
+  position:relative!important;
+  z-index:1!important;
+}
+
+/* Book: emblems remain legible but never steal width. */
+@media (max-width:1366px) {
+  body.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > .admin-family-emblem-r3 {
+    width:40px!important;height:40px!important;right:10px!important;top:56px!important;bottom:auto!important;transform:translateY(-50%)!important;opacity:.065!important;filter:none!important;
+  }
+  body.atlas-section-air-40292 #liveSourcesCollapse > summary.admin-summary-emblem-host-r3 {padding-right:50px!important}
+  body.atlas-section-air-40292 #liveSourcesCollapse > summary.admin-summary-emblem-host-r3 > .admin-summary-emblem-r3 {
+    width:40px!important;height:40px!important;right:7px!important;opacity:.08!important;filter:none!important;
+  }
+  body.atlas-section-air-40292 #atlasAnalyticalMemory394.admin-analytical-emblem-host-r3 > .admin-analytical-emblem-r3 {
+    width:38px!important;height:58px!important;right:8px!important;opacity:.07!important;filter:none!important;
+  }
+  body.atlas-section-air-40292 #oracle-analysis-suite > .atlas-oracle-suite-body {padding:6px 7px 8px!important}
+  body.atlas-section-air-40292 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body {padding-left:6px!important}
+}
+
+
+
+/* ============================================================================
+   40.2.93 — COMPACT SECTION HIERARCHY + BORDERED SUBSECTIONS LOCK · VISUAL ONLY
+
+   Operator correction after 40.2.92:
+   - remove only the redundant intermediate wrapper/frame;
+   - keep true business subsections visibly outlined;
+   - recover vertical and peripheral space throughout accordion families;
+   - do not touch Graphique, Lecture technique, Oracle calculations, News logic,
+     Celestial transport, network, timers or Window Manager geometry.
+   ============================================================================ */
+body.atlas-section-density-40293{
+  --atlas-density-gap:6px;
+  --atlas-density-pad-x:8px;
+  --atlas-density-pad-y:6px;
+  --atlas-subframe-line:rgba(126,224,255,.18);
+  --atlas-subframe-bg:rgba(3,12,20,.22);
+}
+
+/* Recover space around expanded families while keeping the outer accordion frame. */
+body.atlas-section-density-40293 details.atlas-collapse[data-layout-family] > .atlas-collapse-body{
+  padding:6px 8px 8px!important;
+}
+body.atlas-section-density-40293 details.atlas-collapse[data-layout-family] > .atlas-collapse-body > section.panel.glass{
+  margin:0!important;
+}
+
+/* Main summaries stay readable, but lose excess vertical air. */
+body.atlas-section-density-40293 details.atlas-collapse[data-layout-family] > summary.atlas-collapse-summary{
+  padding-top:9px!important;
+  padding-bottom:9px!important;
+}
+
+/* ORACLE — outer frame -> bordered subsection -> metric cards. No wrapper level 1.5. */
+body.atlas-section-density-40293 #oracle-analysis-suite > .atlas-oracle-suite-body{
+  padding:5px 6px 7px!important;
+}
+body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection{
+  margin:0 0 6px!important;
+  border:1px solid var(--atlas-subframe-line)!important;
+  border-radius:11px!important;
+  background:linear-gradient(135deg,rgba(126,224,255,.025),rgba(255,255,255,.008))!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.012)!important;
+  overflow:hidden!important;
+}
+body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection:last-child{margin-bottom:0!important}
+body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection + .atlas-oracle-suite-subsection{
+  border-top:1px solid var(--atlas-subframe-line)!important;
+}
+body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-summary{
+  min-height:44px!important;
+  padding:7px 9px!important;
+  border:0!important;
+  border-bottom:1px solid rgba(126,224,255,.10)!important;
+  border-radius:0!important;
+  background:linear-gradient(90deg,rgba(126,224,255,.050),rgba(4,12,18,.045) 48%,transparent)!important;
+  box-shadow:inset 2px 0 0 rgba(126,224,255,.42)!important;
+}
+body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body{
+  padding:6px 8px 8px!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body > .panel.glass,
+body.atlas-section-density-40293 #oracle-analysis-suite #oracle-lab-dashboard,
+body.atlas-section-density-40293 #oracle-analysis-suite #oracle-infrastructure-observatory{
+  margin:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* Oracle instrument internals: retain useful boxes, trim only outer spacing. */
+body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-long-shadow-40273{margin-top:6px!important;padding:9px!important}
+body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-long-grid-40282{gap:6px!important}
+body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-long-card-40282{padding:8px!important}
+body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-infra-modules{gap:6px!important}
+
+/* NEWS -> MARCHÉ — remove only the global wrapper; true subsections get their box back. */
+body.atlas-section-density-40293 #news-market-explanation > .news-market-report-body-40241{
+  padding:5px 7px 7px!important;
+}
+body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235{
+  padding:5px 3px 3px!important;
+}
+body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-reaction-timeline-40236,
+body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-role-quality-40237,
+body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-cross-layer-40238{
+  margin:6px 0!important;
+  padding:8px 9px!important;
+  border:1px solid rgba(126,224,255,.16)!important;
+  border-radius:10px!important;
+  background:rgba(3,12,20,.20)!important;
+  box-shadow:none!important;
+}
+body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-reaction-timeline-40236{border-left:2px solid rgba(112,211,255,.56)!important}
+body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-role-quality-40237{border-left:2px solid rgba(185,167,255,.58)!important}
+body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-cross-layer-40238{border-left:2px solid rgba(115,240,209,.60)!important}
+body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-market-verdict-40235{
+  margin-top:6px!important;
+  padding-top:8px!important;
+  padding-bottom:8px!important;
+  border:1px solid rgba(255,211,119,.20)!important;
+  border-left:2px solid rgba(255,211,119,.60)!important;
+  border-radius:10px!important;
+}
+
+/* Evidence Explorer / Astro / Celestial / News: reclaim perimeter without flattening cards. */
+body.atlas-section-density-40293 :is(#oracle-evidence-explorer,#astrocycle-4055,#celestial-sentinel-4055,#news-sentinel) > .atlas-collapse-body{
+  padding:6px 8px 8px!important;
+}
+body.atlas-section-density-40293 :is(#oracle-evidence-explorer,#astrocycle-4055,#celestial-sentinel-4055,#news-sentinel) > .atlas-collapse-body > section.panel.glass{
+  margin:0!important;
+}
+
+/* Local Atlas pipeline: when CURRENT starts, the pipeline becomes the viewport anchor. */
+body.atlas-section-density-40293 #atlasAnalysisProgressCard{
+  scroll-margin-top:10px!important;
+  margin-top:6px!important;
+  margin-bottom:6px!important;
+}
+body.atlas-section-density-40293 #local-ai-hub.atlas-analysis-running-40293 #atlasAnalysisProgressCard{
+  border-color:rgba(91,224,255,.42)!important;
+  box-shadow:0 0 0 1px rgba(91,224,255,.08),0 10px 26px rgba(0,0,0,.16)!important;
+}
+body.atlas-section-density-40293 #local-ai-hub.atlas-analysis-running-40293 .atlas-analysis-progress-nodes{gap:6px!important}
+
+@media(max-width:1366px){
+  body.atlas-section-density-40293 details.atlas-collapse[data-layout-family] > .atlas-collapse-body{padding:5px 6px 7px!important}
+  body.atlas-section-density-40293 details.atlas-collapse[data-layout-family] > summary.atlas-collapse-summary{padding-top:8px!important;padding-bottom:8px!important}
+  body.atlas-section-density-40293 #oracle-analysis-suite > .atlas-oracle-suite-body{padding:4px 5px 6px!important}
+  body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection{margin-bottom:5px!important;border-radius:9px!important}
+  body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-summary{min-height:42px!important;padding:6px 8px!important}
+  body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body{padding:5px 6px 7px!important}
+  body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-reaction-timeline-40236,
+  body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-role-quality-40237,
+  body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-cross-layer-40238{margin:5px 0!important;padding:7px 8px!important}
+}
+
+
+/* ============================================================================
+   40.2.98 — FAMILY BOUNDARY + EMBLEM SIGNAL ALIGNMENT LOCK
+   - cumulative over 40.2.95/96/97;
+   - family headers are hard top-level siblings in the Administrator shell;
+   - visual bleed is cut at every family transition;
+   - 03 Operations -> 04 System receives an explicit larger break;
+   - existing transparent emblems stay non-reserving and align with the right signal axis;
+   - no business/runtime ownership change.
+   ============================================================================ */
+body.atlas-family-boundaries-40298 main.shell > section.atlas-layout-family {
+  clear:both!important;
+  isolation:isolate!important;
+  position:relative!important;
+  width:100%!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+  transform:none!important;
+}
+body.atlas-family-boundaries-40298 main.shell > [data-layout-family] + section.atlas-layout-family {
+  margin-top:24px!important;
+}
+body.atlas-family-boundaries-40298 main.shell > [data-layout-family="operations"] + section.atlas-layout-family-system {
+  margin-top:36px!important;
+}
+body.atlas-family-boundaries-40298 main.shell > section.atlas-layout-family-system {
+  clear:both!important;
+  isolation:isolate!important;
+  z-index:2!important;
+}
+body.atlas-family-boundaries-40298 main.shell > [data-layout-family="operations"] {
+  position:relative!important;
+  z-index:1!important;
+}
+@media (max-width:1366px) {
+  body.atlas-family-boundaries-40298 main.shell > [data-layout-family] + section.atlas-layout-family {margin-top:20px!important}
+  body.atlas-family-boundaries-40298 main.shell > [data-layout-family="operations"] + section.atlas-layout-family-system {margin-top:30px!important}
+}
+
+
+/* ============================================================================
+   40.2.99 — BOOK NAVIGATION COMPACT LOCK
+   - Essential navigation is one 6-button row above 1366 px.
+   - Transformer Book / <=1366 px uses a stable 2x3 grid.
+   - The duplicate ADMIN kicker is visually suppressed in favor of the existing
+     Administration view selector.
+   - Buttons are internal controls, not URL/hash navigation anchors.
+   ============================================================================ */
+body.atlas-book-nav-40299 .atlas-v2-interface-bar .atlas-v2-nav{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+}
+body.atlas-book-nav-40299 .atlas-v2-nav-essential.atlas-quick-dock{
+  display:grid!important;
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  gap:6px!important;
+  width:100%!important;
+  min-width:0!important;
+  align-items:stretch!important;
+}
+body.atlas-book-nav-40299 .atlas-v2-nav-essential.atlas-quick-dock>.atlas-quick-link{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  justify-content:center!important;
+  align-items:center!important;
+  white-space:nowrap!important;
+  font:inherit;
+  cursor:pointer!important;
+}
+body.atlas-book-nav-40299 .atlas-admin-command-kicker.atlas-visually-hidden{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+body.atlas-book-nav-40299 .atlas-v2-nav-advanced.atlas-admin-dock:not([hidden]){
+  width:100%!important;
+  margin-top:6px!important;
+}
+@media (max-width:1366px){
+  body.atlas-book-nav-40299 .atlas-v2-nav-essential.atlas-quick-dock{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:5px!important;
+  }
+  body.atlas-book-nav-40299 .atlas-v2-nav-essential.atlas-quick-dock>.atlas-quick-link{
+    min-height:34px!important;
+    padding:6px 8px!important;
+    font-size:clamp(10px,1.05vw,12px)!important;
+  }
+  body.atlas-book-nav-40299 .atlas-v2-nav-essential .atlas-quick-icon{
+    flex:0 0 auto!important;
+  }
+}
+@media (max-width:700px){
+  body.atlas-book-nav-40299 .atlas-v2-nav-essential.atlas-quick-dock{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+
+
+/* ============================================================================
+   40.3.00 — ADMIN FAMILY MENU ALIGNMENT LOCK (ORDER SUPERSEDED)
+   - the 40.3.00 temporary family-order experiment is no longer authoritative;
+   - 40.3.06 header-first topology was rejected by operator review;
+   - 40.3.07 restores the trailing 04 boundary after Sécurité physique;
+   - the transparent-emblem stacking rule must NEVER take position ownership
+     from native Window Manager controls;
+   - illustrated family controls stay on the right, just left of the emblem;
+   - no Window Manager source modification.
+   ============================================================================ */
+body.atlas-family-order-40300.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > .admin-native-controls{
+  position:absolute!important;
+  top:50%!important;
+  right:82px!important;
+  bottom:auto!important;
+  left:auto!important;
+  transform:translateY(-50%)!important;
+  z-index:2147481200!important;
+}
+body.atlas-family-order-40300 main.shell > section.atlas-layout-family-system{
+  clear:both!important;
+  isolation:isolate!important;
+  margin-top:26px!important;
+  margin-bottom:10px!important;
+}
+@media (max-width:1366px){
+  body.atlas-family-order-40300.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > .admin-native-controls{
+    right:62px!important;
+  }
+  body.atlas-family-order-40300 main.shell > section.atlas-layout-family-system{margin-top:22px!important}
+}
+
+
+/* ============================================================================
+   40.3.01 — FAMILY COMPACT REDUCE LOCK
+   Window Manager behavior only: docked 01/02/03/04 keep native family headers;
+   Oracle/Atlas compact representatives reuse their existing collapsed UI.
+   No new geometry rule is owned here.
+   ========================================================================== */
+
+/* ============================================================================
+   40.3.02 — ATOMIC FAMILY + COMMANDLINE SURGERY LOCK
+   - supersedes the 40.2.99 2x3 Book override in Administrator advanced mode;
+   - restores the pre-existing single horizontal Home/Admin command line;
+   - buttons are deliberately smaller, with horizontal scroll only as fallback;
+   - Command Center drawer remains a portal; JS scrolls the drawer, never document.
+   ============================================================================ */
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-interface-bar .atlas-v2-nav{
+  display:flex!important;
+  flex-flow:row nowrap!important;
+  align-items:center!important;
+  gap:4px!important;
+  width:100%!important;
+  min-width:0!important;
+  overflow-x:auto!important;
+  overflow-y:visible!important;
+  scrollbar-width:thin!important;
+}
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-nav-essential.atlas-quick-dock{
+  display:flex!important;
+  flex:0 0 auto!important;
+  grid-template-columns:none!important;
+  align-items:center!important;
+  gap:3px!important;
+  width:auto!important;
+  min-width:max-content!important;
+}
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-nav-essential.atlas-quick-dock>.atlas-quick-link{
+  flex:0 0 auto!important;
+  width:auto!important;
+  min-width:66px!important;
+  min-height:28px!important;
+  padding:4px 7px!important;
+  gap:4px!important;
+  font-size:9px!important;
+  line-height:1!important;
+}
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-nav-essential .atlas-quick-icon{
+  font-size:10px!important;
+}
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-nav-advanced.atlas-admin-dock:not([hidden]){
+  display:flex!important;
+  flex:1 0 auto!important;
+  align-items:center!important;
+  width:auto!important;
+  min-width:max-content!important;
+  min-height:30px!important;
+  margin:0!important;
+  padding:0 0 0 5px!important;
+  border:0!important;
+  border-left:1px solid rgba(98,236,255,.18)!important;
+  border-radius:0!important;
+  background:none!important;
+}
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-command-bar{
+  display:flex!important;
+  flex-flow:row nowrap!important;
+  align-items:center!important;
+  gap:3px!important;
+  width:auto!important;
+  min-width:max-content!important;
+  min-height:28px!important;
+}
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-command-shortcuts{
+  display:flex!important;
+  flex-flow:row nowrap!important;
+  align-items:center!important;
+  gap:3px!important;
+  min-width:max-content!important;
+}
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-command-shortcuts button{
+  flex:0 0 auto!important;
+  min-width:68px!important;
+  min-height:28px!important;
+  padding:4px 6px!important;
+  gap:4px!important;
+  font-size:9px!important;
+}
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-command-shortcuts button b{
+  font-size:8px!important;
+}
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-graph-toggle{
+  flex:0 0 auto!important;
+  width:auto!important;
+  min-width:86px!important;
+  min-height:28px!important;
+  padding:4px 6px!important;
+  gap:5px!important;
+}
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-center-toggle{
+  flex:0 0 auto!important;
+  grid-column:auto!important;
+  min-width:116px!important;
+  min-height:28px!important;
+  padding:4px 7px!important;
+  gap:6px!important;
+}
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-graph-toggle span,
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-center-toggle span{
+  font-size:8.5px!important;
+}
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-graph-toggle b,
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-center-toggle b{
+  font-size:7.5px!important;
+}
+@media (max-width:1366px){
+  html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-interface-bar .atlas-v2-nav,
+  html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-command-bar{
+    display:flex!important;
+    flex-flow:row nowrap!important;
+  }
+  html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-nav-essential.atlas-quick-dock{
+    display:flex!important;
+    grid-template-columns:none!important;
+    gap:2px!important;
+  }
+  html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-nav-essential.atlas-quick-dock>.atlas-quick-link{
+    min-width:60px!important;
+    min-height:26px!important;
+    padding:3px 5px!important;
+    font-size:8.5px!important;
+  }
+  html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-command-shortcuts button{
+    min-width:62px!important;
+    min-height:26px!important;
+    padding:3px 5px!important;
+    font-size:8.5px!important;
+  }
+  html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-graph-toggle{min-width:80px!important;min-height:26px!important}
+  html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-center-toggle{min-width:108px!important;min-height:26px!important}
+}
+
+/* 40.3.04 canonical sequence: 04 owns its six system/experiment members,
+   then the complete Missions de vie block, then Mesure d'audience and Sources.
+   No visual inheritance from 03 and no family header is split from its members. */
+body.atlas-family-atomic-40302 main.shell > section.atlas-layout-family-system + [data-layout-family="system"],
+body.atlas-family-atomic-40302 main.shell > section.atlas-layout-family-system + [data-layout-family="experiment"]{
+  margin-top:0!important;
+}
+body.atlas-canonical-admin-sequence-40304 main.shell > [data-layout-family="system"] + #missions-vie,
+body.atlas-canonical-admin-sequence-40304 main.shell > [data-layout-family="experiment"] + #missions-vie{
+  margin-top:10px!important;
+}
+body.atlas-canonical-admin-sequence-40304 main.shell > details[data-collapse-key="aerith-terre-vivante"] + #mesure-audience{
+  margin-top:10px!important;
+}
+
+
+/* ============================================================================
+   40.3.07 — FAMILY 04 TRAILING BOUNDARY LOCK
+   Operator-canonical visual sequence:
+   system/experiment content -> Sécurité physique -> 04 boundary -> Missions de vie.
+   The 04 boundary remains the Window Manager anchor but no longer sits before
+   its owned content in native page flow. No control geometry ownership change.
+   ============================================================================ */
+body.atlas-family04-trailing-boundary-40307 main.shell > details[data-collapse-key="physical-security"] + section.atlas-layout-family-system{
+  margin-top:10px!important;
+}
+body.atlas-family04-trailing-boundary-40307 main.shell > section.atlas-layout-family-system + #missions-vie{
+  margin-top:10px!important;
+}
+
+
+/* ============================================================================
+   40.3.09 — BOOK COMMAND CENTER + STATUS COMPACTION LOCK
+   - Transformer Book: Command Center is the sole entry for Decision / Analysis /
+     System / Projects / graph-view management; essential six links remain.
+   - Desktop keeps the complete advanced shortcut row.
+   - Livecheck status strip owns exactly five visible grid items; redundant labels
+     are shortened and the time label is visually removed while its value remains.
+   - No handler, Window Manager, market engine, Atlas or Oracle behavior change.
+   ============================================================================ */
+body.atlas-status-strip-40309 #sourceTimeCard>.atlas-status-time-label-40309{
+  display:none!important;
+}
+body.atlas-status-strip-40309 #livecheck.command-bar{
+  grid-template-columns:minmax(150px,.82fr) minmax(145px,.76fr) minmax(170px,.92fr) minmax(260px,1.30fr) minmax(300px,1.42fr)!important;
+  gap:6px!important;
+}
+body.atlas-status-strip-40309 #sourceTimeCard{
+  min-width:0!important;
+  flex:1 1 auto!important;
+}
+body.atlas-status-strip-40309 #decisionCard,
+body.atlas-status-strip-40309 #sourceActiveCard,
+body.atlas-status-strip-40309 #sourceTimeCard{
+  min-inline-size:0!important;
+}
+body.atlas-status-strip-40309 #decisionCard>strong,
+body.atlas-status-strip-40309 #sourceActiveCard>strong,
+body.atlas-status-strip-40309 #atlasCelestialClockHeader4055{
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+@media (max-width:1366px){
+  html[data-atlas-mode="advanced"] body.atlas-book-command-center-40309 .atlas-admin-command-shortcuts,
+  html[data-atlas-mode="advanced"] body.atlas-book-command-center-40309 .atlas-admin-graph-toggle{
+    display:none!important;
+  }
+  html[data-atlas-mode="advanced"] body.atlas-book-command-center-40309 .atlas-v2-nav-advanced.atlas-admin-dock:not([hidden]){
+    flex:0 0 auto!important;
+    width:auto!important;
+    min-width:auto!important;
+    padding-left:3px!important;
+    border-left:1px solid rgba(98,236,255,.18)!important;
+  }
+  html[data-atlas-mode="advanced"] body.atlas-book-command-center-40309 .atlas-admin-command-bar,
+  html[data-atlas-mode="advanced"] body.atlas-book-command-center-40309 .atlas-admin-center-toggle{
+    width:auto!important;
+    min-width:auto!important;
+  }
+  html[data-atlas-mode="advanced"] body.atlas-book-command-center-40309 .atlas-admin-center-toggle{
+    min-height:26px!important;
+    padding:3px 7px!important;
+  }
+  body.atlas-status-strip-40309 #livecheck.command-bar{
+    grid-template-columns:minmax(136px,.72fr) minmax(128px,.68fr) minmax(135px,.78fr) minmax(220px,1.28fr) minmax(245px,1.36fr)!important;
+    gap:5px!important;
+  }
+  body.atlas-status-strip-40309 #livecheck.command-bar>.btn{
+    min-width:0!important;
+    padding-inline:8px!important;
+  }
+  body.atlas-status-strip-40309 #livecheck.command-bar>.source-card{
+    min-width:0!important;
+    padding-inline:7px!important;
+  }
+}
+
+
+/* ============================================================================
+   40.3.09 — ADMIN PRESENTATION AUTHORITY LOCK
+   Root cause repair after Firefox operator review:
+   - 04 remains a TRAILING boundary after Physical Security, before Missions;
+   - therefore the visual START of the System/Experiment run is Storage, not 04;
+   - explicitly close the gold 03 reading after Plan exchange and open a new
+     teal/system run before Storage without duplicating the numbered 04 header;
+   - this supersedes historical boundary selectors that expected the 04 header
+     to precede its members.
+   ============================================================================ */
+body.atlas-admin-presentation-authority-40309 main.shell > details[data-collapse-key="planning"] + #atlasStorageHealth40198{
+  position:relative!important;
+  margin-top:38px!important;
+}
+body.atlas-admin-presentation-authority-40309 main.shell > details[data-collapse-key="planning"] + #atlasStorageHealth40198::before{
+  content:""!important;
+  position:absolute!important;
+  left:18px!important;
+  right:18px!important;
+  top:-20px!important;
+  height:1px!important;
+  pointer-events:none!important;
+  background:linear-gradient(90deg,rgba(255,211,119,.58),rgba(105,226,224,.46) 46%,rgba(105,226,224,.10) 82%,transparent)!important;
+  box-shadow:0 0 14px rgba(105,226,224,.08)!important;
+}
+body.atlas-admin-presentation-authority-40309 main.shell > #atlasStorageHealth40198{
+  border-top-color:rgba(105,226,224,.34)!important;
+}
+body.atlas-admin-presentation-authority-40309 main.shell > details[data-collapse-key="physical-security"] + section.atlas-layout-family-system{
+  margin-top:12px!important;
+}
+body.atlas-admin-presentation-authority-40309 main.shell > section.atlas-layout-family-system + #missions-vie{
+  margin-top:10px!important;
+}
+@media (max-width:1366px){
+  body.atlas-admin-presentation-authority-40309 main.shell > details[data-collapse-key="planning"] + #atlasStorageHealth40198{margin-top:30px!important}
+  body.atlas-admin-presentation-authority-40309 main.shell > details[data-collapse-key="planning"] + #atlasStorageHealth40198::before{top:-16px!important}
+}
+
+
+/* ============================================================================
+   40.3.15 — LOW-COST FLOATING SURFACE + NATIVE 97% CONTENT LOCK
+   Operator intent:
+   - header/menu keeps the full shell width;
+   - cockpit content uses ~97% of the viewport, centered, without transform/zoom;
+   - floating windows keep a dark native surface but NO full-window backdrop blur;
+   - drag does not trigger content auto-fit/re-measure before movement.
+   ============================================================================ */
+body.atlas-surface-performance-40315 main.shell{
+  width:100%!important;
+  max-width:none!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  transform:none!important;
+}
+body.atlas-surface-performance-40315 main.shell > header#accueil{
+  width:100%!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+}
+body.atlas-surface-performance-40315.atlas-family-boundaries-40298 main.shell > section,
+body.atlas-surface-performance-40315 main.shell > details,
+body.atlas-surface-performance-40315 main.shell > footer{
+  width:97%!important;
+  max-width:97%!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  box-sizing:border-box!important;
+}
+body.atlas-surface-performance-40315 main.shell > section + section,
+body.atlas-surface-performance-40315 main.shell > details + section,
+body.atlas-surface-performance-40315 main.shell > section + details,
+body.atlas-surface-performance-40315 main.shell > details + details{
+  margin-top:10px!important;
+}
+
+/* The old 39.2.15 floating shell paints a viewport-sized blurred glass layer.
+   On Firefox this is expensive while scrolling/moving because the pixels behind
+   the fixed surface must be recomposited. Keep the dark cockpit, remove the GPU-heavy glass. */
+body.atlas-surface-performance-40315 .admin-native-floating-shell,
+body.atlas-surface-performance-40315 .admin-native-direct-floating{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  background:linear-gradient(180deg,rgba(8,12,16,.995),rgba(5,9,13,.995))!important;
+  box-shadow:0 18px 52px rgba(0,0,0,.48),0 0 0 1px color-mix(in srgb,var(--native-accent,#72d8ff) 14%,transparent)!important;
+}
+body.atlas-surface-performance-40315 .admin-native-floating-titlebar,
+body.atlas-surface-performance-40315 .admin-native-floating-shell .admin-native-controls,
+body.atlas-surface-performance-40315 .admin-native-direct-floating > .admin-native-controls{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+body.atlas-surface-performance-40315 .admin-native-moving{
+  opacity:1!important;
+  box-shadow:0 16px 42px rgba(0,0,0,.45),0 0 0 1px color-mix(in srgb,var(--native-accent,#72d8ff) 24%,transparent)!important;
+}
+@media(max-width:1366px){
+  body.atlas-surface-performance-40315.atlas-family-boundaries-40298 main.shell > section,
+  body.atlas-surface-performance-40315 main.shell > details,
+  body.atlas-surface-performance-40315 main.shell > footer{
+    width:calc(100% - 16px)!important;
+    max-width:calc(100% - 16px)!important;
+  }
+}
+
+
+/* ============================================================================
+   40.3.20 — CANONICAL FAMILY 04 HIERARCHY + NATIVE FLOW RECOVERY
+   Recovered from the already-proven structural intent of 40.3.13, now applied
+   only after the Firefox/Bridge continuous-load repairs are in place.
+   Native document truth:
+   03 -> Situation -> Questionnaire -> Briefing -> Plan
+   04 -> Storage -> Simulation -> Tests -> Backend -> Safety -> Physical
+   -> Missions -> Audience -> Sources.
+   No wrapper, clone, backdrop or z-index mask is introduced.
+   ============================================================================ */
+body.atlas-family04-canonical-hierarchy-40320 main.shell > details[data-collapse-key="planning"] + section.atlas-layout-family-system{
+  position:relative!important;
+  margin-top:38px!important;
+}
+body.atlas-family04-canonical-hierarchy-40320 main.shell > section.atlas-layout-family-system + #atlasStorageHealth40198{
+  margin-top:10px!important;
+}
+body.atlas-family04-canonical-hierarchy-40320 main.shell > details[data-collapse-key="physical-security"] + #missions-vie{
+  margin-top:10px!important;
+}
+@media (max-width:1366px){
+  body.atlas-family04-canonical-hierarchy-40320 main.shell > details[data-collapse-key="planning"] + section.atlas-layout-family-system{
+    margin-top:30px!important;
+  }
+}
+
+
+/* ============================================================================
+   40.3.44 — FAMILY CONTROL RIGHT-EDGE + EMBLEM NON-RESERVING LOCK
+   Operator evidence: family 01 is the canonical placement reference.
+   The historical 40.3.00 illustrated-family rule moved controls left by 82px
+   to reserve the emblem. That reservation made 02/03/04 controls drift away
+   from the common right-edge target. Restore native family control geometry
+   (right:16px) and move the decorative emblem to the left of the controls.
+   Presentation only: no Window Manager behavior, no section order, no resize.
+   ============================================================================ */
+body.atlas-administrator-mirror.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > .admin-native-controls{
+  position:absolute!important;
+  top:50%!important;
+  right:16px!important;
+  bottom:auto!important;
+  left:auto!important;
+  transform:translateY(-50%)!important;
+  z-index:2147481200!important;
+}
+body.atlas-administrator-mirror.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > .admin-family-emblem-r3{
+  right:184px!important;
+}
+@media (max-width:1366px){
+  body.atlas-administrator-mirror.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > .admin-native-controls{right:16px!important;}
+  body.atlas-administrator-mirror.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > .admin-family-emblem-r3{right:178px!important;}
+}
+
+
+/* 40.3.66 — AETHER SHARED TOP NAVIGATION CONTRACT LOCK
+   The same top navigation surface is exposed in Basic, Intermediate and Administrator.
+   View-specific content contracts remain unchanged. */
+html[data-atlas-view="essential"] body.atlas-book-nav-40299 .atlas-v2-nav-essential.atlas-quick-dock{
+  display:flex!important;grid-template-columns:none!important;flex-flow:row nowrap!important;width:auto!important;min-width:max-content!important;gap:5px!important;
+}

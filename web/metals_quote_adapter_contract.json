@@ -1,0 +1,127 @@
+{
+  "schema": "agent_crypto_metals_quote_adapter_contract_v1",
+  "version": "2.1.0",
+  "published_at": "2026-08-03T20:20:00Z",
+  "domain": "metals",
+  "purpose": "Read current public Metals quotes independently from the optional annual Futures history, shared by Ryzen and Transformer Book without provider keys or manual publication.",
+  "paths": {
+    "latest": "../data/metals/latest.json",
+    "status": "../data/metals/status.json",
+    "history_index": "../data/metals/history/index.json",
+    "bridge_snapshot_route": "/market/metals/snapshot",
+    "bridge_status_route": "/market/metals/status",
+    "import_template": "../data/metals/import_template.json",
+    "public_history": "../data/metals/history/public_1y.json",
+    "fx_usd_eur": "../data/metals/fx/usd_eur.json"
+  },
+  "required_assets": [
+    {
+      "asset_id": "gold",
+      "symbol": "XAU"
+    },
+    {
+      "asset_id": "silver",
+      "symbol": "XAG"
+    },
+    {
+      "asset_id": "platinum",
+      "symbol": "XPT"
+    },
+    {
+      "asset_id": "palladium",
+      "symbol": "XPD"
+    },
+    {
+      "asset_id": "copper",
+      "symbol": "HG"
+    }
+  ],
+  "snapshot_schema": "agent_crypto_metals_snapshot_v1",
+  "quote_record_contract": "agent_crypto_market_data_contract_v1.quote_record",
+  "accepted_data_states": [
+    "data_current",
+    "data_delayed",
+    "data_historical",
+    "date_unqualified",
+    "source_disconnected",
+    "adapter_required",
+    "licence_to_verify"
+  ],
+  "required_quote_fields": [
+    "domain",
+    "asset_id",
+    "symbol",
+    "source_id",
+    "instrument_type",
+    "currency",
+    "unit",
+    "source_time",
+    "received_at",
+    "data_state"
+  ],
+  "numeric_nullable": [
+    "price",
+    "bid",
+    "ask",
+    "change",
+    "change_percent"
+  ],
+  "security": {
+    "provider_key_in_browser_forbidden": true,
+    "provider_key_in_public_repository_forbidden": true,
+    "keyed_provider_must_use_bridge": false,
+    "public_page_reads_archive_only": true,
+    "logs_must_redact_secrets": true
+  },
+  "separation": {
+    "crypto_latest_path": "../data/latest.json",
+    "metals_latest_path": "../data/metals/latest.json",
+    "crypto_cache_must_not_supply_metals": true,
+    "metals_cache_namespace": "cache_metals_quotes",
+    "metals_history_namespace": "cache_metals_history"
+  },
+  "render_policy": {
+    "empty_snapshot_display": "—",
+    "zero_is_not_missing": true,
+    "market_may_render_valid_snapshot": true,
+    "detail_may_render_valid_snapshot": true,
+    "chart_requires_series_or_at_least_two_real_snapshots": true,
+    "single_snapshot_must_not_create_line": true,
+    "missing_change_percent_must_remain_null": true,
+    "browser_time_must_not_replace_source_time": true,
+    "current_quotes_may_render_without_history": true
+  },
+  "provider_selection": {
+    "selected_provider_id": "public_metals_multi_source",
+    "state": "configured",
+    "current_price_source": "gold_api_indicative",
+    "history_source": "yahoo_finance_futures_daily",
+    "fx_source": "ecb_reference_rate",
+    "selection_requires_explicit_decision": false,
+    "history_transport": "browser_impersonation_query2_then_query1",
+    "current_quotes_must_survive_history_failure": true
+  },
+  "import_gate": {
+    "state": "ready",
+    "input_schema": "agent_crypto_metals_import_v1",
+    "provider_neutral": true,
+    "provider_fetch_performed": false,
+    "full_basket_required_by_default": true,
+    "partial_import_requires_explicit_flag": true,
+    "secret_fields_rejected": true,
+    "writes_latest": true,
+    "appends_daily_jsonl_history": true,
+    "rebuilds_history_index": true,
+    "updates_collector_status": true,
+    "single_snapshot_must_not_draw_chart": true
+  },
+  "publication": {
+    "mode": "github_actions_automatic",
+    "manual_ryzen_publication_forbidden": true,
+    "transformer_book_reads_same_public_files": true,
+    "bridge_optional_local_cache_only": true,
+    "public_report_generated_in_browser": true,
+    "public_report_persisted_in_indexeddb": true,
+    "current_and_history_decoupled": true
+  }
+}
