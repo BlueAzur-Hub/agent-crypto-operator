@@ -625,3 +625,46 @@
   .aether46-oracle-metrics strong { font-size:7px !important; }
 }
 
+
+
+/* ========================================================================== 
+   40.6.60 — AETHER ACCEPTANCE · READABILITY CONSOLIDATION
+   Replaces the earlier 40.6.54 density tail. The 1672×941 backplate, radial
+   coordinates and Window Manager geometry are unchanged.
+   ========================================================================== */
+.aether46-card header span,.aether46-core,.aether46-card{font-variant-numeric:tabular-nums;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+
+@container aether49 (max-width:1450px){
+  .aether46-card header{margin-bottom:4px!important;align-items:flex-start!important}
+  .aether46-card header span{font-size:clamp(11px,.82cqw,14px)!important;line-height:1.08!important;letter-spacing:.015em!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important}
+  .aether46-card header b{display:block!important;font-size:clamp(8px,.52cqw,10px)!important;line-height:1.05!important;max-width:46%!important;white-space:normal!important;text-align:right!important}
+  .aether46-card footer{font-size:clamp(8px,.50cqw,10px)!important;line-height:1.15!important;white-space:normal!important;overflow:visible!important}
+
+  .aether46-source-metrics,.aether46-oracle-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:minmax(0,1fr)!important;gap:5px 9px!important;margin-top:5px!important}
+  .aether46-source-metrics small,.aether46-oracle-metrics small,.aether46-weather-metrics small{font-size:clamp(8px,.50cqw,10px)!important;line-height:1.05!important;white-space:normal!important}
+  .aether46-source-metrics strong,.aether46-oracle-metrics strong,.aether46-weather-metrics strong{font-size:clamp(10px,.65cqw,12px)!important;line-height:1.08!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important}
+
+  .aether46-system-metrics small{font-size:clamp(8px,.50cqw,10px)!important}.aether46-system-metrics strong{font-size:clamp(12px,.76cqw,15px)!important}
+  .aether46-atlas-main{display:grid!important;grid-template-columns:auto minmax(0,1fr)!important;gap:7px!important;align-items:start!important}.aether46-atlas-main>strong{font-size:clamp(18px,1.05cqw,22px)!important}.aether46-atlas-main>span{font-size:clamp(9px,.58cqw,11px)!important;white-space:normal!important;line-height:1.12!important;max-height:2.3em!important}.aether46-atlas-sub b,.aether46-atlas-sub span{font-size:clamp(9px,.57cqw,11px)!important}
+  .aether46-convergence-main>strong{font-size:clamp(20px,1.25cqw,25px)!important}.aether46-convergence-main>span{font-size:clamp(9px,.60cqw,11px)!important}.aether46-card[data-aether-card-406046="convergence"] footer{display:block!important}
+  .aether46-card[data-aether-card-406046="divergence"] p{font-size:clamp(10px,.64cqw,12px)!important;line-height:1.15!important;white-space:normal!important;max-height:3.45em!important}
+  .aether46-breadth{font-size:clamp(9px,.56cqw,11px)!important}.aether46-breadth strong{font-size:clamp(10px,.64cqw,12px)!important}.aether46-coins b{font-size:clamp(8px,.48cqw,9px)!important}.aether46-coins strong{font-size:clamp(9px,.55cqw,10.5px)!important}
+  .aether46-event-row:nth-child(n+3){display:none!important}.aether46-events [data-aether46-events]{gap:4px!important;max-height:none!important}.aether46-event-row{grid-template-columns:36px 48px minmax(0,1fr)!important;gap:5px!important;align-items:start!important}.aether46-event-row time,.aether46-event-row b,.aether46-event-row span{font-size:clamp(8px,.51cqw,10px)!important;line-height:1.15!important}.aether46-event-row span{white-space:normal!important;display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden!important}
+  .aether46-weather-metrics{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important}
+  .aether46-core>span{font-size:clamp(10px,.62cqw,12px)!important}.aether46-core>strong{font-size:clamp(28px,1.90cqw,36px)!important}.aether46-core>small,.aether46-core>b{font-size:clamp(9px,.55cqw,10.5px)!important}.aether46-core>p{font-size:clamp(9px,.54cqw,10.5px)!important;line-height:1.15!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;max-width:92%!important}.aether46-core>footer{display:block!important;font-size:clamp(8px,.48cqw,9.5px)!important}
+  .aether46-system-banner>div:first-child b{font-size:clamp(8px,.50cqw,10px)!important}.aether46-system-banner>div:first-child span{font-size:clamp(8px,.48cqw,9px)!important}.aether46-clock small{font-size:clamp(7px,.43cqw,8px)!important}.aether46-clock strong{font-size:clamp(13px,.82cqw,16px)!important}
+}
+
+@container aether49 (max-width:1180px){
+  .aether46-card header span{font-size:10.5px!important}.aether46-card header b{font-size:7.5px!important;max-width:42%!important}
+  .aether46-source-metrics small,.aether46-oracle-metrics small,.aether46-weather-metrics small{font-size:7.5px!important}.aether46-source-metrics strong,.aether46-oracle-metrics strong,.aether46-weather-metrics strong{font-size:9px!important}
+  .aether46-atlas-main>strong{font-size:17px!important}.aether46-atlas-main>span{font-size:8.5px!important;max-height:2.2em!important}.aether46-atlas-sub span{display:none!important}
+  .aether46-convergence-main>strong{font-size:19px!important}.aether46-convergence-main>span{font-size:8px!important}.aether46-card[data-aether-card-406046="convergence"] footer{font-size:7.5px!important}
+  .aether46-card[data-aether-card-406046="divergence"] p{font-size:8.5px!important}
+  .aether46-breadth{font-size:7.8px!important}.aether46-breadth strong{font-size:9px!important}.aether46-coins b{font-size:6.8px!important}.aether46-coins strong{font-size:7.8px!important}
+  .aether46-event-row time,.aether46-event-row b,.aether46-event-row span{font-size:7.5px!important}
+  .aether46-core>strong{font-size:26px!important}.aether46-core>span{font-size:9px!important}.aether46-core>small,.aether46-core>b{font-size:7.8px!important}.aether46-core>p{font-size:7.8px!important;line-height:1.12!important}.aether46-core>footer{font-size:7px!important}
+  .aether46-bottom-center{font-size:7.5px!important;letter-spacing:.14em!important}
+}
+
+/* >1450 px intentionally inherits the validated immersive/F11 .53 geometry and density. */

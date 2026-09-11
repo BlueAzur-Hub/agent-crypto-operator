@@ -1,0 +1,55 @@
+{
+  "schema": "agent_crypto_multi_strategy_shadow_ledger_contract_v1",
+  "build": "40.6.66",
+  "parent_build": "40.6.65",
+  "release": "MULTI-STRATEGY SHADOW LEDGER · STRATEGY A ↔ TRADUS",
+  "source_event": "agentcrypto:tradus-shadow-observation",
+  "source_owner": "js/tradus-shadow-adapter-406066.js",
+  "storage": {
+    "kind": "sessionStorage",
+    "key": "agent_crypto_multi_strategy_shadow_ledger_406066",
+    "fallback": "memory",
+    "max_rows": 120,
+    "cross_session_persistence": false
+  },
+  "row_fields": [
+    "at",
+    "trigger",
+    "book_ok",
+    "bid",
+    "ask",
+    "signal",
+    "reason",
+    "imbalance",
+    "spread_ratio",
+    "strategy_a",
+    "strategy_a_direction",
+    "comparison",
+    "comparison_text"
+  ],
+  "ui": {
+    "panel": "MULTI-STRATEGY SHADOW LEDGER",
+    "last_rows": 5,
+    "export_json": true
+  },
+  "safety": {
+    "paper_only": true,
+    "shadow_only": true,
+    "strategy_a_mutation": false,
+    "paper_owner_mutation": false,
+    "real_order": false,
+    "wallet": false,
+    "credentials": false,
+    "recurring_timer": false,
+    "mutation_observer": false
+  },
+  "protected": {
+    "market_core": "38.15.11",
+    "aether": true,
+    "graph": true,
+    "technical_reading": true,
+    "atlas": true,
+    "oracle": true,
+    "strategy_a_thresholds": true
+  }
+}

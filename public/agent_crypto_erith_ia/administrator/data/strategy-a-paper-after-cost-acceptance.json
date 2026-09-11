@@ -1,0 +1,37 @@
+{
+  "schema": "agent_crypto_strategy_a_paper_after_cost_acceptance_contract_v1",
+  "build": "40.6.62",
+  "parent_build": "40.6.61",
+  "release": "STRATEGY A PAPER LIFECYCLE · AFTER-COST PROOF",
+  "mode": "PAPER_ONLY",
+  "owners": {
+    "lifecycle": [
+      "AgentCryptoStrategyAPaperLifecycle404295",
+      "AgentCryptoStrategyAPaperLifecycle404291"
+    ],
+    "after_cost": [
+      "AgentCryptoStrategyAAfterCostMetrics404298",
+      "AgentCryptoStrategyAAfterCostMetrics404292"
+    ]
+  },
+  "acceptance": {
+    "lifecycle_self_test_required": true,
+    "after_cost_self_test_required": true,
+    "state_preservation_required": true,
+    "partial_fill_average_price_checked_by_owner": true,
+    "reconciliation_conflict_checked_by_owner": true,
+    "duplicate_reconciliation_refused": true,
+    "complete_accounting_identity_required": true,
+    "partial_cost_model_must_remain_indeterminate": true,
+    "unknown_cost_must_not_be_zero": true
+  },
+  "safety": {
+    "network": false,
+    "real_order": false,
+    "kraken_order": false,
+    "wallet": false,
+    "credentials": false,
+    "storage_write": false,
+    "profitability_claim": false
+  }
+}

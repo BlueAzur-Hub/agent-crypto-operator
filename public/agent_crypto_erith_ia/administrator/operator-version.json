@@ -1,15 +1,12 @@
 {
-  "schema": "agent_crypto_yohan_operator_version_v1",
-  "operator_build": "40.6.54",
-  "parent_operator_build": "40.6.53",
-  "runtime_base_build": "40.6.53",
-  "market_core": "38.15.11",
+  "schema": "agent_crypto_operator_profile_pointer_v1",
+  "separate_build_lineage": false,
+  "runtime_truth": "build.json",
   "profile": "yohan",
   "default_view": "intermediate",
   "default_role": "operator",
   "administrator_unlock": "local",
   "projects_hidden": true,
   "public_secret_embedded": false,
-  "functional_change": false,
-  "release": "YOHAN OPERATOR CANONICAL CHECKPOINT"
+  "note": "Yohan is a profile of the Administrator runtime. No separate Operator build number."
 }

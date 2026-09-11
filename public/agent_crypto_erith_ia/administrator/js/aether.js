@@ -529,7 +529,7 @@ function aetherNewsCanonicalEvent404288(event){
       else signal=aetherCompact4088(signal||first,20).toUpperCase();
       return [status&&status!=="IDLE"?status:null,signal||null,scoreClean||null].filter(Boolean).join(" · ");
     }
-    const reports=Array.isArray(current?.reports)?current.reports.length:0;
+    const reports=Number.isFinite(Number(current?.atlas_reports))?Math.max(0,Number(current.atlas_reports)):Array.isArray(current?.reports)?current.reports.length:0;
     return `${status||"VEILLE"}${reports?` · ${reports}/4`:""}`;
   }
   function aetherSourcesBrief4088(){
@@ -623,7 +623,7 @@ function aetherNewsCanonicalEvent404288(event){
 
   function aetherSnapshot4084(){
     const current=aetherCurrent4084();
-    const reports=Array.isArray(current?.reports)?current.reports.length:0;
+    const reports=Number.isFinite(Number(current?.atlas_reports))?Math.max(0,Number(current.atlas_reports)):Array.isArray(current?.reports)?current.reports.length:0;
     const currentStatus=String(current?.status||"").trim().toUpperCase();
     const atlas=aetherAtlasBrief4088();
     const oracle=aetherOracleBrief4088();
@@ -649,7 +649,17 @@ function aetherNewsCanonicalEvent404288(event){
   try{const coins=(typeof state!=="undefined"&&Array.isArray(state?.coins))?state.coins:[];const rows=coins.map(r=>aetherSystemNumber4086(r?.change24h)).filter(v=>v!==null);if(!rows.length)return "Marché non chargé";const up=rows.filter(v=>v>.05).length,down=rows.filter(v=>v<-.05).length,flat=rows.length-up-down;const bias=down>up*1.35?"largeur négative":up>down*1.35?"largeur positive":"largeur mixte";return `${up} hausses · ${down} baisses · ${flat} stables · ${bias}`;}catch(_){return "Marché non chargé";}
 }
 function aetherAtlasAuto40133(){
-  try{const o=globalThis.ErithAtlasResidentWake40133,s=o&&typeof o.snapshot==="function"?o.snapshot():null;if(!s)return "Résident · owner en attente";if(s.last_action==="current-kick")return `ARMÉ · CURRENT relancé · ${s.last_market_id||"snapshot canonique"}`;if(s.last_action==="bridge-sync")return "ARMÉ · nouveau snapshot détecté · Bridge en reprise";if(s.last_action==="already-current")return "ARMÉ · snapshot déjà CURRENT";return s.installed?"ARMÉ · surveille le prochain snapshot canonique":"NON ARMÉ";}catch(_){return "Résident · état indisponible";}
+  try{
+    const current=aetherCurrent4084()||null;
+    let pending=null;
+    try{if(typeof atlasCurrentPendingMarket137==="function")pending=atlasCurrentPendingMarket137()||null;}catch(_){}
+    const status=String(current?.status||"").trim().toUpperCase();
+    const reports=Number.isFinite(Number(current?.atlas_reports))?Number(current.atlas_reports):Array.isArray(current?.reports)?current.reports.length:0;
+    if(pending){const id=String(pending?.market_id||pending?.snapshot_id||pending?.id||"").trim();return `PENDING · nouveau snapshot${id?` · ${id}`:""}`;}
+    if(status==="CURRENT")return `REPOS · dernier CURRENT ${reports?`${reports}/4`:'couverture N/D'}`;
+    if(status)return `${status} · état Atlas canonique`;
+    return "État Atlas inconnu";
+  }catch(_){return "État Atlas indisponible";}
 }
 function aetherSystemBrief40133(){
   const sys=aetherSystemState4086.system||{},cpu=aetherSystemPercent4086(sys?.cpu?.usage_pct),ct=aetherSystemTemperature4086(sys?.cpu?.temperature_c),gs=String(sys?.gpu?.status||"").trim().toLowerCase(),gpu=gs&&gs!=="ok"?null:aetherSystemPercent4086(sys?.gpu?.usage_pct),gt=gs&&gs!=="ok"?null:aetherSystemTemperature4086(sys?.gpu?.temperature_c),ram=aetherSystemPercent4086(sys?.memory?.usage_pct);const part=(l,v,t=null)=>`${l} ${v===null?"N/D":`${Math.round(v)}%${t===null?"":` ${Math.round(t)}°`}`}`;return `${part("CPU",cpu,ct)} · ${part("GPU",gpu,gt)} · ${part("RAM",ram)}`;
@@ -702,8 +712,8 @@ function aetherNewsMarketSemantic405013(){
 }
   function aetherDirectionalWord406026(value){
     const text=String(value||"").toLowerCase();
-    if(/hauss|bull|positive|risk-on|risk on|inflow|entrants?/.test(text))return 1;
-    if(/baiss|bear|negative|risk-off|risk off|outflow|sortants?/.test(text))return -1;
+    if(/hauss|bull|positif|positive|risk-on|risk on|inflow|entrants?/.test(text))return 1;
+    if(/baiss|bear|n[ée]gatif|negative|risk-off|risk off|outflow|sortants?/.test(text))return -1;
     if(/mixte|partag|neutre|stable|lat[ée]ral|non [ée]tablie/.test(text))return 0;
     return null;
   }
@@ -748,42 +758,52 @@ function aetherNewsMarketSemantic405013(){
   function aetherAtlasDirection406026(){
     try{return aetherDirectionalWord406026(`${aetherAtlasBrief4088()} ${aetherText4084("atlasOracleAtlas","")}`);}catch(_){return null;}
   }
-  function aetherOperatorWatch406026(){
+  function aetherDirectionMatrix406058(){
     const layers=[
       {name:"News",value:aetherNewsDirection406026()},
       {name:"Marché",value:aetherMarketDirection406026()},
       {name:"Atlas",value:aetherAtlasDirection406026()},
       {name:"Oracle",value:aetherOracleDirection406026()},
     ];
-    const known=layers.filter(row=>row.value!==null);
-    const positive=known.filter(row=>row.value===1),negative=known.filter(row=>row.value===-1),neutral=known.filter(row=>row.value===0);
+    const present=layers.filter(row=>row.value!==null);
+    const positive=present.filter(row=>row.value===1),negative=present.filter(row=>row.value===-1),neutral=present.filter(row=>row.value===0);
+    const directional=[...positive,...negative];
     const dominant=positive.length>negative.length?1:negative.length>positive.length?-1:0;
-    const aligned=dominant===0?neutral.length:known.filter(row=>row.value===dominant||row.value===0).length;
-    const pct=known.length?Math.round(aligned/known.length*100):0;
-    const sourceReady=!/attente|aucune|requis|indisponible/i.test(aetherSourcesBrief4088());
-    const systemReady=!/N\/D|indisponible/i.test(aetherSystemBrief40133());
+    const leaders=dominant===1?positive:dominant===-1?negative:[];
+    const opposed=dominant===1?negative:dominant===-1?positive:directional;
+    const opposition=positive.length>0&&negative.length>0;
+    const coverage=present.length;
+    const alignmentPct=directional.length&&dominant!==0?Math.round(leaders.length/directional.length*100):null;
+    return {layers,present,positive,negative,neutral,directional,dominant,leaders,opposed,opposition,coverage,total:layers.length,alignmentPct};
+  }
+  function aetherOperatorWatch406026(){
+    const m=aetherDirectionMatrix406058();
+    const sourcesModel=aetherSourcesModel406042(aetherSnapshot4084());
+    const systemModel=aetherSystemModel406042();
+    const sourceReady=sourcesModel.status==="PRÊTES";
+    const systemReady=!['INDISPONIBLE','CRITIQUE'].includes(systemModel.status);
     const feed=aetherVeilleCurrent4087();
     const impact=Number(feed?.event?.impact?.score),evidence=Number(feed?.event?.evidence?.score);
     const attentionBase=aetherAttention40133();
-    let level="MODÉRÉ";
-    if(/danger|critique|non armé|indisponible/i.test(attentionBase)||(Number.isFinite(impact)&&impact>=95&&Number.isFinite(evidence)&&evidence>=85))level="CRITIQUE";
-    else if((Number.isFinite(impact)&&impact>=85)||(pct>=75&&known.length>=3))level="ÉLEVÉ";
-    else if(!known.length||(!sourceReady&&!systemReady))level="FAIBLE";
-    const dirLabel=dominant>0?"HAUSSIÈRE":dominant<0?"BAISSIÈRE":"PARTAGÉE";
-    const convergence=known.length?`${aligned}/${known.length} couches · ${pct}% · dominante ${dirLabel}`:"Données directionnelles insuffisantes";
-    const opposed=dominant===0?[]:known.filter(row=>row.value===-dominant).map(row=>row.name);
-    const divergence=opposed.length?`${opposed.join(" + ")} en contradiction avec la dominante`:neutral.length&&dominant!==0?`${neutral.map(row=>row.name).join(" + ")} restent neutres`:`Aucune divergence directionnelle forte détectée`;
+    let level="MODÉRÉ",cause="Marché",proof=aetherMarketBreadth40133();
+    if(/Système/i.test(attentionBase)&&/danger|critique|indisponible/i.test(attentionBase)){level="CRITIQUE";cause="Système";proof=aetherSystemBrief40133();}
+    else if(Number.isFinite(impact)&&impact>=95&&Number.isFinite(evidence)&&evidence>=85){level="CRITIQUE";cause="News";proof=`impact ${Math.round(impact)}/100 · preuve ${Math.round(evidence)}/100`;}
+    else if(Number.isFinite(impact)&&impact>=85){level="ÉLEVÉ";cause="News";proof=`impact ${Math.round(impact)}/100${Number.isFinite(evidence)?` · preuve ${Math.round(evidence)}/100`:''}`;}
+    else if(m.alignmentPct!==null&&m.alignmentPct>=75&&m.directional.length>=2){level="ÉLEVÉ";cause="Convergence";proof=`${m.leaders.map(x=>x.name).join(' · ')} · ${m.alignmentPct}% des couches directionnelles`;}
+    else if(!m.coverage||(!sourceReady&&!systemReady)){level="FAIBLE";cause="Couverture";proof=`${m.coverage}/${m.total} couches · ${sourcesModel.status.toLowerCase()}`;}
+    const dirLabel=m.opposition?"OPPOSÉE":m.directional.length>=2&&m.dominant>0?"HAUSSIÈRE":m.directional.length>=2&&m.dominant<0?"BAISSIÈRE":m.directional.length===1?"DIRECTION SEULE":m.coverage>=2?"NEUTRE":"INSUFFISANTE";
+    const convergence=m.coverage?`couverture ${m.coverage}/${m.total} · ${m.directional.length} directionnelle${m.directional.length>1?'s':''} · ${dirLabel}`:"Données directionnelles insuffisantes";
+    let divergence="Aucune opposition directionnelle démontrée";
+    if(m.opposition)divergence=`Opposition ${m.positive.map(x=>x.name).join(' + ')} / ${m.negative.map(x=>x.name).join(' + ')}`;
+    else if(m.neutral.length)divergence=`Neutralité : ${m.neutral.map(x=>x.name).join(' + ')}`;
     const watch=[];
-    const oracle=aetherOracleDirection406026();
-    watch.push(oracle===0?"Oracle : sortie du 50/50":"Oracle : bascule ou renforcement ≥ 60/40");
-    if(aetherMarketDirection406026()===0)watch.push("Largeur marché : rupture de l’équilibre");
+    if(m.opposition)watch.push("Résoudre l’opposition entre couches");
+    if(m.neutral.length)watch.push(`${m.neutral.map(x=>x.name).join(' / ')} : attendre une direction`);
+    if(!sourceReady)watch.push("Sources : retour à un état complet et frais");
     if(Number.isFinite(impact)&&impact>=80)watch.push("News : nouvelle preuve ou changement de ton");
-    if(!sourceReady)watch.push("Sources : retour à un état complet");
-    let note="Lecture encore partagée : surveiller la prochaine confirmation avant toute interprétation forte.";
-    if(dominant>0&&pct>=75)note="Convergence plutôt constructive, mais Aether reste en observation : confirmer par le marché et les sources.";
-    else if(dominant<0&&pct>=75)note="Convergence plutôt défensive : risque prioritaire, aucune exécution automatique.";
-    else if(opposed.length)note=`Divergence active : ${opposed.join(" / ")} ne confirme pas la lecture dominante.`;
-    return {level:`${level} · ${sourceReady?"sources prêtes":"sources partielles"} · ${systemReady?"système lisible":"système partiel"}`,convergence,divergence,watch:watch.slice(0,4).join(" · "),note};
+    if(!watch.length)watch.push("Prochaine variation directionnelle significative");
+    const note=m.coverage<2?"Comparaison insuffisante : ne pas interpréter un pourcentage d’accord.":m.opposition?"Divergence réelle : aucune synthèse directionnelle unique.":m.directional.length<2?"Couverture présente mais comparaison directionnelle insuffisante.":"Lecture descriptive : aucune probabilité de gain n’est déduite de cette convergence.";
+    return {level:`${level} · ${sourceReady?"sources prêtes":"sources partielles"} · ${systemReady?"système lisible":"système partiel"}`,convergence,divergence,watch:watch.slice(0,4).join(" · "),note,why:`${cause} · ${proof}`,cause,proof,evaluated_at:Date.now(),matrix:m};
   }
   const aetherTimelineState406027={entries:[],last:null,max:8};
   function aetherTimelineClip406027(value,max=150){
@@ -792,8 +812,9 @@ function aetherNewsMarketSemantic405013(){
   }
   function aetherTimelineNewsKey406027(){
     try{
-      const feed=aetherVeilleCurrent4087(),event=feed?.event||{};
-      return aetherTimelineClip406027(event?.id||event?.event_id||event?.fingerprint||event?.display_headline||event?.headline||feed?.headline||"",180);
+      const status=aetherVeilleStatus4087();
+      const ids=(Array.isArray(status?.events)?status.events:[]).map(event=>String(event?.event_id||event?.id||event?.fingerprint||event?.source_url||event?.display_headline||event?.headline||"").trim()).filter(Boolean).sort();
+      return ids.join("|");
     }catch(_){return "";}
   }
   function aetherTimelineSnapshot406027(watch){
@@ -805,8 +826,9 @@ function aetherNewsMarketSemantic405013(){
       level:String(watch?.level||"").split("·")[0].trim()||"N/D"
     };
   }
-  function aetherTimelinePush406027(type,level,detail){
-    const entry=Object.freeze({at:Date.now(),type:String(type||"AETHER"),level:String(level||"N/D"),detail:aetherTimelineClip406027(detail||"État actualisé")});
+  function aetherTimelinePush406027(type,level,detail,meta={}){
+    const full=String(detail||"État actualisé").replace(/\s+/g," ").trim();
+    const entry=Object.freeze({at:Date.now(),detected_at:Date.now(),type:String(type||"AETHER"),level:String(level||"N/D"),detail:full,preview:aetherTimelineClip406027(full,150),source_id:meta?.source_id||null,published_at:meta?.published_at||null,source_url:meta?.source_url||null});
     aetherTimelineState406027.entries.unshift(entry);
     if(aetherTimelineState406027.entries.length>aetherTimelineState406027.max)aetherTimelineState406027.entries.length=aetherTimelineState406027.max;
   }
@@ -815,16 +837,18 @@ function aetherNewsMarketSemantic405013(){
       const current=aetherTimelineSnapshot406027(watch),previous=aetherTimelineState406027.last;
       if(!previous){
         aetherTimelinePush406027("AETHER",current.level,watch?.convergence||"Surveillance initialisée");
-        aetherTimelineState406027.last=current;
-        return;
+        aetherTimelineState406027.last=current;return;
       }
-      let type="",detail="";
-      if(current.news&&current.news!==previous.news){type="NEWS";detail=aetherVeilleCurrent4087()?.event?.display_headline||aetherVeilleCurrent4087()?.event?.headline||aetherVeilleCurrent4087()?.headline||"Nouvelle veille";}
-      else if(current.oracle!==previous.oracle){type="ORACLE";detail=aetherOracleBrief4088();}
-      else if(current.market!==previous.market){type="MARCHÉ";detail=aetherMarketBreadth40133();}
-      else if(current.atlas!==previous.atlas){type="ATLAS";detail=aetherAtlasBrief4088();}
-      else if(current.level!==previous.level){type="AETHER";detail=watch?.convergence||watch?.divergence||"Niveau d’attention modifié";}
-      if(type)aetherTimelinePush406027(type,current.level,detail);
+      const changes=[];
+      if(current.news!==previous.news){
+        const status=aetherVeilleStatus4087();
+        changes.push(["NEWS",`${Array.isArray(status?.events)?status.events.length:0} événement(s) qualifié(s) · archive ${String(status?.status||'N/D').toUpperCase()}`]);
+      }
+      if(current.oracle!==previous.oracle)changes.push(["ORACLE",aetherOracleBrief4088()]);
+      if(current.market!==previous.market)changes.push(["MARCHÉ",aetherMarketBreadth40133()]);
+      if(current.atlas!==previous.atlas)changes.push(["ATLAS",aetherAtlasBrief4088()]);
+      if(current.level!==previous.level)changes.push(["AETHER",watch?.convergence||watch?.divergence||"Niveau d’attention modifié"]);
+      for(const [type,detail] of changes)aetherTimelinePush406027(type,current.level,detail);
       aetherTimelineState406027.last=current;
     }catch(_){}
   }
@@ -993,13 +1017,18 @@ function aetherNewsMarketSemantic405013(){
     return {cpu,cpuTemp,gpu,gpuTemp,ram,status,tone};
   }
   function aetherSourcesModel406042(snapshot){
-    let newsCount=0,newsLabel='VEILLE';
-    try{const ns=aetherVeilleStatus4087();newsCount=Array.isArray(ns?.events)?ns.events.length:0;newsLabel=newsCount?'ACTIVES':String(ns?.label||'VEILLE').toUpperCase();}catch(_){}
+    let newsCount=0,newsLabel='VEILLE',newsStatus='idle';
+    try{const ns=aetherVeilleStatus4087();newsCount=Array.isArray(ns?.events)?ns.events.length:0;newsLabel=newsCount?'ACTIVES':String(ns?.label||'VEILLE').toUpperCase();newsStatus=String(ns?.status||'idle').toLowerCase();}catch(_){}
     const ratio=(String(snapshot?.sources||'').match(/\b\d+\s*\/\s*\d+\b/)||[])[0]?.replace(/\s+/g,'')||'N/D';
+    const match=ratio.match(/^(\d+)\/(\d+)$/);const num=match?Number(match[1]):null,den=match?Number(match[2]):null;
+    const binanceComplete=Number.isFinite(num)&&Number.isFinite(den)&&den>0&&num===den;
     const book=String(snapshot?.book||'EN VEILLE').toUpperCase();
+    const bookReady=/^PRÊT/.test(book)&&!/REQUIS|VEILLE|INDISPONIBLE|ERREUR/.test(book);
     const atlasData=String(snapshot?.currentStatus||'').toUpperCase()==='CURRENT'?'CURRENT':snapshot?.reports?'DISPONIBLE':'VEILLE';
-    const sourceReady=!/N\/D|ATTENTE|REQUIS|INDISPONIBLE/.test(`${ratio} ${book}`);
-    return {ratio,book,news:newsCount?`${newsCount} QUALIFIÉ${newsCount>1?'S':''}`:newsLabel,atlasData,status:sourceReady?'PRÊTES':'PARTIELLES',tone:sourceReady?'good':'warn'};
+    const atlasReady=atlasData==='CURRENT'||atlasData==='DISPONIBLE';
+    const newsReady=newsCount>0&&newsStatus!=='error';
+    const sourceReady=binanceComplete&&bookReady&&atlasReady&&newsReady;
+    return {ratio,book,news:newsCount?`${newsCount} QUALIFIÉ${newsCount>1?'S':''}`:newsLabel,atlasData,status:sourceReady?'PRÊTES':'PARTIELLES',tone:sourceReady?'good':'warn',checks:{binanceComplete,bookReady,atlasReady,newsReady}};
   }
   function aetherAtlasModel406042(snapshot){
     const raw=String(snapshot?.atlas||'').trim();
@@ -1009,7 +1038,7 @@ function aetherNewsMarketSemantic405013(){
     const signal=parts.find(v=>!/CURRENT|IDLE|VEILLE|\d+\s*\/\s*100/i.test(v))||parts[1]||'Lecture en attente';
     const resident=aetherAtlasAuto40133();
     const reports=Number(snapshot?.reports)||0;
-    const tone=/NON ARMÉ|indisponible/i.test(resident)?'danger':/CURRENT|ARMÉ|PARTAG|HAUSS|BAISS/i.test(`${status} ${resident} ${signal}`)?'good':'neutral';
+    const tone=/indisponible/i.test(resident)?'danger':/CURRENT|REPOS|PENDING|PARTAG|HAUSS|BAISS/i.test(`${status} ${resident} ${signal}`)?'good':'neutral';
     return {status,signal,score:score===null?'N/D':`${score>=0?'+':''}${score}/100`,reports:reports?`${reports}/4`:'N/D',resident,tone};
   }
   function aetherOracleModel406042(){
@@ -1027,40 +1056,54 @@ function aetherNewsMarketSemantic405013(){
     return {asset,scenario,regime,confidence:confidence===null?'N/D':`${Math.round(confidence)}/100`,up:up===null?'N/D':`${Math.round(up)}/100`,down:down===null?'N/D':`${Math.round(down)}/100`,coherence:coherence===null?'N/D':`${Math.round(coherence)}/100`,summary,tone};
   }
   function aetherConvergenceModel406042(watch){
-    const layers=[{name:'News',value:aetherNewsDirection406026()},{name:'Marché',value:aetherMarketDirection406026()},{name:'Atlas',value:aetherAtlasDirection406026()},{name:'Oracle',value:aetherOracleDirection406026()}];
-    const known=layers.filter(row=>row.value!==null),positive=known.filter(row=>row.value===1),negative=known.filter(row=>row.value===-1),neutral=known.filter(row=>row.value===0);
-    const dominant=positive.length>negative.length?1:negative.length>positive.length?-1:0;
-    const aligned=dominant===0?neutral:known.filter(row=>row.value===dominant||row.value===0);
-    const opposed=dominant===0?[]:known.filter(row=>row.value===-dominant);
-    const pct=known.length?Math.round(aligned.length/known.length*100):0;
-    return {ratio:known.length?`${aligned.length}/${known.length}`:'N/D',pct:known.length?`${pct}%`:'N/D',dominant:dominant>0?'HAUSSIÈRE':dominant<0?'BAISSIÈRE':'PARTAGÉE',confirm:aligned.length?aligned.map(row=>row.name).join(' · '):'Aucune',oppose:opposed.length?opposed.map(row=>row.name).join(' · '):'Aucune',tone:pct>=75&&known.length>=3?(dominant<0?'warn':'good'):'neutral',raw:String(watch?.convergence||'')};
+    const m=watch?.matrix||aetherDirectionMatrix406058();
+    const coveragePct=m.total?Math.round((m.coverage/m.total)*100):0;
+    const comparable=m.directional.length>=2;
+    let dominant='COUVERTURE FAIBLE';
+    if(m.opposition)dominant='OPPOSITION';
+    else if(comparable&&m.dominant>0)dominant='HAUSSIÈRE';
+    else if(comparable&&m.dominant<0)dominant='BAISSIÈRE';
+    else if(m.directional.length===1)dominant='DIRECTION SEULE';
+    else if(m.coverage>=2)dominant='NEUTRE';
+    const confirm=m.opposition
+      ?'Aucune synthèse unique'
+      :m.leaders.length>=2
+        ?m.leaders.map(row=>row.name).join(' · ')
+        :m.directional.length===1
+          ?`${m.directional[0].name} seule`
+          :'Aucune confirmation directionnelle';
+    const confirmLabel=m.opposition?'opposition':m.leaders.length>=2?'confirment':m.directional.length===1?'direction seule':'direction';
+    const oppose=m.opposition?`${m.positive.map(x=>x.name).join(' + ')} / ${m.negative.map(x=>x.name).join(' + ')}`:'Aucune';
+    const pct=`${coveragePct}% couv.`;
+    const tone=m.opposition?'warn':comparable&&m.alignmentPct!==null&&m.alignmentPct>=75?(m.dominant<0?'warn':'good'):'neutral';
+    return {ratio:`${m.coverage}/${m.total}`,pct,coveragePct,alignmentPct:m.alignmentPct,dominant,confirm,confirmLabel,oppose,neutral:m.neutral.map(x=>x.name).join(' · ')||'Aucune',tone,raw:String(watch?.convergence||''),coverage:m.coverage,total:m.total};
   }
   function aetherDivergenceModel406042(watch,convergence){
-    const raw=String(watch?.divergence||'Aucune divergence directionnelle forte détectée');
-    let status='AUCUNE FORTE',tone='good';
-    if(/contradiction|divergence active/i.test(raw)){status='ACTIVE';tone='warn';}
-    else if(/restent neutres|neutre/i.test(raw)){status='NEUTRALITÉ';tone='neutral';}
-    return {status,detail:raw,opposed:convergence?.oppose||'Aucune',tone};
+    const m=watch?.matrix||aetherDirectionMatrix406058();
+    if(m.opposition)return {status:'OPPOSITION',detail:`${m.positive.map(x=>x.name).join(' + ')} / ${m.negative.map(x=>x.name).join(' + ')}`,opposed:convergence?.oppose||'Aucune',tone:'warn'};
+    if(m.neutral.length)return {status:'NEUTRALITÉ',detail:`${m.neutral.map(x=>x.name).join(' + ')} restent neutres`,opposed:'Aucune',tone:'neutral'};
+    if(m.coverage<2)return {status:'COUVERTURE FAIBLE',detail:`${m.coverage}/${m.total} couches disponibles · comparaison insuffisante`,opposed:'Aucune',tone:'neutral'};
+    return {status:'AUCUNE FORTE',detail:'Aucune opposition directionnelle démontrée',opposed:'Aucune',tone:'good'};
   }
   function aetherWeatherModel406042(){
     const weather=aetherSystemState4086.weather||{},days=Array.isArray(weather?.daily)?weather.daily:[];
     const today=days[0]||{};const text=String(today?.text||'Prévision en attente');
     const tempPair=(text.match(/(-?\d+)\s*\/\s*(-?\d+)°/)||[]);const rain=(text.match(/pluie\s*(\d+)%/i)||[])[1];
-    const level=String(weather?.risk_level||'').toLowerCase();const risk=level==='danger'?'ORAGE':level==='warn'?'ALERTE':level==='watch'?'SURVEILLER':'CALME';
-    return {today:tempPair.length?`${tempPair[1]}° / ${tempPair[2]}°`:'N/D',rain:rain?`${rain}%`:'N/D',gust:weather?.max_gust_kmh===null||weather?.max_gust_kmh===undefined?'N/D':`${Math.round(weather.max_gust_kmh)} km/h`,risk,detail:aetherWeatherRisk40133(),tone:level==='danger'?'danger':level==='warn'?'warn':level==='watch'?'neutral':'good'};
+    const level=String(weather?.risk_level||'').toLowerCase();const hasMeasure=Boolean(tempPair.length||rain||weather?.max_gust_kmh!==null&&weather?.max_gust_kmh!==undefined);const risk=!hasMeasure?'INDISPONIBLE':level==='danger'?'ORAGE':level==='warn'?'ALERTE':level==='watch'?'SURVEILLER':level==='ok'?'CALME':'INCONNU';
+    return {today:tempPair.length?`${tempPair[1]}° / ${tempPair[2]}°`:'N/D',rain:rain?`${rain}%`:'N/D',gust:weather?.max_gust_kmh===null||weather?.max_gust_kmh===undefined?'N/D':`${Math.round(weather.max_gust_kmh)} km/h`,risk,detail:hasMeasure?aetherWeatherRisk40133():'Prévision indisponible',tone:!hasMeasure?'muted':level==='danger'?'danger':level==='warn'?'warn':level==='watch'?'neutral':level==='ok'?'good':'muted'};
   }
   function aetherComponentViewModel406042(snapshot,watch){
     const market=aetherMarketModel406042(),system=aetherSystemModel406042(),sources=aetherSourcesModel406042(snapshot),atlas=aetherAtlasModel406042(snapshot),oracle=aetherOracleModel406042(),convergence=aetherConvergenceModel406042(watch),divergence=aetherDivergenceModel406042(watch,convergence),weather=aetherWeatherModel406042();
     const level=String(watch?.level||'MODÉRÉ').split('·')[0].trim()||'MODÉRÉ';
     const coreTone=level==='CRITIQUE'?'danger':level==='ÉLEVÉ'?'warn':level==='FAIBLE'?'muted':'neutral';
-    const why=aetherAttention40133().replace(/^Marché\s*·\s*/,'Marché · ').replace(/^Système\s*·\s*/,'Système · ');
+    const why=String(watch?.why||'Évaluation Aether en attente');
     return {market,system,sources,atlas,oracle,convergence,divergence,weather,core:{level,tone:coreTone,why,watch:String(watch?.watch||'Surveillance en attente'),note:String(watch?.note||'Lecture en cours'),convergence:convergence.pct}};
   }
   function aetherComponentEventRow406042(entry){
     const row=document.createElement('div');row.className='aether46-event-row';
     const time=document.createElement('time');time.textContent=new Date(entry.at).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
     const type=document.createElement('b');type.textContent=entry.type;
-    const detail=document.createElement('span');detail.textContent=aetherTimelineClip406027(entry.detail,88);
+    const detail=document.createElement('span');detail.textContent=aetherTimelineClip406027(entry.preview||entry.detail,88);detail.title=entry.detail||'';
     row.append(time,type,detail);return row;
   }
   function aetherComponentPaint406042(panel,snapshot=aetherSnapshot4084(),watch=aetherOperatorWatch406026()){
@@ -1070,7 +1113,7 @@ function aetherNewsMarketSemantic405013(){
     const dateText=new Intl.DateTimeFormat('fr-FR',{weekday:'short',day:'2-digit',month:'short',year:'numeric'}).format(now);
     const timeText=new Intl.DateTimeFormat('fr-FR',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now);
 
-    aetherSet406042(stage,'status_system',vm.system.status==='INDISPONIBLE'?'SYSTÈME PARTIEL':'SYSTÈME OPÉRATIONNEL',vm.system.tone);
+    aetherSet406042(stage,'status_system',vm.system.status==='STABLE'?'SYSTÈME OPÉRATIONNEL':vm.system.status==='PARTIEL'?'SYSTÈME PARTIEL':vm.system.status==='SOUS CHARGE'?'SYSTÈME SOUS CHARGE':vm.system.status==='CRITIQUE'?'SYSTÈME CRITIQUE':'SYSTÈME INDISPONIBLE',vm.system.tone);
     aetherSet406042(stage,'status_modules',vm.sources.status==='PRÊTES'?'TOUTES LES SOURCES PRÊTES':'SOURCES PARTIELLES',vm.sources.tone);
     aetherSet406042(stage,'status_date',dateText);
     aetherSet406042(stage,'status_time',timeText);
@@ -1126,6 +1169,7 @@ function aetherNewsMarketSemantic405013(){
     aetherSet406042(stage,'convergence_ratio',vm.convergence.ratio);
     aetherSet406042(stage,'convergence_pct',vm.convergence.pct,vm.convergence.tone);
     aetherSet406042(stage,'convergence_dominant',vm.convergence.dominant);
+    aetherSet406042(stage,'convergence_confirm_label',vm.convergence.confirmLabel);
     aetherSet406042(stage,'convergence_confirm',vm.convergence.confirm);
     aetherSet406042(stage,'convergence_oppose',vm.convergence.oppose);
     aetherCardTone406042(stage,'convergence',vm.convergence.tone);
@@ -1195,7 +1239,7 @@ function aetherNewsMarketSemantic405013(){
         <article class="aether46-card" data-aether-card-406046="convergence">
           <header><span>CONVERGENCE</span><b data-aether46="convergence_dominant">—</b></header>
           <div class="aether46-convergence-main"><strong data-aether46="convergence_ratio">—</strong><span>couches · <b data-aether46="convergence_pct">—</b></span></div>
-          <footer>confirment · <b data-aether46="convergence_confirm">—</b></footer>
+          <footer><span data-aether46="convergence_confirm_label">direction</span> · <b data-aether46="convergence_confirm">—</b></footer>
         </article>
 
         <article class="aether46-card" data-aether-card-406046="divergence">
@@ -1229,7 +1273,6 @@ function aetherNewsMarketSemantic405013(){
           <span>NIVEAU D’ATTENTION</span><strong data-aether46="attention_level">—</strong>
           <small>Cause principale</small><p data-aether46="attention_why">—</p>
           <b>À surveiller maintenant</b><p data-aether46="attention_watch">—</p>
-          <footer data-aether46="attention_note">—</footer>
         </article>
       </main>
 
@@ -1471,7 +1514,9 @@ function aetherNewsMarketSemantic405013(){
       button.addEventListener("click",()=>{
         const manager=aetherNativeWindowManager406040();
         const panel=document.getElementById("atlasAetherStatusPanel4084");
-        const shouldOpen=panel?.dataset?.aetherOperatorOpen406046!=="1";
+        let nativeHidden=false;
+        try{nativeHidden=Boolean(panel&&(panel.hidden||getComputedStyle(panel).display==='none'||panel.getClientRects().length===0));}catch(_){}
+        const shouldOpen=!panel||panel.dataset?.aetherOperatorOpen406046!=="1"||nativeHidden;
         aetherPanelSet4084(shouldOpen);
       });
     }

@@ -1,0 +1,41 @@
+{
+  "schema": "agent_crypto_strategy_a_replay_acceptance_expected_v1",
+  "build": "40.6.57",
+  "automatic_run": false,
+  "scenarios": [
+    {
+      "scenario": "PASS_TO_PAPER",
+      "expected": "PAPER_SIMULATED"
+    },
+    {
+      "scenario": "DATA_STALE_STOP",
+      "expected": "STOP"
+    },
+    {
+      "scenario": "DIRECTION_WAIT",
+      "expected": "WAIT"
+    },
+    {
+      "scenario": "BTC24_WAIT",
+      "expected": "WAIT"
+    },
+    {
+      "scenario": "COST_WAIT",
+      "expected": "WAIT"
+    },
+    {
+      "scenario": "DUPLICATE_STOP",
+      "expected": "STOP"
+    },
+    {
+      "scenario": "RISK_REJECT",
+      "expected": "STOP"
+    }
+  ],
+  "safety": {
+    "isolated_from_live": true,
+    "real_orders": false,
+    "network": false,
+    "storage_write": false
+  }
+}

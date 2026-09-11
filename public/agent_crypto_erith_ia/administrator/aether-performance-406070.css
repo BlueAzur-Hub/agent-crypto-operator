@@ -1,0 +1,57 @@
+/*
+  Agent-Crypto Administrator — 40.6.70
+  AETHER FIREFOX PERFORMANCE · DRAG PAINT BUDGET
+  Parent: 40.6.69 R1
+
+  Presentation/compositor-only optimization.
+  No geometry owner, no data owner, no timer, no observer, no network/storage owner.
+  Approved Aether artwork, cards, Workbench content and Window Manager behavior stay intact.
+*/
+
+@supports (-moz-appearance:none) {
+  body.atlas-administrator-mirror #atlasAetherStatusPanel4084,
+  body.atlas-administrator-mirror #atlasAetherWorkbench406039 {
+    contain: layout paint style !important;
+  }
+
+  body.atlas-administrator-mirror #atlasAetherStatusPanel4084 .aether46-stage {
+    contain: layout paint style !important;
+  }
+
+  body.atlas-administrator-mirror #atlasAetherStatusPanel4084.admin-native-moving,
+  body.atlas-administrator-mirror .admin-native-moving #atlasAetherStatusPanel4084,
+  body.atlas-administrator-mirror .admin-native-moving:has(#atlasAetherStatusPanel4084) {
+    box-shadow: none !important;
+    transition: none !important;
+  }
+
+  body.atlas-administrator-mirror #atlasAetherStatusPanel4084.admin-native-moving .aether46-stage,
+  body.atlas-administrator-mirror .admin-native-moving #atlasAetherStatusPanel4084 .aether46-stage,
+  body.atlas-administrator-mirror .admin-native-moving:has(#atlasAetherStatusPanel4084) .aether46-stage {
+    box-shadow: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+
+  body.atlas-administrator-mirror #atlasAetherStatusPanel4084.admin-native-moving .aether46-stage *,
+  body.atlas-administrator-mirror .admin-native-moving #atlasAetherStatusPanel4084 .aether46-stage *,
+  body.atlas-administrator-mirror .admin-native-moving:has(#atlasAetherStatusPanel4084) .aether46-stage * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    transition: none !important;
+    animation-play-state: paused !important;
+    pointer-events: none !important;
+  }
+
+  body.atlas-administrator-mirror #atlasAetherWorkbench406039:has(.awb-head:active) {
+    box-shadow: none !important;
+    transition: none !important;
+  }
+
+  body.atlas-administrator-mirror #atlasAetherWorkbench406039:has(.awb-head:active) .awb-body,
+  body.atlas-administrator-mirror #atlasAetherWorkbench406039:has(.awb-head:active) .awb-row,
+  body.atlas-administrator-mirror #atlasAetherWorkbench406039:has(.awb-head:active) .awb-card {
+    box-shadow: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "schema": "agent_crypto_tradus_shadow_adapter_contract_v1",
+  "build": "40.6.66",
+  "parent_build": "40.6.65",
+  "release": "MULTI-STRATEGY SHADOW LEDGER · STRATEGY A ↔ TRADUS",
+  "source": {
+    "name": "TRADUS V1.0",
+    "source_bundle": "trad.zip",
+    "source_sha256": "1d8770b2bfb643a2f6886455670b40bffad5b9372624975e8efd9d9f0805a2be",
+    "vendor_copy": "vendor/tradus-v1.0-r1"
+  },
+  "correctives": {
+    "stale_clock": "time.time() when now omitted",
+    "sell_accounting": "signed long/short close and flip accounting",
+    "test_spread": "test changed; strategy max spread unchanged"
+  },
+  "strategy": {
+    "name": "ORDER_IMBALANCE",
+    "imbalance_threshold": 0.25,
+    "max_spread_ratio": 0.002,
+    "symbol": "BTCEUR",
+    "book_level": "best bid/ask quantity"
+  },
+  "runtime": {
+    "mode": "SHADOW_SIGNAL_ONLY",
+    "source": "Binance public depth",
+    "initial_read": true,
+    "host_refresh_hook": true,
+    "recurring_timer": false,
+    "strategy_a_mutation": false,
+    "paper_fill": false,
+    "real_order": false,
+    "credentials": false,
+    "wallet": false,
+    "observation_event": "agentcrypto:tradus-shadow-observation",
+    "shadow_ledger": "js/tradus-shadow-ledger-406066.js",
+    "session_storage_only": true
+  },
+  "protected": {
+    "market_core": "38.15.11",
+    "aether": "40.6.61 checkpoint",
+    "strategy_a_thresholds": true,
+    "graph": true,
+    "technical_reading": true,
+    "oracle": true,
+    "atlas": true
+  },
+  "mount_authority": {
+    "late_hydration_safe": true,
+    "primary_anchor": "strategyAPaperAfterCostProof406063",
+    "fallback_anchor": "strategyAReplaySandbox404290",
+    "event_driven_retry": [
+      "DOMContentLoaded",
+      "load",
+      "pageshow",
+      "click",
+      "focusin",
+      "visibilitychange"
+    ],
+    "double_request_animation_frame_after_event": true,
+    "recurring_polling": false,
+    "mutation_observer": false,
+    "panel_id": "tradusShadow406066"
+  },
+  "comparison_truth": {
+    "STOP_plus_directional_tradus": "OPPOSITION SÉCURITÉ",
+    "STOP_plus_no_trade_tradus": "ACCORD PRUDENT",
+    "WAIT_plus_directional_tradus": "DIVERGENCE",
+    "WAIT_plus_no_trade_tradus": "CONVERGENCE",
+    "PAPER_plus_BUY_tradus": "CONVERGENCE POTENTIELLE",
+    "PAPER_plus_SELL_tradus": "OPPOSITION",
+    "OFF_plus_directional_tradus": "NON COMPARABLE",
+    "OFF_plus_no_trade_tradus": "NON COMPARABLE"
+  }
+}

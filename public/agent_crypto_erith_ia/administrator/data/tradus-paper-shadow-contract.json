@@ -1,0 +1,38 @@
+{
+  "schema": "agent_crypto_tradus_paper_shadow_contract_v1",
+  "build": "40.6.67",
+  "parent_build": "40.6.66",
+  "purpose": "isolated TRADUS paper lifecycle from real Binance public top-of-book observations",
+  "capital_start_eur": 1000.0,
+  "ticket_eur": 50.0,
+  "max_open_positions": 1,
+  "entry_fill": {
+    "BUY": "ask",
+    "SELL": "bid"
+  },
+  "exit_fill": {
+    "LONG": "bid",
+    "SHORT": "ask"
+  },
+  "close_rules": [
+    "NO_TRADE after directional edge => close",
+    "opposite signal => close only; no same-tick flip",
+    "invalid/stale/wide-spread book => no state mutation"
+  ],
+  "fee_assumption": {
+    "rate_per_fill": 0.001,
+    "label": "LOCAL PAPER ASSUMPTION — not an exchange fee claim"
+  },
+  "storage": "sessionStorage",
+  "automatic_order": false,
+  "real_order": false,
+  "credentials": false,
+  "wallet": false,
+  "strategy_a_modified": false,
+  "historical_strategy_b_modified": false,
+  "market_core": "38.15.11",
+  "market_core_modified": false,
+  "aether_modified": false,
+  "new_recurring_timer": false,
+  "new_network_owner": false
+}
