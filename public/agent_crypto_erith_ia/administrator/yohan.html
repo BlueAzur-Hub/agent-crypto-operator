@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Agent-Crypto · Yohan Operator</title>
+  <meta name="operator-build" content="40.6.54" />
+  <meta name="operator-base-build" content="40.6.53" />
+  <title>Agent-Crypto · Yohan Operator — 40.6.54</title>
   <style>
     html, body { margin:0; width:100%; height:100%; overflow:hidden; background:#020914; }
     #yohanApp { display:block; width:100vw; height:100vh; border:0; }
@@ -23,10 +25,10 @@
       frame.addEventListener("load", () => {
         try {
           const doc = frame.contentDocument;
-          if (!doc || doc.getElementById("erithYohanOperatorAdmin406053Script")) return;
+          if (!doc || doc.getElementById("erithYohanOperatorAdmin406054Script")) return;
           const script = doc.createElement("script");
-          script.id = "erithYohanOperatorAdmin406053Script";
-          script.src = "./js/yohan-operator-admin-406053.js";
+          script.id = "erithYohanOperatorAdmin406054Script";
+          script.src = "./js/yohan-operator-admin-406054.js";
           script.defer = true;
           (doc.body || doc.documentElement).appendChild(script);
         } catch (error) {
