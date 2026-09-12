@@ -1,0 +1,21 @@
+{
+  "schema": "agent_crypto_operator_delivery_v1",
+  "build": "40.6.99",
+  "market_core": "38.15.11",
+  "profile": "yohan-operator",
+  "published": true,
+  "runtime_mode": "canonical-master-shared",
+  "runtime_repository": "BlueAzur-Hub/erith-ia-memory",
+  "runtime_entry": "https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/administrator/index-40.6.99.html?view=intermediate&operator-entry=40.6.99&profile=yohan",
+  "local_entry": "../administrator/yohan.html",
+  "profile_script": "../administrator/js/yohan-operator-profile.js",
+  "aether_operator_bridge": "406002",
+  "query_parameter_is_authorization": false,
+  "grants_administrator_session": false,
+  "grants_real_trading": false,
+  "grants_wallet": false,
+  "local_administrator_mirror": {
+    "build": "40.6.73 R2",
+    "status": "archive_rollback_not_active_operator_runtime"
+  }
+}
