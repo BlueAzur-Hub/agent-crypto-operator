@@ -1,17 +1,15 @@
 {
   "schema": "agent_crypto_operator_delivery_v1",
-  "build": "40.6.376",
+  "build": "40.6.377",
   "market_core": "38.15.11",
   "profile": "yohan-operator",
   "published": false,
   "runtime_mode": "canonical-master-shared",
   "runtime_repository": "BlueAzur-Hub/erith-ia-memory",
-  "runtime_entry": "https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/administrator/index-40.6.376.html?operator-entry=40.6.376&profile=yohan",
+  "runtime_entry": "https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/administrator/index-40.6.377.html?operator-entry=40.6.377&profile=yohan",
   "local_entry": "../administrator/yohan.html",
   "profile_script": "../administrator/js/yohan-operator-profile.js",
   "ui_contract": "same canonical Administrator runtime; Yohan profile remains non-destructive and does not hide Projects/Portfolio or force a reduced view",
-  "bridge_auth": "future-local-bridge-owner",
-  "aether_operator_bridge": "406002",
   "query_parameter_is_authorization": false,
   "grants_administrator_session": false,
   "grants_real_trading": false,
@@ -19,12 +17,36 @@
   "embeds_secret": false,
   "profile_surface_mutation": false,
   "runtime_duplicated": false,
-  "administrator_runtime_terrain_proof": "40.6.375 REDIVIDER STOP -> COUPÉ -> RELANCE -> PRÊT terrain-validated by Christophe; 40.6.376 adds cosmetic hover-card centering only.",
-  "local_administrator_mirror": {
-    "build": "40.6.73 R2",
-    "status": "archive_rollback_not_active_operator_runtime"
-  },
-  "sync_parent_operator": "40.6.121",
-  "sync_target_administrator": "40.6.376",
-  "operator_delivery_status": "ready_for_manual_upload_due_to_connector_403"
+  "sync_parent_operator": "40.6.376",
+  "sync_target_administrator": "40.6.377",
+  "operator_delivery_status": "ready_for_manual_upload_due_to_connector_403",
+  "math_color_parity": {
+    "source": "shared Administrator 40.6.377 runtime",
+    "bands": [
+      {
+        "min": 0,
+        "max": 24,
+        "id": "red",
+        "color": "#FF5C78"
+      },
+      {
+        "min": 25,
+        "max": 54,
+        "id": "orange",
+        "color": "#FF9F1C"
+      },
+      {
+        "min": 55,
+        "max": 74,
+        "id": "turquoise",
+        "color": "#42E8E0"
+      },
+      {
+        "min": 75,
+        "max": 100,
+        "id": "green",
+        "color": "#64EFA0"
+      }
+    ]
+  }
 }

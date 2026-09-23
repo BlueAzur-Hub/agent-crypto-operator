@@ -1,9 +1,8 @@
 (() => {
   "use strict";
-
   const PROFILE = Object.freeze({
     id: "yohan-operator",
-    deliveryBuild: "40.6.376",
+    deliveryBuild: "40.6.377",
     runtime: "canonical-master-shared",
     sameAdministratorInterface: true,
     hideProjects: false,
@@ -12,26 +11,23 @@
     bridgeAuthenticationOwner: "future-local-bridge",
     publicSecretEmbedded: false
   });
-
   function apply() {
     document.documentElement.dataset.yohanProfile = "operator";
-    document.documentElement.dataset.yohanOperatorDelivery = "40.6.376";
+    document.documentElement.dataset.yohanOperatorDelivery = "40.6.377";
     document.documentElement.dataset.yohanSharedAdministratorRuntime = "true";
     if (document.body) {
       document.body.dataset.yohanProfile = "operator";
-      document.body.dataset.yohanOperatorDelivery = "40.6.376";
+      document.body.dataset.yohanOperatorDelivery = "40.6.377";
     }
     try {
       document.dispatchEvent(new CustomEvent("erith:yohan-operator-profile-ready", {
-        detail: { build: "40.6.376", shared_runtime: true, ui_reduction: false, authorization_granted: false }
+        detail: { build: "40.6.377", shared_runtime: true, ui_reduction: false, authorization_granted: false }
       }));
     } catch (_) {}
     return true;
   }
-
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", apply, { once: true });
   else apply();
-
   globalThis.ErithYohanOperatorProfile = Object.freeze({
     profile: PROFILE,
     apply,
