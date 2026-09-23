@@ -1,15 +1,15 @@
 {
   "schema": "agent_crypto_operator_delivery_v1",
-  "build": "40.6.121",
+  "build": "40.6.376",
   "market_core": "38.15.11",
   "profile": "yohan-operator",
-  "published": true,
+  "published": false,
   "runtime_mode": "canonical-master-shared",
   "runtime_repository": "BlueAzur-Hub/erith-ia-memory",
-  "runtime_entry": "https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/administrator/index-40.6.121.html?operator-entry=40.6.121&profile=yohan",
+  "runtime_entry": "https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/administrator/index-40.6.376.html?operator-entry=40.6.376&profile=yohan",
   "local_entry": "../administrator/yohan.html",
   "profile_script": "../administrator/js/yohan-operator-profile.js",
-  "ui_contract": "same Administrator runtime; Yohan profile does not hide Projects/Portfolio and does not force a reduced view",
+  "ui_contract": "same canonical Administrator runtime; Yohan profile remains non-destructive and does not hide Projects/Portfolio or force a reduced view",
   "bridge_auth": "future-local-bridge-owner",
   "aether_operator_bridge": "406002",
   "query_parameter_is_authorization": false,
@@ -19,9 +19,12 @@
   "embeds_secret": false,
   "profile_surface_mutation": false,
   "runtime_duplicated": false,
-  "administrator_runtime_terrain_proof": "40.6.121 Auto A self-start pending; package intentionally follows requested 40.6.121 runtime",
+  "administrator_runtime_terrain_proof": "40.6.375 REDIVIDER STOP -> COUPÉ -> RELANCE -> PRÊT terrain-validated by Christophe; 40.6.376 adds cosmetic hover-card centering only.",
   "local_administrator_mirror": {
     "build": "40.6.73 R2",
     "status": "archive_rollback_not_active_operator_runtime"
-  }
+  },
+  "sync_parent_operator": "40.6.121",
+  "sync_target_administrator": "40.6.376",
+  "operator_delivery_status": "ready_for_manual_upload_due_to_connector_403"
 }
