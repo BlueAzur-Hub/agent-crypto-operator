@@ -1,12 +1,12 @@
 {
   "schema": "agent_crypto_operator_delivery_v1",
-  "build": "40.6.377",
+  "build": "40.6.407",
   "market_core": "38.15.11",
   "profile": "yohan-operator",
-  "published": false,
+  "published": true,
   "runtime_mode": "canonical-master-shared",
   "runtime_repository": "BlueAzur-Hub/erith-ia-memory",
-  "runtime_entry": "https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/administrator/index-40.6.377.html?operator-entry=40.6.377&profile=yohan",
+  "runtime_entry": "https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/administrator/index-40.6.407.html?operator-entry=40.6.407&profile=yohan",
   "local_entry": "../administrator/yohan.html",
   "profile_script": "../administrator/js/yohan-operator-profile.js",
   "ui_contract": "same canonical Administrator runtime; Yohan profile remains non-destructive and does not hide Projects/Portfolio or force a reduced view",
@@ -17,36 +17,15 @@
   "embeds_secret": false,
   "profile_surface_mutation": false,
   "runtime_duplicated": false,
-  "sync_parent_operator": "40.6.376",
-  "sync_target_administrator": "40.6.377",
-  "operator_delivery_status": "ready_for_manual_upload_due_to_connector_403",
-  "math_color_parity": {
-    "source": "shared Administrator 40.6.377 runtime",
-    "bands": [
-      {
-        "min": 0,
-        "max": 24,
-        "id": "red",
-        "color": "#FF5C78"
-      },
-      {
-        "min": 25,
-        "max": 54,
-        "id": "orange",
-        "color": "#FF9F1C"
-      },
-      {
-        "min": 55,
-        "max": 74,
-        "id": "turquoise",
-        "color": "#42E8E0"
-      },
-      {
-        "min": 75,
-        "max": 100,
-        "id": "green",
-        "color": "#64EFA0"
-      }
-    ]
+  "sync_parent_operator": "40.6.377",
+  "sync_target_administrator": "40.6.407",
+  "operator_delivery_status": "ready_for_upload",
+  "administrator_checkpoint": {
+    "strategy_auto": true,
+    "simulation_evidence_decoupling": true,
+    "strategy_status_location": "simulation-only",
+    "header_strategy_badge": false,
+    "evidence_full_load": "explicit-only",
+    "market_core": "38.15.11"
   }
 }

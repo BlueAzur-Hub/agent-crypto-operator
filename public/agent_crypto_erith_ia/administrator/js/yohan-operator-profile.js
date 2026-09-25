@@ -2,7 +2,7 @@
   "use strict";
   const PROFILE = Object.freeze({
     id: "yohan-operator",
-    deliveryBuild: "40.6.377",
+    deliveryBuild: "40.6.407",
     runtime: "canonical-master-shared",
     sameAdministratorInterface: true,
     hideProjects: false,
@@ -13,15 +13,15 @@
   });
   function apply() {
     document.documentElement.dataset.yohanProfile = "operator";
-    document.documentElement.dataset.yohanOperatorDelivery = "40.6.377";
+    document.documentElement.dataset.yohanOperatorDelivery = "40.6.407";
     document.documentElement.dataset.yohanSharedAdministratorRuntime = "true";
     if (document.body) {
       document.body.dataset.yohanProfile = "operator";
-      document.body.dataset.yohanOperatorDelivery = "40.6.377";
+      document.body.dataset.yohanOperatorDelivery = "40.6.407";
     }
     try {
       document.dispatchEvent(new CustomEvent("erith:yohan-operator-profile-ready", {
-        detail: { build: "40.6.377", shared_runtime: true, ui_reduction: false, authorization_granted: false }
+        detail: { build: "40.6.407", shared_runtime: true, ui_reduction: false, authorization_granted: false }
       }));
     } catch (_) {}
     return true;
