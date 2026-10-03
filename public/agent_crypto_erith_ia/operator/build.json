@@ -10,7 +10,7 @@
   "local_entry": "../administrator/yohan.html",
   "profile_script": "../administrator/js/yohan-operator-profile.js",
   "bridge_client_script": "../administrator/js/yohan-operator-bridge-client.js",
-  "bridge_package_sha256": "36bbcb4011d96df90c95693e9cf62b288b42419ee4827ef6fb8b9ceaa9b60dd8",
+  "bridge_package_sha256": "d1b9c7191144157eec45404657d259c48ee6741a4b9c37c75a07deb50f8ad998",
   "bridge_version": "1.9.13",
   "bridge_role": "operator",
   "bridge_host": "127.0.0.1",
