@@ -1,4 +1,4 @@
-name: Yohan Operator 40.6.509 + Bridge Contract V1.0.0
+name: Yohan Operator 40.6.509 + Control Center R19Y1
 
 on:
   pull_request:
@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate Operator / Bridge public contract
+      - name: Validate Operator / R19Y1 Control Center contract
         run: python .github/scripts/yohan_operator_406509_guard.py
       - name: Validate JavaScript layers
         run: |
