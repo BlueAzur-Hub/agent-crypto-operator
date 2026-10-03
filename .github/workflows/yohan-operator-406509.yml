@@ -1,0 +1,22 @@
+name: Yohan Operator 40.6.509 + Bridge Contract V1.0.0
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Operator / Bridge public contract
+        run: python .github/scripts/yohan_operator_406509_guard.py
+      - name: Validate JavaScript layers
+        run: |
+          node --check public/agent_crypto_erith_ia/administrator/js/yohan-operator-profile.js
+          node --check public/agent_crypto_erith_ia/administrator/js/yohan-operator-bridge-client.js

@@ -3,18 +3,41 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="operator-delivery-build" content="40.6.491" />
+  <meta name="operator-delivery-build" content="40.6.509" />
   <meta name="operator-runtime" content="canonical-master-shared" />
   <meta name="operator-profile" content="yohan" />
-  <title>Agent-Crypto · Yohan Operator 40.6.491</title>
+  <meta name="operator-bridge" content="Yohan Operator Bridge 1.0.0" />
+  <title>Agent-Crypto · Yohan Operator 40.6.509</title>
   <style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#020914}#yohanApp{display:block;width:100vw;height:100vh;border:0}</style>
 </head>
 <body>
-  <iframe id="yohanApp" title="Agent-Crypto · Yohan Operator 40.6.491"
-    src="https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/administrator/index-40.6.491.html?operator-entry=40.6.491&profile=yohan"
+  <iframe id="yohanApp" title="Agent-Crypto · Yohan Operator 40.6.509"
+    src="https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/administrator/index-40.6.509.html?operator-entry=40.6.509&profile=yohan"
     allow="fullscreen"></iframe>
   <script>
-    (()=>{"use strict";const frame=document.getElementById("yohanApp");const profileSrc="https://blueazur-hub.github.io/agent-crypto-operator/public/agent_crypto_erith_ia/administrator/js/yohan-operator-profile.js";frame.addEventListener("load",()=>{try{const doc=frame.contentDocument;if(!doc||doc.getElementById("erithYohanOperatorProfileScript"))return;const script=doc.createElement("script");script.id="erithYohanOperatorProfileScript";script.src=profileSrc;script.dataset.operatorDeliveryBuild="40.6.491";(doc.body||doc.documentElement).appendChild(script);}catch(error){console.error("Yohan Operator 40.6.491 profile injection failed",error);}});})();
+    (()=>{
+      "use strict";
+      const frame=document.getElementById("yohanApp");
+      const scripts=[
+        "https://blueazur-hub.github.io/agent-crypto-operator/public/agent_crypto_erith_ia/administrator/js/yohan-operator-profile.js",
+        "https://blueazur-hub.github.io/agent-crypto-operator/public/agent_crypto_erith_ia/administrator/js/yohan-operator-bridge-client.js"
+      ];
+      frame.addEventListener("load",()=>{
+        try{
+          const doc=frame.contentDocument;
+          if(!doc)return;
+          scripts.forEach((src,index)=>{
+            const id=`erithYohanOperatorLayer${index}`;
+            if(doc.getElementById(id))return;
+            const script=doc.createElement("script");
+            script.id=id;
+            script.src=src;
+            script.dataset.operatorDeliveryBuild="40.6.509";
+            (doc.body||doc.documentElement).appendChild(script);
+          });
+        }catch(error){console.error("Yohan Operator 40.6.509 layer injection failed",error);}
+      });
+    })();
   </script>
 </body>
 </html>

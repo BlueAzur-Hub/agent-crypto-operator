@@ -1,35 +1,36 @@
-# Agent-Crypto Operator — Yohan — 40.6.491
+# Agent-Crypto Operator — Yohan — 40.6.509
 
-Cette livraison synchronise le dépôt séparé `BlueAzur-Hub/agent-crypto-operator`
-avec le checkpoint canonique **Administrator 40.6.491 / Market Core 38.15.11**
-sans recopier le runtime maître.
+Cette livraison synchronise la lignée séparée `BlueAzur-Hub/agent-crypto-operator` sur le checkpoint MASTER **Administrator 40.6.509 / Market Core 38.15.11** sans recopier le runtime maître.
 
 ## Architecture
 
-- runtime : `BlueAzur-Hub/erith-ia-memory` / Administrator 40.6.491 ;
-- profil : couche locale `administrator/js/yohan-operator-profile.js` ;
+- runtime : `BlueAzur-Hub/erith-ia-memory` / Administrator 40.6.509 ;
+- entrée Yohan : `administrator/yohan.html` ;
+- profil local : `administrator/js/yohan-operator-profile.js` ;
+- client Bridge mémoire : `administrator/js/yohan-operator-bridge-client.js` ;
+- package Bridge Yohan : `operator/bridge_yohan/YOHAN_OPERATOR_BRIDGE_V1.0.0_FULL.zip` ;
 - runtime partagé, aucun second moteur ;
-- Operator 40.6.407 reste conservé comme historique / rollback.
+- aucun privilège Administrator, wallet, secret public ou ordre réel.
 
-## Contrat 40.6.491 hérité du MASTER
+## Règle canonique
 
-- Oracle Evidence : archivage AUTO séquentiel avec démarrage single-flight ;
-- progression comptée depuis le watermark VERIFIED jusqu'à la cible figée ;
-- rétention locale uniquement par chunk VERIFIED complet ;
-- comparaison valeur exacte + suppression dans une seule transaction IndexedDB readwrite ;
-- HOT minimum : 10 000 Evidence locales ;
-- suppression automatique : désactivée ;
-- Market Core 38.15.11 inchangé ;
-- aucun ordre réel / wallet / privilège Administrator ajouté.
+**Vue et rôle ne sont pas la même chose.**
 
-## Preuve terrain MASTER observée avant cette livraison
+Vues : Classique / Intermédiaire / Administration.  
+Rôles : public / operator / owner.
 
-- archivage AUTO : 418 / 418 · 1 chunk VERIFIED · publication exacte PASS ;
-- canari rétention : 500 lignes supprimées ; 10 023 restantes ;
-- SHA local = SHA public = SHA manifest ;
-- aucun chunk supplémentaire éligible après le canari.
+Le profil Yohan est `operator`, mais il ne remplace pas le nom de la vue Intermédiaire et ne transforme pas une query string en autorisation.
 
-## Sécurité Operator
+## Bridge local Yohan V1.0.0
 
-Le paramètre URL n'est pas une authentification.
-La couche Yohan n'accorde aucune session Administrator, aucun wallet et aucun trading réel.
+Le Bridge est dérivé du socle R19/V1.9.13 mais réduit au rôle Operator :
+- `history.read` ;
+- `scanner.read` ;
+- `atlas.run` ;
+- `aerith.run` ;
+- `chat.run` ;
+- `security.read`.
+
+Owner/GitHub publication, scanner write, Oracle Evidence publication, wallet et ordres sont exclus.
+
+Le Bridge écoute uniquement sur `127.0.0.1:8787`; le Backend marché read-only 1.4.4 reste sur `127.0.0.1:8790`. Le mot de passe est créé localement sur le PC de Yohan et n'est jamais stocké dans GitHub.
