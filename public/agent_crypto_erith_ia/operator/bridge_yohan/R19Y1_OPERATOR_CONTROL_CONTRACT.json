@@ -1,0 +1,41 @@
+{
+  "schema": "yohan_operator_r19y1_local_control_contract_v1",
+  "operator_build": "40.6.509",
+  "market_core": "38.15.11",
+  "control_center": "2.3.2R19Y1",
+  "bridge": {
+    "version": "1.9.13",
+    "host": "127.0.0.1",
+    "port": 8787,
+    "role": "operator",
+    "ollama_model": "TO_CONFIGURE_ON_YOHAN_PC",
+    "ollama_required_for_okx_transport": false,
+    "github_write": false,
+    "book_mirror_publish": false,
+    "oracle_evidence_publish": false,
+    "wallet": false,
+    "private_exchange": false,
+    "real_order": false
+  },
+  "backend": {
+    "version": "1.4.4",
+    "host": "127.0.0.1",
+    "port": 8790,
+    "read_only": true,
+    "okx_public_transport": true,
+    "routes": ["/health", "/orderbook", "/okx-public", "/candles", "/microstructure"],
+    "origin": "https://blueazur-hub.github.io"
+  },
+  "operator_url": "https://blueazur-hub.github.io/agent-crypto-operator/public/agent_crypto_erith_ia/administrator/yohan.html",
+  "artifacts": {
+    "zip": {
+      "name": "AGENT_CRYPTO_YOHAN_OPERATOR_CONTROL_R19Y1_BRIDGE_1_9_13_BACKEND_1_4_4_OKX_LOCAL_TRANSPORT.zip",
+      "sha256": "36bbcb4011d96df90c95693e9cf62b288b42419ee4827ef6fb8b9ceaa9b60dd8"
+    },
+    "exe": {
+      "name": "YOHAN_OPERATOR_BRIDGE_CONTROL_CENTER_2_3_2R19Y1_BRIDGE_V1_9_13_BACKEND_V1_4_4_OKX_LOCAL_TRANSPORT_GUI_NO_CONSOLE.exe",
+      "sha256": "2d333589fa4352c6aa3b4a43f563df4d19e26ccff312c0e2525ccdf581acca99"
+    },
+    "backend_sha256": "782e6d1e73b7e1d2c09e1aa19b82e16a17be5d75f49a98a59d6623590f4a5c17"
+  }
+}
