@@ -26,10 +26,12 @@ Bridge local préparé pour la lignée séparée `BlueAzur-Hub/agent-crypto-oper
 
 Les routes de publication Book/Oracle Evidence et `scanner.write` ne font pas partie du contrat Yohan.
 
-## Package
+## Package local
 
 `YOHAN_OPERATOR_BRIDGE_V1.0.0_FULL.zip`  
 SHA-256 : `6dd45336225d5ad6938db3df8f778662c01d9529917ef8d20cccbe38170668d9`
+
+Le ZIP est livré séparément comme artefact local vérifié ; il n'est pas stocké dans ce dépôt public. Son empreinte est conservée dans `BRIDGE_PACKAGE_SHA256.txt`.
 
 ## Installation sur le PC de Yohan
 
