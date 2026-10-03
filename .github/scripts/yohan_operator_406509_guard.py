@@ -33,7 +33,7 @@ checks={
  'no_exchange':build.get('bridge_private_exchange') is False,
  'no_wallet':build.get('grants_wallet') is False,
  'token_memory':'token_storage: "memory_only"' in client,
- 'zip_sha':build.get('bridge_package_sha256')=='36bbcb4011d96df90c95693e9cf62b288b42419ee4827ef6fb8b9ceaa9b60dd8',
+ 'zip_sha':build.get('bridge_package_sha256')=='d1b9c7191144157eec45404657d259c48ee6741a4b9c37c75a07deb50f8ad998',
  'exe_sha':build.get('bridge_exe_sha256')=='2d333589fa4352c6aa3b4a43f563df4d19e26ccff312c0e2525ccdf581acca99',
  'backend_sha':build.get('backend_sha256')=='782e6d1e73b7e1d2c09e1aa19b82e16a17be5d75f49a98a59d6623590f4a5c17',
  'contract_matches':contract.get('control_center')=='2.3.2R19Y1' and contract.get('backend',{}).get('version')=='1.4.4',
