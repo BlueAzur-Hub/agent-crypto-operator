@@ -10,7 +10,6 @@
   "local_entry": "../administrator/yohan.html",
   "profile_script": "../administrator/js/yohan-operator-profile.js",
   "bridge_client_script": "../administrator/js/yohan-operator-bridge-client.js",
-  "bridge_package": "bridge_yohan/YOHAN_OPERATOR_BRIDGE_V1.0.0_FULL.zip",
   "bridge_package_sha256": "6dd45336225d5ad6938db3df8f778662c01d9529917ef8d20cccbe38170668d9",
   "bridge_version": "1.0.0",
   "bridge_role": "operator",
@@ -32,5 +31,8 @@
   "bridge_private_exchange": false,
   "sync_parent_operator": "40.6.491",
   "sync_target_administrator": "40.6.509",
-  "operator_delivery_status": "ready_for_firefox_and_yohan_pc_test"
+  "operator_delivery_status": "ready_for_firefox_and_yohan_pc_test",
+  "bridge_package_delivery": "separate_verified_zip",
+  "bridge_package_repo_path": null,
+  "bridge_package_note": "YOHAN_OPERATOR_BRIDGE_V1.0.0_FULL.zip is delivered separately; do not embed secrets or local credentials in the public repository."
 }
