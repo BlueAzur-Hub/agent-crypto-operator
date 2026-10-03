@@ -1,19 +1,27 @@
-# Yohan Operator — 40.6.491
+# Yohan Operator — 40.6.509 + Bridge local V1.0.0
 
-Operator utilise le runtime canonique Administrator du MASTER `BlueAzur-Hub/erith-ia-memory`.
+Repository Operator canonique : `BlueAzur-Hub/agent-crypto-operator`.
 
-## Runtime synchronisé
+Runtime partagé : `BlueAzur-Hub/erith-ia-memory` / Administrator **40.6.509** / Market Core **38.15.11**.
 
-- Operator delivery : **40.6.491**
-- Runtime Administrator : **40.6.491**
-- Market Core : **38.15.11**
-- Profil : **Yohan Operator**
-- Entrée : `operator/index-40.6.491.html`
-- Alias : `operator/index.html`
+## Deux axes distincts
 
-Runtime cible :
-`erith-ia-memory/public/agent_crypto_erith_ia/administrator/index-40.6.491.html?operator-entry=40.6.491&profile=yohan`
+- vues : Classique / Intermédiaire / Administration ;
+- identités : public / operator / owner.
 
-Le runtime maître n'est pas dupliqué. La couche Yohan reste non destructive et n'accorde ni session Administrator, ni wallet, ni trading réel.
+Le profil Yohan n'autorise jamais une session `owner`. Un paramètre URL n'est pas une authentification.
 
-40.6.491 apporte côté MASTER la sécurisation Oracle Evidence : rétention atomique VERIFIED + AUTO single-flight. La livraison Operator ne recrée aucun moteur et ne modifie pas Market Core 38.15.11.
+## Bridge Yohan
+
+- rôle fixe : `operator` ;
+- local uniquement : `127.0.0.1:8787` ;
+- Backend read-only : `127.0.0.1:8790` ;
+- mot de passe local, verifier scrypt hors dépôt public ;
+- token mémoire uniquement ;
+- aucune publication GitHub ;
+- aucun wallet / retrait / ordre / API exchange privée ;
+- modèle Ollama choisi localement par Yohan.
+
+Package : `operator/bridge_yohan/YOHAN_OPERATOR_BRIDGE_V1.0.0_FULL.zip`.
+
+Ce Bridge n'est pas une autorité distante. Ne jamais exposer 8787/8790 publiquement.
