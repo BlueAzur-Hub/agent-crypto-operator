@@ -1,0 +1,25 @@
+name: Yohan Operator 40.6.509 + Bridge V1.0.0
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Operator contract and package hash
+        run: python .github/scripts/yohan_operator_406509_guard.py
+      - name: Extract and self-test Yohan Bridge
+        run: |
+          rm -rf /tmp/yohan-bridge
+          mkdir -p /tmp/yohan-bridge
+          unzip -q public/agent_crypto_erith_ia/operator/bridge_yohan/YOHAN_OPERATOR_BRIDGE_V1.0.0_FULL.zip -d /tmp/yohan-bridge
+          python -m py_compile /tmp/yohan-bridge/YOHAN_OPERATOR_BRIDGE_V1_0_0/bridge/bridge.py /tmp/yohan-bridge/YOHAN_OPERATOR_BRIDGE_V1_0_0/backend/private_backend.py
+          python /tmp/yohan-bridge/YOHAN_OPERATOR_BRIDGE_V1_0_0/bridge/bridge.py --self-test
