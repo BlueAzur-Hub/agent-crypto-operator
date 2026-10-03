@@ -1,0 +1,4 @@
+YOHAN_OPERATOR_BRIDGE_V1.0.0_FULL.zip
+SHA-256: 6dd45336225d5ad6938db3df8f778662c01d9529917ef8d20cccbe38170668d9
+
+The ZIP is a local-machine delivery artifact. It is intentionally not committed to this public repository because local credentials/trust material must never be added here.
