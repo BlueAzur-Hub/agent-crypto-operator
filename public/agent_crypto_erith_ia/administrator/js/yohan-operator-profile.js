@@ -2,26 +2,28 @@
   "use strict";
   const PROFILE = Object.freeze({
     id: "yohan-operator",
-    deliveryBuild: "40.6.491",
+    deliveryBuild: "40.6.509",
     runtime: "canonical-master-shared",
     sameAdministratorInterface: true,
+    viewAndAuthorizationSeparated: true,
     hideProjects: false,
     forceReducedView: false,
     grantsAdministratorSession: false,
-    bridgeAuthenticationOwner: "future-local-bridge",
+    bridgeAuthenticationOwner: "yohan-local-operator-bridge-v1.0.0",
     publicSecretEmbedded: false
   });
   function apply() {
     document.documentElement.dataset.yohanProfile = "operator";
-    document.documentElement.dataset.yohanOperatorDelivery = "40.6.491";
+    document.documentElement.dataset.yohanOperatorDelivery = "40.6.509";
     document.documentElement.dataset.yohanSharedAdministratorRuntime = "true";
+    document.documentElement.dataset.yohanAuthorizationSource = "local-operator-bridge";
     if (document.body) {
       document.body.dataset.yohanProfile = "operator";
-      document.body.dataset.yohanOperatorDelivery = "40.6.491";
+      document.body.dataset.yohanOperatorDelivery = "40.6.509";
     }
     try {
       document.dispatchEvent(new CustomEvent("erith:yohan-operator-profile-ready", {
-        detail: { build: "40.6.491", shared_runtime: true, ui_reduction: false, authorization_granted: false }
+        detail: { build: "40.6.509", shared_runtime: true, ui_reduction: false, authorization_granted: false }
       }));
     } catch (_) {}
     return true;
@@ -34,6 +36,7 @@
     contract: Object.freeze({
       dom_hiding: false,
       view_forcing: false,
+      query_parameter_authorization: false,
       storage_write: false,
       recurring_timer: false,
       observer: false,
