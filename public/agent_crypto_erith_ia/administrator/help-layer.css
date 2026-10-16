@@ -1,0 +1,119 @@
+/* Agent-Crypto 40.6.335 — HELP LAYER V2
+   Presentation only. No runtime owner, timer, observer, storage or network. */
+.agent-help-toggle{
+  flex:0 0 auto;
+  width:30px;
+  height:30px;
+  display:inline-grid;
+  place-items:center;
+  margin-left:2px;
+  padding:0;
+  border:1px solid rgba(74,218,255,.58);
+  border-radius:50%;
+  background:rgba(4,24,37,.78);
+  color:#63e7ff;
+  font:900 20px/1 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  cursor:help;
+  box-shadow:inset 0 0 0 1px rgba(100,226,255,.05);
+  transition:border-color .14s ease,box-shadow .14s ease,color .14s ease,background .14s ease;
+}
+.agent-help-toggle:hover,
+.agent-help-toggle:focus-visible{
+  outline:none;
+  color:#c5f8ff;
+  border-color:rgba(111,234,255,.95);
+  box-shadow:0 0 0 2px rgba(37,204,255,.10),0 0 16px rgba(37,204,255,.26);
+}
+.agent-help-toggle[aria-pressed="true"]{
+  color:#e9fdff;
+  background:rgba(8,72,91,.92);
+  border-color:#70efff;
+  box-shadow:0 0 0 2px rgba(50,224,255,.13),0 0 20px rgba(50,224,255,.38),inset 0 0 16px rgba(72,229,255,.12);
+}
+body.agent-help-mode .agent-help-target{
+  cursor:help;
+  outline:1px solid rgba(66,218,255,.16);
+  outline-offset:2px;
+}
+body.agent-help-mode .agent-help-target.agent-help-current{
+  outline-color:rgba(92,235,255,.68);
+  box-shadow:0 0 0 1px rgba(71,221,255,.12),0 0 20px rgba(39,201,255,.10);
+}
+#atlasHelpLayer.atlas-help-layer{
+  position:fixed;
+  z-index:2147483000;
+  width:min(430px,calc(100vw - 28px));
+  max-height:min(440px,calc(100vh - 28px));
+  overflow:auto;
+  pointer-events:none;
+  padding:14px 15px 13px;
+  border:1px solid rgba(86,229,255,.76);
+  border-radius:14px;
+  background:
+    linear-gradient(145deg,rgba(5,19,31,.98),rgba(5,31,43,.96)),
+    rgba(4,16,26,.98);
+  color:#dff8ff;
+  box-shadow:0 18px 48px rgba(0,0,0,.48),0 0 22px rgba(43,218,255,.18),inset 0 0 0 1px rgba(121,238,255,.05);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+#atlasHelpLayer[hidden]{display:none!important}
+#atlasHelpLayer .agent-help-kicker{
+  display:block;
+  margin:0 0 5px;
+  color:#69e8ff;
+  font:900 10px/1.2 ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+#atlasHelpLayer h3{
+  margin:0 0 8px;
+  color:#f4fdff;
+  font:900 17px/1.15 ui-sans-serif,system-ui,sans-serif;
+}
+#atlasHelpLayer p{
+  margin:6px 0;
+  color:#c9e9f3;
+  font:650 12px/1.45 ui-sans-serif,system-ui,sans-serif;
+}
+#atlasHelpLayer p b{
+  color:#80efff;
+  font-weight:900;
+}
+#atlasHelpLayer .agent-help-attention{
+  margin-top:9px;
+  padding:8px 10px;
+  border-left:3px solid #ffd66b;
+  border-radius:7px;
+  background:rgba(106,79,14,.16);
+  color:#ffe5a2;
+}
+#atlasHelpLayer .agent-help-hint{
+  margin-top:9px;
+  padding-top:8px;
+  border-top:1px solid rgba(98,222,255,.15);
+  color:#8fb9c7;
+  font-size:10px;
+}
+#atlasHelpLive{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+@media(max-width:900px){
+  .agent-help-toggle{width:28px;height:28px;font-size:18px}
+  #atlasHelpLayer.atlas-help-layer{width:min(390px,calc(100vw - 20px));padding:12px}
+}
+@media(max-height:520px){
+  #atlasHelpLayer.atlas-help-layer{max-height:calc(100vh - 20px);font-size:11px}
+  #atlasHelpLayer p{font-size:11px;line-height:1.35}
+}
+@media(prefers-reduced-motion:reduce){
+  .agent-help-toggle{transition:none}
+}

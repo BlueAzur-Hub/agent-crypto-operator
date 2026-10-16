@@ -1,0 +1,182 @@
+/* Trader uniquement — assistance CT dans la Lecture Technique repliable existante.
+   Aucune géométrie du panneau parent, de l'Administrator ou du graphique n'est modifiée. */
+#detailPanel #aiCtPanel{width:100%;box-sizing:border-box;min-width:0;margin:8px 0;border:1px solid rgba(83,190,202,.38);border-radius:10px;background:rgba(3,19,30,.55);color:#e5f6fa}
+#detailPanel #aiCtPanel[hidden]{display:none!important}
+#detailPanel #aiCtPanel>summary{cursor:pointer}
+#detailPanel #aiCtPanel>summary b{color:#a6eff7}
+#detailPanel #aiCtPanel>summary small{color:#bed0db}
+#detailPanel #aiCtPanel .ai-ct-panel-body{min-width:0;box-sizing:border-box;padding:10px 12px 13px}
+#detailPanel #aiCtPanel .ai-ct-intro{margin:2px 0 10px;color:#c0d7e1;font:12px/1.5 system-ui,sans-serif}
+#detailPanel #aiCtPanel .ai-ct-modes{display:flex;gap:6px;flex-wrap:wrap;margin:5px 0 10px}
+#detailPanel #aiCtPanel .ai-ct-modes button,#detailPanel #aiCtPanel .ai-ct-actions button{appearance:none;cursor:pointer;min-height:30px;padding:6px 10px;border:1px solid #426e7c;border-radius:7px;background:#102f3c;color:#d9f0f5;font:600 12px/1.3 system-ui,sans-serif}
+#detailPanel #aiCtPanel .ai-ct-modes button[aria-pressed="true"]{color:#05212c;border-color:#83e0e9;background:#8ee4ed}
+#detailPanel #aiCtPanel button:focus-visible{outline:2px solid #b3f0f5;outline-offset:2px}
+#detailPanel #aiCtPanel button:disabled{opacity:.45;cursor:not-allowed}
+#detailPanel #aiCtPanel .ai-ct-lesson{padding:7px 11px;border:1px solid rgba(113,204,214,.22);border-radius:8px;background:rgba(2,20,28,.48)}
+#detailPanel #aiCtPanel .ai-ct-lesson p{margin:7px 0;color:#d2e8ed;font:12px/1.55 system-ui,sans-serif;overflow-wrap:anywhere}
+#detailPanel #aiCtPanel .ai-ct-lesson .ai-ct-source{font-weight:700;color:#9ee4e8}
+#detailPanel #aiCtPanel .ai-ct-actions{display:flex;gap:6px;flex-wrap:wrap;margin:11px 0 5px}
+#detailPanel #aiCtPanel #aiCtStatus{min-height:18px;margin:7px 0;color:#acd5e1;font:12px/1.45 system-ui,sans-serif}
+#detailPanel #aiCtPanel #aiCtDetails{min-width:0}
+#detailPanel #aiCtPanel .ai-ct-row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid rgba(116,184,199,.15);font:12px/1.4 system-ui,sans-serif}
+#detailPanel #aiCtPanel .ai-ct-row span{color:#bacdd8}
+#detailPanel #aiCtPanel .ai-ct-row strong{text-align:right;max-width:56%;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+#detailPanel #aiCtPanel .ai-ct-warning{color:#ffce91;font:12px/1.5 system-ui,sans-serif}
+#detailPanel #aiCtPanel .ai-ct-case{margin:12px 0 0;padding:8px 10px;border:1px solid rgba(111,180,193,.23);border-radius:8px;background:rgba(9,36,46,.44)}
+#detailPanel #aiCtPanel .ai-ct-case>summary{color:#b1e9e9;cursor:pointer;font:650 12px/1.4 system-ui,sans-serif}
+#detailPanel #aiCtPanel .ai-ct-case p{color:#c1d8df;font:12px/1.55 system-ui,sans-serif}
+@media(max-width:700px){#detailPanel #aiCtPanel .ai-ct-row{align-items:flex-start}#detailPanel #aiCtPanel .ai-ct-row strong{max-width:60%}}
+
+/* Aide existante conservée : présentation plus légère dans le Trader uniquement. */
+html[data-agent-crypto-surface="trader"] #atlasHelpLayer.atlas-help-layer{
+ width:min(350px,calc(100vw - 28px));
+ max-height:min(440px,calc(100vh - 28px));
+ padding:10px 12px;
+ border-radius:10px;
+ box-shadow:0 8px 22px rgba(0,0,0,.40);
+ backdrop-filter:none;
+ -webkit-backdrop-filter:none;
+}
+html[data-agent-crypto-surface="trader"] #atlasHelpLayer h3{
+ font-size:15px;
+ margin-bottom:5px;
+}
+html[data-agent-crypto-surface="trader"] #atlasHelpLayer p{
+ font-size:11px;
+ font-weight:550;
+ line-height:1.35;
+ margin:5px 0;
+}
+html[data-agent-crypto-surface="trader"] #atlasHelpLayer .agent-help-attention{
+ padding:6px 8px;
+ margin-top:6px;
+}
+html[data-agent-crypto-surface="trader"] #atlasHelpLayer .agent-help-hint{display:none}
+
+/* Même raccourci que dans le menu précédent, sans nouveau propriétaire métier. */
+#accueil .atlas-v2-nav-essential #aiCtToggle{
+ display:inline-flex;align-items:center;justify-content:center;
+ position:static;inset:auto;margin:0;padding:7px 12px;min-height:34px;
+ border:1px solid #2d7183;border-radius:9px;
+ background:#082a38;color:#dbfbff;
+ font:700 12px/1.2 system-ui,sans-serif;
+ white-space:nowrap;cursor:pointer;flex:0 0 auto;
+}
+#accueil .atlas-v2-nav-essential #aiCtToggle[aria-expanded="true"]{
+ border-color:#59cede;background:#114859;
+}
+#accueil .atlas-v2-nav-essential #aiCtToggle:focus-visible{
+ outline:2px solid #a2eff8;outline-offset:2px;
+}
+
+/* Correctif grille héritée du menu : bouton texte seul, sans colonne d'icône.
+   Trader uniquement. Ne touche pas aux liens Livecheck / Marché / Graphique. */
+html[data-agent-crypto-surface="trader"] #accueil .atlas-v2-nav-essential #aiCtToggle{
+  display:inline-flex!important;
+  grid-template-columns:none!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:0!important;
+  flex:0 0 auto!important;
+  box-sizing:border-box!important;
+  width:max-content!important;
+  min-width:max-content!important;
+  max-width:none!important;
+  min-height:34px!important;
+  padding:7px 13px!important;
+  font:700 12px/1.2 system-ui,sans-serif!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-align:center!important;
+}
+
+/* Compte rendu de position privé dans le panneau déjà existant, sans modification du layout central. */
+#detailPanel #aiCtPanel .ai-ct-seven-brief{padding:10px 12px;margin:7px 0 13px;background:rgba(13,48,59,.6);border:1px solid rgba(135,223,230,.28);border-radius:9px}
+#detailPanel #aiCtPanel .ai-ct-seven-brief>strong{display:block;color:#aff2ef;letter-spacing:.06em;font:800 12px/1.4 system-ui,sans-serif;margin-bottom:7px}
+#detailPanel #aiCtPanel .ai-ct-seven-brief p{color:#d7ebed;font:12px/1.6 system-ui,sans-serif;margin:6px 0;overflow-wrap:anywhere}
+#detailPanel #aiCtPanel .ai-ct-seven-brief p:last-child{color:#dfd1b0}
+
+
+/* Seven · lecture marché CT dans les panneaux EXISTANTS du Trader.
+   Grille compacte, résultats de simulation séparés des filtres OKX. */
+#traderOkxAccountPanel .ai-ct-execution,
+#detailPanel #aiCtPanel .ai-ct-execution{
+ margin:6px 0 13px;padding:12px;min-width:0;border-radius:11px;
+ background:linear-gradient(135deg,rgba(7,32,44,.96),rgba(9,47,55,.87));
+ border:1px solid rgba(111,205,205,.4);color:#e5f6f5;
+ box-shadow:0 6px 19px rgba(0,0,0,.16);
+}
+.ai-ct-execution-top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.ai-ct-execution-title{font:800 13px/1.35 system-ui,sans-serif;letter-spacing:.055em;color:#adf1ea}
+.ai-ct-execution-sub{margin:0!important;color:#9fc9d2!important;font:11px/1.4 system-ui,sans-serif!important}
+.ai-ct-execution-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.ai-ct-execution-metric{display:flex;flex-direction:column;gap:5px;min-width:0;padding:10px;
+ border:1px solid rgba(142,205,212,.21);border-radius:9px;background:rgba(3,20,29,.6)}
+.ai-ct-execution-metric span{color:#acc5d0;font-size:11px}
+.ai-ct-execution-metric strong{color:#e5fcf8;font-size:clamp(13px,1.4vw,17px);font-weight:800;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.ai-ct-execution-metric small{color:#98b7c3;font-size:10px;line-height:1.45}
+.ai-ct-execution-status{margin-top:10px;padding:9px 10px;border-left:3px solid #dbb778;
+ border-radius:6px;background:rgba(86,62,17,.19);color:#ffe1a5;font-size:11px;line-height:1.5;overflow-wrap:anywhere}
+.ai-ct-execution-status[data-source="verified"]{border-left-color:#79cfc8;background:rgba(42,124,116,.13);color:#a8ece8}
+.ai-ct-execution h4{margin:15px 0 8px;font-size:12px;font-weight:780;color:#c7f4ef}
+.ai-ct-table-scroll{overflow-x:auto;max-width:100%;border:1px solid rgba(110,189,198,.24);border-radius:8px}
+.ai-ct-scenario-table{border-collapse:collapse;width:100%;min-width:620px;table-layout:auto;font:12px/1.5 system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.ai-ct-scenario-table th{text-align:left;color:#b4d8dc;background:rgba(33,78,89,.6);white-space:nowrap;font-size:11px;font-weight:750;padding:9px 10px}
+.ai-ct-scenario-table td{padding:10px 10px;border-top:1px solid rgba(137,191,202,.13);vertical-align:middle;color:#e7f2f3}
+.ai-ct-scenario-table tbody tr:nth-child(even){background:rgba(133,187,191,.065)}
+.ai-ct-scenario-table td:nth-child(1){font-weight:800;color:#a3e6e5}
+.ai-ct-rule-state{max-width:235px;font-size:11px;line-height:1.45;color:#d3e8e9!important}
+.ai-ct-rule-state[data-state="below_minimum"],
+.ai-ct-rule-state[data-state="invalid_step"],
+.ai-ct-rule-state[data-state="not_live"]{color:#ffc199!important;font-weight:700}
+.ai-ct-rule-state[data-state="unverified"]{color:#f6dba1!important}
+.ai-ct-rule-state[data-state="size_matches"]{color:#a0e6cd!important}
+.ai-ct-price-scenarios{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.ai-ct-price-scenario{display:flex;flex-direction:column;gap:4px;padding:10px;border:1px solid rgba(136,194,192,.23);border-radius:8px;background:rgba(13,39,52,.58)}
+.ai-ct-price-scenario span{font-size:11px;color:#aed4db;font-weight:750}
+.ai-ct-price-scenario strong{font-size:14px;color:#e3f6f5;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.ai-ct-price-scenario small{font-size:10px;color:#a1bbc9}
+.ai-ct-execution-warning{margin:12px 0 0!important;color:#d6bea2!important;font:11px/1.55 system-ui,sans-serif!important}
+.ai-ct-analysis-details{margin-top:8px;padding:9px 10px;border:1px solid rgba(120,197,196,.25);border-radius:8px;background:rgba(5,29,39,.55)}
+.ai-ct-analysis-details>summary{cursor:pointer;color:#b4e9ea;font-size:12px;font-weight:700}
+.ai-ct-analysis-details p{font:12px/1.6 system-ui,sans-serif;color:#d4e7ea;margin:8px 0;overflow-wrap:anywhere}
+@media(max-width:900px){.ai-ct-execution-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.ai-ct-price-scenarios{grid-template-columns:1fr}.ai-ct-execution-metrics{grid-template-columns:1fr 1fr}}
+
+
+/* Plan de quantité BRUTE/NETTE après frais, intégré aux panneaux Seven CT. */
+.ai-ct-buy-planner{margin-top:13px;padding:11px 12px;border:1px solid rgba(231,191,118,.38);background:rgba(46,38,21,.24);border-radius:9px;min-width:0}
+.ai-ct-buy-planner>summary{cursor:pointer;color:#f7d99f;font-weight:800;font:800 12px/1.55 system-ui,sans-serif}
+.ai-ct-buy-intro,.ai-ct-buy-source,.ai-ct-buy-historic{margin:9px 0!important;color:#d0e1df!important;font:11px/1.55 system-ui,sans-serif!important}
+.ai-ct-buy-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0 9px}
+.ai-ct-buy-label{display:flex;flex-direction:column;gap:5px;min-width:0;color:#e2ece7;font:700 11px/1.4 system-ui,sans-serif}
+.ai-ct-buy-label input,.ai-ct-buy-label select{box-sizing:border-box;width:100%;min-width:0;background:#08202d;border:1px solid #497784;color:#e8faf5;padding:8px 9px;border-radius:7px;font:12px/1.4 system-ui,sans-serif}
+.ai-ct-buy-label input[readonly]{background:rgba(83,121,119,.15);color:#b9d3d2}
+.ai-ct-buy-compute,.ai-ct-buy-suggest{border:1px solid rgba(195,214,203,.5);border-radius:7px;padding:7px 10px;background:#164750;color:#f2fffa;font:700 11px/1.5 system-ui,sans-serif;cursor:pointer}
+.ai-ct-buy-suggest{background:transparent;margin-top:4px}
+.ai-ct-buy-compute:focus-visible,.ai-ct-buy-suggest:focus-visible{outline:2px solid #fee0aa;outline-offset:2px}
+.ai-ct-buy-result{margin-top:10px;padding:10px;background:rgba(2,17,27,.66);border:1px solid rgba(137,181,180,.27);border-radius:8px;color:#cce7e2;font-size:11px;line-height:1.55;overflow-wrap:anywhere}
+.ai-ct-buy-result>strong{color:#bdf4e9;display:block;margin-bottom:9px}
+.ai-ct-buy-result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:0}
+.ai-ct-buy-result-grid>div{padding:8px;border:1px solid rgba(137,181,180,.18);border-radius:6px;background:rgba(18,49,58,.65)}
+.ai-ct-buy-result-grid dt{color:#aac8cc;font:11px/1.4 system-ui,sans-serif}
+.ai-ct-buy-result-grid dd{margin:4px 0 0;color:#f2fff9;font:800 13px/1.4 system-ui,sans-serif;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+@media(max-width:520px){.ai-ct-buy-fields,.ai-ct-buy-result-grid{grid-template-columns:1fr}}
+
+
+/* Comparaison décisionnelle locale : prix Convert MANUEL, jamais ordre. */
+.ai-ct-choice-compare{margin:12px 0;padding:11px 12px;border:1px solid rgba(133,206,194,.43);border-radius:9px;background:rgba(7,40,47,.5)}
+.ai-ct-choice-compare>summary{cursor:pointer;color:#c4f4dc;font:800 12px/1.6 system-ui,sans-serif}
+.ai-ct-choice-compare>p{margin:9px 0!important;color:#c1dbda!important;font:11px/1.6 system-ui,sans-serif!important}
+.ai-ct-choice-label{display:flex;flex-direction:column;gap:6px;max-width:350px;color:#daedeb;font:700 11px/1.5 system-ui,sans-serif}
+.ai-ct-choice-label input{padding:9px 10px;color:#effff9;background:#061d29;border:1px solid #589298;border-radius:7px;font:12px/1.4 system-ui,sans-serif}
+.ai-ct-choice-button{display:inline-block;margin:9px 0;border:1px solid #6bbeb3;border-radius:7px;background:#12515a;color:#f5fffa;padding:8px 12px;cursor:pointer;font:800 11px/1.4 system-ui,sans-serif}
+.ai-ct-choice-button:focus-visible{outline:2px solid #fce4b2;outline-offset:2px}
+.ai-ct-choice-results{margin:8px 0;padding:10px;border:1px solid rgba(114,186,182,.25);border-radius:8px;background:rgba(3,22,30,.6);color:#deeeee;font:11px/1.6 system-ui,sans-serif}
+.ai-ct-choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.ai-ct-choice-cell{padding:10px;display:flex;flex-direction:column;gap:7px;min-width:0;border:1px solid rgba(136,193,186,.27);border-radius:8px;background:rgba(20,58,63,.5)}
+.ai-ct-choice-cell span{font:700 11px/1.35 system-ui,sans-serif;color:#a1e3d5}
+.ai-ct-choice-cell strong{color:#fff2d0;font:800 15px/1.35 system-ui,sans-serif;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.ai-ct-choice-cell small{color:#c5d9dc;font:11px/1.55 system-ui,sans-serif;overflow-wrap:anywhere}
+.ai-ct-choice-warning{color:#f2ca9d!important;margin:10px 0 0!important;font:11px/1.55 system-ui,sans-serif!important}
+@media(max-width:760px){.ai-ct-choice-grid{grid-template-columns:1fr}}

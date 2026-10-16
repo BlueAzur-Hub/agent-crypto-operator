@@ -1,0 +1,53 @@
+{
+  "schema": "agent_crypto_local_dialogue_presentation_evidence_v2",
+  "build": "40.6.112",
+  "parent_build": "40.6.111",
+  "market_core": "38.15.11",
+  "scope": "visual/readability only for existing local Atlas/Aerith dialogue and analytical provenance",
+  "terrain_defect_reproduced": true,
+  "terrain_observation": "40.6.111 still exposes a plain Dialogue local status line and a long small provenance sentence although Atlas CURRENT is healthy",
+  "canonical_runtime_owner": "js/local-dialogue-presentation.js",
+  "historical_owner": "js/local-dialogue-presentation-406108.js",
+  "presentation": {
+    "compact_atlas_status_card": true,
+    "six_stage_chips": ["Marché", "Top 5", "Math", "Contradictions", "NØX", "Aerith"],
+    "progress_meter": true,
+    "closed_current_is_100_percent": true,
+    "ollama_model_is_secondary": true,
+    "provenance_card": true,
+    "market_snapshot_time_separate": true,
+    "current_produced_time_separate": true,
+    "bridge_validation_preserved": true,
+    "ryzen_source_preserved": true
+  },
+  "acceptance": {
+    "analytical_state_changed": false,
+    "market_data_changed": false,
+    "market_core_changed": false,
+    "web_classic_changed": false,
+    "atlas_current_algorithm_changed": false,
+    "aether_changed": false,
+    "oracle_changed": false,
+    "lecture_technique_changed": false,
+    "strategy_a_changed": false,
+    "tradus_changed": false,
+    "bridge_protocol_changed": false,
+    "ollama_config_changed": false,
+    "trading_changed": false,
+    "wallet_changed": false,
+    "recurring_timer_added": false,
+    "observer_added": false,
+    "storage_write_added": false,
+    "market_network_request_added": false
+  },
+  "pure_self_test": {
+    "expected": "4/4",
+    "cases": [
+      "Atlas 3/4 parses as 75 percent",
+      "CURRENT restored with Atlas 4/4, NOX and Aerith at rest parses as 100 percent",
+      "snapshot market time and CURRENT produced time stay distinct",
+      "Bridge validation and 4-report provenance are preserved"
+    ]
+  },
+  "terrain_proof": "pending Firefox Administrator 40.6.112 visual review"
+}

@@ -1,0 +1,49 @@
+{
+  "schema": "agent_crypto_local_dialogue_presentation_evidence_v1",
+  "build": "40.6.108",
+  "parent_build": "40.6.107",
+  "market_core": "38.15.11",
+  "scope": "visual/readability only for existing local Atlas/Aerith dialogue and analytical provenance",
+  "user_observations": [
+    "plain local-dialogue progress line is difficult to scan visually",
+    "Aerith local provenance line is too small",
+    "conserved synthesis timestamp 08:45:07 is confused with current wall-clock time although it is the market snapshot time"
+  ],
+  "runtime_patch": "js/local-dialogue-presentation-406108.js",
+  "presentation": {
+    "atlas_progress_card": true,
+    "six_stage_chips": ["Marché", "Top 5", "Math", "Contradictions", "NØX", "Aerith"],
+    "progress_meter_uses_existing_report_percent": true,
+    "provenance_readability_increased": true,
+    "market_snapshot_time_labeled": true,
+    "current_produced_time_source": "atlasAnalyticalMemoryStats394.latestAt",
+    "current_time_is_not_wall_clock_now": true,
+    "historical_snapshot_time_preserved": true
+  },
+  "acceptance": {
+    "analytical_state_changed": false,
+    "market_data_changed": false,
+    "market_core_changed": false,
+    "web_classic_changed": false,
+    "atlas_current_algorithm_changed": false,
+    "oracle_changed": false,
+    "lecture_technique_changed": false,
+    "strategy_a_changed": false,
+    "trading_changed": false,
+    "wallet_changed": false,
+    "recurring_timer_added": false,
+    "observer_added": false,
+    "storage_write_added": false,
+    "network_request_added": false
+  },
+  "pure_self_test": {
+    "expected": "4/4",
+    "cases": [
+      "3/4 Atlas progress parses as 75 percent",
+      "market snapshot timestamp is parsed without conversion",
+      "ryzen source label is preserved",
+      "08:45:07 is never replaced by current wall-clock time"
+    ]
+  },
+  "terrain_proof": "pending Firefox Administrator 40.6.108 visual review"
+}

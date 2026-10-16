@@ -1,0 +1,56 @@
+{
+  "schema": "agent_crypto_pedagogy_version_truth_evidence_v1",
+  "build": "40.6.104",
+  "parent_build": "40.6.103",
+  "engine": "38.15.11",
+  "reproduced_on": "Administrator 40.6.103 user-provided full report",
+  "defect": {
+    "surface": "PARCOURS DÉBUTANT DÉTAILLÉ · PÉDAGOGIE 28.3.44",
+    "observed": "Parcours pédagogique 28.3.44 actif · Interface 40.6.86",
+    "expected_loaded_build": "40.6.103",
+    "header_correct": true,
+    "footer_correct": true,
+    "generated_journal_correct": true,
+    "stale_visible_build_occurrences_in_report": 1
+  },
+  "correction": {
+    "owner": "js/pedagogy-version-truth-406104.js",
+    "scope": "presentation-only exact pedagogy build label reconciliation",
+    "loaded_build_source": "ErithVersionTruth / immutable entry pathname / ac-build fallback",
+    "legacy_app_rewritten": false,
+    "pedagogy_business_logic_changed": false,
+    "historical_archive_changed": false
+  },
+  "checks": [
+    {
+      "id": "pedagogy_label_current",
+      "expected": "Parcours pédagogique 28.3.44 actif · Interface 40.6.104"
+    },
+    {
+      "id": "no_stale_pedagogy_406086",
+      "expected": "no visible current pedagogy label advertises Interface 40.6.86"
+    },
+    {
+      "id": "no_side_effect_owner",
+      "expected": "no fetch, recurring timer, observer, storage write, Atlas start or trading path"
+    }
+  ],
+  "protected": {
+    "market_core": "38.15.11",
+    "web_classic": true,
+    "graphique": true,
+    "lecture_technique": true,
+    "aether": true,
+    "atlas_current": true,
+    "oracle": true,
+    "strategy_a": true,
+    "tradus": true,
+    "indexeddb_v7": true
+  },
+  "terrain": {
+    "version_truth_ci": "required",
+    "version_delivery_ci": "required",
+    "github_pages": "required",
+    "firefox": "required after deployment"
+  }
+}

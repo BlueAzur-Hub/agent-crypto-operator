@@ -1,0 +1,41 @@
+{
+  "schema": "agent_crypto_visible_version_surface_truth_evidence_v1",
+  "build": "40.6.107",
+  "parent_build": "40.6.106",
+  "market_core": "38.15.11",
+  "scope": "current runtime visible version truth only",
+  "reproduced_defects": [
+    "Atlas Auto Reader V4 displayed Build 40.6.86 on loaded Administrator 40.6.106",
+    "Atlas Auto Reader reported audit statique FAIL [interface_build_truth] while immutable Version Truth was 40.6.106",
+    "footerRelease could still render a parser-time Build 40.6.86 after later current-runtime hydration"
+  ],
+  "runtime_patch": "js/visible-version-surface-truth-406107.js",
+  "authority": "globalThis.ErithVersionTruth / immutable entry pathname",
+  "acceptance": {
+    "auto_reader_uses_loaded_build": true,
+    "interface_build_truth_pass_requires_deterministic_consistency": true,
+    "historical_provenance_is_not_rewritten": true,
+    "footer_current_build_resynced": true,
+    "market_core_unchanged": true,
+    "web_classic_unchanged": true,
+    "atlas_business_logic_unchanged": true,
+    "oracle_unchanged": true,
+    "lecture_technique_unchanged": true,
+    "strategy_a_unchanged": true,
+    "trading_unchanged": true,
+    "recurring_timer_added": false,
+    "observer_added": false,
+    "storage_write_added": false,
+    "network_request_added": false
+  },
+  "pure_self_test": {
+    "expected": "4/4",
+    "cases": [
+      "stale Auto Reader build is replaced by loaded immutable build",
+      "interface_build_truth becomes PASS only when deterministic authorities agree",
+      "FAIL is preserved when authorities disagree",
+      "unrelated historical Build 40.6.86 text remains untouched"
+    ]
+  },
+  "terrain_proof": "pending Firefox Administrator 40.6.107 export"
+}

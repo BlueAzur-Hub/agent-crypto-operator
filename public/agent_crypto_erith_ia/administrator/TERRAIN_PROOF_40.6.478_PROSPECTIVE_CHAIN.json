@@ -1,0 +1,38 @@
+{
+  "schema": "agent_crypto_terrain_proof_v1",
+  "checkpoint": "40.6.478",
+  "observed_at": "2026-09-30",
+  "source": "operator Firefox export supplied in conversation",
+  "prospective_outcome": {
+    "state": "ARMED",
+    "cycles_tracked": 1,
+    "okx_t0_captured": 1,
+    "t5_captured": 1,
+    "t15_captured": 1,
+    "t60_captured": 1,
+    "missed_windows": 0,
+    "cycle_id": "A-CYCLE-00029-405f73c5",
+    "horizons": {
+      "t5": "CAPTURED",
+      "t15": "CAPTURED",
+      "t60": "CAPTURED"
+    }
+  },
+  "plumbing_observed_same_session": {
+    "events_received": 1,
+    "event_cycle_id": "A-CYCLE-00001-e2251980",
+    "resolved_cycle_id": "A-CYCLE-00001-e2251980",
+    "resolution_mode": "LEDGER_BY_ID",
+    "error": null,
+    "mount_anchor": "strategyAExecutionCostEvidenceCapture",
+    "mount_repairs": 2
+  },
+  "claims": {
+    "real_prospective_t0_to_t60_chain_observed": true,
+    "terminal_write_guard_terrain_proven": false,
+    "terminal_write_guard_harness_proven": true,
+    "profitability_claim": false,
+    "real_order": false
+  },
+  "note": "The real terrain proves the prospective economic evidence chain. The post-terminal immutability rule introduced in 40.6.478 remains proven by harness, not yet by direct IndexedDB terrain observation."
+}

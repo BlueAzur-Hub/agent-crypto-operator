@@ -6,7 +6,7 @@ Parent: **40.6.13**
 Market Core: **38.15.11 protected**
 
 ### Correction
-Le propriétaire réel du lifecycle Paper (`js/strategy-a-paper-lifecycle-404295.js`) possède désormais un gate commun vers le Safety Governor.
+Le propriétaire réel du lifecycle Paper (`js/strategy-a-paper-lifecycle.js`) possède désormais un gate commun vers le Safety Governor.
 
 - `CREATE` : fail-closed si Safety est absent ou hors `NORMAL`.
 - `SUBMIT` : seconde validation juste avant engagement Paper.

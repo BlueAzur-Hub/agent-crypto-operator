@@ -1,0 +1,288 @@
+/* 40.4.284 — Memory Color Identity.
+   Visual-only owner for Auto Reader / Shared Memory / GitHub Memory.
+   No geometry, Window Manager, Technical Reading, Market Core or business-state ownership. */
+
+details[data-collapse-key="auto-reader"],
+details[data-collapse-key="shared-memory"],
+details[data-collapse-key="github-memory"] {
+  --memory-line: rgba(104, 220, 255, .28);
+  --memory-glow: rgba(62, 196, 255, .12);
+  --memory-accent: #6ee8ff;
+  --memory-accent-2: #8c7cff;
+}
+
+details[data-collapse-key="auto-reader"] {
+  --memory-line: rgba(79, 224, 255, .36);
+  --memory-glow: rgba(56, 208, 255, .14);
+  --memory-accent: #63e8ff;
+  --memory-accent-2: #79a8ff;
+}
+
+details[data-collapse-key="shared-memory"] {
+  --memory-line: rgba(92, 245, 201, .34);
+  --memory-glow: rgba(67, 226, 181, .13);
+  --memory-accent: #6ff2cf;
+  --memory-accent-2: #a889ff;
+}
+
+details[data-collapse-key="github-memory"] {
+  --memory-line: rgba(145, 126, 255, .36);
+  --memory-glow: rgba(126, 96, 255, .14);
+  --memory-accent: #a38bff;
+  --memory-accent-2: #ffd277;
+}
+
+details[data-collapse-key="auto-reader"] > .atlas-collapse-summary,
+details[data-collapse-key="shared-memory"] > .atlas-collapse-summary,
+details[data-collapse-key="github-memory"] > .atlas-collapse-summary {
+  border-color: var(--memory-line);
+  background:
+    radial-gradient(circle at 9% 50%, var(--memory-glow), transparent 31%),
+    linear-gradient(90deg, rgba(8, 22, 36, .96), rgba(12, 22, 39, .89));
+  box-shadow:
+    inset 3px 0 0 var(--memory-accent),
+    inset 0 0 0 1px rgba(255,255,255,.025),
+    0 8px 24px rgba(0,0,0,.18);
+}
+
+details[data-collapse-key="auto-reader"] > .atlas-collapse-summary .atlas-collapse-icon,
+details[data-collapse-key="shared-memory"] > .atlas-collapse-summary .atlas-collapse-icon,
+details[data-collapse-key="github-memory"] > .atlas-collapse-summary .atlas-collapse-icon,
+details[data-collapse-key="auto-reader"] > .atlas-collapse-summary .atlas-collapse-title,
+details[data-collapse-key="shared-memory"] > .atlas-collapse-summary .atlas-collapse-title,
+details[data-collapse-key="github-memory"] > .atlas-collapse-summary .atlas-collapse-title {
+  color: var(--memory-accent);
+}
+
+details[data-collapse-key="auto-reader"][open] > .atlas-collapse-summary,
+details[data-collapse-key="shared-memory"][open] > .atlas-collapse-summary,
+details[data-collapse-key="github-memory"][open] > .atlas-collapse-summary {
+  box-shadow:
+    inset 4px 0 0 var(--memory-accent),
+    inset 0 -1px 0 var(--memory-line),
+    0 10px 26px rgba(0,0,0,.22),
+    0 0 24px var(--memory-glow);
+}
+
+#auto-reader.panel.glass,
+#shared-memory.panel.glass,
+#github-memory.panel.glass {
+  border-color: var(--memory-line);
+  background:
+    radial-gradient(circle at 88% 6%, var(--memory-glow), transparent 29%),
+    radial-gradient(circle at 9% 90%, rgba(107, 91, 255, .055), transparent 32%),
+    linear-gradient(145deg, rgba(8, 20, 31, .97), rgba(10, 18, 31, .94));
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.025),
+    inset 0 1px 0 rgba(255,255,255,.035),
+    0 12px 34px rgba(0,0,0,.20);
+}
+
+#auto-reader .section-head,
+#shared-memory .section-head,
+#github-memory .section-head {
+  border-bottom: 1px solid var(--memory-line);
+  padding-bottom: 12px;
+}
+
+#auto-reader .section-head .eyebrow,
+#shared-memory .section-head .eyebrow,
+#github-memory .section-head .eyebrow {
+  color: var(--memory-accent);
+  text-shadow: 0 0 12px var(--memory-glow);
+}
+
+#auto-reader .section-head h2,
+#shared-memory .section-head h2,
+#github-memory .section-head h2 {
+  color: #fff1cf;
+}
+
+#auto-reader .pill,
+#shared-memory .pill,
+#github-memory .pill {
+  border-color: var(--memory-line);
+  background: linear-gradient(135deg, var(--memory-glow), rgba(255,255,255,.035));
+}
+
+#auto-reader .auto-grid article,
+#shared-memory .shared-grid article,
+#github-memory .github-grid article,
+#memoryCoveragePanel .memory-coverage-kpis article,
+#memoryCoveragePanel .memory-horizon-grid article {
+  border: 1px solid rgba(112, 188, 216, .20);
+  background:
+    linear-gradient(145deg, rgba(20, 38, 52, .74), rgba(9, 20, 31, .82));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+#auto-reader .auto-grid article:nth-child(3n+1) { border-color: rgba(86, 230, 255, .30); }
+#auto-reader .auto-grid article:nth-child(3n+2) { border-color: rgba(112, 159, 255, .28); }
+#auto-reader .auto-grid article:nth-child(3n) { border-color: rgba(157, 126, 255, .27); }
+#auto-reader .auto-grid article b { color: #b9f5ff; }
+#auto-reader .auto-grid article span { color: #edfaff; }
+
+#shared-memory .shared-grid article:nth-child(1) { border-color: rgba(83, 225, 255, .32); }
+#shared-memory .shared-grid article:nth-child(2) { border-color: rgba(97, 243, 193, .32); }
+#shared-memory .shared-grid article:nth-child(3) { border-color: rgba(168, 137, 255, .34); }
+#shared-memory .shared-grid article:nth-child(4) { border-color: rgba(255, 203, 104, .30); }
+#shared-memory .shared-grid article b { color: #fff0c8; }
+#shared-memory .shared-grid article span { color: #d9f8f1; }
+
+#github-memory .github-grid article:nth-child(4n+1) { border-color: rgba(155, 134, 255, .34); }
+#github-memory .github-grid article:nth-child(4n+2) { border-color: rgba(96, 212, 255, .28); }
+#github-memory .github-grid article:nth-child(4n+3) { border-color: rgba(255, 205, 111, .29); }
+#github-memory .github-grid article:nth-child(4n) { border-color: rgba(105, 238, 196, .26); }
+#github-memory .github-grid article b { color: #d9d0ff; }
+#github-memory .github-grid article span { color: #f1f5ff; }
+
+#memoryCoveragePanel {
+  border: 1px solid rgba(94, 225, 210, .27);
+  background:
+    radial-gradient(circle at 82% 0%, rgba(142, 111, 255, .09), transparent 28%),
+    linear-gradient(180deg, rgba(6, 23, 34, .86), rgba(7, 17, 28, .92));
+  box-shadow:
+    inset 0 0 30px rgba(57, 218, 193, .035),
+    0 10px 24px rgba(0,0,0,.16);
+}
+
+#memoryCoveragePanel .memory-coverage-head {
+  border-bottom: 1px solid rgba(101, 228, 205, .20);
+}
+
+#memoryCoveragePanel .memory-coverage-head .eyebrow {
+  color: #aa8cff;
+}
+
+#memoryCoveragePanel .memory-coverage-kpis article:nth-child(1),
+#memoryCoveragePanel .memory-coverage-kpis article:nth-child(2) {
+  border-color: rgba(86, 218, 255, .25);
+}
+
+#memoryCoveragePanel .memory-coverage-kpis article:nth-child(3),
+#memoryCoveragePanel .memory-coverage-kpis article:nth-child(4) {
+  border-color: rgba(100, 242, 197, .26);
+}
+
+#memoryCoveragePanel .memory-coverage-kpis article:nth-child(5) {
+  border-color: rgba(169, 139, 255, .28);
+}
+
+#memoryCoveragePanel .memory-coverage-kpis article[data-gap-state="attention"] {
+  border-color: rgba(255, 157, 94, .48);
+  background: linear-gradient(145deg, rgba(71, 37, 29, .48), rgba(22, 21, 29, .84));
+  box-shadow: inset 3px 0 0 rgba(255, 174, 92, .78);
+}
+
+#memoryCoveragePanel .memory-horizon-grid article {
+  position: relative;
+  overflow: hidden;
+  transition: border-color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+
+#memoryCoveragePanel .memory-horizon-grid article::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: rgba(120, 170, 190, .35);
+}
+
+#memoryCoveragePanel .memory-horizon-grid article[data-coverage-state="full"] {
+  border-color: rgba(95, 242, 174, .48);
+  background: linear-gradient(145deg, rgba(27, 68, 57, .48), rgba(8, 25, 29, .86));
+}
+#memoryCoveragePanel .memory-horizon-grid article[data-coverage-state="full"]::before { background: #6ff2b1; }
+#memoryCoveragePanel .memory-horizon-grid article[data-coverage-state="full"] b { color: #8dffc5; }
+
+#memoryCoveragePanel .memory-horizon-grid article[data-coverage-state="strong"] {
+  border-color: rgba(86, 220, 255, .45);
+  background: linear-gradient(145deg, rgba(25, 58, 75, .52), rgba(8, 23, 33, .86));
+}
+#memoryCoveragePanel .memory-horizon-grid article[data-coverage-state="strong"]::before { background: #65deff; }
+#memoryCoveragePanel .memory-horizon-grid article[data-coverage-state="strong"] b { color: #9cecff; }
+
+#memoryCoveragePanel .memory-horizon-grid article[data-coverage-state="partial"] {
+  border-color: rgba(255, 199, 97, .48);
+  background: linear-gradient(145deg, rgba(73, 55, 25, .49), rgba(25, 24, 25, .87));
+}
+#memoryCoveragePanel .memory-horizon-grid article[data-coverage-state="partial"]::before { background: #ffca68; }
+#memoryCoveragePanel .memory-horizon-grid article[data-coverage-state="partial"] b { color: #ffe09a; }
+
+#memoryCoveragePanel .memory-horizon-grid article[data-coverage-state="sparse"] {
+  border-color: rgba(255, 121, 157, .48);
+  background: linear-gradient(145deg, rgba(68, 31, 47, .49), rgba(24, 20, 29, .88));
+}
+#memoryCoveragePanel .memory-horizon-grid article[data-coverage-state="sparse"]::before { background: #ff82a6; }
+#memoryCoveragePanel .memory-horizon-grid article[data-coverage-state="sparse"] b { color: #ffb2c7; }
+
+#memoryCoveragePanel .memory-horizon-grid article[data-coverage-state="empty"] {
+  opacity: .78;
+}
+
+#memoryCollectorQuality,
+#collectorTruthList {
+  gap: 8px;
+}
+
+#memoryCollectorQuality > [data-collector-tone],
+#collectorTruthList > [data-collector-tone] {
+  border: 1px solid rgba(120, 180, 205, .20);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: rgba(9, 21, 31, .72);
+}
+
+#memoryCollectorQuality > [data-collector-tone="ryzen"],
+#collectorTruthList > [data-collector-tone="ryzen"] {
+  border-color: rgba(80, 220, 255, .42);
+  color: #a8efff;
+  box-shadow: inset 3px 0 0 #58dfff;
+}
+
+#memoryCollectorQuality > [data-collector-tone="book"],
+#collectorTruthList > [data-collector-tone="book"] {
+  border-color: rgba(174, 133, 255, .44);
+  color: #d4c0ff;
+  box-shadow: inset 3px 0 0 #a98bff;
+}
+
+#memoryCollectorQuality > [data-collector-tone="legacy"],
+#collectorTruthList > [data-collector-tone="legacy"] {
+  border-color: rgba(255, 198, 92, .38);
+  color: #ffe0a0;
+  box-shadow: inset 3px 0 0 #ffc765;
+}
+
+#auto-reader .auto-reader-output,
+#shared-memory .memory-coverage-output,
+#shared-memory .shared-memory-output,
+#github-memory .github-memory-output {
+  border: 1px solid var(--memory-line);
+  background: linear-gradient(145deg, rgba(3, 12, 20, .94), rgba(8, 18, 29, .94));
+  color: #dff8ff;
+  box-shadow: inset 0 0 24px var(--memory-glow);
+}
+
+#auto-reader #btnAutoToggle,
+#shared-memory #btnSaveCollectorId,
+#github-memory #btnLoadGithubMemory {
+  border-color: var(--memory-line);
+  background: linear-gradient(135deg, var(--memory-accent), var(--memory-accent-2));
+  color: #07121c;
+  box-shadow: 0 0 16px var(--memory-glow);
+}
+
+#shared-memory #collectorIdInput {
+  border-color: rgba(92, 245, 201, .34);
+  background: rgba(7, 23, 30, .86);
+  color: #ddfff4;
+}
+
+@media (max-width: 780px) {
+  #memoryCoveragePanel .memory-horizon-grid article small {
+    line-height: 1.25;
+  }
+}

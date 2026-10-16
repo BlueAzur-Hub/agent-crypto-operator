@@ -1,0 +1,35 @@
+{
+  "schema": "agent_crypto_evidence_reconciliation_runtime_gap_truth_test_v1",
+  "build": "40.6.468",
+  "pass": true,
+  "checks": {
+    "multi_id_identity_truth": true,
+    "primary_id_overlap_preserved_diagnostic": true,
+    "historical_open_gap_separated": true,
+    "current_active_gap_separated": true,
+    "gap_history_preserved": true,
+    "no_gap_delete": true,
+    "no_evidence_merge": true,
+    "no_storage_write": true,
+    "no_threshold_change": true,
+    "no_real_order": true
+  },
+  "terrain_baseline": {
+    "durable_cycles": 611,
+    "after_cost": 4,
+    "paper_states": 9,
+    "crosswalk_unique_links": 4,
+    "true_orphan_after_cost": 0,
+    "true_orphan_paper": 5,
+    "raw_runtime_gaps": 531,
+    "raw_open_gaps": 50,
+    "shadow_cost_wait": 144,
+    "kraken_shadow_pass": 0,
+    "okx_potential_before_slippage": 16
+  },
+  "invariants": {
+    "market_core": "38.15.11",
+    "legacy_cost_gate_pct": 0.8,
+    "paper_only": true
+  }
+}

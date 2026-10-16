@@ -5,7 +5,7 @@
 Parent: **40.5.22**  
 Market Core: **38.15.11 protected**
 
-New owner: `js/canonical-freeze-405023.js`
+New owner: `js/canonical-freeze.js`
 
 - Version Truth 40.5.19 single-owner lock preserved.
 - No recurring timer.

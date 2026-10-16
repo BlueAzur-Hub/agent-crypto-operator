@@ -1,0 +1,25 @@
+AGENT-CRYPTO ORACLE METRICS FINAL FIT — 40.6.445
+===================================================
+
+FUNCTIONAL CHANGE
+-----------------
+administrator/index.html
+  Oracle metrics layout only:
+  repeat(2) + Cohérence span 2  ->  repeat(3) + no span
+
+PROTECTED / BYTE-UNCHANGED
+--------------------------
+style.css                                 b8254bb9bdcf3485d28fd5c9006d2eb8f26f1e3f
+app.js                                   0988c742c62997b022d75a511561302b170d7972
+js/post-boot-runtime-loader.js           3a97ba785f91a16fb87e36164a7559d544642ef9
+js/views/private-source-demand-loader.js 5f363046c9a07a5e7e9a92511dd6958d3cec7cd2
+js/views/private-backend-sources.js      55e3c282b3caf5f22642b833574b4ff83b183869
+js/strategy-a-audit-demand-loader.js     21bac07be91c6e66ed36aefdc59446eba278b49a
+js/strategy-a-execution-cost-truth.js    dead4890f8c9751db7a1cf6e02526d5fb3e70cb8
+
+NO ORACLE MATH CHANGE
+NO BACKEND CHANGE
+NO CHART CHANGE
+NO STRATEGY BUSINESS CHANGE
+NO MARKET CORE CHANGE
+NO AETHER CHANGE

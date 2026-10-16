@@ -1,0 +1,33 @@
+AGENT-CRYPTO 40.6.481 — ORACLE EVIDENCE CURSOR READ RECOVERY
+
+MODIFIED
+public/agent_crypto_erith_ia/administrator/app.js
+public/agent_crypto_erith_ia/administrator/index.html
+public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+public/agent_crypto_erith_ia/administrator/js/strategy-a-audit-demand-loader.js
+public/agent_crypto_erith_ia/administrator/build.json
+public/agent_crypto_erith_ia/administrator/RELEASE.md
+public/agent_crypto_erith_ia/administrator/HANDOFF.md
+
+ADDED
+.github/scripts/agent_crypto_oracle_evidence_cursor_read_test_406481.py
+.github/workflows/agent-crypto-package-406481.yml
+public/agent_crypto_erith_ia/administrator/index-40.6.481.html
+public/agent_crypto_erith_ia/administrator/ORACLE_EVIDENCE_CURSOR_READ_RECOVERY_40.6.481.md
+public/agent_crypto_erith_ia/administrator/ORACLE_EVIDENCE_CURSOR_READ_TEST_40.6.481.json
+public/agent_crypto_erith_ia/administrator/HANDOFF_FINAL_40.6.481.md
+public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.481.txt
+
+SCOPE
+Oracle Evidence full-read transport only.
+
+UNCHANGED
+Evidence rows
+IndexedDB schema
+retention cap 50000
+Oracle Math / models
+Strategy A / Solo Progression 1000 EUR profile
+Atlas CURRENT
+Market Core 38.15.11
+Aether / Lecture Technique / Web Classique
+real orders

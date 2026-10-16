@@ -1,0 +1,33 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.528
+Parent: 40.6.527
+Release: NEW LISTINGS RADAR V1 · CANONICAL SEARCH
+
+CHANGED:
+- administrator/js/new-listings.js
+- version identity / index / loader / atlas view
+- index-40.6.528.html
+- docs / guard / package
+
+NEW FUNCTION:
+- permanent New Listings Radar independent from Top 1000
+- canonical identity search
+- search by name / id / ticker / pair / exchange
+- age filters
+- voluntary external Web Research fallback
+- Concrete (CT) first tracked terrain case
+
+PROTECTED:
+- app.js
+- Market Core 38.15.11
+- Backend 1.4.4 / Bridge 1.9.13
+- OKX transport .526
+- Market/Fiche / Graph / Oracle / Aether / Target Flow / Depth / Candles / Strategy
+
+NO:
+- state.coins injection
+- ranking mutation
+- fabricated price
+- automatic external ingestion
+- storage write
+- timer / observer
+- order / wallet

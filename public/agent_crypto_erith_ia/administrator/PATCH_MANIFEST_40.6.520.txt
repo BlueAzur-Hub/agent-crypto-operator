@@ -1,0 +1,42 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.520
+Release: GRAPH NATIVE USD SOURCE · CURRENCY-AWARE CACHE/CONTEXT
+Parent: 40.6.519
+Market Core: 38.15.11 UNCHANGED
+
+CHANGED
+- administrator/js/graph-native-usd-406520.js
+- Administrator 40.6.520 version truth / archive / docs / guard / package
+- post-boot + Atlas visible build identity
+
+USD GRAPH RULE
+- source: CoinGecko market_chart?vs_currency=usd
+- cache: isolated from EUR
+- context: isolated from EUR
+- axes / tooltip / caption: USD
+- 24 h current endpoint: explicit priceUsd
+- no EUR→USD browser conversion
+- no USDC/USDT relabel as USD
+
+EUR RULE
+- existing canonical Graphique path preserved
+
+PROTECTED
+- app.js / Market Core 38.15.11
+- Market + Fiche 40.6.518
+- Oracle + Aether 40.6.519
+- Lecture Technique
+- Bougies
+- Profondeur / OKX Carnet
+- Strategy A / Evidence / Cost Gate
+- Backend / Bridge
+
+RUNTIME
+- no new recurring timer
+- no MutationObserver
+- no new storage owner
+- no wallet
+- no private API
+- no real order
+
+TERRAIN
+PENDING FIREFOX.

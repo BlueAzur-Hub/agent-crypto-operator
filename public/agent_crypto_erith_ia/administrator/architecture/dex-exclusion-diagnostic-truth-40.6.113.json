@@ -1,0 +1,55 @@
+{
+  "schema": "agent_crypto_dex_exclusion_diagnostic_truth_v1",
+  "build": "40.6.113",
+  "parent_build": "40.6.112",
+  "market_core": "38.15.11",
+  "scope": "read-only diagnostic truth for DEX freshness exclusions already enforced by 40.6.111",
+  "canonical_runtime_owner": "js/dex-exclusion-diagnostics.js",
+  "historical_owner": "js/dex-exclusion-diagnostics-406098.js",
+  "source_demand_loader": "js/views/private-source-demand-loader.js",
+  "freshness_owner": "js/dex-freshness-guard.js",
+  "diagnostic_truth": {
+    "reads_existing_freshness_reason": true,
+    "stale_reason_visible": true,
+    "freshness_unknown_reason_visible": true,
+    "generic_fallback_preserved": true,
+    "stale_observations_remain_observable": true,
+    "unknown_freshness_observations_remain_observable": true
+  },
+  "acceptance": {
+    "atlas_eligibility_expression_changed": false,
+    "dex_freshness_guard_changed": false,
+    "canonical_price_changed": false,
+    "market_data_changed": false,
+    "market_core_changed": false,
+    "web_classic_changed": false,
+    "atlas_current_algorithm_changed": false,
+    "aether_changed": false,
+    "oracle_changed": false,
+    "lecture_technique_changed": false,
+    "strategy_a_changed": false,
+    "tradus_changed": false,
+    "bridge_protocol_changed": false,
+    "trading_changed": false,
+    "wallet_changed": false,
+    "recurring_timer_added": false,
+    "observer_added": false,
+    "storage_write_added": false,
+    "market_network_request_added": false
+  },
+  "pure_self_test": {
+    "expected": "4/4",
+    "cases": [
+      "fresh eligible observation stays eligible with no diagnostic reason",
+      "STALE freshness exclusion surfaces STALE and not ATLAS_NOT_ELIGIBLE",
+      "FRESHNESS_UNKNOWN exclusion surfaces FRESHNESS_UNKNOWN and not ATLAS_NOT_ELIGIBLE",
+      "unexplained atlas_eligible=false retains ATLAS_NOT_ELIGIBLE fallback"
+    ]
+  },
+  "loader_contract": {
+    "builds_40_6_98_to_40_6_112": "js/dex-exclusion-diagnostics-406098.js",
+    "build_40_6_113_and_newer": "js/dex-exclusion-diagnostics.js",
+    "single_active_diagnostic_owner": true
+  },
+  "terrain_proof": "pending Firefox Administrator 40.6.113 review after Pages propagation"
+}

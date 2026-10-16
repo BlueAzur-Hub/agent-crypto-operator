@@ -1,12 +1,13 @@
+/* Visual cache only. Application version authority: build.json -> js/boot.js -> js/version-truth.js. */
 (() => {
   "use strict";
 
-  const BUILD = "40.4.254";
+  const BUILD = "40.6.389";
   const DB_NAME = "agent_crypto_visual_cache_v1";
   const DB_VERSION = 1;
   const STORE = "assets";
-  const GENERATION = "administrator-visuals-2026-09-05-404254-v2";
-  const CHART_OFFICE = "./assets/visual/admin-chart-office.png";
+  const GENERATION = "administrator-visuals-2026-09-23-406389-v3";
+  const CHART_OFFICE = "https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/assets/images/visual/admin-chart-office.png";
   const objectUrls = new Map();
   const stats = { memory: 0, indexeddb: 0, network: 0, miss: 0, error: 0 };
 
@@ -169,7 +170,7 @@
     });
   }
 
-  globalThis.AgentCryptoVisualCache40326 = Object.freeze({
+  globalThis.AgentCryptoVisualCache = Object.freeze({
     build: BUILD,
     database: DB_NAME,
     generation: GENERATION,
@@ -222,11 +223,11 @@
 
   const src=h=>{try{return typeof h==="function"?Function.prototype.toString.call(h):"";}catch{return "";}};
   const quiet=(h,a)=>idle(()=>{if(document.hidden||clock()-lastInput<1400||clock()<resumeUntil||busy())return;try{h(...a);}catch{}},3500);
-  globalThis.setInterval=function(h,d,...a){const s=src(h),ms=Number(d)||0;if(typeof h==="function"&&ms===15000&&s.includes("atlasOracleOutcomeRun")&&s.includes("atlasOracleLongShadowRun40273")){stats.oracleRetimed++;return setI(()=>quiet(h,a),60000);}return setI(h,d,...a);};
-  globalThis.setTimeout=function(h,d,...a){const s=src(h),ms=Number(d)||0;if(typeof h==="function"&&ms===2500&&s.includes("atlasOracleOutcomeRun")&&s.includes("atlasOracleLongShadowRun40273")){stats.bootRetimed++;return setT(()=>quiet(h,a),6500);}if(typeof h==="function"&&ms===3500&&s.includes("atlasOracleLongShadowRun40273(true)")){stats.bootRetimed++;return setT(()=>quiet(h,a),70000);}return setT(h,d,...a);};
-  window.setInterval=globalThis.setInterval;window.setTimeout=globalThis.setTimeout;
+  globalThis.setInterval=function(h,d,...a){const s=src(h),ms=Number(d)||0;if(typeof h==="function"&&ms===15000&&s.includes("atlasOracleOutcomeRun")&&s.includes("atlasOracleLongShadowRun")){stats.oracleRetimed++;return setI(()=>quiet(h,a),60000);}return setI(h,d,...a);};
+  globalThis.setTimeout=function(h,d,...a){const s=src(h),ms=Number(d)||0;if(typeof h==="function"&&ms===2500&&s.includes("atlasOracleOutcomeRun")&&s.includes("atlasOracleLongShadowRun")){stats.bootRetimed++;return setT(()=>quiet(h,a),6500);}if(typeof h==="function"&&ms===3500&&s.includes("atlasOracleLongShadowRun(true)")){stats.bootRetimed++;return setT(()=>quiet(h,a),70000);}return setT(h,d,...a);};
+window.setTimeout=globalThis.setTimeout;
 
   function coalesce(name,ms=2000,normalize=null){const base=globalThis[name];if(typeof base!=="function"||base.__perf40363)return;let at=-Infinity,result,gen=-1;const f=function(...a){const t=clock(),res=t<resumeUntil;if((res&&gen===resumeGen)||t-at<ms){stats.coalesced++;return result;}at=t;if(res)gen=resumeGen;if(normalize)a=normalize(a,res);result=base.apply(this,a);return result;};Object.defineProperty(f,"__perf40363",{value:true});globalThis[name]=f;}
-  function install(){coalesce("atlasBookMirrorFetch36",5000);coalesce("atlasExchangeRefreshDirectRest383",4000,(a,res)=>res&&a[0]&&typeof a[0]==="object"?[{...a[0],force:false},...a.slice(1)]:a);coalesce("atlasCurrentJournalHydrate3814",2200);coalesce("atlasRuntimeTruthApply3813",1800);coalesce("atlasCurrentMemoryEventReconcile3813",2200);coalesce("atlasBookRoleUiLock3812",1800);coalesce("atlasRestoreRuntimeUi",1400);document.documentElement.dataset.firefoxFreezeRecovery40363="1";globalThis.ErithFirefoxFreezeRecovery40363=Object.freeze({build:BUILD,parent:"40.3.62",visibility_resume:"serial_idle",oracle_background_ms:60000,full_snapshot_semantics_changed:false,market_core_changed:false,oracle_math_changed:false,window_manager_changed:false,stats:()=>Object.freeze({...stats,queue:jobs.length})});}
+  function install(){coalesce("atlasBookMirrorFetch36",5000);coalesce("atlasExchangeRefreshDirectRest383",4000,(a,res)=>res&&a[0]&&typeof a[0]==="object"?[{...a[0],force:false},...a.slice(1)]:a);coalesce("atlasCurrentJournalHydrate3814",2200);coalesce("atlasRuntimeTruthApply3813",1800);coalesce("atlasCurrentMemoryEventReconcile3813",2200);coalesce("atlasBookRoleUiLock3812",1800);coalesce("atlasRestoreRuntimeUi",1400);document.documentElement.dataset.firefoxFreezeRecovery="1";globalThis.ErithFirefoxFreezeRecovery=Object.freeze({build:BUILD,parent:"40.3.62",visibility_resume:"serial_idle",oracle_background_ms:60000,full_snapshot_semantics_changed:false,market_core_changed:false,oracle_math_changed:false,window_manager_changed:false,stats:()=>Object.freeze({...stats,queue:jobs.length})});}
   if(document.readyState==="loading")add.call(document,"DOMContentLoaded",()=>requestAnimationFrame(()=>idle(install,1200)),{once:true});else requestAnimationFrame(()=>idle(install,1200));
 })();

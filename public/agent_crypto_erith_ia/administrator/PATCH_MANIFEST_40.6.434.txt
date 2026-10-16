@@ -1,0 +1,51 @@
+AGENT-CRYPTO DELIVERY MANIFEST — 40.6.434
+================================================
+
+Build: 40.6.434
+Release: STRATEGY A OKX ONE-SHOT RECOVERY + READABILITY
+Functional commit: b0d634b59b26954e847b97dffb347928b78ec186
+Market Core: 38.15.11
+
+PACKAGE RULE
+------------
+Bounded Agent-Crypto update package.
+NOT a repository archive.
+Archive root: administrator/
+
+CONTENTS
+--------
+ee223fbcc0368920fb65bf233b06b7e7a622609ef2e5535b7786879bbd03c30d  administrator/js/strategy-a-execution-cost-truth.js
+af059e8345ec5e6e40e955ef361aca97d8c61c74867462444d5af0e9c0072cc9  administrator/build.json
+cc4d9c2ebb85144b325a5a1b417539b3ceee4c891d0bf32858479513bc19072c  administrator/index.html
+cc4d9c2ebb85144b325a5a1b417539b3ceee4c891d0bf32858479513bc19072c  administrator/index-40.6.434.html
+538828638552a84e0b9159a927775615753a3a553097d97b9aeb8697e3ba1af8  administrator/RELEASE.md
+451d9d21c9d7698ecf44c0d814e5e6291c66d390d347353850612fc6d8116c7b  administrator/HANDOFF.md
+
+SCOPE
+-----
+- OKX public EEA one-shot WebSocket order-book measurement on operator click;
+- OKX public REST fallback if WebSocket fails;
+- larger local typography for Execution Cost Truth;
+- technical network error details collapsed;
+- export filename corrected to 40.6.434.
+
+PROTECTED
+---------
+- Strategy A business logic and thresholds;
+- Oracle / Risk / Paper;
+- Market Core 38.15.11;
+- Aether;
+- global cockpit CSS;
+- wallets / API keys / real orders.
+
+NETWORK CONTRACT
+----------------
+No permanent WebSocket.
+No recurring timer.
+No polling.
+No storage write.
+One-shot OKX socket opens only after MESURER KRAKEN + OKX and closes after first book snapshot.
+
+DELIVERY DISCIPLINE
+-------------------
+1 ZIP = 1 upload = 1 packaging commit.

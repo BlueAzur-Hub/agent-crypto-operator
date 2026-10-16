@@ -14,9 +14,9 @@
     state:"CANONICAL_PASSIVE_TRUTH_FACADE",
     order:ORDER,
     owners:Object.freeze({
-      router:"js/market-stack.js::ErithDomainSkeletonMirror404174",
+      router:"js/market-stack.js::ErithDomainSkeletonMirror",
       crypto:"app.js · Market Core 38.15.11",
-      metals:"existing app.js Metals runtime + AtlasParallelMarketDemand40465.ensure",
+      metals:"existing app.js Metals runtime + AtlasParallelMarketDemand.ensure",
       parallel:"js/parallel-markets.js::ErithParallelMarketsRuntime",
       deep_reading:"js/market-reading-depth.js"
     }),
@@ -35,7 +35,7 @@
     new_observer:false,
     new_storage_owner:false,
     readiness(){
-      const stack=globalThis.ErithDomainSkeletonMirror404174;
+      const stack=globalThis.ErithDomainSkeletonMirror;
       const parallel=globalThis.ErithParallelMarketsRuntime;
       return Object.freeze({
         router:Boolean(stack && Array.isArray(stack.order) && stack.order.join("|")===ORDER.join("|")),
@@ -47,16 +47,16 @@
       });
     }
   });
-  globalThis.ErithMarketsDomainContract404213=CONTRACT;
+  globalThis.ErithMarketsDomainContract=CONTRACT;
   // Historical public names remain as compatibility aliases, but they no
   // longer claim the obsolete 40.4.166/167 architecture as current truth.
-  globalThis.ErithParallelMarketsRouter404166=Object.freeze({
+  globalThis.ErithParallelMarketsRouter=Object.freeze({
     build:"40.4.166", state:"HISTORICAL_NAME_CURRENT_FACADE", superseded_by:BUILD,
     active_domains:Object.freeze({crypto:{state:"ACTIVE_NATIVE"},metals:{state:"ACTIVE_NATIVE_DEMAND"},indices:{state:"ACTIVE_PARALLEL"},energy:{state:"ACTIVE_PARALLEL"},"cross-market":{state:"ACTIVE_PARALLEL"}}),
     future_domains:Object.freeze({}), readiness:CONTRACT.readiness,
     direct_reinitialize_forbidden:true, second_engine_created:false
   });
-  globalThis.ErithMarketCascade404167=Object.freeze({
+  globalThis.ErithMarketCascade=Object.freeze({
     build:"40.4.167", state:"HISTORICAL_SUPERSEDED", superseded_by:BUILD,
     order:ORDER, shell_visible_does_not_mean_runtime_active:true,
     snapshot:()=>Object.freeze({build:BUILD,state:"SUPERSEDED_BY_CYCLIC_SINGLE_SURFACE",order:ORDER})

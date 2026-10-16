@@ -1,0 +1,60 @@
+{
+  "schema": "agent_crypto_operator_cockpit_contract_v1",
+  "build": "40.6.116",
+  "parent_build": "40.6.115",
+  "market_core": "38.15.11",
+  "owner": "js/operator-cockpit.js",
+  "scope": "human-readable read-only cockpit over existing Strategy A, TRADUS, comparison and Paper truths",
+  "visible_surface": {
+    "decision": true,
+    "operator_action": true,
+    "plain_reason": true,
+    "strategy_a": true,
+    "tradus": true,
+    "agreement": true,
+    "paper_summary": true,
+    "large_typography": true,
+    "expandable_plain_french_details": true,
+    "technical_drilldown_buttons": true
+  },
+  "inputs": [
+    "AgentCryptoStrategyTradusComparativeIntelligence.model",
+    "AgentCryptoTradusStrategyFailClosed.readStrategyA",
+    "AgentCryptoTradusShadow.read",
+    "AgentCryptoTradusPaperObservability406068.stats"
+  ],
+  "fail_closed": {
+    "unknown_or_stale_weakens_conclusion": true,
+    "strategy_stop_is_stop": true,
+    "wait_plus_wait_is_wait": true,
+    "wait_plus_directional_tradus_is_surveillance": true,
+    "directional_agreement_remains_paper_only": true
+  },
+  "protections": {
+    "market_core_modified": false,
+    "web_classic_modified": false,
+    "graph_modified": false,
+    "lecture_technique_modified": false,
+    "aether_modified": false,
+    "atlas_current_modified": false,
+    "oracle_engine_modified": false,
+    "strategy_a_engine_modified": false,
+    "tradus_engine_modified": false,
+    "paper_engine_modified": false,
+    "bridge_protocol_modified": false,
+    "canonical_price_created": false,
+    "financial_signal_created": false,
+    "fetch_added": false,
+    "recurring_timer_added": false,
+    "observer_added": false,
+    "storage_write_added": false,
+    "wallet_added": false,
+    "trading_added": false
+  },
+  "self_test": {
+    "expected": "5/5",
+    "real_order_must_remain_false": true,
+    "financial_signal_must_remain_false": true
+  },
+  "terrain_proof": "pending Firefox Administrator 40.6.116 review after Pages propagation"
+}

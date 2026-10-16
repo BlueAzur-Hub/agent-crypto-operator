@@ -1,0 +1,32 @@
+AGENT-CRYPTO STRATEGY A DURABLE EVIDENCE RECONCILIATION TRUTH — 40.6.460
+
+NEW OWNER
+js/strategy-a-durable-evidence-reconciliation-truth.js
+
+DELIVERY
+js/strategy-a-audit-demand-loader.js
+
+READS ONLY
+AgentCryptoStrategyAExperimentLedger
+AgentCryptoStrategyADurableEvidence.read_cycles()
+AgentCryptoStrategyADurableEvidence.read_after_cost()
+AgentCryptoStrategyADurableEvidence.read_paper_states()
+AgentCryptoStrategyADurableEvidence.read_runtime_gaps()
+AgentCryptoStrategyAAfterCostMetrics
+
+OUTPUT
+visible↔durable cycle overlap
+visible↔durable after-cost overlap
+durable after-cost↔PAPER overlap
+orphan after-cost / orphan PAPER
+COMPLETE+VERIFIED after-cost
+runtime gaps open / closed
+
+NO GATE PROMOTION
+NO THRESHOLD CHANGE
+NO STORAGE WRITE
+NO NETWORK
+NO TIMER
+NO OBSERVER
+NO REAL ORDER
+MARKET CORE 38.15.11 PRESERVED

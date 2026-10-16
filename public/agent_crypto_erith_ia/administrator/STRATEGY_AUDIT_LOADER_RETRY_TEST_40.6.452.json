@@ -1,0 +1,38 @@
+{
+  "version": "40.6.452",
+  "test": "STRATEGY_A_AUDIT_DEMAND_LOADER_RETRY",
+  "engine": "Node.js isolated fake DOM/event harness",
+  "pass": true,
+  "cases": {
+    "syntax": {
+      "pass": true
+    },
+    "self_test": {
+      "pass": true
+    },
+    "transport_load_without_expected_api": {
+      "pass": true,
+      "expected": "ensure=false; failed node removed; last_error=load-failed:cost-wait"
+    },
+    "explicit_second_ensure": {
+      "pass": true,
+      "expected": "cost-wait -> oracle-cost -> execution-cost load successfully"
+    },
+    "stale_loaded_1_without_api": {
+      "pass": true,
+      "expected": "stale script removed and replacement succeeds"
+    },
+    "no_automatic_retry_loop": {
+      "pass": true
+    }
+  },
+  "final_snapshot": {
+    "state": "ready",
+    "last_error": "",
+    "simulation_open": true,
+    "cost_wait_loaded": true,
+    "oracle_cost_loaded": true,
+    "execution_cost_loaded": true
+  },
+  "note": "The harness tests the exact 40.6.452 candidate loader before commit. Firefox operator validation remains separate."
+}

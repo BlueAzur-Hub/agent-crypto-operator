@@ -1,0 +1,36 @@
+/* Seven Heaven · Historique · F11 cockpit R4 · shared visual layer */
+/* R1 inventory and R3 reader: preserve collector, browser verification and archive owners. */
+:root{font:clamp(12px,.82vw,15px)/1.4 system-ui,-apple-system,sans-serif}
+*{box-sizing:border-box}body{max-width:min(97vw,1540px);margin:auto;padding:clamp(9px,1vw,18px);
+background:radial-gradient(ellipse at 83% 0,rgba(45,118,148,.14),transparent 57%)}
+header{min-height:50px;align-items:center;padding:0 3px 5px;gap:15px}
+h1{font-size:clamp(21px,1.65vw,28px);letter-spacing:-.03em;margin-bottom:2px}
+h2{font-size:clamp(14px,1vw,17px);margin:0 0 7px}
+header p{margin:2px 0 4px}.muted{color:#a8bed2}
+.pane,.panel{margin:8px 0;padding:clamp(10px,.85vw,15px);border-color:#415d77;
+border-radius:11px;box-shadow:0 6px 22px #00000016}
+.pane>p,.panel>p{margin:5px 0 9px}
+.note{padding:7px 11px;background:#0d2033;border-color:#77b9d0}
+button{padding:8px 13px;border-radius:8px}
+button:hover{background:#296f8a}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid #86d4eb;outline-offset:3px}
+.cards,.metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
+.card,.metric{min-width:0;padding:9px 12px;background:linear-gradient(140deg,#15324a,#0c2237);border-color:#4c6982}
+.card b,.metric b{font-size:clamp(20px,1.8vw,27px);font-variant-numeric:tabular-nums}
+.card small,.metric small{color:#bbd0e0}
+table{font-variant-numeric:tabular-nums}
+th,td{padding:6px 8px}
+th{background:#193147;position:sticky;top:0;z-index:1}
+.scroll{overflow:auto;max-height:min(44vh,445px)}
+summary{cursor:pointer;font-weight:700;list-style:revert;padding:3px 1px}
+details .scroll{margin-top:10px}
+details[open]{background:#152b3f}
+.two-col,.reader-foot{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.two-col .pane,.reader-foot .panel{margin:0;min-width:0}
+.reader-foot{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}
+#github .card{display:inline-block;margin:4px}
+@media(max-width:900px){body{max-width:100%;padding:10px}.cards,.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+.two-col,.reader-foot{grid-template-columns:minmax(0,1fr)}}
+@media(max-height:720px) and (min-width:900px){body{padding:8px}.pane,.panel{padding:10px;margin:6px 0}
+h1{font-size:20px}h2{font-size:14px}td,th{padding:4px 8px}.card,.metric{padding:7px 11px}}
+@media(prefers-reduced-motion:no-preference){button{transition:background-color .18s}}

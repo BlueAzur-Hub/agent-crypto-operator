@@ -1,0 +1,51 @@
+AGENT-CRYPTO AETHER SOURCE READINESS TRUTH — 40.6.453
+=======================================================
+
+FUNCTIONAL OWNER
+----------------
+js/aether.js
+
+ROOT CAUSE
+----------
+Aether "SOURCES PRÊTES" ignored Source Intelligence + freshness gate.
+
+FIX
+---
+PRÊTES now requires:
+- Binance complete
+- Book ready
+- Atlas ready
+- News ready
+- Source Intelligence state=ready
+- freshness_gate.ready=true
+- CEX comparable complete
+
+FAIL CLOSED
+-----------
+source API missing        -> PARTIELLES
+source intelligence null  -> PARTIELLES
+state partial/stale       -> PARTIELLES
+freshness gate false      -> PARTIELLES
+CEX incomplete            -> PARTIELLES
+
+EVENT-DRIVEN REFRESH
+--------------------
+erith:source-intelligence
+erith:source-intelligence-auto
+erith:private-source-runtime-loaded
+
+PROTECTED
+---------
+Backend .441
+Graphique .442
+Oracle .445
+HTML .448
+Readability .449
+Execution Cost freshness .450
+Execution Cost table layout .451
+Strategy loader .452
+Market Core 38.15.11
+
+NO STRATEGY / ORACLE THRESHOLD CHANGE
+NO BACKEND BUSINESS CHANGE
+NO NEW TIMER / OBSERVER / STORAGE / BUSINESS NETWORK

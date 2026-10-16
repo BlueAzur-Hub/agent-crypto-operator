@@ -1,0 +1,38 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.511
+Release: DEPTH STATIC OVERLAY · NO FOLLOW LOOP
+Parent: 40.6.510
+Market Core: 38.15.11 UNCHANGED
+
+MODIFIED
+M public/agent_crypto_erith_ia/administrator/js/okx-microstructure-406499.js
+M public/agent_crypto_erith_ia/administrator/index.html
+M public/agent_crypto_erith_ia/administrator/build.json
+M public/agent_crypto_erith_ia/administrator/views/atlas.html
+M public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+
+ADDED
+A public/agent_crypto_erith_ia/administrator/index-40.6.511.html
+A public/agent_crypto_erith_ia/administrator/DEPTH_STATIC_OVERLAY_NO_FOLLOW_40.6.511.md
+A public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.511.txt
+A .github/scripts/agent_crypto_depth_static_overlay_guard_406511.py
+A .github/workflows/agent-crypto-package-406511.yml
+
+REMOVED BEHAVIOR
+- dockSyncTimer
+- 180 ms continuous #detailPanel geometry mirror
+- scroll-follow positioning
+- docked resize-follow positioning
+
+PRESERVED
+- independent document.body portal
+- one-shot snap on open
+- one-shot snap on redock
+- native controls ⠿ — □ ⤢ ×
+- detached independent drag
+- 40.6.510 FRESH/STALE/context truth
+- Backend 1.4.4 / Bridge 1.9.13
+- Market Core / Strategy / Cost Gate / Oracle / Aether / Lecture Technique logic
+- no wallet / private API / real execution
+
+NEXT
+Firefox terrain proof, then 40.6.512 AbortSignal transport repair.

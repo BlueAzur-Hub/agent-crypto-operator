@@ -1,0 +1,680 @@
+/* Agent-Crypto @erith.IA — Build 40.6.75
+   AETHER WATCH V2 — CANONICAL FRAME / READABILITY
+
+   Canonical presentation layer after the exact V2 backplate decodes.
+   C1–C5 were laboratory candidates; this file is the single promoted V2 styling owner.
+
+   Scope:
+   - preserve the 1672×941 V2 artwork unchanged;
+   - recadre the live DOM inside the painted capsules;
+   - keep the same radial composition at floating / maximized / F11 sizes;
+   - keep all five market assets visible;
+   - preserve useful Atlas / Oracle / Sources information instead of hiding it;
+   - no data owner, Market Core, storage, network, observer or timer ownership.
+*/
+
+html[data-aether-backplate-v2="ready"] .aether46-stage {
+  background-image:url('./assets/aether/aether-observatory-master-v2.png') !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+  background-size:100% 100% !important;
+}
+
+/* ==========================================================================
+   1. PAINTED GEOMETRY — one measured V2 map, no candidate stacking.
+   ========================================================================== */
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="system"] {
+  left:14.75% !important; top:16.00% !important; width:21.40% !important; height:14.45% !important;
+  padding:1.05% .72% .92% 6.70% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="sources"] {
+  left:15.00% !important; top:32.55% !important; width:20.75% !important; height:15.55% !important;
+  padding:1.06% .68% .94% 6.70% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="atlas"] {
+  left:14.90% !important; top:50.10% !important; width:21.00% !important; height:16.25% !important;
+  padding:1.05% .68% .92% 6.75% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="convergence"] {
+  left:36.45% !important; top:7.15% !important; width:25.90% !important; height:14.70% !important;
+  padding:1.02% .76% .90% 7.45% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="divergence"] {
+  left:62.85% !important; top:15.85% !important; width:22.05% !important; height:14.70% !important;
+  padding:1.04% .70% .90% 6.90% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="market"] {
+  left:63.00% !important; top:32.45% !important; width:22.15% !important; height:15.85% !important;
+  padding:1.05% .66% .92% 6.85% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="events"] {
+  left:62.95% !important; top:50.00% !important; width:21.90% !important; height:16.45% !important;
+  padding:1.05% .66% .92% 6.85% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="oracle"] {
+  left:22.85% !important; top:69.00% !important; width:23.60% !important; height:14.20% !important;
+  padding:.92% .66% .82% 7.15% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="weather"] {
+  left:52.10% !important; top:68.95% !important; width:23.65% !important; height:14.35% !important;
+  padding:.92% .66% .82% 7.05% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-system-banner {
+  left:68.15% !important; top:3.20% !important; width:22.80% !important; height:6.55% !important;
+  padding:.48cqw .82cqw .44cqw 3.10cqw !important;
+}
+
+/* Maximized 40.6.74 is already reframed to 16:9 by the canonical presentation bridge.
+   The stage therefore fills the Aether window exactly instead of letterboxing. */
+html[data-aether-backplate-v2="ready"]
+#atlasAetherStatusPanel.admin-native-maximized .aether46-stage {
+  width:100cqw !important;
+  height:100cqh !important;
+  transform:translate(-50%,-50%) !important;
+}
+
+/* ==========================================================================
+   2. OPTICAL FRAMING — status stays near the lamp; facts use the new room.
+   ========================================================================== */
+html[data-aether-backplate-v2="ready"] .aether46-card {
+  min-width:0 !important;
+  min-height:0 !important;
+  overflow:hidden !important;
+  box-sizing:border-box !important;
+}
+
+/* 40.6.75 — ICON-SAFE LIVE TYPOGRAPHY
+   The V2 PNG owns every luminous icon. Live facts start in a measured clear lane
+   to the right of that icon; no text is allowed to paint across the emblem. */
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="system"],
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="sources"],
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="atlas"],
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="convergence"],
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="divergence"],
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="oracle"],
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="weather"] {
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card header {
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:clamp(4px,.34cqw,7px) !important;
+  margin:0 0 clamp(4px,.36cqw,7px) !important;
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card header span {
+  flex:0 1 auto !important;
+  min-width:0 !important;
+  color:#63ddff !important;
+  font-size:clamp(11px,.82cqw,15px) !important;
+  line-height:1 !important;
+  font-weight:900 !important;
+  letter-spacing:.018em !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card header b {
+  flex:0 1 auto !important;
+  min-width:0 !important;
+  max-width:44% !important;
+  color:#64ffd4 !important;
+  font-size:clamp(8px,.50cqw,10px) !important;
+  line-height:1 !important;
+  font-weight:900 !important;
+  letter-spacing:0 !important;
+  text-align:right !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card footer {
+  margin-top:clamp(3px,.34cqw,6px) !important;
+  color:#95cadd !important;
+  font-size:clamp(8px,.48cqw,10px) !important;
+  line-height:1.12 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+/* SYSTÈME */
+html[data-aether-backplate-v2="ready"] .aether46-system-metrics {
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:.45cqw !important;
+  margin:.04cqw 0 .08cqw !important;
+  align-items:center !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-system-metrics small {
+  font-size:clamp(8px,.48cqw,10px) !important;
+  line-height:1 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-system-metrics strong {
+  margin-top:.20cqw !important;
+  font-size:clamp(13px,.82cqw,16px) !important;
+  line-height:1 !important;
+}
+
+/* SOURCES — 2×2 is the real V2 framing; no four-column squeeze. */
+html[data-aether-backplate-v2="ready"] .aether46-source-metrics {
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  column-gap:.78cqw !important;
+  row-gap:.42cqw !important;
+  margin:.04cqw 0 .05cqw !important;
+  align-content:start !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-source-metrics div {
+  min-width:0 !important;
+  border-right:0 !important;
+  padding-right:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-source-metrics small {
+  font-size:clamp(8px,.47cqw,9.5px) !important;
+  line-height:1 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-source-metrics strong {
+  margin-top:.14cqw !important;
+  font-size:clamp(10px,.65cqw,13px) !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+/* ATLAS — score, state, reports and resident line all remain; only overflow clips. */
+html[data-aether-backplate-v2="ready"] .aether46-atlas-main {
+  display:grid !important;
+  grid-template-columns:auto minmax(0,1fr) !important;
+  align-items:baseline !important;
+  gap:.55cqw !important;
+  margin-top:.02cqw !important;
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-main > strong {
+  font-size:clamp(20px,1.30cqw,27px) !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-main > span {
+  min-width:0 !important;
+  font-size:clamp(9px,.59cqw,12px) !important;
+  line-height:1.05 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-sub {
+  display:grid !important;
+  grid-template-columns:auto minmax(0,1fr) !important;
+  gap:.48cqw !important;
+  margin-top:.44cqw !important;
+  align-items:center !important;
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-sub b {
+  font-size:clamp(9px,.60cqw,12px) !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-sub span {
+  min-width:0 !important;
+  font-size:clamp(8px,.48cqw,10px) !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+/* CONVERGENCE */
+html[data-aether-backplate-v2="ready"] .aether46-convergence-main {
+  display:flex !important;
+  align-items:baseline !important;
+  gap:.52cqw !important;
+  margin-top:.02cqw !important;
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-convergence-main > strong {
+  font-size:clamp(23px,1.48cqw,31px) !important;
+  line-height:1 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-convergence-main > span {
+  min-width:0 !important;
+  font-size:clamp(10px,.66cqw,13px) !important;
+  line-height:1.08 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+html[data-aether-backplate-v2="ready"]
+.aether46-card[data-aether-card-406046="convergence"] footer {
+  font-size:clamp(9px,.55cqw,11px) !important;
+}
+
+/* DIVERGENCE */
+html[data-aether-backplate-v2="ready"]
+.aether46-card[data-aether-card-406046="divergence"] p {
+  margin:.02cqw 0 0 !important;
+  max-height:3.55em !important;
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:3 !important;
+  overflow:hidden !important;
+  font-size:clamp(10px,.62cqw,12px) !important;
+  line-height:1.18 !important;
+}
+
+/* MARCHÉ — breadth + five assets are one indivisible first-glance unit. */
+html[data-aether-backplate-v2="ready"] .aether46-breadth {
+  display:flex !important;
+  justify-content:space-between !important;
+  align-items:center !important;
+  gap:.28cqw !important;
+  min-width:0 !important;
+  font-size:clamp(9px,.54cqw,11px) !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-breadth strong {
+  font-size:clamp(11px,.68cqw,14px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-coins {
+  display:grid !important;
+  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  gap:.16cqw !important;
+  margin-top:.56cqw !important;
+  padding-top:.34cqw !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-coins span,
+html[data-aether-backplate-v2="ready"] .aether46-coins span:nth-child(n+4) {
+  display:block !important;
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-coins b {
+  font-size:clamp(7px,.44cqw,9px) !important;
+  line-height:1 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-coins strong {
+  margin-top:.15cqw !important;
+  font-size:clamp(8px,.48cqw,10px) !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+}
+
+/* ÉVÉNEMENTS — three clean rows large, two only when genuinely compact. */
+html[data-aether-backplate-v2="ready"] .aether46-events [data-aether46-events] {
+  display:grid !important;
+  gap:.30cqw !important;
+  max-height:5.5cqw !important;
+  overflow:hidden !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-event-row {
+  display:grid !important;
+  grid-template-columns:2.55cqw 3.05cqw minmax(0,1fr) !important;
+  gap:.28cqw !important;
+  align-items:start !important;
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-event-row time,
+html[data-aether-backplate-v2="ready"] .aether46-event-row b,
+html[data-aether-backplate-v2="ready"] .aether46-event-row span {
+  font-size:clamp(8px,.47cqw,10px) !important;
+  line-height:1.08 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-event-row time,
+html[data-aether-backplate-v2="ready"] .aether46-event-row b {
+  white-space:nowrap !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-event-row span {
+  min-width:0 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-event-row:nth-child(n+4) {
+  display:none !important;
+}
+
+/* ORACLE — 2×2 framed around the icon, not four microscopic columns. */
+html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics {
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  column-gap:.78cqw !important;
+  row-gap:.38cqw !important;
+  margin-top:.08cqw !important;
+  align-content:start !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics div {
+  min-width:0 !important;
+  border-right:0 !important;
+  padding-right:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics small {
+  font-size:clamp(8px,.47cqw,9.5px) !important;
+  line-height:1 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics strong {
+  margin-top:.14cqw !important;
+  font-size:clamp(10px,.64cqw,13px) !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+/* MÉTÉO */
+html[data-aether-backplate-v2="ready"] .aether46-weather-metrics {
+  grid-template-columns:1.15fr .78fr 1fr !important;
+  gap:.48cqw !important;
+  margin-top:.10cqw !important;
+  align-items:start !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-weather-metrics div {
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-weather-metrics small {
+  font-size:clamp(8px,.47cqw,9.5px) !important;
+  line-height:1 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-weather-metrics strong {
+  margin-top:.14cqw !important;
+  font-size:clamp(10px,.64cqw,13px) !important;
+  line-height:1 !important;
+}
+html[data-aether-backplate-v2="ready"]
+.aether46-card[data-aether-card-406046="weather"] footer {
+  font-size:clamp(8px,.46cqw,9.5px) !important;
+}
+
+/* Sacred center — keep the V2 nucleus aligned below the baked AETHER identity. */
+html[data-aether-backplate-v2="ready"] .aether46-core {
+  left:40.20% !important;
+  top:46.20% !important;
+  width:19.60% !important;
+  height:17.40% !important;
+  padding:.08% .78% .16% !important;
+  overflow:hidden !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-core > span {
+  font-size:clamp(10px,.61cqw,12px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-core > strong {
+  margin-top:.16cqw !important;
+  font-size:clamp(28px,2.02cqw,38px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-core > small,
+html[data-aether-backplate-v2="ready"] .aether46-core > b {
+  font-size:clamp(9px,.52cqw,10.5px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-core > p {
+  margin-top:.16cqw !important;
+  max-height:2.25em !important;
+  font-size:clamp(8px,.46cqw,9.5px) !important;
+  line-height:1.10 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-core > footer {
+  margin-top:.20cqw !important;
+  max-height:1.12em !important;
+  font-size:clamp(7px,.40cqw,8.5px) !important;
+  line-height:1.08 !important;
+}
+
+/* Top status strip follows the same optical scale as the cards. */
+html[data-aether-backplate-v2="ready"] .aether46-system-banner {
+  grid-template-columns:minmax(0,1fr) 34% !important;
+  gap:.46cqw !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-system-banner > div:first-child b {
+  font-size:clamp(8px,.50cqw,10px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-system-banner > div:first-child span {
+  font-size:clamp(8px,.47cqw,9px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-clock small {
+  font-size:clamp(7px,.42cqw,8px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-clock strong {
+  font-size:clamp(14px,.92cqw,18px) !important;
+}
+
+/* ==========================================================================
+   3. FLOATING / MEDIUM — recadre, do not amputate.
+   ========================================================================== */
+@container aether49 (max-width:980px) {
+  html[data-aether-backplate-v2="ready"] .aether46-card header {
+    gap:3px !important;
+    margin-bottom:4px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-card header span {
+    font-size:9.5px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-card header b {
+    max-width:40% !important;
+    font-size:6.8px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-card footer {
+    margin-top:3px !important;
+    font-size:7px !important;
+  }
+
+  html[data-aether-backplate-v2="ready"] .aether46-system-metrics {
+    gap:3px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-system-metrics small {
+    font-size:6.6px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-system-metrics strong {
+    font-size:10.5px !important;
+  }
+
+  html[data-aether-backplate-v2="ready"] .aether46-source-metrics,
+  html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics {
+    column-gap:6px !important;
+    row-gap:3px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-source-metrics small,
+  html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics small,
+  html[data-aether-backplate-v2="ready"] .aether46-weather-metrics small {
+    font-size:6.4px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-source-metrics strong,
+  html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics strong,
+  html[data-aether-backplate-v2="ready"] .aether46-weather-metrics strong {
+    font-size:8.6px !important;
+  }
+
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-main > strong {
+    font-size:17px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-main > span {
+    font-size:8px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-sub {
+    margin-top:3px !important;
+    gap:4px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-sub b {
+    font-size:7.6px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-sub span {
+    font-size:6.6px !important;
+  }
+
+  html[data-aether-backplate-v2="ready"] .aether46-convergence-main > strong {
+    font-size:20px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-convergence-main > span {
+    font-size:8.4px !important;
+  }
+  html[data-aether-backplate-v2="ready"]
+  .aether46-card[data-aether-card-406046="convergence"] footer {
+    font-size:7.2px !important;
+  }
+  html[data-aether-backplate-v2="ready"]
+  .aether46-card[data-aether-card-406046="divergence"] p {
+    -webkit-line-clamp:2 !important;
+    max-height:2.3em !important;
+    font-size:8.5px !important;
+  }
+  html[data-aether-backplate-v2="ready"]
+  .aether46-card[data-aether-card-406046="divergence"] footer {
+    font-size:6.8px !important;
+  }
+
+  html[data-aether-backplate-v2="ready"] .aether46-breadth {
+    gap:2px !important;
+    font-size:7.2px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-breadth strong {
+    font-size:8.7px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-coins {
+    grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+    gap:1px !important;
+    margin-top:4px !important;
+    padding-top:3px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-coins span,
+  html[data-aether-backplate-v2="ready"] .aether46-coins span:nth-child(n+4) {
+    display:block !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-coins b {
+    font-size:6px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-coins strong {
+    font-size:6.9px !important;
+  }
+
+  html[data-aether-backplate-v2="ready"] .aether46-events [data-aether46-events] {
+    gap:3px !important;
+    max-height:36px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-event-row {
+    grid-template-columns:30px 40px minmax(0,1fr) !important;
+    gap:3px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-event-row time,
+  html[data-aether-backplate-v2="ready"] .aether46-event-row b,
+  html[data-aether-backplate-v2="ready"] .aether46-event-row span {
+    font-size:6.8px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-event-row:nth-child(n+3) {
+    display:none !important;
+  }
+
+  html[data-aether-backplate-v2="ready"] .aether46-weather-metrics {
+    gap:4px !important;
+  }
+
+  html[data-aether-backplate-v2="ready"] .aether46-core {
+    top:46.10% !important;
+    height:17.55% !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-core > span {
+    font-size:8.8px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-core > strong {
+    font-size:27px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-core > small,
+  html[data-aether-backplate-v2="ready"] .aether46-core > b {
+    font-size:7.5px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-core > p {
+    font-size:7.3px !important;
+    line-height:1.08 !important;
+    max-height:2.2em !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-core > footer {
+    display:none !important;
+  }
+
+  html[data-aether-backplate-v2="ready"] .aether46-system-banner {
+    grid-template-columns:minmax(0,1fr) 31% !important;
+    gap:3px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-system-banner > div:first-child b {
+    font-size:6.7px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-system-banner > div:first-child span {
+    font-size:6.3px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-clock small {
+    font-size:5.8px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-clock strong {
+    font-size:12px !important;
+  }
+}
+
+/* Small emergency stage: preserve the composition and Top 5; remove only tertiary prose. */
+@container aether49 (max-width:900px) {
+  html[data-aether-backplate-v2="ready"] .aether46-card header span {
+    font-size:8.6px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-card header b {
+    font-size:5.8px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-card footer,
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-sub span,
+  html[data-aether-backplate-v2="ready"] .aether46-quote,
+  html[data-aether-backplate-v2="ready"] .aether46-bottom-left,
+  html[data-aether-backplate-v2="ready"] .aether46-bottom-right {
+    display:none !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-coins {
+    grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-coins span:nth-child(n+4) {
+    display:block !important;
+  }
+}
+
+/* ==========================================================================
+   4. WORKBENCH — canonical 40.6.75 identity.
+   ========================================================================== */
+#atlasAetherWorkbench .awb-kicker {
+  font-size:0 !important;
+}
+#atlasAetherWorkbench .awb-kicker::after {
+  content:"AETHER WORKBENCH · 40.6.75";
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-weight:950;
+  color:#63edff;
+}
+#atlasAetherWorkbench .awb-body {
+  padding:20px 22px 24px !important;
+}
+#atlasAetherWorkbench .awb-intro {
+  margin-bottom:14px !important;
+}
+#atlasAetherWorkbench .awb-columns,
+#atlasAetherWorkbench .awb-row {
+  grid-template-columns:88px 88px 84px minmax(0,1fr) !important;
+  gap:12px !important;
+}
+#atlasAetherWorkbench .awb-row {
+  padding:13px 15px !important;
+}
+#atlasAetherWorkbench .awb-detail {
+  font-size:14px !important;
+  line-height:1.42 !important;
+}
+#atlasAetherWorkbench .awb-details {
+  gap:14px !important;
+}
+#atlasAetherWorkbench .awb-card {
+  min-height:128px !important;
+  padding:17px 18px !important;
+}
+#atlasAetherWorkbench .awb-card p {
+  font-size:15px !important;
+  line-height:1.48 !important;
+}
+#atlasAetherWorkbench .awb-watch {
+  margin-top:14px !important;
+  padding:15px 17px !important;
+}

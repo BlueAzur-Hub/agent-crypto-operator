@@ -1,0 +1,37 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.506
+Release: INDEPENDENT DEPTH BODY PORTAL
+Parent: 40.6.505
+Market Core: 38.15.11 UNCHANGED
+
+MODIFIED
+M public/agent_crypto_erith_ia/administrator/index.html
+M public/agent_crypto_erith_ia/administrator/build.json
+M public/agent_crypto_erith_ia/administrator/js/okx-microstructure-406499.js
+M public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+
+ADDED
+A public/agent_crypto_erith_ia/administrator/index-40.6.506.html
+A public/agent_crypto_erith_ia/administrator/OKX_DEPTH_INDEPENDENT_PORTAL_40.6.506.md
+A public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.506.txt
+A .github/scripts/agent_crypto_okx_depth_independent_portal_guard_406506.py
+A .github/workflows/agent-crypto-package-406506.yml
+
+ARCHITECTURE
+- Depth is always a direct child of document.body
+- Docking mirrors #detailPanel rectangle only
+- no reparenting into #detailPanel / #analyste
+- detached drag moves only Depth
+- pointer events isolated from Graphique window manager
+
+PRESERVED
+- local Backend 8790 /orderbook
+- 2 s open-only polling
+- Market Core 38.15.11
+- Strategy / Cost Gate
+- Oracle / Aether / Atlas CURRENT
+- Lecture Technique logic
+- Web Classique
+- Candles zoom/pan
+- no private API / wallet / real order
+
+TERRAIN: PENDING FIREFOX RYZEN

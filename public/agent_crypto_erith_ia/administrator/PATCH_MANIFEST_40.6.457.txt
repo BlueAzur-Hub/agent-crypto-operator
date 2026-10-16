@@ -1,0 +1,46 @@
+AGENT-CRYPTO PRIVATE SOURCE MOUNT CONTRACT HARDENING — 40.6.457
+==================================================================
+
+FUNCTIONAL OWNER
+----------------
+js/views/private-source-demand-loader.js
+
+DELIVERY OWNER
+--------------
+js/post-boot-runtime-loader.js (logic unchanged, child token 40.6.457)
+index.html (post-boot delivery token 40.6.457)
+
+FIX
+---
+owner API available
++ owner.mount() === true
++ AgentCryptoDexFreshnessGuard.active === true
++ bounded downstream == ready
+= runtime READY + erith:private-source-runtime-loaded
+
+FAIL CLOSED
+-----------
+owner missing          -> error / false / no ready event
+owner mount false      -> error / false / no downstream / no ready event
+owner mount exception  -> error / false / no downstream / no ready event
+freshness not active   -> error / false / no ready event
+downstream timeout     -> error / false / no ready event
+downstream error       -> error / false / no ready event
+
+DUPLICATE MOUNT
+---------------
+The pre-mount call in ensure() is removed.
+One demand performs one owner mount attempt.
+
+SNAPSHOT
+--------
+source_owner_api_ready
+source_owner_mounted
+source_owner_ready
+freshness_guard_ready
+downstream_state
+runtime_ready
+last_error
+
+NO NEW TIMER / OBSERVER / STORAGE OWNER / BUSINESS ENDPOINT / REAL ORDER
+NO SOURCE TRUTH MATH / STRATEGY / ORACLE / AETHER / EXECUTION COST / MARKET CORE CHANGE

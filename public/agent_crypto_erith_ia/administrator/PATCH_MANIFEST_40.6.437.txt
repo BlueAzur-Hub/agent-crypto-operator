@@ -1,0 +1,29 @@
+AGENT-CRYPTO DELIVERY MANIFEST — 40.6.437
+================================================
+
+Build: 40.6.437
+Release: BACKEND SOURCE TRUTH RESIDENCY RECOVERY
+Functional commit: fd96a0283f61a0c0b2c0535cd11c05cedf151308
+Market Core: 38.15.11
+
+BOUNDARY
+--------
+Patch borné Agent-Crypto. Pas une archive complète du dépôt.
+Archive root: administrator/
+
+CONTENTS
+--------
+4e3b4c3b10f8ae33de43b8877c7ad6922f455eb4318073e909cec053db6454d8  administrator/js/strategy-a-execution-cost-truth.js
+3e4885dedf3fe53cbf0eed2fac9ed80f0a4dac6aff9840e31075ba02722bc7ab  administrator/js/views/private-source-demand-loader.js
+f6f0ab3a2ccc1c4e5c4b9521938cb8d5a74e0c399419d1653fd206d309b7835c  administrator/build.json
+f83ed407392372558a4143ef0dbc4e658af570b5965598428655df7da1cbf1e9  administrator/index.html
+f83ed407392372558a4143ef0dbc4e658af570b5965598428655df7da1cbf1e9  administrator/index-40.6.437.html
+449b9a67a029f6d6b0756e6d0069da1c4f5a8a16540bf7c9d6f3c9bdd16010be  administrator/RELEASE.md
+58bb475edde1acf08e7abce266dc95fae868a19974d582e218ba015f136b0b04  administrator/HANDOFF.md
+
+FIX
+---
+- replay Source Truth demand if Backend/API was already open before the secondary loader arrived;
+- let Execution Cost Truth request the existing ErithPrivateSourceDemand owner when needed;
+- preserve .436 fetchJson recovery and canonical Execution Cost panel location;
+- do not modify Private Backend V1.4.2 business logic.

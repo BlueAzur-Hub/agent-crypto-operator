@@ -1,0 +1,537 @@
+/* Agent-Crypto @erith.IA — 40.6.74 Candidate 5
+   AETHER WATCH V2 — FIELD REFRAME / READABILITY
+
+   Firefox field correction from the 18:46 capture.
+   The V2 artwork is preserved. C5 fixes the remaining two presentation faults:
+   1) the floating Aether frame may restore too small / too far right from an old
+      persisted geometry, wasting the left workspace and making every cell tiny;
+   2) the <=1180px candidate typography compressed useful content to 6–8px.
+
+   This stylesheet is the only active 40.6.74 candidate sheet. It sits on top of
+   the validated 40.6.73 Aether base and does not own market/runtime data.
+*/
+
+html[data-aether-backplate-v2="ready"] .aether46-stage {
+  background-image:url('./assets/aether/aether-observatory-master-v2.png') !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+  background-size:100% 100% !important;
+}
+
+/* --------------------------------------------------------------------------
+   V2 painted capsules — measured once against the 1672×941 master.
+   -------------------------------------------------------------------------- */
+html[data-aether-backplate-v2="ready"] .aether46-card {
+  box-sizing:border-box !important;
+  min-width:0 !important;
+  min-height:0 !important;
+  overflow:hidden !important;
+}
+
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="system"] {
+  left:14.75% !important; top:16.00% !important; width:21.40% !important; height:14.45% !important;
+  padding:1.05% 1.05% .92% 5.15% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="sources"] {
+  left:15.00% !important; top:32.55% !important; width:20.75% !important; height:15.55% !important;
+  padding:1.06% 1.00% .94% 5.00% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="atlas"] {
+  left:14.90% !important; top:50.10% !important; width:21.00% !important; height:16.25% !important;
+  padding:1.05% 1.00% .92% 5.05% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="convergence"] {
+  left:36.45% !important; top:7.15% !important; width:25.90% !important; height:14.70% !important;
+  padding:1.02% 1.12% .90% 5.80% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="divergence"] {
+  left:62.85% !important; top:15.85% !important; width:22.05% !important; height:14.70% !important;
+  padding:1.04% 1.05% .90% 5.20% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="market"] {
+  left:63.00% !important; top:32.45% !important; width:22.15% !important; height:15.85% !important;
+  padding:1.02% 1.00% .92% 5.05% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="events"] {
+  left:62.95% !important; top:50.00% !important; width:21.90% !important; height:16.45% !important;
+  padding:1.02% 1.00% .92% 5.05% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="oracle"] {
+  left:22.85% !important; top:69.00% !important; width:23.60% !important; height:14.20% !important;
+  padding:.92% 1.00% .82% 5.30% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="weather"] {
+  left:52.10% !important; top:68.95% !important; width:23.65% !important; height:14.35% !important;
+  padding:.92% 1.00% .82% 5.20% !important;
+}
+
+/* Use the vertical freedom in the new capsules. The two dense streaming cells
+   keep top alignment; the others are optically centered around their icons. */
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="system"],
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="sources"],
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="atlas"],
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="convergence"],
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="divergence"],
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="oracle"],
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="weather"] {
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+}
+
+/* --------------------------------------------------------------------------
+   Typography — readable first, truncation only on secondary prose.
+   -------------------------------------------------------------------------- */
+html[data-aether-backplate-v2="ready"] .aether46-card header {
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:clamp(4px,.34cqw,7px) !important;
+  margin:0 0 clamp(4px,.36cqw,7px) !important;
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card header span {
+  flex:0 1 auto !important;
+  min-width:0 !important;
+  color:#63ddff !important;
+  font:900 clamp(11px,.86cqw,16px)/1 ui-sans-serif,system-ui !important;
+  letter-spacing:.015em !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card header b {
+  flex:0 1 auto !important;
+  min-width:0 !important;
+  max-width:45% !important;
+  color:#64ffd4 !important;
+  font:900 clamp(8px,.52cqw,10px)/1 ui-sans-serif,system-ui !important;
+  letter-spacing:0 !important;
+  text-align:right !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card footer {
+  margin-top:clamp(4px,.34cqw,6px) !important;
+  color:#98ccdf !important;
+  font:650 clamp(8px,.48cqw,10px)/1.12 ui-sans-serif,system-ui !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+/* SYSTÈME */
+html[data-aether-backplate-v2="ready"] .aether46-system-metrics {
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:.44cqw !important;
+  margin:.04cqw 0 .08cqw !important;
+  align-items:center !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-system-metrics small {
+  font-size:clamp(8px,.48cqw,10px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-system-metrics strong {
+  margin-top:.20cqw !important;
+  font-size:clamp(13px,.84cqw,17px) !important;
+}
+
+/* SOURCES — real 2×2 use of the enlarged cell. */
+html[data-aether-backplate-v2="ready"] .aether46-source-metrics {
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  column-gap:.82cqw !important;
+  row-gap:.42cqw !important;
+  margin:.04cqw 0 .05cqw !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-source-metrics div {
+  min-width:0 !important;
+  border-right:0 !important;
+  padding-right:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-source-metrics small {
+  font-size:clamp(8px,.48cqw,10px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-source-metrics strong {
+  margin-top:.14cqw !important;
+  font-size:clamp(10px,.66cqw,13px) !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+/* ATLAS */
+html[data-aether-backplate-v2="ready"] .aether46-atlas-main {
+  display:grid !important;
+  grid-template-columns:auto minmax(0,1fr) !important;
+  align-items:baseline !important;
+  gap:.56cqw !important;
+  margin-top:.02cqw !important;
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-main > strong {
+  font-size:clamp(20px,1.32cqw,28px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-main > span {
+  min-width:0 !important;
+  font-size:clamp(9px,.60cqw,12px) !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-sub {
+  display:grid !important;
+  grid-template-columns:auto minmax(0,1fr) !important;
+  gap:.48cqw !important;
+  margin-top:.44cqw !important;
+  align-items:center !important;
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-sub b {
+  font-size:clamp(9px,.61cqw,12px) !important;
+  white-space:nowrap !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-sub span {
+  min-width:0 !important;
+  font-size:clamp(8px,.49cqw,10px) !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+/* CONVERGENCE */
+html[data-aether-backplate-v2="ready"] .aether46-convergence-main {
+  display:flex !important;
+  align-items:baseline !important;
+  gap:.54cqw !important;
+  margin-top:.02cqw !important;
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-convergence-main > strong {
+  font-size:clamp(24px,1.50cqw,32px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-convergence-main > span {
+  min-width:0 !important;
+  font-size:clamp(10px,.67cqw,13px) !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="convergence"] footer {
+  font-size:clamp(9px,.56cqw,11px) !important;
+}
+
+/* DIVERGENCE */
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="divergence"] p {
+  margin:.02cqw 0 0 !important;
+  max-height:3.55em !important;
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:3 !important;
+  overflow:hidden !important;
+  color:#eaf7ff !important;
+  font:750 clamp(10px,.64cqw,13px)/1.18 ui-sans-serif,system-ui !important;
+}
+
+/* MARCHÉ — never sacrifice XRP/SOL to make the cell fit. */
+html[data-aether-backplate-v2="ready"] .aether46-breadth {
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:.26cqw !important;
+  min-width:0 !important;
+  font-size:clamp(9px,.55cqw,11px) !important;
+  white-space:nowrap !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-breadth strong {
+  font-size:clamp(11px,.69cqw,14px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-coins {
+  display:grid !important;
+  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  gap:.15cqw !important;
+  margin-top:.52cqw !important;
+  padding-top:.32cqw !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-coins span,
+html[data-aether-backplate-v2="ready"] .aether46-coins span:nth-child(n+4) {
+  display:block !important;
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-coins b {
+  font-size:clamp(8px,.47cqw,9px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-coins strong {
+  margin-top:.14cqw !important;
+  font-size:clamp(8px,.50cqw,10px) !important;
+  white-space:nowrap !important;
+}
+
+/* EVENTS */
+html[data-aether-backplate-v2="ready"] .aether46-events [data-aether46-events] {
+  display:grid !important;
+  gap:.28cqw !important;
+  max-height:5.8cqw !important;
+  overflow:hidden !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-event-row {
+  display:grid !important;
+  grid-template-columns:2.55cqw 3.05cqw minmax(0,1fr) !important;
+  gap:.28cqw !important;
+  align-items:start !important;
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-event-row time,
+html[data-aether-backplate-v2="ready"] .aether46-event-row b,
+html[data-aether-backplate-v2="ready"] .aether46-event-row span {
+  font-size:clamp(8px,.48cqw,10px) !important;
+  line-height:1.08 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-event-row time,
+html[data-aether-backplate-v2="ready"] .aether46-event-row b {
+  white-space:nowrap !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-event-row span {
+  min-width:0 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-event-row:nth-child(n+4) {
+  display:none !important;
+}
+
+/* ORACLE — readable 2×2 rather than four compressed columns. */
+html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics {
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  column-gap:.84cqw !important;
+  row-gap:.38cqw !important;
+  margin-top:.03cqw !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics div {
+  min-width:0 !important;
+  border-right:0 !important;
+  padding-right:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics small {
+  font-size:clamp(8px,.48cqw,10px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics strong {
+  margin-top:.14cqw !important;
+  font-size:clamp(10px,.66cqw,13px) !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+/* WEATHER */
+html[data-aether-backplate-v2="ready"] .aether46-weather-metrics {
+  display:grid !important;
+  grid-template-columns:1.15fr .78fr 1fr !important;
+  gap:.50cqw !important;
+  margin-top:.04cqw !important;
+  align-items:start !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-weather-metrics div {
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-weather-metrics small {
+  font-size:clamp(8px,.48cqw,10px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-weather-metrics strong {
+  margin-top:.14cqw !important;
+  font-size:clamp(10px,.66cqw,13px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="weather"] footer {
+  font-size:clamp(8px,.47cqw,10px) !important;
+}
+
+/* Sacred centre. */
+html[data-aether-backplate-v2="ready"] .aether46-core {
+  left:40.20% !important;
+  top:46.05% !important;
+  width:19.60% !important;
+  height:17.70% !important;
+  padding:.06% .78% .14% !important;
+  overflow:hidden !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-core > span {
+  font-size:clamp(10px,.62cqw,12px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-core > strong {
+  margin-top:.15cqw !important;
+  font-size:clamp(29px,2.05cqw,39px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-core > small,
+html[data-aether-backplate-v2="ready"] .aether46-core > b {
+  font-size:clamp(9px,.53cqw,11px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-core > p {
+  margin-top:.15cqw !important;
+  max-height:2.30em !important;
+  font-size:clamp(8px,.47cqw,10px) !important;
+  line-height:1.10 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-core > footer {
+  margin-top:.18cqw !important;
+  max-height:1.15em !important;
+  font-size:clamp(7px,.41cqw,9px) !important;
+  line-height:1.08 !important;
+}
+
+/* Top operational strip. */
+html[data-aether-backplate-v2="ready"] .aether46-system-banner {
+  left:68.15% !important; top:3.20% !important; width:22.80% !important; height:6.55% !important;
+  padding:.46cqw .80cqw .42cqw 3.10cqw !important;
+  grid-template-columns:minmax(0,1fr) 34% !important;
+  gap:.44cqw !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-system-banner > div:first-child b {
+  font-size:clamp(8px,.51cqw,10px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-system-banner > div:first-child span {
+  font-size:clamp(8px,.48cqw,9px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-clock small {
+  font-size:clamp(7px,.43cqw,8px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-clock strong {
+  font-size:clamp(14px,.94cqw,18px) !important;
+}
+
+/* C5 maximized frame is already 16:9, so stage fills it exactly. */
+html[data-aether-backplate-v2="ready"]
+#atlasAetherStatusPanel.admin-native-maximized .aether46-stage {
+  width:100cqw !important;
+  height:100cqh !important;
+  transform:translate(-50%,-50%) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Medium floating state — do NOT repeat C4's 6px collapse.
+   The normal Firefox capture is expected to migrate to ~1200–1250px when the
+   Lecture Technique rail is present; these rules are only the true fallback.
+   -------------------------------------------------------------------------- */
+@container aether49 (max-width:1180px) {
+  html[data-aether-backplate-v2="ready"] .aether46-card header {
+    gap:3px !important;
+    margin-bottom:3px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-card header span {
+    font-size:10px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-card header b {
+    max-width:42% !important;
+    font-size:7.5px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-card footer {
+    margin-top:2px !important;
+    font-size:7.8px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-system-metrics small,
+  html[data-aether-backplate-v2="ready"] .aether46-source-metrics small,
+  html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics small,
+  html[data-aether-backplate-v2="ready"] .aether46-weather-metrics small {
+    font-size:7.4px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-system-metrics strong {
+    font-size:12px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-source-metrics strong,
+  html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics strong,
+  html[data-aether-backplate-v2="ready"] .aether46-weather-metrics strong {
+    font-size:9.4px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-main > strong {
+    font-size:19px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-main > span {
+    font-size:8.4px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-sub b {
+    font-size:8px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-sub span {
+    font-size:7.2px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-convergence-main > strong {
+    font-size:22px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-convergence-main > span {
+    font-size:9px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="divergence"] p {
+    -webkit-line-clamp:2 !important;
+    max-height:2.35em !important;
+    font-size:9px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-breadth {
+    font-size:8px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-breadth strong {
+    font-size:9.5px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-coins b {
+    font-size:7px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-coins strong {
+    font-size:7.8px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-events [data-aether46-events] {
+    gap:3px !important;
+    max-height:40px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-event-row {
+    grid-template-columns:32px 42px minmax(0,1fr) !important;
+    gap:3px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-event-row time,
+  html[data-aether-backplate-v2="ready"] .aether46-event-row b,
+  html[data-aether-backplate-v2="ready"] .aether46-event-row span {
+    font-size:7.4px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-event-row:nth-child(n+3) {
+    display:none !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-core > span { font-size:9px !important; }
+  html[data-aether-backplate-v2="ready"] .aether46-core > strong { font-size:28px !important; }
+  html[data-aether-backplate-v2="ready"] .aether46-core > small,
+  html[data-aether-backplate-v2="ready"] .aether46-core > b { font-size:8px !important; }
+  html[data-aether-backplate-v2="ready"] .aether46-core > p { font-size:7.7px !important; }
+  html[data-aether-backplate-v2="ready"] .aether46-core > footer { display:none !important; }
+  html[data-aether-backplate-v2="ready"] .aether46-system-banner > div:first-child b { font-size:7.4px !important; }
+  html[data-aether-backplate-v2="ready"] .aether46-system-banner > div:first-child span { font-size:7px !important; }
+  html[data-aether-backplate-v2="ready"] .aether46-clock small { font-size:6.5px !important; }
+  html[data-aether-backplate-v2="ready"] .aether46-clock strong { font-size:13px !important; }
+}
+
+@container aether49 (max-width:900px) {
+  html[data-aether-backplate-v2="ready"] .aether46-card footer,
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-sub span,
+  html[data-aether-backplate-v2="ready"] .aether46-quote,
+  html[data-aether-backplate-v2="ready"] .aether46-bottom-left,
+  html[data-aether-backplate-v2="ready"] .aether46-bottom-right {
+    display:none !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-coins,
+  html[data-aether-backplate-v2="ready"] .aether46-coins span:nth-child(n+4) {
+    display:grid !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-coins {
+    grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  }
+}
+
+/* Workbench truth label. */
+#atlasAetherWorkbench .awb-kicker {
+  font-size:0 !important;
+}
+#atlasAetherWorkbench .awb-kicker::after {
+  content:"AETHER WORKBENCH · 40.6.74 C5";
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-weight:950;
+  color:#63edff;
+}

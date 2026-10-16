@@ -1,0 +1,39 @@
+{
+  "schema": "agent_crypto_local_ai_contract_consistency_proof_v1",
+  "build": "40.6.106",
+  "parent": "40.6.105",
+  "owner": "atlasLocalBoundedCommentTruthGuard",
+  "runtime_patch": "js/local-ai-contract-consistency-406106.js",
+  "loader": "js/version-truth-406086-authority-lock.js",
+  "reproduced_defects": [
+    "top5_false_absence",
+    "market_price_volume_false_absence",
+    "math_false_degradation"
+  ],
+  "guard_strategy": "extend_existing_deterministic_comment_guard_then_reuse_existing_fallback",
+  "synthetic_tests": {
+    "total": 6,
+    "passed": 6,
+    "top5_conflict_rejected": true,
+    "top5_valid_comment_preserved": true,
+    "market_conflict_rejected": true,
+    "market_valid_comment_preserved": true,
+    "math_conflict_rejected": true,
+    "math_valid_comment_preserved": true
+  },
+  "new_recurring_timer": false,
+  "new_observer": false,
+  "new_network_owner": false,
+  "new_storage_owner": false,
+  "trading_changed": false,
+  "wallet_changed": false,
+  "market_core_changed": false,
+  "web_classic_changed": false,
+  "graph_changed": false,
+  "aether_changed": false,
+  "atlas_current_algorithm_changed": false,
+  "oracle_changed": false,
+  "lecture_technique_changed": false,
+  "strategy_a_changed": false,
+  "firefox_terrain_proof": "pending_new_current_or_full_export"
+}

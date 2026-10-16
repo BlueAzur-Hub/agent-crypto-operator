@@ -8,7 +8,7 @@ Generated: **2026-09-08T22:03:48Z**
 The Workbench interaction is valid, but the Observatory's historical stage uses a near-maximum z-index. This lets the 16:9 Aether artwork render above the floating reader when the two overlap. History and Details are functionally correct but need stronger visual priority, more room and more legible reading lanes.
 
 ## 40.6.39 correction
-- Replaces the lazy Workbench payload owner with `js/aether-workbench-406039.js`.
+- Replaces the lazy Workbench payload owner with `js/aether-workbench.js`.
 - Raises the Workbench above the existing Aether stage without touching the Aether stage z-index or global Window Manager.
 - Adds a passive focus scrim below the Workbench and above the Observatory so the artwork remains visible but visually quiet while reading.
 - Increases default Workbench width/height while keeping viewport clamps.

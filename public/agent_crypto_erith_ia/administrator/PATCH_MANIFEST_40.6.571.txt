@@ -1,0 +1,37 @@
+AGENT-CRYPTO ADMINISTRATOR 40.6.571
+WORKSPACE MEMORY CURRENCY LABEL SYNC
+Parent: 40.6.570
+Market Core: 38.15.11 PROTECTED
+
+FUNCTIONAL CHANGE
+- administrator/app.js
+  atlasWorkspaceRenderStrip():
+  hardcoded Prix EUR
+  -> canonical Quote Currency Architecture displayCurrency
+  + rerender on agent-crypto:quote-architecture-changed
+
+RELEASE METADATA / DELIVERY
+- administrator/index.html
+- administrator/index-40.6.571.html
+- administrator/build.json
+- administrator/js/market-microscope-candles.js (build identity only; no logic change)
+- administrator/WORKSPACE_MEMORY_CURRENCY_LABEL_SYNC_40.6.571.md
+- compact delivery workflow now includes administrator/app.js
+
+PROTECTED / UNCHANGED
+- Market Core 38.15.11
+- Profondeur repair and dock contract
+- Lecture Technique
+- Graph data / indicator math
+- Market
+- Math Core
+- Backend 1.4.4
+- Bridge 1.9.13
+- Strategy A / Evidence
+- no order / wallet / new timer / observer / storage owner
+
+TERRAIN
+PENDING FIREFOX:
+USD -> Prix USD
+EUR -> Prix EUR
+USD -> Prix USD

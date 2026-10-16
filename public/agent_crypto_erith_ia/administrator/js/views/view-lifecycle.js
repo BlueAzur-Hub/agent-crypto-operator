@@ -65,7 +65,7 @@
   installed:marketPulseWakeupInstalled
 });
 
-globalThis.ErithAtlasResidentWake40133Retired404256=Object.freeze({
+globalThis.ErithAtlasResidentWake40133Retired=Object.freeze({
   build:"40.4.256",
   retired_owner:"40.4.133 view-lifecycle Atlas resident wake wrapper",
   canonical_owner:"app.js atlasCurrentPendingMarket137",
@@ -83,7 +83,7 @@ globalThis.ErithAtlasResidentWake40133Retired404256=Object.freeze({
 const DEFINITIONS=Object.freeze([
     Object.freeze({id:"projects",label:"Projet @erith.IA · Missions de vie",source:"./views/projects.html",roots:Object.freeze(["#missions-vie",'[data-collapse-key="fonds-erith"]','[data-collapse-key="association-erith"]','[data-collapse-key="aerith-enfance"]','[data-collapse-key="aerith-animaux"]','[data-collapse-key="aerith-terre-vivante"]']),risk:"low"}),
     Object.freeze({id:"operations",label:"03 · Préparation & opérations",source:"./views/operations.html",roots:Object.freeze([".atlas-layout-family-operations",'[data-collapse-key="situation"]','[data-collapse-key="questionnaire"]','[data-collapse-key="briefing"]','[data-collapse-key="planning"]']),risk:"low"}),
-    Object.freeze({id:"system",label:"04 · Expérimentation & système",source:"./views/system.html",roots:Object.freeze([".atlas-layout-family-system","#atlasStorageHealth40198","#atlasGreyPlateForensic40393",'[data-collapse-key="simulation"]','[data-collapse-key="commandes"]','[data-collapse-key="backend"]','[data-collapse-key="safety"]','[data-collapse-key="physical-security"]']),risk:"medium"}),
+    Object.freeze({id:"system",label:"04 · Expérimentation & système",source:"./views/system.html",roots:Object.freeze([".atlas-layout-family-system","#atlasStorageHealth","#atlasGreyPlateForensic",'[data-collapse-key="simulation"]','[data-collapse-key="commandes"]','[data-collapse-key="backend"]','[data-collapse-key="safety"]','[data-collapse-key="physical-security"]']),risk:"medium"}),
     Object.freeze({id:"atlas",label:"02 · Intelligence, mémoire & création",source:"./views/atlas.html",roots:Object.freeze(["#atlas-local-ai-collapse",'[data-collapse-key="auto-reader"]','[data-collapse-key="shared-memory"]','[data-collapse-key="github-memory"]']),risk:"high"}),
     Object.freeze({id:"oracle",label:"Oracle · Analyse prospective & preuves",source:"./views/oracle.html",roots:Object.freeze(["#oracle-models-calibration",'[data-collapse-key="oracle-sources-runtime"]',"#oracle-evidence-explorer"]),risk:"high"})
   ]);
@@ -158,7 +158,7 @@ const DEFINITIONS=Object.freeze([
     label:"Projet @erith.IA · Missions de vie",
     selectors:PROJECTS_RESIDENCY_SELECTORS_406073_R2
   });
-  globalThis.ErithProjectsDemandResidency40412=Object.freeze({
+  globalThis.ErithProjectsDemandResidency=Object.freeze({
     build:"40.4.12",
     integration_build:INTEGRATION_BUILD,
     strategy:"closed-body-same-node-detach",
@@ -192,7 +192,7 @@ const DEFINITIONS=Object.freeze([
     label:"03 · Préparation & opérations",
     selectors:OPERATIONS_RESIDENCY_SELECTORS_406073_R2
   });
-  globalThis.ErithOperationsDemandResidency40413=Object.freeze({
+  globalThis.ErithOperationsDemandResidency=Object.freeze({
     build:"40.4.13",
     integration_build:INTEGRATION_BUILD,
     strategy:"closed-body-same-node-detach",

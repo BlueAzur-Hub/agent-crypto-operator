@@ -1,0 +1,31 @@
+AGENT-CRYPTO RESTORE MANIFEST — 40.6.438
+================================================
+
+Build: 40.6.438
+Release: EMERGENCY RESTORE · 40.6.425 RUNTIME RECOVERY
+Source checkpoint: 40.6.425
+Source commit: 2bcd0459ba7570b81fec194244d1cc5be9a9f426
+Rejected terrain build: 40.6.437
+
+RESTORED EXACT BLOBS
+--------------------
+0e4ae4526d043073ada940a2426811e725dcfb7b  administrator/style.css
+0988c742c62997b022d75a511561302b170d7972  administrator/app.js
+5a778bc78df95c81d8e71576b49347bf933c656a  administrator/js/post-boot-runtime-loader.js
+7060c5bf1b5f6cc88af1e8132f62878d7c486462  administrator/js/views/private-source-demand-loader.js
+
+INDEX
+-----
+administrator/index.html is rebuilt from the 40.6.425 index with:
+- build identity 40.6.438
+- restore release label
+- cache-buster query values 40.6.438
+
+BOUNDARY
+--------
+No data rollback.
+No book_mirror rollback.
+No Market Core change.
+No Aether change.
+No Oracle/Risk/Paper change.
+40.6.429–40.6.437 Strategy audit files remain in Git but are not post-boot residents.

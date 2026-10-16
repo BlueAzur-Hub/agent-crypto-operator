@@ -23,7 +23,7 @@
   let earlySweepDone=false;
   let earlyDetachedDetails=0;
 
-  function earlyDetachClosedBodies40494(){
+  function earlyDetachClosedBodies(){
     if(earlySweepDone)return earlyDetachedDetails;
     earlySweepDone=true;
     const details=[...new Set(selectors.flatMap(selector=>[...document.querySelectorAll(selector)]))]
@@ -47,10 +47,10 @@
     const registration=life.registerClosedBodyFamily({id:"secondary-analysis",label:"Analyse secondaire · News",selectors});
     installed=true;
 
-    if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",earlyDetachClosedBodies40494,{once:true});
-    else earlyDetachClosedBodies40494();
+    if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",earlyDetachClosedBodies,{once:true});
+    else earlyDetachClosedBodies();
 
-    globalThis.ErithSecondaryDomainDemand40494=Object.freeze({
+    globalThis.ErithSecondaryDomainDemand=Object.freeze({
       build:BUILD,
       boot_fix:BOOT_FIX,
       boot_fix_source:BOOT_FIX_SOURCE,

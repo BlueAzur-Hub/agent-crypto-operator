@@ -1,0 +1,34 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.502
+Release: OKX ORDERBOOK DEPTH BOTTOM DOCK
+Parent: 40.6.501
+Market Core: 38.15.11 UNCHANGED
+
+MODIFIED
+M public/agent_crypto_erith_ia/administrator/index.html
+M public/agent_crypto_erith_ia/administrator/build.json
+M public/agent_crypto_erith_ia/administrator/js/okx-microstructure-406499.js
+M public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+
+ADDED
+A public/agent_crypto_erith_ia/administrator/index-40.6.502.html
+A public/agent_crypto_erith_ia/administrator/OKX_ORDERBOOK_DEPTH_DOCK_40.6.502.md
+A public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.502.txt
+A .github/scripts/agent_crypto_okx_depth_dock_guard_406502.py
+A .github/workflows/agent-crypto-package-406502.yml
+
+OPERATOR SURFACE
+- bottom dock instead of right overlay
+- order-book ladder
+- cumulative BID/ASK bars
+- depth bands ±5 / ±10 / ±25 bp
+- local Backend 8790 /orderbook
+- no direct browser OKX fetch in Depth path
+
+PRESERVED
+- 40.6.501 candles zoom/pan/fullspace
+- 40.6.500 candles transport
+- R19 / Backend 1.4.4 / Bridge 1.9.13
+- Market Core / Strategy / Cost Gate / Oracle / Aether / Lecture Technique / Web Classique
+- no real order / wallet / private API
+
+TERRAIN: PENDING FIREFOX RYZEN

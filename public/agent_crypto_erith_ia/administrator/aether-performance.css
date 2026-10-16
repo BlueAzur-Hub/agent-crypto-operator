@@ -1,0 +1,68 @@
+/*
+  Agent-Crypto Administrator — 40.6.70
+  AETHER FIREFOX PERFORMANCE · DRAG PAINT BUDGET
+  Parent: 40.6.69 R1
+
+  Presentation/compositor-only optimization.
+  No geometry owner, no data owner, no timer, no observer, no network/storage owner.
+  Approved Aether artwork, cards, Workbench content and Window Manager behavior stay intact.
+*/
+
+@supports (-moz-appearance:none) {
+  /* Both surfaces already clip their own content. Paint/layout containment keeps
+     their large decorative trees from invalidating the surrounding cockpit. */
+  body.atlas-administrator-mirror #atlasAetherStatusPanel,
+  body.atlas-administrator-mirror #atlasAetherWorkbench {
+    contain: layout paint style !important;
+  }
+
+  body.atlas-administrator-mirror #atlasAetherStatusPanel .aether46-stage {
+    contain: layout paint style !important;
+  }
+
+  /* The historical Window Manager intentionally increases the moving-window
+     shadow to 145px. On Aether this is a very expensive full-frame repaint.
+     During drag only, flatten decorative paint; restore it automatically as
+     soon as the manager removes .admin-native-moving. */
+  body.atlas-administrator-mirror #atlasAetherStatusPanel.admin-native-moving,
+  body.atlas-administrator-mirror .admin-native-moving #atlasAetherStatusPanel,
+  body.atlas-administrator-mirror .admin-native-moving:has(#atlasAetherStatusPanel) {
+    box-shadow: none !important;
+    transition: none !important;
+  }
+
+  body.atlas-administrator-mirror #atlasAetherStatusPanel.admin-native-moving .aether46-stage,
+  body.atlas-administrator-mirror .admin-native-moving #atlasAetherStatusPanel .aether46-stage,
+  body.atlas-administrator-mirror .admin-native-moving:has(#atlasAetherStatusPanel) .aether46-stage {
+    box-shadow: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+
+  /* Preserve every value/card while moving, but temporarily retire decorative
+     per-node shadows/animations and hit testing. This only exists while the
+     operator is actively dragging Aether. */
+  body.atlas-administrator-mirror #atlasAetherStatusPanel.admin-native-moving .aether46-stage *,
+  body.atlas-administrator-mirror .admin-native-moving #atlasAetherStatusPanel .aether46-stage *,
+  body.atlas-administrator-mirror .admin-native-moving:has(#atlasAetherStatusPanel) .aether46-stage * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    transition: none !important;
+    animation-play-state: paused !important;
+    pointer-events: none !important;
+  }
+
+  /* Workbench has its own drag owner (40.6.39). Its large 100px shadow is
+     flattened only while the title bar is actively held. No JS hook needed. */
+  body.atlas-administrator-mirror #atlasAetherWorkbench:has(.awb-head:active) {
+    box-shadow: none !important;
+    transition: none !important;
+  }
+
+  body.atlas-administrator-mirror #atlasAetherWorkbench:has(.awb-head:active) .awb-body,
+  body.atlas-administrator-mirror #atlasAetherWorkbench:has(.awb-head:active) .awb-row,
+  body.atlas-administrator-mirror #atlasAetherWorkbench:has(.awb-head:active) .awb-card {
+    box-shadow: none !important;
+    transition: none !important;
+  }
+}

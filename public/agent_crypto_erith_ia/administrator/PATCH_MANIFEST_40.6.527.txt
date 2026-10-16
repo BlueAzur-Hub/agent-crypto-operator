@@ -1,0 +1,13 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.527
+Parent: 40.6.526
+Release: NEW LISTINGS NAVIGATOR · CONCRETE CT
+CHANGED:
+- administrator/js/new-listings.js
+- version identity / index / loader / atlas view
+- docs / guards / package
+PROTECTED:
+- app.js
+- Market Core 38.15.11
+- Backend 1.4.4 / Bridge 1.9.13
+- OKX transport .526
+- Market/Fiche / Graph / Oracle / Aether / Target Flow / Depth / Candles / Strategy

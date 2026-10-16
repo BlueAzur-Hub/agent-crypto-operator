@@ -1,7 +1,7 @@
 {
-  "schema": "agent_crypto_private_backend_sources_v5",
-  "build": "40.4.62",
-  "backend_version": "1.4.0",
+  "schema": "agent_crypto_private_backend_sources_v6",
+  "build": "40.6.492",
+  "backend_version": "1.4.3",
   "endpoint": "http://127.0.0.1:8790",
   "binding": "loopback_only",
   "mode": "READ_ONLY_PUBLIC_MARKET_DATA",
@@ -30,6 +30,13 @@
       "id": "coinbase",
       "role": "secondary_spot_eur_control",
       "endpoint_family": "https://api.exchange.coinbase.com/products/{product_id}/stats",
+      "authentication": "none",
+      "write_capability": false
+    },
+    {
+      "id": "okx",
+      "role": "secondary_spot_eur_control_plus_read_only_orderbook_evidence",
+      "endpoint_family": "https://www.okx.com/api/v5/market/ticker?instId={asset}-EUR + https://www.okx.com/api/v5/market/books?instId={asset}-EUR&sz={depth}",
       "authentication": "none",
       "write_capability": false
     },
@@ -85,7 +92,8 @@
     },
     "controls": [
       "kraken",
-      "coinbase"
+      "coinbase",
+      "okx"
     ],
     "merge_owner": "js/views/private-backend-sources.js",
     "canonical_price_created": false,
@@ -122,7 +130,7 @@
     "owner": "js/views/private-backend-sources.js",
     "inputs": [
       "Binance live primary",
-      "Kraken/Coinbase CEX controls",
+      "Kraken/Coinbase/OKX CEX controls",
       "DEX Screener/GeckoTerminal context",
       "DefiLlama chain context"
     ],
@@ -152,7 +160,7 @@
     "address_level_proof": false,
     "wrong_chain_symbol_collision_rejected": true,
     "reversed_pair_price_reuse_forbidden": true,
-    "liquidity_ratio_review_threshold": 20.0,
+    "liquidity_ratio_review_threshold": 20,
     "atlas_consumer_enabled": false,
     "canonical_price_created": false,
     "financial_signal": false,
@@ -237,5 +245,60 @@
     "source_intelligence_contract_changed": false,
     "scanner_persistence_owner": "app.js",
     "purpose": "keep private backend acceptance intact while moving Scanner serialization out of the interactive hot path"
+  },
+  "okx_wave_1_406087": {
+    "owner": "Private Backend V1.4.2 + js/views/private-backend-sources.js",
+    "source": "OKX public spot EUR market data",
+    "assets": [
+      "BTC",
+      "ETH",
+      "BNB",
+      "XRP",
+      "SOL"
+    ],
+    "mode": "READ_ONLY_PUBLIC_MARKET_DATA",
+    "authentication": "none",
+    "controls_after_wave": [
+      "kraken",
+      "coinbase",
+      "okx"
+    ],
+    "primary_unchanged": "binance",
+    "eur_only": true,
+    "synthetic_usdt_to_eur_conversion": false,
+    "proof": "Ryzen backend V1.4.2 returned OKX status=ok for 5/5 assets; global backend source matrix 14/15 because Coinbase BNB-EUR is unavailable",
+    "canonical_price_created": false,
+    "financial_signal": false,
+    "trading_endpoint": false,
+    "private_exchange_api": false
+  },
+  "okx_orderbook_depth_406492": {
+    "owner": "Private Backend V1.4.3 + js/strategy-a-execution-cost-truth.js",
+    "source": "OKX public BTC/EUR market books",
+    "local_route": "GET http://127.0.0.1:8790/orderbook?asset=BTC&depth=100",
+    "upstream_route": "GET https://www.okx.com/api/v5/market/books?instId=BTC-EUR&sz=100",
+    "authentication": "none",
+    "mode": "READ_ONLY_PUBLIC_MARKET_DATA",
+    "cache_seconds": 3,
+    "depth_levels_max": 400,
+    "consumer": "Strategy A Execution Cost Truth shadow evidence",
+    "depth_bps": [
+      5,
+      10,
+      25
+    ],
+    "simulation_notional_eur": [
+      10,
+      25,
+      50,
+      100
+    ],
+    "missing_book_policy": "UNKNOWN_NO_FABRICATION",
+    "direct_browser_okx": false,
+    "canonical_price_created": false,
+    "financial_signal": false,
+    "trading_endpoint": false,
+    "private_exchange_api": false,
+    "strategy_gate_modified": false
   }
 }

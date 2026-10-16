@@ -1,0 +1,33 @@
+{
+  "schema": "agent_crypto_strategy_a_execution_cost_evidence_capture_test_v1",
+  "build": "40.6.463",
+  "pass": true,
+  "checks": {
+    "exact_50_book_capture": true,
+    "raw_spread_preserved": true,
+    "raw_slippage_preserved": true,
+    "unsupported_notional_not_invented": true,
+    "never_authoritative_after_cost_input": true,
+    "no_historical_backfill": true
+  },
+  "invariants": {
+    "future_paper_only": true,
+    "paper_open_capture": true,
+    "paper_close_capture": true,
+    "exact_sizes_eur": [
+      10,
+      25,
+      50,
+      100
+    ],
+    "unsupported_notional_slippage_remains_unknown": true,
+    "historical_backfill": false,
+    "after_cost_injection": false,
+    "db_schema_changed": false,
+    "durable_projection": "existing PAPER states",
+    "market_core": "38.15.11",
+    "recurring_timer": false,
+    "new_observer": false,
+    "real_order": false
+  }
+}

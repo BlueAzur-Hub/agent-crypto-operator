@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<script src="../web/vault-data-router.js" data-erith-vault-data-router="true"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<script>if(new URLSearchParams(location.search).get("embed")==="1")document.documentElement.classList.add("radar-embedded");</script>
+<title>ERITH.IA · Radar · Marché et nouveaux listings</title>
+<style>
+:root{color-scheme:dark;--bg:#06131f;--panel:#0a2230;--line:#275060;--txt:#e7f4f3;--muted:#9cbcc5;--cyan:#8ee8ee;--gold:#f5ca80}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 76% -15%,#123e50 0,transparent 47%),var(--bg);color:var(--txt);font:14px/1.5 system-ui,"Segoe UI",sans-serif}
+main{max-width:1320px;margin:auto;padding:24px clamp(12px,2.5vw,28px) 48px}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+h1{font:normal clamp(29px,4vw,43px)/1.1 Georgia,serif;color:#fff1c7;margin:5px 0 12px}h2{font-size:17px;margin:0 0 14px;color:var(--gold)}.kicker{font-size:11px;font-weight:750;letter-spacing:.13em;color:var(--cyan)}p{color:var(--muted);margin:5px 0 12px}a{color:var(--cyan)}
+button,select,input{font:inherit;color:var(--txt);background:#092b3b;border:1px solid #407382;border-radius:9px;padding:9px 11px}button{cursor:pointer;font-weight:650}button[aria-pressed=true]{border-color:#80dbd5;background:#225b61}a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.panel{background:linear-gradient(125deg,#092636,#071a29);border:1px solid var(--line);padding:18px;border-radius:13px;margin:16px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.stat{padding:12px;background:#091c2a;border:1px solid #24495a;border-radius:10px}.stat small{display:block;color:var(--muted)}.stat b{font-size:21px;font-variant-numeric:tabular-nums}.stat span{display:block;color:var(--muted);font-size:12px}
+.controls{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin:14px 0}.controls input{min-width:180px;flex:1 1 150px}.controls label{color:var(--muted);font-size:12px}
+.scroll{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:680px}td,th{padding:11px 8px;border-bottom:1px solid #264452;text-align:left;vertical-align:middle}th{font-size:11px;color:var(--muted)}td:not(:first-child),th:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}td:first-child{font-weight:620}.positive{color:#8aefbb}.negative{color:#ffa5ac}.muted{color:var(--muted);font-size:12px}
+.note{padding:11px 13px;background:#0b2c36;border-left:3px solid var(--cyan);border-radius:5px;color:#d1ebea}
+#status{min-height:24px;color:var(--gold)}.chip{display:inline-block;border:1px solid #3f7780;border-radius:99px;padding:2px 9px;font-size:11px;color:#bcecf2}
+.grid .panel{margin:0}footer{font-size:12px;color:var(--muted);padding-top:12px}
+@media(max-width:860px){.grid{grid-template-columns:1fr}.stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:450px){.stat-grid{grid-template-columns:1fr 1fr}.stat b{font-size:17px}main{padding:14px 10px}}
+
+.radar-embedded main{max-width:none;padding:12px 12px 24px}
+.radar-embedded header{padding:0 0 8px;border-bottom:0;justify-content:flex-end}
+.radar-embedded header>div:first-child{display:none}
+.radar-embedded header a[href="../trader/trading-desk.html"]{display:none}
+.radar-embedded .panel{margin:12px 0}
+.radar-embedded .grid .panel{margin:0}
+.radar-embedded .stat-grid{gap:8px}
+.radar-embedded .stat{padding:10px}
+.radar-embedded h2{font-size:16px}
+.radar-embedded .controls{gap:6px}
+@media(max-width:780px){.radar-embedded .grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main>
+<header>
+<div><div class="kicker">ERITH.IA · LABORATOIRE IA · OBSERVATION PUBLIQUE</div><h1>Radar</h1>
+<p>Marché par capitalisation, nouveaux listings Spot et observations PAPER automatisées — aucune transaction réelle.</p></div>
+<div><a href="../trader/trading-desk.html">← Trader</a> · <a href="./radar20-veille.html">Étude historique Radar 20</a>
+<button id="refresh" type="button">Actualiser Radar</button></div>
+</header>
+<p id="status" role="status" aria-live="polite">Lecture des sources publiques…</p>
+<div class="stat-grid">
+<div class="stat"><small>Univers demandé</small><b id="universe">—</b><span>Top 10 → 250, capitalisation</span></div>
+<div class="stat"><small>Marché CoinGecko</small><b id="market-age">—</b><span id="market-source">Source en attente</span></div>
+<div class="stat"><small>Radar nouveaux listings</small><b id="new-count">—</b><span id="new-source">Bitget Spot · moins de 30 jours</span></div>
+<div class="stat"><small>Observateur PAPER indépendant</small><b id="paper-count">—</b><span id="paper-time">GitHub Actions · BTC/CT</span></div>
+</div>
+<section class="panel">
+<h2>Marché · Univers par rang de capitalisation</h2>
+<div class="controls" id="tiers" aria-label="Choisir le périmètre Radar">
+<button data-tier="10" aria-pressed="true" type="button">Top 10</button>
+<button data-tier="20" aria-pressed="false" type="button">Top 20</button>
+<button data-tier="50" aria-pressed="false" type="button">Top 50</button>
+<button data-tier="250" aria-pressed="false" type="button">Top 250</button>
+<label>Filtre <input id="search" type="search" placeholder="Crypto ou symbole"></label>
+<label>Classer <select id="sort"><option value="rank">Rang marché</option><option value="change24h">Progression 24 h</option><option value="drop24h">Baisse 24 h</option><option value="volume24hUsd">Volume 24 h</option></select></label>
+</div>
+<p id="tier-note" class="muted">Top = rang de capitalisation, pas signal d'achat. Une hausse passée ne prouve pas la hausse future.</p>
+<div class="scroll"><table><thead><tr><th>Actif</th><th>Rang</th><th>Prix USD</th><th>24 h</th><th>7 j</th><th>Volume USD 24 h</th></tr></thead><tbody id="market-body"><tr><td colspan="6">Chargement…</td></tr></tbody></table></div>
+</section>
+<div class="grid">
+<section class="panel">
+<h2>Marché → Nouveaux listings</h2>
+<p>Découverte sur la même famille d'API publiques Bitget Spot que l'Interface. CT est suivi séparément via OKX Spot. Une identité enregistrée seule n'est pas une cotation prouvée.</p>
+<p id="listings-proof" class="note">Chargement de la provenance…</p>
+<div class="scroll"><table><thead><tr><th>Actif / paire</th><th>Âge</th><th>Prix coté</th><th>24 h</th><th>État</th></tr></thead><tbody id="listings-body"><tr><td colspan="5">Chargement…</td></tr></tbody></table></div>
+</section>
+<section class="panel">
+<h2>Suivis : BTC · CT · MAGNE.AI</h2>
+<p>BTC et CT possèdent un journal GitHub PAPER ; MAGNE.AI figure dans le détecteur des nouveaux listings. Aucune stratégie autonome sur MAGNE.AI n'est encore qualifiée.</p>
+<div id="watch-list" class="stat-grid"></div>
+<div class="note" id="paper-proof">Lecture du journal autonome en cours…</div>
+<p><a href="https://github.com/BlueAzur-Hub/erith-ia-memory/blob/main/public/agent_crypto_erith_ia/data/trader_flux/btc_ct_auto_paper/state.json" target="_blank" rel="noopener">Journal public BTC/CT ↗</a></p>
+</section>
+</div>
+<section class="panel">
+<h2>Évolution prévue · Radar 10 → 20 → 50 → 250</h2>
+<p><span class="chip">Marché</span> Ces quatre périmètres sont disponibles en consultation. Le classement se fonde sur la capitalisation CoinGecko, pas sur la disponibilité d'une paire Spot OKX ni sur la rentabilité.</p>
+<p><span class="chip">Nouveaux</span> Le Radar découvre les lancements récents Spot Bitget lorsque les API répondent, avec preuve de date, identité, prix et volume. Les jetons hors classement restent à part.</p>
+<p><span class="chip">Futures</span> TAO, LIT et SOL sur les captures OKX sont des exemples de contrats perpétuels ; ils ne sont pas assimilés aux paires Spot et aucun effet de levier n'est simulé ici.</p>
+<p><span class="chip">Recherche</span> « Radar 20 » reste une expérience distincte à univers fixe de 20 actifs, <strong>pas</strong> un Top 20 par capitalisation. Son protocole prospectif ne doit pas être réécrit.</p>
+</section>
+<footer>Données publiques, ponctuelles et éventuellement différées. Ni conseil d'achat personnalisé, ni exécution, ni contrôle du solde, ni promesse de gains. Aucune donnée privée OKX dans cette page.</footer>
+<script src="./radar.js"></script>
+</main></body></html>

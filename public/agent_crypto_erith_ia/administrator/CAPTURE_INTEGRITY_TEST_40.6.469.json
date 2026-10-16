@@ -1,0 +1,53 @@
+{
+  "mode": "candidate-regression-tests",
+  "scope": "Isolated Firefox, synthetic quotes and PAPER fixtures. No operator database, no external request, no real order.",
+  "button": {
+    "measurements": 3,
+    "trigger": "auto:experiment-cycle",
+    "maxActive": 1,
+    "selfTest": true
+  },
+  "public-api": {
+    "measurements": 3,
+    "trigger": "auto:experiment-cycle",
+    "maxActive": 1,
+    "selfTest": true
+  },
+  "public-api-failure": {
+    "measurements": 3,
+    "trigger": "auto:experiment-cycle",
+    "maxActive": 1,
+    "selfTest": true
+  },
+  "duplicateOpen": {
+    "openOk": true,
+    "duplicate": true,
+    "calls": 1,
+    "unchanged": true,
+    "firstBid": 99,
+    "secondBid": 99,
+    "offSizeUnknown": true,
+    "firstState": "TOP_OF_BOOK_CAPTURED"
+  },
+  "render": {
+    "render": true,
+    "panels": 1,
+    "armed": true,
+    "selfTest": true
+  },
+  "pendingDuplicate": {
+    "calls": 1,
+    "duplicate": true,
+    "pendingState": "PENDING",
+    "unchanged": true
+  },
+  "closeAndFailures": {
+    "calls": 4,
+    "closedUnchanged": true,
+    "complete": "ENTRY_CLOSE_CAPTURED",
+    "busy": "BUSY_OR_STALE_MEASUREMENT",
+    "failed": "MEASUREMENT_FAILED",
+    "injection": false
+  },
+  "pass": true
+}

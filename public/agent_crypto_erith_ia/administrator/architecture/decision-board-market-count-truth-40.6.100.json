@@ -1,0 +1,51 @@
+{
+  "schema": "agent_crypto_decision_board_count_truth_evidence_v1",
+  "build": "40.6.100",
+  "parent_build": "40.6.99",
+  "engine": "38.15.11",
+  "reproduced_on": "Administrator 40.6.99",
+  "defect": {
+    "compact_market_observations": 0,
+    "canonical_market_snapshots_observed": 469,
+    "source_records_observed": 470,
+    "cause": "legacy compact shell reads atlasOperatorSummaryRender35 split.marketRecords length while Dual Memory reads canonical Market Memory stats"
+  },
+  "correction": {
+    "owner": "js/decision-board.js",
+    "source": "atlasMarketMemoryStats3944R1 canonicalCount/distinctCount with existing intelligence fallback",
+    "scope": "read-side presentation only",
+    "retrospective_validation_changed": false,
+    "market_memory_storage_changed": false,
+    "analytical_memory_changed": false
+  },
+  "checks": [
+    {
+      "id": "compact_equals_canonical",
+      "expected": "Decision Board compact market observation count equals Dual Memory canonical snapshot count"
+    },
+    {
+      "id": "retrospective_semantics_preserved",
+      "expected": "CURRENT evaluable count remains chronology-gated by a strictly later canonical market snapshot"
+    },
+    {
+      "id": "no_side_effect_owner",
+      "expected": "no fetch, timer, observer, WebSocket, storage write, Atlas start or trading path"
+    }
+  ],
+  "protected": {
+    "market_core": "38.15.11",
+    "web_classic": true,
+    "aether": true,
+    "atlas_current": true,
+    "oracle": true,
+    "lecture_technique": true,
+    "strategy_a": true,
+    "indexeddb_v7": true
+  },
+  "terrain": {
+    "version_truth_ci": "required",
+    "version_delivery_ci": "required",
+    "github_pages": "required",
+    "firefox": "required after deployment"
+  }
+}

@@ -18,7 +18,7 @@
      ============================================================ */
 
   const BUILD_3980R2 = "39.8.0R2";
-  const ROOT_ID = "atlasMemoryHealth3980";
+  const ROOT_ID = "atlasMemoryHealth";
   const TOP5 = Object.freeze(["BTC", "ETH", "BNB", "XRP", "SOL"]);
 
   const byId = id => document.getElementById(id);
@@ -248,7 +248,7 @@
     const market = safeCall(globalThis.atlasMarketMemoryStats3944R1, {}) || {};
     const intelligence = safeCall(globalThis.atlasMemoryIntelligenceCompute, {}) || {};
     const analytical = safeCall(globalThis.atlasAnalyticalMemoryStats394, {}) || {};
-    const multi = safeCall(globalThis.atlasMultiCollectorConcordance3970?.derive, {}) || {};
+    const multi = safeCall(globalThis.atlasMultiCollectorConcordance?.derive, {}) || {};
 
     const source = sourceRows(market);
     const canonical = canonicalRows(market);
@@ -651,7 +651,7 @@
 
   const api = Object.freeze({ derive, render, markdown });
   globalThis.atlasMemoryHealth3980R2 = api;
-  globalThis.atlasMemoryHealth3980 = api; // compatibility alias for 39.8 readers/tools
+  globalThis.atlasMemoryHealth = api; // compatibility alias for 39.8 readers/tools
 
   queueMicrotask(() => { try { render(); } catch (_) {} });
 })();

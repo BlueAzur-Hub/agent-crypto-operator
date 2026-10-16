@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr"><head>
+<script src="../web/vault-data-router.js" data-erith-vault-data-router="true"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agent-Crypto · Inventaire historique</title>
+<style>
+:root{color-scheme:dark;font:14px/1.5 system-ui,sans-serif;color:#e8f1fc;background:#091523}
+body{max-width:1150px;margin:0 auto;padding:23px}h1{font-size:23px;margin:0 0 8px}h2{font-size:17px;margin:0 0 10px}
+p{margin:9px 0 15px}.muted{color:#a5b8cc}.pane{padding:17px;margin:14px 0;background:#132337;border:1px solid #375067;border-radius:12px}
+a{color:#aedcfa}button{background:#1a5370;color:white;border:1px solid #6ba4bb;border-radius:8px;padding:9px 14px;cursor:pointer;font:inherit}button:disabled{opacity:.5}
+.cards{display:flex;flex-wrap:wrap;gap:10px}.card{border:1px solid #3b5971;border-radius:7px;background:#10283e;padding:12px;min-width:140px}.card b{display:block;font-size:23px}
+table{border-collapse:collapse;width:100%;font-size:13px}td,th{border-bottom:1px solid #34465c;text-align:left;padding:7px}th{color:#b9d5ed} .scroll{overflow:auto;max-height:400px} .warn{color:#f3cf87}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.note{border-left:3px solid #80c4d9;padding:8px 12px;background:#0e1b2c}
+</style><link rel="stylesheet" href="./historical-f11.css"></head><body>
+<header><div><h1>Inventaire historique crypto</h1><p class="muted">Seven Heaven · diagnostic autonome · lecture seule</p></div><a href="./index.html">← Revenir à l'Interface</a></header>
+<div class="pane"><p class="note">Ce diagnostic ne modifie ni IndexedDB ni localStorage, ne fait aucun ordre et ne transmet aucune donnée privée à GitHub. Les requêtes réseau lisent seulement les archives publiques déjà présentes dans le dépôt.</p><button id="run">Analyser</button> <button id="copy" disabled>Copier le résumé</button> <span id="status" class="muted">En attente</span></div>
+<section class="pane"><h2>Comptage</h2><div id="totals" class="cards"><span class="muted">Cliquer sur Analyser</span></div></section>
+<section class="pane"><h2>Couverture par capitalisation</h2><p class="muted">Présence d'au moins une série ≠ historique frais, complet ou durable. Les Top 5/10 suivent ici les rangs de capitalisation réels et ne remplacent pas le Top 5 canonique.</p><div id="core" class="scroll">En attente</div></section>
+<details class="pane"><summary>Voir les 80 caches graphiques · liste détaillée</summary><p class="muted">Détail complet disponible à la demande, avec défilement interne.</p><div class="scroll" id="chart">En attente</div></details>
+<div class="two-col"><section class="pane"><h2>Archives publiques GitHub</h2><div id="github">En attente</div></section>
+<section class="pane"><h2>Réserves et limites</h2><div id="limits" class="muted">Aucune validation terrain exécutée.</div></section></div>
+<script>
+(function(){
+"use strict";
+var DB="agent_crypto_storage_relief_40278",STORE="payloads",KEY="agent_crypto_erith_ia_real_charts_v1_1_alpha_26_37_top50";
+var API="https://api.github.com/repos/BlueAzur-Hub/erith-ia-memory/contents/public/agent_crypto_erith_ia/data/";
+var summary=null;function el(id){return document.getElementById(id)}
+function fail(e){return String(e&&e.message||e).slice(0,250)}
+function date(n){return Number.isFinite(n)&&n>0?new Date(n).toLocaleString("fr-FR"):"—"}
+function table(head,rows){var t=document.createElement("table"),tr=document.createElement("tr");head.forEach(function(v){var th=document.createElement("th");th.textContent=v;tr.appendChild(th)});t.appendChild(tr);rows.forEach(function(r){var tr=document.createElement("tr");r.forEach(function(v){var td=document.createElement("td");td.textContent=String(v===null?"—":v);tr.appendChild(td)});t.appendChild(tr)});return t}
+function replace(id,node){el(id).replaceChildren(node)}
+function card(name,value){var a=document.createElement("div"),s=document.createElement("small"),b=document.createElement("b");a.className="card";s.textContent=name;b.textContent=String(value);a.append(s,b);return a}
+function openSaved(){return new Promise(function(resolve,reject){
+if(typeof indexedDB.databases!=="function"){reject(Error("Vérification préalable des bases indisponible"));return}
+indexedDB.databases().then(function(list){if(!list.some(function(db){return db.name===DB})){reject(Error("Base IndexedDB absente"));return}
+var req=indexedDB.open(DB);req.onupgradeneeded=function(){req.transaction.abort();reject(Error("Ouverture avec migration refusée"))};req.onerror=function(){reject(req.error||Error("IndexedDB inaccessible"))};
+req.onsuccess=function(){var db=req.result;if(!db.objectStoreNames.contains(STORE)){db.close();reject(Error("Magasin absent"));return}
+var tx=db.transaction(STORE,"readonly"),get=tx.objectStore(STORE).get(KEY);
+get.onsuccess=function(){resolve(get.result)};get.onerror=function(){reject(get.error||Error("Lecture impossible"))};
+tx.oncomplete=function(){db.close()};tx.onabort=function(){db.close()};tx.onerror=function(){db.close()}
+}}).catch(reject)})}
+function parseKey(key){var a=key.match(/^(.*?):USD:([^:]+):([0-9]+)$/i);if(a)return {id:a[1],days:+a[3],source:a[2],currency:"USD"};
+a=key.match(/^(.*?):([0-9]+):([^:]+)$/);if(a)return {id:a[1],days:+a[2],source:a[3],currency:"clé sans devise"};return {id:key,days:0,source:"?",currency:"?"}}
+function local(record){if(typeof record?.payload!=="string")throw Error("Cache historique IndexedDB absent");
+var obj=JSON.parse(record.payload),list=Object.keys(obj).map(function(key){var data=obj[key]||{},r=parseKey(key),pts=Array.isArray(data.series)?data.series:[];return {key:key,id:r.id,days:r.days,source:r.source,currency:r.currency,points:pts.length,first:+(pts[0]?.[0]||0),last:+(pts[pts.length-1]?.[0]||0)}}).sort(function(a,b){return a.id.localeCompare(b.id)||a.days-b.days});
+return {list:list,unique:new Set(list.map(function(x){return x.id})).size,points:list.reduce(function(n,x){return n+x.points},0),verified:record.verified===true,updated:record.updated_at}}
+async function remote(path){var r=await fetch("../data/"+path,{credentials:"omit",cache:"no-store"});if(!r.ok)throw Error(path+" HTTP "+r.status);return await r.json()}
+async function dir(path){var r=await fetch(API+path,{credentials:"omit",cache:"no-store"});if(!r.ok)throw Error("Répertoire "+path+" HTTP "+r.status);var v=await r.json();if(!Array.isArray(v))throw Error("Répertoire "+path+" illisible");return v}
+function cover(loc,coins){var available=new Set(loc.list.filter(function(x){return x.points>0}).map(function(x){return x.id}));var byRank=new Map(coins.map(function(c){return [Number(c.rank),c.id]}));return [5,10,50,100,250].map(function(n){var ids=Array.from({length:n},function(_,i){return byRank.get(i+1)}).filter(Boolean);function covering(days){return ids.filter(function(id){return loc.list.some(function(x){return x.id===id&&x.days===days&&x.points>0})}).length}return ["Core "+n,ids.length,ids.filter(function(id){return available.has(id)}).length,covering(1),covering(7),covering(30)]})}
+async function run(){
+el("run").disabled=true;el("copy").disabled=true;el("status").textContent="Inventaire en lecture seule…";var errors=[];
+var results=await Promise.allSettled([openSaved(),remote("crypto/latest.json"),remote("crypto/extended.json"),dir("history"),dir("charts"),dir("charts/assets")]);
+var get=function(i,name){if(results[i].status==="fulfilled")return results[i].value;errors.push(name+": "+fail(results[i].reason));return null};
+var storage=get(0,"IndexedDB"),core=get(1,"Core 250"),extended=get(2,"Extended 750"),hist=get(3,"Journal GitHub"),charts=get(4,"Graphiques GitHub"),assets=get(5,"Graphiques assets");
+var loc=null;try{if(storage)loc=local(storage)}catch(e){errors.push("Cache: "+fail(e))}
+var cards=document.createDocumentFragment();[["Séries locales",loc?.list.length??"?"],["Actifs distincts",loc?.unique??"?"],["Points locaux",loc?.points.toLocaleString("fr-FR")??"?"],["Core public",core?.coins?.length??"?"],["Extended public",extended?.coins?.length??"?"]].forEach(function(c){cards.append(card(c[0],c[1]))});replace("totals",cards);
+if(loc){replace("chart",table(["Actif","Jours","Source","Devise dans clé","Points","Début","Fin"],loc.list.map(function(r){return [r.id,r.days===36500?"Max":r.days,r.source,r.currency,r.points,date(r.first),date(r.last)]})))}
+if(loc&&Array.isArray(core?.coins)){replace("core",table(["Univers","Market rangé","Avec historique","24h","7j","30j"],cover(loc,core.coins)))}
+var files=(charts||[]).concat(assets||[]).filter(function(f){return f.name?.endsWith(".json")});
+var days=(hist||[]).filter(function(f){return /^\d{4}-\d\d-\d\d\.jsonl$/.test(f.name)}).sort(function(a,b){return a.name.localeCompare(b.name)});
+var div=document.createElement("div");div.append(card("Journaux JSONL",hist?days.length:"?"),card("Fichiers graphiques",charts&&assets?files.length:"?"));
+var p=document.createElement("p");p.textContent="Premier journal : "+(days[0]?.name||"—")+" · Dernier : "+(days[days.length-1]?.name||"—")+" · Graphiques : "+files.map(function(f){return f.name}).join(", ");div.append(p);replace("github",div);
+el("limits").textContent="Archives GitHub (snapshots de marché) ≠ séries historiques graphiques détaillées. Certaines courbes GitHub peuvent être anciennes. La présence d'une clé IndexedDB ne prouve ni fraîcheur ni vérification; statut interne verified = "+(loc?String(loc.verified):"inconnu")+". Aucun contenu local n'a été envoyé au réseau. "+errors.join(" · ");
+summary={schema:"historical_inventory_read_only_v1",timestamp:new Date().toISOString(),local:loc?{histories:loc.list.length,coins:loc.unique,points:loc.points,verified:loc.verified,series:loc.list.map(function(r){return {key:r.key,points:r.points,first:r.first,last:r.last}})}:null,public:{core:core?.coins?.length??null,extended:extended?.coins?.length??null,historyFiles:hist?days.length:null,chartFiles:charts&&assets?files.length:null},errors:errors};
+el("copy").disabled=false;el("run").disabled=false;el("status").textContent=errors.length?"Terminé avec limites":"Inventaire terminé"
+}
+el("run").addEventListener("click",function(){run().catch(function(e){el("status").textContent=fail(e);el("run").disabled=false})});
+el("copy").addEventListener("click",function(){if(!summary)return;navigator.clipboard.writeText(JSON.stringify(summary,null,2)).then(function(){el("status").textContent="Résumé copié : métadonnées uniquement"},function(e){el("status").textContent=fail(e)})});
+})();
+</script></body></html>

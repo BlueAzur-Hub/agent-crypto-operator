@@ -1,0 +1,14 @@
+{
+  "schema": "prospective_terminal_write_guard_test_v1",
+  "build": "40.6.478",
+  "pass_pending_workflow": false,
+  "cases": {
+    "terminal_detected": "PASS",
+    "late_cycle_one_zero_write": "PASS",
+    "late_cycle_two_zero_write": "PASS",
+    "record_unchanged": "PASS",
+    "pending_record_advances": "PASS",
+    "late_window_missed_preserved": "PASS"
+  },
+  "pass": true
+}

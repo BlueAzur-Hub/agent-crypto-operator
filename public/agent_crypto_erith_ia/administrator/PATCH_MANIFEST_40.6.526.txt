@@ -1,0 +1,5 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.526
+Parent: 40.6.525
+Release: OKX TRANSPORT ABORT SIGNAL + CANONICAL OWNER NAME
+Changed: canonical OKX transport owner + version metadata/guards/package.
+Historical retained/not loaded: js/okx-local-backend-transport-406500.js

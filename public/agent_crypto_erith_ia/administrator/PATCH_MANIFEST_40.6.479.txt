@@ -1,0 +1,33 @@
+AGENT-CRYPTO 40.6.479 — STRATEGY A INPUT FRESHNESS TRUTH
+
+MODIFIED
+administrator/js/post-boot-runtime-loader.js
+administrator/js/strategy-a-audit-demand-loader.js
+administrator/index.html
+administrator/build.json
+administrator/RELEASE.md
+administrator/HANDOFF.md
+
+ADDED
+administrator/js/strategy-a-input-freshness-truth.js
+administrator/index-40.6.479.html
+administrator/TERRAIN_PROOF_40.6.478_PROSPECTIVE_CHAIN.json
+administrator/ATLAS_CANONICAL_UPSTREAM_DIAGNOSIS_40.6.479.md
+administrator/HANDOFF_FINAL_40.6.479.md
+administrator/STRATEGY_INPUT_FRESHNESS_TEST_40.6.479.json
+administrator/PATCH_MANIFEST_40.6.479.txt
+.github/workflows/agent-crypto-package-406479.yml
+
+SCOPE
+Read-only input freshness / provenance audit plus frozen parent proof.
+
+UNCHANGED
+Strategy A decision logic, thresholds and gates
+Atlas CURRENT owner
+Oracle
+Execution cost decision model
+Aether / Redivider
+Lecture Technique .477
+Prospective terminal guard .478
+Market Core 38.15.11
+real orders

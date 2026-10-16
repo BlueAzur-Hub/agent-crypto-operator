@@ -1,0 +1,35 @@
+AGENT-CRYPTO 40.6.480 — PUBLIC CRYPTO COLLECTOR ACCESS RECOVERY
+
+MODIFIED
+.github/workflows/atlas-public-crypto-market.yml
+public/agent_crypto_erith_ia/tools/collect_public_crypto.py
+public/agent_crypto_erith_ia/tools/collect_public_crypto_rank_complete.py
+public/agent_crypto_erith_ia/administrator/index.html
+public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+public/agent_crypto_erith_ia/administrator/js/strategy-a-audit-demand-loader.js
+public/agent_crypto_erith_ia/administrator/build.json
+public/agent_crypto_erith_ia/administrator/RELEASE.md
+public/agent_crypto_erith_ia/administrator/HANDOFF.md
+
+ADDED
+.github/scripts/agent_crypto_public_crypto_demo_auth_test_406480.py
+public/agent_crypto_erith_ia/administrator/index-40.6.480.html
+public/agent_crypto_erith_ia/administrator/PUBLIC_CRYPTO_COLLECTOR_ACCESS_RECOVERY_40.6.480.md
+public/agent_crypto_erith_ia/administrator/PUBLIC_CRYPTO_COLLECTOR_ACCESS_TEST_40.6.480.json
+public/agent_crypto_erith_ia/administrator/HANDOFF_FINAL_40.6.480.md
+public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.480.txt
+.github/workflows/agent-crypto-package-406480.yml
+
+SCOPE
+Canonical public Crypto Top-250 CoinGecko access only.
+
+UNCHANGED
+Strategy A business logic, thresholds and gates
+Atlas CURRENT engine
+Oracle
+Cost Gate model
+Aether / Redivider
+Lecture Technique
+Market Core 38.15.11
+extended ranks 251-1000 collector
+real orders / wallets

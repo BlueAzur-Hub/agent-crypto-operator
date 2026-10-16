@@ -1,0 +1,28 @@
+{
+  "schema": "agent_crypto_execution_cost_auto_measure_test_v1",
+  "build": "40.6.455",
+  "owner": "js/strategy-a-execution-cost-truth.js",
+  "pass": true,
+  "expected": {
+    "automatic_measure_on_mount": true,
+    "automatic_measure_on_experiment_cycle": true,
+    "manual_refresh_fallback": true,
+    "manual_fetch_only": false,
+    "concurrent_measurement": false,
+    "pending_experiment_replay_max": 1,
+    "recurring_timer": false,
+    "polling": false,
+    "observer": false,
+    "real_order": false,
+    "loader_logic_build": "40.6.452",
+    "loader_delivery_token": "40.6.455",
+    "execution_cost_delivery_token": "40.6.455",
+    "cache_bust_verified": true
+  },
+  "protected": {
+    "parent_cycle_event": "40.6.454",
+    "strategy_loader": "40.6.452",
+    "market_core": "38.15.11",
+    "strategy_loader_logic": "40.6.452"
+  }
+}

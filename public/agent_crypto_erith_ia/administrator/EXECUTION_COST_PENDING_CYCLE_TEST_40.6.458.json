@@ -1,0 +1,23 @@
+{
+  "schema": "agent_crypto_execution_cost_pending_cycle_resume_test_v1",
+  "build": "40.6.458",
+  "pass": true,
+  "cases": {
+    "pending_after_manual_exit": "RESUME",
+    "pending_while_busy": "WAIT",
+    "nothing_pending": "NOOP",
+    "auto_only_finally_gate": "REMOVED",
+    "pending_storage": "BOOLEAN_SINGLE_SLOT"
+  },
+  "invariants": {
+    "one_measurement_inflight": true,
+    "pending_resume_max": 1,
+    "manual_exit_checks_pending": true,
+    "auto_exit_checks_pending": true,
+    "market_core": "38.15.11",
+    "new_timer": false,
+    "new_observer": false,
+    "storage_write": false,
+    "real_order": false
+  }
+}

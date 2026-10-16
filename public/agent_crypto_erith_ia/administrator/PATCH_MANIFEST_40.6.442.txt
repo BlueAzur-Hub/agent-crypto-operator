@@ -1,0 +1,30 @@
+AGENT-CRYPTO CSS RESTORE MANIFEST — 40.6.442
+================================================
+
+SOURCE OF TRUTH
+---------------
+40.6.428
+commit 46d273d05d36b654a76697be7564160e2faa73c5
+
+FUNCTIONAL CHANGE
+-----------------
+administrator/style.css
+
+EXACT RESTORE
+-------------
+height: clamp(525px, calc(61.5vh + 42px), 720px) !important;
+min-height: 525px !important;
+max-height: 720px !important;
+
+PROTECTED / UNCHANGED BYTES
+---------------------------
+app.js                                  0988c742c62997b022d75a511561302b170d7972
+js/post-boot-runtime-loader.js          3a97ba785f91a16fb87e36164a7559d544642ef9
+js/views/private-source-demand-loader.js 5f363046c9a07a5e7e9a92511dd6958d3cec7cd2
+js/views/private-backend-sources.js     55e3c282b3caf5f22642b833574b4ff83b183869
+
+BACKEND/API 40.6.441 REMAINS FROZEN
+NO MARKET CORE CHANGE
+NO AETHER CHANGE
+NO STRATEGY CHANGE
+NO EXECUTION COST CHANGE

@@ -1,0 +1,40 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.514
+Release: GLOBAL QUOTE ROUTER · USD FOUNDATION
+Parent: 40.6.513
+Market Core: 38.15.11 UNCHANGED
+
+NEW
+- administrator/js/global-quote-router-406514.js
+- same-origin Source Truth read: data/crypto/latest.json
+- default DISPLAY USD
+
+MODIFIED
+- administrator/js/quote-currency-architecture-406497.js
+- administrator/index.html
+- administrator/build.json
+- administrator/js/post-boot-runtime-loader.js
+- administrator/views/atlas.html
+
+DISPLAY CONTRACT
+- Graphique/Fiche foundation = USD by default
+- canonical EUR runtime chart values × published ECB USD/EUR factor
+- EUR selector restores original runtime values
+- Base100 remains unitless
+
+UNCHANGED
+- EXEC BTC-EUR
+- SETTLE EUR
+- Market Core 38.15.11
+- Strategy A business logic / gates
+- Oracle
+- Aether
+- Depth 40.6.513 geometry + EUR-native contract
+- Backend / Bridge
+- wallet / private API / real order
+- storage schema
+
+PACKAGE
+PATCH ONLY — touched files + manifest/guard/workflow, never the full Administrator tree.
+
+TERRAIN
+PENDING FIREFOX.

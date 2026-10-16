@@ -1,0 +1,36 @@
+{
+  "schema": "agent_crypto_strategy_experiment_cycle_event_test_v1",
+  "build": "40.6.454",
+  "owner": "app.js",
+  "event": "agent-crypto:strategy-a-experiment-cycle",
+  "expected_dispatch_per_record": 1,
+  "pass": true,
+  "cases": {
+    "helper_dispatches_exact_event": "PASS",
+    "detail_cycle_id": "PASS",
+    "detail_cycle_number": "PASS",
+    "detail_trigger_phase": "PASS",
+    "detail_persisted_boolean": "PASS",
+    "no_document_returns_false": "PASS",
+    "experiment_record_calls_helper_once": "PASS",
+    "auto_cycle_finally_still_records_once": "PASS",
+    "listener_cost_wait_preserved": "PASS",
+    "listener_oracle_cost_preserved": "PASS",
+    "listener_execution_cost_preserved": "PASS"
+  },
+  "invariants": {
+    "new_timer": false,
+    "new_observer": false,
+    "new_fetch": false,
+    "new_websocket": false,
+    "new_storage_owner": false,
+    "real_order": false,
+    "strategy_thresholds_changed": false,
+    "oracle_math_changed": false,
+    "risk_policy_changed": false,
+    "paper_execution_changed": false,
+    "backend_modified": false,
+    "aether_modified": false,
+    "market_core_modified": false
+  }
+}

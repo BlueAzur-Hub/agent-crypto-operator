@@ -1,0 +1,51 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.518
+Release: MARKET + FICHE USD PROJECTION · EXPLICIT VALUES ONLY
+Parent: 40.6.517 (Firefox PASS)
+Market Core: 38.15.11 UNCHANGED
+
+ADDED
+- administrator/js/market-fiche-display-406518.js
+- bounded Market + Fiche DISPLAY projection
+- explicit USD price / market cap / volume consumption
+- explicit USD Fiche source/freshness
+- 40.6.518 guard + package workflow
+- version archive / docs
+
+DISPLAY CONTRACT
+- default DISPLAY = EUR
+- ANALYSIS = EUR
+- EXEC = BTC-EUR
+- SETTLE = EUR
+- USD is opt-in via the existing selector in this build
+
+USD RULE
+- priceUsd only
+- marketCapUsd only
+- volume24hUsd only
+- no EUR→USD browser conversion
+- missing USD => unavailable, never estimated
+
+PROTECTED
+- app.js / Market Core 38.15.11
+- Currency Domain V2 40.6.517
+- quote-currency-architecture baseline
+- Graphique
+- Oracle / Math
+- Aether
+- Lecture Technique
+- Bougies
+- Profondeur
+- Strategy A / Evidence / Cost Gate
+- Backend / Bridge
+
+RUNTIME
+- no recurring timer
+- no MutationObserver
+- no storage write
+- no new business market request
+- no wallet
+- no private API
+- no real order
+
+TERRAIN
+PENDING FIREFOX.

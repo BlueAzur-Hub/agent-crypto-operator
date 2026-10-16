@@ -16,6 +16,7 @@
   const BUILD_3950 = "39.5.0";
   const ROOT_ID = "decisionDualMemory395";
   const EXPORT_ID = "btnDecisionBoardDualMemoryExport395";
+  const WRAP_MARKER = "__agentCryptoDualMemoryWrapped406117";
 
   const byId = id => document.getElementById(id);
   const text = (id, value) => {
@@ -71,6 +72,36 @@
     if (!value) return "date indisponible";
     const t = Date.parse(value);
     return Number.isFinite(t) ? new Date(t).toLocaleString("fr-FR") : String(value);
+  }
+
+  /* 40.6.100 — compact Decision Board count truth lock.
+     The legacy compact shell may expose summary.split.marketRecords, which is
+     not the canonical Market Memory counter. Reconcile presentation only after
+     the canonical Dual Memory reader has resolved its own read-only stats. */
+  function syncCompactMarketCount(market) {
+    const canonical = Number(market?.canonical || 0);
+    const status = byId("decisionBoardStatus");
+    const verdict = byId("decisionBoardVerdict");
+
+    if (status) {
+      const value = String(status.textContent || "");
+      if (/^CURRENT · mémoire \d+$/.test(value)) {
+        status.textContent = `CURRENT · mémoire ${canonical}`;
+      } else if (/^Détails à la demande · \d+ mémoire$/.test(value)) {
+        status.textContent = `Détails à la demande · ${canonical} mémoire`;
+      }
+    }
+
+    if (verdict) {
+      const value = String(verdict.textContent || "");
+      if (value.includes("Decision Board compact")) {
+        verdict.textContent = value.replace(/\d+ observation\(s\) marché/, `${canonical} observation(s) marché`);
+      }
+    }
+
+    const board = byId("decision-board");
+    if (board) board.dataset.compactMarketCountSource = "market-memory-canonical-406100";
+    return canonical;
   }
 
   function ensureRoot() {
@@ -147,6 +178,8 @@
       board.dataset.analyticalMemory = String(analytical.count);
     }
 
+    syncCompactMarketCount(market);
+
     const compareTitle = byId("decisionMemoryCompare")?.querySelector?.(".decision-memory-compare-head b");
     if (compareTitle) compareTitle.textContent = "Comparer les deux derniers relevés Market Memory";
 
@@ -206,15 +239,46 @@
     return body;
   }
 
+  /* 40.6.117 R4 — late legacy-renderer rebind.
+     Some late-loaded Administrator layers can replace renderDecisionBoard after
+     this reader first executes. When that happens the compact shell can fall
+     back to its historic counter while the canonical Dual Memory cards remain
+     correct. Rebind once after full load: no timer, observer, fetch or write. */
+  function bindLegacyDecisionRenderer() {
+    const current = globalThis.renderDecisionBoard;
+    if (typeof current !== "function") {
+      try { render(); } catch (_) {}
+      return false;
+    }
+    if (current[WRAP_MARKER] === true) {
+      try { render(); } catch (_) {}
+      return true;
+    }
+    const base = current;
+    const wrapped = function renderDecisionBoard3950LateTruth(...args) {
+      const result = base.apply(this, args);
+      try { render(); } catch (_) {}
+      return result;
+    };
+    try { Object.defineProperty(wrapped, WRAP_MARKER, { value: true }); }
+    catch (_) { wrapped[WRAP_MARKER] = true; }
+    globalThis.renderDecisionBoard = wrapped;
+    try { render(); } catch (_) {}
+    return true;
+  }
+
   const baseRenderDecisionBoard = typeof globalThis.renderDecisionBoard === "function"
     ? globalThis.renderDecisionBoard
     : null;
   if (baseRenderDecisionBoard) {
-    globalThis.renderDecisionBoard = function renderDecisionBoard3950(...args) {
+    const wrapped = function renderDecisionBoard3950(...args) {
       const result = baseRenderDecisionBoard.apply(this, args);
       try { render(); } catch (_) {}
       return result;
     };
+    try { Object.defineProperty(wrapped, WRAP_MARKER, { value: true }); }
+    catch (_) { wrapped[WRAP_MARKER] = true; }
+    globalThis.renderDecisionBoard = wrapped;
   }
 
   document.addEventListener("click", event => {
@@ -232,9 +296,13 @@
     writes_memory: false,
     new_fetch: false,
     new_timer: false,
-    new_websocket: false
+    new_websocket: false,
+    compact_market_count_truth_406100: true,
+    late_legacy_renderer_rebind_406117: true
   });
-  globalThis.atlasDecisionBoardDualMemory3950 = Object.freeze({ render, markdown });
+  globalThis.atlasDecisionBoardDualMemory = Object.freeze({ render, markdown });
 
   queueMicrotask(() => { try { render(); } catch (_) {} });
+  if (document.readyState === "complete") bindLegacyDecisionRenderer();
+  else window.addEventListener("load", bindLegacyDecisionRenderer, { once:true, passive:true });
 })();

@@ -12,7 +12,7 @@
       <span class="atlas-layout-family-index" aria-hidden="true">02</span>
       <div class="atlas-layout-family-copy">
         <p>PARCOURS ADMINISTRATEUR</p>
-        <h2 id="atlasLayoutFamily02" class="atlas-icon-heading-40290" data-semantic-tone-40290="intelligence"><span class="atlas-heading-icon-40290" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2"></circle><circle cx="12" cy="6" r="2"></circle><circle cx="18" cy="12" r="2"></circle><circle cx="12" cy="18" r="2"></circle><path d="M7.5 10.5 10.5 7.5M13.5 7.5l3 3M16.5 13.5l-3 3M10.5 16.5l-3-3"></path></svg></span>Intelligence, mémoire & création</h2>
+        <h2 id="atlasLayoutFamily02" class="atlas-icon-heading" data-semantic-tone="intelligence"><span class="atlas-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2"></circle><circle cx="12" cy="6" r="2"></circle><circle cx="18" cy="12" r="2"></circle><circle cx="12" cy="18" r="2"></circle><path d="M7.5 10.5 10.5 7.5M13.5 7.5l3 3M16.5 13.5l-3 3M10.5 16.5l-3-3"></path></svg></span>Intelligence, mémoire & création</h2>
         <span>Interroger Atlas et Aerith, conserver les repères, puis ouvrir la Forge sans quitter le parcours.</span>
       </div>
       <span class="atlas-layout-family-signal" aria-hidden="true"></span>
@@ -23,11 +23,11 @@
         <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
         <span class="atlas-collapse-title">Atlas-10 + Aerith-10 Crypto</span>
         <span class="atlas-collapse-subtitle">Profils locaux du Ryzen · Ollama / LM Studio / AnythingLLM</span>
-        <div class="atlas-collapsed-current-preview-40295" id="atlasCollapsedCurrentPreview40295" data-phase="idle" aria-label="Résumé du pipeline CURRENT Atlas">
-          <div class="atlas-collapsed-current-copy-40295"><span>PIPELINE LOCAL · CURRENT</span><b id="atlasCollapsedCurrentTitle40295">Atlas-10 prêt à analyser</b></div>
-          <div class="atlas-collapsed-current-readout-40295"><strong id="atlasCollapsedCurrentPercent40295">0 %</strong><span id="atlasCollapsedCurrentState40295">IDLE</span></div>
-          <div class="atlas-collapsed-current-track-40295" aria-hidden="true"><span id="atlasCollapsedCurrentBar40295"></span></div>
-          <div class="atlas-analysis-progress-nodes atlas-collapsed-current-nodes-40295" aria-label="Étapes compactes Atlas CURRENT">
+        <div class="atlas-collapsed-current-preview" id="atlasCollapsedCurrentPreview" data-phase="idle" aria-label="Résumé du pipeline CURRENT Atlas">
+          <div class="atlas-collapsed-current-copy"><span>PIPELINE LOCAL · CURRENT</span><b id="atlasCollapsedCurrentTitle">Atlas-10 prêt à analyser</b></div>
+          <div class="atlas-collapsed-current-readout"><strong id="atlasCollapsedCurrentPercent">0 %</strong><span id="atlasCollapsedCurrentState">IDLE</span></div>
+          <div class="atlas-collapsed-current-track" aria-hidden="true"><span id="atlasCollapsedCurrentBar"></span></div>
+          <div class="atlas-analysis-progress-nodes atlas-collapsed-current-nodes" aria-label="Étapes compactes Atlas CURRENT">
             <span data-atlas-progress-node="1"><i>01</i><b>Marché</b></span><span data-atlas-progress-node="2"><i>02</i><b>Top 5</b></span><span data-atlas-progress-node="3"><i>03</i><b>Math Core</b></span><span data-atlas-progress-node="4"><i>04</i><b>Contradictions</b></span><span data-atlas-progress-node="nox"><i>NØX</i><b>No-FOMO</b></span><span data-atlas-progress-node="aerith"><i>A</i><b>Aerith</b></span>
           </div>
         </div>
@@ -283,82 +283,82 @@
               </div>
 
               <section class="atlas-stable-stack" id="atlasStableStack" data-runtime="waiting" aria-labelledby="atlasStableStackTitle">
-        <div class="section-head compact atlas-current-audit-shell-40431" data-atlas-current-audit-shell-40431="stable-stack">
+        <div class="section-head compact atlas-current-audit-shell" data-atlas-current-audit-shell="stable-stack">
           <div>
             <p class="eyebrow">PILE STABLE CONSOLIDÉE · PRODUCTION / LECTURE</p>
             <h5 id="atlasStableStackTitle">Interface, Control Center, Bridge et mémoire</h5>
             <p class="planning-intro">État déjà calculé · matérialiser les détails à la demande</p>
           </div>
-          <button class="btn" type="button" data-atlas-current-audit-open-40431="stable-stack" aria-controls="atlasStableStack">Ouvrir les détails</button>
+          <button class="btn" type="button" data-atlas-current-audit-open="stable-stack" aria-controls="atlasStableStack">Ouvrir les détails</button>
         </div>
       </section>
 
               <section class="atlas-analytical-truth" id="atlasAnalyticalTruth" data-state="waiting" aria-labelledby="atlasAnalyticalTruthTitle">
-        <div class="section-head compact atlas-current-audit-shell-40431" data-atlas-current-audit-shell-40431="analytical-truth">
+        <div class="section-head compact atlas-current-audit-shell" data-atlas-current-audit-shell="analytical-truth">
           <div>
             <p class="eyebrow">VÉRITÉ ANALYTIQUE · EMPREINTE V2</p>
             <h5 id="atlasAnalyticalTruthTitle">Contexte, sources, preuves et qualité statistique</h5>
             <p class="planning-intro">Lecture seule · aucun recalcul déclenché par l’ouverture</p>
           </div>
-          <button class="btn" type="button" data-atlas-current-audit-open-40431="analytical-truth" aria-controls="atlasAnalyticalTruth">Ouvrir les détails</button>
+          <button class="btn" type="button" data-atlas-current-audit-open="analytical-truth" aria-controls="atlasAnalyticalTruth">Ouvrir les détails</button>
         </div>
       </section>
 
               <section class="atlas-frame-truth" id="atlasFrameTruth" data-state="waiting" aria-labelledby="atlasFrameTruthTitle">
-        <div class="section-head compact atlas-current-audit-shell-40431" data-atlas-current-audit-shell-40431="frame-truth">
+        <div class="section-head compact atlas-current-audit-shell" data-atlas-current-audit-shell="frame-truth">
           <div>
             <p class="eyebrow">COHÉRENCE TEMPORELLE · SNAPSHOT / LIVE</p>
             <h5 id="atlasFrameTruthTitle">Snapshot analysé et marché live</h5>
             <p class="planning-intro">Présentation différée · état runtime conservé</p>
           </div>
-          <button class="btn" type="button" data-atlas-current-audit-open-40431="frame-truth" aria-controls="atlasFrameTruth">Ouvrir les détails</button>
+          <button class="btn" type="button" data-atlas-current-audit-open="frame-truth" aria-controls="atlasFrameTruth">Ouvrir les détails</button>
         </div>
       </section>
 
 
               <section class="atlas-current-truth-33" id="atlasCurrentTruth33" data-state="waiting" aria-labelledby="atlasCurrentTruth33Title">
-        <div class="section-head compact atlas-current-audit-shell-40431" data-atlas-current-audit-shell-40431="current-truth">
+        <div class="section-head compact atlas-current-audit-shell" data-atlas-current-audit-shell="current-truth">
           <div>
             <p class="eyebrow">CURRENT TRUTH · ÉTAT TRANSACTIONNEL</p>
             <h5 id="atlasCurrentTruth33Title">Pourquoi cette analyse est CURRENT</h5>
             <p class="planning-intro">Relit seulement l’état produit par le pipeline</p>
           </div>
-          <button class="btn" type="button" data-atlas-current-audit-open-40431="current-truth" aria-controls="atlasCurrentTruth33">Ouvrir les détails</button>
+          <button class="btn" type="button" data-atlas-current-audit-open="current-truth" aria-controls="atlasCurrentTruth33">Ouvrir les détails</button>
         </div>
       </section>
 
-              <details class="atlas-memory-intelligence atlas-memory-deferred-40353 atlas-collapse glass atlas-tone-intelligence" id="atlasMemoryIntelligence" data-state="waiting" data-atlas-memory-deferred-40353="1" aria-labelledby="atlasMemoryIntelligenceTitle">
+              <details class="atlas-memory-intelligence atlas-memory-deferred atlas-collapse glass atlas-tone-intelligence" id="atlasMemoryIntelligence" data-state="waiting" data-atlas-memory-deferred="1" aria-labelledby="atlasMemoryIntelligenceTitle">
                 <summary class="atlas-memory-intelligence-head atlas-collapse-summary">
                   <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
                   <span class="atlas-collapse-copy">
                     <span class="eyebrow">MARKET MEMORY · 3 / 5 / 10 OBSERVATIONS</span>
                     <span class="atlas-collapse-title" id="atlasMemoryIntelligenceTitle">Continuité réelle du marché · indépendante d’Atlas</span>
-                    <span class="atlas-collapse-subtitle" id="atlasMarketMemorySummarySubtitle40354">Lecture rétrospective à la demande · les CURRENT analytiques restent séparés.</span>
+                    <span class="atlas-collapse-subtitle" id="atlasMarketMemorySummarySubtitle">Lecture rétrospective à la demande · les CURRENT analytiques restent séparés.</span>
                   </span>
                   <span class="pill warn" id="atlasMemoryIntelligenceBadge">Mémoire en attente</span>
                   <span class="atlas-collapse-state" data-open-label="Replier" data-closed-label="Déplier">Déplier</span>
                 </summary>
-                <div class="atlas-collapse-body" id="atlasMemoryIntelligenceMount40353" data-atlas-memory-mounted-40353="0">
-                  <p class="atlas-local-response-empty" data-atlas-memory-placeholder-40353="1">Market Memory conservée · ouvrir pour matérialiser les horizons, la continuité et les diagnostics.</p>
+                <div class="atlas-collapse-body" id="atlasMemoryIntelligenceMount" data-atlas-memory-mounted="0">
+                  <p class="atlas-local-response-empty" data-atlas-memory-placeholder="1">Market Memory conservée · ouvrir pour matérialiser les horizons, la continuité et les diagnostics.</p>
                 </div>
               </details>
 
-              <details class="atlas-memory-intelligence atlas-analytical-memory-deferred-40353 atlas-collapse glass atlas-tone-intelligence" id="atlasAnalyticalMemory394" data-state="waiting" data-atlas-analytical-memory-deferred-40353="1" aria-labelledby="atlasAnalyticalMemoryTitle394">
+              <details class="atlas-memory-intelligence atlas-analytical-memory-deferred atlas-collapse glass atlas-tone-intelligence" id="atlasAnalyticalMemory394" data-state="waiting" data-atlas-analytical-memory-deferred="1" aria-labelledby="atlasAnalyticalMemoryTitle394">
                 <summary class="atlas-memory-intelligence-head atlas-collapse-summary">
                   <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
                   <span class="atlas-collapse-copy">
                     <span class="eyebrow">ANALYTICAL MEMORY · CURRENT FERMÉS</span>
                     <span class="atlas-collapse-title" id="atlasAnalyticalMemoryTitle394">Mémoire des analyses réellement terminées · séparée du marché</span>
-                    <span class="atlas-collapse-subtitle" id="atlasAnalyticalMemorySummarySubtitle40354">CURRENT Atlas 4/4 → NØX → Aerith · contenu détaillé matérialisé uniquement à l’ouverture.</span>
+                    <span class="atlas-collapse-subtitle" id="atlasAnalyticalMemorySummarySubtitle">CURRENT Atlas 4/4 → NØX → Aerith · contenu détaillé matérialisé uniquement à l’ouverture.</span>
                   </span>
                   <span class="pill warn" id="atlasAnalyticalMemoryBadge394">En attente</span>
                   <span class="atlas-collapse-state" data-open-label="Replier" data-closed-label="Déplier">Déplier</span>
                 </summary>
-                <div class="atlas-collapse-body" id="atlasAnalyticalMemoryMount40353" data-atlas-analytical-memory-mounted-40353="0">
-                  <p class="atlas-local-response-empty" data-atlas-analytical-memory-placeholder-40353="1">Analytical Memory conservée · ouvrir pour matérialiser les CURRENT détaillés.</p>
+                <div class="atlas-collapse-body" id="atlasAnalyticalMemoryMount" data-atlas-analytical-memory-mounted="0">
+                  <p class="atlas-local-response-empty" data-atlas-analytical-memory-placeholder="1">Analytical Memory conservée · ouvrir pour matérialiser les CURRENT détaillés.</p>
                 </div>
               </details>
-    <section class="decision-board glass atlas-family-member atlas-tone-analysis" id="decision-board" aria-label="Atlas Decision Board" data-layout-family="analysis" data-analysis-owner-40385="decision-synthese-contradictions-limites">
+    <section class="decision-board glass atlas-family-member atlas-tone-analysis" id="decision-board" aria-label="Atlas Decision Board" data-layout-family="analysis" data-analysis-owner="decision-synthese-contradictions-limites">
       <div class="section-head compact">
         <div>
           <p class="eyebrow">ATLAS DECISION BOARD V2 · SYNTHÈSE / CONTRADICTIONS / LIMITES</p>
@@ -390,8 +390,8 @@
 
 
 
-      <details class="atlas-decision-detail atlas-decision-detail-deferred-40353" id="atlasDecisionBoardDetails" data-atlas-decision-detail-deferred-40353="1">
-        <summary class="atlas-collapse-summary atlas-decision-detail-summary-40358">
+      <details class="atlas-decision-detail atlas-decision-detail-deferred" id="atlasDecisionBoardDetails" data-atlas-decision-detail-deferred="1">
+        <summary class="atlas-collapse-summary atlas-decision-detail-summary">
           <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
           <span class="atlas-collapse-copy">
             <span class="atlas-collapse-title">Détails Atlas · mouvements, anomalies, catégories et contexte News</span>
@@ -399,8 +399,8 @@
           </span>
           <span class="atlas-collapse-state" data-open-label="Replier" data-closed-label="Déplier">Déplier</span>
         </summary>
-        <div class="atlas-decision-detail-body" id="atlasDecisionBoardDeepMount40353" data-atlas-decision-detail-mounted-40353="0">
-          <p class="atlas-local-response-empty" data-atlas-decision-detail-placeholder-40353="1">Decision Board compact · ouvrir pour matérialiser les cartes et le contexte News.</p>
+        <div class="atlas-decision-detail-body" id="atlasDecisionBoardDeepMount" data-atlas-decision-detail-mounted="0">
+          <p class="atlas-local-response-empty" data-atlas-decision-detail-placeholder="1">Decision Board compact · ouvrir pour matérialiser les cartes et le contexte News.</p>
         </div>
       </details>
 
@@ -448,18 +448,18 @@
                   <article><span>Règle cotation</span><b id="atlasScannerTruthQuoteRule37">Binance si sûre → sinon marché</b><small>La provenance reste affichée pour chaque actif.</small></article>
                   <article><span>Historique séries</span><b id="atlasScannerTruthHistory37">Bridge/Binance → Binance → CoinGecko</b><small>Cache/archive uniquement s’ils sont explicitement identifiés comme tels.</small></article>
                 </div>
-                <details class="atlas-collapse atlas-tone-analysis" id="atlasScannerTruthDetails40358" data-atlas-scanner-detail-deferred-40358="1">
+                <details class="atlas-collapse atlas-tone-analysis" id="atlasScannerTruthDetails" data-atlas-scanner-detail-deferred="1">
                   <summary class="atlas-collapse-summary">
                     <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
                     <span class="atlas-collapse-copy">
                       <span class="atlas-collapse-title">Résultats Scanner · hausses / baisses / volumes</span>
                       <span class="atlas-collapse-subtitle">Les trois paniers 5/5/5 sont matérialisés uniquement à l’ouverture.</span>
                     </span>
-                    <span class="pill warn" id="atlasScannerTruthDetailBadge40358">À la demande</span>
+                    <span class="pill warn" id="atlasScannerTruthDetailBadge">À la demande</span>
                     <span class="atlas-collapse-state" data-open-label="Replier" data-closed-label="Déplier">Déplier</span>
                   </summary>
-                  <div class="atlas-collapse-body" id="atlasScannerTruthMount40358" data-atlas-scanner-mounted-40358="0"></div>
-                  <template id="atlasScannerTruthTemplate40358">
+                  <div class="atlas-collapse-body" id="atlasScannerTruthMount" data-atlas-scanner-mounted="0"></div>
+                  <template id="atlasScannerTruthTemplate">
                     <div class="atlas-scanner-truth-37-grid">
                       <article data-scanner-truth="gainers"><span>HAUSSES 5</span><b id="atlasScannerGainersTitle37">En attente</b><div id="atlasScannerGainersRows37" class="atlas-scanner-truth-rows"></div></article>
                       <article data-scanner-truth="losers"><span>BAISSES 5</span><b id="atlasScannerLosersTitle37">En attente</b><div id="atlasScannerLosersRows37" class="atlas-scanner-truth-rows"></div></article>
@@ -473,8 +473,8 @@
                 </details>
               </section>
 
-              <details class="atlas-current-journal-33 atlas-current-journal-deferred-40352 atlas-collapse glass atlas-tone-intelligence" id="atlasCurrentJournal33" data-state="waiting" data-atlas-current-journal-deferred-40352="1" aria-labelledby="atlasCurrentJournal33Title">
-                <summary class="atlas-collapse-summary atlas-current-journal-summary-40352">
+              <details class="atlas-current-journal-33 atlas-current-journal-deferred atlas-collapse glass atlas-tone-intelligence" id="atlasCurrentJournal33" data-state="waiting" data-atlas-current-journal-deferred="1" aria-labelledby="atlasCurrentJournal33Title">
+                <summary class="atlas-collapse-summary atlas-current-journal-summary">
                   <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
                   <span class="atlas-collapse-copy">
                     <span class="eyebrow">JOURNAL DES CURRENT · INDEX LOCAL</span>
@@ -484,21 +484,21 @@
                   <span class="pill warn" id="atlasCurrentJournal33Badge">0 CURRENT</span>
                   <span class="atlas-collapse-state" data-open-label="Replier" data-closed-label="Déplier">Déplier</span>
                 </summary>
-                <div class="atlas-collapse-body" id="atlasCurrentJournalMount40352" data-atlas-current-journal-mounted-40352="0">
-                  <p class="atlas-local-response-empty" data-atlas-current-journal-placeholder-40352="1">Journal CURRENT fermé · index conservé en mémoire locale.</p>
+                <div class="atlas-collapse-body" id="atlasCurrentJournalMount" data-atlas-current-journal-mounted="0">
+                  <p class="atlas-local-response-empty" data-atlas-current-journal-placeholder="1">Journal CURRENT fermé · index conservé en mémoire locale.</p>
                 </div>
                 <p class="atlas-current-journal-33-status" id="atlasCurrentJournal33Status">Journal local prêt · contenu détaillé chargé uniquement à l’ouverture.</p>
               </details>
 
 
-    <details class="atlas-collapse glass atlas-family-member atlas-tone-intelligence" id="atlasMultiCollectorDetails40357" data-collapse-key="multi-collector-operator" data-layout-family="intelligence" data-atlas-multi-collector-deferred-40357="1">
+    <details class="atlas-collapse glass atlas-family-member atlas-tone-intelligence" id="atlasMultiCollectorDetails" data-collapse-key="multi-collector-operator" data-layout-family="intelligence" data-atlas-multi-collector-deferred="1">
       <summary class="atlas-collapse-summary">
         <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
         <span class="atlas-collapse-title">Multi-Collector & Operator Console</span>
         <span class="atlas-collapse-subtitle">Concordance mémoire · rôle local · handoff</span>
       </summary>
-      <div class="atlas-collapse-body" id="atlasMultiCollectorMount40357" data-atlas-multi-collector-mounted-40357="0"></div>
-      <template id="atlasMultiCollectorTemplate40357">
+      <div class="atlas-collapse-body" id="atlasMultiCollectorMount" data-atlas-multi-collector-mounted="0"></div>
+      <template id="atlasMultiCollectorTemplate">
         <section class="panel glass atlas-multi-collector-panel" id="atlasMultiCollectorOperator" data-state="waiting">
           <div class="section-head">
             <div>
@@ -550,24 +550,24 @@
     </details>
 
               <section class="atlas-book-readonly" id="atlasBookReadOnlyKnowledge" data-state="waiting" aria-labelledby="atlasBookReadOnlyTitle">
-        <div class="section-head compact atlas-current-audit-shell-40431" data-atlas-current-audit-shell-40431="book-readonly">
+        <div class="section-head compact atlas-current-audit-shell" data-atlas-current-audit-shell="book-readonly">
           <div>
             <p class="eyebrow">SHARED READ-ONLY KNOWLEDGE · RYZEN → BOOK</p>
             <h5 id="atlasBookReadOnlyTitle">Miroir et lecture Book</h5>
             <p class="planning-intro">Runtime et mémoire conservés · présentation chargée à la demande</p>
           </div>
-          <button class="btn" type="button" data-atlas-current-audit-open-40431="book-readonly" aria-controls="atlasBookReadOnlyKnowledge">Ouvrir les détails</button>
+          <button class="btn" type="button" data-atlas-current-audit-open="book-readonly" aria-controls="atlasBookReadOnlyKnowledge">Ouvrir les détails</button>
         </div>
       </section>
 
               <section class="atlas-knowledge-library" id="atlasKnowledgeLibrary" data-state="ready" aria-labelledby="atlasKnowledgeLibraryTitle">
-        <div class="section-head compact atlas-current-audit-shell-40431" data-atlas-current-audit-shell-40431="knowledge-library">
+        <div class="section-head compact atlas-current-audit-shell" data-atlas-current-audit-shell="knowledge-library">
           <div>
             <p class="eyebrow">BIBLIOTHÈQUE PÉDAGOGIQUE PERMANENTE · SANS BRIDGE</p>
             <h5 id="atlasKnowledgeLibraryTitle">Dictionnaire Crypto / Banque / Bourse</h5>
             <p class="planning-intro">56 définitions conservées · cartes et contrôles chargés à la demande</p>
           </div>
-          <button class="btn" type="button" data-atlas-current-audit-open-40431="knowledge-library" aria-controls="atlasKnowledgeLibrary">Ouvrir les détails</button>
+          <button class="btn" type="button" data-atlas-current-audit-open="knowledge-library" aria-controls="atlasKnowledgeLibrary">Ouvrir les détails</button>
         </div>
       </section>
 
@@ -642,7 +642,7 @@
           </section>
           <div class="aerith10-creator-stage" id="aerith10CreatorStage">
             <div class="aerith10-creator-hint">Page Notion publique intégrée · si le fournisseur refuse l’embarquement, utilise « Ouvrir Aerith-10 complète ↗ ».</div>
-            <div class="aerith10-portal-406023" data-aerith10-portal="40.6.23" role="region" aria-label="Portail Aerith-10 Créatrice Full Matrix">
+            <div class="aerith10-portal" data-aerith10-portal="40.6.23" role="region" aria-label="Portail Aerith-10 Créatrice Full Matrix">
               <div class="aerith10-portal-kicker">🌸 AERITH-10 CRÉATRICE · FULL MATRIX</div>
               <h3>De l’idée à l’œuvre, sans quitter le parcours Administrator</h3>
               <p class="aerith10-portal-copy">Notion refuse l’embarquement direct dans Firefox. La sous-section reste intégrée ici comme portail ; la page complète s’ouvre volontairement dans un nouvel onglet.</p>
@@ -767,7 +767,7 @@
         <span class="atlas-collapse-title">Atlas Auto Reader</span>
         <span class="atlas-collapse-subtitle">Collecte autonome du marché</span>
       </summary>
-      <div class="atlas-collapse-body atlas-peripheral-lazy-body-40425" data-atlas-peripheral-lazy="auto-reader" data-atlas-hydrated-40425="0"><p class="atlas-local-response-empty">Atlas Auto Reader · contenu chargé uniquement à l’ouverture.</p></div>
+      <div class="atlas-collapse-body atlas-peripheral-lazy-body" data-atlas-peripheral-lazy="auto-reader" data-atlas-hydrated="0"><p class="atlas-local-response-empty">Atlas Auto Reader · contenu chargé uniquement à l’ouverture.</p></div>
     </details>
 
     <details class="atlas-collapse glass atlas-family-member atlas-tone-intelligence" id="shared-memory" data-collapse-key="shared-memory" data-layout-family="intelligence">
@@ -776,7 +776,7 @@
         <span class="atlas-collapse-title">Shared Memory</span>
         <span class="atlas-collapse-subtitle">Export / import par machine</span>
       </summary>
-      <div class="atlas-collapse-body atlas-peripheral-lazy-body-40425" data-atlas-peripheral-lazy="shared-memory" data-atlas-hydrated-40425="0"><p class="atlas-local-response-empty">Shared Memory · contenu chargé uniquement à l’ouverture.</p></div>
+      <div class="atlas-collapse-body atlas-peripheral-lazy-body" data-atlas-peripheral-lazy="shared-memory" data-atlas-hydrated="0"><p class="atlas-local-response-empty">Shared Memory · contenu chargé uniquement à l’ouverture.</p></div>
     </details>
 
 
@@ -788,14 +788,14 @@
         <span class="atlas-collapse-title">GitHub Memory</span>
         <span class="atlas-collapse-subtitle">Mémoire commune GitHub</span>
       </summary>
-      <div class="atlas-collapse-body atlas-peripheral-lazy-body-40425" data-atlas-peripheral-lazy="github-memory" data-atlas-hydrated-40425="0"><p class="atlas-local-response-empty">GitHub Memory · contenu chargé uniquement à l’ouverture.</p></div>
+      <div class="atlas-collapse-body atlas-peripheral-lazy-body" data-atlas-peripheral-lazy="github-memory" data-atlas-hydrated="0"><p class="atlas-local-response-empty">GitHub Memory · contenu chargé uniquement à l’ouverture.</p></div>
     </details>
 
 `;
   host.insertAdjacentHTML("beforebegin",html);
   host.remove();
   try{
-    globalThis.AgentCryptoAtlasColdRouter40499?.attach?.();
+    globalThis.AgentCryptoAtlasColdRouter?.attach?.();
     globalThis.AgentCryptoAtlasPeripheralLazy?.attach?.();
   }catch(error){console.warn("[40.4.99] Atlas cold-router attach",error);}
   try{

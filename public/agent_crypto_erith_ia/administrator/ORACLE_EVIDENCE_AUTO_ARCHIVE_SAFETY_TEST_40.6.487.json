@@ -1,0 +1,20 @@
+{
+  "schema": "agent_crypto_oracle_evidence_auto_archive_safety_test_v1",
+  "build": "40.6.487",
+  "pass_pending_workflow": false,
+  "cases": {
+    "queue_and_integration_build_identity": "PASS",
+    "bridge_enabled_true_required": "PASS",
+    "shared_ingest_lock": "PASS",
+    "manual_mass_ingest_disabled": "PASS",
+    "manual_stale_manifest_bootstrap_guard": "PASS",
+    "exact_public_receipt_queue": "PASS",
+    "exact_public_receipt_manual_surface": "PASS",
+    "strict_sequential_verified_before_next": "PASS",
+    "pause_stop_after_current_chunk": "PASS",
+    "resume_from_bridge_verified_watermark": "PASS",
+    "indexeddb_readonly_no_delete": "PASS",
+    "historical_481_486_release_workflows_manual": "PASS"
+  },
+  "pass": true
+}

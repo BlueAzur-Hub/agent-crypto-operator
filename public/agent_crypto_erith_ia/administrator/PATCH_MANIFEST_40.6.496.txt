@@ -1,0 +1,46 @@
+AGENT-CRYPTO 40.6.496 — OKX DEMO FILL + HORIZON EVIDENCE TRUTH
+parent=40.6.495
+market_core=38.15.11 protected
+execution_cost_truth=40.6.492 unchanged
+bridge=R18 / V1.9.13 unchanged
+backend=V1.4.3 unchanged
+
+CHANGED
+- public/agent_crypto_erith_ia/administrator/index.html
+- public/agent_crypto_erith_ia/administrator/index-40.6.496.html
+- public/agent_crypto_erith_ia/administrator/build.json
+- public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+- public/agent_crypto_erith_ia/administrator/js/strategy-a-okx-micro-execution-shadow-truth.js
+- public/agent_crypto_erith_ia/administrator/OKX_DEMO_FILL_HORIZON_EVIDENCE_TRUTH_40.6.496.md
+- public/agent_crypto_erith_ia/administrator/HANDOFF_FINAL_40.6.496.md
+- public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.496.txt
+- .github/scripts/agent_crypto_okx_demo_fill_horizon_guard_406496.py
+- .github/workflows/agent-crypto-package-406496.yml
+
+EVIDENCE
+- source report fingerprint sha256:930bb9d35cfdbcd3c2a0632063918e8c7a8b2afb424da8d99aa4bf7ae1b4425b
+- OKX Demo · BTC-EUR · 10 EUR · best bid
+- 10 attempts · 4 full fills · 0 partial · 6 no-fill
+- fill rate 40.0 % · first-fill median 20 s · observed entry fee 0.10 %
+- +5m median +0.1447 % · 1/4 covers 0.20 % maker/maker proxy
+- +15m +0.1357 % · 0/4
+- +30m +0.0843 % · 0/4
+- +60m -0.4500 % · 0/4
+- +120m -0.6459 % · 0/4
+- longer horizon NOT VALIDATED in this small Demo sample
+- entry leg only; exit / round-trip / live fill remain unproven
+- 25/50/100 EUR fill behavior unmeasured
+- Strategy A V1 FAIL_BENCHMARK_FROZEN
+- Strategy A2 not started
+
+UNCHANGED
+- Strategy A thresholds / business logic
+- Cost Gate
+- Oracle Math
+- Risk
+- PAPER execution
+- 40.6.492 measurement logic
+- Backend / Bridge
+- Market Core 38.15.11
+- storage schema
+- real orders / wallet / API keys

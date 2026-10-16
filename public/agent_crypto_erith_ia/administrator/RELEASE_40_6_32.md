@@ -10,7 +10,7 @@ Generated: **2026-09-08T05:43:28Z**
 40.6.32 uses the selected Aether Observatory artwork itself as the actual background layer. Live cards are translucent HTML/CSS overlays aligned to the artwork and mask its baked values with glass/blur. All readable runtime values remain DOM data.
 
 ## Scope
-- Exact selected artwork used as `assets/aether/aether-observatory-background-406032.webp`.
+- Exact selected artwork used as `assets/aether/aether-observatory-background.webp`.
 - Rejected generated SVG removed from the active build.
 - Live System, Sources, Atlas, Oracle, Weather, Convergence, Divergence, Market and Events cards aligned to the artwork.
 - Center Aether level/action remains live.

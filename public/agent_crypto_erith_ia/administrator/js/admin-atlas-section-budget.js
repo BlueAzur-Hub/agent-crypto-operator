@@ -13,12 +13,12 @@
   }
 
   function wrapNode(target, spec) {
-    if (!target || target.closest?.("details.atlas-budget-section-40325")) return null;
+    if (!target || target.closest?.("details.atlas-budget-section")) return null;
     const parent = target.parentNode;
     if (!parent) return null;
 
     const details = document.createElement("details");
-    details.className = "atlas-budget-section-40325";
+    details.className = "atlas-budget-section";
     details.id = spec.id;
     details.dataset.budgetTone = spec.tone || "audit";
     details.dataset.budgetOwner = OWNER;
@@ -26,14 +26,14 @@
     if (spec.open) details.open = true;
 
     const summary = document.createElement("summary");
-    summary.className = "atlas-budget-summary-40325";
+    summary.className = "atlas-budget-summary";
     summary.innerHTML = `
-      <span class="atlas-budget-chevron-40325" aria-hidden="true">▶</span>
-      <span class="atlas-budget-copy-40325"><b>${esc(spec.title)}</b><small>${esc(spec.subtitle || "")}</small></span>
-      <span class="atlas-budget-badge-40325">${esc(spec.badge || "DÉTAILS")}</span>`;
+      <span class="atlas-budget-chevron" aria-hidden="true">▶</span>
+      <span class="atlas-budget-copy"><b>${esc(spec.title)}</b><small>${esc(spec.subtitle || "")}</small></span>
+      <span class="atlas-budget-badge">${esc(spec.badge || "DÉTAILS")}</span>`;
 
     const body = document.createElement("div");
-    body.className = "atlas-budget-body-40325";
+    body.className = "atlas-budget-body";
 
     parent.insertBefore(details, target);
     details.append(summary, body);
@@ -94,7 +94,7 @@
     /* Memory owner moved first. Analytical Memory, Multi-Collector 39.7,
        Memory Health and Freeze subsequently anchor inside this closed body. */
     wrapId("atlasMemoryIntelligence", {
-      id: "atlasBudgetMemory40325",
+      id: "atlasBudgetMemory",
       title: "Mémoire, Analytical Memory, Health & Freeze",
       subtitle: "Market Memory détaillée · CURRENT analytiques · diagnostics · contrôles d’architecture.",
       badge: "AUDIT",
@@ -135,7 +135,7 @@
     });
 
     wrapId("atlasKnowledgeLibrary", {
-      id: "atlasBudgetDictionary40325",
+      id: "atlasBudgetDictionary",
       title: "Dictionnaire Crypto / Banque / Bourse",
       subtitle: "56 définitions permanentes ; ouvrir seulement lorsqu’une recherche est nécessaire.",
       badge: "RÉFÉRENCE",
@@ -152,7 +152,7 @@
 
     /* Existing cross-navigation remains usable through the new outer disclosure. */
     document.getElementById("btnAtlasBookOpenDictionary")?.addEventListener("click", () => {
-      const outer = document.getElementById("atlasBudgetDictionary40325");
+      const outer = document.getElementById("atlasBudgetDictionary");
       if (outer) outer.open = true;
     }, { passive: true });
 
@@ -170,12 +170,12 @@
         "atlasBudgetAerithResponse40325",
         "atlasBudgetStableStack40325",
         "atlasBudgetAnalyticalTruth40325",
-        "atlasBudgetMemory40325",
+        "atlasBudgetMemory",
         "atlasBudgetDecisionHistory40325",
         "atlasBudgetScanner40325",
         "atlasBudgetJournal40325",
         "atlasBudgetBook40325",
-        "atlasBudgetDictionary40325",
+        "atlasBudgetDictionary",
         "atlasBudgetSharedReport40325"
       ]),
       moves_existing_nodes: true,

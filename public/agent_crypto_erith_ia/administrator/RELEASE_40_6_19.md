@@ -2,7 +2,7 @@
 
 - Parent: `40.6.18`
 - Market Core `38.15.11` protected / unchanged.
-- Changed runtime owner: `js/strategy-a-evidence-dossier-404295.js`.
+- Changed runtime owner: `js/strategy-a-evidence-dossier.js`.
 - After-Cost evidence no longer treats `null`, blank strings or booleans as numeric zero.
 - A row counts complete only with strict numeric net/cost facts and `COMPLETE + VERIFIED + accounting_identity_ok=true`.
 - Partial/indeterminate rows never promote Monte Carlo readiness.

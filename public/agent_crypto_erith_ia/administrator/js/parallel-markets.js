@@ -82,7 +82,7 @@
   }
 
   function renderCanvasHover(event) {
-    const canvas = byId("atlasParallelLiveCanvas404170");
+    const canvas = byId("atlasParallelLiveCanvas");
     const overlay = stage()?.querySelector?.("[data-parallel-overlay]");
     const model = state.hover;
     const g = model?.geometry;
@@ -134,35 +134,35 @@
   }
 
   function bindCanvasHover() {
-    const canvas = byId("atlasParallelLiveCanvas404170");
+    const canvas = byId("atlasParallelLiveCanvas");
     if (!canvas || canvas.dataset.parallelHoverBound === "1") return;
     canvas.dataset.parallelHoverBound = "1";
     canvas.addEventListener("pointermove", renderCanvasHover, {passive:true});
     canvas.addEventListener("pointerleave", clearCanvasHover, {passive:true});
   }
 
-  function stage(){ return byId("atlasCyclicMarketInertStage404168"); }
-  function toolbar(){ return byId("atlasCyclicMarketMirrorToolbar404168"); }
-  function detail(){ return byId("atlasParallelDomainRailHost404189") || byId("atlasCyclicMarketInertDetail404168"); }
+  function stage(){ return byId("atlasCyclicMarketInertStage"); }
+  function toolbar(){ return byId("atlasCyclicMarketMirrorToolbar"); }
+  function detail(){ return byId("atlasParallelDomainRailHost") || byId("atlasCyclicMarketInertDetail"); }
 
   function ensureShell() {
     const host = stage(), bar = toolbar(), rail = detail();
     if (!host || !bar || !rail) return false;
-    if (!byId("atlasParallelLiveCanvas404170")) {
+    if (!byId("atlasParallelLiveCanvas")) {
       host.innerHTML = `
-        <div class="atlas-parallel-live-shell atlas-parallel-cockpit-404228" data-parallel-live-shell>
+        <div class="atlas-parallel-live-shell atlas-parallel-cockpit" data-parallel-live-shell>
           <div class="atlas-parallel-live-heading">
             <div><small>ERITH.IA · MARKETS OBSERVATORY</small><h3 data-parallel-title>Marché</h3><p data-parallel-subtitle>Source Truth publique · observation uniquement.</p></div>
             <div class="atlas-parallel-live-badges"><span data-parallel-source>Source</span><span data-parallel-count>0/0</span></div>
           </div>
           <div class="atlas-parallel-live-stage">
-            <canvas id="atlasParallelLiveCanvas404170" aria-label="Graphique marché parallèle"></canvas>
+            <canvas id="atlasParallelLiveCanvas" aria-label="Graphique marché parallèle"></canvas>
             <div class="atlas-parallel-live-overlay" data-parallel-overlay></div>
           </div>
           <div class="atlas-parallel-live-summary" data-parallel-summary>En attente du domaine.</div>
           <div class="atlas-parallel-live-legend" data-parallel-legend></div>
-          <div class="atlas-parallel-memory-strip-404228"><span>ESPACE MÉMORISÉ</span><b data-parallel-memory>—</b><small>Source · période · couverture · choix locaux uniquement</small></div>
-          <div class="atlas-parallel-truth-strip-404228"><b data-parallel-truth-title>MARCHÉ</b><span data-parallel-truth>Observation historique · aucune prévision</span></div>
+          <div class="atlas-parallel-memory-strip"><span>ESPACE MÉMORISÉ</span><b data-parallel-memory>—</b><small>Source · période · couverture · choix locaux uniquement</small></div>
+          <div class="atlas-parallel-truth-strip"><b data-parallel-truth-title>MARCHÉ</b><span data-parallel-truth>Observation historique · aucune prévision</span></div>
         </div>`;
     }
     bindCanvasHover();
@@ -171,7 +171,7 @@
       bar.innerHTML = `
         <span class="mirror-group atlas-toolbar-view-404228" role="group" aria-label="Vue"><small>VUE</small><b class="active">Base 100</b></span>
         <span class="mirror-group atlas-toolbar-history-404246 atlas-parallel-history" role="group" aria-label="Historique long"><small>HISTORIQUE</small>${LONG_PERIODS.map(p => `<button type="button" data-parallel-long-period="${p}" title="Historique long chargé uniquement à la demande">${p === "max" ? "MAX" : p}</button>`).join("")}</span>
-        <span class="mirror-group atlas-toolbar-inspection-404228" role="group" aria-label="Inspection"><small>INSPECTION</small><b class="active">Survol</b><span>Valeurs réelles</span></span>
+        <span class="mirror-group atlas-toolbar-inspection" role="group" aria-label="Inspection"><small>INSPECTION</small><b class="active">Survol</b><span>Valeurs réelles</span></span>
         <span class="mirror-group atlas-toolbar-period-404228 atlas-parallel-periods" role="group" aria-label="Période standard"><small>PÉRIODE</small>${PERIODS.map(p => `<button type="button" data-parallel-period="${p}">${p}</button>`).join("")}</span>`;
       bar.addEventListener("click", event => {
         const button = event.target instanceof Element ? event.target.closest("[data-parallel-period]") : null;
@@ -333,7 +333,7 @@
   }
 
   function drawCanvas(series, period, accent) {
-    const canvas = byId("atlasParallelLiveCanvas404170");
+    const canvas = byId("atlasParallelLiveCanvas");
     if (!canvas) return;
     clearCanvasHover();
     const rect = canvas.getBoundingClientRect();
@@ -627,8 +627,8 @@
     const math = ENABLE_MATH && ranked.length ? `
       <section class="atlas-parallel-math"><b>Math Core · historique mesuré</b>
         <div class="atlas-parallel-math-grid">
-          <span class="atlas-parallel-math-asset-404208" style="--asset-color:${colorForAsset(domain,leader.asset,0)}"><small>Leader</small><strong>${esc(leader.asset.symbol || leader.asset.name)} ${pct(leader.metric.change)}</strong></span>
-          <span class="atlas-parallel-math-asset-404208" style="--asset-color:${colorForAsset(domain,laggard.asset,0)}"><small>Retard</small><strong>${esc(laggard.asset.symbol || laggard.asset.name)} ${pct(laggard.metric.change)}</strong></span>
+          <span class="atlas-parallel-math-asset" style="--asset-color:${colorForAsset(domain,leader.asset,0)}"><small>Leader</small><strong>${esc(leader.asset.symbol || leader.asset.name)} ${pct(leader.metric.change)}</strong></span>
+          <span class="atlas-parallel-math-asset" style="--asset-color:${colorForAsset(domain,laggard.asset,0)}"><small>Retard</small><strong>${esc(laggard.asset.symbol || laggard.asset.name)} ${pct(laggard.metric.change)}</strong></span>
           <span><small>Dispersion</small><strong>${num(leader.metric.change-laggard.metric.change)} pt</strong></span>
           <span><small>Prévision</small><strong>AUCUNE</strong></span>
         </div>
@@ -636,10 +636,10 @@
     rail.innerHTML = `
       <header><span class="eyebrow">DÉTAIL ACTIF</span><strong>Lecture ${esc(cfg.title)}</strong><small>Observation seulement · Source Truth publique</small></header>
       <div class="atlas-parallel-detail-state atlas-parallel-detail-state-404228"><span><small>Domaine</small><b>${esc(cfg.label)}</b></span><span><small>Fenêtre active</small><b>${esc((state.period.get(domain) || cfg.defaultPeriod).toUpperCase())}</b></span><span><small>Couverture</small><b>${payload.assets_count}/${cfg.expected}</b></span><span><small>Source</small><b>${esc(payload.source || cfg.source)}</b></span></div>
-      <section class="atlas-parallel-rail-context-404228"><b>État des données</b><p>Snapshot ${esc(dateText(payload.generated_at || payload.updated_at || payload.as_of || payload.timestamp))} · historique réel · comparaison Base 100 · aucune interpolation inventée.</p></section>
-      <section class="atlas-parallel-rail-decision-404228"><span><small>DÉCISION</small><b>Observer / comparer</b></span><span><small>PRÉVISION</small><b>AUCUNE</b></span></section>
+      <section class="atlas-parallel-rail-context"><b>État des données</b><p>Snapshot ${esc(dateText(payload.generated_at || payload.updated_at || payload.as_of || payload.timestamp))} · historique réel · comparaison Base 100 · aucune interpolation inventée.</p></section>
+      <section class="atlas-parallel-rail-decision"><span><small>DÉCISION</small><b>Observer / comparer</b></span><span><small>PRÉVISION</small><b>AUCUNE</b></span></section>
       <section><b>Lecture synthétique</b><p>${leader ? `Leader ${esc(leader.asset.name)} ${pct(leader.metric.change)} ; retard ${esc(laggard.asset.name)} ${pct(laggard.metric.change)}. Les séries restent indépendantes et sont comparées en Base 100.` : "Données insuffisantes."}</p></section>
-      <section class="atlas-parallel-basket-404189 atlas-parallel-asset-selector-404236"><b>Sélection actif · ${esc(state.period.get(domain) || cfg.defaultPeriod)}</b><ul>${basket || "<li>Données insuffisantes.</li>"}</ul></section>
+      <section class="atlas-parallel-basket atlas-parallel-asset-selector"><b>Sélection actif · ${esc(state.period.get(domain) || cfg.defaultPeriod)}</b><ul>${basket || "<li>Données insuffisantes.</li>"}</ul></section>
       ${math}
       ${depthContent(domain,payload,rowsByAsset,metricByAsset)}
       <section><b>Intégrité</b><p>Aucune valeur inventée · aucune moyenne inter-source · aucune exécution · décision humaine uniquement.</p></section>`;
@@ -709,7 +709,7 @@
     const summary = shell.querySelector("[data-parallel-summary]");
     if (summary) {
       const identities = metricByAsset.map(x=>`<span style="--series:${x.color}"><i></i><b>${esc(x.asset.symbol||x.asset.name)}</b></span>`).join("");
-      summary.innerHTML = ranked.length ? `<b>${series.length}/${cfg.expected}</b><span>Leader ${esc(leader.asset.symbol||leader.asset.name)} ${pct(leader.metric.change)} · retard ${esc(lag.asset.symbol||lag.asset.name)} ${pct(lag.metric.change)}</span><span class="atlas-parallel-summary-assets-404236">${identities}</span>` : "Données insuffisantes";
+      summary.innerHTML = ranked.length ? `<b>${series.length}/${cfg.expected}</b><span>Leader ${esc(leader.asset.symbol||leader.asset.name)} ${pct(leader.metric.change)} · retard ${esc(lag.asset.symbol||lag.asset.name)} ${pct(lag.metric.change)}</span><span class="atlas-parallel-summary-assets">${identities}</span>` : "Données insuffisantes";
     }
     const legend = shell.querySelector("[data-parallel-legend]");
     if (legend) { legend.replaceChildren(); legend.hidden = true; }
@@ -746,7 +746,7 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => sync(document.documentElement.dataset.cyclicMarketDomain || "crypto"), {once:true});
   else sync(document.documentElement.dataset.cyclicMarketDomain || "crypto");
 
-  function measuredSnapshot404199(domain, requestedPeriod=null) {
+  function measuredSnapshot(domain, requestedPeriod=null) {
     const cfg = CONFIG[domain];
     if (!cfg || !ACTIVE.has(domain)) return { loaded:false, domain, period:requestedPeriod || null, reason:"domain_inactive" };
     const period = requestedPeriod || state.period.get(domain) || cfg.defaultPeriod;
@@ -768,9 +768,9 @@
   }
 
   async function ensureHistorical404199(domain, period) {
-    if (!longDomainEnabled(domain) || !isLongPeriod(period)) return measuredSnapshot404199(domain,period);
+    if (!longDomainEnabled(domain) || !isLongPeriod(period)) return measuredSnapshot(domain,period);
     await loadHistorical(domain,period);
-    return measuredSnapshot404199(domain,period);
+    return measuredSnapshot(domain,period);
   }
 
   globalThis.ErithParallelMarketsRuntime = Object.freeze({
@@ -807,7 +807,7 @@
     new_observer:false,
     storage_owner:false,
     orders_allowed:false,
-    snapshot:measuredSnapshot404199,
+    snapshot:measuredSnapshot,
     ensureHistorical:ensureHistorical404199,
     refresh:domain=>{state.data.delete(domain);for(const key of [...state.history.keys()]) if(key.startsWith(`${domain}:`)) state.history.delete(key);return sync(domain);}
   });

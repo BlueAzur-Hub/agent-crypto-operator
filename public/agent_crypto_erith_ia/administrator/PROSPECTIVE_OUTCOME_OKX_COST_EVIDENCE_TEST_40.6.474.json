@@ -1,0 +1,46 @@
+{
+  "schema": "agent_crypto_prospective_outcome_okx_cost_evidence_test_v1",
+  "build": "40.6.474",
+  "pass": true,
+  "checks": {
+    "future_cost_gate_wait_only": true,
+    "historical_backfill": false,
+    "horizons_min": [
+      5,
+      15,
+      60
+    ],
+    "tolerance_ms": 150000,
+    "no_interpolation": true,
+    "missed_window_explicit": true,
+    "okx_existing_execution_cost_owner": true,
+    "okx_slippage_unknown_preserved": true,
+    "existing_durable_db": true,
+    "existing_meta_store": true,
+    "db_version_unchanged": true,
+    "new_object_store": false,
+    "no_recurring_timer": true,
+    "no_mutation_observer": true,
+    "no_threshold_change": true,
+    "no_gate_change": true,
+    "no_real_order": true
+  },
+  "parent_terrain": {
+    "build": "40.6.473",
+    "status": "PASS_OPERATOR_473_TRAJECTORY_TRUTH_READY",
+    "crossing_samples": 1,
+    "first_cross_min": 22.2,
+    "peak_move_pct": 0.691,
+    "margin_over_floor_pct": 0.08,
+    "unknown_t60": {
+      "partial_no_cross": 4,
+      "archive_end_no_sample": 0,
+      "target_gap_no_sample": 4
+    }
+  },
+  "invariants": {
+    "market_core": "38.15.11",
+    "paper_only": true,
+    "profitability_claim": false
+  }
+}

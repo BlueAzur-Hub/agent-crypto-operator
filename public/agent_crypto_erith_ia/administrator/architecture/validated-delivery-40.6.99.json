@@ -1,0 +1,68 @@
+{
+  "schema": "agent_crypto_validated_delivery_evidence_v1",
+  "build": "40.6.99",
+  "parent_build": "40.6.98",
+  "engine": "38.15.11",
+  "checks": [
+    {
+      "id": "sequential_version_contract",
+      "result": "PASS",
+      "proof": "40.6.98 -> 40.6.99; immutable entry index-40.6.99.html"
+    },
+    {
+      "id": "immutable_ui_document_preserved",
+      "result": "PASS",
+      "proof": "index-40.6.99.html reuses the validated index-40.6.98.html blob; runtime build identity remains pathname-authoritative"
+    },
+    {
+      "id": "coingecko_rank_complete_fix_present",
+      "result": "PASS",
+      "proof": "commit eeb6a1579a6dde99db6a0dc433d384cf2ee6c980 requires rank 250 in Top-250 and rank 1000 in Extended collectors"
+    },
+    {
+      "id": "dex_observability_fix_present",
+      "result": "PASS",
+      "proof": "commit 244a12eb73c8d1ac1420cb2e08ef64641d530033 introduced read-only per-asset exclusion diagnostics"
+    },
+    {
+      "id": "dex_diagnostics_forward_compatible",
+      "result": "PASS",
+      "proof": "loader enables diagnostics for builds >= 40.6.98; diagnostic build identity is read from Version Truth / immutable entry"
+    },
+    {
+      "id": "javascript_syntax",
+      "result": "PASS",
+      "commands": [
+        "node --check private-source-demand-loader.js",
+        "node --check dex-exclusion-diagnostics-406098.js"
+      ]
+    },
+    {
+      "id": "build_manifest_json",
+      "result": "PASS",
+      "command": "python -m json.tool build.json"
+    }
+  ],
+  "runtime_invariants": {
+    "market_core_modified": false,
+    "web_classic_modified": false,
+    "aether_modified": false,
+    "atlas_current_modified": false,
+    "oracle_modified": false,
+    "lecture_technique_modified": false,
+    "strategy_a_modified": false,
+    "backend_local_modified": false,
+    "real_order": false,
+    "automatic_order": false,
+    "wallet": false,
+    "new_recurring_timer": false,
+    "new_observer": false,
+    "new_storage_owner": false
+  },
+  "terrain": {
+    "version_truth_ci": "required after commit",
+    "version_delivery_ci": "required after commit",
+    "github_pages": "required after commit",
+    "firefox": "operator visual proof after deployment"
+  }
+}

@@ -1,0 +1,176 @@
+
+/* Agent-Crypto Administrator — 40.6.346
+   OPERATOR DASHBOARD · ROUND INDEPENDENT WINGS
+   Presentation-only repair of 40.6.345. */
+(()=>{
+  "use strict";
+  if(globalThis.AgentCryptoOperatorDashboard406346)return;
+
+  const BUILD="40.6.346";
+  const ROOT_ID="agentCryptoOperatorDashboard406346";
+  const MANUAL_STOP_KEY="agent_crypto_strategy_a_auto_manual_stop_v1";
+  const state={mathMode:"normal",killMode:"normal",mounted:false,bound:false,last_stop:null,last_error:null,stop_pending:false};
+
+  const byId=id=>document.getElementById(id);
+  const compact=(value,max=150)=>{const s=String(value??"").replace(/\s+/g," ").trim();return s.length>max?s.slice(0,max-1)+"…":s;};
+  const numberFrom=value=>{const m=String(value??"").replace(",",".").match(/-?\d+(?:\.\d+)?/);return m?Number(m[0]):null;};
+
+  function mathSnapshot(){
+    const raw=compact(byId("scoreValue")?.textContent||byId("atlasMathRailScore")?.textContent||"—",24);
+    const score=numberFrom(raw);
+    return Object.freeze({
+      raw,
+      score:Number.isFinite(score)?score:null,
+      label:compact(byId("scoreLabel")?.textContent||"En attente",64),
+      context:compact(byId("atlasMathContextLine")?.textContent||"Contexte Market : en attente",100),
+      verdict:compact(byId("atlasHumanVerdict")?.innerText||byId("atlasHumanVerdict")?.textContent||"Lecture Math Core en attente.",160),
+      source:"CANONICAL_MATH_DOM"
+    });
+  }
+
+  function autoSnapshot(){
+    try{
+      if(typeof globalThis.strategyAAutoSnapshot==="function"){
+        const snap=globalThis.strategyAAutoSnapshot();
+        if(snap&&typeof snap==="object")return snap;
+      }
+    }catch(_){}
+    const summary=compact(byId("strategyAAutoSummary")?.textContent||"",180);
+    const visual=compact(byId("strategyAOperatorStatus")?.textContent||byId("strategyAVisualState404269")?.textContent||"",80);
+    let stopped=false;
+    try{stopped=sessionStorage.getItem(MANUAL_STOP_KEY)==="1";}catch(_){}
+    return Object.freeze({
+      build:null,enabled:visual?/ACTIF|ARM|OUVERT/i.test(visual):null,
+      phase:stopped?"OFF":visual||"UNKNOWN",
+      last_action:summary||(stopped?"Arrêt opérateur persistant pour cette session.":"État Auto A non résident."),
+      paper_only:true,real_orders:false,fallback:true
+    });
+  }
+
+  function stopOwner(){
+    if(typeof globalThis.strategyAAutoStop==="function"){
+      return {kind:"function",run:()=>globalThis.strategyAAutoStop("KILL SWITCH · arrêt opérateur depuis le tableau de bord 40.6.346.")};
+    }
+    for(const id of ["strategyAAutoStop","strategyAOperatorStop","strategyAVisualStop404269"]){
+      const button=byId(id);
+      if(button instanceof HTMLElement)return {kind:"button",id,run:()=>{button.click();return autoSnapshot();}};
+    }
+    return null;
+  }
+
+  function stopState(){
+    const snap=autoSnapshot();
+    let persisted=false;
+    try{persisted=sessionStorage.getItem(MANUAL_STOP_KEY)==="1";}catch(_){}
+    return Object.freeze({
+      available:!!stopOwner(),enabled:snap?.enabled===true,phase:String(snap?.phase||"UNKNOWN"),
+      last_action:compact(snap?.last_action||"—",120),persisted,
+      paper_only:snap?.paper_only!==false,real_orders:snap?.real_orders===true
+    });
+  }
+
+  function emit(action,detail={}){
+    try{window.dispatchEvent(new CustomEvent("agent-crypto:operator-kill-switch",{detail:{build:BUILD,action,operator_action:true,...detail}}));}catch(_){}
+  }
+
+  function scoreTextOf(math){
+    if(math.raw==="—"||!math.raw)return "—";
+    return math.raw+(String(math.raw).includes("/")?"":"/100");
+  }
+
+  function render(){
+    const root=byId(ROOT_ID); if(!root)return false;
+    root.dataset.mathMode=state.mathMode;
+    root.dataset.killMode=state.killMode;
+    const math=mathSnapshot();
+    const scoreText=scoreTextOf(math);
+    for(const id of ["acOperatorMathScore406346","acOperatorMathMiniScore406346"]){const node=byId(id);if(node)node.textContent=scoreText;}
+    const label=byId("acOperatorMathLabel406346");if(label)label.textContent=math.label;
+    const context=byId("acOperatorMathContext406346");if(context)context.textContent=math.context;
+    const verdict=byId("acOperatorMathVerdict406346");if(verdict)verdict.textContent=math.verdict;
+
+    const ks=stopState();
+    const status=state.stop_pending?"ARRÊT…":ks.persisted||ks.enabled===false?"STOP":ks.enabled===true?"AUTO A ACTIF":ks.available?"PRÊT":"INDISPONIBLE";
+    root.dataset.killState=(ks.persisted||ks.enabled===false)?"stopped":ks.enabled===true?"active":"idle";
+    const stateNode=byId("acOperatorKillState406346");if(stateNode)stateNode.textContent=status;
+    const detail=byId("acOperatorKillDetail406346");if(detail)detail.textContent=ks.persisted?"Arrêt opérateur persistant · session actuelle":ks.last_action;
+    const paper=byId("acOperatorPaperOnly406346");if(paper)paper.textContent=ks.paper_only&&!ks.real_orders?"PAPER ONLY":"ÉTAT À VÉRIFIER";
+    root.querySelectorAll("[data-ac-kill-stop]").forEach(button=>{
+      button.disabled=state.stop_pending||!ks.available;
+      button.setAttribute("aria-pressed",ks.persisted||ks.enabled===false?"true":"false");
+      button.title=ks.available?"KILL SWITCH · STOP Auto A Paper existant.":"STOP Auto A non encore résident.";
+    });
+    return true;
+  }
+
+  let raf=0;
+  function scheduleRender(){if(raf)return;raf=requestAnimationFrame(()=>{raf=0;render();});}
+
+  function setWingMode(wing,mode){
+    if(!["math","kill"].includes(wing)||!["normal","mini","hidden"].includes(mode))return false;
+    if(wing==="math")state.mathMode=mode;else state.killMode=mode;
+    render();emit("DASHBOARD_"+wing.toUpperCase()+"_"+mode.toUpperCase());return true;
+  }
+
+  function operatorStop(){
+    const owner=stopOwner();
+    if(!owner){state.last_error="STOP_OWNER_NOT_RESIDENT";render();return false;}
+    const ok=window.confirm("KILL SWITCH · STOP\n\nArrêter le scheduler Auto A Paper ?\nUne position Paper éventuelle reste intacte et surveillable.\nL’interface, Math Core, Oracle, Atlas et le graphique restent lisibles.\nAucun ordre réel, wallet ou suppression n’est déclenché.");
+    if(!ok)return false;
+    state.stop_pending=true;render();
+    try{
+      const result=owner.run();
+      state.last_stop={at:new Date().toISOString(),owner:owner.kind,id:owner.id||null,result:result||null};
+      state.last_error=null;emit("STOP",{owner:owner.kind,owner_id:owner.id||null,paper_only:true,real_orders:false});return true;
+    }catch(error){
+      state.last_error=String(error?.message||error);emit("STOP_FAILED",{error:state.last_error});return false;
+    }finally{state.stop_pending=false;render();}
+  }
+
+  function ensureStyle(){
+    if(byId("agentCryptoOperatorDashboardStyle406346"))return;
+    const style=document.createElement("style");
+    style.id="agentCryptoOperatorDashboardStyle406346";
+    style.textContent="\n#agentCryptoOperatorDashboard406346{position:fixed;inset:0;z-index:2147482400;pointer-events:none;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;--cyan:#65e8ff;--red:#ff717d}\n#agentCryptoOperatorDashboard406346 *{box-sizing:border-box}\n#agentCryptoOperatorDashboard406346 button{font-family:inherit}\n#agentCryptoOperatorDashboard406346 .od-wing{position:absolute;bottom:18px;pointer-events:auto;color:#e9f7fb;border:1px solid rgba(101,232,255,.30);border-radius:24px;background:linear-gradient(145deg,rgba(5,20,31,.97),rgba(5,12,21,.95));box-shadow:0 20px 55px rgba(0,0,0,.48),inset 0 0 0 1px rgba(255,255,255,.025);backdrop-filter:blur(18px);overflow:hidden}\n#agentCryptoOperatorDashboard406346 .od-math{left:18px;width:clamp(320px,25vw,410px);min-height:178px}\n#agentCryptoOperatorDashboard406346 .od-kill{right:18px;width:clamp(280px,22vw,350px);min-height:178px;border-color:rgba(255,113,125,.38)}\n#agentCryptoOperatorDashboard406346 .od-normal{display:block}\n#agentCryptoOperatorDashboard406346 .od-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 13px 9px;border-bottom:1px solid rgba(255,255,255,.055)}\n#agentCryptoOperatorDashboard406346 .od-kicker{font-size:10px;font-weight:1000;letter-spacing:.15em;color:var(--cyan);white-space:nowrap}\n#agentCryptoOperatorDashboard406346 .od-kill .od-kicker{color:#ffc1c6}\n#agentCryptoOperatorDashboard406346 .od-round-controls{display:flex;gap:7px;align-items:center}\n#agentCryptoOperatorDashboard406346 .od-round{width:34px;height:34px;min-width:34px;padding:0;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.045);color:#e5f4f8;font:1000 17px/1 system-ui,sans-serif;cursor:pointer}\n#agentCryptoOperatorDashboard406346 .od-round:hover{background:rgba(255,255,255,.11);transform:translateY(-1px)}\n#agentCryptoOperatorDashboard406346 .od-round:focus-visible,#agentCryptoOperatorDashboard406346 .od-circle-face:focus-visible,#agentCryptoOperatorDashboard406346 .od-stop-circle:focus-visible,#agentCryptoOperatorDashboard406346 .od-recall:focus-visible{outline:2px solid rgba(101,232,255,.88);outline-offset:3px}\n#agentCryptoOperatorDashboard406346 .od-body{padding:13px 15px 15px}\n#agentCryptoOperatorDashboard406346 .od-score-row{display:flex;align-items:center;gap:15px}\n#agentCryptoOperatorDashboard406346 .od-score-orb{width:102px;height:102px;min-width:102px;border-radius:50%;display:grid;place-items:center;padding:10px;text-align:center;border:1px solid rgba(101,232,255,.43);background:radial-gradient(circle at 45% 28%,rgba(101,232,255,.18),rgba(3,14,23,.78) 67%);box-shadow:inset 0 0 26px rgba(101,232,255,.06),0 0 24px rgba(101,232,255,.05);font-size:24px;font-weight:1000;color:#f0fdff;text-shadow:0 0 18px rgba(101,232,255,.25)}\n#agentCryptoOperatorDashboard406346 .od-score-copy{min-width:0}\n#agentCryptoOperatorDashboard406346 .od-score-copy b{display:block;font-size:14px;color:#fff0bc}\n#agentCryptoOperatorDashboard406346 .od-score-copy small{display:block;margin-top:6px;color:#8fa9b5;font-size:9px;line-height:1.42}\n#agentCryptoOperatorDashboard406346 .od-verdict{margin:10px 0 0;padding-top:9px;border-top:1px solid rgba(255,255,255,.055);font-size:10px;line-height:1.42;color:#bad0da}\n#agentCryptoOperatorDashboard406346 .od-kill-layout{display:grid;grid-template-columns:minmax(0,1fr) 108px;gap:14px;align-items:center}\n#agentCryptoOperatorDashboard406346 .od-kill-state{padding:11px;border:1px solid rgba(255,255,255,.075);border-radius:15px;background:rgba(255,255,255,.025)}\n#agentCryptoOperatorDashboard406346 .od-kill-state strong{display:block;font-size:19px;color:#f7fbfc}\n#agentCryptoOperatorDashboard406346[data-kill-state=\"stopped\"] .od-kill-state strong{color:#ff939d}\n#agentCryptoOperatorDashboard406346[data-kill-state=\"active\"] .od-kill-state strong{color:#ffe09a}\n#agentCryptoOperatorDashboard406346 .od-paper{display:inline-flex;margin-top:8px;padding:5px 8px;border-radius:999px;border:1px solid rgba(167,255,156,.25);color:#b8ffad;background:rgba(45,105,49,.12);font-size:8px;font-weight:950}\n#agentCryptoOperatorDashboard406346 .od-kill-detail{margin:8px 1px 0;font-size:9px;line-height:1.35;color:#92aab5}\n#agentCryptoOperatorDashboard406346 .od-stop-circle{width:104px;height:104px;border-radius:50%;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:2px solid rgba(255,113,125,.68);background:radial-gradient(circle at 50% 35%,rgba(183,46,61,.38),rgba(72,15,25,.72));color:#ffe4e6;cursor:pointer;box-shadow:0 0 26px rgba(255,64,82,.10),inset 0 0 24px rgba(255,115,126,.08)}\n#agentCryptoOperatorDashboard406346 .od-stop-circle span:first-child{font-size:9px;font-weight:1000;letter-spacing:.12em}\n#agentCryptoOperatorDashboard406346 .od-stop-circle span:last-child{font-size:20px;font-weight:1000;letter-spacing:.04em}\n#agentCryptoOperatorDashboard406346 .od-stop-circle:hover{transform:scale(1.025)}\n#agentCryptoOperatorDashboard406346 .od-stop-circle:disabled{opacity:.34;cursor:not-allowed;transform:none}\n#agentCryptoOperatorDashboard406346 .od-mini-face{display:none}\n#agentCryptoOperatorDashboard406346 .od-circle-face{width:118px;height:118px;border-radius:50%;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:1px solid rgba(101,232,255,.48);background:radial-gradient(circle at 50% 28%,rgba(101,232,255,.19),rgba(3,14,23,.94) 68%);color:#eefdff;cursor:pointer;box-shadow:0 16px 40px rgba(0,0,0,.42),inset 0 0 24px rgba(101,232,255,.06)}\n#agentCryptoOperatorDashboard406346 .od-circle-face .mini-title{font-size:8px;font-weight:1000;letter-spacing:.13em;color:var(--cyan)}\n#agentCryptoOperatorDashboard406346 .od-circle-face .mini-score{font-size:22px;font-weight:1000}\n#agentCryptoOperatorDashboard406346 .od-kill-mini-wrap{position:relative;width:132px;height:132px}\n#agentCryptoOperatorDashboard406346 .od-mini-kill-stop{position:absolute;inset:5px;width:122px;height:122px;border-radius:50%;padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:2px solid rgba(255,113,125,.68);background:radial-gradient(circle at 50% 32%,rgba(177,45,60,.40),rgba(61,13,23,.93) 70%);color:#ffe3e6;cursor:pointer;box-shadow:0 16px 40px rgba(0,0,0,.46),0 0 22px rgba(255,80,95,.08)}\n#agentCryptoOperatorDashboard406346 .od-mini-kill-stop .mini-title{font-size:8px;font-weight:1000;letter-spacing:.10em}\n#agentCryptoOperatorDashboard406346 .od-mini-kill-stop .mini-stop{font-size:21px;font-weight:1000}\n#agentCryptoOperatorDashboard406346 .od-mini-kill-stop:disabled{opacity:.34;cursor:not-allowed}\n#agentCryptoOperatorDashboard406346 .od-mini-open-round{position:absolute;left:-3px;top:-3px;z-index:3;width:34px;height:34px;border-radius:50%;padding:0;border:1px solid rgba(255,255,255,.20);background:rgba(7,20,30,.98);color:#e9f7fb;display:grid;place-items:center;font-size:15px;font-weight:1000;cursor:pointer}\n#agentCryptoOperatorDashboard406346 .od-recall{display:none;position:absolute;bottom:20px;pointer-events:auto;width:72px;height:72px;border-radius:50%;padding:7px;align-items:center;justify-content:center;text-align:center;border:1px solid rgba(101,232,255,.46);background:rgba(5,20,31,.97);color:#c8f6ff;box-shadow:0 14px 34px rgba(0,0,0,.44);font-size:8px;font-weight:1000;letter-spacing:.08em;line-height:1.14;cursor:pointer}\n#agentCryptoOperatorDashboard406346 .od-recall-math{left:18px}\n#agentCryptoOperatorDashboard406346 .od-recall-kill{right:18px;width:80px;height:80px;border-color:rgba(255,113,125,.52);color:#ffd0d4;background:rgba(28,9,15,.97)}\n#agentCryptoOperatorDashboard406346 .od-recall:hover{transform:scale(1.04)}\n#agentCryptoOperatorDashboard406346[data-math-mode=\"mini\"] .od-math{width:118px;height:118px;min-height:0;border:0;background:transparent;box-shadow:none;backdrop-filter:none;overflow:visible}\n#agentCryptoOperatorDashboard406346[data-math-mode=\"mini\"] .od-math .od-normal{display:none}\n#agentCryptoOperatorDashboard406346[data-math-mode=\"mini\"] .od-math .od-mini-face{display:block}\n#agentCryptoOperatorDashboard406346[data-math-mode=\"hidden\"] .od-math{display:none}\n#agentCryptoOperatorDashboard406346[data-math-mode=\"hidden\"] .od-recall-math{display:flex}\n#agentCryptoOperatorDashboard406346[data-kill-mode=\"mini\"] .od-kill{width:132px;height:132px;min-height:0;border:0;background:transparent;box-shadow:none;backdrop-filter:none;overflow:visible}\n#agentCryptoOperatorDashboard406346[data-kill-mode=\"mini\"] .od-kill .od-normal{display:none}\n#agentCryptoOperatorDashboard406346[data-kill-mode=\"mini\"] .od-kill .od-mini-face{display:block}\n#agentCryptoOperatorDashboard406346[data-kill-mode=\"hidden\"] .od-kill{display:none}\n#agentCryptoOperatorDashboard406346[data-kill-mode=\"hidden\"] .od-recall-kill{display:flex}\n@media(max-width:900px){#agentCryptoOperatorDashboard406346 .od-math{left:9px;width:min(44vw,360px)}#agentCryptoOperatorDashboard406346 .od-kill{right:9px;width:min(39vw,330px)}#agentCryptoOperatorDashboard406346 .od-recall-math{left:9px}#agentCryptoOperatorDashboard406346 .od-recall-kill{right:9px}}\n@media(max-width:620px){#agentCryptoOperatorDashboard406346 .od-math{left:8px;bottom:174px;width:calc(100vw - 16px)}#agentCryptoOperatorDashboard406346 .od-kill{right:8px;width:calc(100vw - 16px)}#agentCryptoOperatorDashboard406346[data-math-mode=\"mini\"] .od-math{left:8px;bottom:8px;width:108px;height:108px}#agentCryptoOperatorDashboard406346[data-math-mode=\"mini\"] .od-circle-face{width:108px;height:108px}#agentCryptoOperatorDashboard406346[data-kill-mode=\"mini\"] .od-kill{right:8px;bottom:8px;width:122px;height:122px}#agentCryptoOperatorDashboard406346[data-kill-mode=\"mini\"] .od-kill-mini-wrap{width:122px;height:122px}#agentCryptoOperatorDashboard406346[data-kill-mode=\"mini\"] .od-mini-kill-stop{width:112px;height:112px}#agentCryptoOperatorDashboard406346 .od-recall{bottom:8px}}\n";
+    document.head.appendChild(style);
+  }
+
+  function mount(){
+    if(byId(ROOT_ID)){state.mounted=true;scheduleRender();return true;}
+    ensureStyle();
+    const root=document.createElement("div");
+    root.id=ROOT_ID;root.dataset.mathMode=state.mathMode;root.dataset.killMode=state.killMode;root.dataset.killState="idle";
+    root.setAttribute("aria-label","Tableau de bord opérateur Math Core et Kill Switch");
+    root.innerHTML="\n<section class=\"od-wing od-math\" aria-label=\"Math Core synthétique\">\n  <div class=\"od-normal\">\n    <div class=\"od-head\">\n      <span class=\"od-kicker\">MATH CORE</span>\n      <div class=\"od-round-controls\">\n        <button type=\"button\" class=\"od-round\" data-dashboard-wing=\"math\" data-dashboard-mode=\"mini\" title=\"Minimiser Math Core\" aria-label=\"Minimiser Math Core\">−</button>\n        <button type=\"button\" class=\"od-round\" data-dashboard-wing=\"math\" data-dashboard-mode=\"hidden\" title=\"Masquer Math Core\" aria-label=\"Masquer Math Core\">×</button>\n      </div>\n    </div>\n    <div class=\"od-body\">\n      <div class=\"od-score-row\">\n        <div class=\"od-score-orb\" id=\"acOperatorMathScore406346\">—</div>\n        <div class=\"od-score-copy\">\n          <b id=\"acOperatorMathLabel406346\">En attente</b>\n          <small id=\"acOperatorMathContext406346\">Contexte Market : en attente</small>\n        </div>\n      </div>\n      <p class=\"od-verdict\" id=\"acOperatorMathVerdict406346\">Lecture Math Core en attente.</p>\n    </div>\n  </div>\n  <div class=\"od-mini-face\">\n    <button type=\"button\" class=\"od-circle-face\" data-dashboard-wing=\"math\" data-dashboard-mode=\"normal\" title=\"Ouvrir Math Core\" aria-label=\"Ouvrir Math Core\">\n      <span class=\"mini-title\">MATH CORE</span>\n      <span class=\"mini-score\" id=\"acOperatorMathMiniScore406346\">—</span>\n    </button>\n  </div>\n</section>\n\n<section class=\"od-wing od-kill\" aria-label=\"Kill Switch opérateur\">\n  <div class=\"od-normal\">\n    <div class=\"od-head\">\n      <span class=\"od-kicker\">KILL SWITCH</span>\n      <div class=\"od-round-controls\">\n        <button type=\"button\" class=\"od-round\" data-dashboard-wing=\"kill\" data-dashboard-mode=\"mini\" title=\"Minimiser Kill Switch\" aria-label=\"Minimiser Kill Switch\">−</button>\n        <button type=\"button\" class=\"od-round\" data-dashboard-wing=\"kill\" data-dashboard-mode=\"hidden\" title=\"Masquer Kill Switch\" aria-label=\"Masquer Kill Switch\">×</button>\n      </div>\n    </div>\n    <div class=\"od-body\">\n      <div class=\"od-kill-layout\">\n        <div>\n          <div class=\"od-kill-state\">\n            <strong id=\"acOperatorKillState406346\">PRÊT</strong>\n            <span class=\"od-paper\" id=\"acOperatorPaperOnly406346\">PAPER ONLY</span>\n          </div>\n          <div class=\"od-kill-detail\" id=\"acOperatorKillDetail406346\">STOP Auto A · lecture et monitoring préservés.</div>\n        </div>\n        <button type=\"button\" class=\"od-stop-circle\" data-ac-kill-stop aria-label=\"KILL SWITCH STOP\">\n          <span>KILL SWITCH</span><span>STOP</span>\n        </button>\n      </div>\n    </div>\n  </div>\n  <div class=\"od-mini-face\">\n    <div class=\"od-kill-mini-wrap\">\n      <button type=\"button\" class=\"od-mini-open-round\" data-dashboard-wing=\"kill\" data-dashboard-mode=\"normal\" title=\"Ouvrir Kill Switch\" aria-label=\"Ouvrir Kill Switch\">↗</button>\n      <button type=\"button\" class=\"od-mini-kill-stop\" data-ac-kill-stop aria-label=\"KILL SWITCH STOP\">\n        <span class=\"mini-title\">KILL SWITCH</span><span class=\"mini-stop\">STOP</span>\n      </button>\n    </div>\n  </div>\n</section>\n\n<button type=\"button\" class=\"od-recall od-recall-math\" data-dashboard-wing=\"math\" data-dashboard-mode=\"normal\" aria-label=\"Rappeler Math Core\">MATH<br>CORE</button>\n<button type=\"button\" class=\"od-recall od-recall-kill\" data-dashboard-wing=\"kill\" data-dashboard-mode=\"normal\" aria-label=\"Rappeler Kill Switch\">KILL<br>SWITCH</button>\n";
+    document.body.appendChild(root);
+    root.querySelectorAll("[data-dashboard-wing][data-dashboard-mode]").forEach(button=>{
+      button.addEventListener("click",()=>setWingMode(button.dataset.dashboardWing,button.dataset.dashboardMode));
+    });
+    root.querySelectorAll("[data-ac-kill-stop]").forEach(button=>button.addEventListener("click",operatorStop));
+    state.mounted=true;render();return true;
+  }
+
+  function bind(){
+    if(state.bound)return;state.bound=true;
+    ["agent-crypto:market-series-updated","agentcrypto:current-finalized","agent-crypto:current-finalized","agent-crypto:evidence-data-changed","agent-crypto:evidence-refresh-complete","agent-crypto:runtime-modules-ready","agent-crypto:postboot-runtime-ready","erith:system-hydrated","pageshow"].forEach(name=>window.addEventListener(name,scheduleRender,{passive:true}));
+    document.addEventListener("visibilitychange",()=>{if(!document.hidden)scheduleRender();},{passive:true});
+  }
+
+  function start(){mount();bind();scheduleRender();}
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+
+  globalThis.AgentCryptoOperatorDashboard406346=Object.freeze({
+    build:BUILD,mount,render:scheduleRender,
+    set_math_mode:mode=>setWingMode("math",mode),
+    set_kill_mode:mode=>setWingMode("kill",mode),
+    show_all:()=>{setWingMode("math","normal");setWingMode("kill","normal");return true;},
+    stop:operatorStop,
+    snapshot:()=>Object.freeze({build:BUILD,math_mode:state.mathMode,kill_mode:state.killMode,mounted:state.mounted,math:mathSnapshot(),kill:stopState(),last_stop:state.last_stop,error:state.last_error}),
+    math_source:"CANONICAL_MATH_DOM",
+    kill_owner:"strategyAAutoStop / existing STOP controls",
+    kill_scope:"AUTO_A_PAPER_SCHEDULER_ONLY",
+    independent_wings:true,round_controls:true,hidden_recall_per_wing:true,
+    paper_position_preserved:true,reading_preserved:true,paper_only:true,real_orders:false,wallet:false,
+    storage_owner:false,network:false,recurring_timer:false,mutation_observer:false
+  });
+})();

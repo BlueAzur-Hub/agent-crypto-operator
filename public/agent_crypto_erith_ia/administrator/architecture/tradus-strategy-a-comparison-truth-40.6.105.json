@@ -1,0 +1,63 @@
+{
+  "schema": "agent_crypto_tradus_strategy_a_comparison_truth_v1",
+  "build": "40.6.105",
+  "parent_build": "40.6.104",
+  "engine": "38.15.11",
+  "reproduced_on": "Administrator 40.6.103 user-provided full report",
+  "defect": {
+    "strategy_a_current": "AUTO A ACTIF / NO TRADE",
+    "tradus_frozen_strategy_a": "OFF",
+    "tradus_comparison": "NON COMPARABLE",
+    "cause": "TRADUS adapter stores Strategy A at last book refresh and renders the frozen copy until another refresh"
+  },
+  "correction": {
+    "owner": "js/tradus-strategy-a-reconcile-406105.js",
+    "scope": "read-side presentation reconciliation only",
+    "reads_current_strategy_a": true,
+    "reads_existing_tradus_snapshot": true,
+    "new_market_fetch": false,
+    "max_comparison_age_seconds": 15,
+    "stale_fail_closed_state": "À RAFRAÎCHIR",
+    "tradus_snapshot_mutated": false,
+    "strategy_a_mutated": false,
+    "ledger_mutated": false
+  },
+  "self_test": {
+    "total": 4,
+    "expected": "4/4",
+    "cases": [
+      "NO TRADE + fresh SELL => DIVERGENCE",
+      "OFF + SELL => NON COMPARABLE",
+      "fresh model preserves DIVERGENCE",
+      "stale model => À RAFRAÎCHIR"
+    ]
+  },
+  "protected": {
+    "market_core": "38.15.11",
+    "web_classic": true,
+    "graphique": true,
+    "lecture_technique": true,
+    "aether_business_truth": true,
+    "atlas_current": true,
+    "oracle": true,
+    "strategy_a_business_logic": true,
+    "strategy_a_paper": true,
+    "tradus_network_owner": "tradus-shadow-adapter.js",
+    "indexeddb_v7": true
+  },
+  "side_effects": {
+    "fetch": false,
+    "recurring_timer": false,
+    "observer": false,
+    "storage_write": false,
+    "order": false,
+    "wallet": false,
+    "credentials": false
+  },
+  "terrain": {
+    "version_truth_ci": "required",
+    "version_delivery_ci": "required",
+    "github_pages": "required",
+    "firefox": "required after deployment"
+  }
+}

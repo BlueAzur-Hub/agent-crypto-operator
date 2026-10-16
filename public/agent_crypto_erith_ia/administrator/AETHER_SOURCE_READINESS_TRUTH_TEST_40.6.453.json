@@ -1,0 +1,25 @@
+{
+  "schema": "agent_crypto_aether_source_readiness_truth_test_v1",
+  "build": "40.6.453",
+  "owner": "js/aether.js",
+  "pass": true,
+  "cases": {
+    "api_missing": "EXPECTED_PARTIAL",
+    "intelligence_missing": "EXPECTED_PARTIAL",
+    "intelligence_partial_fresh": "EXPECTED_PARTIAL",
+    "intelligence_ready_freshness_false": "EXPECTED_PARTIAL",
+    "intelligence_ready_cex_incomplete": "EXPECTED_PARTIAL",
+    "intelligence_ready_fresh_cex_complete": "EXPECTED_READY"
+  },
+  "events": [
+    "erith:source-intelligence",
+    "erith:source-intelligence-auto",
+    "erith:private-source-runtime-loaded"
+  ],
+  "protected": {
+    "market_core": "38.15.11",
+    "strategy_loader_asset": "40.6.452",
+    "strategy_business_logic_changed": false,
+    "backend_business_logic_changed": false
+  }
+}

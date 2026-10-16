@@ -1,0 +1,18 @@
+{
+  "schema": "agent_crypto_public_crypto_collector_access_test_v1",
+  "build": "40.6.480",
+  "pass_pending_workflow": false,
+  "live_provider_recovery_proven": false,
+  "cases": {
+    "missing_secret_fails_closed": "PASS",
+    "demo_header_injected_only_on_coingecko": "PASS",
+    "global_session_has_no_demo_secret": "PASS",
+    "rank_fallback_authenticated": "PASS",
+    "public_status_contains_no_key_value": "PASS",
+    "canonical_last_valid_preservation_unchanged": "PASS",
+    "strategy_a_unchanged": "PASS",
+    "market_core_381511_unchanged": "PASS",
+    "live_provider_recovery": "PENDING_VALID_SECRET"
+  },
+  "pass": true
+}

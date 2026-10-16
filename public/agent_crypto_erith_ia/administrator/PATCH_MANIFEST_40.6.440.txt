@@ -1,0 +1,33 @@
+AGENT-CRYPTO BACKEND RESIDENCY RECOVERY MANIFEST — 40.6.440
+================================================================
+
+Build: 40.6.440
+Parent: 40.6.439
+Rejected terrain: 40.6.439
+
+MODIFIED
+--------
+administrator/js/views/private-source-demand-loader.js
+administrator/js/post-boot-runtime-loader.js
+  ONLY: private-source-demand-loader URL cache-buster -> ?v=40.6.440
+administrator/index.html / index-40.6.440.html
+administrator/build.json
+administrator/RELEASE.md
+administrator/HANDOFF.md
+
+PROTECTED / UNCHANGED
+---------------------
+administrator/style.css
+administrator/app.js
+administrator/js/views/private-backend-sources.js
+Aether
+Market Core
+Oracle math / Risk / Paper / Strategy business logic
+Execution Cost Truth remains non-resident
+
+BEHAVIOR
+--------
+Backend already open -> replay demand.
+Failed/stale source script -> remove -> new attempt.
+Source load wait -> max 7000 ms.
+Downstream owner wiring wait -> max 4500 ms.

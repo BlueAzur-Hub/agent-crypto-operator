@@ -1,0 +1,46 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.504
+Release: DEPTH FULL LECTURE TECHNIQUE COVER + READABILITY
+Parent: 40.6.503
+Market Core: 38.15.11 UNCHANGED
+
+MODIFIED
+M public/agent_crypto_erith_ia/administrator/index.html
+M public/agent_crypto_erith_ia/administrator/build.json
+M public/agent_crypto_erith_ia/administrator/js/okx-microstructure-406499.js
+M public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+
+ADDED
+A public/agent_crypto_erith_ia/administrator/index-40.6.504.html
+A public/agent_crypto_erith_ia/administrator/OKX_DEPTH_FULL_PANEL_READABILITY_40.6.504.md
+A public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.504.txt
+A .github/scripts/agent_crypto_okx_depth_full_panel_guard_406504.py
+A .github/workflows/agent-crypto-package-406504.yml
+
+PRESENTATION
+- full cover of #detailPanel
+- underlying Lecture Technique dimmed to 8%
+- darker semi-transparent overlay + 14 px blur
+- title ~15 px
+- KPI ~13 px
+- orderbook rows ~12 px
+- 6 ASK + 6 BID rows
+
+BEHAVIOR PRESERVED
+- local Backend 8790 /orderbook
+- 2 s polling only while open
+- pause when browser document is hidden
+- no direct browser OKX
+- no private API
+- no real order
+- no wallet
+
+PROTECTED
+- Market Core
+- Strategy / Cost Gate
+- Oracle / Aether / Atlas CURRENT
+- Lecture Technique logic
+- Web Classique
+- Backend / Bridge
+- Candles zoom/pan
+
+TERRAIN: PENDING FIREFOX RYZEN

@@ -1,0 +1,44 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.503
+Release: LIVE DEPTH ON LECTURE TECHNIQUE
+Parent: 40.6.502
+Market Core: 38.15.11 UNCHANGED
+
+MODIFIED
+M public/agent_crypto_erith_ia/administrator/index.html
+M public/agent_crypto_erith_ia/administrator/build.json
+M public/agent_crypto_erith_ia/administrator/js/okx-microstructure-406499.js
+M public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+
+ADDED
+A public/agent_crypto_erith_ia/administrator/index-40.6.503.html
+A public/agent_crypto_erith_ia/administrator/OKX_LIVE_DEPTH_LECTURE_TECHNIQUE_40.6.503.md
+A public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.503.txt
+A .github/scripts/agent_crypto_okx_depth_lecture_guard_406503.py
+A .github/workflows/agent-crypto-package-406503.yml
+
+OPERATOR UX
+- Depth overlays #detailPanel / Lecture Technique
+- semi-transparent + blur
+- chart remains full width
+- larger text
+- orderbook ladder ASK → MID → BID
+- depth bands ±5 / ±10 / ±25 bp
+- bounded 2 s refresh only while open
+- pause when document hidden
+
+NETWORK
+- local Backend 8790 /orderbook only
+- no direct browser OKX
+- no private API
+- no real order
+- no wallet
+
+PROTECTED
+- Market Core
+- Strategy / Cost Gate
+- Oracle / Aether / Atlas CURRENT
+- Lecture Technique logic
+- Web Classique
+- Backend / Bridge
+
+TERRAIN: PENDING FIREFOX RYZEN

@@ -1,0 +1,29 @@
+AGENT-CRYPTO 40.6.533 — PATCH MANIFEST
+Release: NEW LISTINGS · SINGLE GRAPH OWNER REPAIR
+Parent: 40.6.532
+Market Core: 38.15.11 (UNCHANGED)
+
+CORE OWNER
+- public/agent_crypto_erith_ia/administrator/app.js
+  + AtlasExternalChart.present()
+  + external overlay follows active external graph owner
+
+RUNTIME
+- public/agent_crypto_erith_ia/administrator/js/new-listings-native-category.js
+  - no __atlasExternalChartContext access
+  - no atlasExternalChartDraw call
+  - stable dataset accessors
+  - canonical exit does not pre-clear canvas
+- public/agent_crypto_erith_ia/administrator/index.html
+- public/agent_crypto_erith_ia/administrator/index-40.6.533.html
+- public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+- public/agent_crypto_erith_ia/administrator/views/atlas.html
+- public/agent_crypto_erith_ia/administrator/build.json
+
+GUARD / PACKAGE
+- .github/scripts/agent_crypto_new_listings_guard.py
+- .github/workflows/agent-crypto-new-listings-package.yml
+
+TERRAIN
+- 40.6.532: FAIL — CT canvas / BTC overlay divergence + premature external clear path
+- 40.6.533: PENDING FIREFOX

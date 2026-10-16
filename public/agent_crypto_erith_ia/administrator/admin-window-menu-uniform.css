@@ -105,7 +105,7 @@ body.atlas-administrator-mirror .admin-native-control-host > .admin-native-contr
    - destructive Vider may keep a restrained red border/text cue while inactive;
    - no DOM ownership, handlers, data source or chart geometry changes.
    ============================================================================ */
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 {
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic {
   --atlas-gm-border:rgba(183,202,214,.22);
   --atlas-gm-border-soft:rgba(183,202,214,.13);
   --atlas-gm-text:rgba(231,240,245,.88);
@@ -120,27 +120,27 @@ body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 {
   min-width:0!important;
 }
 
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toolbar-row {
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toolbar-row {
   border:1px solid var(--atlas-gm-border-soft)!important;
   border-radius:10px!important;
   background:linear-gradient(180deg,rgba(36,47,55,.28),rgba(5,10,14,.44))!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 4px 12px rgba(0,0,0,.08)!important;
 }
 
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toolbar-label,
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle-group > span {
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toolbar-label,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toggle-group > span {
   color:var(--atlas-gm-label)!important;
   font-weight:950!important;
   letter-spacing:.105em!important;
   text-transform:uppercase!important;
   text-shadow:0 1px 2px rgba(0,0,0,.5)!important;
 }
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toolbar-label {font-size:8.5px!important}
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle-group > span {font-size:7.5px!important}
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toolbar-label {font-size:8.5px!important}
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toggle-group > span {font-size:7.5px!important}
 
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle-group,
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-tabs,
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-action-group {
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toggle-group,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .period-tabs,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .compare-action-group {
   border:1px solid rgba(183,202,214,.10)!important;
   border-radius:8px!important;
   background:linear-gradient(180deg,rgba(23,32,38,.32),rgba(4,8,12,.38))!important;
@@ -148,9 +148,9 @@ body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .c
 }
 
 /* AVAILABLE / INACTIVE — neutral metallic, not "disabled". */
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle,
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-btn,
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-btn {
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toggle,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .period-btn,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .compare-btn {
   min-height:25px!important;
   border:1px solid var(--atlas-gm-border)!important;
   border-radius:7px!important;
@@ -162,29 +162,29 @@ body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .c
   white-space:nowrap!important;
 }
 
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle:hover:not(:disabled):not([aria-disabled="true"]),
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-btn:hover:not(:disabled):not([aria-disabled="true"]),
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-btn:hover:not(:disabled):not([aria-disabled="true"]) {
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toggle:hover:not(:disabled):not([aria-disabled="true"]),
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .period-btn:hover:not(:disabled):not([aria-disabled="true"]),
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .compare-btn:hover:not(:disabled):not([aria-disabled="true"]) {
   border-color:rgba(130,234,255,.36)!important;
   background:linear-gradient(180deg,rgba(48,86,100,.68),rgba(7,24,31,.88))!important;
   color:#f5fbff!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.075),0 0 9px rgba(93,220,255,.07),0 3px 10px rgba(0,0,0,.22)!important;
 }
 
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle:focus-visible,
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-btn:focus-visible,
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-btn:focus-visible {
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toggle:focus-visible,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .period-btn:focus-visible,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .compare-btn:focus-visible {
   outline:2px solid rgba(98,236,255,.72)!important;
   outline-offset:1px!important;
 }
 
 /* ACTIVE / SELECTED — ONE grammar: luminous turquoise/cyan metallic + white text. */
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle.is-active,
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle[aria-pressed="true"],
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-btn.active,
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-btn.active,
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 #atlasTop5NativeFicheToggle40284.is-active,
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 #atlasTop5NativeFicheToggle40284[aria-pressed="true"] {
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toggle.is-active,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toggle[aria-pressed="true"],
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .period-btn.active,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .compare-btn.active,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic #atlasTop5NativeFicheToggle.is-active,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic #atlasTop5NativeFicheToggle[aria-pressed="true"] {
   border-color:var(--atlas-gm-active-border)!important;
   background:linear-gradient(180deg,var(--atlas-gm-active-top),var(--atlas-gm-active-bottom))!important;
   color:var(--atlas-gm-active-text)!important;
@@ -193,12 +193,12 @@ body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 #a
 }
 
 /* DISABLED really means disabled: greyed and visually inert. */
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle:disabled,
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-btn:disabled,
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-btn:disabled,
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle[aria-disabled="true"],
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-btn[aria-disabled="true"],
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-btn[aria-disabled="true"] {
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toggle:disabled,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .period-btn:disabled,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .compare-btn:disabled,
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toggle[aria-disabled="true"],
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .period-btn[aria-disabled="true"],
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .compare-btn[aria-disabled="true"] {
   opacity:.58!important;
   border-color:var(--atlas-gm-disabled-border)!important;
   background:linear-gradient(180deg,rgba(65,68,71,.22),rgba(20,22,24,.46))!important;
@@ -210,36 +210,36 @@ body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .c
 }
 
 /* Max ? is ordinary neutral when inactive: no gold exception. */
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-btn-max:not(.active) {
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .period-btn-max:not(.active) {
   border-color:var(--atlas-gm-border)!important;
   color:var(--atlas-gm-text)!important;
 }
 
 /* Vider keeps only a restrained destructive cue when inactive. */
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-btn-clear:not(.active) {
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .compare-btn-clear:not(.active) {
   border-color:rgba(255,92,117,.22)!important;
   color:rgba(255,215,221,.82)!important;
 }
 
-body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-period-truth {
+body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-period-truth {
   color:rgba(181,199,211,.70)!important;
   font-weight:800!important;
 }
 
 /* Transformer Book: preserve the 40.2.85 compact geometry, but raise text floor. */
 @media (max-width:1366px) {
-  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toolbar-row {padding:2px 3px!important}
-  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-control-deck,
-  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-tabs,
-  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-actions {gap:3px!important}
-  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle-group,
-  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-tabs,
-  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-action-group {padding:1px 2px!important}
-  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle,
-  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .period-btn,
-  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .compare-btn {min-height:24px!important;padding:3px 6px!important;font-size:9px!important}
-  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toolbar-label {font-size:8px!important;letter-spacing:.08em!important}
-  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .chart-v2-toggle-group > span {font-size:7.5px!important;letter-spacing:.07em!important}
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toolbar-row {padding:2px 3px!important}
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-control-deck,
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .period-tabs,
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .compare-actions {gap:3px!important}
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toggle-group,
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .period-tabs,
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .compare-action-group {padding:1px 2px!important}
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toggle,
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .period-btn,
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .compare-btn {min-height:24px!important;padding:3px 6px!important;font-size:9px!important}
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toolbar-label {font-size:8px!important;letter-spacing:.08em!important}
+  body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic .chart-v2-toggle-group > span {font-size:7.5px!important;letter-spacing:.07em!important}
 }
 
 /* ============================================================================
@@ -252,7 +252,7 @@ body.atlas-administrator-mirror #analyste .atlas-graph-toolbar-metallic-40289 .c
    - no layout ownership, handler, data, chart, Oracle, Celestial or window-manager change;
    - color is supplemental: labels/text remain present, never icon-only.
    ============================================================================ */
-body.atlas-administrator-mirror.atlas-semantic-color-icons-40290 {
+body.atlas-administrator-mirror.atlas-semantic-color-icons {
   --atlas-sem-cyan:#76eaff;
   --atlas-sem-teal:#73f0d1;
   --atlas-sem-green:#8ce7a5;
@@ -264,7 +264,7 @@ body.atlas-administrator-mirror.atlas-semantic-color-icons-40290 {
 }
 
 /* Command Center: icon + restrained semantic hue per function. */
-body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290] {
+body.atlas-semantic-color-icons #atlasAdminCommandBar button[data-semantic-tone] {
   --atlas-semantic-color:var(--atlas-sem-cyan);
   --atlas-semantic-rgb:118,234,255;
   position:relative!important;
@@ -273,19 +273,19 @@ body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic
   background:linear-gradient(180deg,rgba(var(--atlas-semantic-rgb),.075),rgba(4,11,17,.62))!important;
   transition:border-color .14s ease,background .14s ease,box-shadow .14s ease!important;
 }
-body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290="decision"]{--atlas-semantic-color:var(--atlas-sem-gold);--atlas-semantic-rgb:255,212,127}
-body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290="analysis"]{--atlas-semantic-color:var(--atlas-sem-cyan);--atlas-semantic-rgb:118,234,255}
-body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290="system"]{--atlas-semantic-color:var(--atlas-sem-teal);--atlas-semantic-rgb:115,240,209}
-body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290="projects"]{--atlas-semantic-color:var(--atlas-sem-violet);--atlas-semantic-rgb:185,167,255}
-body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290="view"]{--atlas-semantic-color:var(--atlas-sem-blue);--atlas-semantic-rgb:131,173,255}
-body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290="command"]{--atlas-semantic-color:var(--atlas-sem-cyan);--atlas-semantic-rgb:118,234,255}
-body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290]:hover,
-body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290][aria-expanded="true"] {
+body.atlas-semantic-color-icons #atlasAdminCommandBar button[data-semantic-tone="decision"]{--atlas-semantic-color:var(--atlas-sem-gold);--atlas-semantic-rgb:255,212,127}
+body.atlas-semantic-color-icons #atlasAdminCommandBar button[data-semantic-tone="analysis"]{--atlas-semantic-color:var(--atlas-sem-cyan);--atlas-semantic-rgb:118,234,255}
+body.atlas-semantic-color-icons #atlasAdminCommandBar button[data-semantic-tone="system"]{--atlas-semantic-color:var(--atlas-sem-teal);--atlas-semantic-rgb:115,240,209}
+body.atlas-semantic-color-icons #atlasAdminCommandBar button[data-semantic-tone="projects"]{--atlas-semantic-color:var(--atlas-sem-violet);--atlas-semantic-rgb:185,167,255}
+body.atlas-semantic-color-icons #atlasAdminCommandBar button[data-semantic-tone="view"]{--atlas-semantic-color:var(--atlas-sem-blue);--atlas-semantic-rgb:131,173,255}
+body.atlas-semantic-color-icons #atlasAdminCommandBar button[data-semantic-tone="command"]{--atlas-semantic-color:var(--atlas-sem-cyan);--atlas-semantic-rgb:118,234,255}
+body.atlas-semantic-color-icons #atlasAdminCommandBar button[data-semantic-tone]:hover,
+body.atlas-semantic-color-icons #atlasAdminCommandBar button[data-semantic-tone][aria-expanded="true"] {
   border-color:rgba(var(--atlas-semantic-rgb),.58)!important;
   background:linear-gradient(180deg,rgba(var(--atlas-semantic-rgb),.15),rgba(4,15,23,.80))!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 0 12px rgba(var(--atlas-semantic-rgb),.10)!important;
 }
-body.atlas-semantic-color-icons-40290 .atlas-admin-shortcut-icon-40290 {
+body.atlas-semantic-color-icons .atlas-admin-shortcut-icon {
   position:absolute!important;left:8px!important;top:50%!important;transform:translateY(-50%)!important;
   width:13px!important;height:13px!important;fill:none!important;stroke:var(--atlas-semantic-color)!important;
   stroke-width:1.7!important;stroke-linecap:round!important;stroke-linejoin:round!important;pointer-events:none!important;
@@ -293,74 +293,74 @@ body.atlas-semantic-color-icons-40290 .atlas-admin-shortcut-icon-40290 {
 }
 
 /* Administrator family palette: same dark shell, different semantic rails. */
-body.atlas-semantic-color-icons-40290 .atlas-layout-family,
-body.atlas-semantic-color-icons-40290 .atlas-family-member {
+body.atlas-semantic-color-icons .atlas-layout-family,
+body.atlas-semantic-color-icons .atlas-family-member {
   --atlas-semantic-accent:var(--atlas-sem-cyan);
   --atlas-semantic-accent-rgb:118,234,255;
 }
-body.atlas-semantic-color-icons-40290 .atlas-layout-family-analysis,
-body.atlas-semantic-color-icons-40290 .atlas-tone-analysis{--atlas-semantic-accent:var(--atlas-sem-cyan);--atlas-semantic-accent-rgb:118,234,255}
-body.atlas-semantic-color-icons-40290 .atlas-layout-family-intelligence,
-body.atlas-semantic-color-icons-40290 .atlas-tone-intelligence{--atlas-semantic-accent:var(--atlas-sem-violet);--atlas-semantic-accent-rgb:185,167,255}
-body.atlas-semantic-color-icons-40290 .atlas-layout-family-operations,
-body.atlas-semantic-color-icons-40290 .atlas-tone-operations{--atlas-semantic-accent:var(--atlas-sem-gold);--atlas-semantic-accent-rgb:255,212,127}
-body.atlas-semantic-color-icons-40290 .atlas-layout-family-system,
-body.atlas-semantic-color-icons-40290 .atlas-tone-system{--atlas-semantic-accent:var(--atlas-sem-teal);--atlas-semantic-accent-rgb:115,240,209}
-body.atlas-semantic-color-icons-40290 .atlas-tone-creation{--atlas-semantic-accent:var(--atlas-sem-pink);--atlas-semantic-accent-rgb:255,158,215}
-body.atlas-semantic-color-icons-40290 .atlas-tone-experiment{--atlas-semantic-accent:var(--atlas-sem-orange);--atlas-semantic-accent-rgb:255,179,110}
+body.atlas-semantic-color-icons .atlas-layout-family-analysis,
+body.atlas-semantic-color-icons .atlas-tone-analysis{--atlas-semantic-accent:var(--atlas-sem-cyan);--atlas-semantic-accent-rgb:118,234,255}
+body.atlas-semantic-color-icons .atlas-layout-family-intelligence,
+body.atlas-semantic-color-icons .atlas-tone-intelligence{--atlas-semantic-accent:var(--atlas-sem-violet);--atlas-semantic-accent-rgb:185,167,255}
+body.atlas-semantic-color-icons .atlas-layout-family-operations,
+body.atlas-semantic-color-icons .atlas-tone-operations{--atlas-semantic-accent:var(--atlas-sem-gold);--atlas-semantic-accent-rgb:255,212,127}
+body.atlas-semantic-color-icons .atlas-layout-family-system,
+body.atlas-semantic-color-icons .atlas-tone-system{--atlas-semantic-accent:var(--atlas-sem-teal);--atlas-semantic-accent-rgb:115,240,209}
+body.atlas-semantic-color-icons .atlas-tone-creation{--atlas-semantic-accent:var(--atlas-sem-pink);--atlas-semantic-accent-rgb:255,158,215}
+body.atlas-semantic-color-icons .atlas-tone-experiment{--atlas-semantic-accent:var(--atlas-sem-orange);--atlas-semantic-accent-rgb:255,179,110}
 
-body.atlas-semantic-color-icons-40290 .atlas-layout-family {
+body.atlas-semantic-color-icons .atlas-layout-family {
   border-color:rgba(var(--atlas-semantic-accent-rgb),.24)!important;
   background:linear-gradient(90deg,rgba(var(--atlas-semantic-accent-rgb),.09),rgba(7,15,23,.42) 34%,rgba(4,10,16,.55))!important;
   box-shadow:inset 3px 0 0 rgba(var(--atlas-semantic-accent-rgb),.66),inset 0 1px 0 rgba(255,255,255,.025)!important;
 }
-body.atlas-semantic-color-icons-40290 .atlas-layout-family .atlas-layout-family-index,
-body.atlas-semantic-color-icons-40290 .atlas-layout-family .atlas-layout-family-copy>p {color:var(--atlas-semantic-accent)!important}
-body.atlas-semantic-color-icons-40290 .atlas-layout-family .atlas-layout-family-signal {
+body.atlas-semantic-color-icons .atlas-layout-family .atlas-layout-family-index,
+body.atlas-semantic-color-icons .atlas-layout-family .atlas-layout-family-copy>p {color:var(--atlas-semantic-accent)!important}
+body.atlas-semantic-color-icons .atlas-layout-family .atlas-layout-family-signal {
   background:linear-gradient(90deg,var(--atlas-semantic-accent),transparent)!important;
   box-shadow:0 0 10px rgba(var(--atlas-semantic-accent-rgb),.24)!important;
 }
 
 /* Family members get only a thin colored rail; no geometry rewrite. */
-body.atlas-semantic-color-icons-40290 .atlas-family-member {
+body.atlas-semantic-color-icons .atlas-family-member {
   border-color:rgba(var(--atlas-semantic-accent-rgb),.17)!important;
   box-shadow:inset 2px 0 0 rgba(var(--atlas-semantic-accent-rgb),.48),0 8px 24px rgba(0,0,0,.08)!important;
 }
-body.atlas-semantic-color-icons-40290 details.atlas-family-member>summary.atlas-collapse-summary {
+body.atlas-semantic-color-icons details.atlas-family-member>summary.atlas-collapse-summary {
   background:linear-gradient(90deg,rgba(var(--atlas-semantic-accent-rgb),.065),rgba(5,13,20,.18) 42%,transparent)!important;
 }
-body.atlas-semantic-color-icons-40290 details.atlas-family-member[open]>summary.atlas-collapse-summary {
+body.atlas-semantic-color-icons details.atlas-family-member[open]>summary.atlas-collapse-summary {
   box-shadow:inset 3px 0 0 rgba(var(--atlas-semantic-accent-rgb),.64)!important;
 }
-body.atlas-semantic-color-icons-40290 .atlas-family-member .eyebrow {color:var(--atlas-semantic-accent)!important}
+body.atlas-semantic-color-icons .atlas-family-member .eyebrow {color:var(--atlas-semantic-accent)!important}
 
 /* More variety inside the analysis family while keeping the same blue-night base. */
-body.atlas-semantic-color-icons-40290 #atlasBreakoutContext40271{--atlas-semantic-accent:var(--atlas-sem-green);--atlas-semantic-accent-rgb:140,231,165}
-body.atlas-semantic-color-icons-40290 #news-sentinel,
-body.atlas-semantic-color-icons-40290 #news-market-explanation{--atlas-semantic-accent:var(--atlas-sem-teal);--atlas-semantic-accent-rgb:115,240,209}
-body.atlas-semantic-color-icons-40290 #astrocycle-4055{--atlas-semantic-accent:var(--atlas-sem-gold);--atlas-semantic-accent-rgb:255,212,127}
-body.atlas-semantic-color-icons-40290 #celestial-sentinel-4055{--atlas-semantic-accent:var(--atlas-sem-violet);--atlas-semantic-accent-rgb:185,167,255}
-body.atlas-semantic-color-icons-40290 #atlasStorageHealth40198{--atlas-semantic-accent:var(--atlas-sem-teal);--atlas-semantic-accent-rgb:115,240,209}
-body.atlas-semantic-color-icons-40290 #atlasMetalsAnalysisFoundation{--atlas-semantic-accent:var(--atlas-sem-gold);--atlas-semantic-accent-rgb:255,212,127}
+body.atlas-semantic-color-icons #atlasBreakoutContext{--atlas-semantic-accent:var(--atlas-sem-green);--atlas-semantic-accent-rgb:140,231,165}
+body.atlas-semantic-color-icons #news-sentinel,
+body.atlas-semantic-color-icons #news-market-explanation{--atlas-semantic-accent:var(--atlas-sem-teal);--atlas-semantic-accent-rgb:115,240,209}
+body.atlas-semantic-color-icons #astrocycle{--atlas-semantic-accent:var(--atlas-sem-gold);--atlas-semantic-accent-rgb:255,212,127}
+body.atlas-semantic-color-icons #celestial-sentinel{--atlas-semantic-accent:var(--atlas-sem-violet);--atlas-semantic-accent-rgb:185,167,255}
+body.atlas-semantic-color-icons #atlasStorageHealth{--atlas-semantic-accent:var(--atlas-sem-teal);--atlas-semantic-accent-rgb:115,240,209}
+body.atlas-semantic-color-icons #atlasMetalsAnalysisFoundation{--atlas-semantic-accent:var(--atlas-sem-gold);--atlas-semantic-accent-rgb:255,212,127}
 
 /* Code-only section heading icons. Absolute placement keeps line-box geometry stable. */
-body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290 {
+body.atlas-semantic-color-icons .atlas-icon-heading {
   --atlas-semantic-color:var(--atlas-sem-cyan);
   --atlas-semantic-rgb:118,234,255;
   position:relative!important;
   padding-left:31px!important;
 }
-body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="analysis"]{--atlas-semantic-color:var(--atlas-sem-cyan);--atlas-semantic-rgb:118,234,255}
-body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="intelligence"]{--atlas-semantic-color:var(--atlas-sem-violet);--atlas-semantic-rgb:185,167,255}
-body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="operations"]{--atlas-semantic-color:var(--atlas-sem-gold);--atlas-semantic-rgb:255,212,127}
-body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="system"]{--atlas-semantic-color:var(--atlas-sem-teal);--atlas-semantic-rgb:115,240,209}
-body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="metals"]{--atlas-semantic-color:var(--atlas-sem-gold);--atlas-semantic-rgb:255,212,127}
-body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="breakout"]{--atlas-semantic-color:var(--atlas-sem-green);--atlas-semantic-rgb:140,231,165}
-body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="oracle"]{--atlas-semantic-color:var(--atlas-sem-cyan);--atlas-semantic-rgb:118,234,255}
-body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="network"]{--atlas-semantic-color:var(--atlas-sem-blue);--atlas-semantic-rgb:131,173,255}
-body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="news"]{--atlas-semantic-color:var(--atlas-sem-teal);--atlas-semantic-rgb:115,240,209}
-body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290[data-semantic-tone-40290="storage"]{--atlas-semantic-color:var(--atlas-sem-teal);--atlas-semantic-rgb:115,240,209}
-body.atlas-semantic-color-icons-40290 .atlas-heading-icon-40290 {
+body.atlas-semantic-color-icons .atlas-icon-heading[data-semantic-tone="analysis"]{--atlas-semantic-color:var(--atlas-sem-cyan);--atlas-semantic-rgb:118,234,255}
+body.atlas-semantic-color-icons .atlas-icon-heading[data-semantic-tone="intelligence"]{--atlas-semantic-color:var(--atlas-sem-violet);--atlas-semantic-rgb:185,167,255}
+body.atlas-semantic-color-icons .atlas-icon-heading[data-semantic-tone="operations"]{--atlas-semantic-color:var(--atlas-sem-gold);--atlas-semantic-rgb:255,212,127}
+body.atlas-semantic-color-icons .atlas-icon-heading[data-semantic-tone="system"]{--atlas-semantic-color:var(--atlas-sem-teal);--atlas-semantic-rgb:115,240,209}
+body.atlas-semantic-color-icons .atlas-icon-heading[data-semantic-tone="metals"]{--atlas-semantic-color:var(--atlas-sem-gold);--atlas-semantic-rgb:255,212,127}
+body.atlas-semantic-color-icons .atlas-icon-heading[data-semantic-tone="breakout"]{--atlas-semantic-color:var(--atlas-sem-green);--atlas-semantic-rgb:140,231,165}
+body.atlas-semantic-color-icons .atlas-icon-heading[data-semantic-tone="oracle"]{--atlas-semantic-color:var(--atlas-sem-cyan);--atlas-semantic-rgb:118,234,255}
+body.atlas-semantic-color-icons .atlas-icon-heading[data-semantic-tone="network"]{--atlas-semantic-color:var(--atlas-sem-blue);--atlas-semantic-rgb:131,173,255}
+body.atlas-semantic-color-icons .atlas-icon-heading[data-semantic-tone="news"]{--atlas-semantic-color:var(--atlas-sem-teal);--atlas-semantic-rgb:115,240,209}
+body.atlas-semantic-color-icons .atlas-icon-heading[data-semantic-tone="storage"]{--atlas-semantic-color:var(--atlas-sem-teal);--atlas-semantic-rgb:115,240,209}
+body.atlas-semantic-color-icons .atlas-heading-icon {
   position:absolute!important;left:0!important;top:50%!important;transform:translateY(-50%)!important;
   width:23px!important;height:23px!important;border-radius:8px!important;display:grid!important;place-items:center!important;
   border:1px solid rgba(var(--atlas-semantic-rgb),.34)!important;
@@ -368,23 +368,23 @@ body.atlas-semantic-color-icons-40290 .atlas-heading-icon-40290 {
   box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 0 9px rgba(var(--atlas-semantic-rgb),.08)!important;
   color:var(--atlas-semantic-color)!important;
 }
-body.atlas-semantic-color-icons-40290 .atlas-heading-icon-40290 svg {
+body.atlas-semantic-color-icons .atlas-heading-icon svg {
   width:14px!important;height:14px!important;fill:none!important;stroke:currentColor!important;stroke-width:1.7!important;stroke-linecap:round!important;stroke-linejoin:round!important;
 }
 
 /* Existing 40.2.69 semantic collapse icons: slightly richer, still restrained. */
-body.atlas-semantic-color-icons-40290 .atlas-collapse-summary>.atlas-section-icon-40269 {
+body.atlas-semantic-color-icons .atlas-collapse-summary>.atlas-section-icon {
   background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(3,10,16,.50))!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 0 10px rgba(98,236,255,.06)!important;
 }
 
 /* Book: preserve clarity; color stays, glow is reduced. */
 @media (max-width:1366px) {
-  body.atlas-semantic-color-icons-40290 #atlasAdminCommandBar button[data-semantic-tone-40290]{padding-left:23px!important}
-  body.atlas-semantic-color-icons-40290 .atlas-admin-shortcut-icon-40290{left:6px!important;width:11px!important;height:11px!important;filter:none!important}
-  body.atlas-semantic-color-icons-40290 .atlas-icon-heading-40290{padding-left:28px!important}
-  body.atlas-semantic-color-icons-40290 .atlas-heading-icon-40290{width:21px!important;height:21px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important}
-  body.atlas-semantic-color-icons-40290 .atlas-heading-icon-40290 svg{width:13px!important;height:13px!important}
+  body.atlas-semantic-color-icons #atlasAdminCommandBar button[data-semantic-tone]{padding-left:23px!important}
+  body.atlas-semantic-color-icons .atlas-admin-shortcut-icon{left:6px!important;width:11px!important;height:11px!important;filter:none!important}
+  body.atlas-semantic-color-icons .atlas-icon-heading{padding-left:28px!important}
+  body.atlas-semantic-color-icons .atlas-heading-icon{width:21px!important;height:21px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important}
+  body.atlas-semantic-color-icons .atlas-heading-icon svg{width:13px!important;height:13px!important}
 }
 
 /* ============================================================================
@@ -400,7 +400,7 @@ body.atlas-semantic-color-icons-40290 .atlas-collapse-summary>.atlas-section-ico
    - ChronosXP calculations, clock cadence, celestial transport and market logic unchanged;
    - no layout/size/position ownership is introduced here.
    ============================================================================ */
-body.atlas-astro-planet-colors-40291 {
+body.atlas-astro-planet-colors {
   --astro-saturn:#ff6f7d;
   --astro-mars:#ff9d63;
   --astro-sun:#ffe46f;
@@ -410,16 +410,16 @@ body.atlas-astro-planet-colors-40291 {
   --astro-jupiter:#ffd17a;
 }
 
-body.atlas-astro-planet-colors-40291 [data-planet40291="saturn"]{--astro-planet:var(--astro-saturn);--astro-planet-rgb:255,111,125}
-body.atlas-astro-planet-colors-40291 [data-planet40291="mars"]{--astro-planet:var(--astro-mars);--astro-planet-rgb:255,157,99}
-body.atlas-astro-planet-colors-40291 [data-planet40291="sun"]{--astro-planet:var(--astro-sun);--astro-planet-rgb:255,228,111}
-body.atlas-astro-planet-colors-40291 [data-planet40291="venus"]{--astro-planet:var(--astro-venus);--astro-planet-rgb:120,230,162}
-body.atlas-astro-planet-colors-40291 [data-planet40291="mercury"]{--astro-planet:var(--astro-mercury);--astro-planet-rgb:114,188,255}
-body.atlas-astro-planet-colors-40291 [data-planet40291="moon"]{--astro-planet:var(--astro-moon);--astro-planet-rgb:243,246,255}
-body.atlas-astro-planet-colors-40291 [data-planet40291="jupiter"]{--astro-planet:var(--astro-jupiter);--astro-planet-rgb:255,209,122}
+body.atlas-astro-planet-colors [data-planet40291="saturn"]{--astro-planet:var(--astro-saturn);--astro-planet-rgb:255,111,125}
+body.atlas-astro-planet-colors [data-planet40291="mars"]{--astro-planet:var(--astro-mars);--astro-planet-rgb:255,157,99}
+body.atlas-astro-planet-colors [data-planet40291="sun"]{--astro-planet:var(--astro-sun);--astro-planet-rgb:255,228,111}
+body.atlas-astro-planet-colors [data-planet40291="venus"]{--astro-planet:var(--astro-venus);--astro-planet-rgb:120,230,162}
+body.atlas-astro-planet-colors [data-planet40291="mercury"]{--astro-planet:var(--astro-mercury);--astro-planet-rgb:114,188,255}
+body.atlas-astro-planet-colors [data-planet40291="moon"]{--astro-planet:var(--astro-moon);--astro-planet-rgb:243,246,255}
+body.atlas-astro-planet-colors [data-planet40291="jupiter"]{--astro-planet:var(--astro-jupiter);--astro-planet-rgb:255,209,122}
 
 /* 24 planetary-hour cells: thin planet rail + subtle atmosphere only. */
-body.atlas-astro-planet-colors-40291 .atlas-astro-hour-4055[data-planet40291]{
+body.atlas-astro-planet-colors .atlas-astro-hour[data-planet40291]{
   border-color:rgba(var(--astro-planet-rgb),.34)!important;
   background:
     linear-gradient(180deg,rgba(var(--astro-planet-rgb),.075),rgba(4,12,21,.61) 48%,rgba(4,12,21,.66))!important;
@@ -427,17 +427,17 @@ body.atlas-astro-planet-colors-40291 .atlas-astro-hour-4055[data-planet40291]{
     inset 0 2px 0 rgba(var(--astro-planet-rgb),.55),
     inset 0 1px 0 rgba(255,255,255,.025)!important;
 }
-body.atlas-astro-planet-colors-40291 .atlas-astro-hour-4055[data-planet40291] b{
+body.atlas-astro-planet-colors .atlas-astro-hour[data-planet40291] b{
   color:var(--astro-planet)!important;
   text-shadow:0 0 9px rgba(var(--astro-planet-rgb),.12)!important;
 }
-body.atlas-astro-planet-colors-40291 .atlas-astro-hour-4055[data-planet40291] small{
+body.atlas-astro-planet-colors .atlas-astro-hour[data-planet40291] small{
   color:#9bafbb!important;
 }
 
 /* Current timing state = brighter planet color. Next = moderate preview.
    State does not replace planet identity with a generic green/gold. */
-body.atlas-astro-planet-colors-40291 .atlas-astro-hour-4055[data-planet40291][data-state="active"]{
+body.atlas-astro-planet-colors .atlas-astro-hour[data-planet40291][data-state="active"]{
   border-color:rgba(var(--astro-planet-rgb),.84)!important;
   background:
     linear-gradient(180deg,rgba(var(--astro-planet-rgb),.16),rgba(var(--astro-planet-rgb),.065) 42%,rgba(4,12,21,.67))!important;
@@ -446,7 +446,7 @@ body.atlas-astro-planet-colors-40291 .atlas-astro-hour-4055[data-planet40291][da
     inset 0 0 0 1px rgba(255,255,255,.055),
     0 0 17px rgba(var(--astro-planet-rgb),.16)!important;
 }
-body.atlas-astro-planet-colors-40291 .atlas-astro-hour-4055[data-planet40291][data-state="next"]{
+body.atlas-astro-planet-colors .atlas-astro-hour[data-planet40291][data-state="next"]{
   border-color:rgba(var(--astro-planet-rgb),.56)!important;
   box-shadow:
     inset 0 2px 0 rgba(var(--astro-planet-rgb),.72),
@@ -454,24 +454,24 @@ body.atlas-astro-planet-colors-40291 .atlas-astro-hour-4055[data-planet40291][da
 }
 
 /* Current / next KPI cards receive the same planet identity. */
-body.atlas-astro-planet-colors-40291 .atlas-astro-kpis-4055 article[data-planet40291]{
+body.atlas-astro-planet-colors .atlas-astro-kpis article[data-planet40291]{
   border-color:rgba(var(--astro-planet-rgb),.34)!important;
   background:
     linear-gradient(135deg,rgba(var(--astro-planet-rgb),.09),rgba(3,12,22,.55) 48%)!important;
   box-shadow:inset 3px 0 0 rgba(var(--astro-planet-rgb),.66)!important;
 }
-body.atlas-astro-planet-colors-40291 .atlas-astro-kpis-4055 article[data-planet40291] b{
+body.atlas-astro-planet-colors .atlas-astro-kpis article[data-planet40291] b{
   color:var(--astro-planet)!important;
   text-shadow:0 0 10px rgba(var(--astro-planet-rgb),.12)!important;
 }
 
 /* Book: keep the color code, reduce glow only. */
 @media (max-width:1366px){
-  body.atlas-astro-planet-colors-40291 .atlas-astro-hour-4055[data-planet40291],
-  body.atlas-astro-planet-colors-40291 .atlas-astro-kpis-4055 article[data-planet40291]{
+  body.atlas-astro-planet-colors .atlas-astro-hour[data-planet40291],
+  body.atlas-astro-planet-colors .atlas-astro-kpis article[data-planet40291]{
     box-shadow:inset 0 2px 0 rgba(var(--astro-planet-rgb),.58)!important;
   }
-  body.atlas-astro-planet-colors-40291 .atlas-astro-hour-4055[data-planet40291][data-state="active"]{
+  body.atlas-astro-planet-colors .atlas-astro-hour[data-planet40291][data-state="active"]{
     box-shadow:inset 0 2px 0 rgba(var(--astro-planet-rgb),.90),0 0 9px rgba(var(--astro-planet-rgb),.10)!important;
   }
 }
@@ -492,31 +492,31 @@ body.atlas-astro-planet-colors-40291 .atlas-astro-kpis-4055 article[data-planet4
    SOURCES -> actual Sources collapsed row
    ANALYTICAL MEMORY -> one restrained watermark, never scattered thumbnails.
    ============================================================================ */
-body.atlas-section-air-40292 {
+body.atlas-section-air {
   --atlas-air-line:rgba(126,224,255,.16);
   --atlas-air-soft:rgba(126,224,255,.035);
   --atlas-air-text:#edf7fb;
 }
 
 /* The accordion is already the frame. Its body does not need a second shell. */
-body.atlas-section-air-40292 details.atlas-collapse[data-layout-family] > .atlas-collapse-body {
+body.atlas-section-air details.atlas-collapse[data-layout-family] > .atlas-collapse-body {
   border:0!important;
   box-shadow:none!important;
   background:transparent!important;
 }
 
 /* Generic nested panel: keep spacing/content, remove redundant shell/shadow only. */
-body.atlas-section-air-40292 details.atlas-collapse[data-layout-family] > .atlas-collapse-body > section.panel.glass {
+body.atlas-section-air details.atlas-collapse[data-layout-family] > .atlas-collapse-body > section.panel.glass {
   box-shadow:none!important;
 }
 
 /* ORACLE: outer Oracle accordion owns the frame. Inner subsections become open rails. */
-body.atlas-section-air-40292 #oracle-analysis-suite > .atlas-oracle-suite-body {
+body.atlas-section-air #oracle-analysis-suite > .atlas-oracle-suite-body {
   padding:8px 10px 10px!important;
   background:transparent!important;
   box-shadow:none!important;
 }
-body.atlas-section-air-40292 #oracle-analysis-suite .atlas-oracle-suite-subsection {
+body.atlas-section-air #oracle-analysis-suite .atlas-oracle-suite-subsection {
   margin:0!important;
   border:0!important;
   border-radius:0!important;
@@ -524,10 +524,10 @@ body.atlas-section-air-40292 #oracle-analysis-suite .atlas-oracle-suite-subsecti
   box-shadow:none!important;
   overflow:visible!important;
 }
-body.atlas-section-air-40292 #oracle-analysis-suite .atlas-oracle-suite-subsection + .atlas-oracle-suite-subsection {
+body.atlas-section-air #oracle-analysis-suite .atlas-oracle-suite-subsection + .atlas-oracle-suite-subsection {
   border-top:1px solid rgba(126,224,255,.12)!important;
 }
-body.atlas-section-air-40292 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-summary {
+body.atlas-section-air #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-summary {
   min-height:48px!important;
   padding:9px 10px!important;
   border:0!important;
@@ -536,15 +536,15 @@ body.atlas-section-air-40292 #oracle-analysis-suite .atlas-oracle-suite-subsecti
   background:linear-gradient(90deg,rgba(126,224,255,.055),rgba(4,12,18,.08) 45%,transparent)!important;
   box-shadow:inset 2px 0 0 rgba(126,224,255,.42)!important;
 }
-body.atlas-section-air-40292 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body {
+body.atlas-section-air #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body {
   padding:5px 4px 11px 10px!important;
   border:0!important;
   background:transparent!important;
   box-shadow:none!important;
 }
-body.atlas-section-air-40292 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body > .panel.glass,
-body.atlas-section-air-40292 #oracle-analysis-suite #oracle-lab-dashboard,
-body.atlas-section-air-40292 #oracle-analysis-suite #oracle-infrastructure-observatory {
+body.atlas-section-air #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body > .panel.glass,
+body.atlas-section-air #oracle-analysis-suite #oracle-lab-dashboard,
+body.atlas-section-air #oracle-analysis-suite #oracle-infrastructure-observatory {
   margin:0!important;
   border:0!important;
   border-radius:0!important;
@@ -555,20 +555,20 @@ body.atlas-section-air-40292 #oracle-analysis-suite #oracle-infrastructure-obser
 }
 
 /* Long Shadow remains a logical instrument, but loses the extra heavy outer box. */
-body.atlas-section-air-40292 #oracle-analysis-suite .atlas-oracle-long-shadow-40273 {
+body.atlas-section-air #oracle-analysis-suite .atlas-oracle-long-shadow {
   border-color:rgba(126,224,255,.10)!important;
   background:linear-gradient(90deg,rgba(126,224,255,.028),transparent 42%)!important;
   box-shadow:none!important;
 }
 
 /* NEWS -> MARKET: the report accordion owns the outside frame. */
-body.atlas-section-air-40292 #news-market-explanation > .news-market-report-body-40241 {
+body.atlas-section-air #news-market-explanation > .news-market-report-body {
   padding:6px 10px 10px!important;
   border:0!important;
   background:transparent!important;
   box-shadow:none!important;
 }
-body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 {
+body.atlas-section-air #newsMarketOperatorIntelligence {
   margin:0!important;
   padding:8px 6px 6px!important;
   border:0!important;
@@ -578,9 +578,9 @@ body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 {
 }
 
 /* Secondary report sections become rails/dividers; their inner metric cards stay intact. */
-body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 .news-reaction-timeline-40236,
-body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 .news-role-quality-40237,
-body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 .news-cross-layer-40238 {
+body.atlas-section-air #newsMarketOperatorIntelligence .news-reaction-timeline,
+body.atlas-section-air #newsMarketOperatorIntelligence .news-role-quality,
+body.atlas-section-air #newsMarketOperatorIntelligence .news-cross-layer {
   margin:8px 0!important;
   padding:10px 10px 9px 12px!important;
   border-radius:0!important;
@@ -590,18 +590,18 @@ body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 .news-cross-la
   background:linear-gradient(90deg,rgba(126,224,255,.022),transparent 48%)!important;
   box-shadow:none!important;
 }
-body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 .news-reaction-timeline-40236 {
+body.atlas-section-air #newsMarketOperatorIntelligence .news-reaction-timeline {
   border-left:2px solid rgba(112,211,255,.52)!important;
 }
-body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 .news-role-quality-40237 {
+body.atlas-section-air #newsMarketOperatorIntelligence .news-role-quality {
   border-left:2px solid rgba(185,167,255,.54)!important;
 }
-body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 .news-cross-layer-40238 {
+body.atlas-section-air #newsMarketOperatorIntelligence .news-cross-layer {
   border-left:2px solid rgba(115,240,209,.56)!important;
 }
 
 /* Keep verdict visually distinct, but lighter than a full nested panel. */
-body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 .news-market-verdict-40235 {
+body.atlas-section-air #newsMarketOperatorIntelligence .news-market-verdict {
   margin-top:8px!important;
   border-width:1px 0 0 2px!important;
   border-radius:0!important;
@@ -609,24 +609,24 @@ body.atlas-section-air-40292 #newsMarketOperatorIntelligence40235 .news-market-v
 }
 
 /* Generic nested panels get air: one less shadow and slightly tighter vertical rhythm. */
-body.atlas-section-air-40292 details.atlas-collapse[data-layout-family] > .atlas-collapse-body > section.panel.glass:not(#newsMarketOperatorIntelligence40235) {
+body.atlas-section-air details.atlas-collapse[data-layout-family] > .atlas-collapse-body > section.panel.glass:not(#newsMarketOperatorIntelligence) {
   box-shadow:none!important;
 }
 
 /* --------------------------------------------------------------------------
    EXISTING TRANSPARENT EMBLEMS — no new files, no layout reservation.
-   These nodes are already injected by adminVisualAssets40269 from repository assets.
+   These nodes are already injected by adminVisualAssets from repository assets.
    -------------------------------------------------------------------------- */
-body.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 {
+body.atlas-section-air .atlas-layout-family.admin-family-emblem-host-r3 {
   position:relative!important;
   min-height:0!important;
   padding-right:0!important;
   overflow:hidden!important;
 }
-body.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3::after {
+body.atlas-section-air .atlas-layout-family.admin-family-emblem-host-r3::after {
   content:none!important;
 }
-body.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > .admin-family-emblem-r3 {
+body.atlas-section-air .atlas-layout-family.admin-family-emblem-host-r3 > .admin-family-emblem-r3 {
   position:absolute!important;
   right:14px!important;
   top:clamp(56px,4.2vw,70px)!important;
@@ -640,7 +640,7 @@ body.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > 
   pointer-events:none!important;
   z-index:0!important;
 }
-body.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > :not(.admin-family-emblem-r3) {
+body.atlas-section-air .atlas-layout-family.admin-family-emblem-host-r3 > :not(.admin-family-emblem-r3) {
   position:relative!important;
   z-index:1!important;
 }
@@ -648,13 +648,13 @@ body.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > 
 /* 40.2.98 — Family Emblem Alignment Lock: family emblems align on the right-side signal axis, not the lower corner. */
 
 /* Sources archive emblem belongs to the real Sources row, small and non-reserving. */
-body.atlas-section-air-40292 #liveSourcesCollapse > summary.admin-summary-emblem-host-r3 {
+body.atlas-section-air #liveSourcesCollapse > summary.admin-summary-emblem-host-r3 {
   position:relative!important;
   min-height:0!important;
   padding-right:66px!important;
   overflow:hidden!important;
 }
-body.atlas-section-air-40292 #liveSourcesCollapse > summary.admin-summary-emblem-host-r3 > .admin-summary-emblem-r3 {
+body.atlas-section-air #liveSourcesCollapse > summary.admin-summary-emblem-host-r3 > .admin-summary-emblem-r3 {
   position:absolute!important;
   right:10px!important;
   top:50%!important;
@@ -668,12 +668,12 @@ body.atlas-section-air-40292 #liveSourcesCollapse > summary.admin-summary-emblem
 }
 
 /* Analytical Memory: one watermark only, as requested historically. */
-body.atlas-section-air-40292 #atlasAnalyticalMemory394.admin-analytical-emblem-host-r3 {
+body.atlas-section-air #atlasAnalyticalMemory394.admin-analytical-emblem-host-r3 {
   position:relative!important;
   padding-right:0!important;
   overflow:hidden!important;
 }
-body.atlas-section-air-40292 #atlasAnalyticalMemory394.admin-analytical-emblem-host-r3 > .admin-analytical-emblem-r3 {
+body.atlas-section-air #atlasAnalyticalMemory394.admin-analytical-emblem-host-r3 > .admin-analytical-emblem-r3 {
   position:absolute!important;
   right:14px!important;
   top:50%!important;
@@ -686,25 +686,25 @@ body.atlas-section-air-40292 #atlasAnalyticalMemory394.admin-analytical-emblem-h
   pointer-events:none!important;
   z-index:0!important;
 }
-body.atlas-section-air-40292 #atlasAnalyticalMemory394.admin-analytical-emblem-host-r3 > :not(.admin-analytical-emblem-r3) {
+body.atlas-section-air #atlasAnalyticalMemory394.admin-analytical-emblem-host-r3 > :not(.admin-analytical-emblem-r3) {
   position:relative!important;
   z-index:1!important;
 }
 
 /* Book: emblems remain legible but never steal width. */
 @media (max-width:1366px) {
-  body.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > .admin-family-emblem-r3 {
+  body.atlas-section-air .atlas-layout-family.admin-family-emblem-host-r3 > .admin-family-emblem-r3 {
     width:40px!important;height:40px!important;right:10px!important;top:56px!important;bottom:auto!important;transform:translateY(-50%)!important;opacity:.065!important;filter:none!important;
   }
-  body.atlas-section-air-40292 #liveSourcesCollapse > summary.admin-summary-emblem-host-r3 {padding-right:50px!important}
-  body.atlas-section-air-40292 #liveSourcesCollapse > summary.admin-summary-emblem-host-r3 > .admin-summary-emblem-r3 {
+  body.atlas-section-air #liveSourcesCollapse > summary.admin-summary-emblem-host-r3 {padding-right:50px!important}
+  body.atlas-section-air #liveSourcesCollapse > summary.admin-summary-emblem-host-r3 > .admin-summary-emblem-r3 {
     width:40px!important;height:40px!important;right:7px!important;opacity:.08!important;filter:none!important;
   }
-  body.atlas-section-air-40292 #atlasAnalyticalMemory394.admin-analytical-emblem-host-r3 > .admin-analytical-emblem-r3 {
+  body.atlas-section-air #atlasAnalyticalMemory394.admin-analytical-emblem-host-r3 > .admin-analytical-emblem-r3 {
     width:38px!important;height:58px!important;right:8px!important;opacity:.07!important;filter:none!important;
   }
-  body.atlas-section-air-40292 #oracle-analysis-suite > .atlas-oracle-suite-body {padding:6px 7px 8px!important}
-  body.atlas-section-air-40292 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body {padding-left:6px!important}
+  body.atlas-section-air #oracle-analysis-suite > .atlas-oracle-suite-body {padding:6px 7px 8px!important}
+  body.atlas-section-air #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body {padding-left:6px!important}
 }
 
 
@@ -719,7 +719,7 @@ body.atlas-section-air-40292 #atlasAnalyticalMemory394.admin-analytical-emblem-h
    - do not touch Graphique, Lecture technique, Oracle calculations, News logic,
      Celestial transport, network, timers or Window Manager geometry.
    ============================================================================ */
-body.atlas-section-density-40293{
+body.atlas-section-density{
   --atlas-density-gap:6px;
   --atlas-density-pad-x:8px;
   --atlas-density-pad-y:6px;
@@ -728,24 +728,24 @@ body.atlas-section-density-40293{
 }
 
 /* Recover space around expanded families while keeping the outer accordion frame. */
-body.atlas-section-density-40293 details.atlas-collapse[data-layout-family] > .atlas-collapse-body{
+body.atlas-section-density details.atlas-collapse[data-layout-family] > .atlas-collapse-body{
   padding:6px 8px 8px!important;
 }
-body.atlas-section-density-40293 details.atlas-collapse[data-layout-family] > .atlas-collapse-body > section.panel.glass{
+body.atlas-section-density details.atlas-collapse[data-layout-family] > .atlas-collapse-body > section.panel.glass{
   margin:0!important;
 }
 
 /* Main summaries stay readable, but lose excess vertical air. */
-body.atlas-section-density-40293 details.atlas-collapse[data-layout-family] > summary.atlas-collapse-summary{
+body.atlas-section-density details.atlas-collapse[data-layout-family] > summary.atlas-collapse-summary{
   padding-top:9px!important;
   padding-bottom:9px!important;
 }
 
 /* ORACLE — outer frame -> bordered subsection -> metric cards. No wrapper level 1.5. */
-body.atlas-section-density-40293 #oracle-analysis-suite > .atlas-oracle-suite-body{
+body.atlas-section-density #oracle-analysis-suite > .atlas-oracle-suite-body{
   padding:5px 6px 7px!important;
 }
-body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection{
+body.atlas-section-density #oracle-analysis-suite .atlas-oracle-suite-subsection{
   margin:0 0 6px!important;
   border:1px solid var(--atlas-subframe-line)!important;
   border-radius:11px!important;
@@ -753,11 +753,11 @@ body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subs
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.012)!important;
   overflow:hidden!important;
 }
-body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection:last-child{margin-bottom:0!important}
-body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection + .atlas-oracle-suite-subsection{
+body.atlas-section-density #oracle-analysis-suite .atlas-oracle-suite-subsection:last-child{margin-bottom:0!important}
+body.atlas-section-density #oracle-analysis-suite .atlas-oracle-suite-subsection + .atlas-oracle-suite-subsection{
   border-top:1px solid var(--atlas-subframe-line)!important;
 }
-body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-summary{
+body.atlas-section-density #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-summary{
   min-height:44px!important;
   padding:7px 9px!important;
   border:0!important;
@@ -766,15 +766,15 @@ body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subs
   background:linear-gradient(90deg,rgba(126,224,255,.050),rgba(4,12,18,.045) 48%,transparent)!important;
   box-shadow:inset 2px 0 0 rgba(126,224,255,.42)!important;
 }
-body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body{
+body.atlas-section-density #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body{
   padding:6px 8px 8px!important;
   border:0!important;
   background:transparent!important;
   box-shadow:none!important;
 }
-body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body > .panel.glass,
-body.atlas-section-density-40293 #oracle-analysis-suite #oracle-lab-dashboard,
-body.atlas-section-density-40293 #oracle-analysis-suite #oracle-infrastructure-observatory{
+body.atlas-section-density #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body > .panel.glass,
+body.atlas-section-density #oracle-analysis-suite #oracle-lab-dashboard,
+body.atlas-section-density #oracle-analysis-suite #oracle-infrastructure-observatory{
   margin:0!important;
   padding-left:0!important;
   padding-right:0!important;
@@ -785,21 +785,21 @@ body.atlas-section-density-40293 #oracle-analysis-suite #oracle-infrastructure-o
 }
 
 /* Oracle instrument internals: retain useful boxes, trim only outer spacing. */
-body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-long-shadow-40273{margin-top:6px!important;padding:9px!important}
-body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-long-grid-40282{gap:6px!important}
-body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-long-card-40282{padding:8px!important}
-body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-infra-modules{gap:6px!important}
+body.atlas-section-density #oracle-analysis-suite .atlas-oracle-long-shadow{margin-top:6px!important;padding:9px!important}
+body.atlas-section-density #oracle-analysis-suite .atlas-oracle-long-grid{gap:6px!important}
+body.atlas-section-density #oracle-analysis-suite .atlas-oracle-long-card{padding:8px!important}
+body.atlas-section-density #oracle-analysis-suite .atlas-oracle-infra-modules{gap:6px!important}
 
 /* NEWS -> MARCHÉ — remove only the global wrapper; true subsections get their box back. */
-body.atlas-section-density-40293 #news-market-explanation > .news-market-report-body-40241{
+body.atlas-section-density #news-market-explanation > .news-market-report-body{
   padding:5px 7px 7px!important;
 }
-body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235{
+body.atlas-section-density #newsMarketOperatorIntelligence{
   padding:5px 3px 3px!important;
 }
-body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-reaction-timeline-40236,
-body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-role-quality-40237,
-body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-cross-layer-40238{
+body.atlas-section-density #newsMarketOperatorIntelligence .news-reaction-timeline,
+body.atlas-section-density #newsMarketOperatorIntelligence .news-role-quality,
+body.atlas-section-density #newsMarketOperatorIntelligence .news-cross-layer{
   margin:6px 0!important;
   padding:8px 9px!important;
   border:1px solid rgba(126,224,255,.16)!important;
@@ -807,10 +807,10 @@ body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-cros
   background:rgba(3,12,20,.20)!important;
   box-shadow:none!important;
 }
-body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-reaction-timeline-40236{border-left:2px solid rgba(112,211,255,.56)!important}
-body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-role-quality-40237{border-left:2px solid rgba(185,167,255,.58)!important}
-body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-cross-layer-40238{border-left:2px solid rgba(115,240,209,.60)!important}
-body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-market-verdict-40235{
+body.atlas-section-density #newsMarketOperatorIntelligence .news-reaction-timeline{border-left:2px solid rgba(112,211,255,.56)!important}
+body.atlas-section-density #newsMarketOperatorIntelligence .news-role-quality{border-left:2px solid rgba(185,167,255,.58)!important}
+body.atlas-section-density #newsMarketOperatorIntelligence .news-cross-layer{border-left:2px solid rgba(115,240,209,.60)!important}
+body.atlas-section-density #newsMarketOperatorIntelligence .news-market-verdict{
   margin-top:6px!important;
   padding-top:8px!important;
   padding-bottom:8px!important;
@@ -820,35 +820,35 @@ body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-mark
 }
 
 /* Evidence Explorer / Astro / Celestial / News: reclaim perimeter without flattening cards. */
-body.atlas-section-density-40293 :is(#oracle-evidence-explorer,#astrocycle-4055,#celestial-sentinel-4055,#news-sentinel) > .atlas-collapse-body{
+body.atlas-section-density :is(#oracle-evidence-explorer,#astrocycle,#celestial-sentinel,#news-sentinel) > .atlas-collapse-body{
   padding:6px 8px 8px!important;
 }
-body.atlas-section-density-40293 :is(#oracle-evidence-explorer,#astrocycle-4055,#celestial-sentinel-4055,#news-sentinel) > .atlas-collapse-body > section.panel.glass{
+body.atlas-section-density :is(#oracle-evidence-explorer,#astrocycle,#celestial-sentinel,#news-sentinel) > .atlas-collapse-body > section.panel.glass{
   margin:0!important;
 }
 
 /* Local Atlas pipeline: when CURRENT starts, the pipeline becomes the viewport anchor. */
-body.atlas-section-density-40293 #atlasAnalysisProgressCard{
+body.atlas-section-density #atlasAnalysisProgressCard{
   scroll-margin-top:10px!important;
   margin-top:6px!important;
   margin-bottom:6px!important;
 }
-body.atlas-section-density-40293 #local-ai-hub.atlas-analysis-running-40293 #atlasAnalysisProgressCard{
+body.atlas-section-density #local-ai-hub.atlas-analysis-running-40293 #atlasAnalysisProgressCard{
   border-color:rgba(91,224,255,.42)!important;
   box-shadow:0 0 0 1px rgba(91,224,255,.08),0 10px 26px rgba(0,0,0,.16)!important;
 }
-body.atlas-section-density-40293 #local-ai-hub.atlas-analysis-running-40293 .atlas-analysis-progress-nodes{gap:6px!important}
+body.atlas-section-density #local-ai-hub.atlas-analysis-running-40293 .atlas-analysis-progress-nodes{gap:6px!important}
 
 @media(max-width:1366px){
-  body.atlas-section-density-40293 details.atlas-collapse[data-layout-family] > .atlas-collapse-body{padding:5px 6px 7px!important}
-  body.atlas-section-density-40293 details.atlas-collapse[data-layout-family] > summary.atlas-collapse-summary{padding-top:8px!important;padding-bottom:8px!important}
-  body.atlas-section-density-40293 #oracle-analysis-suite > .atlas-oracle-suite-body{padding:4px 5px 6px!important}
-  body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection{margin-bottom:5px!important;border-radius:9px!important}
-  body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-summary{min-height:42px!important;padding:6px 8px!important}
-  body.atlas-section-density-40293 #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body{padding:5px 6px 7px!important}
-  body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-reaction-timeline-40236,
-  body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-role-quality-40237,
-  body.atlas-section-density-40293 #newsMarketOperatorIntelligence40235 .news-cross-layer-40238{margin:5px 0!important;padding:7px 8px!important}
+  body.atlas-section-density details.atlas-collapse[data-layout-family] > .atlas-collapse-body{padding:5px 6px 7px!important}
+  body.atlas-section-density details.atlas-collapse[data-layout-family] > summary.atlas-collapse-summary{padding-top:8px!important;padding-bottom:8px!important}
+  body.atlas-section-density #oracle-analysis-suite > .atlas-oracle-suite-body{padding:4px 5px 6px!important}
+  body.atlas-section-density #oracle-analysis-suite .atlas-oracle-suite-subsection{margin-bottom:5px!important;border-radius:9px!important}
+  body.atlas-section-density #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-summary{min-height:42px!important;padding:6px 8px!important}
+  body.atlas-section-density #oracle-analysis-suite .atlas-oracle-suite-subsection > .atlas-collapse-body{padding:5px 6px 7px!important}
+  body.atlas-section-density #newsMarketOperatorIntelligence .news-reaction-timeline,
+  body.atlas-section-density #newsMarketOperatorIntelligence .news-role-quality,
+  body.atlas-section-density #newsMarketOperatorIntelligence .news-cross-layer{margin:5px 0!important;padding:7px 8px!important}
 }
 
 
@@ -861,7 +861,7 @@ body.atlas-section-density-40293 #local-ai-hub.atlas-analysis-running-40293 .atl
    - existing transparent emblems stay non-reserving and align with the right signal axis;
    - no business/runtime ownership change.
    ============================================================================ */
-body.atlas-family-boundaries-40298 main.shell > section.atlas-layout-family {
+body.atlas-family-boundaries main.shell > section.atlas-layout-family {
   clear:both!important;
   isolation:isolate!important;
   position:relative!important;
@@ -870,24 +870,24 @@ body.atlas-family-boundaries-40298 main.shell > section.atlas-layout-family {
   box-sizing:border-box!important;
   transform:none!important;
 }
-body.atlas-family-boundaries-40298 main.shell > [data-layout-family] + section.atlas-layout-family {
+body.atlas-family-boundaries main.shell > [data-layout-family] + section.atlas-layout-family {
   margin-top:24px!important;
 }
-body.atlas-family-boundaries-40298 main.shell > [data-layout-family="operations"] + section.atlas-layout-family-system {
+body.atlas-family-boundaries main.shell > [data-layout-family="operations"] + section.atlas-layout-family-system {
   margin-top:36px!important;
 }
-body.atlas-family-boundaries-40298 main.shell > section.atlas-layout-family-system {
+body.atlas-family-boundaries main.shell > section.atlas-layout-family-system {
   clear:both!important;
   isolation:isolate!important;
   z-index:2!important;
 }
-body.atlas-family-boundaries-40298 main.shell > [data-layout-family="operations"] {
+body.atlas-family-boundaries main.shell > [data-layout-family="operations"] {
   position:relative!important;
   z-index:1!important;
 }
 @media (max-width:1366px) {
-  body.atlas-family-boundaries-40298 main.shell > [data-layout-family] + section.atlas-layout-family {margin-top:20px!important}
-  body.atlas-family-boundaries-40298 main.shell > [data-layout-family="operations"] + section.atlas-layout-family-system {margin-top:30px!important}
+  body.atlas-family-boundaries main.shell > [data-layout-family] + section.atlas-layout-family {margin-top:20px!important}
+  body.atlas-family-boundaries main.shell > [data-layout-family="operations"] + section.atlas-layout-family-system {margin-top:30px!important}
 }
 
 
@@ -899,12 +899,12 @@ body.atlas-family-boundaries-40298 main.shell > [data-layout-family="operations"
      Administration view selector.
    - Buttons are internal controls, not URL/hash navigation anchors.
    ============================================================================ */
-body.atlas-book-nav-40299 .atlas-v2-interface-bar .atlas-v2-nav{
+body.atlas-book-nav .atlas-v2-interface-bar .atlas-v2-nav{
   display:block!important;
   width:100%!important;
   min-width:0!important;
 }
-body.atlas-book-nav-40299 .atlas-v2-nav-essential.atlas-quick-dock{
+body.atlas-book-nav .atlas-v2-nav-essential.atlas-quick-dock{
   display:grid!important;
   grid-template-columns:repeat(6,minmax(0,1fr))!important;
   gap:6px!important;
@@ -912,7 +912,7 @@ body.atlas-book-nav-40299 .atlas-v2-nav-essential.atlas-quick-dock{
   min-width:0!important;
   align-items:stretch!important;
 }
-body.atlas-book-nav-40299 .atlas-v2-nav-essential.atlas-quick-dock>.atlas-quick-link{
+body.atlas-book-nav .atlas-v2-nav-essential.atlas-quick-dock>.atlas-quick-link{
   box-sizing:border-box!important;
   width:100%!important;
   min-width:0!important;
@@ -923,7 +923,7 @@ body.atlas-book-nav-40299 .atlas-v2-nav-essential.atlas-quick-dock>.atlas-quick-
   font:inherit;
   cursor:pointer!important;
 }
-body.atlas-book-nav-40299 .atlas-admin-command-kicker.atlas-visually-hidden{
+body.atlas-book-nav .atlas-admin-command-kicker.atlas-visually-hidden{
   position:absolute!important;
   width:1px!important;
   height:1px!important;
@@ -934,26 +934,26 @@ body.atlas-book-nav-40299 .atlas-admin-command-kicker.atlas-visually-hidden{
   white-space:nowrap!important;
   border:0!important;
 }
-body.atlas-book-nav-40299 .atlas-v2-nav-advanced.atlas-admin-dock:not([hidden]){
+body.atlas-book-nav .atlas-v2-nav-advanced.atlas-admin-dock:not([hidden]){
   width:100%!important;
   margin-top:6px!important;
 }
 @media (max-width:1366px){
-  body.atlas-book-nav-40299 .atlas-v2-nav-essential.atlas-quick-dock{
+  body.atlas-book-nav .atlas-v2-nav-essential.atlas-quick-dock{
     grid-template-columns:repeat(3,minmax(0,1fr))!important;
     gap:5px!important;
   }
-  body.atlas-book-nav-40299 .atlas-v2-nav-essential.atlas-quick-dock>.atlas-quick-link{
+  body.atlas-book-nav .atlas-v2-nav-essential.atlas-quick-dock>.atlas-quick-link{
     min-height:34px!important;
     padding:6px 8px!important;
     font-size:clamp(10px,1.05vw,12px)!important;
   }
-  body.atlas-book-nav-40299 .atlas-v2-nav-essential .atlas-quick-icon{
+  body.atlas-book-nav .atlas-v2-nav-essential .atlas-quick-icon{
     flex:0 0 auto!important;
   }
 }
 @media (max-width:700px){
-  body.atlas-book-nav-40299 .atlas-v2-nav-essential.atlas-quick-dock{
+  body.atlas-book-nav .atlas-v2-nav-essential.atlas-quick-dock{
     grid-template-columns:repeat(2,minmax(0,1fr))!important;
   }
 }
@@ -969,7 +969,7 @@ body.atlas-book-nav-40299 .atlas-v2-nav-advanced.atlas-admin-dock:not([hidden]){
    - illustrated family controls stay on the right, just left of the emblem;
    - no Window Manager source modification.
    ============================================================================ */
-body.atlas-family-order-40300.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > .admin-native-controls{
+body.atlas-family-order.atlas-section-air .atlas-layout-family.admin-family-emblem-host-r3 > .admin-native-controls{
   position:absolute!important;
   top:50%!important;
   right:82px!important;
@@ -978,17 +978,17 @@ body.atlas-family-order-40300.atlas-section-air-40292 .atlas-layout-family.admin
   transform:translateY(-50%)!important;
   z-index:2147481200!important;
 }
-body.atlas-family-order-40300 main.shell > section.atlas-layout-family-system{
+body.atlas-family-order main.shell > section.atlas-layout-family-system{
   clear:both!important;
   isolation:isolate!important;
   margin-top:26px!important;
   margin-bottom:10px!important;
 }
 @media (max-width:1366px){
-  body.atlas-family-order-40300.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > .admin-native-controls{
+  body.atlas-family-order.atlas-section-air .atlas-layout-family.admin-family-emblem-host-r3 > .admin-native-controls{
     right:62px!important;
   }
-  body.atlas-family-order-40300 main.shell > section.atlas-layout-family-system{margin-top:22px!important}
+  body.atlas-family-order main.shell > section.atlas-layout-family-system{margin-top:22px!important}
 }
 
 
@@ -1006,7 +1006,7 @@ body.atlas-family-order-40300 main.shell > section.atlas-layout-family-system{
    - buttons are deliberately smaller, with horizontal scroll only as fallback;
    - Command Center drawer remains a portal; JS scrolls the drawer, never document.
    ============================================================================ */
-html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-interface-bar .atlas-v2-nav{
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-v2-interface-bar .atlas-v2-nav{
   display:flex!important;
   flex-flow:row nowrap!important;
   align-items:center!important;
@@ -1017,7 +1017,7 @@ html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-
   overflow-y:visible!important;
   scrollbar-width:thin!important;
 }
-html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-nav-essential.atlas-quick-dock{
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-v2-nav-essential.atlas-quick-dock{
   display:flex!important;
   flex:0 0 auto!important;
   grid-template-columns:none!important;
@@ -1026,7 +1026,7 @@ html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-
   width:auto!important;
   min-width:max-content!important;
 }
-html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-nav-essential.atlas-quick-dock>.atlas-quick-link{
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-v2-nav-essential.atlas-quick-dock>.atlas-quick-link{
   flex:0 0 auto!important;
   width:auto!important;
   min-width:66px!important;
@@ -1036,10 +1036,10 @@ html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-
   font-size:9px!important;
   line-height:1!important;
 }
-html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-nav-essential .atlas-quick-icon{
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-v2-nav-essential .atlas-quick-icon{
   font-size:10px!important;
 }
-html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-nav-advanced.atlas-admin-dock:not([hidden]){
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-v2-nav-advanced.atlas-admin-dock:not([hidden]){
   display:flex!important;
   flex:1 0 auto!important;
   align-items:center!important;
@@ -1053,7 +1053,7 @@ html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-
   border-radius:0!important;
   background:none!important;
 }
-html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-command-bar{
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-admin-command-bar{
   display:flex!important;
   flex-flow:row nowrap!important;
   align-items:center!important;
@@ -1062,14 +1062,14 @@ html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-adm
   min-width:max-content!important;
   min-height:28px!important;
 }
-html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-command-shortcuts{
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-admin-command-shortcuts{
   display:flex!important;
   flex-flow:row nowrap!important;
   align-items:center!important;
   gap:3px!important;
   min-width:max-content!important;
 }
-html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-command-shortcuts button{
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-admin-command-shortcuts button{
   flex:0 0 auto!important;
   min-width:68px!important;
   min-height:28px!important;
@@ -1077,10 +1077,10 @@ html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-adm
   gap:4px!important;
   font-size:9px!important;
 }
-html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-command-shortcuts button b{
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-admin-command-shortcuts button b{
   font-size:8px!important;
 }
-html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-graph-toggle{
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-admin-graph-toggle{
   flex:0 0 auto!important;
   width:auto!important;
   min-width:86px!important;
@@ -1088,7 +1088,7 @@ html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-adm
   padding:4px 6px!important;
   gap:5px!important;
 }
-html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-center-toggle{
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-admin-center-toggle{
   flex:0 0 auto!important;
   grid-column:auto!important;
   min-width:116px!important;
@@ -1096,53 +1096,53 @@ html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-adm
   padding:4px 7px!important;
   gap:6px!important;
 }
-html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-graph-toggle span,
-html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-center-toggle span{
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-admin-graph-toggle span,
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-admin-center-toggle span{
   font-size:8.5px!important;
 }
-html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-graph-toggle b,
-html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-center-toggle b{
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-admin-graph-toggle b,
+html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-admin-center-toggle b{
   font-size:7.5px!important;
 }
 @media (max-width:1366px){
-  html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-interface-bar .atlas-v2-nav,
-  html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-command-bar{
+  html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-v2-interface-bar .atlas-v2-nav,
+  html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-admin-command-bar{
     display:flex!important;
     flex-flow:row nowrap!important;
   }
-  html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-nav-essential.atlas-quick-dock{
+  html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-v2-nav-essential.atlas-quick-dock{
     display:flex!important;
     grid-template-columns:none!important;
     gap:2px!important;
   }
-  html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-v2-nav-essential.atlas-quick-dock>.atlas-quick-link{
+  html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-v2-nav-essential.atlas-quick-dock>.atlas-quick-link{
     min-width:60px!important;
     min-height:26px!important;
     padding:3px 5px!important;
     font-size:8.5px!important;
   }
-  html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-command-shortcuts button{
+  html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-admin-command-shortcuts button{
     min-width:62px!important;
     min-height:26px!important;
     padding:3px 5px!important;
     font-size:8.5px!important;
   }
-  html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-graph-toggle{min-width:80px!important;min-height:26px!important}
-  html[data-atlas-mode="advanced"] body.atlas-commandline-compact-40302 .atlas-admin-center-toggle{min-width:108px!important;min-height:26px!important}
+  html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-admin-graph-toggle{min-width:80px!important;min-height:26px!important}
+  html[data-atlas-mode="advanced"] body.atlas-commandline-compact .atlas-admin-center-toggle{min-width:108px!important;min-height:26px!important}
 }
 
 /* 40.3.04 canonical sequence: 04 owns its six system/experiment members,
    then the complete Missions de vie block, then Mesure d'audience and Sources.
    No visual inheritance from 03 and no family header is split from its members. */
-body.atlas-family-atomic-40302 main.shell > section.atlas-layout-family-system + [data-layout-family="system"],
-body.atlas-family-atomic-40302 main.shell > section.atlas-layout-family-system + [data-layout-family="experiment"]{
+body.atlas-family-atomic main.shell > section.atlas-layout-family-system + [data-layout-family="system"],
+body.atlas-family-atomic main.shell > section.atlas-layout-family-system + [data-layout-family="experiment"]{
   margin-top:0!important;
 }
-body.atlas-canonical-admin-sequence-40304 main.shell > [data-layout-family="system"] + #missions-vie,
-body.atlas-canonical-admin-sequence-40304 main.shell > [data-layout-family="experiment"] + #missions-vie{
+body.atlas-canonical-admin-sequence main.shell > [data-layout-family="system"] + #missions-vie,
+body.atlas-canonical-admin-sequence main.shell > [data-layout-family="experiment"] + #missions-vie{
   margin-top:10px!important;
 }
-body.atlas-canonical-admin-sequence-40304 main.shell > details[data-collapse-key="aerith-terre-vivante"] + #mesure-audience{
+body.atlas-canonical-admin-sequence main.shell > details[data-collapse-key="aerith-terre-vivante"] + #mesure-audience{
   margin-top:10px!important;
 }
 
@@ -1171,59 +1171,59 @@ body.atlas-family04-trailing-boundary-40307 main.shell > section.atlas-layout-fa
      are shortened and the time label is visually removed while its value remains.
    - No handler, Window Manager, market engine, Atlas or Oracle behavior change.
    ============================================================================ */
-body.atlas-status-strip-40309 #sourceTimeCard>.atlas-status-time-label-40309{
+body.atlas-status-strip #sourceTimeCard>.atlas-status-time-label{
   display:none!important;
 }
-body.atlas-status-strip-40309 #livecheck.command-bar{
+body.atlas-status-strip #livecheck.command-bar{
   grid-template-columns:minmax(150px,.82fr) minmax(145px,.76fr) minmax(170px,.92fr) minmax(260px,1.30fr) minmax(300px,1.42fr)!important;
   gap:6px!important;
 }
-body.atlas-status-strip-40309 #sourceTimeCard{
+body.atlas-status-strip #sourceTimeCard{
   min-width:0!important;
   flex:1 1 auto!important;
 }
-body.atlas-status-strip-40309 #decisionCard,
-body.atlas-status-strip-40309 #sourceActiveCard,
-body.atlas-status-strip-40309 #sourceTimeCard{
+body.atlas-status-strip #decisionCard,
+body.atlas-status-strip #sourceActiveCard,
+body.atlas-status-strip #sourceTimeCard{
   min-inline-size:0!important;
 }
-body.atlas-status-strip-40309 #decisionCard>strong,
-body.atlas-status-strip-40309 #sourceActiveCard>strong,
-body.atlas-status-strip-40309 #atlasCelestialClockHeader4055{
+body.atlas-status-strip #decisionCard>strong,
+body.atlas-status-strip #sourceActiveCard>strong,
+body.atlas-status-strip #atlasCelestialClockHeader4055{
   overflow:hidden!important;
   text-overflow:ellipsis!important;
   white-space:nowrap!important;
 }
 @media (max-width:1366px){
-  html[data-atlas-mode="advanced"] body.atlas-book-command-center-40309 .atlas-admin-command-shortcuts,
-  html[data-atlas-mode="advanced"] body.atlas-book-command-center-40309 .atlas-admin-graph-toggle{
+  html[data-atlas-mode="advanced"] body.atlas-book-command-center .atlas-admin-command-shortcuts,
+  html[data-atlas-mode="advanced"] body.atlas-book-command-center .atlas-admin-graph-toggle{
     display:none!important;
   }
-  html[data-atlas-mode="advanced"] body.atlas-book-command-center-40309 .atlas-v2-nav-advanced.atlas-admin-dock:not([hidden]){
+  html[data-atlas-mode="advanced"] body.atlas-book-command-center .atlas-v2-nav-advanced.atlas-admin-dock:not([hidden]){
     flex:0 0 auto!important;
     width:auto!important;
     min-width:auto!important;
     padding-left:3px!important;
     border-left:1px solid rgba(98,236,255,.18)!important;
   }
-  html[data-atlas-mode="advanced"] body.atlas-book-command-center-40309 .atlas-admin-command-bar,
-  html[data-atlas-mode="advanced"] body.atlas-book-command-center-40309 .atlas-admin-center-toggle{
+  html[data-atlas-mode="advanced"] body.atlas-book-command-center .atlas-admin-command-bar,
+  html[data-atlas-mode="advanced"] body.atlas-book-command-center .atlas-admin-center-toggle{
     width:auto!important;
     min-width:auto!important;
   }
-  html[data-atlas-mode="advanced"] body.atlas-book-command-center-40309 .atlas-admin-center-toggle{
+  html[data-atlas-mode="advanced"] body.atlas-book-command-center .atlas-admin-center-toggle{
     min-height:26px!important;
     padding:3px 7px!important;
   }
-  body.atlas-status-strip-40309 #livecheck.command-bar{
+  body.atlas-status-strip #livecheck.command-bar{
     grid-template-columns:minmax(136px,.72fr) minmax(128px,.68fr) minmax(135px,.78fr) minmax(220px,1.28fr) minmax(245px,1.36fr)!important;
     gap:5px!important;
   }
-  body.atlas-status-strip-40309 #livecheck.command-bar>.btn{
+  body.atlas-status-strip #livecheck.command-bar>.btn{
     min-width:0!important;
     padding-inline:8px!important;
   }
-  body.atlas-status-strip-40309 #livecheck.command-bar>.source-card{
+  body.atlas-status-strip #livecheck.command-bar>.source-card{
     min-width:0!important;
     padding-inline:7px!important;
   }
@@ -1240,11 +1240,11 @@ body.atlas-status-strip-40309 #atlasCelestialClockHeader4055{
    - this supersedes historical boundary selectors that expected the 04 header
      to precede its members.
    ============================================================================ */
-body.atlas-admin-presentation-authority-40309 main.shell > details[data-collapse-key="planning"] + #atlasStorageHealth40198{
+body.atlas-admin-presentation-authority-40309 main.shell > details[data-collapse-key="planning"] + #atlasStorageHealth{
   position:relative!important;
   margin-top:38px!important;
 }
-body.atlas-admin-presentation-authority-40309 main.shell > details[data-collapse-key="planning"] + #atlasStorageHealth40198::before{
+body.atlas-admin-presentation-authority-40309 main.shell > details[data-collapse-key="planning"] + #atlasStorageHealth::before{
   content:""!important;
   position:absolute!important;
   left:18px!important;
@@ -1255,7 +1255,7 @@ body.atlas-admin-presentation-authority-40309 main.shell > details[data-collapse
   background:linear-gradient(90deg,rgba(255,211,119,.58),rgba(105,226,224,.46) 46%,rgba(105,226,224,.10) 82%,transparent)!important;
   box-shadow:0 0 14px rgba(105,226,224,.08)!important;
 }
-body.atlas-admin-presentation-authority-40309 main.shell > #atlasStorageHealth40198{
+body.atlas-admin-presentation-authority-40309 main.shell > #atlasStorageHealth{
   border-top-color:rgba(105,226,224,.34)!important;
 }
 body.atlas-admin-presentation-authority-40309 main.shell > details[data-collapse-key="physical-security"] + section.atlas-layout-family-system{
@@ -1265,8 +1265,8 @@ body.atlas-admin-presentation-authority-40309 main.shell > section.atlas-layout-
   margin-top:10px!important;
 }
 @media (max-width:1366px){
-  body.atlas-admin-presentation-authority-40309 main.shell > details[data-collapse-key="planning"] + #atlasStorageHealth40198{margin-top:30px!important}
-  body.atlas-admin-presentation-authority-40309 main.shell > details[data-collapse-key="planning"] + #atlasStorageHealth40198::before{top:-16px!important}
+  body.atlas-admin-presentation-authority-40309 main.shell > details[data-collapse-key="planning"] + #atlasStorageHealth{margin-top:30px!important}
+  body.atlas-admin-presentation-authority-40309 main.shell > details[data-collapse-key="planning"] + #atlasStorageHealth::before{top:-16px!important}
 }
 
 
@@ -1278,58 +1278,58 @@ body.atlas-admin-presentation-authority-40309 main.shell > section.atlas-layout-
    - floating windows keep a dark native surface but NO full-window backdrop blur;
    - drag does not trigger content auto-fit/re-measure before movement.
    ============================================================================ */
-body.atlas-surface-performance-40315 main.shell{
+body.atlas-surface-performance main.shell{
   width:100%!important;
   max-width:none!important;
   margin-left:auto!important;
   margin-right:auto!important;
   transform:none!important;
 }
-body.atlas-surface-performance-40315 main.shell > header#accueil{
+body.atlas-surface-performance main.shell > header#accueil{
   width:100%!important;
   max-width:none!important;
   box-sizing:border-box!important;
 }
-body.atlas-surface-performance-40315.atlas-family-boundaries-40298 main.shell > section,
-body.atlas-surface-performance-40315 main.shell > details,
-body.atlas-surface-performance-40315 main.shell > footer{
+body.atlas-surface-performance.atlas-family-boundaries main.shell > section,
+body.atlas-surface-performance main.shell > details,
+body.atlas-surface-performance main.shell > footer{
   width:97%!important;
   max-width:97%!important;
   margin-left:auto!important;
   margin-right:auto!important;
   box-sizing:border-box!important;
 }
-body.atlas-surface-performance-40315 main.shell > section + section,
-body.atlas-surface-performance-40315 main.shell > details + section,
-body.atlas-surface-performance-40315 main.shell > section + details,
-body.atlas-surface-performance-40315 main.shell > details + details{
+body.atlas-surface-performance main.shell > section + section,
+body.atlas-surface-performance main.shell > details + section,
+body.atlas-surface-performance main.shell > section + details,
+body.atlas-surface-performance main.shell > details + details{
   margin-top:10px!important;
 }
 
 /* The old 39.2.15 floating shell paints a viewport-sized blurred glass layer.
    On Firefox this is expensive while scrolling/moving because the pixels behind
    the fixed surface must be recomposited. Keep the dark cockpit, remove the GPU-heavy glass. */
-body.atlas-surface-performance-40315 .admin-native-floating-shell,
-body.atlas-surface-performance-40315 .admin-native-direct-floating{
+body.atlas-surface-performance .admin-native-floating-shell,
+body.atlas-surface-performance .admin-native-direct-floating{
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
   background:linear-gradient(180deg,rgba(8,12,16,.995),rgba(5,9,13,.995))!important;
   box-shadow:0 18px 52px rgba(0,0,0,.48),0 0 0 1px color-mix(in srgb,var(--native-accent,#72d8ff) 14%,transparent)!important;
 }
-body.atlas-surface-performance-40315 .admin-native-floating-titlebar,
-body.atlas-surface-performance-40315 .admin-native-floating-shell .admin-native-controls,
-body.atlas-surface-performance-40315 .admin-native-direct-floating > .admin-native-controls{
+body.atlas-surface-performance .admin-native-floating-titlebar,
+body.atlas-surface-performance .admin-native-floating-shell .admin-native-controls,
+body.atlas-surface-performance .admin-native-direct-floating > .admin-native-controls{
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
 }
-body.atlas-surface-performance-40315 .admin-native-moving{
+body.atlas-surface-performance .admin-native-moving{
   opacity:1!important;
   box-shadow:0 16px 42px rgba(0,0,0,.45),0 0 0 1px color-mix(in srgb,var(--native-accent,#72d8ff) 24%,transparent)!important;
 }
 @media(max-width:1366px){
-  body.atlas-surface-performance-40315.atlas-family-boundaries-40298 main.shell > section,
-  body.atlas-surface-performance-40315 main.shell > details,
-  body.atlas-surface-performance-40315 main.shell > footer{
+  body.atlas-surface-performance.atlas-family-boundaries main.shell > section,
+  body.atlas-surface-performance main.shell > details,
+  body.atlas-surface-performance main.shell > footer{
     width:calc(100% - 16px)!important;
     max-width:calc(100% - 16px)!important;
   }
@@ -1346,18 +1346,18 @@ body.atlas-surface-performance-40315 .admin-native-moving{
    -> Missions -> Audience -> Sources.
    No wrapper, clone, backdrop or z-index mask is introduced.
    ============================================================================ */
-body.atlas-family04-canonical-hierarchy-40320 main.shell > details[data-collapse-key="planning"] + section.atlas-layout-family-system{
+body.atlas-family04-canonical-hierarchy main.shell > details[data-collapse-key="planning"] + section.atlas-layout-family-system{
   position:relative!important;
   margin-top:38px!important;
 }
-body.atlas-family04-canonical-hierarchy-40320 main.shell > section.atlas-layout-family-system + #atlasStorageHealth40198{
+body.atlas-family04-canonical-hierarchy main.shell > section.atlas-layout-family-system + #atlasStorageHealth{
   margin-top:10px!important;
 }
-body.atlas-family04-canonical-hierarchy-40320 main.shell > details[data-collapse-key="physical-security"] + #missions-vie{
+body.atlas-family04-canonical-hierarchy main.shell > details[data-collapse-key="physical-security"] + #missions-vie{
   margin-top:10px!important;
 }
 @media (max-width:1366px){
-  body.atlas-family04-canonical-hierarchy-40320 main.shell > details[data-collapse-key="planning"] + section.atlas-layout-family-system{
+  body.atlas-family04-canonical-hierarchy main.shell > details[data-collapse-key="planning"] + section.atlas-layout-family-system{
     margin-top:30px!important;
   }
 }
@@ -1372,7 +1372,7 @@ body.atlas-family04-canonical-hierarchy-40320 main.shell > details[data-collapse
    (right:16px) and move the decorative emblem to the left of the controls.
    Presentation only: no Window Manager behavior, no section order, no resize.
    ============================================================================ */
-body.atlas-administrator-mirror.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > .admin-native-controls{
+body.atlas-administrator-mirror.atlas-section-air .atlas-layout-family.admin-family-emblem-host-r3 > .admin-native-controls{
   position:absolute!important;
   top:50%!important;
   right:16px!important;
@@ -1381,18 +1381,18 @@ body.atlas-administrator-mirror.atlas-section-air-40292 .atlas-layout-family.adm
   transform:translateY(-50%)!important;
   z-index:2147481200!important;
 }
-body.atlas-administrator-mirror.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > .admin-family-emblem-r3{
+body.atlas-administrator-mirror.atlas-section-air .atlas-layout-family.admin-family-emblem-host-r3 > .admin-family-emblem-r3{
   right:184px!important;
 }
 @media (max-width:1366px){
-  body.atlas-administrator-mirror.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > .admin-native-controls{right:16px!important;}
-  body.atlas-administrator-mirror.atlas-section-air-40292 .atlas-layout-family.admin-family-emblem-host-r3 > .admin-family-emblem-r3{right:178px!important;}
+  body.atlas-administrator-mirror.atlas-section-air .atlas-layout-family.admin-family-emblem-host-r3 > .admin-native-controls{right:16px!important;}
+  body.atlas-administrator-mirror.atlas-section-air .atlas-layout-family.admin-family-emblem-host-r3 > .admin-family-emblem-r3{right:178px!important;}
 }
 
 
 /* 40.3.66 — AETHER SHARED TOP NAVIGATION CONTRACT LOCK
    The same top navigation surface is exposed in Basic, Intermediate and Administrator.
    View-specific content contracts remain unchanged. */
-html[data-atlas-view="essential"] body.atlas-book-nav-40299 .atlas-v2-nav-essential.atlas-quick-dock{
+html[data-atlas-view="essential"] body.atlas-book-nav .atlas-v2-nav-essential.atlas-quick-dock{
   display:flex!important;grid-template-columns:none!important;flex-flow:row nowrap!important;width:auto!important;min-width:max-content!important;gap:5px!important;
 }

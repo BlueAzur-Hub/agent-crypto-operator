@@ -20,8 +20,8 @@ Market Core: **38.15.11 — protected / unchanged**
 
 ## Preserved
 
-- TRADUS signal owner: `tradus-shadow-adapter-406066.js`;
-- TRADUS Paper lifecycle owner: `tradus-paper-shadow-406067.js`;
+- TRADUS signal owner: `tradus-shadow-adapter.js`;
+- TRADUS Paper lifecycle owner: `tradus-paper-shadow.js`;
 - Strategy A remains unchanged and is not made comparable while OFF;
 - Aether artwork, radial geometry, Technical Reading, Window Manager and Oracle presentation are untouched;
 - Market Core **38.15.11** untouched;

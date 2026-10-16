@@ -1,0 +1,38 @@
+AGENT-CRYPTO PRIVATE SOURCE LOADER READY FAIL-CLOSED — 40.6.456
+================================================================
+
+FUNCTIONAL OWNER
+----------------
+js/views/private-source-demand-loader.js
+
+DELIVERY OWNER
+--------------
+js/post-boot-runtime-loader.js (logic unchanged, child token 40.6.456)
+index.html (post-boot delivery token 40.6.456)
+
+READY CONTRACT
+--------------
+source owner mountable
++ source owner mount succeeds
++ AgentCryptoDexFreshnessGuard.active === true
++ bounded downstream == ready
+= runtime READY + erith:private-source-runtime-loaded
+
+FAIL CLOSED
+-----------
+missing owner          -> error / false / no ready event
+mount error            -> error / false / no ready event
+freshness not active   -> error / false / no ready event
+downstream timeout     -> error / false / no ready event
+downstream error       -> error / false / no ready event
+
+SNAPSHOT
+--------
+runtime_ready
+source_owner_ready
+freshness_guard_ready
+downstream_state
+last_error
+
+NO NEW TIMER / OBSERVER / STORAGE OWNER / BUSINESS ENDPOINT / REAL ORDER
+NO STRATEGY / ORACLE / AETHER / MARKET CORE CHANGE

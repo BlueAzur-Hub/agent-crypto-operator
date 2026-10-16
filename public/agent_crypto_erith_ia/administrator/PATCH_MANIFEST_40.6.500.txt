@@ -1,0 +1,41 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.500
+Release: OKX LOCAL BACKEND TRANSPORT
+Parent: 40.6.499
+Market Core: 38.15.11 UNCHANGED
+
+PUBLIC REPO FILES
+M public/agent_crypto_erith_ia/administrator/index.html
+A public/agent_crypto_erith_ia/administrator/js/okx-local-backend-transport-406500.js
+M public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+M public/agent_crypto_erith_ia/administrator/build.json
+A public/agent_crypto_erith_ia/administrator/OKX_LOCAL_BACKEND_TRANSPORT_40.6.500.md
+A public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.500.txt
+
+LOCAL COMPANION
+Aether Control 2.3.2R19
+Bridge V1.9.13 unchanged
+Private Backend V1.4.4
+Port 8787 Bridge
+Port 8790 Backend
+New allowlisted route: /okx-public
+Upstream public market GET only: candles, ticker, books, books-rpi, trades
+
+FORBIDDEN / UNCHANGED
+No private exchange API
+No credentials
+No real order
+No wallet
+No recurring timer
+No MutationObserver
+No storage owner
+No Strategy threshold change
+No Cost Gate change
+No Oracle Math change
+No Market Core change
+No native Prix/Base100 change
+
+VALIDATION
+Static transport self-test: PASS
+Backend V1.4.4 self-test: PASS
+Windows x64 GUI build: PASS
+Firefox Ryzen terrain: PENDING

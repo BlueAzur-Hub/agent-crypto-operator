@@ -1,0 +1,19 @@
+{
+  "schema": "agent_crypto_oracle_evidence_tiered_storage_foundation_test_v1",
+  "build": "40.6.482",
+  "pass_pending_workflow": false,
+  "cases": {
+    "manifest_schema": "PASS",
+    "browser_github_write_disabled": "PASS",
+    "github_token_absent": "PASS",
+    "local_retention_locked": "PASS",
+    "bounded_cursor_chunk": "PASS",
+    "chunk_sha256": "PASS",
+    "transport_bundle_single_file": "PASS",
+    "cold_chunk_verifier": "PASS",
+    "oracle_481_cursor_preserved": "PASS",
+    "strategy_a_unchanged": "PASS",
+    "market_core_381511_unchanged": "PASS"
+  },
+  "pass": true
+}

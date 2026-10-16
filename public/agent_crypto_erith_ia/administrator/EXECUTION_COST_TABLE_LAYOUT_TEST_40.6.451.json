@@ -1,0 +1,30 @@
+{
+  "version": "40.6.451",
+  "test": "EXECUTION_COST_TABLE_CONTAINMENT",
+  "engine": "Chromium headless / Playwright",
+  "viewport_px": [
+    1644,
+    920
+  ],
+  "representative_layout": {
+    "card_width_px": 745,
+    "baseline": {
+      "global_table_min_width_px": 790,
+      "table_width_px": 790,
+      "overflow_px": 68
+    },
+    "candidate": {
+      "table_width_px": 721,
+      "overflow_px": 0,
+      "last_column_width_percent": 34
+    }
+  },
+  "assertions": {
+    "baseline_overflow_reproduced": true,
+    "candidate_overflow_zero": true,
+    "no_horizontal_scroll_required": true,
+    "headers_allowed_to_wrap": true
+  },
+  "pass": true,
+  "note": "Representative local DOM reproducing the live two-card Execution Cost table structure; this does not replace Christophe's Firefox visual validation."
+}

@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="fr"><head>
+<script src="../web/vault-data-router.js" data-erith-vault-data-router="true"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seven Heaven · Coffre historique</title><style>
+:root{color-scheme:dark;font:clamp(12px,.79vw,15px)/1.4 system-ui,-apple-system,sans-serif;color:#ebf3fc;background:#091524}
+*{box-sizing:border-box}body{max-width:min(97.5vw,1570px);margin:auto;padding:clamp(10px,.9vw,18px);
+background:radial-gradient(ellipse at 85% 0,rgba(52,127,171,.17),transparent 57%)}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:7px}
+h1{font-size:clamp(21px,1.65vw,29px);letter-spacing:-.03em;margin:0}h2{font-size:15px;margin:0 0 7px}p{margin:5px 0 9px}
+.muted{color:#acc2d6}a{color:#abdff4}a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #87dbee;outline-offset:3px}
+.links{display:flex;flex-wrap:wrap;gap:12px}.board{background:#132439;border:1px solid #39566f;border-radius:12px;padding:clamp(10px,.85vw,15px);margin:8px 0}
+.note{padding:7px 12px;border-left:3px solid #72bbd2;background:#0c1d2f}.toolbar{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+button{background:#206082;border:1px solid #73b1c9;border-radius:8px;color:#fff;font:inherit;padding:8px 14px;cursor:pointer}
+button:hover{background:#287496}button:disabled{opacity:.55;cursor:default}
+.cards{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}.metric{padding:9px 11px;min-width:0;background:linear-gradient(145deg,#173951,#10273b);border:1px solid #476780;border-radius:9px}
+.metric small{color:#bad2e5}.metric b{display:block;font-size:clamp(20px,1.75vw,27px);font-variant-numeric:tabular-nums}
+.cols{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:10px;align-items:start}.cols .board{margin:0;min-width:0}
+table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}th,td{padding:6px 7px;text-align:left;border-bottom:1px solid #344e64}
+th{color:#c0dcf0;position:sticky;top:0;background:#183048}.scroll{overflow:auto;max-height:min(44vh,390px)}
+.good{color:#9bdeb5}.bad{color:#ffaaa3}.warn{color:#f4d49c}summary{cursor:pointer;font-weight:650}
+details{padding:10px 13px}.fine{font-size:12px;color:#acbed1}
+@media(max-width:1100px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))}.cols{grid-template-columns:1fr}}
+@media(max-width:600px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}body{padding:9px}.links{gap:7px}.scroll{max-height:45vh}}
+@media(max-height:720px) and (min-width:1000px){body{padding:8px}.board{margin:6px 0;padding:9px}header{margin-bottom:4px}.metric{padding:6px 9px}th,td{padding:4px 7px}h1{font-size:21px}}
+select{font:inherit;color:#ebf3fc;background:#143049;border:1px solid #6c9db3;border-radius:7px;padding:7px 10px}
+select:focus-visible{outline:2px solid #a5dcec}#r6-table{max-height:27vh;margin-top:7px}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0}
+.vault-select{padding:5px 10px;white-space:nowrap;font-size:12px}
+#top250-coverage table{min-width:810px}
+#top250-coverage summary,#btc-year-lab summary{font-size:16px;color:#e3f4ff;margin-bottom:9px}
+#top250-coverage input[type=search]{font:inherit}
+#top250-coverage input[type=checkbox]{accent-color:#6cd6e9}
+.btc-hero{display:flex;flex-wrap:wrap;gap:9px;margin:10px 0}
+.btc-hero .metric{flex:1;min-width:190px}
+#btc-year-table{min-width:620px}
+#btc-year-curve{display:block;max-width:100%}
+@media(max-width:760px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style></head>
+<body>
+<header><div><h1>Coffre historique · Seven Heaven</h1><p class="muted">Une seule vue · Firefox + GitHub · lecture seule</p></div>
+<nav class="links"><a href="./index.html">← Interface</a></nav></header>
+<section class="board"><p class="note"><strong>Un seul Coffre :</strong> Binance + Bitget, bougies vérifiées et blocs annuels au même endroit. Le cache Firefox est distinct des archives GitHub ; leurs compteurs ne s'additionnent pas. <b>Prix archivés en USDT, non convertis en USD/EUR, pas en temps réel.</b></p>
+<div class="toolbar"><button id="analyze">Analyser le Coffre</button><button id="copy" disabled>Copier le bilan</button><span id="status" class="muted" aria-live="polite">Prêt pour la vérification</span><span id="r10-automatic-status" class="muted" aria-live="polite">R10 · automatique au chargement</span></div></section>
+<details class="board" id="wbt-private-proof" open>
+ <summary><strong>WBT · WhiteBIT Spot / USDT — historique privé vérifié</strong></summary>
+ <p class="muted">WBT est l'actif n° 15 dans le classement du checkpoint. Ses bougies originales à la minute ont été auditées à partir des fichiers privés transmis par le propriétaire. <b>Elles ne sont pas publiées sur GitHub Pages</b> et ne sont pas chargées par ce graphique. Cette preuve est distincte des archives publiques Binance / Bitget et ne change pas leurs compteurs.</p>
+ <div class="metrics" id="wbt-private-metrics"><div class="metric"><small>Statut</small><b>Lecture de la preuve…</b></div></div>
+ <p id="wbt-private-status" class="fine" aria-live="polite">Chargement des métadonnées publiques, sans transfert de fichiers privés.</p>
+ <p class="fine">Première journée partielle : 25 août 2022, dès 13 h 59 UTC. Les archives originales restent sur le PC de leur propriétaire. Source WhiteBIT Spot WBT/USDT : ni conversion USD, ni prix en temps réel, ni série utilisable par le Trader depuis cette page.</p>
+</details>
+<details class="board" id="top250-coverage" open>
+ <summary id="top250-title">Coffre Top 250 · couverture réelle des historiques (chargement…)</summary>
+ <p class="muted">Le classement répertorie 250 cryptomonnaies. Une crypto est indiquée « archivée » uniquement lorsqu'un ZIP mensuel officiel a été vérifié et publié. Les autres ne sont pas inventées. Sources : <b>Binance Spot USDT</b> et <b>Bitget Spot USDT</b>, formats natifs distincts. Un mois archivé ne signifie pas un an de données.</p>
+ <div class="metrics" id="top250-summary"><div class="metric">Chargement de l'index réel…</div></div>
+ <p class="fine" id="top250-counts">Couverture Top 10 / 50 / 100 / 250 à vérifier.</p>
+ <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0">
+  <label for="top250-limit">Univers</label>
+  <select id="top250-limit" style="background:#102f48;color:#e7f7ff;border:1px solid #6087a1;border-radius:7px;padding:8px">
+   <option value="10">Top 10</option><option value="50" selected>Top 50</option>
+   <option value="100">Top 100</option><option value="250">Top 250</option>
+  </select>
+  <input id="top250-search" type="search" placeholder="Rechercher une crypto…" aria-label="Rechercher une crypto du classement" style="background:#102f48;color:#e7f7ff;border:1px solid #6087a1;border-radius:7px;padding:9px;min-width:200px">
+  <label><input type="checkbox" id="top250-available"> Avec archives seulement</label>
+ </div>
+ <div id="top250-status" aria-live="polite" class="muted">Chargement…</div>
+ <p id="top250-listed" class="fine"></p>
+ <div class="scroll" style="max-height:420px;overflow-y:auto">
+ <table><thead><tr><th>Rang</th><th>Crypto</th><th>Historique</th><th>Mois</th><th>Bougies 1m</th><th>Depuis</th><th>Dernière archive</th><th>Consulter</th></tr></thead><tbody id="top250-rows"></tbody></table>
+ </div>
+ <p class="fine">La présence de données historiques ne signifie pas que la crypto est disponible sur Binance aujourd'hui. Cliquer sur « Voir les bougies » pour ouvrir la crypto dans le graphique ci-dessous. Les ZIP originaux restent dans GitHub Releases, sans toucher au Trader.</p>
+</details>
+<details class="board" id="shared-month-reader" open>
+ <summary>Graphique historique commun · cryptomonnaies réellement archivées</summary>
+ <p class="muted"><b>Lecteur interactif Top 5 certifié :</b> BTC, ETH, BNB, XRP et SOL sur <b>24h · 7j · 30j · 60j · 90j · 1 an · Max</b>, avec véritables prix OHLC, volumes et interruptions vérifiées SHA-256. Pour les autres cryptos Binance / Bitget, le lecteur historique existant reste disponible dans ce même graphique. Archives en USDT, arrêtées au 30 septembre 2026 pour les sept vues Top 5 ; aucun prix live et aucune bougie synthétique.</p>
+ <div class="toolbar" style="margin:10px 0;gap:9px">
+  <label for="shared-asset">Crypto</label>
+  <select id="shared-asset" style="max-width:min(90vw,330px)"><option>Chargement…</option></select>
+  <label for="shared-period">Période</label>
+  <select id="shared-period">
+   <option value="24h">24 heures · 1 min</option>
+   <option value="7j">7 jours · 5 min</option>
+   <option value="30j" selected>30 jours · historique vérifié</option>
+   <option value="mois">Mois source · 1 heure</option>
+   <option value="60j">60 jours · 1 heure</option>
+   <option value="90j">90 jours · 1 heure</option>
+   <option value="1an">1 an · bougies vérifiées</option>
+   <option value="Max">Max archivé · ruptures signalées</option>
+  </select>
+  <label for="shared-style">Affichage</label>
+  <select id="shared-style"><option value="candles" selected>Bougies OHLC + volumes</option><option value="line">Cours de clôture + volumes</option></select>
+  <button id="shared-read" type="button" disabled>Lire les bougies de l'actif</button>
+ </div>
+ <p id="shared-status" class="muted" aria-live="polite">Chargement de l'index historique…</p>
+ <p id="shared-explanation" class="note" aria-live="polite"><b>Lecture :</b> une bougie représente une période de cotation. Le graphique Max peut couvrir plusieurs années, mais ce ne sont pas des cours en direct. Sélectionne une crypto et une période pour commencer.</p>
+ <p id="shared-legend" class="fine" aria-label="Légende des bougies et des volumes"><span style="color:#69cbae;font-weight:700">■ Vert : clôture au-dessus de l'ouverture</span> · <span style="color:#f29289;font-weight:700">■ Rouge : clôture sous l'ouverture</span> · <span style="color:#d9aa59;font-weight:700">■ Orange : archive absente</span> · <b>Volume : quantité échangée en crypto (pas en USDT)</b></p>
+ <p id="shared-gaps" class="fine" aria-live="polite">Les dates et la durée des archives manquantes seront indiquées ici.</p>
+ <div class="toolbar" aria-label="Navigation dans l'historique" style="margin:9px 0">
+  <span class="fine"><b>Explorer l'histoire :</b></span>
+  <button type="button" id="shared-prev" disabled aria-label="Afficher la période précédente">← Avant</button>
+  <button type="button" id="shared-zoom-in" disabled aria-label="Zoomer sur les bougies">Zoom +</button>
+  <button type="button" id="shared-zoom-out" disabled aria-label="Dézoomer sur les bougies">Zoom −</button>
+  <button type="button" id="shared-next" disabled aria-label="Afficher la période suivante">Après →</button>
+  <button type="button" id="shared-reset" disabled aria-label="Afficher toutes les bougies sélectionnées">Tout voir</button>
+  <span id="shared-range" class="fine" aria-live="polite">Affichage complet · navigation disponible pour les cinq cryptos pilotes.</span>
+ </div>
+ <canvas id="shared-curve" width="1100" height="370" style="display:block;width:100%;max-width:1100px;background:#0b1a29;border:1px solid #34516b;border-radius:8px" role="img" aria-label="Bougies historiques OHLC, prix et volumes authentiques en USDT"></canvas>
+ <p id="shared-hover" class="fine" aria-live="polite">Survole le graphique : dates, ouverture, plus haut, plus bas, clôture et volume seront détaillés ici. Tu peux aussi lire les valeurs exactes dans le tableau situé dessous.</p>
+ <p id="shared-source" class="fine">Dernier mois clos disponible seulement, non live. Aucune conversion implicite USDT → USD.</p>
+ <div class="scroll"><table id="shared-table"><tr><td>Lire un actif pour afficher ses dernières bougies.</td></tr></table></div>
+</details>
+<details class="board" id="vault-yearly-inline" open>
+ <summary><strong>Historique pluriannuel · blocs annuels vérifiés (BTC / ETH)</strong></summary>
+ <p class="muted">La même lecture SHA-256 et OHLCV que le lecteur annuel déjà validé : BTC et ETH sur les années réellement matérialisées. Pour les autres cryptos, aucun bloc annuel n'est annoncé avant sa publication. Toutes les cotations ici sont en USDT.</p>
+ <div class="toolbar" style="margin:10px 0;gap:9px">
+  <label for="vault-year-coin">Crypto</label><select id="vault-year-coin"><option>Chargement…</option></select>
+  <label for="vault-year-year">Année</label><select id="vault-year-year"><option>—</option></select>
+  <label for="vault-year-month">Période</label><select id="vault-year-month"><option value="all">Bloc complet</option></select>
+  <button id="vault-year-read" type="button" disabled>Lire les bougies annuelles</button>
+ </div>
+ <p id="vault-year-status" class="muted" aria-live="polite">Chargement des blocs vérifiés…</p>
+ <p id="vault-year-source" class="fine">Binance Spot USDT · ZIP mensuels sources certifiés.</p>
+ <canvas id="vault-year-curve" width="1120" height="420" style="display:block;width:100%;max-width:1120px;background:#0b1a29;border:1px solid #385d76;border-radius:9px" role="img" aria-label="Chandeliers pluriannuels des sources authentiques"></canvas>
+ <p id="vault-year-scope" class="fine">Périodes certifiées uniquement · sans interpolation ni conversion de devise.</p>
+ <div class="scroll"><table><thead><tr><th>UTC</th><th>Ouverture</th><th>Haut</th><th>Bas</th><th>Clôture</th><th>Volume base</th><th>Transactions</th></tr></thead>
+ <tbody id="vault-year-rows"><tr><td colspan="7">Aucune bougie chargée.</td></tr></tbody></table></div>
+</details>
+<details class="board">
+ <summary><strong>Outils de diagnostic (facultatifs)</strong></summary>
+ <p class="muted">Anciennes vues techniques conservées : <a href="./historical-inventory.html">inventaire du cache Firefox</a> · <a href="./historical-archive-reader.html">diagnostic R3</a> · <a href="./historical-yearly.html">lecteur annuel indépendant</a>. Le Coffre ci-dessus reste l'entrée utilisateur unique.</p>
+</details>
+<details class="board" id="btc-year-lab">
+ <summary><strong>BTC/USDT · explorer les archives mensuelles de Bitcoin</strong></summary>
+ <div class="btc-hero" aria-label="Repères de l'archive BTC">
+  <div class="metric"><small>Historique source validé</small><b>525 600 bougies</b><small>1 minute native · 365 jours</small></div>
+  <div class="metric"><small>Mois dans le Coffre</small><b>12 mois</b><small>Octobre 2025 → septembre 2026</small></div>
+  <div class="metric"><small>Nature des données</small><b>USDT · archive</b><small>Binance Spot · pas temps réel</small></div>
+ </div>
+ <p class="muted">Une source archivée Binance Spot BTC/USDT, plusieurs périodes d'affichage. Les ZIP mensuels authentiques restent dans GitHub Releases. Cette vue, reconstruite depuis ces mêmes bougies, est datée du dernier mois clos disponible. Aucun accès au Trader, aux ordres ou aux caches locaux. Les périodes affichées se terminent au dernier mois archivé, et non à la date du jour.</p>
+ <label for="btc-year-period">Période archivée</label>
+ <select id="btc-year-period" style="background:#102f48;color:#e7f7ff;border:1px solid #6087a1;border-radius:7px;padding:9px;min-width:100px">
+  <option value="24h">24 h</option>
+  <option value="7j">7 jours</option>
+  <option value="30j">30 jours</option>
+  <option value="60j">60 jours</option>
+  <option value="90j">90 jours</option>
+  <option value="1an" selected>1 an</option>
+  <option value="Max">Max archivé</option>
+ </select>
+ <button id="btc-year-read" type="button">Lire BTC depuis le Coffre</button>
+ <p class="muted" id="btc-year-status" aria-live="polite">Aucune lecture lancée.</p>
+ <canvas id="btc-year-curve" width="940" height="260" style="display:block;width:100%;max-width:940px;border:1px solid #34516b;border-radius:8px;background:#0b1a29" role="img" aria-label="Courbe de clôture Bitcoin historique en USDT"></canvas>
+ <p class="fine" id="btc-year-coverage">La période Max correspond uniquement aux mois réellement archivés et vérifiés ; elle ne prétend pas couvrir Bitcoin depuis 2009.</p>
+ <div class="scroll"><table id="btc-year-table"><tr><td>Huit dernières bougies visibles après lecture.</td></tr></table></div>
+</details>
+<section class="board"><h2>Vue d'ensemble</h2><div class="cards" id="cards"><p class="muted">Cliquer sur Analyser.</p></div></section>
+<div class="cols">
+<section class="board"><h2>GitHub · Mémoire historique permanente</h2>
+<p class="muted">R2 + deltas R4, avec SHA-256 et continuité des chandelles vérifiées</p>
+<div class="scroll" id="archive">En attente</div><p id="remote-message" class="fine">Aucun contrôle exécuté.</p></section>
+<section class="board"><h2>Firefox · Cache local de travail</h2>
+<p class="muted">Maximum 80 séries ; aucune conservation cumulative garantie ici</p>
+<div class="scroll" id="local">En attente</div><p id="local-message" class="fine">Aucun contrôle exécuté.</p></section>
+</div>
+<details class="board" id="r6-archive-adapter">
+<summary>R6 · Lire les chandelles archivées (sans toucher au Graphique)</summary>
+<div class="toolbar" style="margin-top:9px;gap:12px">
+<label for="r6-asset">Crypto</label><select id="r6-asset"><option value="bitcoin">BTC</option><option value="ethereum">ETH</option><option value="binancecoin">BNB</option><option value="ripple">XRP</option><option value="solana">SOL</option><option value="tron">TRX</option><option value="zcash">ZEC</option></select>
+<label for="r6-period">Période</label><select id="r6-period"><option value="24h">24 h · 5 min</option><option value="7d">7 j · 1 h</option><option value="30d">30 j · 4 h</option></select>
+<button type="button" id="r6-read">Lire la série</button><span id="r6-result" aria-live="polite" class="muted">En attente</span>
+</div><p id="r6-source" class="fine">Binance Spot / USDT. Source archivistique, pas un prix USD/EUR, ni un signal live.</p>
+<div id="r6-table" class="scroll">Sélectionne une crypto et une période, puis clique sur Lire la série.</div>
+</details>
+<details class="board" id="r7-btc-comparator">
+<summary>R7 · Comparer BTC : CoinGecko USD · Binance USDT · OKX USDC</summary>
+<p class="muted">Lecture indépendante : les trois prix n'ont ni la même devise ni nécessairement la même date. Aucun écart de prix calculé.</p>
+<div class="toolbar"><button type="button" id="r7-check">Comparer les sources BTC</button><span id="r7-status" class="muted" aria-live="polite">En attente</span></div>
+<div id="r7-table" class="scroll" style="margin-top:8px">Lecture sur demande uniquement.</div>
+<p class="fine" id="r7-warning">CoinGecko : snapshot public USD · Binance : dernière clôture archivée en USDT · OKX : ticker public BTC-USDC via Backend local si disponible. Aucune modification du Graphique.</p>
+</details><details class="board" id="r9-compact">
+<summary>R9 · Lire un bloc compact (prototype réversible)</summary>
+<p class="muted">Archive immuable par crypto et période. Lecture ciblée : un index + un seul bloc gzip. Aucun changement des lecteurs R6/R7 ni du Graphique.</p>
+<div class="toolbar">
+<label for="r9-asset">Crypto</label><select id="r9-asset">
+<option value="bitcoin">BTC</option><option value="ethereum">ETH</option><option value="binancecoin">BNB</option>
+<option value="ripple">XRP</option><option value="solana">SOL</option><option value="tron">TRX</option><option value="zcash">ZEC</option>
+</select>
+<label for="r9-period">Période</label><select id="r9-period"><option value="24h">24 h · 5 min</option><option value="7d">7 j · 1 h</option><option value="30d">30 j · 4 h</option></select>
+<button id="r9-read" type="button">Lire le bloc R9</button><span id="r9-status" class="muted" aria-live="polite">Lecture sur demande</span>
+</div>
+<p id="r9-source" class="fine">USDT Binance Spot · snapshot de l'archive R8 à sa date de construction, non live. Rien n'est supprimé.</p>
+<div id="r9-table" class="scroll" style="margin-top:8px">En attente.</div>
+</details><details class="board"><summary>Informations techniques et limites</summary>
+<div id="details" class="fine">La source GitHub doit passer la vérification SHA-256, la décompression gzip, la chronologie et l'index de couverture. Aucun fichier local n'est envoyé sur Internet.</div></details>
+<script>
+(()=>{"use strict";
+const ROOT=new URL("../data/historical_archive_prototype/ohlcv_spot_pilot/",location.href);
+const DB="agent_crypto_storage_relief_40278",STORE="payloads",KEY="agent_crypto_erith_ia_real_charts_v1_1_alpha_26_37_top50";
+const SPECS={"24h":{ms:300000,count:288,interval:"5m"},"7d":{ms:3600000,count:168,interval:"1h"},"30d":{ms:14400000,count:180,interval:"4h"}};
+const $=id=>document.getElementById(id);let exported=null;
+function yes(v,msg){if(!v)throw Error(msg)}
+function tbl(head,rows){const t=document.createElement("table"),h=document.createElement("tr");head.forEach(s=>{const th=document.createElement("th");th.textContent=s;h.append(th)});t.append(h);
+rows.forEach(r=>{const tr=document.createElement("tr");r.forEach(v=>{const td=document.createElement("td");td.textContent=String(v??"—");tr.append(td)});t.append(tr)});return t}
+function metric(label,value){const a=document.createElement("div"),s=document.createElement("small"),b=document.createElement("b");a.className="metric";s.textContent=label;b.textContent=String(value);a.append(s,b);return a}
+function showMetrics(a){const frag=document.createDocumentFragment();a.forEach(x=>frag.append(metric(x[0],x[1])));$("cards").replaceChildren(frag)}
+function utc(t){return Number.isFinite(t)&&t>0?new Date(t).toLocaleString("fr-FR",{timeZone:"UTC",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})+" UTC":"—"}
+function dmsg(e){return String(e?.message||e).slice(0,200)}
+async function fetchBuf(url){
+yes(url.origin===location.origin,"URL externe refusée");
+const r=await fetch(url.href,{credentials:"omit",cache:"no-store",redirect:"error"});
+yes(r.ok,"Échec HTTP "+r.status+" : "+url.pathname);
+return r.arrayBuffer()}
+async function sha(buf){yes(crypto?.subtle,"SHA-256 indisponible");const b=await crypto.subtle.digest("SHA-256",buf);
+return Array.from(new Uint8Array(b),x=>x.toString(16).padStart(2,"0")).join("")}
+async function packed(entry,seed){
+const file=entry?.file;
+yes(typeof file==="string"&&(seed?/^ohlcv_top10_\d{4}-\d\d-\d\d\.json\.gz$/.test(file):/^deltas\/delta_\d{8}T\d{6}Z\.json\.gz$/.test(file)),"Nom d'archive non autorisé");
+yes(/^[a-f0-9]{64}$/i.test(entry.sha256),"SHA manquant");
+const bytes=await fetchBuf(new URL(file,ROOT));
+yes(bytes.byteLength===entry.bytes,"Taille gzip différente : "+file);
+yes(await sha(bytes)===entry.sha256.toLowerCase(),"Empreinte SHA différente : "+file);
+yes(typeof DecompressionStream==="function","Décompression gzip non supportée");
+const plain=await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"))).text();
+return JSON.parse(plain)}
+function validRow(r,step){yes(Array.isArray(r)&&r.length===8&&r.every(Number.isFinite),"Chandelle OHLCV incorrecte");
+const[t,o,h,l,c,v,q,n]=r;yes(Number.isInteger(t)&&t%step===0&&Number.isInteger(n)&&n>=0,"Horodatage/transac. invalide");
+yes(l>0&&l<=Math.min(o,c)&&Math.max(o,c)<=h&&v>=0&&q>=0,"Cours ou volume invalide");return t}
+function append(series,key,rows,step,cutoff){
+yes(Array.isArray(rows),"Série absente : "+key);let entry=series.get(key);
+for(let k=0;k<rows.length;k++){const t=validRow(rows[k],step);yes(t+step<=cutoff,"Chandelle non clôturée : "+key);
+if(entry){yes(t===entry.last+step,"Doublon ou trou : "+key);entry.last=t;entry.count++}
+else{entry={first:t,last:t,count:1};series.set(key,entry)}}
+}
+async function github(){
+const index=JSON.parse(new TextDecoder().decode(await fetchBuf(new URL("index.json",ROOT))));
+const manifest=JSON.parse(new TextDecoder().decode(await fetchBuf(new URL("manifest.json",ROOT))));
+yes(index.schema==="aerith.public.ohlcv.spot.cumulative.index.v1","Index cumulatif inconnu");
+yes(manifest.schema==="aerith.public.ohlcv.spot.top10.pilot.manifest.v1","Manifeste R2 inconnu");
+yes(index.quote_asset==="USDT"&&index.source==="Binance Spot"&&index.basket_reference===manifest.reference,"Source/devise/référence incohérente");
+yes(index.seed?.file===manifest.archive&&index.seed.sha256===manifest.archive_sha256&&index.seed.bytes===manifest.archive_gzip_bytes,"Seed différent du manifeste");
+yes(Array.isArray(index.deltas)&&Array.isArray(index.coverage),"Index incomplet");
+yes(index.deltas.length<=500,"Nombre de deltas excessif pour cette page");
+const base=await packed(index.seed,true);
+yes(base.schema==="aerith.public.ohlcv.spot.top10.pilot.v1"&&base.quote_asset==="USDT"&&base.kind==="REAL_BINANCE_SPOT_OHLCV_NO_SYNTHETIC_BARS","Données R2 invalides");
+yes(base.basket_reference===manifest.reference&&base.captured_at===manifest.created_at,"Référence R2 invalidée");
+const assets=base.assets,ids=Object.keys(assets||{});
+yes(ids.length===7&&ids.length===manifest.spot_pairs_qualified,"Panier R2 non qualifié");
+const series=new Map();let totalSource=0;
+for(const id of ids){
+const asset=assets[id];yes(manifest.complete_assets.includes(id)&&asset.quote==="USDT"&&/^[A-Z0-9]+USDT$/.test(asset.pair),"Paire incompatible");
+for(const [period,sp] of Object.entries(SPECS)){
+const item=asset.periods?.[period],key=id+"|"+period;
+yes(item?.interval===sp.interval&&item.rows?.length===sp.count,"Période R2 non qualifiée");
+yes(item.start_open_ms===item.rows[0][0]&&item.last_open_ms===item.rows.at(-1)[0],"Bornes R2 discordantes");
+append(series,key,item.rows,sp.ms,Date.parse(base.captured_at));totalSource+=item.rows.length;
+}}
+yes(totalSource===4452,"Socle R2 inattendu");
+let previousName="",sumDelta=0;
+for(const entry of index.deltas){
+yes(typeof entry.file==="string"&&entry.file>previousName,"Deltas non ordonnés ou dupliqués");previousName=entry.file;
+const part=await packed(entry,false);
+yes(part.schema==="aerith.public.ohlcv.spot.increment.v1"&&part.quote_asset==="USDT"&&part.basket_reference===manifest.reference,"Delta incompatible");
+yes(Array.isArray(part.updates)&&part.updates.length===entry.updates,"Nombre de mises à jour discordant");
+const seen=new Set();let n=0;
+for(const v of part.updates){
+const key=v.id+"|"+v.period,sp=SPECS[v.period];
+yes(sp&&assets[v.id]?.pair===v.pair&&v.interval===sp.interval&&!seen.has(key),"Clé de delta invalide");seen.add(key);
+yes(v.rows.length>0&&v.rows.length<=240,"Taille série delta incompatible");
+append(series,key,v.rows,sp.ms,Date.parse(part.collected_at));n+=v.rows.length;
+}
+yes(n===entry.candles,"Nombre de chandelles delta différent");sumDelta+=n;
+}
+yes(series.size===index.series_count&&index.coverage.length===series.size,"Nombre de séries différent");
+const coverage=new Map(index.coverage.map(x=>[x.id+"|"+x.period,x]));
+yes(coverage.size===series.size,"Couverture dupliquée");
+let calculated=0;
+for(const [k,v] of series){
+const item=coverage.get(k),[id,period]=k.split("|");
+yes(item&&item.pair===assets[id].pair&&item.interval===SPECS[period].interval,"Couverture identité incohérente");
+yes(item.first_open_ms===v.first&&item.last_open_ms===v.last&&item.candles===v.count,"Couverture différente de l'archive : "+k);calculated+=v.count;
+}
+yes(calculated===index.candles_total&&calculated===totalSource+sumDelta,"Total cumulatif incohérent");
+const tableRows=ids.map(id=>{
+const a=assets[id],periods=Object.keys(SPECS).map(p=>series.get(id+"|"+p));
+return[id,a.pair,...periods.map(x=>x.count),utc(periods[0].last)]}).sort((a,b)=>a[1].localeCompare(b[1]));
+return{count:calculated,series:series.size,assets:ids.length,deltas:index.deltas.length,added:sumDelta,rows:tableRows,updated:index.updated_at,missing:manifest.unavailable.map(v=>v.id)}}
+async function firefox(){
+yes(typeof indexedDB!=="undefined"&&typeof indexedDB.databases==="function","Énumération IndexedDB indisponible");
+const list=await indexedDB.databases();yes(list.some(x=>x.name===DB),"Base locale inexistante");
+const record=await new Promise((resolve,reject)=>{
+const req=indexedDB.open(DB);req.onupgradeneeded=()=>{req.transaction.abort();reject(Error("Migration interdite"))};
+req.onerror=()=>reject(req.error||Error("Ouverture impossible"));
+req.onsuccess=()=>{const db=req.result;if(!db.objectStoreNames.contains(STORE)){db.close();reject(Error("Magasin local absent"));return}
+const tx=db.transaction(STORE,"readonly"),item=tx.objectStore(STORE).get(KEY);
+item.onsuccess=()=>resolve(item.result);item.onerror=()=>reject(item.error||Error("Lecture cache impossible"));
+tx.oncomplete=()=>db.close();tx.onabort=()=>db.close();tx.onerror=()=>db.close();
+}});
+yes(typeof record?.payload==="string","Cache local absent");
+const data=JSON.parse(record.payload),keys=Object.keys(data),ids=new Set();let total=0;const period={};
+keys.forEach(k=>{const v=data[k],m=k.match(/^(.+?):USD:([^:]+):([0-9]+)$/)||k.match(/^(.+?):([0-9]+):([^:]+)$/);
+let name=k,days="?";if(m){name=m[1];days=k.includes(":USD:")?m[3]:m[2]}
+ids.add(name);const count=Array.isArray(v?.series)?v.series.length:0;total+=count;period[days]=(period[days]||0)+1});
+return{entries:keys.length,coins:ids.size,points:total,verified:record.verified===true,period}}
+async function run(){
+$("analyze").disabled=true;$("copy").disabled=true;$("status").textContent="Lecture et validation en cours…";exported=null;
+const results=await Promise.allSettled([github(),firefox()]);
+let r=results[0].status==="fulfilled"?results[0].value:null,l=results[1].status==="fulfilled"?results[1].value:null;
+let errR=r?null:dmsg(results[0].reason),errL=l?null:dmsg(results[1].reason);
+showMetrics([["Cache Firefox",l?l.entries:"?"],["Cryptos locales",l?l.coins:"?"],["Points cache",l?l.points.toLocaleString("fr-FR"):"?"],["Chandelles GitHub",r?r.count.toLocaleString("fr-FR"):"?"],["Séries GitHub",r?r.series:"?"],["Deltas validés",r?r.deltas:"?"]]);
+if(r){$("archive").replaceChildren(tbl(["Actif","Paire","5 min","1 h","4 h","Dernière 5 min"],r.rows));
+$("remote-message").textContent="VALIDÉ · R2 : 4 452 · deltas : +"+r.added+" · 7 cryptos · dernière mise à jour index : "+r.updated+" · absents : "+r.missing.join(", ");
+$("remote-message").className="good fine"}
+else{$("archive").textContent="Archive non vérifiée";$("remote-message").textContent="ÉCHEC GitHub : "+errR;$("remote-message").className="bad fine"}
+if(l){$("local").replaceChildren(tbl(["Période en jours","Séries en cache"],Object.entries(l.period).sort((a,b)=>Number(a[0])-Number(b[0]))));
+$("local-message").textContent="Cache volatile · "+l.entries+" entrées · statut interne verified="+String(l.verified)+". Pas un stockage cumulatif.";
+$("local-message").className="muted fine"}
+else{$("local").textContent="Cache indisponible";$("local-message").textContent="LECTURE LOCALE : "+errL;$("local-message").className="warn fine"}
+$("details").textContent="GitHub : "+(r?"SHA-256, gzip, R2, "+r.deltas+" deltas, trous/doublons OHLCV et index cumulatif cohérents":errR)+
+". Firefox : "+(l?"lecture seule des métadonnées du cache":errL)+". Aucun prix, aucun historique local ou identifiant privé transmis. Les données en USDT ne sont pas des prix EUR/USD.";
+exported={schema:"seven_heaven_unified_vault_readonly_v1",checked_at:new Date().toISOString(),
+github:r?{status:"VALIDATED",candles:r.count,series:r.series,assets:r.assets,deltas:r.deltas,added:r.added,updated_at:r.updated}: {status:"UNAVAILABLE",reason:errR},
+firefox:l?{status:"READ_ONLY",entries:l.entries,coins:l.coins,points:l.points,verified:l.verified}:{status:"UNAVAILABLE",reason:errL}};
+$("copy").disabled=false;$("status").textContent=r?(l?"Coffre vérifié":"GitHub vérifié · Firefox indisponible"):"Archive à vérifier";$("status").className=r?"good":"bad";
+$("analyze").disabled=false;
+}
+$("analyze").addEventListener("click",()=>run().catch(e=>{$("status").textContent="Erreur : "+dmsg(e);$("analyze").disabled=false}));
+$("copy").addEventListener("click",()=>{if(!exported)return;navigator.clipboard.writeText(JSON.stringify(exported,null,2)).then(()=>{$("status").textContent="Bilan copié"},e=>{$("status").textContent="Copie impossible : "+dmsg(e)})});
+})();
+</script><script src="./js/historical-archive-adapter.js"></script>
+<script>
+(() => {"use strict";
+const $=id=>document.getElementById(id),btn=$("r6-read");
+const utc=n=>new Date(n).toLocaleString("fr-FR",{timeZone:"UTC",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})+" UTC";
+const number=n=>new Intl.NumberFormat("fr-FR",{maximumFractionDigits:8}).format(n);
+btn.addEventListener("click",async()=>{
+ btn.disabled=true;$("r6-result").textContent="Lecture et vérification…";$("r6-table").textContent="Chargement…";
+ try{
+  if(!window.SevenHistoricalArchive)throw Error("Module de lecture indisponible");
+  const data=await window.SevenHistoricalArchive.readSeries({assetId:$("r6-asset").value,period:$("r6-period").value});
+  const m=data.metadata;
+  $("r6-source").textContent="VALIDÉ · "+m.pair+" · "+m.source+" · "+m.quote+" · "+m.interval+" · "+m.points+" chandelles · de "+utc(m.firstOpenMs)+" à "+utc(m.lastOpenMs)+" · index "+m.archiveUpdatedAt+" · NON LIVE · Graphique non raccordé";
+  const table=document.createElement("table"),tr=document.createElement("tr");
+  ["UTC","Ouverture USDT","Plus haut","Plus bas","Clôture USDT","Volume base"].forEach(x=>{const th=document.createElement("th");th.textContent=x;tr.appendChild(th)});table.appendChild(tr);
+  data.candles.slice(-8).forEach(row=>{const item=document.createElement("tr");
+   [utc(row[0]),number(row[1]),number(row[2]),number(row[3]),number(row[4]),number(row[5])].forEach(val=>{const td=document.createElement("td");td.textContent=val;item.appendChild(td)});
+   table.appendChild(item)});
+  $("r6-table").replaceChildren(table);$("r6-result").textContent="Série lue et vérifiée";$("r6-result").className="good";
+ }catch(e){$("r6-table").textContent="Aucune chandelle affichée : contrôle refusé.";$("r6-result").textContent=String(e?.message||e).slice(0,150);$("r6-result").className="bad"}
+ finally{btn.disabled=false}
+});
+})();
+</script><script src="./js/historical-btc-comparator.js"></script>
+<script>
+(()=>{"use strict";
+const $=id=>document.getElementById(id),btn=$("r7-check");
+const iso=s=>{const t=Date.parse(s);return Number.isFinite(t)?new Date(t).toLocaleString("fr-FR",{timeZone:"UTC",day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit",second:"2-digit"})+" UTC":"—"};
+const money=n=>new Intl.NumberFormat("fr-FR",{maximumFractionDigits:8}).format(n);
+btn.addEventListener("click",async()=>{
+ btn.disabled=true;$("r7-status").textContent="Vérification…";$("r7-table").textContent="Lecture en cours…";
+ try{
+  const api=window.SevenBTCSourceComparator;
+  if(!api)throw Error("Module R7 non chargé");
+  const result=await api.compare();
+  if(result.graphModified||result.priceSpreadCalculated||result.quoteRule!=="USD != USDT != USDC")throw Error("Contrat devise invalide");
+  const table=document.createElement("table"),head=document.createElement("tr");
+  ["Source","Instrument / devise","Prix observé","Date UTC","État"].forEach(x=>{const th=document.createElement("th");th.textContent=x;head.append(th)});table.append(head);
+  result.rows.forEach(r=>{const row=document.createElement("tr");const cols=[r.provider,r.market?r.market+" · "+r.quote:"—",
+   Number.isFinite(r.price)?money(r.price)+" "+r.quote:"—",r.observedAt?iso(r.observedAt):"—",
+   r.status==="UNAVAILABLE"?"Indisponible · "+r.error:(r.status==="STALE"?"Ancien relevé · ":"Relevé vérifié · ")+r.ageMinutes+" min"];
+   cols.forEach(value=>{const td=document.createElement("td");td.textContent=value;row.append(td)});table.append(row)});
+  $("r7-table").replaceChildren(table);
+  $("r7-status").textContent=result.rows.filter(r=>r.status!=="UNAVAILABLE").length+"/3 sources consultées · lecture seule";
+  $("r7-status").className="good";
+  $("r7-warning").textContent="Horaires non alignés ; USD ≠ USDT ≠ USDC. Aucun arbitrage, aucune conversion implicite, aucun ordre. L'absence du Bridge peut rendre OKX indisponible sans bloquer les autres sources.";
+ }catch(e){$("r7-table").textContent="Aucune valeur inventée : contrôle non validé.";$("r7-status").textContent=String(e?.message||e).slice(0,160);$("r7-status").className="bad"}
+ finally{btn.disabled=false}
+});
+})();
+</script><script src="./js/historical-compact-reader.js"></script>
+<script>
+(()=>{"use strict";
+const $=id=>document.getElementById(id),btn=$("r9-read");
+const fmt=n=>new Intl.NumberFormat("fr-FR",{maximumFractionDigits:8}).format(n);
+const utc=n=>new Date(n).toLocaleString("fr-FR",{timeZone:"UTC",day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"})+" UTC";
+btn.addEventListener("click",async()=>{
+ btn.disabled=true;$("r9-status").textContent="Lecture et validation du bloc…";$("r9-table").textContent="Vérification SHA-256…";
+ try{
+  if(!window.SevenCompactArchiveReader)throw Error("Lecteur compact R9 indisponible");
+  const x=await window.SevenCompactArchiveReader.readSeries({assetId:$("r9-asset").value,period:$("r9-period").value});
+  const m=x.metadata;
+  if(m.quote!=="USDT"||m.graphConnected||m.isLive||m.status!=="VALIDATED_SNAPSHOT")throw Error("Contrat R9 non respecté");
+  const t=document.createElement("table"),head=document.createElement("tr");
+  ["UTC","Ouverture USDT","Plus haut","Plus bas","Clôture USDT","Volume base"].forEach(s=>{const th=document.createElement("th");th.textContent=s;head.append(th)});t.append(head);
+  for(const row of x.candles.slice(-6)){const tr=document.createElement("tr");[utc(row[0]),fmt(row[1]),fmt(row[2]),fmt(row[3]),fmt(row[4]),fmt(row[5])].forEach(s=>{const td=document.createElement("td");td.textContent=s;tr.append(td)});t.append(tr)}
+  $("r9-table").replaceChildren(t);
+  $("r9-source").textContent="VALIDÉ · "+m.pair+" · "+m.period+" / "+m.interval+" · "+m.points+" chandelles · première "+utc(m.firstOpenMs)+" · dernière "+utc(m.lastOpenMs)+" · capture R8 : "+m.sourceIndexUpdatedAt+" · lecture 1 index + 1 bloc · non live, Graphique non raccordé.";
+  $("r9-status").textContent="Bloc exact vérifié (SHA-256 et OHLCV)";$("r9-status").className="good";
+ }catch(e){$("r9-table").textContent="Aucune série publiée sans validation.";$("r9-status").textContent=String(e?.message||e).slice(0,160);$("r9-status").className="bad"}
+ finally{btn.disabled=false}
+});
+})();
+</script><script src="./js/historical-vault-automatic.js"></script><script src="./js/top250-history-catalog.js"></script><script src="./js/btc-annual-view.js"></script><script src="./js/shared-hourly-history.js"></script><script src="./js/verified-periods-reader.js"></script><script src="./js/shared-historical-view.js"></script><script src="./js/historical-yearly-browser.js"></script></body></html>

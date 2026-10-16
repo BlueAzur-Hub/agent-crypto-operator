@@ -1,0 +1,564 @@
+/* 40.6.396 — REDIVIDER WHITE/RED HUD BLOOM
+   Firefox refinement: tighter white core, cleaner red falloff on REDIVIDER + [100%].
+   Visual-only refinement: white-hot text core + red luminous bloom.
+   No PNG, DOM, STOP/RESUME, Paper, Math Core or Market Core behavior change. */
+/* SINGLE OWNER BASE — formerly injected by operator-dashboard ensureStyle(). */
+#agentCryptoOperatorDashboard406384 .redivider-confirm-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:40;
+  pointer-events:auto;
+  place-items:center;
+}
+#agentCryptoOperatorDashboard406384[data-confirm-open="true"] .redivider-confirm-overlay{
+  display:grid;
+}
+#agentCryptoOperatorDashboard406384 .confirm-action{
+  cursor:pointer;
+}
+#agentCryptoOperatorDashboard406384 .confirm-action:focus-visible{
+  outline:2px solid rgba(225,190,194,.72);
+  outline-offset:3px;
+}
+#agentCryptoOperatorDashboard406384 .confirm-action:disabled{
+  opacity:.42;
+  cursor:wait;
+}
+
+/* REDIVIDER visual owner — canonical persistent module
+   DOM rebuilt for the confirmation component.
+   Desktop: approved PNG = visual chassis; one centered HTML copy block = live truth.
+   Mobile/compact: no PNG request; CSS-only native ring.
+   No STOP/RESUME business logic changes. */
+
+@media (min-width:900px){
+  #agentCryptoOperatorDashboard406384 .redivider-confirm-overlay{
+    --rv-ratio:1.777778;
+    --rv-hot-white:#fff9f5;
+    --rv-red-core:rgba(255,76,96,.90);
+    --rv-red-bloom:rgba(210,18,49,.64);
+    --rv-red-deep:rgba(118,0,24,.36);
+    padding:clamp(12px,2.2vh,22px);
+    background:rgba(1,4,7,.82);
+    backdrop-filter:blur(8px) saturate(78%);
+  }
+
+  #agentCryptoOperatorDashboard406384 .redivider-confirm-modal{
+    --rv-footer-h:160px;
+    --rv-hud-w:min(930px,calc(100vw - 84px),calc((100dvh - var(--rv-footer-h) - 70px) * var(--rv-ratio)));
+    --rv-hud-h:calc(var(--rv-hud-w) / var(--rv-ratio));
+    width:min(1000px,calc(100vw - 44px));
+    max-height:calc(100dvh - 28px);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    position:relative;
+    padding:14px 28px 18px;
+    border-radius:30px;
+    color:#d7cfca;
+    border:1px solid rgba(125,42,54,.46);
+    background:
+      radial-gradient(ellipse at 50% 28%,rgba(62,15,26,.21),transparent 43%),
+      linear-gradient(166deg,rgba(10,10,13,.990),rgba(3,5,8,.995));
+    box-shadow:
+      0 34px 110px rgba(0,0,0,.78),
+      0 0 0 1px rgba(255,255,255,.012),
+      inset 0 1px 0 rgba(255,255,255,.018),
+      0 0 68px rgba(67,11,22,.10);
+    isolation:isolate;
+  }
+
+  #agentCryptoOperatorDashboard406384 .redivider-confirm-modal::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+    pointer-events:none;
+    z-index:0;
+    background:linear-gradient(180deg,rgba(255,255,255,.018),transparent 13%);
+  }
+
+  #agentCryptoOperatorDashboard406384 .redivider-confirm-modal::after{
+    content:"";
+    position:absolute;
+    left:9%;
+    right:9%;
+    top:0;
+    height:1px;
+    z-index:1;
+    pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(171,39,53,.54) 34%,rgba(211,78,90,.68) 50%,rgba(171,39,53,.54) 66%,transparent);
+    box-shadow:0 0 14px rgba(132,24,39,.14);
+  }
+
+  #agentCryptoOperatorDashboard406384 .redivider-confirm-modal > *{
+    position:relative;
+    z-index:2;
+    min-width:0;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-hud{
+    width:var(--rv-hud-w);
+    height:var(--rv-hud-h);
+    flex:0 0 auto;
+    max-width:100%;
+    margin:0 auto 2px;
+    position:relative;
+    isolation:isolate;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-hud-art{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background-image:url("./assets/images/redivider-hud-frame-406390.png");
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:contain;
+    filter:
+      drop-shadow(0 18px 30px rgba(0,0,0,.44))
+      drop-shadow(0 0 20px rgba(86,22,36,.18));
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-hud-copy{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:34%;
+    height:59%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    pointer-events:none;
+    padding:2% 0 0;
+    z-index:2;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-eyebrow{
+    margin:0 0 5px;
+    color:#f6e7e5;
+    font-size:clamp(7px,.72vw,10px);
+    font-weight:900;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    white-space:nowrap;
+    text-shadow:0 0 1px rgba(255,255,255,.82),0 0 7px rgba(255,78,98,.30),0 0 16px rgba(177,10,38,.18);
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-title{
+    margin:0;
+    color:var(--rv-hot-white);
+    font-size:clamp(22px,2.35vw,34px);
+    font-weight:950;
+    line-height:1;
+    letter-spacing:.14em;
+    text-shadow:0 0 1px rgba(255,255,255,.96),0 0 3px rgba(255,244,241,.68),0 0 9px rgba(255,76,96,.80),0 0 21px rgba(210,18,49,.54),0 0 36px rgba(118,0,24,.28),0 2px 0 rgba(0,0,0,.50);
+    white-space:nowrap;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-subtitle{
+    margin:5px 0 0;
+    color:#f3dadd;
+    font-size:clamp(7px,.70vw,9.5px);
+    font-weight:850;
+    letter-spacing:.145em;
+    text-transform:uppercase;
+    white-space:nowrap;
+    text-shadow:0 0 1px rgba(255,255,255,.68),0 0 8px rgba(255,65,89,.42),0 0 18px rgba(174,8,37,.20);
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-live{
+    margin-top:clamp(12px,1.1vw,18px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-percent{
+    color:#fff1ed;
+    font-size:clamp(26px,2.7vw,40px)!important;
+    font-weight:920;
+    line-height:1;
+    letter-spacing:.075em;
+    white-space:nowrap;
+    text-shadow:0 0 1px rgba(255,255,255,.96),0 0 3px rgba(255,245,241,.72),0 0 8px rgba(255,82,100,.82),0 0 19px rgba(216,17,51,.54),0 0 34px rgba(126,0,24,.28);
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-glyphs{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    margin-top:8px;
+    color:#7a303a;
+    font-size:12px;
+    text-shadow:none;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-glyphs b{
+    color:#ff6474;
+    font-size:20px;
+    text-shadow:0 0 4px rgba(255,107,120,.56),0 0 12px rgba(222,22,54,.48),0 0 24px rgba(124,0,23,.24);
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-state{
+    margin-top:9px;
+    color:#f4e1e0;
+    font-size:clamp(7px,.68vw,9.5px)!important;
+    font-weight:900;
+    line-height:1.30;
+    letter-spacing:.13em!important;
+    text-transform:uppercase;
+    white-space:pre-line;
+    text-align:center;
+    text-shadow:0 0 1px rgba(255,255,255,.64),0 0 7px rgba(255,70,91,.38),0 0 15px rgba(176,8,37,.20);
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-command-deck{
+    width:min(680px,82%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-top:-2px;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-question{
+    margin:0 0 9px;
+    color:#fff8f4;
+    font-size:clamp(15px,1.12vw,18px);
+    font-weight:850;
+    letter-spacing:.005em;
+    text-align:center;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    white-space:nowrap;
+    text-shadow:0 0 1px rgba(255,255,255,.74),0 0 8px rgba(255,69,91,.26),0 0 18px rgba(162,7,34,.14);
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-question::before,
+  #agentCryptoOperatorDashboard406384 .confirm-question::after{
+    content:"";
+    display:block;
+    width:64px;
+    height:1px;
+    margin:0;
+    background:linear-gradient(90deg,transparent,rgba(129,43,53,.62));
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-question::after{
+    transform:scaleX(-1);
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-safety{
+    width:100%;
+    max-width:none;
+    margin:0;
+    padding:10px 16px 9px;
+    border-radius:14px;
+    border:1px solid rgba(118,44,53,.18);
+    background:linear-gradient(180deg,rgba(255,255,255,.014),rgba(255,255,255,.006));
+    color:#a79c98;
+    font-size:10.5px;
+    line-height:1.46;
+    font-weight:690;
+    text-align:center;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.010);
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-safety span{
+    display:block;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-safety span:nth-child(1),
+  #agentCryptoOperatorDashboard406384 .confirm-safety span:nth-child(2){
+    color:#b8aca7;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-safety span:nth-child(3),
+  #agentCryptoOperatorDashboard406384 .confirm-safety span:nth-child(4){
+    display:inline-flex;
+    margin:5px 4px 0;
+    padding:3px 9px;
+    border-radius:999px;
+    border:1px solid rgba(132,50,60,.18);
+    color:#9c666c;
+    background:rgba(79,16,27,.10);
+    font-size:9px;
+    letter-spacing:.055em;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-actions{
+    width:auto;
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-top:12px;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-action{
+    min-width:160px;
+    height:42px;
+    padding:0 22px;
+    border-radius:999px;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:.11em;
+    transition:transform .14s ease,filter .14s ease,border-color .14s ease,background .14s ease,box-shadow .14s ease;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-action.cancel{
+    color:#c4bbb6;
+    border:1px solid rgba(182,173,166,.20);
+    background:linear-gradient(180deg,rgba(255,255,255,.038),rgba(255,255,255,.020));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.022);
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-action.confirm{
+    color:#e4ced0;
+    border:1px solid rgba(154,49,60,.52);
+    background:linear-gradient(180deg,rgba(104,23,36,.88),rgba(52,10,18,.96));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.028),0 0 18px rgba(88,14,27,.11);
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-action:hover{
+    transform:translateY(-1px);
+    filter:brightness(1.065);
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-action:active{
+    transform:translateY(0);
+  }
+
+  @media (max-height:760px){
+    #agentCryptoOperatorDashboard406384 .redivider-confirm-modal{
+      --rv-footer-h:146px;
+      padding-top:8px;
+      padding-bottom:12px;
+    }
+    #agentCryptoOperatorDashboard406384 .confirm-command-deck{
+      margin-top:-8px;
+    }
+    #agentCryptoOperatorDashboard406384 .confirm-safety{
+      padding:8px 14px;
+      line-height:1.38;
+    }
+    #agentCryptoOperatorDashboard406384 .confirm-actions{
+      margin-top:9px;
+    }
+    #agentCryptoOperatorDashboard406384 .confirm-action{
+      height:39px;
+    }
+  }
+}
+
+/* Compact/mobile owner: no PNG request. */
+@media (max-width:899px){
+  #agentCryptoOperatorDashboard406384 .redivider-confirm-overlay{
+    padding:10px;
+    background:rgba(1,4,7,.76);
+    backdrop-filter:blur(5px) saturate(78%);
+  }
+
+  #agentCryptoOperatorDashboard406384 .redivider-confirm-modal{
+    width:calc(100vw - 20px);
+    max-height:calc(100dvh - 20px);
+    overflow:auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:18px 14px 16px;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-hud{
+    width:100%;
+    height:210px;
+    margin:0 auto 10px;
+    position:relative;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-hud-art{
+    display:none!important;
+    background-image:none!important;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-hud-copy{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:210px;
+    height:210px;
+    border-radius:50%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:7px 12px 0;
+    background:radial-gradient(circle at 50% 42%,rgba(116,13,26,.22),rgba(13,9,12,.97) 62%,rgba(4,5,7,.995));
+    border:12px solid rgba(176,30,46,.80);
+    box-shadow:0 0 0 1px rgba(177,31,46,.18),0 0 24px rgba(138,12,30,.20),inset 0 0 28px rgba(0,0,0,.62);
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-eyebrow{
+    margin:0 0 5px;
+    color:#b6aca9;
+    font-size:8px;
+    font-weight:1000;
+    letter-spacing:.20em;
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-title{
+    margin:0;
+    color:#fff9f5;
+    font-size:22px;
+    font-weight:1000;
+    line-height:1;
+    letter-spacing:.13em;
+    white-space:nowrap;
+    text-shadow:0 0 1px rgba(255,255,255,1),0 0 5px rgba(255,244,241,.82),0 0 11px rgba(255,76,96,.72),0 0 23px rgba(210,18,49,.44);
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-subtitle{
+    margin:5px 0 0;
+    color:#9d777b;
+    font-size:7.5px;
+    font-weight:900;
+    letter-spacing:.10em;
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-live{
+    margin-top:12px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-percent{
+    color:#fff0ec;
+    font-size:26px!important;
+    font-weight:1000;
+    line-height:1;
+    letter-spacing:.10em;
+    white-space:nowrap;
+    text-shadow:0 0 1px rgba(255,255,255,1),0 0 5px rgba(255,245,241,.86),0 0 10px rgba(255,82,100,.78),0 0 22px rgba(216,17,51,.46);
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-glyphs{
+    display:flex;
+    gap:11px;
+    margin-top:7px;
+    align-items:center;
+    color:#8c2631;
+    font-size:12px;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-glyphs b{
+    color:#c32d3b;
+    font-size:20px;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-state{
+    margin-top:7px;
+    color:#f4e1e0;
+    font-size:7px!important;
+    font-weight:1000;
+    line-height:1.25;
+    letter-spacing:.10em!important;
+    text-transform:uppercase;
+    white-space:pre-line;
+    text-align:center;
+    text-shadow:0 0 1px rgba(255,255,255,.58),0 0 7px rgba(255,70,91,.34),0 0 14px rgba(176,8,37,.18);
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-command-deck{
+    width:100%;
+    margin-top:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-question{
+    margin:0 auto 12px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#f1ece8;
+    font-size:15px;
+    font-weight:900;
+    white-space:nowrap;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-question::before,
+  #agentCryptoOperatorDashboard406384 .confirm-question::after{
+    content:"";
+    display:block;
+    width:32px;
+    height:1px;
+    margin:0;
+    background:linear-gradient(90deg,transparent,rgba(174,35,49,.58));
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-question::after{
+    transform:scaleX(-1);
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-safety{
+    width:100%;
+    max-width:none;
+    margin:0;
+    padding:12px 16px;
+    border-radius:14px;
+    border:1px solid rgba(149,39,51,.20);
+    background:rgba(255,255,255,.018);
+    color:#b49a9e;
+    font-size:10.5px;
+    line-height:1.48;
+    text-align:center;
+    font-weight:800;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-safety span{
+    display:block;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-safety span:nth-child(3),
+  #agentCryptoOperatorDashboard406384 .confirm-safety span:nth-child(4){
+    display:inline-flex;
+    margin:6px 3px 0;
+    padding:3px 8px;
+    border-radius:999px;
+    border:1px solid rgba(132,50,60,.18);
+    font-size:9px;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-actions{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-top:12px;
+  }
+
+  #agentCryptoOperatorDashboard406384 .confirm-action{
+    width:100%;
+    height:42px;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  #agentCryptoOperatorDashboard406384 .confirm-action{
+    transition:none!important;
+  }
+}

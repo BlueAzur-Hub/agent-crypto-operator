@@ -22,7 +22,7 @@ Engine: Market Core 38.15.11
 
 ## Architecture
 
-The legacy `aether-observatory-background-406032.webp` is still present, but only at low opacity as a decorative `cover` backplate. It no longer determines card coordinates, aspect ratio or window dimensions. CSS Grid and container queries own presentation.
+The legacy `aether-observatory-background.webp` is still present, but only at low opacity as a decorative `cover` backplate. It no longer determines card coordinates, aspect ratio or window dimensions. CSS Grid and container queries own presentation.
 
 ## Preserved
 

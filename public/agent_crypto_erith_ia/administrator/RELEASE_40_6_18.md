@@ -2,7 +2,7 @@
 
 - Parent: `40.6.17`
 - Market Core `38.15.11` protected / unchanged.
-- Changed runtime owner: `js/strategy-a-auto-lifecycle-bridge-404297.js`.
+- Changed runtime owner: `js/strategy-a-auto-lifecycle-bridge.js`.
 - External `null`, blank, boolean, missing or invalid numerics stay `null`/UNKNOWN.
 - Missing entry fee can no longer become `0` to fabricate `authorized_notional - fee`.
 - Price×quantity remains a valid direct asset-notional proof even when fee/authorized notional are unknown.

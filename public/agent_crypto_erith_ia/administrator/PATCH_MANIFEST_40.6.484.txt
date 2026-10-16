@@ -1,0 +1,43 @@
+AGENT-CRYPTO 40.6.484 — ORACLE EVIDENCE EXISTING BRIDGE INTEGRATION
+
+ADDED
+.github/scripts/agent_crypto_oracle_evidence_existing_bridge_test_406484.py
+.github/workflows/agent-crypto-package-406484.yml
+coordination/inter_ai_dialogues/agent_crypto/BRIDGE_R16_V1_9_12_ORACLE_EVIDENCE_SOURCE_LOCK_40.6.484.md
+public/agent_crypto_erith_ia/administrator/js/oracle-evidence-existing-bridge-integration.js
+public/agent_crypto_erith_ia/administrator/ORACLE_EVIDENCE_EXISTING_BRIDGE_INTEGRATION_40.6.484.md
+public/agent_crypto_erith_ia/administrator/ORACLE_EVIDENCE_EXISTING_BRIDGE_TEST_40.6.484.json
+public/agent_crypto_erith_ia/administrator/HANDOFF_FINAL_40.6.484.md
+public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.484.txt
+public/agent_crypto_erith_ia/administrator/index-40.6.484.html
+
+REMOVED FROM ACTIVE TREE
+public/agent_crypto_erith_ia/administrator/js/oracle-evidence-safe-bridge-ingest.js
+public/agent_crypto_erith_ia/tools/oracle_evidence_cold_bridge.py
+
+MODIFIED
+public/agent_crypto_erith_ia/administrator/index.html
+public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+public/agent_crypto_erith_ia/administrator/js/strategy-a-audit-demand-loader.js
+public/agent_crypto_erith_ia/administrator/build.json
+public/agent_crypto_erith_ia/administrator/RELEASE.md
+public/agent_crypto_erith_ia/administrator/HANDOFF.md
+public/agent_crypto_erith_ia/data/oracle_evidence/manifest.json
+public/agent_crypto_erith_ia/data/oracle_evidence/README.md
+
+PRESERVED
+40.6.482 Oracle Evidence tiered-storage foundation
+Oracle Evidence IndexedDB rows/schema
+Private Backend V1.4.2 / 8790 read-only
+Market Core 38.15.11
+Strategy A business logic / Solo Progression 1000 EUR
+Oracle Math
+Atlas CURRENT
+Aether
+Lecture Technique
+Web Classique
+Seven Vault 8780
+real orders
+
+SUPERSEDED
+40.6.483 standalone 8791 transport — not installed by operator

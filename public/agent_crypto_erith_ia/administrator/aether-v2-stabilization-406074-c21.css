@@ -1,0 +1,63 @@
+/* Agent-Crypto @erith.IA — 40.6.74 C2.1
+   AETHER WATCH V2 — RESPONSIVE STABILIZATION
+   Loaded after the historical Aether cascade and Candidate 2 spatial contract.
+   Purpose: let the enlarged V2 cells use their new room before tertiary data collapses.
+   Presentation only: no geometry owner, Market Core, Window Manager, network or storage change. */
+
+@container aether49 (max-width: 1120px) {
+  html[data-aether-backplate-v2="ready"] .aether46-card header b {
+    display:block !important;
+    max-width:42% !important;
+    font-size:clamp(7px,.44cqw,8px) !important;
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+  }
+
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-sub span {
+    display:inline !important;
+    max-width:58% !important;
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+  }
+
+  html[data-aether-backplate-v2="ready"] .aether46-event-row:nth-child(3) {
+    display:grid !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-event-row:nth-child(n+4) {
+    display:none !important;
+  }
+}
+
+/* The V2 backplate bought real space. Keep three recent events and the secondary
+   status lane down to a genuinely compact stage; collapse only after that. */
+@container aether49 (max-width: 900px) {
+  html[data-aether-backplate-v2="ready"] .aether46-card header b {
+    display:block !important;
+    max-width:38% !important;
+    font-size:7px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-sub span {
+    display:inline !important;
+    max-width:52% !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-event-row:nth-child(3) {
+    display:grid !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-event-row:nth-child(n+4) {
+    display:none !important;
+  }
+}
+
+@container aether49 (max-width: 760px) {
+  html[data-aether-backplate-v2="ready"] .aether46-card header b {
+    display:none !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-sub span {
+    display:none !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-event-row:nth-child(n+3) {
+    display:none !important;
+  }
+}

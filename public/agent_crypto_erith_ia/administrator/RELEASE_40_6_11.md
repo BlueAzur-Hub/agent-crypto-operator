@@ -17,7 +17,7 @@ La source reste la valeur Oracle déjà rendue dans `#atlasOracleBull` (`Force N
 Le texte de régime (`MIXTE`, etc.) et toutes les valeurs numériques restent autoritaires. La couleur est une aide de lecture, **pas un signal de trading**.
 
 ### Chirurgie 40.6.11
-- `oracle-presentation-405010.css` reste le propriétaire de présentation Oracle ; ajout d'un bloc colorimétrique strictement scoped à `.atlas-oracle-readout`.
+- `oracle-presentation.css` reste le propriétaire de présentation Oracle ; ajout d'un bloc colorimétrique strictement scoped à `.atlas-oracle-readout`.
 - Nouveau lecteur passif `js/oracle-semantic-bias-406011.js` : il observe uniquement le texte déjà rendu de `#atlasOracleBull` et pose `data-oracle-bias-state`.
 - Aucun timer, fetch, WebSocket, storage ou calcul prédictif ajouté.
 - Les cartes natives **Oracle hausse** et **Oracle baisse** gardent leurs couleurs propres vert/rouge.

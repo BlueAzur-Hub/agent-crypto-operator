@@ -1,0 +1,41 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.501
+Release: MARKET MICROSCOPE FULLSPACE ZOOM + DEPTH DOCK
+Parent: 40.6.500
+Market Core: 38.15.11 UNCHANGED
+
+MODIFIED
+M public/agent_crypto_erith_ia/administrator/index.html
+M public/agent_crypto_erith_ia/administrator/build.json
+M public/agent_crypto_erith_ia/administrator/js/market-microscope-candles-406498.js
+M public/agent_crypto_erith_ia/administrator/js/okx-microstructure-406499.js
+M public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+
+ADDED
+A public/agent_crypto_erith_ia/administrator/MARKET_MICROSCOPE_UX_40.6.501.md
+A public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.501.txt
+A .github/scripts/agent_crypto_market_microscope_ux_guard_406501.py
+A .github/workflows/agent-crypto-package-406501.yml
+
+FEATURES
+- full-space candle plot
+- wheel zoom
+- drag pan
+- double-click/reset
+- time + price labels
+- depth/order-book dock visible inside chart shell
+- operator help for BID/ASK/SPREAD/IMBALANCE/DEPTH/RPI
+
+UNCHANGED
+- 40.6.500 local backend transport
+- Backend V1.4.4 / Bridge V1.9.13
+- Market Core
+- Strategy / Cost Gate
+- Oracle
+- Aether
+- Lecture Technique
+- Web Classique
+- no real order
+- no wallet
+- no private exchange API
+
+TERRAIN: PENDING FIREFOX RYZEN

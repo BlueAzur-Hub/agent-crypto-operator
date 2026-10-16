@@ -1,0 +1,46 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.530
+Parent: 40.6.529
+Release: NEW LISTINGS · NATIVE MARKET INTEGRATION
+
+NEW:
+- js/new-listings-native-market-406530.js
+- index-40.6.530.html
+- docs / guard / package workflow
+
+CHANGED:
+- js/new-listings-live-asset-406529.js
+  * preserve quote currency string
+  * store live ticker under marketTicker
+  * add nativeMarket load option
+- js/market-microscope-candles-406498.js
+  * native Ligne no longer forced open by external context
+  * external candles load only when Bougies is selected
+- index.html / build.json / loader / Atlas identity
+
+REUSED:
+- existing Market search/table
+- existing Fiche
+- existing main Graphique Ligne / AtlasExternalChart
+- existing Bougies owner
+- existing Profondeur owner
+- existing Quote Currency / USD owners
+
+PROTECTED:
+- app.js
+- Market Core 38.15.11
+- js/new-listings.js 40.6.528 registry/Radar owner
+- js/okx-local-backend-transport.js
+- js/okx-microstructure-406499.js
+- js/graph-native-usd-406520.js
+- js/market-fiche-display-406518.js
+- Strategy / Oracle / Aether / Target Flow
+
+NO:
+- state.coins injection
+- ranking mutation
+- duplicate graph/Fiche/depth
+- private API
+- order / wallet
+- new storage owner
+- recurring timer
+- MutationObserver

@@ -1,0 +1,294 @@
+/* Agent-Crypto @erith.IA — 40.6.74 Candidate 2
+   AETHER WATCH V2 — BACKPLATE SPATIAL CONTRACT
+   Parent validated runtime: Administrator 40.6.73 + R5.
+
+   This sheet is intentionally dormant until the V2 backplate asset is decoded.
+   If the asset is absent, the validated 40.6.73 Aether geometry remains untouched.
+
+   V2 intent:
+   - new 1672×941 Aether backplate with larger empty capsules;
+   - preserve live DOM/data owners;
+   - use the added space instead of forcing larger type into the old geometry;
+   - keep 20–30% practical breathing room for future Aether data;
+   - no Market Core / Window Manager / network / storage ownership change.
+*/
+
+html[data-aether-backplate-v2="ready"] .aether46-stage {
+  background-image:url('./assets/aether/aether-observatory-master-v2.png') !important;
+}
+
+/* --------------------------------------------------------------------------
+   V2 painted geometry — measured against the new 1672×941 generated master.
+   The card boxes follow the larger capsules rather than the old 40.6.49 artwork.
+   -------------------------------------------------------------------------- */
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="system"] {
+  left:14.75% !important; top:16.00% !important; width:21.40% !important; height:14.45% !important;
+  padding:1.00% 1.05% .82% 5.15% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="sources"] {
+  left:15.00% !important; top:32.55% !important; width:20.75% !important; height:15.55% !important;
+  padding:1.02% 1.00% .84% 5.00% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="atlas"] {
+  left:14.90% !important; top:50.10% !important; width:21.00% !important; height:16.25% !important;
+  padding:1.02% 1.00% .86% 5.05% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="convergence"] {
+  left:36.45% !important; top:7.15% !important; width:25.90% !important; height:14.70% !important;
+  padding:.96% 1.12% .80% 5.80% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="divergence"] {
+  left:62.85% !important; top:15.85% !important; width:22.05% !important; height:14.70% !important;
+  padding:1.00% 1.05% .82% 5.20% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="market"] {
+  left:63.00% !important; top:32.45% !important; width:22.15% !important; height:15.85% !important;
+  padding:1.00% 1.00% .84% 5.05% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="events"] {
+  left:62.95% !important; top:50.00% !important; width:21.90% !important; height:16.45% !important;
+  padding:1.00% 1.00% .86% 5.05% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="oracle"] {
+  left:22.85% !important; top:69.00% !important; width:23.60% !important; height:14.20% !important;
+  padding:.94% 1.00% .78% 5.30% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="weather"] {
+  left:52.10% !important; top:68.95% !important; width:23.65% !important; height:14.35% !important;
+  padding:.94% 1.00% .78% 5.20% !important;
+}
+
+/* The new top-right strip has more room but the Earth globe remains artwork-owned. */
+html[data-aether-backplate-v2="ready"] .aether46-system-banner {
+  left:68.15% !important; top:3.20% !important; width:22.80% !important; height:6.55% !important;
+  padding:.48cqw .86cqw .44cqw 3.10cqw !important;
+}
+
+/* --------------------------------------------------------------------------
+   V2 typography contract — readable first glance, no forced gigantism.
+   Larger cells buy the room; type stays disciplined and future-proof.
+   -------------------------------------------------------------------------- */
+html[data-aether-backplate-v2="ready"] .aether46-card header {
+  gap:clamp(5px,.42cqw,8px) !important;
+  margin-bottom:clamp(4px,.40cqw,7px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card header span {
+  font-size:clamp(11px,.82cqw,15px) !important;
+  line-height:1.02 !important;
+  font-weight:900 !important;
+  letter-spacing:.035em !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.90),0 0 9px rgba(55,210,255,.14) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card header b {
+  font-size:clamp(8px,.50cqw,10px) !important;
+  max-width:46% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card footer {
+  font-size:clamp(8px,.48cqw,10px) !important;
+  line-height:1.15 !important;
+}
+
+/* System: three primary machine values. */
+html[data-aether-backplate-v2="ready"] .aether46-system-metrics {
+  gap:.48cqw !important;
+  margin:.18cqw 0 .48cqw !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-system-metrics small {
+  font-size:clamp(8px,.49cqw,10px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-system-metrics strong {
+  font-size:clamp(13px,.88cqw,17px) !important;
+}
+
+/* Sources: use the new vertical room; 2×2 is more readable than four tiny columns. */
+html[data-aether-backplate-v2="ready"] .aether46-source-metrics {
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  column-gap:.62cqw !important;
+  row-gap:.42cqw !important;
+  margin:.14cqw 0 .44cqw !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-source-metrics div {
+  border-right:0 !important;
+  padding-right:.22cqw !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-source-metrics small {
+  font-size:clamp(8px,.48cqw,10px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-source-metrics strong {
+  font-size:clamp(11px,.70cqw,14px) !important;
+}
+
+/* Atlas: score leads, state and coverage remain visible instead of being crushed. */
+html[data-aether-backplate-v2="ready"] .aether46-atlas-main {
+  gap:.62cqw !important;
+  margin-top:.12cqw !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-main > strong {
+  font-size:clamp(20px,1.32cqw,27px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-main > span {
+  font-size:clamp(10px,.61cqw,12px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-sub {
+  margin-top:.58cqw !important;
+  gap:.58cqw !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-sub b {
+  font-size:clamp(10px,.65cqw,13px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-sub span {
+  font-size:clamp(8px,.50cqw,10px) !important;
+}
+
+/* Convergence: generous top card, score plus two supporting lines. */
+html[data-aether-backplate-v2="ready"] .aether46-convergence-main {
+  gap:.50cqw !important;
+  margin-top:.10cqw !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-convergence-main > strong {
+  font-size:clamp(23px,1.52cqw,31px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-convergence-main > span {
+  font-size:clamp(10px,.68cqw,13px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="convergence"] footer {
+  margin-top:.44cqw !important;
+  font-size:clamp(9px,.56cqw,11px) !important;
+}
+
+/* Divergence: allow three deliberate lines before clipping. */
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="divergence"] p {
+  margin:.10cqw 0 .42cqw !important;
+  max-height:3.55em !important;
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:3 !important;
+  font-size:clamp(10px,.62cqw,12px) !important;
+  line-height:1.18 !important;
+}
+
+/* Market: breadth remains first glance; five coins fit in the larger V2 capsule. */
+html[data-aether-backplate-v2="ready"] .aether46-breadth {
+  gap:clamp(5px,.46cqw,8px) !important;
+  font-size:clamp(9px,.53cqw,11px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-breadth strong {
+  font-size:clamp(12px,.73cqw,15px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-coins {
+  gap:.20cqw !important;
+  margin-top:.62cqw !important;
+  padding-top:.40cqw !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-coins b {
+  font-size:clamp(8px,.48cqw,10px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-coins strong {
+  font-size:clamp(8px,.50cqw,10px) !important;
+}
+
+/* Events: use the extra height for a real mini-journal. */
+html[data-aether-backplate-v2="ready"] .aether46-events [data-aether46-events] {
+  gap:.30cqw !important;
+  max-height:6.0cqw !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-event-row {
+  grid-template-columns:2.8cqw 3.2cqw minmax(0,1fr) !important;
+  gap:.34cqw !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-event-row time,
+html[data-aether-backplate-v2="ready"] .aether46-event-row b,
+html[data-aether-backplate-v2="ready"] .aether46-event-row span {
+  font-size:clamp(8px,.48cqw,10px) !important;
+}
+
+/* Oracle: 2×2 makes the larger bottom capsule useful and leaves reserve space. */
+html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics {
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  column-gap:.72cqw !important;
+  row-gap:.40cqw !important;
+  margin-top:.12cqw !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics div {
+  border-right:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics small {
+  font-size:clamp(8px,.48cqw,10px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics strong {
+  font-size:clamp(11px,.68cqw,14px) !important;
+}
+
+/* Weather: keep the direct three-value glance, now with comfortable spacing. */
+html[data-aether-backplate-v2="ready"] .aether46-weather-metrics {
+  grid-template-columns:1.15fr .82fr 1fr !important;
+  gap:.52cqw !important;
+  margin-top:.16cqw !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-weather-metrics small {
+  font-size:clamp(8px,.48cqw,10px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-weather-metrics strong {
+  font-size:clamp(11px,.70cqw,14px) !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="weather"] footer {
+  margin-top:.48cqw !important;
+  font-size:clamp(8px,.47cqw,9px) !important;
+}
+
+/* Central live state remains below the baked AETHER identity. */
+html[data-aether-backplate-v2="ready"] .aether46-core {
+  left:40.20% !important; top:46.10% !important; width:19.60% !important; height:17.20% !important;
+  padding:.12% .82% .20% !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-core > strong {
+  font-size:clamp(27px,2.05cqw,38px) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Windowed safeguard.
+   At small Aether widths, remove secondary density before shrinking the facts.
+   -------------------------------------------------------------------------- */
+@container aether49 (max-width: 1100px) {
+  html[data-aether-backplate-v2="ready"] .aether46-card footer {
+    font-size:8px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-source-metrics {
+    row-gap:3px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-events [data-aether46-events] {
+    max-height:46px !important;
+    gap:3px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-event-row {
+    grid-template-columns:34px 42px minmax(0,1fr) !important;
+    gap:4px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-coins span:nth-child(n+4) {
+    display:none !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-coins {
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-core > footer {
+    display:none !important;
+  }
+}
+
+@container aether49 (max-width: 900px) {
+  html[data-aether-backplate-v2="ready"] .aether46-card header span {
+    font-size:10px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-card header b {
+    font-size:8px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-card footer {
+    display:none !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-events [data-aether46-events] {
+    max-height:36px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-event-row:nth-child(n+3) {
+    display:none !important;
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "agent_crypto_post_handoff_stabilization_test_evidence_v1",
+  "cascade": ["40.6.96", "40.6.97", "40.6.98"],
+  "engine": "38.15.11",
+  "tests": [
+    {"id":"js_syntax_patch","result":"PASS","command":"node --check agent-crypto-post-handoff-406096.js"},
+    {"id":"js_syntax_loader","result":"PASS","command":"node --check private-source-demand-loader.js"},
+    {"id":"strategy_auto_proof_gate_406096","result":"PASS","proof":"isolated VM: acceptance API run() called exactly once on 40.6.96"},
+    {"id":"retrospective_activation_gate_406097","result":"PASS","proof":"isolated VM: retrospective-validation.js requested on 40.6.97 and not on 40.6.96"},
+    {"id":"source_freshness_fail_closed_406098","result":"PASS","proof":"isolated VM: 20-minute-old control quotes excluded; guarded consensus insufficient; Source Intelligence downgraded to partial"},
+    {"id":"build_manifest_json","result":"PASS","command":"python -m json.tool build.json"}
+  ],
+  "runtime_invariants": {
+    "market_core_modified": false,
+    "real_order": false,
+    "automatic_order": false,
+    "wallet": false,
+    "private_exchange_api": false,
+    "new_recurring_timer": false,
+    "new_observer": false,
+    "new_storage_owner": false,
+    "retrospective_storage_write": false,
+    "strategy_forced_trade": false
+  },
+  "terrain": {
+    "40.6.95": "user-provided Firefox proof accepted",
+    "40.6.98": "final Firefox observation requested after deployment only"
+  }
+}

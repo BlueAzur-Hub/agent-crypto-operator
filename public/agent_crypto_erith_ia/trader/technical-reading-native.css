@@ -1,0 +1,27 @@
+/* Exact Technical Reading static-theme presentation transposed from Administrator 40.6.571.
+   No new geometry owner. */
+#detailPanel.atlas-tech-static-cycle{
+  --atlas-tech-accent:#59ddeb;
+  --atlas-tech-accent-soft:rgba(89,221,235,.25);
+}
+#detailPanel.atlas-tech-static-cycle[data-tech-theme="dawn"]{--atlas-tech-accent:#e9c77a;--atlas-tech-accent-soft:rgba(233,199,122,.28)}
+#detailPanel.atlas-tech-static-cycle[data-tech-theme="day"]{--atlas-tech-accent:#54dde8;--atlas-tech-accent-soft:rgba(84,221,232,.25)}
+#detailPanel.atlas-tech-static-cycle[data-tech-theme="dusk"]{--atlas-tech-accent:#e7a65e;--atlas-tech-accent-soft:rgba(231,166,94,.28)}
+#detailPanel.atlas-tech-static-cycle[data-tech-theme="night"]{--atlas-tech-accent:#6c8fc7;--atlas-tech-accent-soft:rgba(71,99,151,.30)}
+#detailPanel.atlas-tech-static-cycle[data-tech-theme="lunar"]{--atlas-tech-accent:#9bdcff;--atlas-tech-accent-soft:rgba(116,191,255,.30)}
+#detailPanel .atlas-tech-static-toolbar{
+  display:flex;align-items:center;gap:4px;flex-wrap:wrap;padding:5px 7px;margin:0 0 5px;
+  border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(3,10,18,.48);backdrop-filter:blur(7px);
+}
+#detailPanel .atlas-tech-static-toolbar>small{margin-right:auto;color:var(--atlas-tech-accent);font:900 8px/1 system-ui,sans-serif;letter-spacing:.10em;text-transform:uppercase;white-space:nowrap}
+#detailPanel .atlas-tech-static-toolbar button{appearance:none;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:4px 6px;background:rgba(255,255,255,.035);color:#c9d5dc;font:850 8px/1 system-ui,sans-serif;cursor:pointer}
+#detailPanel .atlas-tech-static-toolbar button.is-active{color:#061018;border-color:var(--atlas-tech-accent);background:var(--atlas-tech-accent);box-shadow:0 0 12px var(--atlas-tech-accent-soft)}
+#detailPanel .atlas-tech-static-toolbar button:hover,#detailPanel .atlas-tech-static-toolbar button:focus-visible{border-color:var(--atlas-tech-accent);color:#fff;outline:none}
+#detailPanel .detail-project-visual.admin-tech-r3{isolation:isolate!important}
+#detailPanel .detail-project-visual.admin-tech-r3>.atlas-tech-static-tint{pointer-events:none!important;background:linear-gradient(180deg,rgba(2,7,14,.02),rgba(2,8,17,.18))!important;opacity:.35}
+#detailPanel[data-tech-theme="dawn"] .atlas-tech-static-tint{background:linear-gradient(180deg,rgba(255,218,169,.08),rgba(95,52,62,.12))!important}
+#detailPanel[data-tech-theme="day"] .atlas-tech-static-tint{background:linear-gradient(180deg,rgba(117,215,229,.05),rgba(20,72,83,.08))!important}
+#detailPanel[data-tech-theme="dusk"] .atlas-tech-static-tint{background:linear-gradient(180deg,rgba(231,166,94,.06),rgba(53,37,75,.16))!important}
+#detailPanel[data-tech-theme="night"] .atlas-tech-static-tint{background:linear-gradient(180deg,rgba(10,24,48,.08),rgba(2,7,18,.22))!important}
+#detailPanel[data-tech-theme="lunar"] .atlas-tech-static-tint{background:radial-gradient(circle at 50% 12%,rgba(190,224,255,.10),transparent 38%),linear-gradient(180deg,rgba(25,73,126,.04),rgba(4,17,38,.16))!important}
+@media(max-width:760px){#detailPanel .atlas-tech-static-toolbar>small{width:100%;margin:0 0 2px}#detailPanel .atlas-tech-static-toolbar button{padding:4px 5px;font-size:7px}}

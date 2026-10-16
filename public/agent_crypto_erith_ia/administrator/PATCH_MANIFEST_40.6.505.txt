@@ -1,0 +1,46 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.505
+Release: DETACHABLE DEPTH GLASS SURFACE
+Parent: 40.6.504
+Market Core: 38.15.11 UNCHANGED
+
+MODIFIED
+M public/agent_crypto_erith_ia/administrator/index.html
+M public/agent_crypto_erith_ia/administrator/build.json
+M public/agent_crypto_erith_ia/administrator/js/okx-microstructure-406499.js
+M public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+
+ADDED
+A public/agent_crypto_erith_ia/administrator/index-40.6.505.html
+A public/agent_crypto_erith_ia/administrator/OKX_DEPTH_DETACHABLE_GLASS_40.6.505.md
+A public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.505.txt
+A .github/scripts/agent_crypto_okx_depth_detachable_guard_406505.py
+A .github/workflows/agent-crypto-package-406505.yml
+
+UX
+- docked glass surface calqued on Lecture Technique
+- image remains visible behind glass
+- native Lecture Technique text/widgets subdued behind
+- Décrocher ↗ -> document-level floating window
+- detached window restores full native Lecture Technique
+- draggable detached header
+- resizable detached window
+- viewport-bounded movement
+- Replacer ▣ -> dock back onto Lecture Technique
+
+BEHAVIOR PRESERVED
+- local Backend 8790 /orderbook
+- 2 s polling only while open
+- pause when browser document hidden
+- no direct browser OKX
+- no private API / wallet / real order
+
+PROTECTED
+- Market Core 38.15.11
+- Strategy / Cost Gate
+- Oracle / Aether / Atlas CURRENT
+- Lecture Technique logic
+- Web Classique
+- Backend / Bridge
+- Candles zoom/pan
+
+TERRAIN: PENDING FIREFOX RYZEN

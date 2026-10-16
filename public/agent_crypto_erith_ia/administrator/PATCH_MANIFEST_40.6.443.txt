@@ -1,0 +1,27 @@
+AGENT-CRYPTO EXECUTION COST RESTORE MANIFEST — 40.6.443
+==========================================================
+
+MODIFIED
+--------
+administrator/js/strategy-a-audit-demand-loader.js
+administrator/js/strategy-a-execution-cost-truth.js
+administrator/index.html / index-40.6.443.html
+administrator/build.json
+administrator/RELEASE.md
+administrator/HANDOFF.md
+
+PROTECTED / BYTE-UNCHANGED
+--------------------------
+style.css                                b8254bb9bdcf3485d28fd5c9006d2eb8f26f1e3f
+app.js                                  0988c742c62997b022d75a511561302b170d7972
+js/post-boot-runtime-loader.js          3a97ba785f91a16fb87e36164a7559d544642ef9
+js/views/private-source-demand-loader.js 5f363046c9a07a5e7e9a92511dd6958d3cec7cd2
+js/views/private-backend-sources.js     55e3c282b3caf5f22642b833574b4ff83b183869
+
+CONTRACT
+--------
+Execution Cost Truth: Simulation-demand only.
+No post-boot standard residency.
+Kraken: manual public read-only.
+OKX: existing Source Truth CEX / Backend local.
+No order, wallet, key, storage or recurring timer.

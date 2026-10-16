@@ -1,0 +1,56 @@
+{
+  "schema": "agent_crypto_strategy_tradus_comparative_intelligence_v1",
+  "build": "40.6.115",
+  "parent_build": "40.6.114",
+  "market_core": "38.15.11",
+  "owner": "js/strategy-tradus-comparative-intelligence.js",
+  "visible_anchor": "#tradusShadow406066",
+  "visible_position": "immediately_after_existing_tradus_shadow_panel",
+  "inputs": [
+    "AgentCryptoTradusStrategyReconcile406105.readStrategyA",
+    "AgentCryptoTradusStrategyFailClosed.compare",
+    "AgentCryptoTradusShadow.read",
+    "AgentCryptoTradusShadowLedger406066.summary",
+    "AgentCryptoTradusPaperObservability406068.stats"
+  ],
+  "visible_outputs": {
+    "strategy_a_state": true,
+    "tradus_state": true,
+    "current_comparison": true,
+    "plain_french_explanation": true,
+    "comparative_memory_summary": true,
+    "tradus_paper_archive_summary": true,
+    "paper_archive_not_strategy_a_proof_warning": true
+  },
+  "fail_closed": {
+    "stale_tradus_is_not_comparable": true,
+    "unknown_strategy_a_is_not_wait": true,
+    "wait_plus_directional_tradus_is_disagreement": true,
+    "wait_plus_no_trade_is_prudent_descriptive_agreement": true,
+    "paper_history_is_not_future_profitability_proof": true
+  },
+  "protections": {
+    "market_core_modified": false,
+    "strategy_a_engine_modified": false,
+    "tradus_engine_modified": false,
+    "oracle_modified": false,
+    "atlas_current_modified": false,
+    "aether_modified": false,
+    "graph_modified": false,
+    "lecture_technique_modified": false,
+    "source_truth_modified": false,
+    "fetch_added": false,
+    "recurring_timer_added": false,
+    "observer_added": false,
+    "storage_owner_added": false,
+    "wallet_added": false,
+    "real_order_added": false
+  },
+  "self_test": {
+    "expected": "5/5",
+    "financial_signal": false,
+    "automatic_order": false,
+    "real_order": false
+  },
+  "terrain_acceptance": "Firefox must visibly show COMPARATEUR STRATÉGIE A ↔ TRADUS below the existing TRADUS shadow panel"
+}

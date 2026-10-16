@@ -12,7 +12,7 @@
   const SOURCE="./views/operations.html";
   const host=document.getElementById("operations-view-host");
   if(!host)return;
-  const shellHtml="<section aria-labelledby=\"atlasLayoutFamily03\" class=\"atlas-layout-family atlas-layout-family-operations\">\n<span aria-hidden=\"true\" class=\"atlas-layout-family-index\">03</span>\n<div class=\"atlas-layout-family-copy\">\n<p>PARCOURS ADMINISTRATEUR</p>\n<h2 class=\"atlas-icon-heading-40290\" data-semantic-tone-40290=\"operations\" id=\"atlasLayoutFamily03\"><span aria-hidden=\"true\" class=\"atlas-heading-icon-40290\"><svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M5 5h14v14H5z\"></path><path d=\"m8 10 2 2 4-4M8 16h8\"></path></svg></span>Préparation &amp; opérations</h2>\n<span>Suivre l’état du projet, cadrer l’opérateur et préparer les accès sans action financière réelle.</span>\n</div>\n<span aria-hidden=\"true\" class=\"atlas-layout-family-signal\"></span>\n</section>\n\n<details class=\"atlas-collapse glass atlas-family-member atlas-tone-operations\" data-collapse-key=\"situation\" data-layout-family=\"operations\" data-operations-lazy-shell-40421=\"true\">\n<summary class=\"atlas-collapse-summary\">\n<span aria-hidden=\"true\" class=\"atlas-collapse-icon\">▶</span>\n<span class=\"atlas-collapse-title\">Situation du projet</span>\n<span class=\"atlas-collapse-subtitle\">Synthèse d’état</span>\n<span id=\"situation\" data-operations-lazy-anchor-40421=\"true\" aria-hidden=\"true\" style=\"display:inline-block;width:0;height:0;overflow:hidden;pointer-events:none\"></span></summary>\n<div class=\"atlas-collapse-body\" data-operations-lazy-body-40421=\"situation\" data-operations-hydration-40421=\"placeholder\"></div>\n</details>\n\n<details class=\"atlas-collapse glass atlas-family-member atlas-tone-operations\" data-collapse-key=\"questionnaire\" data-layout-family=\"operations\" data-operations-lazy-shell-40421=\"true\">\n<summary class=\"atlas-collapse-summary\">\n<span aria-hidden=\"true\" class=\"atlas-collapse-icon\">▶</span>\n<span class=\"atlas-collapse-title\">Questionnaire opérateur</span>\n<span class=\"atlas-collapse-subtitle\">Cadre humain et limites</span>\n<span id=\"questionnaire\" data-operations-lazy-anchor-40421=\"true\" aria-hidden=\"true\" style=\"display:inline-block;width:0;height:0;overflow:hidden;pointer-events:none\"></span></summary>\n<div class=\"atlas-collapse-body\" data-operations-lazy-body-40421=\"questionnaire\" data-operations-hydration-40421=\"placeholder\"></div>\n</details>\n\n<details class=\"atlas-collapse glass atlas-family-member atlas-tone-operations\" data-collapse-key=\"briefing\" data-layout-family=\"operations\" data-operations-lazy-shell-40421=\"true\">\n<summary class=\"atlas-collapse-summary\">\n<span aria-hidden=\"true\" class=\"atlas-collapse-icon\">▶</span>\n<span class=\"atlas-collapse-title\">Briefing opérateur</span>\n<span class=\"atlas-collapse-subtitle\">Lecture de contexte</span>\n<span id=\"briefing\" data-operations-lazy-anchor-40421=\"true\" aria-hidden=\"true\" style=\"display:inline-block;width:0;height:0;overflow:hidden;pointer-events:none\"></span></summary>\n<div class=\"atlas-collapse-body\" data-operations-lazy-body-40421=\"briefing\" data-operations-hydration-40421=\"placeholder\"></div>\n</details>\n\n<details class=\"atlas-collapse glass atlas-family-member atlas-tone-operations\" data-collapse-key=\"planning\" data-layout-family=\"operations\" data-operations-lazy-shell-40421=\"true\">\n<summary class=\"atlas-collapse-summary\">\n<span aria-hidden=\"true\" class=\"atlas-collapse-icon\">▶</span>\n<span class=\"atlas-collapse-title\">Plan exchange / accès déporté</span>\n<span class=\"atlas-collapse-subtitle\">Préparation hors GitHub Pages</span>\n<span id=\"planning\" data-operations-lazy-anchor-40421=\"true\" aria-hidden=\"true\" style=\"display:inline-block;width:0;height:0;overflow:hidden;pointer-events:none\"></span></summary>\n<div class=\"atlas-collapse-body\" data-operations-lazy-body-40421=\"planning\" data-operations-hydration-40421=\"placeholder\"></div>\n</details>\n";
+  const shellHtml="<section aria-labelledby=\"atlasLayoutFamily03\" class=\"atlas-layout-family atlas-layout-family-operations\">\n<span aria-hidden=\"true\" class=\"atlas-layout-family-index\">03</span>\n<div class=\"atlas-layout-family-copy\">\n<p>PARCOURS ADMINISTRATEUR</p>\n<h2 class=\"atlas-icon-heading\" data-semantic-tone=\"operations\" id=\"atlasLayoutFamily03\"><span aria-hidden=\"true\" class=\"atlas-heading-icon\"><svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M5 5h14v14H5z\"></path><path d=\"m8 10 2 2 4-4M8 16h8\"></path></svg></span>Préparation &amp; opérations</h2>\n<span>Suivre l’état du projet, cadrer l’opérateur et préparer les accès sans action financière réelle.</span>\n</div>\n<span aria-hidden=\"true\" class=\"atlas-layout-family-signal\"></span>\n</section>\n\n<details class=\"atlas-collapse glass atlas-family-member atlas-tone-operations\" data-collapse-key=\"situation\" data-layout-family=\"operations\" data-operations-lazy-shell=\"true\">\n<summary class=\"atlas-collapse-summary\">\n<span aria-hidden=\"true\" class=\"atlas-collapse-icon\">▶</span>\n<span class=\"atlas-collapse-title\">Situation du projet</span>\n<span class=\"atlas-collapse-subtitle\">Synthèse d’état</span>\n<span id=\"situation\" data-operations-lazy-anchor=\"true\" aria-hidden=\"true\" style=\"display:inline-block;width:0;height:0;overflow:hidden;pointer-events:none\"></span></summary>\n<div class=\"atlas-collapse-body\" data-operations-lazy-body-40421=\"situation\" data-operations-hydration=\"placeholder\"></div>\n</details>\n\n<details class=\"atlas-collapse glass atlas-family-member atlas-tone-operations\" data-collapse-key=\"questionnaire\" data-layout-family=\"operations\" data-operations-lazy-shell=\"true\">\n<summary class=\"atlas-collapse-summary\">\n<span aria-hidden=\"true\" class=\"atlas-collapse-icon\">▶</span>\n<span class=\"atlas-collapse-title\">Questionnaire opérateur</span>\n<span class=\"atlas-collapse-subtitle\">Cadre humain et limites</span>\n<span id=\"questionnaire\" data-operations-lazy-anchor=\"true\" aria-hidden=\"true\" style=\"display:inline-block;width:0;height:0;overflow:hidden;pointer-events:none\"></span></summary>\n<div class=\"atlas-collapse-body\" data-operations-lazy-body-40421=\"questionnaire\" data-operations-hydration=\"placeholder\"></div>\n</details>\n\n<details class=\"atlas-collapse glass atlas-family-member atlas-tone-operations\" data-collapse-key=\"briefing\" data-layout-family=\"operations\" data-operations-lazy-shell=\"true\">\n<summary class=\"atlas-collapse-summary\">\n<span aria-hidden=\"true\" class=\"atlas-collapse-icon\">▶</span>\n<span class=\"atlas-collapse-title\">Briefing opérateur</span>\n<span class=\"atlas-collapse-subtitle\">Lecture de contexte</span>\n<span id=\"briefing\" data-operations-lazy-anchor=\"true\" aria-hidden=\"true\" style=\"display:inline-block;width:0;height:0;overflow:hidden;pointer-events:none\"></span></summary>\n<div class=\"atlas-collapse-body\" data-operations-lazy-body-40421=\"briefing\" data-operations-hydration=\"placeholder\"></div>\n</details>\n\n<details class=\"atlas-collapse glass atlas-family-member atlas-tone-operations\" data-collapse-key=\"planning\" data-layout-family=\"operations\" data-operations-lazy-shell=\"true\">\n<summary class=\"atlas-collapse-summary\">\n<span aria-hidden=\"true\" class=\"atlas-collapse-icon\">▶</span>\n<span class=\"atlas-collapse-title\">Plan exchange / accès déporté</span>\n<span class=\"atlas-collapse-subtitle\">Préparation hors GitHub Pages</span>\n<span id=\"planning\" data-operations-lazy-anchor=\"true\" aria-hidden=\"true\" style=\"display:inline-block;width:0;height:0;overflow:hidden;pointer-events:none\"></span></summary>\n<div class=\"atlas-collapse-body\" data-operations-lazy-body-40421=\"planning\" data-operations-hydration=\"placeholder\"></div>\n</details>\n";
   const KEYS=Object.freeze(["situation", "questionnaire", "briefing", "planning"]);
   const ANCHORS=Object.freeze({"situation": "situation", "questionnaire": "questionnaire", "briefing": "briefing", "planning": "planning"});
   let sourcePromise=null;
@@ -25,7 +25,7 @@
   host.insertAdjacentHTML("beforebegin",shellHtml);
   host.remove();
 
-  function detailFor(key){return document.querySelector(`details[data-operations-lazy-shell-40421="true"][data-collapse-key="${key}"]`);}
+  function detailFor(key){return document.querySelector(`details[data-operations-lazy-shell="true"][data-collapse-key="${key}"]`);}
 
   async function sourceDocument(){
     if(sourceTemplate)return sourceTemplate;
@@ -67,7 +67,7 @@
     bindRuntimeActions(key,body);
     if(key==="situation"){try{globalThis.atlasSyncReleaseLabels?.();}catch(_){}}
     try{globalThis.atlasV2ClassifySections?.();}catch(_){}
-    try{const mode=globalThis.atlasV2Mode?.()||document.documentElement.dataset.atlasView||"essential";globalThis.atlasV2ApplySectionVisibility?.(mode);globalThis.atlasV2ApplySemanticRoleIsolation40312?.(mode);}catch(_){}
+    try{const mode=globalThis.atlasV2Mode?.()||document.documentElement.dataset.atlasView||"essential";globalThis.atlasV2ApplySectionVisibility?.(mode);globalThis.atlasV2ApplySemanticRoleIsolation?.(mode);}catch(_){}
     try{window.dispatchEvent(new CustomEvent("erith:operations-hydrated",{detail:{build:BUILD,key}}));}catch(_){}
   }
 
@@ -78,9 +78,9 @@
     if(!(detail instanceof HTMLDetailsElement))return false;
     const body=detail.querySelector(':scope > .atlas-collapse-body');
     if(!(body instanceof HTMLElement))return false;
-    if(body.dataset.operationsHydration40421==="ready"){bindRuntimeActions(key,body);return true;}
-    if(body.dataset.operationsHydration40421==="loading"){try{await sourcePromise;}catch(_){}return body.dataset.operationsHydration40421==="ready";}
-    body.dataset.operationsHydration40421="loading";
+    if(body.dataset.operationsHydration==="ready"){bindRuntimeActions(key,body);return true;}
+    if(body.dataset.operationsHydration==="loading"){try{await sourcePromise;}catch(_){}return body.dataset.operationsHydration==="ready";}
+    body.dataset.operationsHydration="loading";
     try{
       const template=await sourceDocument();
       const sourceDetail=template.content.querySelector(`details[data-collapse-key="${key}"]`);
@@ -93,25 +93,25 @@
         if(!(node instanceof Element))return;
         const candidates=[node,...node.querySelectorAll('[id]')];
         candidates.forEach(candidate=>{
-          if(candidate.id===ANCHORS[key]){candidate.dataset.operationsSourceAnchor40421=ANCHORS[key];candidate.removeAttribute('id');}
+          if(candidate.id===ANCHORS[key]){candidate.dataset.operationsSourceAnchor=ANCHORS[key];candidate.removeAttribute('id');}
         });
       });
       body.replaceChildren(...children);
-      body.dataset.operationsHydration40421="ready";
+      body.dataset.operationsHydration="ready";
       hydrationCount+=1;
       reconcileAfterHydration(key,body);
       return true;
     }catch(error){
-      body.dataset.operationsHydration40421="error";
-      body.dataset.operationsHydrationError40421=String(error?.message||error||"unknown");
+      body.dataset.operationsHydration="error";
+      body.dataset.operationsHydrationError=String(error?.message||error||"unknown");
       console.warn(`Agent-Crypto ${BUILD} · Operations body hydration failed`,key,error);
       return false;
     }
   }
 
   function bindDetail(detail){
-    if(!(detail instanceof HTMLDetailsElement)||detail.dataset.operationsLazyBound40421==="1")return;
-    detail.dataset.operationsLazyBound40421="1";
+    if(!(detail instanceof HTMLDetailsElement)||detail.dataset.operationsLazyBound==="1")return;
+    detail.dataset.operationsLazyBound="1";
     const ensure=()=>{if(detail.open)hydrate(detail.dataset.collapseKey);};
     detail.addEventListener('toggle',()=>{if(detail.open)queueMicrotask(ensure);});
     // Existing closed-body lifecycle restores its fragment before emitting this event.
@@ -125,10 +125,10 @@
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',hydrateHashIfOpen,{once:true});else hydrateHashIfOpen();
 
   function snapshot(){
-    const rows=KEYS.map(key=>{const detail=detailFor(key);const body=detail?.querySelector(':scope > .atlas-collapse-body');return Object.freeze({key,open:detail?.open===true,body_state:body?.dataset?.operationsHydration40421||'detached-or-missing',anchor_present:!!document.getElementById(ANCHORS[key])});});
+    const rows=KEYS.map(key=>{const detail=detailFor(key);const body=detail?.querySelector(':scope > .atlas-collapse-body');return Object.freeze({key,open:detail?.open===true,body_state:body?.dataset?.operationsHydration||'detached-or-missing',anchor_present:!!document.getElementById(ANCHORS[key])});});
     return Object.freeze({build:BUILD,source:SOURCE,strategy:'parser-shell + on-demand operations body hydration',full_source_tags:255,boot_shell_tags:39,deferred_tags:216,source_fetch_count:sourceFetchCount,hydration_count:hydrationCount,action_bind_count:actionBindCount,last_error:lastError||null,rows:Object.freeze(rows),window_manager_shell_parity:true,questionnaire_rebind:true,command_rebind:true,new_timer:false,new_observer:false,storage_policy_changed:false,business_engine_changed:false});
   }
   const api=Object.freeze({build:BUILD,source:SOURCE,ensureBody:hydrate,snapshot,keys:KEYS,anchors:ANCHORS,window_manager_shell_parity:true,network_fetch:'same-origin static source on first Operations disclosure only',new_timer:false,new_observer:false,storage_policy_changed:false,business_engine_changed:false});
-  globalThis.ErithOperationsPresentation40421=api;
+  globalThis.ErithOperationsPresentation=api;
   globalThis.__AGENT_CRYPTO_OPERATIONS_PRESENTATION_MOUNT_40421__=snapshot();
 })();

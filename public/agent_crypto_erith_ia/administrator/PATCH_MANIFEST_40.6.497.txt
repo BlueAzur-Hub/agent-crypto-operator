@@ -1,0 +1,17 @@
+AGENT-CRYPTO 40.6.497 — QUOTE CURRENCY ARCHITECTURE
+parent=40.6.496
+market_core=38.15.11 protected
+
+ADDED
+- administrator/js/quote-currency-architecture-406497.js
+- display/execution/settlement separation contract
+- EUR/USD display selector
+
+UNCHANGED
+- graph algorithm and native Prix/Base100
+- Strategy A / gates
+- Market Core 38.15.11
+- Oracle / Math / Risk / PAPER
+- Bridge / Backend
+- storage schema
+- real orders / wallet / private API

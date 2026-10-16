@@ -1,0 +1,36 @@
+AGENT-CRYPTO STRATEGY A EVIDENCE IDENTITY CROSSWALK TRUTH — 40.6.461
+
+NEW OWNER
+js/strategy-a-evidence-identity-crosswalk-truth.js
+
+READS
+Durable Evidence after_cost
+Durable Evidence paper_states
+
+COMPARES ALL ID FIELDS
+execution_id
+reconciliation_id
+trade_id
+identity
+
+CLASSIFIES
+EXACT_EXECUTION_MATCH
+RECONCILIATION_MATCH
+TRADE_MATCH
+CROSS_FIELD_MATCH
+MULTI_ID_MATCH
+
+REPORTS
+candidate links
+unique one-to-one links
+ambiguous candidates
+true orphan after-cost
+true orphan PAPER
+
+NO MERGE
+NO STORAGE WRITE
+NO GATE PROMOTION
+NO THRESHOLD CHANGE
+NO NETWORK
+NO REAL ORDER
+MARKET CORE 38.15.11 PRESERVED

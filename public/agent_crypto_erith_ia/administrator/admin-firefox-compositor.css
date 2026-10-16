@@ -15,19 +15,19 @@
    transform, animation, data, navigation or persistence rule.
    ============================================================================ */
 
-body.atlas-administrator-mirror.atlas-firefox-compositor-40323 .glass,
-body.atlas-administrator-mirror.atlas-firefox-compositor-40323 .admin-mirror-bar,
-body.atlas-administrator-mirror.atlas-firefox-compositor-40323 .admin-window-deck,
-body.atlas-administrator-mirror.atlas-firefox-compositor-40323 .admin-native-controls,
-body.atlas-administrator-mirror.atlas-firefox-compositor-40323 .admin-native-floating-shell,
-body.atlas-administrator-mirror.atlas-firefox-compositor-40323 .admin-native-direct-floating,
-body.atlas-administrator-mirror.atlas-firefox-compositor-40323 .admin-native-floating-titlebar,
-body.atlas-administrator-mirror.atlas-firefox-compositor-40323 #atlasOracleV0,
-body.atlas-administrator-mirror.atlas-firefox-compositor-40323 #analyste.champagne-clean-lens .chart-toolbar,
-body.atlas-administrator-mirror.atlas-firefox-compositor-40323 #analyste.champagne-clean-lens .chart-legend,
-body.atlas-administrator-mirror.atlas-firefox-compositor-40323 #analyste.champagne-clean-lens .chart-analysis-card,
-body.atlas-administrator-mirror.atlas-firefox-compositor-40323 #analyste.champagne-clean-lens .chart-memory-bar,
-body.atlas-administrator-mirror.atlas-firefox-compositor-40323 #missions-vie .life-missions-copy {
+body.atlas-administrator-mirror.atlas-firefox-compositor .glass,
+body.atlas-administrator-mirror.atlas-firefox-compositor .admin-mirror-bar,
+body.atlas-administrator-mirror.atlas-firefox-compositor .admin-window-deck,
+body.atlas-administrator-mirror.atlas-firefox-compositor .admin-native-controls,
+body.atlas-administrator-mirror.atlas-firefox-compositor .admin-native-floating-shell,
+body.atlas-administrator-mirror.atlas-firefox-compositor .admin-native-direct-floating,
+body.atlas-administrator-mirror.atlas-firefox-compositor .admin-native-floating-titlebar,
+body.atlas-administrator-mirror.atlas-firefox-compositor #atlasOracleV0,
+body.atlas-administrator-mirror.atlas-firefox-compositor #analyste.champagne-clean-lens .chart-toolbar,
+body.atlas-administrator-mirror.atlas-firefox-compositor #analyste.champagne-clean-lens .chart-legend,
+body.atlas-administrator-mirror.atlas-firefox-compositor #analyste.champagne-clean-lens .chart-analysis-card,
+body.atlas-administrator-mirror.atlas-firefox-compositor #analyste.champagne-clean-lens .chart-memory-bar,
+body.atlas-administrator-mirror.atlas-firefox-compositor #missions-vie .life-missions-copy {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }

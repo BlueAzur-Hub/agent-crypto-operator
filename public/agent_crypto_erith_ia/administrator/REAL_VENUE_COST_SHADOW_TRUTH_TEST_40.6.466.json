@@ -1,0 +1,25 @@
+{
+  "schema": "agent_crypto_real_venue_cost_shadow_truth_test_v1",
+  "build": "40.6.466",
+  "pass": true,
+  "checks": {
+    "read_only_counterfactual": true,
+    "historical_cost_wait_source": true,
+    "current_execution_cost_snapshot_source": true,
+    "canonical_safety_margin_source": true,
+    "kraken_multi_ticket_shadow": true,
+    "canonical_ticket_50_eur": true,
+    "okx_lower_bound_only": true,
+    "okx_certified_pass_forbidden": true,
+    "no_threshold_change": true,
+    "no_strategy_decision_change": true,
+    "no_real_order": true
+  },
+  "invariants": {
+    "market_core": "38.15.11",
+    "legacy_cost_gate_pct": 0.8,
+    "paper_only": true,
+    "automatic_platform_choice": false,
+    "profitability_claim": false
+  }
+}

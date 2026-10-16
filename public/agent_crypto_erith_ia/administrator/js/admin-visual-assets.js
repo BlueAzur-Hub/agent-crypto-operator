@@ -10,7 +10,7 @@
   const DB_VERSION = 1;
   const STORE = "visual_slots";
   const TECH_KEY = "technical-reading";
-  const DEFAULT_TECH = "./assets/visual/admin-technical-reading-default.png";
+  const DEFAULT_TECH = "https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/assets/images/technical-reading/admin-technical-reading-default.png";
   const CLASSIC_MISSIONS = "./assets/images/missions_de_vie_constellation_bg.png";
   let techObjectUrl = null;
 
@@ -203,7 +203,7 @@
     const img = document.createElement("img");
     img.className = "admin-summary-emblem-r3";
     img.dataset.for = "sources";
-    img.src = "./assets/visual/admin-sources-archive.png";
+    img.src = "https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/assets/images/visual/admin-sources-archive.png";
     img.alt = "";
     img.setAttribute("aria-hidden", "true");
     img.loading = "lazy";
@@ -219,7 +219,7 @@
     if (section.querySelector(".admin-analytical-emblem-r3")) return true;
     const img = document.createElement("img");
     img.className = "admin-analytical-emblem-r3";
-    img.src = "./assets/visual/admin-analytical-memory.png";
+    img.src = "https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/assets/images/visual/admin-analytical-memory.png";
     img.alt = "";
     img.setAttribute("aria-hidden", "true");
     img.loading = "lazy";
@@ -244,8 +244,8 @@
 
   function decorate() {
     removeR2Artifacts();
-    const system = familyEmblem(".atlas-layout-family-system", "./assets/visual/admin-system-core.png", "system");
-    const projects = familyEmblem(".atlas-layout-family-operations", "./assets/visual/admin-projects-orchestration.png", "projects");
+    const system = familyEmblem(".atlas-layout-family-system", "https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/assets/images/visual/admin-system-core.png", "system");
+    const projects = familyEmblem(".atlas-layout-family-operations", "https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/assets/images/visual/admin-projects-orchestration.png", "projects");
     const sources = sourceSummaryEmblem();
     const analytical = analyticalEmblem();
     const missions = restoreClassicMissionsBackground();

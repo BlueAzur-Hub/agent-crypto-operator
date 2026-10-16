@@ -1,0 +1,29 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.508
+Release: FINAL ADMIN TRUTH SYNC FREEZE
+Parent: 40.6.507
+Market Core: 38.15.11 UNCHANGED
+
+MODIFIED
+M public/agent_crypto_erith_ia/administrator/index.html
+M public/agent_crypto_erith_ia/administrator/build.json
+M public/agent_crypto_erith_ia/administrator/views/atlas.html
+M public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+
+ADDED
+A public/agent_crypto_erith_ia/administrator/index-40.6.508.html
+A public/agent_crypto_erith_ia/administrator/FINAL_AUDIT_TRUTH_FREEZE_40.6.508.md
+A public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.508.txt
+A .github/scripts/agent_crypto_final_truth_freeze_guard_406508.py
+A .github/workflows/agent-crypto-package-406508.yml
+
+FIX
+- remove stale Interface Build 39.7.0
+- remove stale Control Center V2.3.2R13
+- remove stale Bridge V1.9.11
+- align lazy Atlas truth with Administrator 40.6.508 / Control 2.3.2R19 / Bridge 1.9.13
+
+NO BEHAVIOR CHANGE
+Graph / Candles / Depth / Book / Market Core / Strategy / Oracle / Aether / Backend / Bridge unchanged.
+
+NEXT
+Separate Operator-view build after pause.

@@ -1,3 +1,5 @@
+/* 40.6.413 · diagnostic-only eval boundary */
+(()=>{try{const b=String(globalThis.AGENT_CRYPTO_EFFECTIVE_BUILD||document.documentElement?.dataset?.agentCryptoLoadedBuild||"");if(b==="40.6.413")globalThis.AgentCryptoBootProbe?.mark?.("probe-script-eval-enter",{src:"layout-repair.js",build:"40.6.413"});}catch(_){}})();
 (() => {
   "use strict";
 
@@ -52,7 +54,7 @@
     const board = byId("decision-board");
     const primary = byId("decisionMemoryV2");
     const dual = byId("decisionDualMemory395");
-    const retro = byId("decisionRetrospective3960");
+    const retro = byId("decisionRetrospective");
     const host = ensureHost(board);
     let movedDual = false;
     let movedRetro = false;
@@ -354,7 +356,7 @@
       classObserver.observe(node, { attributes: true, attributeFilter: ["class"] });
     }
 
-    globalThis.ErithGraphDirectFloatRepair404158 = Object.freeze({
+    globalThis.ErithGraphDirectFloatRepair = Object.freeze({
       build: BUILD,
       graph_id: GRAPH_ID,
       body_portal_only_while_floating: true,
@@ -431,7 +433,7 @@
   };
 
   function role() {
-    return String(document.documentElement.dataset.adminWindowPresentationRole40314 || "").trim().toLowerCase();
+    return String(document.documentElement.dataset.adminWindowPresentationRole || "").trim().toLowerCase();
   }
 
   function normalizeGeometry(raw) {
@@ -499,11 +501,11 @@
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
       lastSignature = nextSignature;
-      document.documentElement.dataset.operatorFamilyPersistence404162 = "saved";
-      document.documentElement.dataset.operatorFamilyPersistenceSaved404162 = payload.saved_at;
+      document.documentElement.dataset.operatorFamilyPersistence = "saved";
+      document.documentElement.dataset.operatorFamilyPersistenceSaved = payload.saved_at;
       return true;
     } catch (_) {
-      document.documentElement.dataset.operatorFamilyPersistence404162 = "storage-unavailable";
+      document.documentElement.dataset.operatorFamilyPersistence = "storage-unavailable";
       return false;
     }
   }
@@ -513,7 +515,7 @@
     const saved = readSaved();
     if (!saved) {
       lastSignature = signature(currentFamilySnapshot());
-      document.documentElement.dataset.operatorFamilyPersistence404162 = "default-compact";
+      document.documentElement.dataset.operatorFamilyPersistence = "default-compact";
       return false;
     }
 
@@ -521,11 +523,11 @@
     try {
       manager.applySnapshot(saved.snapshot, { persist: false, captureResult: false });
       lastSignature = signature(currentFamilySnapshot());
-      document.documentElement.dataset.operatorFamilyPersistence404162 = "restored";
-      document.documentElement.dataset.operatorFamilyPersistenceRestoreReason404162 = String(reason || "boot");
+      document.documentElement.dataset.operatorFamilyPersistence = "restored";
+      document.documentElement.dataset.operatorFamilyPersistenceRestoreReason = String(reason || "boot");
       return true;
     } catch (_) {
-      document.documentElement.dataset.operatorFamilyPersistence404162 = "restore-failed";
+      document.documentElement.dataset.operatorFamilyPersistence = "restore-failed";
       return false;
     } finally {
       restoring = false;
@@ -562,21 +564,40 @@
     if (lastRole === "administrator") restoreSaved("boot");
     else lastSignature = signature(currentFamilySnapshot());
 
-    // Capture the state before a possible role switch, then capture again after
-    // the click transaction. Signature dedup prevents redundant localStorage writes.
-    document.addEventListener("click", () => {
-      try { if (role() === "administrator") writeSaved("pre-click"); } catch (_) {}
-      postInteraction("click");
+    // 40.6.299 — INTERACTION LATENCY REPAIR.
+    // Do not snapshot all windows or synchronously touch localStorage for every
+    // ordinary click. Only controls that can change family presentation state
+    // are allowed to schedule family persistence.
+    const presentationSelector = [
+      ".admin-native-control",
+      ".admin-window-deck-action",
+      ".admin-window-deck-toggle",
+      "#adminWorkspaceProfilesToggle",
+      "[data-workspace-profile-load]"
+    ].join(",");
+
+    document.addEventListener("click", event => {
+      const target = event.target instanceof Element ? event.target : null;
+      if (target?.closest?.(presentationSelector)) {
+        postInteraction("presentation-click");
+        return;
+      }
+      queueMicrotask(() => { try { reconcileRole("click-role"); } catch (_) {} });
     }, true);
 
-    // Drag, first-detach and native CSS resize finish on pointerup. Persist only
-    // if the resulting four-family snapshot actually changed.
-    window.addEventListener("pointerup", () => postInteraction("pointerup"), true);
-    window.addEventListener("popstate", () => postInteraction("popstate"), true);
-    window.addEventListener("hashchange", () => postInteraction("hashchange"), true);
+    // Persist family geometry after real window-drag chrome only, never after a
+    // generic pointerup inside content/subsections.
+    window.addEventListener("pointerup", event => {
+      const target = event.target instanceof Element ? event.target : null;
+      if (target?.closest?.(".admin-native-move,.admin-native-floating-titlebar,.admin-native-minibar")) {
+        postInteraction("presentation-pointerup");
+      }
+    }, true);
+    window.addEventListener("popstate", () => { try { reconcileRole("popstate-role"); } catch (_) {} }, true);
+    window.addEventListener("hashchange", () => { try { reconcileRole("hashchange-role"); } catch (_) {} }, true);
 
     document.documentElement.dataset.operatorFamilyPersistenceBuild = BUILD;
-    globalThis.ErithOperatorFamilyPersistence404162 = Object.freeze({
+    globalThis.ErithOperatorFamilyPersistence = Object.freeze({
       build: BUILD,
       schema: SCHEMA,
       storage_key: STORAGE_KEY,
@@ -592,10 +613,13 @@
       network_added: false,
       websocket_added: false,
       broad_observer_added: false,
+      all_click_snapshot_retired_406299: true,
+      ordinary_content_click_storage_write_406299: false,
+      presentation_control_only_persistence_406299: true,
       status: () => Object.freeze({
         role: role(),
         saved: !!readSaved(),
-        state: document.documentElement.dataset.operatorFamilyPersistence404162 || "idle",
+        state: document.documentElement.dataset.operatorFamilyPersistence || "idle",
         signature: lastSignature
       }),
       capture: reason => writeSaved(reason || "manual"),
@@ -608,3 +632,5 @@
   queueMicrotask(() => { try { install(); } catch (_) {} });
   window.addEventListener("load", () => { try { install(); } catch (_) {} }, { once: true });
 })();
+/* 40.6.413 · diagnostic-only eval boundary */
+(()=>{try{const b=String(globalThis.AGENT_CRYPTO_EFFECTIVE_BUILD||document.documentElement?.dataset?.agentCryptoLoadedBuild||"");if(b==="40.6.413")globalThis.AgentCryptoBootProbe?.mark?.("probe-script-eval-exit",{src:"layout-repair.js",build:"40.6.413"});}catch(_){}})();

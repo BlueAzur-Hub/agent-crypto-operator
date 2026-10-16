@@ -1,0 +1,31 @@
+{
+  "schema": "agent_crypto_okx_t60_trajectory_unknown_truth_test_v1",
+  "build": "40.6.473",
+  "pass": true,
+  "checks": {
+    "first_cross_observed": true,
+    "peak_observed": true,
+    "last_above_observed": true,
+    "above_sample_count": true,
+    "observed_span_not_continuous_dwell": true,
+    "unknown_reason_split": true,
+    "no_interpolation": true,
+    "no_tolerance_widening": true,
+    "no_threshold_change": true,
+    "no_gate_change": true,
+    "no_storage_write": true,
+    "no_real_order": true
+  },
+  "terrain_parent": {
+    "t60_certified": 7,
+    "t60_observed_crossings": 1,
+    "t60_unknown": 8,
+    "cross_cycle": "A-CYCLE-00001-d562dc57",
+    "observed_mfe_pct": 0.691,
+    "floor_before_slippage_pct": 0.6109
+  },
+  "invariants": {
+    "market_core": "38.15.11",
+    "paper_only": true
+  }
+}

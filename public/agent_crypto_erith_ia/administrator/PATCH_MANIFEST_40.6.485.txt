@@ -1,0 +1,31 @@
+AGENT-CRYPTO 40.6.485 — ORACLE EVIDENCE GITHUB TRANSPORT RESILIENCE
+
+MODIFIED
+public/agent_crypto_erith_ia/administrator/js/oracle-evidence-existing-bridge-integration.js
+public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+public/agent_crypto_erith_ia/administrator/js/strategy-a-audit-demand-loader.js
+public/agent_crypto_erith_ia/administrator/index.html
+public/agent_crypto_erith_ia/administrator/build.json
+public/agent_crypto_erith_ia/data/oracle_evidence/manifest.json
+public/agent_crypto_erith_ia/administrator/RELEASE.md
+public/agent_crypto_erith_ia/administrator/HANDOFF.md
+
+ADDED
+public/agent_crypto_erith_ia/administrator/index-40.6.485.html
+public/agent_crypto_erith_ia/administrator/HANDOFF_FINAL_40.6.485.md
+public/agent_crypto_erith_ia/administrator/ORACLE_EVIDENCE_GITHUB_TRANSPORT_RESILIENCE_40.6.485.md
+public/agent_crypto_erith_ia/administrator/ORACLE_EVIDENCE_GITHUB_RESILIENCE_TEST_40.6.485.json
+public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.485.txt
+coordination/inter_ai_dialogues/agent_crypto/BRIDGE_R17_V1_9_13_GITHUB_TRANSPORT_RESILIENCE_LOCK_40.6.485.md
+.github/scripts/agent_crypto_oracle_evidence_github_resilience_test_406485.py
+.github/workflows/agent-crypto-package-406485.yml
+
+PRESERVED
+40.6.482 chunk foundation
+Bridge port 8787
+Backend V1.4.2 / 8790 read-only
+Seven Vault / 8780
+Market Core 38.15.11
+Strategy A
+Oracle Math
+local Evidence and IndexedDB schema

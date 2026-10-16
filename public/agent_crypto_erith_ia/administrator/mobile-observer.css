@@ -1,0 +1,46 @@
+/* 40.6.340 — Operator choice: keep Source Truth in data/diagnostics,
+   but do not render the VALID source capsule over the Crypto graph.
+   Loading/blocked messages are intentionally untouched. */
+.atlas-market-zone #analyste
+.chart-shell[data-chart-state="valid"][data-real-chart]::before {
+  display: none !important;
+}
+
+/* ==========================================================================
+   40.6.340 — VALID CHART SOURCE BADGE · HIDDEN
+
+   Owner: presentation only.
+   Purpose: prevent the historical chart source ::before badge from being
+   vertically stretched on narrow viewports by the legacy top:14px rule
+   colliding with the later mobile bottom:52px rule.
+
+   Scope:
+   - <= 900 CSS px only
+   - Crypto real-chart source badge only
+   - no chart/data/runtime/business logic
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .atlas-market-zone #analyste
+  .chart-shell[data-chart-state="valid"][data-real-chart]::before {
+    top: auto !important;
+    right: 10px !important;
+    bottom: 52px !important;
+    left: auto !important;
+
+    width: auto !important;
+    height: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: calc(100% - 20px) !important;
+    max-height: none !important;
+
+    box-sizing: border-box !important;
+    padding: 6px 9px !important;
+    border-radius: 10px !important;
+    line-height: 1.16 !important;
+    text-align: right !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+}

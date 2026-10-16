@@ -1,0 +1,21 @@
+AGENT-CRYPTO 40.6.493 — OKX MICRO EXECUTION SHADOW TRUTH
+parent=40.6.492
+market_core=38.15.11 protected
+bridge=R18 / V1.9.13 unchanged
+backend=V1.4.3 unchanged
+changed:
+- administrator/index.html
+- administrator/index-40.6.493.html
+- administrator/build.json
+- administrator/js/post-boot-runtime-loader.js
+- administrator/js/strategy-a-okx-micro-execution-shadow-truth.js
+- administrator/OKX_MICRO_EXECUTION_SHADOW_TRUTH_40.6.493.md
+- administrator/HANDOFF_FINAL_40.6.493.md
+- .github/scripts/agent_crypto_okx_micro_execution_shadow_guard_406493.py
+- .github/workflows/agent-crypto-package-406493.yml
+protections:
+- EVIDENCE_SHADOW_NOT_GATE
+- POTENTIEL != PASS
+- no Bridge/Backend change
+- no network/WebSocket/storage/order/key/wallet
+- no Strategy threshold/Cost Gate/Risk/Oracle/Market Core change

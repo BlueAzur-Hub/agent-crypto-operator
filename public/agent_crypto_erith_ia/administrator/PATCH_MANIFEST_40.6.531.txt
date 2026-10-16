@@ -1,0 +1,54 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.531
+Parent: 40.6.530
+Release: NEW LISTINGS · NATIVE MARKET CATEGORY
+
+NEW:
+- js/new-listings-native-category-406531.js
+- index-40.6.531.html
+- docs / guard / package workflow
+
+CHANGED:
+- js/new-listings-live-asset-406529.js
+  * suppress legacy NEW ribbon / Retour Market when 40.6.531 owns UX
+  * suppress legacy Radar binding under native category
+- index.html / build.json / loader / Atlas identity
+
+NOT LOADED ANYMORE:
+- js/new-listings-native-market-406530.js
+
+REUSED:
+- existing Market table/search/filter surface
+- existing Fiche surface
+- existing main Graphique Ligne canvas and presentation controls
+- existing Bougies owner
+- existing Profondeur owner
+- existing 40.6.529 exchange data adapters
+
+DISCOVERY:
+- Bitget SPOT instruments launchTime <=30d
+- Bitget public tickers
+- current friendly names for CT/MHA/MCAT/PONS/CNPY when observed
+
+PRICE TRUTH:
+- no USDT=USD relabel
+- USD/EUR derived only with explicit stablecoin FX reference
+- raw quote remains exchange truth
+
+PROTECTED:
+- app.js
+- Market Core 38.15.11
+- new-listings.js 40.6.528 owner
+- OKX local transport
+- Graph Native USD owner
+- Market/Fiche display owner
+- Profondeur owner
+- Strategy / Oracle / Aether / Target Flow
+
+NO:
+- state.coins injection
+- ranking mutation
+- duplicate graph/Fiche/depth
+- order / wallet / private API
+- new storage owner
+- recurring timer
+- MutationObserver

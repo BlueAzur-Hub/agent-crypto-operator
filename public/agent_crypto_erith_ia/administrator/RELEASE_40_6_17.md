@@ -2,7 +2,7 @@
 
 - Parent: `40.6.16`
 - Market Core: `38.15.11` — protected / unchanged.
-- Changed runtime owner: `js/strategy-a-after-cost-metrics-404298.js`.
+- Changed runtime owner: `js/strategy-a-after-cost-metrics.js`.
 - `null`, blank strings, booleans, missing and invalid numeric facts remain **UNKNOWN**.
 - Negative cost values are not silently clamped to zero.
 - If no cost component is known, `known_costs_eur` is **UNKNOWN**, not `0`.

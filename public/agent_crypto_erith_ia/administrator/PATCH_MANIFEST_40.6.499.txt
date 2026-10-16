@@ -1,0 +1,29 @@
+AGENT-CRYPTO 40.6.499 — OKX MICROSTRUCTURE
+parent=40.6.498
+cumulative=40.6.497 + 40.6.498
+market_core=38.15.11 protected
+
+ADDED
+- js/okx-microstructure-406499.js
+- AFFICHER > Profondeur
+- public ticker / books / books-rpi / trades
+- bid ask spread bp
+- organic/RPI imbalance
+- top20 depth
+- Total/Organic/RPI/#orders levels
+- recent trades
+
+TEST
+- node syntax PASS
+- cumulative module self_test PASS
+- headless Chromium mock-data visual harness PASS
+- Firefox production terrain PENDING
+
+UNCHANGED
+- native Prix/Base100
+- Strategy A / gates
+- Market Core 38.15.11
+- Oracle / Math / Risk / PAPER
+- Bridge / Backend
+- storage schema
+- real orders / wallet / private API

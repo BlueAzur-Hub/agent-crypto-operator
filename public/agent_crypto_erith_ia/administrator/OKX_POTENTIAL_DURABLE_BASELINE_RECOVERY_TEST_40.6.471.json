@@ -1,0 +1,29 @@
+{
+  "schema": "agent_crypto_okx_potential_durable_baseline_recovery_test_v1",
+  "build": "40.6.471",
+  "pass": true,
+  "checks": {
+    "durable_source_only": true,
+    "payload_unwrap": true,
+    "cycle_id_dedup": true,
+    "chronological_sort": true,
+    "cost_wait_filter": true,
+    "first_144_freeze": true,
+    "reconstructs_expected_16_fixture": true,
+    "visible_ledger_not_required": true,
+    "current_okx_snapshot_not_used": true,
+    "no_threshold_change": true,
+    "no_gate_change": true,
+    "no_storage_write": true,
+    "no_real_order": true
+  },
+  "baseline": {
+    "cost_wait_population": 144,
+    "okx_floor_before_slippage_pct": 0.6109,
+    "expected_potential_count": 16
+  },
+  "invariants": {
+    "market_core": "38.15.11",
+    "paper_only": true
+  }
+}

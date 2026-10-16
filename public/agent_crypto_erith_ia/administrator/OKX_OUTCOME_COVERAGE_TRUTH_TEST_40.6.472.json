@@ -1,0 +1,23 @@
+{
+  "schema": "agent_crypto_okx_outcome_coverage_truth_test_v1",
+  "build": "40.6.472",
+  "pass": true,
+  "checks": {
+    "baseline_parent_471": true,
+    "tolerance_ms": 150000,
+    "tolerance_widened": false,
+    "no_interpolation": true,
+    "partial_no_cross_is_unknown": true,
+    "no_sample_is_unknown": true,
+    "observed_cross_partial_supported": true,
+    "no_threshold_change": true,
+    "no_gate_change": true,
+    "no_storage_write": true,
+    "no_real_order": true
+  },
+  "invariants": {
+    "market_core": "38.15.11",
+    "floor_before_slippage_pct": 0.6109,
+    "paper_only": true
+  }
+}

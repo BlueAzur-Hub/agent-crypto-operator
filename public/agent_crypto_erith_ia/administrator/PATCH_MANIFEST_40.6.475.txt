@@ -1,0 +1,39 @@
+AGENT-CRYPTO 40.6.475 — PROSPECTIVE CAPTURE PLUMBING PROOF
+================================================================
+
+MODIFIED
+--------
+administrator/js/strategy-a-prospective-outcome-evidence-capture.js
+administrator/js/post-boot-runtime-loader.js
+administrator/js/strategy-a-audit-demand-loader.js
+administrator/index.html
+administrator/build.json
+administrator/RELEASE.md
+administrator/HANDOFF.md
+
+ADDED
+-----
+administrator/index-40.6.475.html
+administrator/HANDOFF_FINAL_40.6.475.md
+administrator/PROSPECTIVE_CAPTURE_PLUMBING_TEST_40.6.475.json
+administrator/PATCH_MANIFEST_40.6.475.txt
+.github/workflows/agent-crypto-package-406475.yml
+
+BEHAVIOR
+--------
+- exact cycle_id resolution from partial .454 event
+- fail closed when event cycle_id is absent from ledger
+- plumbing observability in UI
+- isolated end-to-end harness
+
+UNCHANGED
+---------
+Strategy A business logic
+Cost Gate
+Oracle
+Risk
+PAPER
+Auto A cadence
+Market Core 38.15.11
+IndexedDB schema
+real orders

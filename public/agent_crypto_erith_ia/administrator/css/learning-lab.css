@@ -1,0 +1,47 @@
+/* ERITH.IA · Laboratoire IA · isolé du moteur Graphique et des panneaux OKX. */
+html:not([data-agent-crypto-surface="trader"]) #agentCryptoLearningLab{display:none!important}
+#agentCryptoLearningLab{display:block;box-sizing:border-box;margin:16px 0 20px;border:1px solid rgba(100,208,218,.28);border-radius:17px;background:linear-gradient(130deg,#071923,#07121d 72%);color:#e1f3fa;overflow:hidden;min-width:0}
+#agentCryptoLearningLab>summary{display:flex;align-items:center;gap:12px;flex-wrap:wrap;cursor:pointer;padding:16px 19px;list-style:none;border-bottom:1px solid transparent}
+#agentCryptoLearningLab>summary::-webkit-details-marker{display:none}
+#agentCryptoLearningLab[open]>summary{border-bottom-color:rgba(100,208,218,.23)}
+#agentCryptoLearningLab .lab-kicker{font-size:11px;font-weight:800;color:#70e6e9;letter-spacing:.12em}
+#agentCryptoLearningLab>summary strong{font-size:16px;color:#fff0c5}
+#agentCryptoLearningLab>summary small{font-size:11px;color:#97b4c6;margin-left:auto}
+#agentCryptoLearningLab .lab-body{padding:18px;display:grid;gap:12px;min-width:0}
+#agentCryptoLearningLab .lab-header{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+#agentCryptoLearningLab .lab-picker,#agentCryptoLearningLab .lab-tabs{display:flex;align-items:center;flex-wrap:wrap;gap:7px;min-width:0}
+#agentCryptoLearningLab button{font:inherit;cursor:pointer;max-width:100%}
+#agentCryptoLearningLab .lab-asset,#agentCryptoLearningLab .lab-tab,#agentCryptoLearningLab .lab-action{border:1px solid #284a5a;border-radius:10px;padding:9px 13px;background:#0a2330;color:#d0eaf4;font-size:12px;font-weight:700}
+#agentCryptoLearningLab .lab-action{border-color:#3a5e69;color:#ffecbc}
+#agentCryptoLearningLab .lab-asset:hover,#agentCryptoLearningLab .lab-tab:hover,#agentCryptoLearningLab .lab-action:hover{border-color:#73d9de}
+#agentCryptoLearningLab .is-active,#agentCryptoLearningLab .lab-tab[aria-selected="true"]{border-color:#55d3e4;background:#13536c;color:#fff}
+#agentCryptoLearningLab :is(button,input,textarea,a):focus-visible{outline:2px solid #74e7fc;outline-offset:3px}
+#agentCryptoLearningLab .lab-current{font-weight:800;font-size:15px;margin:0;color:#fbeac4}
+#agentCryptoLearningLab .lab-hint{font-size:12px;color:#a1b8c9;margin:3px 0 7px;line-height:1.6}
+#agentCryptoLearningLab .lab-pane{display:grid;gap:14px;min-width:0}
+#agentCryptoLearningLab .lab-pane>h3{font-size:16px;color:#ffefc8;margin:5px 0 3px}
+#agentCryptoLearningLab .lab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#agentCryptoLearningLab .lab-card,#agentCryptoLearningLab .lab-note{padding:16px;background:rgba(4,20,31,.82);border:1px solid rgba(86,175,190,.23);border-radius:13px;min-width:0}
+#agentCryptoLearningLab .lab-card h4,#agentCryptoLearningLab .lab-note h4{color:#f2d99a;font-size:14px;margin:0 0 9px}
+#agentCryptoLearningLab .lab-card p,#agentCryptoLearningLab .lab-note p{font-size:13px;line-height:1.75;color:#d9eaf1;margin:0 0 8px;overflow-wrap:anywhere}
+#agentCryptoLearningLab .lab-card p:last-child,#agentCryptoLearningLab .lab-note p:last-child{margin-bottom:0}
+#agentCryptoLearningLab .lab-note{background:rgba(66,48,22,.16);border-color:rgba(226,191,108,.32)}
+#agentCryptoLearningLab .lab-sources{display:flex;flex-wrap:wrap;gap:9px}
+#agentCryptoLearningLab .lab-sources a,#agentCryptoLearningLab .lab-link{padding:7px 11px;border:1px solid #205465;border-radius:999px;color:#9de6f2;font-size:12px;text-decoration:none;overflow-wrap:anywhere}
+#agentCryptoLearningLab .lab-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#agentCryptoLearningLab .lab-field{display:grid;gap:6px;color:#c2d7df;font-size:12px}
+#agentCryptoLearningLab :is(.lab-field input,.lab-textarea){display:block;min-width:0;width:100%;box-sizing:border-box;border:1px solid #395569;border-radius:9px;background:#04121f;color:#f0fbfc;padding:10px;font:inherit}
+#agentCryptoLearningLab .lab-journal-form{display:grid;gap:10px}
+#agentCryptoLearningLab .lab-journal-list{display:grid;gap:8px}
+#agentCryptoLearningLab .lab-journal-list small{color:#7fbbc8}
+#agentCryptoLearningLab .lab-btc-report{min-width:0}
+#agentCryptoLearningLab .lab-btc-report #traderOkbCaseStudy{margin:0;max-width:100%}
+@media(max-width:800px){
+  #agentCryptoLearningLab .lab-grid,#agentCryptoLearningLab .lab-form-grid{grid-template-columns:minmax(0,1fr)}
+  #agentCryptoLearningLab .lab-body{padding:11px}
+  #agentCryptoLearningLab>summary{padding:12px}
+  #agentCryptoLearningLab>summary small{margin-left:0}
+}
+@media(prefers-reduced-motion:reduce){
+  #agentCryptoLearningLab *,#agentCryptoLearningLab *::before{animation:none!important;transition:none!important}
+}

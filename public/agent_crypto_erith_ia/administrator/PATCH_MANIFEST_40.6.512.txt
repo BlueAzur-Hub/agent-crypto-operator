@@ -1,0 +1,28 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.512
+Release: DEPTH TRUE DOCK · BODY ONLY WHEN DETACHED
+Parent: 40.6.511
+Market Core: 38.15.11 UNCHANGED
+
+ROOT CAUSE
+- 40.6.511 removed continuous follow
+- docked Depth still lived under document.body with position:fixed
+- it therefore remained pinned to the viewport outside Lecture Technique
+
+CORRECTION
+- docked parent = #detailPanel
+- docked position = absolute inset 0
+- detached/maximized parent = document.body
+- detached/maximized position = fixed
+- no coordinate-follow timer
+- no scroll-follow
+- no docked resize-follow
+
+PRESERVED
+- native controls and detached drag
+- 40.6.510 freshness/context truth
+- dynamic asset columns
+- Backend 1.4.4 / Bridge 1.9.13
+- Market Core / Strategy / Cost Gate / Oracle / Aether / Lecture Technique logic
+
+NEXT
+Firefox terrain proof, then 40.6.513 transport AbortSignal repair.

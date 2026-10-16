@@ -1,0 +1,30 @@
+AGENT-CRYPTO 40.6.478 — PROSPECTIVE TERMINAL RECORD WRITE GUARD
+
+MODIFIED
+administrator/js/strategy-a-prospective-outcome-evidence-capture.js
+administrator/js/post-boot-runtime-loader.js
+administrator/js/strategy-a-audit-demand-loader.js
+administrator/index.html
+administrator/build.json
+administrator/RELEASE.md
+administrator/HANDOFF.md
+
+ADDED
+administrator/index-40.6.478.html
+administrator/HANDOFF_FINAL_40.6.478.md
+administrator/PROSPECTIVE_TERMINAL_WRITE_GUARD_TEST_40.6.478.json
+administrator/PATCH_MANIFEST_40.6.478.txt
+.github/workflows/agent-crypto-package-406478.yml
+
+SCOPE
+Post-terminal evidence persistence only.
+
+UNCHANGED
+Lecture Technique recovery 40.6.477
+Prospective plumbing/mount 40.6.475/.476
+Decision thresholds and gates
+OKX T0 capture
+Aether / Redivider
+Market Core 38.15.11
+IndexedDB schema
+real orders

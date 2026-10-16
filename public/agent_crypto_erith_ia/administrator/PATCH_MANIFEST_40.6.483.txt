@@ -1,0 +1,41 @@
+AGENT-CRYPTO 40.6.483 — ORACLE EVIDENCE SAFE BRIDGE INGEST + COLD VERIFY
+
+ADDED
+.github/scripts/agent_crypto_oracle_evidence_safe_bridge_test_406483.py
+.github/workflows/agent-crypto-package-406483.yml
+public/agent_crypto_erith_ia/tools/oracle_evidence_cold_bridge.py
+public/agent_crypto_erith_ia/administrator/js/oracle-evidence-safe-bridge-ingest.js
+public/agent_crypto_erith_ia/administrator/ORACLE_EVIDENCE_SAFE_BRIDGE_INGEST_COLD_VERIFY_40.6.483.md
+public/agent_crypto_erith_ia/administrator/ORACLE_EVIDENCE_SAFE_BRIDGE_TEST_40.6.483.json
+public/agent_crypto_erith_ia/administrator/HANDOFF_FINAL_40.6.483.md
+public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.483.txt
+public/agent_crypto_erith_ia/administrator/index-40.6.483.html
+
+MODIFIED
+public/agent_crypto_erith_ia/administrator/index.html
+public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+public/agent_crypto_erith_ia/administrator/js/strategy-a-audit-demand-loader.js
+public/agent_crypto_erith_ia/administrator/build.json
+public/agent_crypto_erith_ia/administrator/RELEASE.md
+public/agent_crypto_erith_ia/administrator/HANDOFF.md
+public/agent_crypto_erith_ia/data/oracle_evidence/manifest.json
+public/agent_crypto_erith_ia/data/oracle_evidence/README.md
+
+PRESERVED
+public/agent_crypto_erith_ia/administrator/js/oracle-evidence-tiered-storage-foundation.js
+Oracle Evidence IndexedDB rows and schema
+Oracle Math/models
+Strategy A business logic / Solo Progression 1000 EUR
+Atlas CURRENT
+Market Core 38.15.11
+Aether
+Lecture Technique
+Web Classique
+real orders
+
+SAFETY
+No GitHub token in browser
+No automatic upload
+No local Evidence delete
+No retention reduction
+No force push in Bridge

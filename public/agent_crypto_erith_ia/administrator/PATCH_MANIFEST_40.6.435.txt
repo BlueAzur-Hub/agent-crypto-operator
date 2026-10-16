@@ -1,0 +1,42 @@
+AGENT-CRYPTO DELIVERY MANIFEST — 40.6.435
+================================================
+
+Build: 40.6.435
+Release: STRATEGY A OKX BACKEND ROUTE TRUTH
+Functional commit: 285691e8a0f338b9c66edf5b26887ce7502dc52b
+Market Core: 38.15.11
+
+PACKAGE RULE
+------------
+Bounded Agent-Crypto update package. NOT a repository archive.
+Archive root: administrator/
+
+CONTENTS
+--------
+a19d07d33c3defa6da6a1a99d4aa3b40ce967a062619265b50a414b9c0d2578b  administrator/js/strategy-a-execution-cost-truth.js
+7e6ef1ea36a1858afa8bb6b9896fec81b8bc36310ffaa139b4d6433e79a8ce1b  administrator/build.json
+5c6d7c1822d2b232edd142f7fe7727322c7b11d37037296da68742b336681b21  administrator/index.html
+5c6d7c1822d2b232edd142f7fe7727322c7b11d37037296da68742b336681b21  administrator/index-40.6.435.html
+381202c4e44ac95d27b838c2333556e6284b8dcd47f49c0502f9a323bfa4c766  administrator/RELEASE.md
+bcef036ed88fb5a2c9fb7868dcbc5bf8549280f8f4b37865bddb95c2585a026b  administrator/HANDOFF.md
+
+SCOPE
+-----
+- remove direct browser OKX WebSocket/REST attempts from Execution Cost Truth;
+- reuse existing loopback Private Backend V1.4.2 /quotes?assets=BTC;
+- measure OKX real bid/ask + spread from backend;
+- keep OKX depth/slippage explicitly unknown until backend exposes multi-level orderbook;
+- keep Kraken existing full orderbook measurement unchanged.
+
+PROTECTED
+---------
+- Strategy A thresholds/business logic;
+- Oracle / Risk / Paper;
+- Market Core 38.15.11;
+- Aether / global cockpit CSS;
+- backend V1.4.2 itself;
+- wallets / API keys / real orders.
+
+DELIVERY DISCIPLINE
+-------------------
+1 ZIP = 1 upload = 1 packaging commit.

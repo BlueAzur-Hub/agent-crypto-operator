@@ -1,0 +1,25 @@
+AGENT-CRYPTO EXECUTION COST PENDING CYCLE RESUME — 40.6.458
+
+OWNER
+js/strategy-a-execution-cost-truth.js
+
+DEFECT
+manual-refresh busy=true + Strategy A experiment-cycle
+=> pending=true
+=> manual measure ended
+=> historical auto-only finally skipped resume
+
+FIX
+every measurement exit checks pending
+one measurement inflight max
+one pending boolean max
+pending consumed once before auto:experiment-cycle resume
+
+PROTECTED
+Market Core 38.15.11
+Strategy thresholds
+Oracle
+Source Truth
+Aether
+Paper
+No new timer / observer / storage owner / network owner / real order

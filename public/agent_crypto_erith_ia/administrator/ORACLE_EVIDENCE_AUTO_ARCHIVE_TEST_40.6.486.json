@@ -1,0 +1,20 @@
+{
+  "schema": "agent_crypto_oracle_evidence_auto_archive_test_v1",
+  "build": "40.6.486",
+  "pass_pending_workflow": false,
+  "cases": {
+    "queue_build_identity": "PASS",
+    "existing_bridge_8787_v1913": "PASS",
+    "chunk_rows_500": "PASS",
+    "fixed_target_at_start": "PASS",
+    "watermark_advances_after_verified_only": "PASS",
+    "strict_sequential_no_parallel": "PASS",
+    "pause_after_current_chunk": "PASS",
+    "stop_after_current_chunk": "PASS",
+    "resume_from_bridge_verified_watermark": "PASS",
+    "local_indexeddb_readonly": "PASS",
+    "no_browser_github_secret_or_delete": "PASS",
+    "historical_release_workflows_frozen_manual": "PASS"
+  },
+  "pass": true
+}

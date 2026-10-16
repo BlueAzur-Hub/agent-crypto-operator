@@ -1,0 +1,46 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.517
+Release: CURRENCY DOMAIN V2 · ADDITIVE CONTRACT ONLY
+Parent: 40.6.516
+Market Core: 38.15.11 UNCHANGED
+
+ADDED
+- administrator/js/currency-domain-v2-406517.js
+- additive QuoteValue / QuoteBundle / CurrencyContext contract
+- currency-aware chart storage/context key helpers
+- 40.6.517 guard + package workflow
+- version archive / docs
+
+UNCHANGED BEHAVIOR
+- default DISPLAY = EUR
+- ANALYSIS = EUR
+- EXEC = BTC-EUR
+- SETTLE = EUR
+- no USD owner propagation in .517
+- legacy quote.price remains EUR
+- spot broker remains unchanged
+- Graphique remains unchanged
+- Oracle/Math remains unchanged
+- Aether remains unchanged
+- Candles/Depth remain unchanged
+
+PROTECTED
+- app.js / Market Core 38.15.11
+- quote-currency-architecture-406497.js baseline
+- market-microscope-candles-406498.js
+- okx-microstructure-406499.js
+- Aether
+- Lecture Technique
+- Strategy A / Evidence / Cost Gate
+- Backend / Bridge
+
+RUNTIME
+- no recurring timer
+- no MutationObserver
+- no storage write
+- no new business market request
+- no wallet
+- no private API
+- no real order
+
+TERRAIN
+PENDING FIREFOX.

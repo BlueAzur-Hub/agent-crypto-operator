@@ -2,7 +2,7 @@
    Proven 40.6.46 window behavior preserved.
    Fixed identity stays in the approved 1672×941 artwork; LIVE information stays DOM-owned. */
 
-#atlasAetherStatusPanel4084 {
+#atlasAetherStatusPanel {
   --a48-ratio: 1.7768331562; /* 1672 / 941 */
   position: fixed !important;
   box-sizing: border-box !important;
@@ -18,10 +18,10 @@
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
-#atlasAetherStatusPanel4084[hidden] { display:none !important; }
+#atlasAetherStatusPanel[hidden] { display:none !important; }
 
 /* Keep a transparent drag lane for the existing native Window Manager. */
-#atlasAetherStatusPanel4084 > .atlas-aether-panel-head-4084 {
+#atlasAetherStatusPanel > .atlas-aether-panel-head {
   position:absolute !important;
   inset:0 0 auto 0 !important;
   height:34px !important;
@@ -34,7 +34,7 @@
   box-shadow:none !important;
   pointer-events:auto !important;
 }
-#atlasAetherStatusPanel4084 > .atlas-aether-panel-head-4084 > b {
+#atlasAetherStatusPanel > .atlas-aether-panel-head > b {
   position:absolute !important;
   width:1px !important;
   height:1px !important;
@@ -43,7 +43,7 @@
   clip-path:inset(50%) !important;
   white-space:nowrap !important;
 }
-#atlasAetherStatusPanel4084 > .atlas-aether-panel-head-4084 > [data-aether-close-4084] {
+#atlasAetherStatusPanel > .atlas-aether-panel-head > [data-aether-close] {
   position:absolute !important;
   top:8px !important;
   right:10px !important;
@@ -60,17 +60,17 @@
   cursor:pointer !important;
   transition:opacity .16s ease, background .16s ease !important;
 }
-#atlasAetherStatusPanel4084:hover > .atlas-aether-panel-head-4084 > [data-aether-close-4084],
-#atlasAetherStatusPanel4084 > .atlas-aether-panel-head-4084 > [data-aether-close-4084]:focus-visible {
+#atlasAetherStatusPanel:hover > .atlas-aether-panel-head > [data-aether-close],
+#atlasAetherStatusPanel > .atlas-aether-panel-head > [data-aether-close]:focus-visible {
   opacity:.92 !important;
   background:rgba(2,19,35,.84) !important;
 }
 
 /* Clean break: even if an older script somehow injects a historical surface, it never participates. */
-#atlasAetherStatusPanel4084 > .aether-first-glance-grid-406030,
-#atlasAetherStatusPanel4084 > [data-aether-component-stage-406042],
-#atlasAetherStatusPanel4084 .aether42-backplate,
-#atlasAetherStatusPanel4084 .aether42-surface {
+#atlasAetherStatusPanel > .aether-first-glance-grid,
+#atlasAetherStatusPanel > [data-aether-component-stage-406042],
+#atlasAetherStatusPanel .aether42-backplate,
+#atlasAetherStatusPanel .aether42-surface {
   display:none !important;
 }
 
@@ -251,14 +251,14 @@
 .aether46-actions button { padding:.28cqw .48cqw; border:1px solid rgba(83,222,255,.27); border-radius:999px; background:rgba(1,11,23,.62); color:#dff8ff; font:750 .43cqw/1 ui-sans-serif,system-ui; cursor:pointer; }
 
 /* Windowed mode and F11/maximized are the SAME stage, only scaled. */
-#atlasAetherStatusPanel4084.admin-native-window-aether-watch,
-#atlasAetherStatusPanel4084.admin-native-window-aether-watch.admin-native-direct-floating,
-#atlasAetherStatusPanel4084.admin-native-window-aether-watch.admin-native-maximized {
+#atlasAetherStatusPanel.admin-native-window-aether-watch,
+#atlasAetherStatusPanel.admin-native-window-aether-watch.admin-native-direct-floating,
+#atlasAetherStatusPanel.admin-native-window-aether-watch.admin-native-maximized {
   overflow:hidden !important;
   background:#01050d !important;
   background-image:none !important;
 }
-#atlasAetherStatusPanel4084.admin-native-window-aether-watch.admin-native-maximized .aether46-stage {
+#atlasAetherStatusPanel.admin-native-window-aether-watch.admin-native-maximized .aether46-stage {
   width:min(100cqw, calc(100cqh * var(--a48-ratio))) !important;
   height:min(100cqh, calc(100cqw / var(--a48-ratio))) !important;
   transform:translate(-50%,-50%) !important;
@@ -266,10 +266,10 @@
 
 @media (max-width: 900px) {
   /* Preserve the exact Observatory rather than reflowing it into a dashboard. */
-  #atlasAetherStatusPanel4084 { overflow:auto !important; }
+  #atlasAetherStatusPanel { overflow:auto !important; }
   .aether46-stage { min-width:900px !important; min-height:506px !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aether46-actions, #atlasAetherStatusPanel4084 > .atlas-aether-panel-head-4084 > [data-aether-close-4084] { transition:none !important; }
+  .aether46-actions, #atlasAetherStatusPanel > .atlas-aether-panel-head > [data-aether-close] { transition:none !important; }
 }

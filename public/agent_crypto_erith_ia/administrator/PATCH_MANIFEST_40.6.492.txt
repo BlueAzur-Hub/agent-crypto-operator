@@ -1,0 +1,16 @@
+AGENT-CRYPTO 40.6.492 — OKX ORDERBOOK DEPTH TRUTH
+parent=40.6.491
+market_core=38.15.11 protected
+changed:
+- administrator/index.html
+- administrator/index-40.6.492.html
+- administrator/build.json
+- administrator/architecture/private-backend-sources.json
+- administrator/js/post-boot-runtime-loader.js
+- administrator/js/strategy-a-execution-cost-truth.js
+- administrator/OKX_ORDERBOOK_DEPTH_TRUTH_40.6.492.md
+- administrator/PRIVATE_BACKEND_V1.4.3_OKX_ORDERBOOK_DEPTH_REQUIREMENT.md
+- administrator/HANDOFF_FINAL_40.6.492.md
+- .github/scripts/agent_crypto_okx_orderbook_depth_guard_406492.py
+- .github/workflows/agent-crypto-package-406492.yml
+external-local-artifact=Control Center 2.3.2R18 / Bridge V1.9.13 / Backend V1.4.3 complete sources

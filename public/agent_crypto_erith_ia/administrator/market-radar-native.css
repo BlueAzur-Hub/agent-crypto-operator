@@ -1,0 +1,92 @@
+/* Radar in Market Snapshot — presentation only.
+ * All colors / typography inherit the Trader/Administrator theme; no iframe
+ * palette, no duplicate shell, no broad global selector overrides.
+ */
+#marketSnapshotPanel .radar-native{color:var(--text);background:transparent;min-width:0;padding:1px 0 8px;font:inherit}
+#marketSnapshotPanel .radar-native[hidden]{display:none!important}
+#marketSnapshotPanel .radar-native-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:8px 2px 10px;border-bottom:1px solid var(--line)}
+#marketSnapshotPanel .radar-native-head .eyebrow{margin:0 0 3px}
+#marketSnapshotPanel .radar-native h3{font:inherit;font-size:clamp(12px,1.15vw,15px);font-weight:900;letter-spacing:.015em;color:var(--text);margin:0 0 7px}
+#marketSnapshotPanel .radar-native-head h3{margin:0;color:var(--text)}
+#marketSnapshotPanel .radar-native-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+#marketSnapshotPanel .radar-native-actions a{color:var(--cyan);text-decoration:none;font-weight:750;font-size:11px}
+#marketSnapshotPanel .radar-native-actions button{border-radius:9px;font-size:10px}
+#marketSnapshotPanel .radar-native-dock{display:flex;gap:9px;align-items:center;flex-wrap:wrap;padding:8px 0}
+#marketSnapshotPanel .radar-native-dock .market-universe-mode{margin:0}
+#marketSnapshotPanel .radar-native-dock input,#marketSnapshotPanel .radar-native-dock select{
+ min-width:125px;min-height:30px;padding:5px 9px;border:1px solid var(--line);border-radius:8px;
+ color:var(--text);background:transparent;font:inherit;font-size:11px
+}
+#marketSnapshotPanel .radar-native-dock input{flex:1 1 155px;max-width:260px}
+#marketSnapshotPanel .radar-native-dock select{max-width:150px}
+#marketSnapshotPanel .radar-native>.table-note{margin:5px 2px 9px;color:var(--muted);font-size:10px}
+#marketSnapshotPanel .radar-native .table-wrap{max-height:340px;min-height:0;border-radius:10px;overflow:auto}
+#marketSnapshotPanel .radar-native table{min-width:550px!important}
+#marketSnapshotPanel .radar-native th,#marketSnapshotPanel .radar-native td{padding:7px 9px;white-space:nowrap}
+#marketSnapshotPanel .radar-native th{font-size:9px}
+#marketSnapshotPanel .radar-native td{font-size:11px}
+#marketSnapshotPanel .radar-native td:nth-child(n+3),#marketSnapshotPanel .radar-native th:nth-child(n+3){text-align:right;font-variant-numeric:tabular-nums}
+#marketSnapshotPanel .radar-native td.pos{color:var(--green,#75ebb2)}
+#marketSnapshotPanel .radar-native td.neg{color:var(--red,#ff8394)}
+#marketSnapshotPanel .radar-native-bottom{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:12px;margin:13px 0}
+#marketSnapshotPanel .radar-native-block{min-width:0;border:1px solid var(--line);border-radius:12px;padding:12px;background:rgba(2,8,16,.18)}
+#marketSnapshotPanel .radar-native-block .table-wrap{max-height:265px}
+#marketSnapshotPanel .radar-native-block table{min-width:500px!important}
+#marketSnapshotPanel .radar-native-block td{white-space:normal;font-size:10px}
+#marketSnapshotPanel .radar-native-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+#marketSnapshotPanel .radar-native-card{min-width:0;display:flex;flex-direction:column;gap:5px;border:1px solid var(--line);border-radius:9px;padding:9px;background:rgba(2,8,16,.16)}
+#marketSnapshotPanel .radar-native-card small{color:var(--muted);font-size:10px;font-weight:750}
+#marketSnapshotPanel .radar-native-card strong{font-size:11px;color:var(--text);overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+#marketSnapshotPanel .radar-native-card span{font-size:10px;color:var(--muted);overflow-wrap:anywhere}
+#marketSnapshotPanel .radar-native-block .table-note{font-size:10px;line-height:1.5;margin:6px 0 9px}
+@media(max-width:1200px){#marketSnapshotPanel .radar-native-bottom{grid-template-columns:1fr}}
+@media(max-width:720px){#marketSnapshotPanel .radar-native-cards{grid-template-columns:1fr 1fr}
+ #marketSnapshotPanel .radar-native-head{align-items:flex-start}
+ #marketSnapshotPanel .radar-native td{font-size:10px}}
+
+/* A Radar row is a graph selection, not a passive quote. */
+#marketSnapshotPanel .radar-native-selectable{cursor:pointer;transition:background .14s ease,box-shadow .14s ease}
+#marketSnapshotPanel .radar-native-selectable:hover{background:rgba(65,198,208,.10)}
+#marketSnapshotPanel .radar-native-selectable:focus-visible{outline:2px solid var(--cyan,#78d9e5);outline-offset:-2px}
+#marketSnapshotPanel .radar-native-cards .radar-native-selectable:hover{border-color:var(--cyan,#78d9e5)}
+
+/* Market identity reused by the Radar: logos, category accents and accessible fallback. */
+#marketSnapshotPanel .radar-native .radar-native-identity{display:flex;align-items:center;gap:9px;min-width:0}
+#marketSnapshotPanel .radar-native .radar-native-identity img,
+#marketSnapshotPanel .radar-native .radar-native-icon-fallback{width:23px;height:23px;border-radius:50%;object-fit:cover;flex:0 0 23px}
+#marketSnapshotPanel .radar-native .radar-native-icon-fallback{display:grid;place-items:center;background:var(--line);color:var(--text);font-size:11px;font-weight:850}
+#marketSnapshotPanel .radar-native .radar-native-identity-label{display:grid;gap:2px;text-align:left;min-width:0}
+#marketSnapshotPanel .radar-native .radar-native-identity-label strong{font-size:11px;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
+#marketSnapshotPanel .radar-native .radar-native-identity-label small{font-size:10px;color:var(--muted)}
+#marketSnapshotPanel .radar-native [data-radar-category]{--radar-accent:var(--cyan,#78d9e5)}
+#marketSnapshotPanel .radar-native [data-radar-category="stablecoin"]{--radar-accent:#37d1be}
+#marketSnapshotPanel .radar-native [data-radar-category="major"]{--radar-accent:#7eafff}
+#marketSnapshotPanel .radar-native [data-radar-category="speculative"]{--radar-accent:#aa89e9}
+#marketSnapshotPanel .radar-native [data-radar-category="listing"]{--radar-accent:#5dd5c6}
+#marketSnapshotPanel .radar-native [data-radar-symbol="BTC"]{--radar-accent:#f9a23c}
+#marketSnapshotPanel .radar-native [data-radar-symbol="ETH"]{--radar-accent:#8c95b2}
+#marketSnapshotPanel .radar-native [data-radar-symbol="BNB"]{--radar-accent:#f6c94e}
+#marketSnapshotPanel .radar-native [data-radar-symbol="XRP"]{--radar-accent:#e1e7f0}
+#marketSnapshotPanel .radar-native [data-radar-symbol="SOL"]{--radar-accent:#9f81ef}
+#marketSnapshotPanel .radar-native [data-radar-symbol="CT"]{--radar-accent:#5be0c9}
+#marketSnapshotPanel .radar-native .market-identity-rail{display:inline-block;width:3px;height:22px;flex:0 0 3px;border-radius:3px;background:var(--radar-accent)}
+#marketSnapshotPanel .radar-native-card>.radar-native-identity{margin-bottom:3px}
+
+#marketSnapshotPanel .radar-native td.radar-native-reading{font-size:10px;text-align:left;white-space:nowrap}
+#marketSnapshotPanel .radar-native td.radar-native-reading.up{color:var(--green,#75ebb2)}
+#marketSnapshotPanel .radar-native td.radar-native-reading.down{color:var(--red,#ff8394)}
+#marketSnapshotPanel .radar-native td.radar-native-reading.mixed{color:var(--cyan,#78d9e5)}
+#marketSnapshotPanel .radar-native td.radar-native-reading.unknown{color:var(--muted)}
+
+/* Research cards use the existing fiche owner only: no second graph or order affordance. */
+#marketSnapshotPanel .radar-native-opportunities{margin-top:10px}
+#marketSnapshotPanel .radar-native-opportunity-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#marketSnapshotPanel .radar-native-opportunity-group{min-width:0}
+#marketSnapshotPanel .radar-native-opportunity-group h4{font-size:11px;font-weight:850;color:var(--text);margin:0 0 7px}
+#marketSnapshotPanel .radar-native-opportunity-list{display:grid;gap:5px}
+#marketSnapshotPanel .radar-native-opportunity{display:grid;grid-template-columns:minmax(80px,1fr) minmax(80px,1fr) 1.6fr auto;gap:6px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:7px}
+#marketSnapshotPanel .radar-native-opportunity strong,#marketSnapshotPanel .radar-native-opportunity span{font-size:10px;overflow-wrap:anywhere}
+#marketSnapshotPanel .radar-native-opportunity small{font-size:9px;color:var(--muted);overflow-wrap:anywhere}
+#marketSnapshotPanel .radar-native-opportunity button{font-size:10px}
+@media(max-width:1100px){#marketSnapshotPanel .radar-native-opportunity-grid{grid-template-columns:1fr}}
+@media(max-width:620px){#marketSnapshotPanel .radar-native-opportunity{grid-template-columns:1fr 1fr}#marketSnapshotPanel .radar-native-opportunity small{grid-column:1/3}}

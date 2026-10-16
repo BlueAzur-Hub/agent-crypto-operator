@@ -1,0 +1,27 @@
+{
+  "schema": "agent_crypto_lecture_technique_initial_image_test_v1",
+  "build": "40.6.477",
+  "pass_pending_workflow": false,
+  "objective": "prove true initial swap status and one-shot recovery when Lecture Technique opens during/after a collapsed cold-cache attempt",
+  "cases": {
+    "open_boot_loads_image": "PASS",
+    "collapsed_cold_cache_defers_network": "PASS",
+    "collapsed_then_open_recovers": "PASS",
+    "open_during_cache_read_recovers_once": "PASS",
+    "failed_initial_swap_not_ready": "PASS",
+    "private_image_preserved": "PASS",
+    "index_runtime_recovery_logic_present": "PASS"
+  },
+  "invariants": {
+    "market_core": "38.15.11",
+    "strategy_a_changed": false,
+    "aether_changed": false,
+    "redivider_changed": false,
+    "full_library_preload": false,
+    "new_recurring_timer": false,
+    "new_observer": false,
+    "storage_schema_changed": false,
+    "real_order": false
+  },
+  "pass": true
+}

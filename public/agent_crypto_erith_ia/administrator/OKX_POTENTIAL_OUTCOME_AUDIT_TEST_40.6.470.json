@@ -1,0 +1,29 @@
+{
+  "schema": "agent_crypto_okx_potential_outcome_audit_test_v1",
+  "build": "40.6.470",
+  "pass": true,
+  "baseline": {
+    "source": "OPERATOR_TERRAIN_40.6.467",
+    "cost_wait_population": 144,
+    "okx_floor_before_slippage_pct": 0.6109,
+    "expected_potential_count": 16
+  },
+  "checks": {
+    "frozen_reference": true,
+    "current_okx_snapshot_not_used": true,
+    "baseline_drift_guard": true,
+    "cumulative_mfe_t5": true,
+    "cumulative_mfe_t15": true,
+    "cumulative_mfe_t60": true,
+    "slippage_unknown_preserved": true,
+    "profitability_claim": false,
+    "no_threshold_change": true,
+    "no_gate_change": true,
+    "no_storage_write": true,
+    "no_real_order": true
+  },
+  "invariants": {
+    "market_core": "38.15.11",
+    "paper_only": true
+  }
+}

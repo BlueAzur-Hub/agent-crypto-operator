@@ -1,0 +1,31 @@
+AGENT-CRYPTO 40.6.482 — ORACLE EVIDENCE TIERED STORAGE FOUNDATION
+
+ADDED
+public/agent_crypto_erith_ia/administrator/js/oracle-evidence-tiered-storage-foundation.js
+public/agent_crypto_erith_ia/data/oracle_evidence/manifest.json
+public/agent_crypto_erith_ia/data/oracle_evidence/README.md
+.github/scripts/agent_crypto_oracle_evidence_tiered_storage_test_406482.py
+.github/workflows/agent-crypto-package-406482.yml
+public/agent_crypto_erith_ia/administrator/ORACLE_EVIDENCE_TIERED_STORAGE_FOUNDATION_40.6.482.md
+public/agent_crypto_erith_ia/administrator/ORACLE_EVIDENCE_TIERED_STORAGE_TEST_40.6.482.json
+public/agent_crypto_erith_ia/administrator/HANDOFF_FINAL_40.6.482.md
+public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.482.txt
+public/agent_crypto_erith_ia/administrator/index-40.6.482.html
+
+MODIFIED
+public/agent_crypto_erith_ia/administrator/index.html
+public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+public/agent_crypto_erith_ia/administrator/js/strategy-a-audit-demand-loader.js
+public/agent_crypto_erith_ia/administrator/build.json
+public/agent_crypto_erith_ia/administrator/RELEASE.md
+public/agent_crypto_erith_ia/administrator/HANDOFF.md
+
+UNCHANGED
+Oracle Evidence rows
+IndexedDB schema
+Oracle Math/models
+Strategy A / Solo Progression 1000 EUR
+Atlas CURRENT
+Market Core 38.15.11
+Aether / Lecture Technique / Web Classique
+real orders

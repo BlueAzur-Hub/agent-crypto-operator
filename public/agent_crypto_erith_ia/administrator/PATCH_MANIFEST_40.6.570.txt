@@ -1,0 +1,39 @@
+AGENT-CRYPTO ADMINISTRATOR 40.6.570
+DEPTH MULTI-QUOTE RENDER REPAIR
+Parent: 40.6.569
+Market Core: 38.15.11 PROTECTED
+
+FUNCTIONAL CHANGE
+- administrator/js/okx-microstructure-406499.js
+  renderDepth():
+  eur(bid) / eur(ask)
+  -> quoteAmount(bid) / quoteAmount(ask)
+
+RELEASE METADATA / DELIVERY
+- administrator/index.html
+- administrator/index-40.6.570.html
+- administrator/build.json
+- administrator/js/market-microscope-candles.js (build identity only; no logic change)
+- administrator/DEPTH_MULTI_QUOTE_RENDER_REPAIR_40.6.570.md
+- .github/scripts/agent_crypto_depth_current_guard.py
+- .github/workflows/agent-crypto-depth-current.yml
+
+PROTECTED / UNCHANGED
+- Market Core 38.15.11
+- Profondeur dock/detach/drag contract 40.6.513
+- Lecture Technique
+- Graph/Bougies logic
+- Market
+- Math Core
+- Backend 1.4.4
+- Bridge 1.9.13
+- Strategy A / Evidence
+- Oracle / Aether
+- no private API
+- no order
+- no wallet
+
+TERRAIN
+PENDING FIREFOX:
+Carnet -> Profondeur -> +/-5/10/25 bp visible -> Carnet -> Profondeur
+then detach / move / redock unchanged.

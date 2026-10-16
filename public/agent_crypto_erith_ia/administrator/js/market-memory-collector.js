@@ -20,10 +20,10 @@
      ============================================================ */
 
   const BUILD_3944 = "39.4.4R1";
-  const MARKET_SCHEMA_3944 = "atlas_market_memory_v3944r1";
-  let captureChain3944 = Promise.resolve();
+  const MARKET_SCHEMA = "atlas_market_memory_v3944r1";
+  let captureChain = Promise.resolve();
 
-  function appState3944() {
+  function appState() {
     try { return typeof state !== "undefined" && state ? state : null; }
     catch (_) { return null; }
   }
@@ -38,7 +38,7 @@
     } catch (_) { return false; }
   }
 
-  function distinctCurrents3944(records) {
+  function distinctCurrents(records) {
     const map = new Map();
     for (const record of Array.isArray(records) ? records : []) {
       if (!isCurrent3944(record)) continue;
@@ -54,7 +54,7 @@
     return [...map.values()].sort((a, b) => Date.parse(a?.saved_at || 0) - Date.parse(b?.saved_at || 0));
   }
 
-  function collectorRows3944() {
+  function collectorRows() {
     try {
       if (typeof readCollectorMemory !== "function") return [];
       const raw = readCollectorMemory();
@@ -68,7 +68,7 @@
     } catch (_) { return []; }
   }
 
-  function adaptMarketRecord3944(record) {
+  function adaptMarketRecord(record) {
     const nested = record?.snapshot?.market_snapshot || {};
     const assets = Array.isArray(record?.assets) && record.assets.length
       ? record.assets
@@ -89,7 +89,7 @@
   }
 
   function marketRows3944() {
-    const adapted = collectorRows3944().map(adaptMarketRecord3944);
+    const adapted = collectorRows().map(adaptMarketRecord);
     try {
       return typeof atlasDistinctMarketMemory === "function"
         ? atlasDistinctMarketMemory(adapted)
@@ -97,9 +97,9 @@
     } catch (_) { return adapted; }
   }
 
-  function currentRows3944() {
+  function currentRows() {
     try {
-      return typeof readAutoMemory === "function" ? distinctCurrents3944(readAutoMemory()) : [];
+      return typeof readAutoMemory === "function" ? distinctCurrents(readAutoMemory()) : [];
     } catch (_) { return []; }
   }
 
@@ -117,7 +117,7 @@
       }
     } catch (_) {}
     if (id) return id;
-    const s = appState3944();
+    const s = appState();
     return String(s?.sourceLock?.snapshotId || s?.dataBroker?.market?.snapshotId || s?.dataBroker?.marketFrame?.id || "").trim();
   }
 
@@ -128,7 +128,7 @@
     return Date.parse(record?.market_generated_at || record?.source_time || record?.last_seen_at || record?.saved_at || 0) || 0;
   }
 
-  function canonicalSnapshots3944(sourceRecords) {
+  function canonicalSnapshots(sourceRecords) {
     const byCanonical = new Map();
     for (const record of Array.isArray(sourceRecords) ? sourceRecords : []) {
       const canonical = canonicalId3944(record) || `unknown:${record?.collector_id || "local"}:${record?.id || record?.saved_at || Math.random()}`;
@@ -142,8 +142,8 @@
     // sourceRecords are already deduplicated by the historic collector + canonical snapshot contract.
     // canonicalRecords collapse the same market snapshot seen by several collectors into ONE market state.
     const sourceRecords = marketRows3944();
-    const canonicalRecords = canonicalSnapshots3944(sourceRecords);
-    const currentRecords = currentRows3944();
+    const canonicalRecords = canonicalSnapshots(sourceRecords);
+    const currentRecords = currentRows();
     const orderedSource = [...sourceRecords].sort((a, b) => recordTime3944(a) - recordTime3944(b));
     const last = orderedSource[orderedSource.length - 1] || null;
     const lastCollector = String(last?.collector_id || "local-legacy");
@@ -182,7 +182,7 @@
     };
   }
 
-  function renderMarketTruth3944() {
+  function renderMarketTruth() {
     try { atlasMemoryIntelligenceRender?.(); } catch (_) {}
     try { renderDecisionBoard?.(); } catch (_) {}
     try { atlasOperatorSummaryRender35?.(); } catch (_) {}
@@ -190,8 +190,8 @@
     try { renderCollectorStatus?.(); } catch (_) {}
   }
 
-  function buildCollectorMarketRecord3944() {
-    const s = appState3944();
+  function buildCollectorMarketRecord() {
+    const s = appState();
     if (!s?.liveOk || !Array.isArray(s.coins) || !s.coins.length) return null;
     const canonical = canonicalId3944();
     if (!canonical) return null;
@@ -211,8 +211,8 @@
       ...base,
       id,
       snapshot_id: id,
-      schema: MARKET_SCHEMA_3944,
-      memory_schema: MARKET_SCHEMA_3944,
+      schema: MARKET_SCHEMA,
+      memory_schema: MARKET_SCHEMA,
       collector_id: collector,
       collector_type: "local_browser",
       record_kind: "MARKET",
@@ -242,7 +242,7 @@
     };
   }
 
-  async function captureMarket3944(reason = "market_refresh") {
+  async function captureMarket(reason = "market_refresh") {
     if (typeof atlasCollectorInitializeStorage !== "function"
         || typeof readCollectorMemory !== "function"
         || typeof writeCollectorMemory !== "function"
@@ -251,7 +251,7 @@
     }
 
     await atlasCollectorInitializeStorage();
-    const record = buildCollectorMarketRecord3944();
+    const record = buildCollectorMarketRecord();
     if (!record) return { ok:false, skipped:"market-not-canonical-or-not-ready" };
 
     const canonical = canonicalId3944(record);
@@ -305,7 +305,7 @@
       return { ok:false, skipped:"indexeddb-reread-missing-canonical-record" };
     }
 
-    renderMarketTruth3944();
+    renderMarketTruth();
     return {
       ok:true,
       changed,
@@ -317,15 +317,15 @@
     };
   }
 
-  function queueCapture3944(reason) {
-    captureChain3944 = captureChain3944
+  function queueCapture(reason) {
+    captureChain = captureChain
       .catch(() => null)
-      .then(() => captureMarket3944(reason))
+      .then(() => captureMarket(reason))
       .catch(error => {
         console.warn("Market Memory 39.4.4", error);
         return { ok:false, error:String(error?.message || error) };
       });
-    return captureChain3944;
+    return captureChain;
   }
 
   atlasDecisionMemoryStats = function atlasDecisionMemoryStats3944() {
@@ -358,7 +358,7 @@
     const confidenceLabel = confidenceScore >= 75 ? "renforcée" : confidenceScore >= 50 ? "moyenne" : "faible";
 
     return {
-      schema: MARKET_SCHEMA_3944,
+      schema: MARKET_SCHEMA,
       generated_at: new Date().toISOString(),
       records: stats.canonicalCount,
       canonical_snapshots: stats.canonicalCount,
@@ -387,7 +387,7 @@
     };
   };
 
-  atlasMemoryLedgerRender35 = function atlasMemoryLedgerRender3944() {
+  atlasMemoryLedgerRender35 = function atlasMemoryLedgerRender() {
     const stats = marketStats3944();
     const set = (id, text) => {
       const node = document.getElementById(id);
@@ -408,9 +408,9 @@
   };
 
   if (typeof atlasMemoryLedgerRender34 === "function") {
-    const currentLedgerBase3944 = atlasMemoryLedgerRender34;
-    atlasMemoryLedgerRender34 = function atlasMemoryLedgerRender34SingleTruth3944() {
-      const currentStats = currentLedgerBase3944();
+    const currentLedgerBase = atlasMemoryLedgerRender34;
+    atlasMemoryLedgerRender34 = function atlasMemoryLedgerRender34SingleTruth() {
+      const currentStats = currentLedgerBase();
       const marketStats = marketStats3944();
       const value = document.getElementById("atlasMemoryCurrentLedger34");
       const detail = document.getElementById("atlasMemoryCurrentLedger34Detail");
@@ -424,9 +424,9 @@
   }
 
   if (typeof atlasMemoryIntelligenceRender === "function") {
-    const renderBase3944 = atlasMemoryIntelligenceRender;
+    const renderBase = atlasMemoryIntelligenceRender;
     atlasMemoryIntelligenceRender = function atlasMemoryIntelligenceRender3944() {
-      const data = renderBase3944();
+      const data = renderBase();
       const stats = marketStats3944();
       atlasMemoryLedgerRender35();
       const root = document.getElementById("atlasMemoryIntelligence");
@@ -446,9 +446,9 @@
   }
 
   if (typeof atlasOperatorSummaryRender35 === "function") {
-    const operatorBase3944 = atlasOperatorSummaryRender35;
-    atlasOperatorSummaryRender35 = function atlasOperatorSummaryRender3944() {
-      const result = operatorBase3944();
+    const operatorBase = atlasOperatorSummaryRender35;
+    atlasOperatorSummaryRender35 = function atlasOperatorSummaryRender() {
+      const result = operatorBase();
       const memory = atlasMemoryIntelligenceCompute();
       const stats = marketStats3944();
       const value = document.getElementById("atlasOperatorMemory35");
@@ -490,12 +490,12 @@
   };
 
   if (typeof atlasAfterLivecheck === "function") {
-    const afterLivecheckBase3944 = atlasAfterLivecheck;
+    const afterLivecheckBase = atlasAfterLivecheck;
     atlasAfterLivecheck = function atlasAfterLivecheck3944(options = {}) {
-      const result = afterLivecheckBase3944(options);
-      const s = appState3944();
+      const result = afterLivecheckBase(options);
+      const s = appState();
       if (s?.liveOk && Array.isArray(s.coins) && s.coins.length && canonicalId3944()) {
-        queueMicrotask(() => { void queueCapture3944(String(options?.reason || "livecheck")); });
+        queueMicrotask(() => { void queueCapture(String(options?.reason || "livecheck")); });
       }
       return result;
     };
@@ -506,10 +506,10 @@
   Promise.resolve()
     .then(() => typeof atlasCollectorInitializeStorage === "function" ? atlasCollectorInitializeStorage() : null)
     .then(() => {
-      renderMarketTruth3944();
-      const s = appState3944();
+      renderMarketTruth();
+      const s = appState();
       if (s?.liveOk && Array.isArray(s.coins) && s.coins.length && canonicalId3944()) {
-        return queueCapture3944("boot-valid-state");
+        return queueCapture("boot-valid-state");
       }
       return null;
     })
@@ -518,7 +518,7 @@
   try {
     globalThis.__AGENT_CRYPTO_MARKET_MEMORY_3944R1__ = Object.freeze({
       build: BUILD_3944,
-      schema: MARKET_SCHEMA_3944,
+      schema: MARKET_SCHEMA,
       storage: "existing Collector IndexedDB agent_crypto_local_memory",
       canonical_identity: "collector_id + market_snapshot_id",
       source_of_truth: "one canonical market snapshot truth shared by Market Memory and Decision Board",
@@ -530,7 +530,7 @@
       new_fetch: false,
       new_websocket: false
     });
-    globalThis.atlasMarketMemoryCapture3944R1 = reason => queueCapture3944(reason || "diagnostic");
+    globalThis.atlasMarketMemoryCapture3944R1 = reason => queueCapture(reason || "diagnostic");
     globalThis.atlasMarketMemoryStats3944R1 = marketStats3944;
   } catch (_) {}
 })();

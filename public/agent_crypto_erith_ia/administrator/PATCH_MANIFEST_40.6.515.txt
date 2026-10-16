@@ -1,0 +1,50 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.515
+Release: GRAPH OWNER HANDSHAKE · USD COMMIT AFTER RENDER
+Parent: 40.6.514
+Market Core: 38.15.11 UNCHANGED
+
+NEW
+- administrator/js/graph-owner-handshake-406515.js
+
+MODIFIED
+- administrator/js/global-quote-router-406514.js
+- administrator/index.html
+- administrator/build.json
+- administrator/js/post-boot-runtime-loader.js
+- administrator/views/atlas.html
+
+OWNER HANDSHAKE
+- restore canonical EUR before owner render
+- commit selected DISPLAY currency after owner settle
+- stale owner settlement rejected by epoch
+- solo owner covered
+- broker redraw covered
+- comparison owner covered
+- scanner owner covered
+- external chart owner covered when present
+
+UNCHANGED
+- app.js human core
+- EXEC BTC-EUR
+- SETTLE EUR
+- Market Core 38.15.11
+- Oracle
+- Aether
+- Lecture Technique logic
+- Strategy A business logic / gates
+- Depth 40.6.513 geometry + EUR-native contract
+- Backend / Bridge
+- storage schema
+- wallet / private API / real order
+
+RUNTIME
+- no new recurring timer
+- no MutationObserver
+- no new external market request
+- no storage writer
+
+PACKAGE
+PATCH ONLY.
+
+TERRAIN
+PENDING FIREFOX.

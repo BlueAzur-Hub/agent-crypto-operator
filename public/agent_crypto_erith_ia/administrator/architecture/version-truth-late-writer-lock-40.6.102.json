@@ -1,0 +1,58 @@
+{
+  "schema": "agent_crypto_visible_version_truth_late_writer_lock_evidence_v1",
+  "build": "40.6.102",
+  "parent_build": "40.6.101",
+  "engine": "38.15.11",
+  "defect": {
+    "reproduced": true,
+    "surface": "footer / late visible version labels",
+    "loaded_header_build_observed": "40.6.100",
+    "stale_footer_build_observed": "40.6.86",
+    "root_cause": "legacy app.js captures parser-time embedded ADMIN_BUILD and can write visible labels later in the same event turn after Version Truth already synchronized them"
+  },
+  "correction": {
+    "owner": "js/version-truth-entry-authority-v3.js",
+    "strategy": "deferred event-turn visible-truth resync",
+    "primitive": "queueMicrotask",
+    "events": ["erith:system-hydrated", "agentcrypto:current-finalized", "DOMContentLoaded", "load", "pageshow"],
+    "legacy_app_rewritten": false,
+    "immutable_path_authority_changed": false,
+    "canonical_build_param_fallback_changed": false
+  },
+  "static_proof": {
+    "node_syntax": "PASS",
+    "version_truth_required_markers_preserved": true,
+    "forbidden_setInterval": false,
+    "forbidden_MutationObserver": false,
+    "forbidden_IntersectionObserver": false,
+    "storage_write": false
+  },
+  "protected": {
+    "market_core": "38.15.11",
+    "web_classic": true,
+    "graph_history": true,
+    "aether": true,
+    "atlas_current": true,
+    "oracle": true,
+    "evidence": true,
+    "math_core": true,
+    "lecture_technique": true,
+    "strategy_a": true,
+    "source_truth": true
+  },
+  "side_effects": {
+    "new_fetch_owner": false,
+    "recurring_timer": false,
+    "observer": false,
+    "storage_write": false,
+    "wallet": false,
+    "real_order": false,
+    "trading_endpoint": false
+  },
+  "terrain": {
+    "version_truth_ci": "required",
+    "version_delivery_ci": "required",
+    "github_pages": "required",
+    "firefox": "required after deployment"
+  }
+}

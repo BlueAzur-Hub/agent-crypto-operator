@@ -1,0 +1,45 @@
+AGENT-CRYPTO STRATEGY HUMAN READABILITY — 40.6.447
+====================================================
+
+PRESENTATION OWNER
+------------------
+strategy-human-readability.css
+  text baseline 13 px
+  technical labels >= 12.5 px
+  values 14 px
+  titles 16–18 px
+  buttons 13 px / >= 38 px
+  no priority override
+  no hidden evidence
+
+SOURCE-LEVEL BUTTON FIXES
+-------------------------
+js/strategy-a-execution-cost-truth.js
+js/strategy-a-paper-lifecycle.js
+js/strategy-a-replay.js
+js/strategy-a-g3-prospective-t0-capture.js
+
+LOCAL TESTS BEFORE COMMIT
+-------------------------
+minimum declared readability font : PASS 12.5 px
+new priority declarations          : PASS 0
+cascade over legacy 7–10 px        : PASS
+representative layout render       : PASS
+
+FROZEN
+------
+Backend 40.6.441
+Graphique 40.6.442
+Oracle metrics 40.6.445
+Strategy demand loader 40.6.446
+Market Core 38.15.11
+Aether
+
+NO STRATEGY THRESHOLD CHANGE
+NO ORACLE MATH CHANGE
+NO BACKEND CHANGE
+NO CHART CHANGE
+NO LOADER CHANGE
+NO MARKET CORE CHANGE
+NO AETHER CHANGE
+NO STORAGE / TIMER / NETWORK CHANGE

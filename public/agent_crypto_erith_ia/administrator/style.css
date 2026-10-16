@@ -6241,7 +6241,7 @@ main .decision-board{
 /* Crypto Card is the intentional interactive use of the shared help layer.
    Generic help stays non-interactive; the market card restores pointer input
    only while a real market coin is bound to the layer. */
-.atlas-help-layer[data-market-help-coin-id]:not([hidden]) {
+#atlasHelpLayer.atlas-help-layer[data-market-help-coin-id]:not([hidden]) {
   pointer-events: auto;
 }
 .atlas-help-kicker {
@@ -16107,9 +16107,9 @@ html[data-atlas-mode="essential"] .atlas-chart-context {
 #analyste.champagne-clean-lens .chart-shell,
 #analyste.champagne-clean-lens.detail-collapsed .chart-shell,
 #analyste.champagne-clean-lens:not(.detail-collapsed) .chart-shell {
-  height: clamp(507px, calc(59vh + 42px), 647px) !important;
-  min-height: 507px !important;
-  max-height: 647px !important;
+  height: clamp(525px, calc(61.5vh + 42px), 720px) !important;
+  min-height: 525px !important;
+  max-height: 720px !important;
 }
 
 #analyste.champagne-clean-lens #mainChart,
@@ -25876,3 +25876,4 @@ html[data-atlas-device-role="book-readonly"] #atlasSharedSynthesisCard #decision
 #atlasMarketCardDockHost.atlas-market-card-dock-host[hidden] {
   display: none !important;
 }
+

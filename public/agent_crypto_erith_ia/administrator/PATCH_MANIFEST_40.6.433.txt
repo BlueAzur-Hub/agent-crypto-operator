@@ -1,0 +1,35 @@
+AGENT-CRYPTO DELIVERY MANIFEST — 40.6.433
+================================================
+
+Build: 40.6.433
+Release: STRATEGY A EXECUTION COST TRUTH MOUNT REPAIR
+Functional commit: 32483a0182e15832bb795ecd8d4fc8346631f0b4
+Market Core: 38.15.11
+
+PACKAGE RULE
+------------
+This is the bounded update package for build 40.6.433.
+It is NOT a GitHub repository/branch archive.
+Archive root: administrator/
+
+CONTENTS
+--------
+332ac7daf3b85f68d98572828d413795d1773ffff074f9990bc66bebd89583c9  administrator/js/strategy-a-execution-cost-truth.js
+f9fed0244ad69318b76a2df77e88d1e7e812876324b271dcc1b0b5a08e873865  administrator/js/post-boot-runtime-loader.js
+0f2bc4d43d2b76e5e7643a153d416611a2cc615ecd9088422e934125d8c14dfa  administrator/build.json
+06ed16a17646adc541c8d85247c28871f9d4c40a617941d6c7dede85ee82a5a3  administrator/index.html
+06ed16a17646adc541c8d85247c28871f9d4c40a617941d6c7dede85ee82a5a3  administrator/index-40.6.433.html
+ff474a6e0e033c191ac2ad5d11dfd2ee2adcbe5baf2355b829913a2c906b6bb5  administrator/RELEASE.md
+431e3398c4dbe20ff3cd9f9894cb249de86493bf3af049da7070ec1a6ccbdbc1  administrator/HANDOFF.md
+
+SCOPE
+-----
+- repairs only the visible mount of Execution Cost Truth;
+- preserves the 40.6.432 Kraken + OKX measurement logic;
+- includes post-boot-runtime-loader.js because it is the cumulative loader dependency introduced by 40.6.432;
+- no Market Core, Aether, CSS cockpit, Oracle, Risk, Paper, wallet, API key or real-order change.
+
+DELIVERY DISCIPLINE
+-------------------
+1 ZIP = 1 upload = 1 packaging commit.
+No new build number is created for this packaging correction.

@@ -1,0 +1,31 @@
+AGENT-CRYPTO 40.6.488 — PUBLIC CRYPTO COLLECTOR PRE-480 RESTORE
+
+RESTORED EXACTLY FROM 40.6.479
+.github/workflows/atlas-public-crypto-market.yml
+public/agent_crypto_erith_ia/tools/collect_public_crypto.py
+public/agent_crypto_erith_ia/tools/collect_public_crypto_rank_complete.py
+
+VERSION IDENTITY
+public/agent_crypto_erith_ia/administrator/index.html
+public/agent_crypto_erith_ia/administrator/index-40.6.488.html
+public/agent_crypto_erith_ia/administrator/build.json
+public/agent_crypto_erith_ia/administrator/RELEASE.md
+public/agent_crypto_erith_ia/administrator/HANDOFF.md
+public/agent_crypto_erith_ia/administrator/HANDOFF_FINAL_40.6.488.md
+public/agent_crypto_erith_ia/administrator/PUBLIC_CRYPTO_COLLECTOR_PRE480_RESTORE_40.6.488.md
+public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.488.txt
+
+PROTECTED
+Market Core 38.15.11
+Strategy A
+Atlas CURRENT engine
+Oracle / Math
+Aether / Redivider
+Lecture Technique
+Bridge R17 / V1.9.13
+Oracle Evidence 40.6.487
+Web Classique
+real orders / wallets
+
+RESTORE SOURCE COMMIT
+aa120142b856596739e0fc6abd5b418fe58f379a

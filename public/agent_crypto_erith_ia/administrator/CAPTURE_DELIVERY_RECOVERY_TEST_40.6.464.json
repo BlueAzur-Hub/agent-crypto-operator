@@ -1,0 +1,18 @@
+{
+  "schema": "agent_crypto_capture_delivery_recovery_test_v1",
+  "build": "40.6.464",
+  "pass": true,
+  "checks": {
+    "window_listener": true,
+    "audit_fallback": true,
+    "broader_anchor": true,
+    "postboot_464": true,
+    "audit_464": true
+  },
+  "invariants": {
+    "historical_backfill": false,
+    "after_cost_injection": false,
+    "market_core": "38.15.11",
+    "real_order": false
+  }
+}

@@ -1,0 +1,48 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.522
+Release: USD DEFAULT DISPLAY · OWNER CHAIN COMPLETE
+Parent: 40.6.521
+Market Core: 38.15.11 UNCHANGED
+
+CHANGED
+- administrator/js/display-default-usd-406522.js
+- Administrator 40.6.522 version truth / archive / docs / guard / package
+- post-boot + Atlas visible build identity
+
+DEFAULT POLICY
+- one-shot startup DISPLAY = USD
+- existing quote architecture emits canonical currency-change event
+- EUR remains operator-selectable
+- no persistent preference
+
+OWNER TRUTH
+- Graphique => native USD history
+- Market/Fiche => explicit USD
+- Oracle/Aether/Lecture price => explicit USD
+- Bougies => actual USDC instrument under DISPLAY USD
+- Profondeur => actual USDC, fallback USDT
+- USDC/USDT are never renamed USD
+
+PROTECTED
+- app.js / Market Core 38.15.11
+- quote architecture 40.6.497
+- Currency Domain V2 40.6.517
+- Market/Fiche 40.6.518
+- Oracle/Aether 40.6.519
+- Graphique 40.6.520
+- Profondeur 40.6.521
+- Bougies 40.6.498
+- Strategy / Evidence / Cost Gate
+- Backend / Bridge
+
+RUNTIME
+- no recurring timer
+- no observer
+- no storage
+- no network owner
+- no conversion
+- no private API
+- no wallet
+- no real order
+
+TERRAIN
+PENDING FIREFOX.

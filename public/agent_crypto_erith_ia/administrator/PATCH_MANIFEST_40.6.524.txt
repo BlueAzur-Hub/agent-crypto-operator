@@ -1,0 +1,32 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.524
+Parent: 40.6.523
+Release: TARGET TOP + MARKET FLOW USD DISPLAY
+Market Core: 38.15.11 protected
+
+CHANGED
+- administrator/js/target-flow-display-406524.js
+- administrator/index.html
+- administrator/index-40.6.524.html
+- administrator/build.json
+- administrator/js/post-boot-runtime-loader.js
+- administrator/views/atlas.html
+- administrator/TARGET_FLOW_USD_DISPLAY_40.6.524.md
+- administrator/PATCH_MANIFEST_40.6.524.txt
+- administrator/SEVEN_HANDOFF_40.6.524.md
+- .github/scripts/agent_crypto_target_flow_usd_guard_406524.py
+- .github/workflows/agent-crypto-package-406524.yml
+
+PROTECTED / UNCHANGED
+- administrator/app.js
+- Market Core 38.15.11
+- Market/Fiche 40.6.523 owner
+- Graphique
+- Oracle / Aether
+- Bougies
+- Profondeur
+- Strategy A
+- Backend / Bridge
+- EXEC BTC-EUR
+- SETTLE EUR
+
+NO EUR→USD CONVERSION.

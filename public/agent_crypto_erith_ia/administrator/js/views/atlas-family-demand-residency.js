@@ -9,6 +9,12 @@
    No engine, polling, recurring timer, observer, fetch, storage or CURRENT owner is added. */
 (()=>{
   "use strict";
+  const __PROBE_406411_SRC="atlas-family-demand-residency.js";
+  const __PROBE_406411_BUILD=String(globalThis.AGENT_CRYPTO_EFFECTIVE_BUILD||document.documentElement?.dataset?.agentCryptoLoadedBuild||"");
+  const __PROBE_406411_ON=["40.6.411","40.6.412"].includes(__PROBE_406411_BUILD);
+  const __PROBE_406411_T0=__PROBE_406411_ON?performance.now():0;
+  if(__PROBE_406411_ON){try{globalThis.AgentCryptoBootProbe?.mark?.("probe-script-eval-enter",{src:__PROBE_406411_SRC,build:__PROBE_406411_BUILD});}catch(_){}}
+
   const BUILD="40.4.139";
   const BOOT_FIX="40.6.72";
   const BOOT_FIX_SOURCE="40.6.71 R1";
@@ -33,8 +39,8 @@
     closeDefaultDisclosure(document.querySelector(HOT_ROOT));
     selectors.forEach(selector=>document.querySelectorAll(selector).forEach(closeDefaultDisclosure));
     try{
-      document.documentElement.dataset.atlasDefaultCollapsed404138="true";
-      document.documentElement.dataset.atlasHotCoreResident404138="true";
+      document.documentElement.dataset.atlasDefaultCollapsed="true";
+      document.documentElement.dataset.atlasHotCoreResident="true";
     }catch(_){}
   };
 
@@ -59,7 +65,7 @@
     if(document.readyState==="complete")enforceCollapsedDefaults();
     else window.addEventListener("load",enforceCollapsedDefaults,{once:true});
 
-    globalThis.ErithAtlasFamilyDemandResidency40415=Object.freeze({
+    globalThis.ErithAtlasFamilyDemandResidency=Object.freeze({
       build:BUILD,
       boot_fix:BOOT_FIX,
       boot_fix_source:BOOT_FIX_SOURCE,
@@ -99,4 +105,6 @@
     if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",rearmAtlasFamilyResidency406071R1,{once:true});
     else if(document.readyState!=="complete")window.addEventListener("load",installAtlasFamilyResidency406071R1,{once:true});
   }
+
+  if(__PROBE_406411_ON){try{globalThis.AgentCryptoBootProbe?.mark?.("probe-script-eval-exit",{src:__PROBE_406411_SRC,build:__PROBE_406411_BUILD,eval_ms:Number((performance.now()-__PROBE_406411_T0).toFixed(3))});}catch(_){}}
 })();

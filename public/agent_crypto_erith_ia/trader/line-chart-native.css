@@ -1,0 +1,133 @@
+/* Agent-Crypto Trader 40.6.589 — native Crypto Ligne surface
+   Visual grammar is inherited from Administrator style.css.
+   This file owns only the Trader line-canvas geometry. */
+
+.trader-chart-shell{
+  position:relative;
+  overflow:hidden;
+}
+.trader-native-line-chart{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  overflow:hidden;
+  border-radius:9px;
+  background:linear-gradient(180deg,rgba(2,9,16,.36),rgba(3,15,23,.22));
+}
+.trader-native-line-chart canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  touch-action:none;
+  cursor:crosshair;
+}
+#traderLineInsightOverlay{
+  z-index:3;
+  pointer-events:none;
+}
+#traderLineLegend{
+  position:absolute;
+  z-index:4;
+  left:18px;
+  top:64px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-height:24px;
+  padding:4px 7px;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:8px;
+  background:rgba(2,10,18,.56);
+  color:#dcecf2;
+  font:850 9px/1.2 system-ui,sans-serif;
+  backdrop-filter:blur(6px);
+  pointer-events:none;
+}
+#traderLineLegend[hidden]{display:none!important}
+#traderLineLegend i{
+  width:18px;
+  height:3px;
+  border-radius:999px;
+  background:currentColor;
+  box-shadow:0 0 6px currentColor;
+}
+.trader-line-caption{
+  position:absolute;
+  z-index:4;
+  left:12px;
+  bottom:8px;
+  max-width:calc(100% - 24px);
+  padding:5px 8px;
+  border:1px solid rgba(255,255,255,.055);
+  border-radius:7px;
+  background:rgba(2,10,17,.82);
+  color:#9ab1bb;
+  font:850 9px/1.3 ui-monospace,monospace;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  pointer-events:none;
+}
+.trader-line-tooltip{
+  position:absolute;
+  z-index:8;
+  min-width:150px;
+  max-width:240px;
+  padding:8px 9px;
+  border:1px solid rgba(121,226,240,.34);
+  border-radius:9px;
+  background:rgba(2,12,20,.96);
+  box-shadow:0 12px 30px rgba(0,0,0,.38);
+  color:#ecfbff;
+  font:850 9px/1.35 system-ui,sans-serif;
+  pointer-events:none;
+}
+.trader-line-tooltip b{display:block;color:#fff0bc;font-size:11px}
+.trader-line-tooltip small{display:block;color:#90aab5;margin-top:2px}
+.trader-native-line-chart.is-loading canvas{opacity:.45}
+.trader-native-line-chart.is-error canvas{opacity:.28}
+.trader-native-line-chart.is-loading::after,
+.trader-native-line-chart.is-error::after{
+  content:attr(data-state-label);
+  position:absolute;
+  z-index:7;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  max-width:70%;
+  padding:10px 14px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:10px;
+  background:rgba(2,11,19,.88);
+  color:#dcecf2;
+  font:850 10px/1.35 system-ui,sans-serif;
+  text-align:center;
+}
+.trader-line-period-row{
+  width:100%;
+  justify-content:flex-end;
+  margin-top:4px;
+}
+.trader-line-period-row .period-tabs{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  flex-wrap:wrap;
+}
+.trader-line-period-row .period-btn[disabled]{
+  opacity:.34;
+  cursor:not-allowed;
+  filter:saturate(.55);
+}
+.trader-line-period-row .chart-v2-period-truth{
+  min-width:72px;
+}
+#atlasMarketMicroscope{
+  z-index:20;
+}
+@media(max-width:1000px){
+  .trader-line-period-row{justify-content:flex-start}
+  #traderLineLegend{top:72px}
+}

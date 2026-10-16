@@ -1,0 +1,39 @@
+AGENT-CRYPTO 40.6.487 — ORACLE EVIDENCE AUTO ARCHIVE SAFETY GATES
+
+ADDED
+.github/scripts/agent_crypto_oracle_evidence_auto_archive_safety_test_406487.py
+.github/workflows/agent-crypto-package-406487.yml
+public/agent_crypto_erith_ia/administrator/js/oracle-evidence-auto-archive-safety-gates.js
+public/agent_crypto_erith_ia/administrator/index-40.6.487.html
+public/agent_crypto_erith_ia/administrator/HANDOFF_FINAL_40.6.487.md
+public/agent_crypto_erith_ia/administrator/ORACLE_EVIDENCE_AUTO_ARCHIVE_SAFETY_GATES_40.6.487.md
+public/agent_crypto_erith_ia/administrator/ORACLE_EVIDENCE_AUTO_ARCHIVE_SAFETY_TEST_40.6.487.json
+public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.487.txt
+
+MODIFIED
+public/agent_crypto_erith_ia/administrator/js/oracle-evidence-existing-bridge-integration.js
+public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+public/agent_crypto_erith_ia/administrator/js/strategy-a-audit-demand-loader.js
+public/agent_crypto_erith_ia/administrator/index.html
+public/agent_crypto_erith_ia/administrator/build.json
+public/agent_crypto_erith_ia/administrator/RELEASE.md
+public/agent_crypto_erith_ia/administrator/HANDOFF.md
+.github/workflows/agent-crypto-package-406477.yml
+.github/workflows/agent-crypto-package-406486.yml
+
+HISTORICAL WORKFLOWS
+40.6.477 and 40.6.481-.486 are manual-only package archives.
+
+SAFETY GATES
+Bridge enabled=true required
+shared archive lock
+manual mass ingest disabled
+exact public receipt path/SHA/count
+500 rows/chunk
+one chunk in flight
+VERIFIED before next
+fixed target
+safe pause/stop boundary
+resume from Bridge VERIFIED watermark
+IndexedDB readonly
+zero local purge

@@ -1,0 +1,43 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.529
+Parent: 40.6.528
+Release: NEW LISTINGS LIVE ASSET PIPELINE V1
+
+CHANGED:
+- administrator/js/new-listings-live-asset-406529.js (new owner)
+- administrator/js/market-microscope-candles-406498.js (bounded external-context extension)
+- administrator/js/okx-microstructure-406499.js (bounded external-context extension)
+- version identity / index / loader / atlas view
+- index-40.6.529.html
+- docs / guard / package
+
+FUNCTION:
+- New Listing temporary external asset context
+- Concrete CT/USDT load via OKX or Bitget
+- real external Ligne in existing chart shell
+- real external Bougies
+- real external Profondeur
+- operator-triggered Bitget recent-listing discovery using launchTime
+- Return Market action
+
+PROTECTED:
+- app.js
+- Market Core 38.15.11
+- js/new-listings.js static Radar 40.6.528
+- Backend 1.4.4 / Bridge 1.9.13
+- OKX transport 40.6.526
+- Graph native USD owner
+- Currency Domain V2
+- Market/Fiche
+- Oracle / Aether
+- Target Flow
+- Strategy
+
+NO:
+- state.coins injection
+- ranking mutation
+- fabricated price
+- private API
+- order / wallet
+- new storage owner
+- new recurring timer
+- MutationObserver

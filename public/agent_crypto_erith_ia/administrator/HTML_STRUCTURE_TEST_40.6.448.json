@@ -1,0 +1,54 @@
+{
+  "version": "40.6.448",
+  "parent": "40.6.447",
+  "scope": "Firefox isolated: full HTML parser and inert document; business scripts/network disabled; not operator session validation",
+  "pass": true,
+  "baseline": {
+    "head_children": 29,
+    "stylesheet_parent": "BODY",
+    "literal_newline_text_nodes": 3
+  },
+  "candidate": {
+    "head_children": 119,
+    "stylesheet_parent": "HEAD",
+    "literal_newline_text_nodes": 0
+  },
+  "inline_scripts_syntax_checked": 19,
+  "ids_preserved": 655,
+  "external_scripts_preserved": 44,
+  "stylesheets_preserved": 32,
+  "inline_styles_preserved": 58,
+  "body_classes_preserved": true,
+  "inline_business_js_preserved": true,
+  "inline_boot_identity": "40.6.448 / 38.15.11",
+  "version_truth_guard": "PASS",
+  "views": [
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 920
+      },
+      "parasites": 0,
+      "stylesheet_parent": "HEAD",
+      "build": "Build 40.6.448 · Administrator"
+    },
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "parasites": 0,
+      "stylesheet_parent": "HEAD",
+      "build": "Build 40.6.448 · Administrator"
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "parasites": 0,
+      "stylesheet_parent": "HEAD",
+      "build": "Build 40.6.448 · Administrator"
+    }
+  ]
+}

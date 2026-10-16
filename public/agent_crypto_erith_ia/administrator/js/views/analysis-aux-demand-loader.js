@@ -1,3 +1,5 @@
+/* 40.6.413 · diagnostic-only eval boundary */
+(()=>{try{const b=String(globalThis.AGENT_CRYPTO_EFFECTIVE_BUILD||document.documentElement?.dataset?.agentCryptoLoadedBuild||"");if(b==="40.6.413")globalThis.AgentCryptoBootProbe?.mark?.("probe-script-eval-enter",{src:"analysis-aux-demand-loader.js",build:"40.6.413"});}catch(_){}})();
 /* Agent-Crypto @erith.IA — 40.4.87
    READ-ONLY AUXILIARY READER TRUE-DEMAND LOADER / PHASE-2 SEAL
    Retrospective Validation and Memory Health are unchanged read-only owners.
@@ -27,7 +29,7 @@
       const script=document.createElement("script");
       script.src=def.src;
       script.async=true;
-      script.dataset.analysisAuxDemand40487=key;
+      script.dataset.analysisAuxDemand=key;
       script.addEventListener("load",()=>{
         state[key]="ready";loadedAt[key]=Date.now();errors[key]="";
         try{window.dispatchEvent(new CustomEvent(def.event,{detail:{build:BUILD,key,reason:reasons[key]}}));}catch(_){}
@@ -47,15 +49,15 @@
     const target=event.target instanceof Element?event.target:null;if(!target)return;
     const href=target.closest('a[href^="#"]')?.getAttribute("href")||"";
     if(["#decision-board","#decisionMemoryV2","#decisionDualMemory395"].includes(href))void ensure("retrospective","decision-board");
-    if(["#local-ai-hub","#shared-memory","#atlasMemoryHealth3980"].includes(href))void ensure("memory","atlas-memory");
+    if(["#local-ai-hub","#shared-memory","#atlasMemoryHealth"].includes(href))void ensure("memory","atlas-memory");
   },true);
 
   const hash=String(location.hash||"");
   if(["#decision-board","#decisionMemoryV2","#decisionDualMemory395"].includes(hash))void ensure("retrospective","direct-hash");
-  if(["#local-ai-hub","#shared-memory","#atlasMemoryHealth3980"].includes(hash))void ensure("memory","direct-hash");
+  if(["#local-ai-hub","#shared-memory","#atlasMemoryHealth"].includes(hash))void ensure("memory","direct-hash");
   if(atlas?.open)void ensure("memory","open-at-boot");
 
-  globalThis.ErithAnalysisAuxDemand40487=Object.freeze({
+  globalThis.ErithAnalysisAuxDemand=Object.freeze({
     build:BUILD,
     ensure,
     snapshot:()=>Object.freeze({
@@ -68,3 +70,5 @@
     new_storage_owner:false
   });
 })();
+/* 40.6.413 · diagnostic-only eval boundary */
+(()=>{try{const b=String(globalThis.AGENT_CRYPTO_EFFECTIVE_BUILD||document.documentElement?.dataset?.agentCryptoLoadedBuild||"");if(b==="40.6.413")globalThis.AgentCryptoBootProbe?.mark?.("probe-script-eval-exit",{src:"analysis-aux-demand-loader.js",build:"40.6.413"});}catch(_){}})();

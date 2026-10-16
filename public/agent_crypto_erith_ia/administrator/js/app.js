@@ -1,12 +1,12 @@
 (() => {
   "use strict";
-  const metaTruth406025 = name => document.querySelector(`meta[name="${name}"]`)?.content?.trim() || "";
-  const ADMIN_BUILD = metaTruth406025("administrator-build") || "UNKNOWN";
-  const ADMIN_RELEASE = metaTruth406025("administrator-release") || "UNKNOWN";
-  const ENGINE_BUILD = metaTruth406025("atlas-engine-build") || "UNKNOWN";
+  const metaTruth = name => document.querySelector(`meta[name="${name}"]`)?.content?.trim() || "";
+  const ADMIN_BUILD = metaTruth("administrator-build") || "UNKNOWN";
+  const ADMIN_RELEASE = metaTruth("administrator-release") || "UNKNOWN";
+  const ENGINE_BUILD = metaTruth("atlas-engine-build") || "UNKNOWN";
   const STORAGE_PREFIX = "erith_admin_portal_39_2_9";
 
-  const WORKSPACE_RUNTIME_CONTRACT_40227 = Object.freeze({
+  const WORKSPACE_RUNTIME_CONTRACT = Object.freeze({
     build: "40.2.27",
     checkpoint_only: true,
     x_semantics: "mask_presentation_only",
@@ -24,9 +24,9 @@
     storage_retirement_added: false,
     evidence_basis: Object.freeze(["40.2.25 runtime visibility", "40.2.26 reduced/collapsed attribution"])
   });
-  globalThis.ErithWorkspaceRuntimeContract40227 = WORKSPACE_RUNTIME_CONTRACT_40227;
+  globalThis.ErithWorkspaceRuntimeContract = WORKSPACE_RUNTIME_CONTRACT;
 
-  const STORAGE_LINEAGE_DECISION_CONTRACT_40228 = Object.freeze({
+  const STORAGE_LINEAGE_DECISION_CONTRACT = Object.freeze({
     build: "40.2.28",
     operator_triggered_only: true,
     read_only: true,
@@ -46,9 +46,9 @@
     window_manager_modified: false,
     runtime_checkpoint_40_2_27_preserved: true
   });
-  globalThis.ErithStorageLineageDecisionContract40228 = STORAGE_LINEAGE_DECISION_CONTRACT_40228;
+  globalThis.ErithStorageLineageDecisionContract = STORAGE_LINEAGE_DECISION_CONTRACT;
 
-  const STORAGE_OWNERSHIP_PROOF_CONTRACT_40229 = Object.freeze({
+  const STORAGE_OWNERSHIP_PROOF_CONTRACT = Object.freeze({
     build: "40.2.29",
     operator_triggered_only: true,
     read_only: true,
@@ -67,17 +67,17 @@
     window_manager_modified: false,
     parent_decision_40_2_28_preserved: true
   });
-  globalThis.ErithStorageOwnershipProofContract40229 = STORAGE_OWNERSHIP_PROOF_CONTRACT_40229;
+  globalThis.ErithStorageOwnershipProofContract = STORAGE_OWNERSHIP_PROOF_CONTRACT;
 
 
-  const VISUAL_CONTINUITY_CONTRACT_40230 = Object.freeze({
+  const VISUAL_CONTINUITY_CONTRACT = Object.freeze({
     build: "40.2.30",
     visual_only: true,
     existing_repository_assets_only: true,
     technical_portrait_complete_foreground_preserved: true,
     technical_portrait_letterbox_backdrop_fill: true,
     intelligence_family_emblem_added: true,
-    asset_used_for_intelligence_family: "./assets/visual/admin-analytical-memory.png",
+    asset_used_for_intelligence_family: "https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/assets/images/visual/admin-analytical-memory.png",
     image_generation_added: false,
     storage_write_added: false,
     network_request_added: false,
@@ -87,9 +87,9 @@
     window_manager_modified: false,
     market_flow_modified: false
   });
-  globalThis.ErithVisualContinuityContract40230 = VISUAL_CONTINUITY_CONTRACT_40230;
+  globalThis.ErithVisualContinuityContract = VISUAL_CONTINUITY_CONTRACT;
 
-  function applyVisualContinuity40230() {
+  function applyVisualContinuity() {
     const intelligence = document.querySelector(".atlas-layout-family-intelligence");
     if (intelligence) {
       intelligence.classList.add("admin-family-emblem-host-r3", "atlas-visual-continuity-40230");
@@ -97,7 +97,7 @@
         const img = document.createElement("img");
         img.className = "admin-family-emblem-r3";
         img.dataset.for = "intelligence-40230";
-        img.src = "./assets/visual/admin-analytical-memory.png";
+        img.src = "https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/assets/images/visual/admin-analytical-memory.png";
         img.alt = "";
         img.setAttribute("aria-hidden", "true");
         img.loading = "lazy";
@@ -110,18 +110,18 @@
     return Boolean(intelligence && detail);
   }
 
-  function bindVisualContinuity40230() {
-    if (document.documentElement.dataset.visualContinuity40230 === "1") return;
-    document.documentElement.dataset.visualContinuity40230 = "1";
-    applyVisualContinuity40230();
+  function bindVisualContinuity() {
+    if (document.documentElement.dataset.visualContinuity === "1") return;
+    document.documentElement.dataset.visualContinuity = "1";
+    applyVisualContinuity();
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindVisualContinuity40230, { once: true });
-  else bindVisualContinuity40230();
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindVisualContinuity, { once: true });
+  else bindVisualContinuity();
 
-  globalThis.ErithVisualContinuity40230 = Object.freeze({
+  globalThis.ErithVisualContinuity = Object.freeze({
     build: "40.2.30",
-    apply: applyVisualContinuity40230,
+    apply: applyVisualContinuity,
     visual_only: true,
     existing_repository_assets_only: true,
     storage_write_added: false,
@@ -129,7 +129,7 @@
     timer_added: false
   });
 
-  const ORACLE_V2_EVALUATION_CONTRACT_40231 = Object.freeze({
+  const ORACLE_V2_EVALUATION_CONTRACT = Object.freeze({
     build: "40.2.31",
     operator_triggered_only: true,
     read_only: true,
@@ -152,7 +152,7 @@
     timer_added: false,
     window_manager_modified: false
   });
-  globalThis.ErithOracleV2EvaluationContract40231 = ORACLE_V2_EVALUATION_CONTRACT_40231;
+  globalThis.ErithOracleV2EvaluationContract = ORACLE_V2_EVALUATION_CONTRACT;
 
   const ORACLE_VERDICT_HIERARCHY_CONTRACT_40232A = Object.freeze({
     build: "40.2.32A",
@@ -211,7 +211,7 @@
   });
   globalThis.ErithOracleRuntimeStethoscopeContract40232D = ORACLE_RUNTIME_STETHOSCOPE_CONTRACT_40232D;
 
-  const ORACLE_OPERATOR_VISUAL_STACK_CONTRACT_40232 = Object.freeze({
+  const ORACLE_OPERATOR_VISUAL_STACK_CONTRACT = Object.freeze({
     build: "40.2.32",
     cumulative: true,
     contains: Object.freeze(["40.2.32A", "40.2.32B", "40.2.32C", "40.2.32D"]),
@@ -224,9 +224,9 @@
     storage_write_added: false,
     window_manager_modified: false,
   });
-  globalThis.ErithOracleOperatorVisualStackContract40232 = ORACLE_OPERATOR_VISUAL_STACK_CONTRACT_40232;
+  globalThis.ErithOracleOperatorVisualStackContract = ORACLE_OPERATOR_VISUAL_STACK_CONTRACT;
 
-  const ORACLE_OPERATOR_CONSOLE_FINAL_CONTRACT_40233 = Object.freeze({
+  const ORACLE_OPERATOR_CONSOLE_FINAL_CONTRACT = Object.freeze({
     build: "40.2.33",
     final_lock: true,
     fit_overflow_contrast_only: true,
@@ -240,9 +240,9 @@
     storage_write_added: false,
     window_manager_modified: false,
   });
-  globalThis.ErithOracleOperatorConsoleFinalContract40233 = ORACLE_OPERATOR_CONSOLE_FINAL_CONTRACT_40233;
+  globalThis.ErithOracleOperatorConsoleFinalContract = ORACLE_OPERATOR_CONSOLE_FINAL_CONTRACT;
 
-  const NEWS_TO_MARKET_CAUSAL_ROLE_CONTRACT_40234 = Object.freeze({
+  const NEWS_TO_MARKET_CAUSAL_ROLE_CONTRACT = Object.freeze({
     build: "40.2.34",
     code_only: true,
     deterministic_local: true,
@@ -262,10 +262,10 @@
     evidence_capture_changed: false,
     window_manager_modified: false,
   });
-  globalThis.ErithNewsToMarketCausalRoleContract40234 = NEWS_TO_MARKET_CAUSAL_ROLE_CONTRACT_40234;
+  globalThis.ErithNewsToMarketCausalRoleContract = NEWS_TO_MARKET_CAUSAL_ROLE_CONTRACT;
 
 
-  const NEWS_TO_MARKET_OPERATOR_INTELLIGENCE_CONTRACT_40235 = Object.freeze({
+  const NEWS_TO_MARKET_OPERATOR_INTELLIGENCE_CONTRACT = Object.freeze({
     build: "40.2.35",
     code_only: true,
     deterministic_local: true,
@@ -285,64 +285,64 @@
     evidence_capture_changed: false,
     window_manager_modified: false,
   });
-  globalThis.ErithNewsToMarketOperatorIntelligenceContract40235 = NEWS_TO_MARKET_OPERATOR_INTELLIGENCE_CONTRACT_40235;
+  globalThis.ErithNewsToMarketOperatorIntelligenceContract = NEWS_TO_MARKET_OPERATOR_INTELLIGENCE_CONTRACT;
 
 
 
-  const EVENT_REACTION_TIMELINE_CONTRACT_40236 = Object.freeze({
+  const EVENT_REACTION_TIMELINE_CONTRACT = Object.freeze({
     build: "40.2.36", code_only: true, local_chart_cache_only: true, fetch_added: false,
     event_timestamp_anchor: true, windows_minutes: Object.freeze([-15,0,15,60,240]),
     causality_inferred: false, timeline_missing_data_is_explicit: true,
     timer_added: false, websocket_added: false, storage_write_added: false,
     oracle_model_modified: false, evidence_capture_changed: false, window_manager_modified: false,
   });
-  globalThis.ErithEventReactionTimelineContract40236 = EVENT_REACTION_TIMELINE_CONTRACT_40236;
+  globalThis.ErithEventReactionTimelineContract = EVENT_REACTION_TIMELINE_CONTRACT;
 
 
 
-  const ROLE_EVIDENCE_QUALITY_CONTRACT_40237 = Object.freeze({
+  const ROLE_EVIDENCE_QUALITY_CONTRACT = Object.freeze({
     build:"40.2.37", code_only:true, role_quality_not_causal_probability:true,
     transparent_components:true, source_independence_not_invented:true,
     timeline_coverage_component:true, causal_probability_calculated:false,
     new_network_request_added:false, timer_added:false, websocket_added:false, storage_write_added:false,
     oracle_model_modified:false, evidence_capture_changed:false, window_manager_modified:false,
   });
-  globalThis.ErithRoleEvidenceQualityContract40237 = ROLE_EVIDENCE_QUALITY_CONTRACT_40237;
+  globalThis.ErithRoleEvidenceQualityContract = ROLE_EVIDENCE_QUALITY_CONTRACT;
 
 
 
-  const CROSS_LAYER_MARKET_EXPLANATION_CONTRACT_40238 = Object.freeze({
+  const CROSS_LAYER_MARKET_EXPLANATION_CONTRACT = Object.freeze({
     build:"40.2.38", code_only:true, independent_layers_preserved:true,
     news_market_oracle_atlas_compared_not_fused:true, descriptive_convergence_only:true,
     oracle_model_modified:false, atlas_model_modified:false, causal_claim_allowed:false,
     new_network_request_added:false, timer_added:false, websocket_added:false, storage_write_added:false,
     evidence_capture_changed:false, window_manager_modified:false,
   });
-  globalThis.ErithCrossLayerMarketExplanationContract40238 = CROSS_LAYER_MARKET_EXPLANATION_CONTRACT_40238;
+  globalThis.ErithCrossLayerMarketExplanationContract = CROSS_LAYER_MARKET_EXPLANATION_CONTRACT;
 
 
 
-  const ORACLE_NEWS_CONTEXT_INTEGRATION_CONTRACT_40239 = Object.freeze({
+  const ORACLE_NEWS_CONTEXT_INTEGRATION_CONTRACT = Object.freeze({
     build:"40.2.39", code_only:true, compact_summary_only:true, source_of_truth:"news-sentinel",
     timeline_quality_cross_layer_reused:true, oracle_forecast_math_changed:false,
     oracle_v2_changed:false, evidence_capture_changed:false, causal_claim_allowed:false,
     new_network_request_added:false, timer_added:false, websocket_added:false, storage_write_added:false, window_manager_modified:false,
   });
-  globalThis.ErithOracleNewsContextIntegrationContract40239 = ORACLE_NEWS_CONTEXT_INTEGRATION_CONTRACT_40239;
+  globalThis.ErithOracleNewsContextIntegrationContract = ORACLE_NEWS_CONTEXT_INTEGRATION_CONTRACT;
 
 
 
-  const NEWS_TO_MARKET_FINAL_LOCK_CONTRACT_40240 = Object.freeze({
+  const NEWS_TO_MARKET_FINAL_LOCK_CONTRACT = Object.freeze({
     build:"40.2.40", final_lock:true, cumulative_from:"40.2.35-40.2.39",
     css_fit_overflow_responsive_only:true, new_intelligence_added:false, code_only:true,
     image_generation_added:false, oracle_model_modified:false, oracle_v2_changed:false,
     atlas_model_modified:false, evidence_capture_changed:false, causal_claim_allowed:false,
     new_network_request_added:false, timer_added:false, websocket_added:false, storage_write_added:false, window_manager_modified:false,
   });
-  globalThis.ErithNewsToMarketFinalLockContract40240 = NEWS_TO_MARKET_FINAL_LOCK_CONTRACT_40240;
+  globalThis.ErithNewsToMarketFinalLockContract = NEWS_TO_MARKET_FINAL_LOCK_CONTRACT;
 
 
-  const ORACLE_RESTORE_NEWS_PLACEMENT_CONTRACT_40241 = Object.freeze({
+  const ORACLE_RESTORE_NEWS_PLACEMENT_CONTRACT = Object.freeze({
     build:"40.2.58", code_only:true, corrective_layout:true,
     oracle_news_context_unmounted:true, oracle_operator_outer_frame_removed:true,
     oracle_bull_bear_metrics_restored_to_primary_readout:true,
@@ -352,7 +352,7 @@
     atlas_model_modified:false, evidence_capture_changed:false, window_manager_modified:false,
     new_network_request_added:false, timer_added:false, websocket_added:false, storage_write_added:false
   });
-  globalThis.ErithOracleRestoreNewsPlacementContract40241 = ORACLE_RESTORE_NEWS_PLACEMENT_CONTRACT_40241;
+  globalThis.ErithOracleRestoreNewsPlacementContract = ORACLE_RESTORE_NEWS_PLACEMENT_CONTRACT;
 
 
   const byId = id => document.getElementById(id);
@@ -394,21 +394,21 @@
   // The 03 owner remains explicit: header + Situation/Questionnaire/Briefing/Plan.
   // The 04 owner is again a real opening header: 04 -> Storage -> Simulation ->
   // Tests/Commands -> Backend -> Safety -> Physical Security -> Missions.
-  const ADMIN_OPERATION_KEYS_40308 = new Set([
+  const ADMIN_OPERATION_KEYS = new Set([
     "situation", "questionnaire", "briefing", "planning"
   ]);
-  const ADMIN_SYSTEM_KEYS_40308 = new Set([
+  const ADMIN_SYSTEM_KEYS = new Set([
     "simulation", "commandes", "backend", "safety", "physical-security"
   ]);
 
-  function preparationEntries40308() {
+  function preparationEntries() {
     const shell = q("main.shell");
     const header = q(".atlas-layout-family-operations");
     if (!shell || !(header instanceof HTMLElement)) return [];
     return [...shell.children]
       .filter(node => node instanceof HTMLElement && (
         node === header
-        || (node instanceof HTMLDetailsElement && ADMIN_OPERATION_KEYS_40308.has(String(node.dataset.collapseKey || "")))
+        || (node instanceof HTMLDetailsElement && ADMIN_OPERATION_KEYS.has(String(node.dataset.collapseKey || "")))
       ))
       .map(node => entry(node));
   }
@@ -416,9 +416,9 @@
   function systemEntriesCanonical40320() {
     const shell = q("main.shell");
     const header = q(".atlas-layout-family-system");
-    const storage = byId("atlasStorageHealth40198");
+    const storage = byId("atlasStorageHealth");
     if (!shell || !(header instanceof HTMLElement)) return [];
-    const details = [...ADMIN_SYSTEM_KEYS_40308]
+    const details = [...ADMIN_SYSTEM_KEYS]
       .map(key => shell.querySelector(`:scope > details[data-collapse-key="${key}"]`))
       .filter(node => node instanceof HTMLDetailsElement);
     return [header, storage, ...details]
@@ -434,10 +434,10 @@
   function systemEntriesCanonical40404() {
     const shell = q("main.shell");
     const header = q(".atlas-layout-family-system");
-    const storage = byId("atlasStorageHealth40198");
-    const greyForensic = byId("atlasGreyPlateForensic40393");
+    const storage = byId("atlasStorageHealth");
+    const greyForensic = byId("atlasGreyPlateForensic");
     if (!shell || !(header instanceof HTMLElement)) return [];
-    const details = [...ADMIN_SYSTEM_KEYS_40308]
+    const details = [...ADMIN_SYSTEM_KEYS]
       .map(key => shell.querySelector(`:scope > details[data-collapse-key="${key}"]`))
       .filter(node => node instanceof HTMLDetailsElement);
     return [header, storage, greyForensic, ...details]
@@ -445,27 +445,27 @@
       .map(node => entry(node));
   }
 
-  const ADMIN_MISSION_KEYS_40302 = new Set([
+  const ADMIN_MISSION_KEYS = new Set([
     "fonds-erith", "association-erith", "aerith-enfance", "aerith-animaux", "aerith-terre-vivante"
   ]);
 
-  function missionEntries40302() {
+  function missionEntries() {
     const shell = q("main.shell");
     if (!shell) return [];
     const intro = byId("missions-vie");
     const members = [...shell.children].filter(node =>
-      node instanceof HTMLDetailsElement && ADMIN_MISSION_KEYS_40302.has(String(node.dataset.collapseKey || ""))
+      node instanceof HTMLDetailsElement && ADMIN_MISSION_KEYS.has(String(node.dataset.collapseKey || ""))
     );
     return [intro, ...members]
       .filter((node, index, list) => node instanceof HTMLElement && node.parentElement === shell && list.indexOf(node) === index)
       .map(node => entry(node));
   }
 
-  // 40.4.5 — Presentation extraction only. missionEntries40302 remains the
+  // 40.4.5 — Presentation extraction only. missionEntries remains the
   // canonical Window Manager owner for Missions de vie; no membership rewrite.
-  const PROJECTS_PRESENTATION_EXTRACTION_40405 = Object.freeze({
+  const PROJECTS_PRESENTATION_EXTRACTION = Object.freeze({
     build: "40.4.5",
-    owner: "missionEntries40302",
+    owner: "missionEntries",
     intro: "missions-vie",
     keys: Object.freeze(["fonds-erith", "association-erith", "aerith-enfance", "aerith-animaux", "aerith-terre-vivante"]),
     audience_is_independent: true,
@@ -474,7 +474,7 @@
 
   // 40.4.6 — Oracle presentation-only debt settlement.
   // Engine, Evidence, Source Health and Window Manager ownership stay unchanged.
-  const ORACLE_UI_CONTINUITY_40406 = Object.freeze({
+  const ORACLE_UI_CONTINUITY = Object.freeze({
     build: "40.4.6",
     suite: "oracle-analysis-suite",
     collapsed_summary: "bias + confidence + horizon + bull/bear bars",
@@ -525,15 +525,15 @@
           const fittedWidth = Math.min(width, height * 16 / 9);
           const fittedHeight = fittedWidth * 9 / 16;
           return {
-            x: Math.max(12, Math.round((vw - fittedWidth) / 2)),
+            x: 12,
             y: Math.max(12, Math.round((vh * .5 + 99) - fittedHeight / 2)),
             width: Math.round(fittedWidth),
             height: Math.round(fittedHeight)
           };
         },
-        resolveEntries: () => [entry(byId("atlasAetherStatusPanel4084"))].filter(Boolean),
+        resolveEntries: () => [entry(byId("atlasAetherStatusPanel"))].filter(Boolean),
         resolveAnchor: nodes => nodes[0],
-        resolveControlHosts: nodes => [nodes[0]?.querySelector(".atlas-aether-panel-head-4084")].filter(Boolean),
+        resolveControlHosts: nodes => [nodes[0]?.querySelector(".atlas-aether-panel-head")].filter(Boolean),
         placeholderPolicy: "preserve"
       },
       {
@@ -644,7 +644,7 @@
         tone: "gold",
         // 40.3.08 — explicit 03 membership: header + Situation/Questionnaire/Briefing/Planning only.
         // No System/Experiment node can be absorbed by semantic proximity or DOM adjacency.
-        resolveEntries: () => preparationEntries40308(),
+        resolveEntries: () => preparationEntries(),
         resolveAnchor: nodes => nodes.find(node => node.classList.contains("atlas-layout-family-operations")) || nodes[0],
         // 40.3.01/40.3.02 — docked Reduce keeps the real family header, never a generic minibar.
         resolveCompactNodes: () => [q(".atlas-layout-family-operations")].filter(Boolean)
@@ -666,7 +666,7 @@
         placeholderPolicy: "compact-family",
         title: "Missions de vie",
         tone: "gold",
-        resolveEntries: () => missionEntries40302(),
+        resolveEntries: () => missionEntries(),
         resolveAnchor: nodes => byId("missions-vie") || nodes[0]
       },
       {
@@ -686,10 +686,10 @@
     ];
   }
 
-  function installOracleGraphWindowChrome404156() {
-    if (document.getElementById("atlasOracleGraphWindowChrome404156")) return true;
+  function installOracleGraphWindowChrome() {
+    if (document.getElementById("atlasOracleGraphWindowChrome")) return true;
     const style = document.createElement("style");
-    style.id = "atlasOracleGraphWindowChrome404156";
+    style.id = "atlasOracleGraphWindowChrome";
     style.textContent = `
       #atlasOracleV0.admin-native-anchor{--native-accent:#b890ff}
       #atlasOracleV0.admin-native-anchor>.admin-native-controls{top:6px!important;right:8px!important;z-index:80!important;opacity:.84}
@@ -704,7 +704,7 @@
     return true;
   }
 
-  globalThis.ErithOracleGraphWindow404156 = Object.freeze({
+  globalThis.ErithOracleGraphWindow = Object.freeze({
     build: "40.4.156",
     window_id: "oracle-graph",
     owner: "existing Administrator Window Manager",
@@ -756,8 +756,7 @@
     // geometry and version indicators only.
     byId("administratorMirrorIdentity")?.remove();
 
-    const footer = byId("footerRelease");
-    if (footer) footer.textContent = `Agent-Crypto @erith.IA · Administrator ${ADMIN_BUILD} · Market Core ${ENGINE_BUILD} · Web Classic · manifeste`;
+    // Footer version is owned exclusively by js/version-truth.js.
   }
 
   function updateLayoutButton(button, free) {
@@ -810,7 +809,7 @@
     reset.addEventListener("click", () => manager.reset());
 
     const classic = document.createElement("a");
-    classic.id = "atlasClassicVersionTruth406025";
+    classic.id = "atlasClassicVersionTruth";
     classic.href = "../web/index.html";
     classic.textContent = "CLASSIC · manifeste";
     classic.title = `Ouvrir la Web Classique · Engine ${ENGINE_BUILD}`;
@@ -1452,7 +1451,7 @@
 
   const MARKET_BODY_PORTAL_40127_MIGRATION_KEY = `${STORAGE_PREFIX}:market-body-portal-40127-migrated`;
 
-  function migrateMarketWindowState40127() {
+  function migrateMarketWindowState() {
     try {
       if (localStorage.getItem(MARKET_BODY_PORTAL_40127_MIGRATION_KEY) === "1") return;
       // 40.1.27: old Market floating state was measured while its shell lived
@@ -1464,7 +1463,7 @@
   }
 
   const GLOBAL_SHELL_PORTAL_40128_MIGRATION_KEY = `${STORAGE_PREFIX}:global-shell-body-portal-40128-migrated`;
-  const GLOBAL_SHELL_WINDOW_IDS_40128 = Object.freeze([
+  const GLOBAL_SHELL_WINDOW_IDS = Object.freeze([
     "market",
     "analyse-decision",
     "intelligence-memoire-creation",
@@ -1481,7 +1480,7 @@
       // 40.1.28 changes the DEFAULT shell portal for every non-directFixed
       // Administrator window. Clear only those shell-window geometries once so
       // their first body-level detach is measured from the native dock.
-      GLOBAL_SHELL_WINDOW_IDS_40128.forEach(id => {
+      GLOBAL_SHELL_WINDOW_IDS.forEach(id => {
         localStorage.removeItem(`${STORAGE_PREFIX}:window:${id}`);
       });
       localStorage.setItem(GLOBAL_SHELL_PORTAL_40128_MIGRATION_KEY, "1");
@@ -1496,7 +1495,7 @@
       // 40.1.29 replaces zero-size hidden placeholders with layout-preserving
       // spacers. Clear only shell-window geometry once so the first detach is
       // measured from the current native dock.
-      GLOBAL_SHELL_WINDOW_IDS_40128.forEach(id => {
+      GLOBAL_SHELL_WINDOW_IDS.forEach(id => {
         localStorage.removeItem(`${STORAGE_PREFIX}:window:${id}`);
       });
       localStorage.setItem(GLOBAL_SHELL_LAYOUT_40129_MIGRATION_KEY, "1");
@@ -1511,7 +1510,7 @@
       // 40.1.30 fixes the CSS/JS placeholder contradiction and measures multi-node
       // families from the union of their visible members. Purge only shell-window
       // geometry once so no stale anchor-only dimensions survive.
-      GLOBAL_SHELL_WINDOW_IDS_40128.forEach(id => {
+      GLOBAL_SHELL_WINDOW_IDS.forEach(id => {
         localStorage.removeItem(`${STORAGE_PREFIX}:window:${id}`);
       });
       localStorage.setItem(GLOBAL_SHELL_GEOMETRY_40130_MIGRATION_KEY, "1");
@@ -1520,7 +1519,7 @@
 
   const DIRECT_FIXED_GEOMETRY_40131_MIGRATION_KEY = `${STORAGE_PREFIX}:direct-fixed-inline-important-40131-migrated`;
 
-  function migrateDirectFixedWindowState40131() {
+  function migrateDirectFixedWindowState() {
     try {
       if (localStorage.getItem(DIRECT_FIXED_GEOMETRY_40131_MIGRATION_KEY) === "1") return;
       // 40.1.31 fixes legacy !important dock rules overriding the directFixed
@@ -1535,13 +1534,13 @@
 
   const GLOBAL_SHELL_AUTOFIT_40132_MIGRATION_KEY = `${STORAGE_PREFIX}:global-shell-natural-autofit-40132-migrated`;
 
-  function migrateGlobalShellAutoFit40132() {
+  function migrateGlobalShellAutoFit() {
     try {
       if (localStorage.getItem(GLOBAL_SHELL_AUTOFIT_40132_MIGRATION_KEY) === "1") return;
       // 40.1.32 changes only shell sizing. Clear the eight shell-window geometries
       // once so their first detach is measured from live content + floating chrome.
       // directFixed Graphique / Target Top / Market Flow / Math Core are excluded.
-      GLOBAL_SHELL_WINDOW_IDS_40128.forEach(id => {
+      GLOBAL_SHELL_WINDOW_IDS.forEach(id => {
         localStorage.removeItem(`${STORAGE_PREFIX}:window:${id}`);
       });
       localStorage.setItem(GLOBAL_SHELL_AUTOFIT_40132_MIGRATION_KEY, "1");
@@ -1565,7 +1564,7 @@
     "missions-de-vie"
   ]);
 
-  function migrateFamilyTopologyWindowState40303() {
+  function migrateFamilyTopologyWindowState() {
     try {
       if (localStorage.getItem(FAMILY_TOPOLOGY_40303_MIGRATION_KEY) === "1") return false;
       FAMILY_TOPOLOGY_40303_WINDOW_IDS.forEach(id => {
@@ -1578,7 +1577,7 @@
     }
   }
 
-  globalThis.ErithFamilyTopologyStateMigration40303 = Object.freeze({
+  globalThis.ErithFamilyTopologyStateMigration = Object.freeze({
     build: ADMIN_BUILD,
     key: FAMILY_TOPOLOGY_40303_MIGRATION_KEY,
     window_ids: FAMILY_TOPOLOGY_40303_WINDOW_IDS,
@@ -1591,7 +1590,7 @@
 
   const FAMILY_ROLE_RETURN_40322_MIGRATION_KEY = `${STORAGE_PREFIX}:family-role-return-40322-migrated`;
 
-  function migrateFamilyRoleReturnWindowState40322() {
+  function migrateFamilyRoleReturnWindowState() {
     try {
       if (localStorage.getItem(FAMILY_ROLE_RETURN_40322_MIGRATION_KEY) === "1") return false;
       // 40.3.22 — recover only the five large Administrator families from stale
@@ -1607,7 +1606,7 @@
     }
   }
 
-  globalThis.ErithFamilyRoleReturnMigration40322 = Object.freeze({
+  globalThis.ErithFamilyRoleReturnMigration = Object.freeze({
     build: "40.3.22",
     parent_build: "40.3.21",
     key: FAMILY_ROLE_RETURN_40322_MIGRATION_KEY,
@@ -1636,7 +1635,7 @@
     } catch {}
   }
 
-  function installMathCoreInlineWindowControls40148() {
+  function installMathCoreInlineWindowControls() {
     const math = byId("math");
     const head = math?.querySelector?.(".atlas-math-dock-head");
     const dockActions = math?.querySelector?.(".atlas-math-dock-actions");
@@ -1709,10 +1708,10 @@
       dockActions.insertBefore(controls, firstDockButton);
     }
 
-    let separator = dockActions.querySelector(".atlas-math-inline-window-separator-40148");
+    let separator = dockActions.querySelector(".atlas-math-inline-window-separator");
     if (!separator) {
       separator = document.createElement("span");
-      separator.className = "atlas-math-inline-window-separator-40148";
+      separator.className = "atlas-math-inline-window-separator";
       separator.textContent = "|";
       separator.setAttribute("aria-hidden", "true");
       separator.style.cssText = "display:inline-flex;align-items:center;justify-content:center;color:rgba(255,226,161,.58);font-weight:900;line-height:1;padding:0 1px;flex:0 0 auto;";
@@ -1728,7 +1727,7 @@
     return true;
   }
 
-  function presentationRole40312() {
+  function presentationRole() {
     const role = String(document.body?.dataset?.atlasRole || document.documentElement?.dataset?.atlasRole || "").trim();
     if (["public", "operator", "administrator"].includes(role)) return role;
     try {
@@ -1742,7 +1741,7 @@
     }
   }
 
-  let activeWindowPresentationRole40314 = "";
+  let activeWindowPresentationRole = "";
 
   // 40.4.39 — CANONICAL OWNER: primary Atlas family visibility in Administrator.
   // The behavior was introduced in 40.4.36 after a persisted compact family state
@@ -1752,7 +1751,7 @@
   const ADMIN_ATLAS_PRIMARY_FAMILY = "intelligence-memoire-creation";
 
   function ensureAdministratorAtlasVisible(manager, reason = "role-transition") {
-    if (!manager || presentationRole40312() !== "administrator") return false;
+    if (!manager || presentationRole() !== "administrator") return false;
     // 40.4.139 — visible does not mean forced expanded. Family 02 keeps the
     // canonical compact/minimized boot state while remaining unhidden.
     const family = q(".atlas-layout-family-intelligence");
@@ -1768,18 +1767,18 @@
     return Boolean(atlas);
   }
 
-  function syncWindowPresentationRole40314(manager, role = presentationRole40312()) {
+  function syncWindowPresentationRole(manager, role = presentationRole()) {
     if (!manager) return role;
-    const nextRole = ["public", "operator", "administrator"].includes(role) ? role : presentationRole40312();
-    if (activeWindowPresentationRole40314 === nextRole) return nextRole;
+    const nextRole = ["public", "operator", "administrator"].includes(role) ? role : presentationRole();
+    if (activeWindowPresentationRole === nextRole) return nextRole;
 
     if (nextRole === "administrator") {
       manager.restorePersistedPresentation?.();
       ensureAdministratorAtlasVisible(manager, "role-transition");
     } else manager.neutralizePresentation?.();
 
-    activeWindowPresentationRole40314 = nextRole;
-    document.documentElement.dataset.adminWindowPresentationRole40314 = nextRole;
+    activeWindowPresentationRole = nextRole;
+    document.documentElement.dataset.adminWindowPresentationRole = nextRole;
     return nextRole;
   }
 
@@ -1795,7 +1794,7 @@
      - No timer, observer, scheduler, CSS paint-skipping gate or runtime reparenting is introduced.
      ============================================================ */
 
-  const ATLAS_MARKET_MEMORY_BODY_TEMPLATE_40353 = `
+  const ATLAS_MARKET_MEMORY_BODY_TEMPLATE = `
     <div class="atlas-memory-ledger-35" id="atlasMemoryLedger35" aria-label="Séparation mémoire marché et CURRENT">
       <article><span>Snapshots canoniques</span><b id="atlasMemoryMarketCount35">0</b><small>États marché distincts après regroupement des relevés de plusieurs collecteurs.</small></article>
       <article><span>CURRENT analytiques</span><b id="atlasMemoryCurrentCount35">0</b><small>Un cycle fermé Atlas 4/4 → NØX → Aerith = une unité analytique.</small></article>
@@ -1824,7 +1823,7 @@
     </div>
     <p id="atlasMemoryIntelligenceStatus">La lecture démarre dès que plusieurs observations marché distinctes sont présentes ; elle ne lance jamais Atlas.</p>`;
 
-  const ATLAS_ANALYTICAL_MEMORY_BODY_TEMPLATE_40353 = `
+  const ATLAS_ANALYTICAL_MEMORY_BODY_TEMPLATE = `
     <div class="atlas-memory-ledger-35" aria-label="Analytical Memory séparée">
       <article><span>Unités analytiques</span><b id="atlasAnalyticalMemoryCount394">0</b><small>CURRENT distincts réellement conservés dans la mémoire locale.</small></article>
       <article><span>CURRENT vérifiés</span><b id="atlasAnalyticalMemoryVerified394">0</b><small>Unités reconnues par la couche CURRENT canonique ; aucune observation marché convertie.</small></article>
@@ -1843,7 +1842,7 @@
     </div>
     <p id="atlasAnalyticalMemoryStatus394">Analytical Memory ne lance jamais Atlas et ne participe jamais aux horizons Market Memory 3 / 5 / 10.</p>`;
 
-  const ATLAS_DECISION_BOARD_DEEP_TEMPLATE_40353 = `
+  const ATLAS_DECISION_BOARD_DEEP_TEMPLATE = `
     <div class="decision-board-grid" id="decisionBoardGrid">
       <article class="decision-card"><b>Mouvements à vérifier</b><span>Livecheck requis.</span></article>
       <article class="decision-card"><b>Repères à comparer</b><span>BTC / ETH / SOL après données live.</span></article>
@@ -1856,44 +1855,44 @@
       <div><span>Contexte News Sentinel</span><b id="decisionNewsState">Chargement de l’archive mondiale</b></div>
       <div><span>Impact / preuve</span><b id="decisionNewsImpact">En attente</b></div>
       <div><span>Décision événementielle</span><b id="decisionNewsAction">Collecte à vérifier</b></div>
-      <div><span>Rôle News → marché</span><b id="decisionNewsRole40234">Rôle causal non qualifié</b></div>
-      <div><span>Lecture croisée</span><b id="decisionNewsExplanation40238">Convergence non évaluée</b></div>
+      <div><span>Rôle News → marché</span><b id="decisionNewsRole">Rôle causal non qualifié</b></div>
+      <div><span>Lecture croisée</span><b id="decisionNewsExplanation">Convergence non évaluée</b></div>
     </div>`;
 
-  function atlasCollapseState40353(root) {
+  function atlasCollapseState(root) {
     const state = root?.querySelector?.(":scope > summary .atlas-collapse-state");
     if (!state) return;
     state.textContent = root.open ? (state.dataset.openLabel || "Replier") : (state.dataset.closedLabel || "Déplier");
   }
 
-  function atlasMarketMemoryRelease40353() {
-    const mount = document.getElementById("atlasMemoryIntelligenceMount40353");
+  function atlasMarketMemoryRelease() {
+    const mount = document.getElementById("atlasMemoryIntelligenceMount");
     if (!mount) return false;
-    mount.innerHTML = '<p class="atlas-local-response-empty" data-atlas-memory-placeholder-40353="1">Market Memory conservée · ouvrir pour matérialiser les horizons, la continuité et les diagnostics.</p>';
-    mount.dataset.atlasMemoryMounted40353 = "0";
+    mount.innerHTML = '<p class="atlas-local-response-empty" data-atlas-memory-placeholder="1">Market Memory conservée · ouvrir pour matérialiser les horizons, la continuité et les diagnostics.</p>';
+    mount.dataset.atlasMemoryMounted = "0";
     return true;
   }
 
-  function atlasMarketMemoryMount40353() {
-    const mount = document.getElementById("atlasMemoryIntelligenceMount40353");
+  function atlasMarketMemoryMount() {
+    const mount = document.getElementById("atlasMemoryIntelligenceMount");
     if (!mount) return false;
-    if (mount.dataset.atlasMemoryMounted40353 !== "1") {
-      mount.innerHTML = ATLAS_MARKET_MEMORY_BODY_TEMPLATE_40353;
-      mount.dataset.atlasMemoryMounted40353 = "1";
+    if (mount.dataset.atlasMemoryMounted !== "1") {
+      mount.innerHTML = ATLAS_MARKET_MEMORY_BODY_TEMPLATE;
+      mount.dataset.atlasMemoryMounted = "1";
     }
     const refresh = document.getElementById("btnAtlasMemoryRefresh");
-    if (refresh && refresh.dataset.atlasDeferred40353 !== "1") {
-      refresh.dataset.atlasDeferred40353 = "1";
+    if (refresh && refresh.dataset.atlasDeferred !== "1") {
+      refresh.dataset.atlasDeferred = "1";
       refresh.addEventListener("click", () => { try { globalThis.atlasMemoryIntelligenceRender?.(); } catch (_) {} });
     }
     const reconcile = document.getElementById("btnAtlasMemoryReconcile34");
-    if (reconcile && reconcile.dataset.atlasDeferred40353 !== "1") {
-      reconcile.dataset.atlasDeferred40353 = "1";
+    if (reconcile && reconcile.dataset.atlasDeferred !== "1") {
+      reconcile.dataset.atlasDeferred = "1";
       reconcile.addEventListener("click", () => { try { globalThis.atlasMemoryCurrentReconcileManual34?.(); } catch (_) {} });
     }
     const exporter = document.getElementById("btnAtlasMemoryExport");
-    if (exporter && exporter.dataset.atlasDeferred40353 !== "1") {
-      exporter.dataset.atlasDeferred40353 = "1";
+    if (exporter && exporter.dataset.atlasDeferred !== "1") {
+      exporter.dataset.atlasDeferred = "1";
       exporter.addEventListener("click", () => { try { globalThis.atlasMemoryIntelligenceExport?.(); } catch (_) {} });
     }
     try { globalThis.atlasAutomation341UiPolish?.(); } catch (_) {}
@@ -1901,15 +1900,15 @@
     return true;
   }
 
-  function atlasAnalyticalMemoryRelease40353() {
-    const mount = document.getElementById("atlasAnalyticalMemoryMount40353");
+  function atlasAnalyticalMemoryRelease() {
+    const mount = document.getElementById("atlasAnalyticalMemoryMount");
     if (!mount) return false;
-    mount.innerHTML = '<p class="atlas-local-response-empty" data-atlas-analytical-memory-placeholder-40353="1">Analytical Memory conservée · ouvrir pour matérialiser les CURRENT détaillés.</p>';
-    mount.dataset.atlasAnalyticalMemoryMounted40353 = "0";
+    mount.innerHTML = '<p class="atlas-local-response-empty" data-atlas-analytical-memory-placeholder="1">Analytical Memory conservée · ouvrir pour matérialiser les CURRENT détaillés.</p>';
+    mount.dataset.atlasAnalyticalMemoryMounted = "0";
     return true;
   }
 
-  function atlasAnalyticalMemoryMarkdown40353(data) {
+  function atlasAnalyticalMemoryMarkdown(data) {
     const safe = data || {};
     const latestAssets = Array.isArray(safe.latestAssets) ? safe.latestAssets : [];
     const wanted = new Set(["BTC", "ETH", "BNB", "XRP", "SOL"]);
@@ -1940,56 +1939,56 @@
     ].join("\n");
   }
 
-  function atlasAnalyticalMemoryExport40353() {
+  function atlasAnalyticalMemoryExport() {
     const data = globalThis.atlasAnalyticalMemoryStats394?.() || {};
-    const text = atlasAnalyticalMemoryMarkdown40353(data);
+    const text = atlasAnalyticalMemoryMarkdown(data);
     const name = `agent_crypto_analytical_memory_${new Date().toISOString().slice(0, 10)}.md`;
     if (typeof globalThis.downloadTextFile === "function") globalThis.downloadTextFile(name, "text/markdown", text);
     return text;
   }
 
-  function atlasAnalyticalMemoryMount40353() {
-    const mount = document.getElementById("atlasAnalyticalMemoryMount40353");
+  function atlasAnalyticalMemoryMount() {
+    const mount = document.getElementById("atlasAnalyticalMemoryMount");
     if (!mount) return false;
-    if (mount.dataset.atlasAnalyticalMemoryMounted40353 !== "1") {
-      mount.innerHTML = ATLAS_ANALYTICAL_MEMORY_BODY_TEMPLATE_40353;
-      mount.dataset.atlasAnalyticalMemoryMounted40353 = "1";
+    if (mount.dataset.atlasAnalyticalMemoryMounted !== "1") {
+      mount.innerHTML = ATLAS_ANALYTICAL_MEMORY_BODY_TEMPLATE;
+      mount.dataset.atlasAnalyticalMemoryMounted = "1";
     }
     const refresh = document.getElementById("btnAtlasAnalyticalMemoryRefresh394");
-    if (refresh && refresh.dataset.atlasDeferred40353 !== "1") {
-      refresh.dataset.atlasDeferred40353 = "1";
+    if (refresh && refresh.dataset.atlasDeferred !== "1") {
+      refresh.dataset.atlasDeferred = "1";
       refresh.addEventListener("click", () => { try { globalThis.atlasAnalyticalMemoryRender394?.(); } catch (_) {} });
     }
     const exporter = document.getElementById("btnAtlasAnalyticalMemoryExport394");
-    if (exporter && exporter.dataset.atlasDeferred40353 !== "1") {
-      exporter.dataset.atlasDeferred40353 = "1";
-      exporter.addEventListener("click", atlasAnalyticalMemoryExport40353);
+    if (exporter && exporter.dataset.atlasDeferred !== "1") {
+      exporter.dataset.atlasDeferred = "1";
+      exporter.addEventListener("click", atlasAnalyticalMemoryExport);
     }
     try { globalThis.atlasAnalyticalMemoryRender394?.(); } catch (_) {}
     return true;
   }
 
-  function atlasDecisionBoardDeepRelease40353() {
-    const mount = document.getElementById("atlasDecisionBoardDeepMount40353");
+  function atlasDecisionBoardDeepRelease() {
+    const mount = document.getElementById("atlasDecisionBoardDeepMount");
     if (!mount) return false;
-    mount.innerHTML = '<p class="atlas-local-response-empty" data-atlas-decision-detail-placeholder-40353="1">Decision Board compact · ouvrir pour matérialiser les cartes et le contexte News.</p>';
-    mount.dataset.atlasDecisionDetailMounted40353 = "0";
+    mount.innerHTML = '<p class="atlas-local-response-empty" data-atlas-decision-detail-placeholder="1">Decision Board compact · ouvrir pour matérialiser les cartes et le contexte News.</p>';
+    mount.dataset.atlasDecisionDetailMounted = "0";
     return true;
   }
 
-  function atlasDecisionBoardDeepMount40353() {
-    const mount = document.getElementById("atlasDecisionBoardDeepMount40353");
+  function atlasDecisionBoardDeepMount() {
+    const mount = document.getElementById("atlasDecisionBoardDeepMount");
     if (!mount) return false;
-    if (mount.dataset.atlasDecisionDetailMounted40353 !== "1") {
-      mount.innerHTML = ATLAS_DECISION_BOARD_DEEP_TEMPLATE_40353;
-      mount.dataset.atlasDecisionDetailMounted40353 = "1";
+    if (mount.dataset.atlasDecisionDetailMounted !== "1") {
+      mount.innerHTML = ATLAS_DECISION_BOARD_DEEP_TEMPLATE;
+      mount.dataset.atlasDecisionDetailMounted = "1";
     }
     try { globalThis.renderDecisionBoard?.(); } catch (_) {}
-    try { globalThis.atlasDecisionBoardDualMemory3950?.render?.(); } catch (_) {}
+    try { globalThis.atlasDecisionBoardDualMemory?.render?.(); } catch (_) {}
     return true;
   }
 
-  function atlasDecisionBoardCompactStatus40353() {
+  function atlasDecisionBoardCompactStatus() {
     const status = document.getElementById("decisionBoardStatus");
     const verdict = document.getElementById("decisionBoardVerdict");
     let summary = null;
@@ -2012,60 +2011,60 @@
     return summary;
   }
 
-  function atlasDecisionBoardWrap40353() {
+  function atlasDecisionBoardWrap() {
     const base = globalThis.renderDecisionBoard;
     if (typeof base !== "function" || base.__atlasMemoryResidency40353) return false;
     const wrapped = function renderDecisionBoard40353(...args) {
       const result = base.apply(this, args);
       const details = document.getElementById("atlasDecisionBoardDetails");
-      if (!details?.open) atlasDecisionBoardCompactStatus40353();
+      if (!details?.open) atlasDecisionBoardCompactStatus();
       return result;
     };
     try { Object.defineProperty(wrapped, "__atlasMemoryResidency40353", { value: true }); } catch (_) {}
     globalThis.renderDecisionBoard = wrapped;
-    atlasDecisionBoardCompactStatus40353();
+    atlasDecisionBoardCompactStatus();
     return true;
   }
 
-  function initAtlasMemoryResidency40353() {
-    atlasDecisionBoardWrap40353();
+  function initAtlasMemoryResidency() {
+    atlasDecisionBoardWrap();
     const market = document.getElementById("atlasMemoryIntelligence");
-    if (market && market.dataset.atlasResidencyBound40353 !== "1") {
-      market.dataset.atlasResidencyBound40353 = "1";
+    if (market && market.dataset.atlasResidencyBound !== "1") {
+      market.dataset.atlasResidencyBound = "1";
       market.addEventListener("toggle", () => {
-        atlasCollapseState40353(market);
-        if (market.open) atlasMarketMemoryMount40353();
-        else atlasMarketMemoryRelease40353();
+        atlasCollapseState(market);
+        if (market.open) atlasMarketMemoryMount();
+        else atlasMarketMemoryRelease();
       });
-      atlasCollapseState40353(market);
-      if (market.open) atlasMarketMemoryMount40353(); else atlasMarketMemoryRelease40353();
+      atlasCollapseState(market);
+      if (market.open) atlasMarketMemoryMount(); else atlasMarketMemoryRelease();
     }
 
     const analytical = document.getElementById("atlasAnalyticalMemory394");
-    if (analytical && analytical.dataset.atlasResidencyBound40353 !== "1") {
-      analytical.dataset.atlasResidencyBound40353 = "1";
+    if (analytical && analytical.dataset.atlasResidencyBound !== "1") {
+      analytical.dataset.atlasResidencyBound = "1";
       analytical.addEventListener("toggle", () => {
-        atlasCollapseState40353(analytical);
-        if (analytical.open) atlasAnalyticalMemoryMount40353();
-        else atlasAnalyticalMemoryRelease40353();
+        atlasCollapseState(analytical);
+        if (analytical.open) atlasAnalyticalMemoryMount();
+        else atlasAnalyticalMemoryRelease();
       });
-      atlasCollapseState40353(analytical);
-      if (analytical.open) atlasAnalyticalMemoryMount40353(); else atlasAnalyticalMemoryRelease40353();
+      atlasCollapseState(analytical);
+      if (analytical.open) atlasAnalyticalMemoryMount(); else atlasAnalyticalMemoryRelease();
     }
 
     const decision = document.getElementById("atlasDecisionBoardDetails");
-    if (decision && decision.dataset.atlasResidencyBound40353 !== "1") {
-      decision.dataset.atlasResidencyBound40353 = "1";
+    if (decision && decision.dataset.atlasResidencyBound !== "1") {
+      decision.dataset.atlasResidencyBound = "1";
       decision.addEventListener("toggle", () => {
-        atlasCollapseState40353(decision);
-        if (decision.open) atlasDecisionBoardDeepMount40353();
-        else atlasDecisionBoardDeepRelease40353();
+        atlasCollapseState(decision);
+        if (decision.open) atlasDecisionBoardDeepMount();
+        else atlasDecisionBoardDeepRelease();
       });
-      atlasCollapseState40353(decision);
-      if (decision.open) atlasDecisionBoardDeepMount40353(); else atlasDecisionBoardDeepRelease40353();
+      atlasCollapseState(decision);
+      if (decision.open) atlasDecisionBoardDeepMount(); else atlasDecisionBoardDeepRelease();
     }
 
-    globalThis.AtlasMemoryPresentationResidency40353 = Object.freeze({
+    globalThis.AtlasMemoryPresentationResidency = Object.freeze({
       build: "40.3.53",
       parent: "40.3.52",
       scope: Object.freeze(["market_memory_presentation", "analytical_memory_presentation", "decision_board_deep_details"]),
@@ -2094,14 +2093,14 @@
   // families in their existing docked compact presentation instead of
   // restoring them fully expanded. This is presentation-only: the business
   // engines keep their existing lifecycle and Window Manager remains canonical.
-  const ADMIN_DEFAULT_COLLAPSED_FAMILY_IDS_40361 = Object.freeze([
+  const ADMIN_DEFAULT_COLLAPSED_FAMILY_IDS = Object.freeze([
     "analyse-decision",
     "intelligence-memoire-creation",
     "preparation-operations",
     "experimentation-systeme"
   ]);
 
-  function administratorHashFamily40361() {
+  function administratorHashFamily() {
     const raw = String(location.hash || "").replace(/^#/, "");
     if (!raw) return "";
     let decoded = raw;
@@ -2122,13 +2121,13 @@
     return "";
   }
 
-  function stageAdministratorDefaultFamilyCollapse40361() {
-    const directFamily = administratorHashFamily40361();
+  function stageAdministratorDefaultFamilyCollapse() {
+    const directFamily = administratorHashFamily();
     const staged = [];
     const skipped = [];
     const failed = [];
 
-    ADMIN_DEFAULT_COLLAPSED_FAMILY_IDS_40361.forEach(id => {
+    ADMIN_DEFAULT_COLLAPSED_FAMILY_IDS.forEach(id => {
       const key = `${STORAGE_PREFIX}:window:${id}`;
       let saved = {};
       try { saved = JSON.parse(localStorage.getItem(key) || "{}") || {}; } catch { saved = {}; }
@@ -2161,13 +2160,13 @@
       }
     });
 
-    document.documentElement.dataset.adminDefaultFamilyCollapse40361 = "1";
-    document.documentElement.dataset.adminDefaultFamilyDirectHash40361 = directFamily || "none";
+    document.documentElement.dataset.adminDefaultFamilyCollapse = "1";
+    document.documentElement.dataset.adminDefaultFamilyDirectHash = directFamily || "none";
 
-    globalThis.ErithAdministratorDefaultFamilyCollapse40361 = Object.freeze({
+    globalThis.ErithAdministratorDefaultFamilyCollapse = Object.freeze({
       build: "40.3.61",
       parent: "40.3.60",
-      families: ADMIN_DEFAULT_COLLAPSED_FAMILY_IDS_40361,
+      families: ADMIN_DEFAULT_COLLAPSED_FAMILY_IDS,
       default_state: "docked compact / minimized",
       direct_hash_family_opens: true,
       persisted_previous_open_state_replayed_on_hard_reload: false,
@@ -2190,23 +2189,61 @@
     return { directFamily, staged, skipped, failed };
   }
 
+
+  // 40.6.85 — Aether left-boot repair.
+  // Scope is exactly one persisted Aether presentation record, one time.
+  // A non-centered operator position is never rewritten.
+  const AETHER_LEFT_406085_MIGRATION_KEY = `${STORAGE_PREFIX}:migration:aether-left-406085`;
+  function migrateAetherCenteredState() {
+    try {
+      if (localStorage.getItem(AETHER_LEFT_406085_MIGRATION_KEY) === "1") return "already";
+      const key = `${STORAGE_PREFIX}:window:aether-watch`;
+      const raw = JSON.parse(localStorage.getItem(key) || "null");
+      if (!raw || typeof raw !== "object") {
+        localStorage.setItem(AETHER_LEFT_406085_MIGRATION_KEY, "1");
+        return "no-state";
+      }
+      const x = Number(raw.x), y = Number(raw.y), width = Number(raw.width), height = Number(raw.height);
+      if (![x, y, width, height].every(Number.isFinite)) {
+        localStorage.setItem(AETHER_LEFT_406085_MIGRATION_KEY, "1");
+        return "invalid-state-preserved";
+      }
+      const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+      const centeredX = Math.max(12, Math.round((vw - width) / 2));
+      const centered = x > 26 && Math.abs(x - centeredX) <= 14;
+      if (centered && raw.maximized !== true) {
+        localStorage.setItem(key, JSON.stringify({ ...raw, x: 12 }));
+        localStorage.setItem(AETHER_LEFT_406085_MIGRATION_KEY, "1");
+        document.documentElement.dataset.aetherLeftMigration = "migrated";
+        return "migrated";
+      }
+      localStorage.setItem(AETHER_LEFT_406085_MIGRATION_KEY, "1");
+      document.documentElement.dataset.aetherLeftMigration = "preserved";
+      return "preserved";
+    } catch (_) {
+      document.documentElement.dataset.aetherLeftMigration = "storage-unavailable";
+      return "storage-unavailable";
+    }
+  }
+
   function boot() {
     installGlobalVersionIdentity();
-    initAtlasMemoryResidency40353();
+    initAtlasMemoryResidency();
 
     migrateRibbonWindowStateR2();
     migrateMarketFlowWindowState40125();
     migrateMarketFlowWindowState40126();
-    migrateMarketWindowState40127();
+    migrateMarketWindowState();
     migrateGlobalShellWindowState40128();
     migrateGlobalShellWindowState40129();
     migrateGlobalShellWindowState40130();
-    migrateDirectFixedWindowState40131();
-    migrateGlobalShellAutoFit40132();
+    migrateDirectFixedWindowState();
+    migrateGlobalShellAutoFit();
     migrateGraphWindowStateR6();
-    migrateFamilyTopologyWindowState40303();
-    migrateFamilyRoleReturnWindowState40322();
-    stageAdministratorDefaultFamilyCollapse40361();
+    migrateFamilyTopologyWindowState();
+    migrateFamilyRoleReturnWindowState();
+    stageAdministratorDefaultFamilyCollapse();
+    migrateAetherCenteredState();
 
     const factory = window.ErithAdminWindowManager;
     if (!factory?.create) {
@@ -2221,18 +2258,18 @@
       definitions: nativeDefinitions()
     });
 
-    const bootRole40312 = presentationRole40312();
-    let aetherNativeStateExists406040 = false;
-    try { aetherNativeStateExists406040 = localStorage.getItem(`${STORAGE_PREFIX}:window:aether-watch`) !== null; } catch {}
-    const state = manager.init({ restorePersistedPresentation: bootRole40312 === "administrator" });
+    const bootRole = presentationRole();
+    let aetherNativeStateExists = false;
+    try { aetherNativeStateExists = localStorage.getItem(`${STORAGE_PREFIX}:window:aether-watch`) !== null; } catch {}
+    const state = manager.init({ restorePersistedPresentation: bootRole === "administrator" });
     // 40.6.40 — the shell is pre-created by aether.js solely so the canonical
     // Window Manager can register it during this one normal init pass.
     // HTML hidden is then released; the manager becomes the only presentation owner.
-    const aetherPanel406040 = byId("atlasAetherStatusPanel4084");
-    const aetherWindow406040 = manager.getWindow("aether-watch");
-    if (aetherPanel406040 && aetherWindow406040) {
-      aetherPanel406040.hidden = false;
-      if (!aetherNativeStateExists406040) {
+    const aetherPanel = byId("atlasAetherStatusPanel");
+    const aetherWindow = manager.getWindow("aether-watch");
+    if (aetherPanel && aetherWindow) {
+      aetherPanel.hidden = false;
+      if (!aetherNativeStateExists) {
         // Aether is already conceptually a portal. First registration therefore
         // starts as a hidden floating native window, preserving the old closed boot
         // while giving the first operator open the complete five-button menu.
@@ -2242,11 +2279,11 @@
     }
     // 40.3.14 — init already applied the correct presentation exactly once.
     // Do not immediately replay the same neutralize/restore transaction.
-    activeWindowPresentationRole40314 = bootRole40312;
-    document.documentElement.dataset.adminWindowPresentationRole40314 = bootRole40312;
-    if (bootRole40312 === "administrator") ensureAdministratorAtlasVisible(manager, "administrator-boot");
-    installOracleGraphWindowChrome404156();
-    installMathCoreInlineWindowControls40148();
+    activeWindowPresentationRole = bootRole;
+    document.documentElement.dataset.adminWindowPresentationRole = bootRole;
+    if (bootRole === "administrator") ensureAdministratorAtlasVisible(manager, "administrator-boot");
+    installOracleGraphWindowChrome();
+    installMathCoreInlineWindowControls();
 
     // 40.1.48 — restore guard for compact bars.  Some stacked Administrator
     // surfaces can overlap a minimized bar visually; capture-phase recovery
@@ -2266,32 +2303,32 @@
     // 40.4.93 — Market presentation follows the existing Window Manager.
     // No extra Market visibility control: normal/restored = rows present;
     // reduced/hidden = generated rows released. The manager remains unchanged.
-    const syncMarketWindow40493 = reason => {
-      try { globalThis.AgentCryptoMarketTablePresentation40493?.syncFromWindow?.(reason); } catch (error) {
+    const syncMarketWindow = reason => {
+      try { globalThis.AgentCryptoMarketTablePresentation?.syncFromWindow?.(reason); } catch (error) {
         console.warn("[40.4.93] Market window presentation sync", error);
       }
     };
-    syncMarketWindow40493("window-manager-init");
-    const syncMarketAfterWindowControl40493 = event => {
+    syncMarketWindow("window-manager-init");
+    const syncMarketAfterWindowControl = event => {
       const control=event.target?.closest?.(".admin-native-minimize,.admin-native-hide,.admin-native-minibar-restore,.admin-window-deck-action");
       if(!control)return;
-      queueMicrotask(()=>syncMarketWindow40493("native-window-control"));
+      queueMicrotask(()=>syncMarketWindow("native-window-control"));
     };
-    document.addEventListener("click", syncMarketAfterWindowControl40493, true);
+    document.addEventListener("click", syncMarketAfterWindowControl, true);
     document.addEventListener("pointerdown", event => {
       if(!event.target?.closest?.(".admin-native-minibar-restore"))return;
-      queueMicrotask(()=>syncMarketWindow40493("native-window-restore"));
+      queueMicrotask(()=>syncMarketWindow("native-window-restore"));
     }, true);
-    document.addEventListener("erith:admin-window-reset", ()=>queueMicrotask(()=>syncMarketWindow40493("window-reset")));
-    document.addEventListener("erith:admin-window-profile-applied", ()=>queueMicrotask(()=>syncMarketWindow40493("window-profile")));
-    document.addEventListener("erith:admin-window-persisted-presentation-restored", ()=>queueMicrotask(()=>syncMarketWindow40493("window-restore")));
+    document.addEventListener("erith:admin-window-reset", ()=>queueMicrotask(()=>syncMarketWindow("window-reset")));
+    document.addEventListener("erith:admin-window-profile-applied", ()=>queueMicrotask(()=>syncMarketWindow("window-profile")));
+    document.addEventListener("erith:admin-window-persisted-presentation-restored", ()=>queueMicrotask(()=>syncMarketWindow("window-restore")));
     window.addEventListener("atlas:v2mode", event => {
       const role = ["public", "operator", "administrator"].includes(event?.detail?.role)
         ? event.detail.role
-        : presentationRole40312();
-      syncWindowPresentationRole40314(manager, role);
+        : presentationRole();
+      syncWindowPresentationRole(manager, role);
     });
-    globalThis.ErithWindowRoleIsolation40312 = Object.freeze({
+    globalThis.ErithWindowRoleIsolation = Object.freeze({
       build: "40.3.12",
       basic_restores_admin_geometry: false,
       intermediate_restores_admin_geometry: false,
@@ -2299,7 +2336,7 @@
       neutralization_persists: false,
       manager_api: "restorePersistedPresentation/neutralizePresentation"
     });
-    globalThis.ErithWindowRoleTransition40314 = Object.freeze({
+    globalThis.ErithWindowRoleTransition = Object.freeze({
       build: "40.3.14",
       same_role_transition_is_noop: true,
       boot_replay_removed: true,
@@ -2327,7 +2364,7 @@
       storage_owner_added: false,
       reconcile: reason => ensureAdministratorAtlasVisible(manager, reason || "manual-diagnostic")
     });
-    globalThis.ErithSurfacePerformance40315 = Object.freeze({
+    globalThis.ErithSurfacePerformance = Object.freeze({
       build: "40.3.15",
       header_surface: "100%",
       content_surface: "97%",
@@ -2338,7 +2375,7 @@
       floating_repeating_background: false,
       parent_build: "40.3.14"
     });
-    globalThis.ErithFamily04GreyForensic40404 = Object.freeze({
+    globalThis.ErithFamily04GreyForensic = Object.freeze({
       build: "40.4.4",
       parent_build: "40.4.3",
       canonical_order: Object.freeze(["04", "storage", "grey-plate-forensic", "simulation", "commandes", "backend", "safety", "physical-security"]),
@@ -2349,7 +2386,7 @@
       ownership_definition_owner: "js/app.js",
       system_presentation_fragment: "./views/system.html"
     });
-    globalThis.ErithBridgePassivePerformance40317 = Object.freeze({
+    globalThis.ErithBridgePassivePerformance = Object.freeze({
       build: "40.3.17",
       parent_build: "40.3.15",
       bridge_health_is_analysis_trigger: false,
@@ -2360,7 +2397,7 @@
       compact_family_placeholder_policy: true,
       preserved_full_placeholder_windows: ["market", "graphique", "target-top", "market-flow", "math-core"]
     });
-    globalThis.ErithCanonicalSectionsAutofit40320 = Object.freeze({
+    globalThis.ErithCanonicalSectionsAutofit = Object.freeze({
       build: "40.3.20",
       parent_build: "40.3.19",
       family03_order: ["03", "situation", "questionnaire", "briefing", "planning"],
@@ -2381,6 +2418,15 @@
     installDomainObserver(manager);
     syncDomainWindows(manager);
 
+    try {
+      globalThis.AgentCryptoBootProbe?.markOnce?.("administrator-window-manager-ready", {
+        build: ADMIN_BUILD,
+        windows: Number(state.count || 0),
+        layout_free: !!state.free,
+        domain: currentDomain()
+      });
+    } catch (_) {}
+
     window.dispatchEvent(new CustomEvent("erith:administrator-mirror-ready", {
       detail: {
         build: ADMIN_BUILD,
@@ -2393,6 +2439,10 @@
     }));
   }
 
+  window.addEventListener("agent-crypto:late-memory-ready", () => {
+    try { initAtlasMemoryResidency(); } catch (_) {}
+  }, { once: true, passive: true });
+
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once: true });
   else boot();
 
@@ -2402,41 +2452,41 @@
      but its large card grid is resident only while the operator opens it.
      No timer, observer, scheduler, storage write, engine or WM change.
      ============================================================ */
-  function initAtlasMemoryHealthDeferred40355() {
+  function initAtlasMemoryHealthDeferred() {
     const originalApi = globalThis.atlasMemoryHealth3980R2;
-    const source = document.getElementById("atlasMemoryHealth3980");
+    const source = document.getElementById("atlasMemoryHealth");
     if (!originalApi || typeof originalApi.derive !== "function" || typeof originalApi.render !== "function" || !source) return false;
-    if (source.dataset.atlasMemoryHealthDeferred40355 === "1") return true;
+    if (source.dataset.atlasMemoryHealthDeferred === "1") return true;
 
     const originalBodyTemplate = source.innerHTML;
     const details = document.createElement("details");
-    details.id = "atlasMemoryHealth3980";
+    details.id = "atlasMemoryHealth";
     details.className = `${source.className || "atlas-memory-intelligence"} atlas-collapse glass atlas-tone-intelligence atlas-memory-health-deferred-40355`;
     details.dataset.state = source.dataset.state || "waiting";
-    details.dataset.atlasMemoryHealthDeferred40355 = "1";
+    details.dataset.atlasMemoryHealthDeferred = "1";
     details.setAttribute("aria-labelledby", "atlasMemoryHealthCompactTitle40355");
     details.innerHTML = `
-      <summary class="atlas-collapse-summary atlas-memory-health-summary-40355">
+      <summary class="atlas-collapse-summary atlas-memory-health-summary">
         <span class="atlas-collapse-icon" aria-hidden="true">▶</span>
         <span class="atlas-collapse-copy">
           <span class="eyebrow">MEMORY HEALTH · 39.8.0R2 · READ ONLY</span>
           <span class="atlas-collapse-title" id="atlasMemoryHealthTitle3980R2">Structure · couverture · continuité</span>
-          <span class="atlas-collapse-subtitle" id="atlasMemoryHealthCompactSubtitle40355">Diagnostic mémoire détaillé uniquement à l’ouverture.</span>
+          <span class="atlas-collapse-subtitle" id="atlasMemoryHealthCompactSubtitle">Diagnostic mémoire détaillé uniquement à l’ouverture.</span>
         </span>
-        <span class="pill warn" id="atlasMemoryHealthCompactBadge40355">EN ATTENTE</span>
+        <span class="pill warn" id="atlasMemoryHealthCompactBadge">EN ATTENTE</span>
         <span class="atlas-collapse-state" data-open-label="Replier" data-closed-label="Déplier">Déplier</span>
       </summary>
-      <div class="atlas-collapse-body" id="atlasMemoryHealthMount40355" data-atlas-memory-health-mounted-40355="0"></div>`;
+      <div class="atlas-collapse-body" id="atlasMemoryHealthMount" data-atlas-memory-health-mounted="0"></div>`;
     source.replaceWith(details);
 
-    const mount = () => document.getElementById("atlasMemoryHealthMount40355");
+    const mount = () => document.getElementById("atlasMemoryHealthMount");
     const stateNode = () => details.querySelector(":scope > summary > .atlas-collapse-state");
     const iconNode = () => details.querySelector(":scope > summary > .atlas-collapse-icon");
     const compact = (data = null) => {
       let truth = data;
       try { if (!truth) truth = originalApi.derive(); } catch (_) { truth = null; }
-      const badge = document.getElementById("atlasMemoryHealthCompactBadge40355");
-      const subtitle = document.getElementById("atlasMemoryHealthCompactSubtitle40355");
+      const badge = document.getElementById("atlasMemoryHealthCompactBadge");
+      const subtitle = document.getElementById("atlasMemoryHealthCompactSubtitle");
       const structure = truth?.verdicts?.structure?.label || truth?.status?.label || "EN ATTENTE";
       const coverage = truth?.verdicts?.coverage?.label || "—";
       const continuity = truth?.verdicts?.continuity?.label || "—";
@@ -2462,9 +2512,9 @@
     };
     const mountBody = () => {
       const host = mount();
-      if (!host || host.dataset.atlasMemoryHealthMounted40355 === "1") return;
+      if (!host || host.dataset.atlasMemoryHealthMounted === "1") return;
       host.innerHTML = originalBodyTemplate;
-      host.dataset.atlasMemoryHealthMounted40355 = "1";
+      host.dataset.atlasMemoryHealthMounted = "1";
       try { originalApi.render(); } catch (_) {}
       bindMountedActions();
       compact();
@@ -2473,7 +2523,7 @@
       const host = mount();
       if (!host) return;
       host.replaceChildren();
-      host.dataset.atlasMemoryHealthMounted40355 = "0";
+      host.dataset.atlasMemoryHealthMounted = "0";
       compact();
     };
     const syncState = () => {
@@ -2500,13 +2550,13 @@
       }
     });
     globalThis.atlasMemoryHealth3980R2 = wrappedApi;
-    globalThis.atlasMemoryHealth3980 = wrappedApi;
+    globalThis.atlasMemoryHealth = wrappedApi;
 
     details.addEventListener("toggle", syncState);
     compact();
     syncState();
 
-    globalThis.AtlasMemoryHealthDeferredResidency40355 = Object.freeze({
+    globalThis.AtlasMemoryHealthDeferredResidency = Object.freeze({
       build: "40.3.55",
       parent: "40.3.54",
       scope: "memory_health_presentation_only",
@@ -2524,15 +2574,15 @@
     return true;
   }
 
-  function bootAtlasMemoryHealthDeferred40355() {
-    if (initAtlasMemoryHealthDeferred40355()) return;
+  function bootAtlasMemoryHealthDeferred() {
+    if (initAtlasMemoryHealthDeferred()) return;
     if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", initAtlasMemoryHealthDeferred40355, { once: true });
+      document.addEventListener("DOMContentLoaded", initAtlasMemoryHealthDeferred, { once: true });
     }
   }
   // 40.4.87: Memory Health script itself is now demand-loaded after Atlas opens.
   // Re-run the existing presentation wrapper when that unchanged read-only owner arrives.
-  window.addEventListener("erith:memory-health-runtime-loaded", initAtlasMemoryHealthDeferred40355, { once: true });
-  queueMicrotask(bootAtlasMemoryHealthDeferred40355);
+  window.addEventListener("erith:memory-health-runtime-loaded", initAtlasMemoryHealthDeferred, { once: true });
+  queueMicrotask(bootAtlasMemoryHealthDeferred);
 
 })();

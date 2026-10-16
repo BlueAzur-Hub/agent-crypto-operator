@@ -1,0 +1,41 @@
+AGENT-CRYPTO 40.6.490 — ORACLE EVIDENCE VERIFIED HOT WINDOW RETENTION
+
+NEW RUNTIME
+public/agent_crypto_erith_ia/administrator/js/oracle-evidence-verified-hot-window-retention-406490.js
+
+VERSION IDENTITY / RESIDENCY
+public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+public/agent_crypto_erith_ia/administrator/index.html
+public/agent_crypto_erith_ia/administrator/build.json
+
+STATIC SAFETY PROOF
+.github/scripts/agent_crypto_oracle_evidence_retention_guard_406490.py
+.github/workflows/agent-crypto-package-406490.yml
+
+DOCUMENTATION
+public/agent_crypto_erith_ia/administrator/RELEASE.md
+public/agent_crypto_erith_ia/administrator/HANDOFF.md
+public/agent_crypto_erith_ia/administrator/HANDOFF_FINAL_40.6.490.md
+public/agent_crypto_erith_ia/administrator/ORACLE_EVIDENCE_VERIFIED_HOT_WINDOW_RETENTION_40.6.490.md
+public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.490.txt
+
+DELIVERY
+public/agent_crypto_erith_ia/administrator/AGENT_CRYPTO_ORACLE_EVIDENCE_VERIFIED_HOT_WINDOW_RETENTION_40.6.490.zip
+public/agent_crypto_erith_ia/administrator/AGENT_CRYPTO_ORACLE_EVIDENCE_VERIFIED_HOT_WINDOW_RETENTION_40.6.490.zip.sha256
+
+PROTECTED / UNCHANGED
+Market Core 38.15.11
+Strategy A
+Atlas CURRENT
+Oracle Math
+CoinGecko / Market collectors
+Aether / Redivider
+Lecture Technique
+Bridge R17 / V1.9.13
+Web Classique
+public/agent_crypto_erith_ia/data/oracle_evidence/manifest.json
+public/agent_crypto_erith_ia/data/oracle_evidence/**/*.jsonl
+real orders / wallets
+
+REAL EVIDENCE DELETION EXECUTED
+NO

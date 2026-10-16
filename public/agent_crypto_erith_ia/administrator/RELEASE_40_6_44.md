@@ -12,7 +12,7 @@ Prepared: `2026-09-09T05:57:38Z`
 
 ## Visual contract
 
-The validated 40.6.43 Aether visual stack and `aether-observatory-empty-ui-406043.webp` are preserved. No new backplate, layout reconstruction, typography calibration or card repositioning is part of this release.
+The validated 40.6.43 Aether visual stack and `aether-observatory-empty-ui.webp` are preserved. No new backplate, layout reconstruction, typography calibration or card repositioning is part of this release.
 
 ## Protected
 

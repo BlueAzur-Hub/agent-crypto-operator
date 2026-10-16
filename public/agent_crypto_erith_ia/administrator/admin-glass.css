@@ -87,7 +87,7 @@ html[data-admin-theme="glass"] body.atlas-administrator-mirror .admin-mirror-bar
   backdrop-filter:blur(9px) saturate(116%)!important;
 }
 
-html[data-admin-theme="glass"] #atlasThemeGlassToggle404300[aria-pressed="true"]{
+html[data-admin-theme="glass"] #atlasThemeGlassToggle[aria-pressed="true"]{
   color:#eaffff!important;
   border-color:rgba(116,230,255,.52)!important;
   background:linear-gradient(135deg,rgba(76,201,235,.20),rgba(132,104,238,.13))!important;
@@ -134,12 +134,12 @@ html[data-admin-theme="glass"] #news-sentinel .news-live-item.active{
 html[data-admin-theme="glass"] #news-sentinel .news-live-item .news-live-meta span{
   background:rgba(var(--news-family-rgb),.055)!important;
 }
-html[data-admin-theme="glass"] #atlasAetherVeille4087{
+html[data-admin-theme="glass"] #atlasAetherVeille{
   background:linear-gradient(90deg,rgba(var(--aether-news-rgb),.055),var(--glass-aether-news),transparent 92%)!important;
   border-color:rgba(var(--aether-news-rgb),.22)!important;
   backdrop-filter:none!important;
 }
-html[data-admin-theme="glass"] #atlasAetherVeille4087 .atlas-aether-veille-viewport-4087{
+html[data-admin-theme="glass"] #atlasAetherVeille .atlas-aether-veille-viewport{
   background:rgba(2,9,15,.10)!important;
 }
 
@@ -162,7 +162,7 @@ html[data-admin-theme="glass"][data-glass-compositor="firefox-safe"] body.atlas-
    Presentation-only hotfix. Keep the existing theme handler/id/storage owner.
    The wide THÈME pill becomes the rightmost round control; the decorative sigil is hidden.
    Visible state: M = Metal, G = Glass. No header reflow owner change. */
-body.atlas-administrator-mirror .hero-top .status-stack > #atlasThemeGlassToggle404300{
+body.atlas-administrator-mirror .hero-top .status-stack > #atlasThemeGlassToggle{
   flex:0 0 42px!important;
   width:42px!important;
   min-width:42px!important;
@@ -181,14 +181,14 @@ body.atlas-administrator-mirror .hero-top .status-stack > #atlasThemeGlassToggle
   letter-spacing:0!important;
   text-indent:0!important;
 }
-body.atlas-administrator-mirror .hero-top .status-stack > #atlasThemeGlassToggle404300::before{
+body.atlas-administrator-mirror .hero-top .status-stack > #atlasThemeGlassToggle::before{
   content:"M";
   display:block;
   font:950 12px/1 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   letter-spacing:.04em;
   color:#e8edf1;
 }
-body.atlas-administrator-mirror .hero-top .status-stack > #atlasThemeGlassToggle404300[aria-pressed="true"]::before{
+body.atlas-administrator-mirror .hero-top .status-stack > #atlasThemeGlassToggle[aria-pressed="true"]::before{
   content:"G";
   color:#eaffff;
 }
@@ -196,7 +196,7 @@ body.atlas-administrator-mirror .hero-top .status-stack > .sigil{
   display:none!important;
 }
 @media (max-width:1200px){
-  body.atlas-administrator-mirror .hero-top .status-stack > #atlasThemeGlassToggle404300{
+  body.atlas-administrator-mirror .hero-top .status-stack > #atlasThemeGlassToggle{
     flex-basis:38px!important;
     width:38px!important;
     min-width:38px!important;

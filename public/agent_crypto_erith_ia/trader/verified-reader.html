@@ -1,0 +1,17 @@
+<!doctype html><html lang="fr"><head>
+<script src="../web/vault-data-router.js" data-erith-vault-data-router="true"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Trader · Lecteur de bougies vérifiées</title><style>body{background:#051722;color:#d9f3f0;padding:24px;font:15px system-ui}main{max-width:1000px;margin:auto}a{color:#8ddbd6}h1{color:#fff2c6}select,button{padding:9px;border-radius:7px;background:#103244;color:white;border:1px solid #49817e}#summary{padding:14px;background:#0c303c;border-radius:9px;line-height:1.6}table{border-collapse:collapse;width:100%}td,th{padding:7px;border-bottom:1px solid #284959;text-align:right}</style></head><body><main><a href="source-catalogue.html">← Catalogue des sources</a><h1>Lecteur de bougies historiques vérifiées</h1><p>Groupe pilote Binance Spot. Aucun ordre ni accès au compte, devise native USDT conservée, pas de conversion automatique USD.</p><form id="reader-form"><label>Actif <select name="coin"><option value="bitcoin">BTC</option><option value="ethereum">ETH</option><option value="binancecoin">BNB</option><option value="ripple">XRP</option><option value="solana">SOL</option></select></label> <label>Période <select name="period"><option>24h</option><option>7j</option><option>30j</option><option>60j</option><option>90j</option><option>1an</option><option>Max</option></select></label> <button type="submit">Vérifier et lire</button></form><p id="summary" role="status">Choisir un actif et une période. Les fichiers sont archivés et peuvent être anciens.</p><table><thead><tr><th>UTC</th><th>Ouverture USDT</th><th>Haut</th><th>Bas</th><th>Clôture</th><th>Volume actif</th></tr></thead><tbody id="rows"></tbody></table></main><script src="ai-source-inventory.js"></script><script src="ai-history-source-catalog.js"></script><script src="ai-verified-history-reader.js"></script><script>
+document.getElementById("reader-form").addEventListener("submit",async event=>{
+ event.preventDefault();const f=event.target,summary=document.getElementById("summary"),body=document.getElementById("rows");
+ body.replaceChildren();summary.textContent="Chargement et validation de l'archive…";
+ try{
+  const d=await AgentCryptoVerifiedHistoryReader.read({assetId:f.coin.value,period:f.period.value});
+  summary.textContent=d.symbol+" · "+d.period+" · "+d.points+" bougies "+d.resolution+" · "+d.quote+" · "+d.gaps+" rupture(s) · source "+d.source+" · SHA-256 vérifié. Instantané hors live.";
+  for(const r of d.rows.slice(-12).reverse()){
+   const tr=document.createElement("tr");
+   for(const v of [new Date(r[0]).toISOString(),...r.slice(1,6)]){
+    const cell=document.createElement("td");cell.textContent=String(v);tr.appendChild(cell);
+   }
+   body.appendChild(tr);
+  }
+ }catch(e){summary.textContent="Archive refusée : "+e.message;}
+});</script></body></html>

@@ -1,0 +1,26 @@
+{
+  "schema": "agent_crypto_capture_render_recovery_test_v1",
+  "build": "40.6.465",
+  "pass": true,
+  "checks": {
+    "root_constant_declared": true,
+    "window_listener_preserved": true,
+    "audit_fallback_preserved": true,
+    "broader_anchor_preserved": true,
+    "postboot_capture_delivery_465": true,
+    "audit_capture_delivery_465": true,
+    "dom_render_mount_harness": true
+  },
+  "expected_mount": {
+    "panel_id": "strategyAExecutionCostEvidenceCapture",
+    "title_contains": "EXECUTION COST EVIDENCE CAPTURE",
+    "no_paper_state": "ARMED",
+    "after_cost_injection": "OFF"
+  },
+  "invariants": {
+    "historical_backfill": false,
+    "after_cost_injection": false,
+    "market_core": "38.15.11",
+    "real_order": false
+  }
+}

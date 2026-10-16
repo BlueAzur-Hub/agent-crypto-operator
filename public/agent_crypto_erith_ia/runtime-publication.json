@@ -1,0 +1,24 @@
+{
+  "schema": "aerith.crypto.pages.multisite.v1",
+  "publication_scope": "shared-root+public-projects+agent-crypto",
+  "scope_strict": true,
+  "protected_sites": [
+    "index.html",
+    "app.js",
+    "style.css",
+    "public/index.html",
+    "public/lego/rising-phoenix/index.html",
+    "public/liora-jardin-reves-doux/index.html"
+  ],
+  "runtime_files": 1478,
+  "runtime_source_bytes": 205551277,
+  "vault_excluded_files": 575,
+  "vault_excluded_bytes": 239279025,
+  "historical_data_in_pages": false,
+  "images_externalized_to_raw": true,
+  "image_source_revision": "main",
+  "router": "public/agent_crypto_erith_ia/web/vault-data-router.js",
+  "source": "https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/",
+  "real_orders": false,
+  "firefox_verified": false
+}

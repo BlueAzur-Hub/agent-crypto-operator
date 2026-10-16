@@ -1,0 +1,29 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.509
+Release: ADMIN ENTRY META TRUTH SYNC
+Parent: 40.6.508
+Market Core: 38.15.11 UNCHANGED
+
+MODIFIED
+M public/agent_crypto_erith_ia/administrator/index.html
+M public/agent_crypto_erith_ia/administrator/build.json
+M public/agent_crypto_erith_ia/administrator/views/atlas.html
+M public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+
+ADDED
+A public/agent_crypto_erith_ia/administrator/index-40.6.509.html
+A public/agent_crypto_erith_ia/administrator/ADMIN_ENTRY_META_TRUTH_SYNC_40.6.509.md
+A public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.509.txt
+A .github/scripts/agent_crypto_admin_meta_truth_guard_406509.py
+A .github/workflows/agent-crypto-package-406509.yml
+
+FIX
+- replace stale administrator-release = OKX MICROSTRUCTURE
+- set administrator-release = ADMIN ENTRY META TRUTH SYNC
+- advance canonical version truth to Administrator 40.6.509
+- keep Atlas stable-stack Interface truth aligned
+
+NO BEHAVIOR CHANGE
+Graph / Candles / Depth / Book / Market Core / Strategy / Oracle / Aether / Backend / Bridge unchanged.
+
+NEXT
+Validate Firefox, freeze Administrator, then continue separate Operator 40.6.510 draft PR #65.

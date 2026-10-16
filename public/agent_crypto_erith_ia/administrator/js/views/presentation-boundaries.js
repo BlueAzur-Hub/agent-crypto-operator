@@ -29,7 +29,7 @@
       family:"02 · Intelligence, mémoire & création",
       canonical_fragment:"./views/atlas.html",
       transport:"./js/views/atlas-presentation.js",
-      anchors:Object.freeze(["atlasLayoutFamily02","atlas-local-ai-collapse","decision-board","atlasMultiCollectorDetails40357"]),
+      anchors:Object.freeze(["atlasLayoutFamily02","atlas-local-ai-collapse","decision-board","atlasMultiCollectorDetails"]),
       rule:"presentation moved; Atlas truth/state/memory remain shared and persistent"
     }),
     operations:Object.freeze({
@@ -45,7 +45,7 @@
       family:"04 · Expérimentation & système",
       canonical_fragment:"./views/system.html",
       transport:"./js/views/system-presentation.js",
-      anchors:Object.freeze(["atlasLayoutFamily04","atlasStorageHealth40198","atlasGreyPlateForensic40393","simulation","commandes","backend","safety","physical-security"]),
+      anchors:Object.freeze(["atlasLayoutFamily04","atlasStorageHealth","atlasGreyPlateForensic","simulation","commandes","backend","safety","physical-security"]),
       rule:"presentation moved; Grey Plate Forensic is explicitly owned by family 04; system/simulation/security logic remains shared in the main runtime"
     }),
     projects:Object.freeze({
@@ -54,7 +54,7 @@
       canonical_fragment:"./views/projects.html",
       transport:"./js/views/projects-presentation.js",
       anchors:Object.freeze(["missions-vie","fonds-erith-ia","association-erith-ia","aerith-enfance","aerith-animaux","aerith-terre-vivante"]),
-      rule:"Missions hero + five detail shells exist at boot for missionEntries40302; project bodies hydrate on first own disclosure from views/projects.html; Audience and Sources remain independent"
+      rule:"Missions hero + five detail shells exist at boot for missionEntries; project bodies hydrate on first own disclosure from views/projects.html; Audience and Sources remain independent"
     }),
     invariants:Object.freeze([
       "one document",
@@ -80,13 +80,13 @@
     ])
   });
   function snapshot(){
-    const projectLazy=globalThis.ErithProjectsPresentation40420?.snapshot?.()||null;
-    const operationsLazy=globalThis.ErithOperationsPresentation40421?.snapshot?.()||null;
+    const projectLazy=globalThis.ErithProjectsPresentation?.snapshot?.()||null;
+    const operationsLazy=globalThis.ErithOperationsPresentation?.snapshot?.()||null;
     const ids=[...REGISTRY.oracle.anchors,...REGISTRY.atlas.anchors,...REGISTRY.operations.anchors,...REGISTRY.system.anchors,...REGISTRY.projects.anchors];
     const present=Object.fromEntries(ids.map(id=>[id,!!document.getElementById(id)]));
     return Object.freeze({build:BUILD,mode:REGISTRY.mode,present,projects_lazy:projectLazy,operations_lazy:operationsLazy,checked_at:new Date().toISOString()});
   }
   function publish(){try{globalThis.__AGENT_CRYPTO_PRESENTATION_BOUNDARY_SNAPSHOT_40405__=snapshot();}catch(_){}}
-  try{globalThis.AgentCryptoPresentationBoundaries40405=Object.freeze({...REGISTRY,snapshot});}catch(_){}
+  try{globalThis.AgentCryptoPresentationBoundaries=Object.freeze({...REGISTRY,snapshot});}catch(_){}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",publish,{once:true});else publish();
 })();

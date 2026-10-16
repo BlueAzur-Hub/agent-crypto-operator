@@ -1,0 +1,28 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.525
+Parent: 40.6.524
+Release: FICHE USD DE-DUP + EUR SYMMETRY
+Market Core: 38.15.11 protected
+
+CHANGED
+- administrator/js/market-fiche-display-406518.js
+- administrator/index.html
+- administrator/index-40.6.525.html
+- administrator/build.json
+- administrator/js/post-boot-runtime-loader.js
+- administrator/views/atlas.html
+- administrator/FICHE_CURRENCY_SYMMETRY_40.6.525.md
+- administrator/PATCH_MANIFEST_40.6.525.txt
+- administrator/SEVEN_HANDOFF_40.6.525.md
+- .github/scripts/agent_crypto_fiche_symmetry_guard_406525.py
+- .github/workflows/agent-crypto-package-406525.yml
+
+PROTECTED / UNCHANGED
+- administrator/app.js
+- administrator/js/target-flow-display-406524.js
+- administrator/js/okx-microstructure-406499.js
+- Market Core 38.15.11
+- Graphique
+- Oracle / Aether
+- Bougies
+- Strategy
+- Backend / Bridge

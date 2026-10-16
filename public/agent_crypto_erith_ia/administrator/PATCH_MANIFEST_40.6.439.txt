@@ -1,0 +1,28 @@
+AGENT-CRYPTO PROGRESSIVE RECOVERY MANIFEST — 40.6.439
+========================================================
+
+Build: 40.6.439
+Parent: 40.6.438
+Base runtime: 40.6.425 restored
+
+PROTECTED BLOBS (UNCHANGED)
+---------------------------
+0e4ae4526d043073ada940a2426811e725dcfb7b  administrator/style.css
+0988c742c62997b022d75a511561302b170d7972  administrator/app.js
+5a778bc78df95c81d8e71576b49347bf933c656a  administrator/js/post-boot-runtime-loader.js
+7060c5bf1b5f6cc88af1e8132f62878d7c486462  administrator/js/views/private-source-demand-loader.js
+
+REINTRODUCED ON DEMAND
+----------------------
+administrator/js/strategy-a-audit-demand-loader.js
+administrator/js/strategy-a-cost-wait-outcome-audit.js
+administrator/js/strategy-a-oracle-cost-calibration-audit.js
+
+NOT RESIDENT
+------------
+administrator/js/strategy-a-execution-cost-truth.js
+
+RULE
+----
+Simulation closed = audits do not recalculate/render.
+No post-boot insertion. No CSS/Aether/Market Core change.

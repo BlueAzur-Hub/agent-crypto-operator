@@ -1,0 +1,273 @@
+/* Agent-Crypto @erith.IA — 40.6.74 Candidate 3
+   AETHER WATCH V2 — CONTENT DENSITY + WORKBENCH REFINEMENT
+
+   Loaded last, after the V2 spatial contract and C2.1 stabilization.
+   Presentation only. No data owner, Market Core, Window Manager, storage,
+   network, observer or timer ownership is introduced here.
+*/
+
+/* ========================================================================== 
+   AETHER WATCH V2 — first-glance hierarchy
+   ========================================================================== */
+html[data-aether-backplate-v2="ready"] .aether46-card {
+  overflow:hidden !important;
+}
+
+html[data-aether-backplate-v2="ready"] .aether46-card header {
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card header span,
+html[data-aether-backplate-v2="ready"] .aether46-card header b {
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card header b {
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+/* ATLAS — score first, diagnostic second. Long machine states must not own the card. */
+html[data-aether-backplate-v2="ready"] .aether46-atlas-main {
+  min-width:0 !important;
+  align-items:center !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-main > strong {
+  flex:0 0 auto !important;
+  white-space:nowrap !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-main > span {
+  min-width:0 !important;
+  max-width:48% !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-sub {
+  min-width:0 !important;
+  align-items:center !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-atlas-sub b,
+html[data-aether-backplate-v2="ready"] .aether46-atlas-sub span {
+  min-width:0 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+/* EVENTS — a mini-journal, never a paragraph wall. */
+html[data-aether-backplate-v2="ready"] .aether46-events [data-aether46-events] {
+  overflow:hidden !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-event-row {
+  min-width:0 !important;
+  align-items:start !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-event-row time,
+html[data-aether-backplate-v2="ready"] .aether46-event-row b {
+  white-space:nowrap !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-event-row span {
+  min-width:0 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-event-row:nth-child(n+4) {
+  display:none !important;
+}
+
+/* CONVERGENCE / DIVERGENCE — protect the verdict, trim prose before facts. */
+html[data-aether-backplate-v2="ready"] .aether46-convergence-main,
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="divergence"] {
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="convergence"] footer {
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="divergence"] p {
+  overflow:hidden !important;
+}
+
+/* MARKET — keep breadth + assets aligned; labels may yield but values remain visible. */
+html[data-aether-backplate-v2="ready"] .aether46-breadth,
+html[data-aether-backplate-v2="ready"] .aether46-coins,
+html[data-aether-backplate-v2="ready"] .aether46-coins span {
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-coins span {
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-coins b,
+html[data-aether-backplate-v2="ready"] .aether46-coins strong {
+  white-space:nowrap !important;
+}
+
+/* SOURCES / ORACLE / WEATHER — use V2 room without inflating type. */
+html[data-aether-backplate-v2="ready"] .aether46-source-metrics,
+html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics,
+html[data-aether-backplate-v2="ready"] .aether46-weather-metrics {
+  align-content:start !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-source-metrics div,
+html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics div,
+html[data-aether-backplate-v2="ready"] .aether46-weather-metrics div {
+  min-width:0 !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-source-metrics strong,
+html[data-aether-backplate-v2="ready"] .aether46-oracle-metrics strong,
+html[data-aether-backplate-v2="ready"] .aether46-weather-metrics strong {
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+/* CORE — the attention level is primary; tertiary explanation yields in a floating window. */
+html[data-aether-backplate-v2="ready"] .aether46-core {
+  overflow:hidden !important;
+}
+html[data-aether-backplate-v2="ready"] .aether46-core > strong {
+  white-space:nowrap !important;
+}
+
+/* ========================================================================== 
+   Floating / medium Aether: two useful events, compact Atlas, no tertiary noise.
+   ========================================================================== */
+@container aether49 (max-width: 1180px) {
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-main > span {
+    max-width:40% !important;
+    font-size:9px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-sub span {
+    display:none !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-sub b {
+    max-width:100% !important;
+    font-size:9px !important;
+  }
+
+  html[data-aether-backplate-v2="ready"] .aether46-event-row:nth-child(n+3) {
+    display:none !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-events [data-aether46-events] {
+    max-height:42px !important;
+    gap:4px !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-event-row {
+    grid-template-columns:34px 46px minmax(0,1fr) !important;
+    gap:5px !important;
+  }
+
+  html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="divergence"] p {
+    -webkit-line-clamp:2 !important;
+    max-height:2.45em !important;
+  }
+
+  html[data-aether-backplate-v2="ready"] .aether46-card[data-aether-card-406046="convergence"] footer {
+    font-size:8px !important;
+    margin-top:3px !important;
+  }
+
+  html[data-aether-backplate-v2="ready"] .aether46-core > footer {
+    display:none !important;
+  }
+}
+
+@container aether49 (max-width: 900px) {
+  html[data-aether-backplate-v2="ready"] .aether46-card header b {
+    max-width:34% !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-atlas-main > span {
+    display:none !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-event-row:nth-child(n+3) {
+    display:none !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-coins span:nth-child(n+4) {
+    display:none !important;
+  }
+  html[data-aether-backplate-v2="ready"] .aether46-coins {
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  }
+}
+
+/* ========================================================================== 
+   AETHER WORKBENCH — harmonize the existing read-only modal with V2.
+   The 40.6.39 runtime remains the data/interaction owner during candidate work.
+   ========================================================================== */
+#atlasAetherWorkbench .awb-kicker {
+  font-size:0 !important;
+}
+#atlasAetherWorkbench .awb-kicker::after {
+  content:"AETHER WORKBENCH · 40.6.74 C3";
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-weight:950;
+  color:#63edff;
+}
+#atlasAetherWorkbench .awb-body {
+  padding:20px 22px 24px !important;
+}
+#atlasAetherWorkbench .awb-intro {
+  margin-bottom:14px !important;
+}
+#atlasAetherWorkbench .awb-columns,
+#atlasAetherWorkbench .awb-row {
+  grid-template-columns:88px 88px 84px minmax(0,1fr) !important;
+  gap:12px !important;
+}
+#atlasAetherWorkbench .awb-row {
+  padding:13px 15px !important;
+  border-color:rgba(85,203,232,.20) !important;
+  background:linear-gradient(135deg,rgba(8,34,50,.76),rgba(3,15,26,.90)) !important;
+}
+#atlasAetherWorkbench .awb-time,
+#atlasAetherWorkbench .awb-type,
+#atlasAetherWorkbench .awb-level {
+  font-size:12px !important;
+}
+#atlasAetherWorkbench .awb-detail {
+  font-size:14px !important;
+  line-height:1.42 !important;
+  font-weight:590 !important;
+}
+#atlasAetherWorkbench .awb-details {
+  gap:14px !important;
+}
+#atlasAetherWorkbench .awb-card {
+  min-height:128px !important;
+  padding:17px 18px !important;
+}
+#atlasAetherWorkbench .awb-card h4 {
+  margin-bottom:9px !important;
+  font-size:11px !important;
+}
+#atlasAetherWorkbench .awb-card p {
+  font-size:15px !important;
+  line-height:1.48 !important;
+  font-weight:570 !important;
+}
+#atlasAetherWorkbench .awb-watch {
+  margin-top:14px !important;
+  padding:15px 17px !important;
+}
+#atlasAetherWorkbench .awb-watch p {
+  font-size:14.5px !important;
+  line-height:1.46 !important;
+}
+
+@media (max-width:980px) {
+  #atlasAetherWorkbench .awb-row {
+    grid-template-columns:76px 68px minmax(0,1fr) !important;
+    gap:8px !important;
+  }
+  #atlasAetherWorkbench .awb-detail {
+    font-size:13px !important;
+  }
+  #atlasAetherWorkbench .awb-card p {
+    font-size:14px !important;
+  }
+}

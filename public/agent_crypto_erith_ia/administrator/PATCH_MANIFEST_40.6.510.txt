@@ -1,0 +1,36 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.510
+Release: OKX ORDERBOOK CONTEXT + FRESHNESS TRUTH
+Parent: 40.6.509
+Market Core: 38.15.11 UNCHANGED
+
+MODIFIED
+M public/agent_crypto_erith_ia/administrator/js/okx-microstructure-406499.js
+M public/agent_crypto_erith_ia/administrator/index.html
+M public/agent_crypto_erith_ia/administrator/build.json
+M public/agent_crypto_erith_ia/administrator/views/atlas.html
+M public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+
+ADDED
+A public/agent_crypto_erith_ia/administrator/index-40.6.510.html
+A public/agent_crypto_erith_ia/administrator/OKX_ORDERBOOK_CONTEXT_FRESHNESS_TRUTH_40.6.510.md
+A public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.510.txt
+A .github/scripts/agent_crypto_okx_orderbook_context_guard_406510.py
+A .github/workflows/agent-crypto-package-406510.yml
+
+FIXES
+- requested asset / returned asset / pair identity
+- EUR quote truth
+- source timestamp required
+- stale/future source rejection
+- source time != receive time
+- FRESH / STALE / OFFLINE / UNKNOWN
+- dynamic asset quantity headings
+- clear old levels on asset change
+- superseded orderbook response cannot commit
+- latest pending asset request replays after abort
+
+UNCHANGED
+Market Core / Strategy / Cost Gate / Oracle / Aether / Lecture Technique logic / Backend / Bridge / wallet / real execution.
+
+NEXT
+Firefox terrain proof, then 40.6.511 AbortSignal transport repair.

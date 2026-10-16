@@ -1,0 +1,29 @@
+AGENT-CRYPTO DELIVERY MANIFEST — 40.6.436
+================================================
+
+Build: 40.6.436
+Release: STRATEGY A EXECUTION COST OWNER RECOVERY
+Functional commit: 3856dedd01b1ed603c0df4a442fcc115343dda37
+Market Core: 38.15.11
+
+BOUNDARY
+--------
+Patch borné Agent-Crypto. Ceci N'EST PAS une archive complète du dépôt.
+Racine de l'archive: administrator/
+
+CONTENTS
+--------
+5791cabdf38be1a71b8918eccb9b582f121fda008bf425e47da0db471d8e84c6  administrator/js/strategy-a-execution-cost-truth.js
+f3aa8c9d9ec251430c62d00a3675441ca3979faf370dc543ac6cf9a6eb20cc6b  administrator/build.json
+a8d425a7b1b56cee7b611065cd564b7822ae7ffc2e1e6763dcfb6c8c2e1ed748  administrator/index.html
+a8d425a7b1b56cee7b611065cd564b7822ae7ffc2e1e6763dcfb6c8c2e1ed748  administrator/index-40.6.436.html
+4c40fbc201a4efb604ab0968fecd7720a84d4d2136ee8b479cc2cf00d82b8824  administrator/RELEASE.md
+8ea9fdcba786ef8a45e951d09ab660ee117a075112da25b8287aeafde23436dc  administrator/HANDOFF.md
+
+FIX
+---
+- restore missing fetchJson helper used by Kraken;
+- reuse ErithPrivateBackendSources.refresh() for OKX;
+- remove direct OKX frontend network path;
+- lock Execution Cost Truth directly after Oracle / Cost Calibration Truth;
+- keep Strategy A thresholds, Oracle, Risk, Paper, Aether and Market Core untouched.

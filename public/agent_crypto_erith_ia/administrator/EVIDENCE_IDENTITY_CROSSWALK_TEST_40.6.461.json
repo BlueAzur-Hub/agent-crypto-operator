@@ -1,0 +1,26 @@
+{
+  "schema": "agent_crypto_strategy_a_evidence_identity_crosswalk_test_v1",
+  "build": "40.6.461",
+  "pass": true,
+  "checks": {
+    "multi_id_detected": true,
+    "cross_field_reconciliation_to_execution_detected": true,
+    "cross_field_execution_to_trade_detected": true,
+    "one_true_after_orphan": true,
+    "one_true_paper_orphan": true,
+    "no_mutation": true,
+    "never_certifies": true
+  },
+  "invariants": {
+    "compares_all_id_fields": true,
+    "ambiguous_never_auto_merged": true,
+    "records_mutated": false,
+    "records_merged": false,
+    "certifies_g1": false,
+    "certifies_g8": false,
+    "market_core": "38.15.11",
+    "storage_write": false,
+    "network": false,
+    "real_order": false
+  }
+}

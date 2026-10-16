@@ -21,25 +21,25 @@
         <span class="atlas-oracle-suite-title"><strong>Oracle — Analyse prospective & preuves</strong><small>Calibration · Evidence · Source Health · Infrastructure · Runtime</small></span>
         <span class="atlas-oracle-suite-kpis" aria-label="Résumé Oracle"><span>Evidence <b id="atlasOracleSuiteEvidence">—</b></span><span>Résolues <b id="atlasOracleSuiteResolved">—</b></span><span>Sources <b id="atlasOracleSuiteSources">—</b></span><span>Qualité <b id="atlasOracleSuiteQuality">—</b></span></span>
         <span class="atlas-collapse-state" data-open-label="Replier" data-closed-label="Déplier">Déplier</span>
-        <span class="atlas-oracle-collapsed-preview-40296" id="atlasOracleCollapsedPreview40296" data-bias="unknown" aria-label="Résumé live Oracle replié">
-          <span class="atlas-oracle-collapsed-copy-40296"><span>ORACLE LIVE · BIAIS MESURÉ</span><b id="atlasOracleCollapsedBias40296">Livecheck requis</b></span>
-          <span class="atlas-oracle-collapsed-meta-40296"><span id="atlasOracleCollapsedConfidence40296">Confiance données —</span><span id="atlasOracleCollapsedHorizon40296">5 MIN</span></span>
-          <span class="atlas-oracle-collapsed-directions-40296">
-            <span class="atlas-oracle-collapsed-direction-40296 is-bull"><span class="atlas-oracle-collapsed-direction-head-40296"><span>ORACLE HAUSSE</span><b id="atlasOracleCollapsedBull40296">—</b></span><span class="atlas-oracle-collapsed-meter-40296" aria-hidden="true"><i id="atlasOracleCollapsedBullMeter40296"></i></span></span>
-            <span class="atlas-oracle-collapsed-direction-40296 is-bear"><span class="atlas-oracle-collapsed-direction-head-40296"><span>ORACLE BAISSE</span><b id="atlasOracleCollapsedBear40296">—</b></span><span class="atlas-oracle-collapsed-meter-40296" aria-hidden="true"><i id="atlasOracleCollapsedBearMeter40296"></i></span></span>
+        <span class="atlas-oracle-collapsed-preview" id="atlasOracleCollapsedPreview" data-bias="unknown" aria-label="Résumé live Oracle replié">
+          <span class="atlas-oracle-collapsed-copy"><span>ORACLE LIVE · BIAIS MESURÉ</span><b id="atlasOracleCollapsedBias">Livecheck requis</b></span>
+          <span class="atlas-oracle-collapsed-meta"><span id="atlasOracleCollapsedConfidence">Confiance données —</span><span id="atlasOracleCollapsedHorizon">5 MIN</span></span>
+          <span class="atlas-oracle-collapsed-directions">
+            <span class="atlas-oracle-collapsed-direction is-bull"><span class="atlas-oracle-collapsed-direction-head"><span>ORACLE HAUSSE</span><b id="atlasOracleCollapsedBull">—</b></span><span class="atlas-oracle-collapsed-meter" aria-hidden="true"><i id="atlasOracleCollapsedBullMeter"></i></span></span>
+            <span class="atlas-oracle-collapsed-direction is-bear"><span class="atlas-oracle-collapsed-direction-head"><span>ORACLE BAISSE</span><b id="atlasOracleCollapsedBear">—</b></span><span class="atlas-oracle-collapsed-meter" aria-hidden="true"><i id="atlasOracleCollapsedBearMeter"></i></span></span>
           </span>
         </span>
       </summary>
       <div class="atlas-collapse-body atlas-oracle-suite-body">
-        <details class="atlas-collapse atlas-oracle-suite-subsection" id="oracle-models-calibration" data-collapse-key="oracle-models-calibration" data-oracle-accordion-40406="models" data-oracle-true-lazy-shell="models">
+        <details class="atlas-collapse atlas-oracle-suite-subsection" id="oracle-models-calibration" data-collapse-key="oracle-models-calibration" data-oracle-accordion="models" data-oracle-true-lazy-shell="models">
           <summary class="atlas-collapse-summary"><span class="atlas-collapse-icon" aria-hidden="true">▶</span><span class="atlas-collapse-copy"><span class="atlas-collapse-title">Modèles & calibration</span><span class="atlas-collapse-subtitle">Oracle V1 · Ensemble · Shadow V2 · long horizon · intégrité</span></span><span class="atlas-collapse-state" data-open-label="Replier" data-closed-label="Déplier">Déplier</span></summary>
           <div class="atlas-collapse-body" data-oracle-lazy-body="models" data-oracle-hydration="placeholder"></div>
         </details>
-        <details class="atlas-collapse atlas-oracle-suite-subsection" data-collapse-key="oracle-sources-runtime" data-oracle-accordion-40406="sources" data-oracle-true-lazy-shell="sources">
+        <details class="atlas-collapse atlas-oracle-suite-subsection" data-collapse-key="oracle-sources-runtime" data-oracle-accordion="sources" data-oracle-true-lazy-shell="sources">
           <summary class="atlas-collapse-summary"><span class="atlas-collapse-icon" aria-hidden="true">▶</span><span class="atlas-collapse-copy"><span class="atlas-collapse-title">Sources & Source Health</span><span class="atlas-collapse-subtitle">Infrastructure · Runtime · quorum · désaccord · performance prospective</span></span><span class="atlas-collapse-state" data-open-label="Replier" data-closed-label="Déplier">Déplier</span></summary>
           <div class="atlas-collapse-body" data-oracle-lazy-body="sources" data-oracle-hydration="placeholder"></div>
         </details>
-        <details class="atlas-collapse glass atlas-family-member atlas-tone-analysis oracle-evidence-explorer atlas-oracle-suite-subsection" id="oracle-evidence-explorer" data-oracle-accordion-40406="evidence" data-collapse-key="oracle-evidence-explorer" data-layout-family="analysis" data-deferred="true" data-oracle-true-lazy-shell="evidence">
+        <details class="atlas-collapse glass atlas-family-member atlas-tone-analysis oracle-evidence-explorer atlas-oracle-suite-subsection" id="oracle-evidence-explorer" data-oracle-accordion="evidence" data-collapse-key="oracle-evidence-explorer" data-layout-family="analysis" data-deferred="true" data-oracle-true-lazy-shell="evidence">
           <summary class="atlas-collapse-summary"><span class="atlas-collapse-icon" aria-hidden="true">▶</span><span class="atlas-collapse-copy"><span class="atlas-collapse-title">Evidence & validation</span><span class="atlas-collapse-subtitle">Observations T0 · résultats réels · filtres locaux · Explorer différé</span></span><span class="atlas-collapse-state" data-open-label="Replier" data-closed-label="Déplier">Déplier</span></summary>
           <div class="atlas-collapse-body" data-oracle-lazy-body="evidence" data-oracle-hydration="placeholder"></div>
         </details>
@@ -69,23 +69,23 @@
 
   function reconcile(key){
     try{globalThis.atlasV2ClassifySections?.();}catch(_){}
-    try{const mode=globalThis.atlasV2Mode?.()||document.documentElement.dataset.atlasView||"essential";globalThis.atlasV2ApplySectionVisibility?.(mode);globalThis.atlasV2ApplySemanticRoleIsolation40312?.(mode);}catch(_){}
+    try{const mode=globalThis.atlasV2Mode?.()||document.documentElement.dataset.atlasView||"essential";globalThis.atlasV2ApplySectionVisibility?.(mode);globalThis.atlasV2ApplySemanticRoleIsolation?.(mode);}catch(_){}
     if(key==="models"){
       try{globalThis.atlasOracleBackupInit?.();}catch(_){}
-      try{globalThis.atlasOracleLabRefreshOnDemand40384?.(true)?.catch?.(()=>{});}catch(_){}
+      try{globalThis.atlasOracleLabRefreshOnDemand?.(true)?.catch?.(()=>{});}catch(_){}
       try{globalThis.atlasOracleLabDashboardRefresh?.(true)?.catch?.(()=>{});}catch(_){}
       try{globalThis.atlasOracleIntegrityRefresh?.(true)?.catch?.(()=>{});}catch(_){}
     }else if(key==="sources"){
-      try{globalThis.atlasOracleInfrastructureRender4020?.();}catch(_){}
-      try{globalThis.atlasOracleSourceHealthPerformanceRefresh4027?.()?.catch?.(()=>{});}catch(_){}
-      try{globalThis.atlasOracleThirdSourceReadinessRender4028?.();}catch(_){}
+      try{globalThis.atlasOracleInfrastructureRender?.();}catch(_){}
+      try{globalThis.atlasOracleSourceHealthPerformanceRefresh?.()?.catch?.(()=>{});}catch(_){}
+      try{globalThis.atlasOracleThirdSourceReadinessRender?.();}catch(_){}
     }else if(key==="evidence"){
       const root=document.getElementById("oracle-evidence-explorer");
       try{if(root)delete root.dataset.oracleExplorerInit;}catch(_){}
       try{globalThis.atlasOracleEvidenceExplorerInit?.();}catch(_){}
       try{globalThis.atlasOracleEvidenceExplorerRefresh?.()?.catch?.(()=>{});}catch(_){}
     }
-    try{globalThis.atlasOracleSuiteSummarySync40216?.();}catch(_){}
+    try{globalThis.atlasOracleSuiteSummarySync?.();}catch(_){}
     try{window.dispatchEvent(new CustomEvent("erith:oracle-hydrated",{detail:{build:BUILD,key}}));}catch(_){}
   }
 

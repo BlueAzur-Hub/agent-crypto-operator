@@ -39,7 +39,7 @@ body.atlas-administrator-mirror #analyste.champagne-clean-lens .chart-panel::bef
   position:absolute!important;
   inset:0!important;
   z-index:-3!important;
-  background-image:url("./assets/visual/admin-chart-office.png")!important;
+  background-image:url("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/assets/images/visual/admin-chart-office.png")!important;
   background-size:cover!important;
   background-position:center center!important;
   background-repeat:no-repeat!important;
@@ -255,7 +255,7 @@ body.atlas-administrator-mirror #missions-vie>.pill{
   position:absolute!important;
   inset:0!important;
   z-index:-2!important;
-  background:url("./assets/visual/admin-command-observatory.png") center/cover no-repeat!important;
+  background:url("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/assets/images/visual/admin-command-observatory.png") center/cover no-repeat!important;
   opacity:.62!important;
   filter:brightness(.82) saturate(.92)!important;
 }

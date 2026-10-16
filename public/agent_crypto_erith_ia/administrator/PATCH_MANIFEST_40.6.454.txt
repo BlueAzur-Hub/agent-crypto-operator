@@ -1,0 +1,35 @@
+AGENT-CRYPTO STRATEGY EXPERIMENT CYCLE EVENT WIRING — 40.6.454
+===============================================================
+
+OWNER
+-----
+app.js
+
+REAL CYCLE PATH
+---------------
+strategyAAutoCycle()
+  -> finally
+  -> strategyAExperimentRecord(trigger)
+  -> push row to existing Experiment Ledger
+  -> existing persistence attempt
+  -> dispatch agent-crypto:strategy-a-experiment-cycle exactly once
+
+CONSUMERS
+---------
+strategy-a-cost-wait-outcome-audit.js
+strategy-a-oracle-cost-calibration-audit.js
+strategy-a-execution-cost-truth.js
+
+NO CHANGE
+---------
+Auto A cadence
+Strategy thresholds
+Cost Gate
+Oracle math
+Risk policy
+Paper execution
+Backend
+Aether
+Market Core 38.15.11
+
+NO NEW TIMER / OBSERVER / FETCH / WEBSOCKET / STORAGE OWNER / REAL ORDER

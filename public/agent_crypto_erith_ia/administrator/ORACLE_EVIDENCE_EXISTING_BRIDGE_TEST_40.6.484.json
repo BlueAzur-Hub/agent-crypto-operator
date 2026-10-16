@@ -1,0 +1,20 @@
+{
+  "schema": "agent_crypto_oracle_evidence_existing_bridge_test_v1",
+  "build": "40.6.484",
+  "pass_pending_workflow": false,
+  "cases": {
+    "module_build_identity": "PASS",
+    "existing_bridge_8787": "PASS",
+    "existing_bridge_session_reused": "PASS",
+    "standalone_8791_removed": "PASS",
+    "foundation_406482_preserved": "PASS",
+    "browser_github_token_absent": "PASS",
+    "operator_triggered_only": "PASS",
+    "local_retention_locked": "PASS",
+    "backend_8790_unchanged": "PASS",
+    "bridge_r16_source_lock": "PASS",
+    "strategy_a_unchanged": "PASS",
+    "market_core_381511_unchanged": "PASS"
+  },
+  "pass": true
+}

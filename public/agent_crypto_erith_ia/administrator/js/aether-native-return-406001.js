@@ -7,15 +7,15 @@
   const BUILD = "40.6.1";
   const RETURN_ATTR = "aetherNativeReturn406001";
 
-  function phaseNodes406001(bar){
+  function phaseNodes(bar){
     const ids = [
       "btnLivecheck","btnRefresh","decisionCard","sourceActiveCard","sourceTimeCard",
-      "atlasAetherRibbon4084","atlasAetherRibbonMarket4088","atlasAetherRibbonAtlas4084",
-      "atlasAetherRibbonOracle4084","atlasAetherRibbonSources4084","atlasAetherRibbonBook4084",
-      "atlasAetherVeille4087","atlasAetherSystem4086"
+      "atlasAetherRibbon","atlasAetherRibbonMarket","atlasAetherRibbonAtlas",
+      "atlasAetherRibbonOracle","atlasAetherRibbonSources","atlasAetherRibbonBook",
+      "atlasAetherVeille","atlasAetherSystem"
     ];
     const nodes = ids.map(id => document.getElementById(id)).filter(Boolean);
-    const brand = bar?.querySelector("#atlasAetherRibbon4084 .atlas-aether-ribbon-brand-4084");
+    const brand = bar?.querySelector("#atlasAetherRibbon .atlas-aether-ribbon-brand");
     if(brand) nodes.push(brand);
     return [...new Set(nodes)];
   }
@@ -24,7 +24,7 @@
     const bar = document.getElementById("livecheck");
     if(!bar) return false;
     const nativeIds = new Set(["btnLivecheck","btnRefresh","decisionCard","sourceActiveCard","sourceTimeCard"]);
-    const nodes = phaseNodes406001(bar);
+    const nodes = phaseNodes(bar);
 
     // One-frame restart of the EXISTING 270 s CSS phase owner. This does not create
     // a second cadence: it only returns that owner to its 0% NORMAL state.
@@ -52,10 +52,10 @@
   }
 
   function bind406001(){
-    const feed = document.getElementById("atlasAetherVeille4087");
-    const brand = feed?.querySelector(".atlas-aether-veille-brand-4087");
-    if(!feed || !brand || brand.dataset.aetherNativeReturnBound406001 === "1") return false;
-    brand.dataset.aetherNativeReturnBound406001 = "1";
+    const feed = document.getElementById("atlasAetherVeille");
+    const brand = feed?.querySelector(".atlas-aether-veille-brand");
+    if(!feed || !brand || brand.dataset.aetherNativeReturnBound === "1") return false;
+    brand.dataset.aetherNativeReturnBound = "1";
     brand.setAttribute("role","button");
     brand.setAttribute("tabindex","0");
     brand.setAttribute("aria-label","Revenir au menu normal");
@@ -79,7 +79,7 @@
   if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", bind406001, {once:true});
   else bind406001();
 
-  globalThis.ErithAetherNativeReturn406001 = Object.freeze({
+  globalThis.ErithAetherNativeReturn = Object.freeze({
     build: BUILD,
     bind: bind406001,
     returnNative: returnNative406001,

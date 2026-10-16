@@ -1,0 +1,73 @@
+{
+  "schema": "agent_crypto_generated_report_version_truth_evidence_v1",
+  "build": "40.6.103",
+  "parent_build": "40.6.102",
+  "engine": "38.15.11",
+  "defect": {
+    "reproduced": true,
+    "surface": "generated Markdown / pedagogical journal",
+    "loaded_build_observed": "40.6.100",
+    "stale_generated_label_observed": "Build 40.6.86 · Administrator",
+    "source": "legacy app.js ATLAS_RELEASE derived from ATLAS_BUILD 40.6.86"
+  },
+  "correction": {
+    "runtime_patch": "js/generated-report-version-truth-406103.js",
+    "loader": "js/version-truth-406086-authority-lock.js",
+    "authority_order": [
+      "ErithVersionTruth.build",
+      "immutable entry pathname",
+      "ac-build",
+      "administrator-build meta"
+    ],
+    "target_builders": [
+      "atlasMemoryIntelligenceMarkdown",
+      "buildLearningJournalMarkdown",
+      "buildMemoryReportMarkdown",
+      "buildAutomaticLearningJournalMarkdown",
+      "buildWakePlanText",
+      "buildCollectionPlanMarkdown"
+    ],
+    "visible_journal_one_shot_normalization": true,
+    "legacy_app_rewritten": false,
+    "legacy_atlas_build_constant_changed": false,
+    "analytical_fingerprint_changed": false,
+    "version_truth_owner": "js/version-truth-entry-authority-v3.js"
+  },
+  "static_proof": {
+    "runtime_patch_node_syntax": "PASS",
+    "version_owner_node_syntax": "PASS",
+    "version_truth_required_markers_preserved": true,
+    "forbidden_setInterval": false,
+    "forbidden_MutationObserver": false,
+    "forbidden_IntersectionObserver": false,
+    "forbidden_storage_write": false
+  },
+  "protected": {
+    "market_core": "38.15.11",
+    "web_classic": true,
+    "graph_history": true,
+    "aether": true,
+    "atlas_current": true,
+    "oracle": true,
+    "evidence": true,
+    "math_core": true,
+    "lecture_technique": true,
+    "strategy_a": true,
+    "source_truth": true
+  },
+  "side_effects": {
+    "new_fetch_owner": false,
+    "recurring_timer": false,
+    "observer": false,
+    "storage_write": false,
+    "wallet": false,
+    "real_order": false,
+    "trading_endpoint": false
+  },
+  "terrain": {
+    "version_truth_ci": "required",
+    "version_delivery_ci": "required",
+    "github_pages": "required",
+    "firefox_generated_journal": "required after deployment"
+  }
+}

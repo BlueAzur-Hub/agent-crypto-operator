@@ -1,0 +1,20 @@
+{
+  "schema": "agent_crypto_oracle_evidence_github_transport_resilience_test_v1",
+  "build": "40.6.485",
+  "pass_pending_workflow": false,
+  "cases": {
+    "bridge_8787_v1913_required": "PASS",
+    "browser_wait_300s": "PASS",
+    "no_8791": "PASS",
+    "no_local_delete": "PASS",
+    "no_browser_github_token": "PASS",
+    "manifest_still_zero_archive_before_terrain": "PASS",
+    "large_write_timeout_180s": "PASS",
+    "readback_timeout_120s": "PASS",
+    "bounded_retry_one": "PASS",
+    "large_file_blob_readback_contract": "PASS",
+    "backend_8790_unchanged": "PASS",
+    "market_strategy_oracle_protected": "PASS"
+  },
+  "pass": true
+}

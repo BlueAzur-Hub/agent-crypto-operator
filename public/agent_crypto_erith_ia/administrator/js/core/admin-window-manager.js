@@ -24,19 +24,34 @@
     let deck = null;
     let deckList = null;
     let deckCount = null;
-    let deckBatchDepth40314 = 0;
-    let deckBatchPending40314 = false;
+    let deckBatchDepth = 0;
+    let deckBatchPending = false;
     let activeDomain = clean(options.domain || document.documentElement.dataset.atlasMarketDomain || "crypto") || "crypto";
     const displayBackups = new WeakMap();
 
+    // 40.6.239 — route native-window persistence through the stable storage
+    // relief contract when available. Under quota, the relief owner provides
+    // session-only volatile continuity without deleting operator data.
+    const storageRelief = () => globalThis.AtlasStorageRelief || null;
     const readStorage = (key, fallback = null) => {
-      try { return localStorage.getItem(key) ?? fallback; } catch { return fallback; }
+      try {
+        const relief = storageRelief();
+        const value = relief?.readSync ? relief.readSync(key) : localStorage.getItem(key);
+        return value ?? fallback;
+      } catch { return fallback; }
     };
     const writeStorage = (key, value) => {
-      try { localStorage.setItem(key, value); return true; } catch { return false; }
+      try {
+        const relief = storageRelief();
+        return relief?.writeSync ? relief.writeSync(key, value) : (localStorage.setItem(key, value), true);
+      } catch { return false; }
     };
     const removeStorage = key => {
-      try { localStorage.removeItem(key); } catch {}
+      try {
+        const relief = storageRelief();
+        if (relief?.removeSync) relief.removeSync(key);
+        else localStorage.removeItem(key);
+      } catch {}
     };
     const stateKey = id => `${statePrefix}${id}`;
     const getState = id => safeJson(readStorage(stateKey(id), "{}"), {}) || {};
@@ -334,7 +349,7 @@
             // nodes had been reparented. Keep that proven drag path local here.
             // IMPORTANT: persisted restore/setFloating ownership is untouched.
             setFloating(win, true, true, detachGeometry, { autoFitShell: false });
-            fitDragDetachedShellHeight40319(win);
+            fitDragDetachedShellHeight(win);
 
             // The pressed control may have moved to a different DOM parent.
             // Rebase the gesture from the fitted floating geometry and reacquire
@@ -351,7 +366,7 @@
             // normalizer solely as a legacy fallback when the operator moves it;
             // never reset saved layouts at boot.
             if (!win.directFixed && win.shell && win.shellSizingMode === "stored-geometry") {
-              fitDragDetachedShellHeight40319(win);
+              fitDragDetachedShellHeight(win);
             }
             dragBase = currentRect(win);
           }
@@ -683,7 +698,7 @@
     // On the first drag-detach (or first move of a restored stored-geometry shell),
     // perform ONE height-only content measurement. Width, x-position, window
     // ownership, menus and saved workspace data remain untouched.
-    function fitDragDetachedShellHeight40319(win) {
+    function fitDragDetachedShellHeight(win) {
       if (!win || win.directFixed || !win.floating || !(win.shell instanceof HTMLElement)) return false;
       if (win.maximized || win.minimized || win.hidden) return false;
 
@@ -1254,8 +1269,8 @@
     }
 
     function updateDeck() {
-      if (deckBatchDepth40314 > 0) {
-        deckBatchPending40314 = true;
+      if (deckBatchDepth > 0) {
+        deckBatchPending = true;
         return;
       }
       if (!deckList) return;
@@ -1288,14 +1303,14 @@
       });
     }
 
-    function withDeckBatch40314(callback) {
-      deckBatchDepth40314 += 1;
+    function withDeckBatch(callback) {
+      deckBatchDepth += 1;
       try {
         return callback();
       } finally {
-        deckBatchDepth40314 = Math.max(0, deckBatchDepth40314 - 1);
-        if (deckBatchDepth40314 === 0 && deckBatchPending40314) {
-          deckBatchPending40314 = false;
+        deckBatchDepth = Math.max(0, deckBatchDepth - 1);
+        if (deckBatchDepth === 0 && deckBatchPending) {
+          deckBatchPending = false;
           updateDeck();
         }
       }
@@ -1450,7 +1465,7 @@
     }
 
     function applySnapshot(rawSnapshot, options = {}) {
-      return withDeckBatch40314(() => {
+      return withDeckBatch(() => {
       const snapshotState = rawSnapshot && typeof rawSnapshot === "object" ? rawSnapshot : {};
       const source = snapshotState.windows && typeof snapshotState.windows === "object"
         ? snapshotState.windows
@@ -1548,7 +1563,7 @@
     }
 
     function restorePersistedPresentation() {
-      return withDeckBatch40314(() => {
+      return withDeckBatch(() => {
         // 40.3.14 — one pass only. applySnapshot already normalizes any current
         // presentation before applying the saved one. The former extra global
         // neutralization doubled DOM moves and forced additional layout work.

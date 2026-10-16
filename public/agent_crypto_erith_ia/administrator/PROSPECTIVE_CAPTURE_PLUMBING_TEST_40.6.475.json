@@ -1,0 +1,29 @@
+{
+  "schema": "agent_crypto_prospective_capture_plumbing_test_v1",
+  "build": "40.6.475",
+  "pass_pending_workflow": false,
+  "objective": "prove partial experiment-cycle event resolves exact ledger cycle and reaches durable/OKX/T+5 path without live market dependency",
+  "cases": {
+    "partial_event_exact_cycle_id": "PASS",
+    "newer_ledger_row_must_not_steal_event": "PASS",
+    "durable_meta_write": "PASS",
+    "okx_t0_capture": "PASS",
+    "t5_capture": "PASS",
+    "missing_cycle_id_fails_closed": "PASS"
+  },
+  "invariants": {
+    "market_core": "38.15.11",
+    "strategy_business_logic_changed": false,
+    "threshold_changed": false,
+    "gate_changed": false,
+    "db_schema_changed": false,
+    "storage_prefix_preserved": "prospective_outcome_474:",
+    "historical_backfill": false,
+    "no_interpolation": true,
+    "recurring_timer": false,
+    "mutation_observer": false,
+    "real_order": false,
+    "paper_only": true
+  },
+  "pass": true
+}

@@ -24,12 +24,12 @@
     const ht=jac(new Set(ta.headline_tokens||[]),new Set(ca.headline_tokens||[]));add("headline_tokens",ht,0.10);
     return {score:total?weighted/total:0,score_100:total?Math.round(weighted/total*100):0,reasons};
   }
-  function ledgerById(){const m=new Map();for(const r of globalThis.AtlasEventReactionLedger405006?.archive?.()||[])if(r?.event_id)m.set(r.event_id,r);return m;}
-  function clusterMembership(){const m=new Map();for(const c of globalThis.AtlasEventSemanticEnrichment405007?.clusters?.()||[])for(const id of c.member_event_ids||[])m.set(id,c.cluster_id);return m;}
+  function ledgerById(){const m=new Map();for(const r of globalThis.AtlasEventReactionLedger?.archive?.()||[])if(r?.event_id)m.set(r.event_id,r);return m;}
+  function clusterMembership(){const m=new Map();for(const c of globalThis.AtlasEventSemanticEnrichment?.clusters?.()||[])for(const id of c.member_event_ids||[])m.set(id,c.cluster_id);return m;}
   function reaction(row,horizon,symbol){const w=row?.reaction_windows?.[horizon];return finite(w?.reactions?.[symbol]?.change_from_t0_pct);}
   function distribution(values){const a=values.filter(Number.isFinite);const neutralBand=.10;return {count:a.length,positive:a.filter(v=>v>neutralBand).length,negative:a.filter(v=>v<-neutralBand).length,neutral:a.filter(v=>Math.abs(v)<=neutralBand).length,mean_pct:mean(a),median_pct:med(a),min_pct:a.length?Math.min(...a):null,max_pct:a.length?Math.max(...a):null,label:"historical_frequency_not_probability"};}
   function analyze(targetInput,options={}){
-    const enrich=globalThis.AtlasEventSemanticEnrichment405007;const target=enrich?.enrich?.(targetInput)||targetInput;if(!target)return null;
+    const enrich=globalThis.AtlasEventSemanticEnrichment;const target=enrich?.enrich?.(targetInput)||targetInput;if(!target)return null;
     const ledger=ledgerById(),clusters=clusterMembership(),targetCluster=clusters.get(target.event_id)||null;
     const asset=String(options.asset||target.assets?.[0]||"BTC").toUpperCase();const horizon=String(options.horizon||"+24h");const minScore=Number.isFinite(Number(options.min_score))?Number(options.min_score):55;
     const candidates=[];
@@ -43,6 +43,6 @@
     const top=candidates.slice(0,Number.isFinite(Number(options.limit))?Math.max(1,Math.min(50,Number(options.limit))):20);const dist=distribution(top.map(x=>x.reaction_pct));
     return Object.freeze({schema:SCHEMA,build:BUILD,target_event_id:target.event_id||null,asset,horizon,min_similarity_score:minScore,analogs:top,distribution:dist,status:dist.count>=8?"DESCRIPTIVE_SAMPLE":dist.count?"INSUFFICIENT_SAMPLE":"NO_ANALOG",historical_frequency_only:true,probability_claim:false,causal_claim:false,prediction:false,financial_signal:false,automatic_order:false});
   }
-  function current(options={}){return analyze(globalThis.AtlasEventSemanticEnrichment405007?.current?.()||null,options);}
+  function current(options={}){return analyze(globalThis.AtlasEventSemanticEnrichment?.current?.()||null,options);}
   globalThis.AtlasHistoricalAnalogEngine405008=Object.freeze({build:BUILD,schema:SCHEMA,similarity,analyze,current,read_only:true,new_storage_owner:false,storage_write:false,new_fetch:false,new_timer:false,new_observer:false,historical_frequency_only:true,probability_claim:false,causal_claim:false,prediction:false,financial_signal:false,automatic_order:false});
 })();

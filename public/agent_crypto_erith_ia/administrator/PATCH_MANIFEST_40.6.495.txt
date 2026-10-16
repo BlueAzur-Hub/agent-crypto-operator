@@ -1,0 +1,41 @@
+AGENT-CRYPTO 40.6.495 — OKX SHADOW EVIDENCE TRUTH
+parent=40.6.494
+market_core=38.15.11 protected
+execution_cost_truth=40.6.492 unchanged
+bridge=R18 / V1.9.13 unchanged
+backend=V1.4.3 unchanged
+
+CHANGED
+- public/agent_crypto_erith_ia/administrator/index.html
+- public/agent_crypto_erith_ia/administrator/index-40.6.495.html
+- public/agent_crypto_erith_ia/administrator/build.json
+- public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+- public/agent_crypto_erith_ia/administrator/js/strategy-a-okx-micro-execution-shadow-truth.js
+- public/agent_crypto_erith_ia/administrator/OKX_SHADOW_EVIDENCE_TRUTH_40.6.495.md
+- public/agent_crypto_erith_ia/administrator/HANDOFF_FINAL_40.6.495.md
+- public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.495.txt
+- .github/scripts/agent_crypto_okx_shadow_evidence_guard_406495.py
+- .github/workflows/agent-crypto-package-406495.yml
+- .github/workflows/agent-crypto-package-406494.yml
+
+FIX
+- historical Oracle median separated from linked-cycle expected move
+- Auto A experiment-cycle measurements linked to cycle_id
+- FULL/PARTIAL/STALE/UNAVAILABLE source quality
+- 120 s current-view evidence aging
+- numeric cost and cost+margin retained in 24-observation session history
+- Post-only 4/4 clarified as ticket-size fee-floor comparison, not executable opportunities
+- ZIP package preserves repository tree
+- 40.6.495 CI self-skips automatically after a later build replaces it
+
+UNCHANGED
+- Strategy A thresholds / business logic
+- Cost Gate
+- Oracle Math
+- Risk
+- PAPER execution
+- 40.6.492 measurement logic
+- Backend / Bridge
+- Market Core 38.15.11
+- storage schema
+- real orders / wallet / API keys

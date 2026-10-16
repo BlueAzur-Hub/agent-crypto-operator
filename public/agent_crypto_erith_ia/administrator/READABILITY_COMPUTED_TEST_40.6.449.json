@@ -1,0 +1,44 @@
+{
+  "version": "40.6.449",
+  "parent": "40.6.448",
+  "scope": "Representative computed-style cascade test. Canonical readability CSS is loaded before historical late-injected module CSS. This is not Christophe's Firefox session.",
+  "engine": "WeasyPrint",
+  "pass": true,
+  "cases": {
+    "paper_lifecycle": {
+      "title_px": 16,
+      "sub_px": 13,
+      "state_px": 13,
+      "label_px": 13,
+      "value_px": 14,
+      "safety_px": 13
+    },
+    "g3_prospective": {
+      "title_px": 16,
+      "label_px": 13,
+      "value_px": 14,
+      "note_px": 13
+    },
+    "after_cost": {
+      "label_px": 13,
+      "value_px": 14
+    },
+    "durable_evidence": {
+      "label_px": 13,
+      "value_px": 14
+    }
+  },
+  "baseline_reproduced": {
+    "paper_lifecycle_label_px": 7,
+    "paper_lifecycle_value_px": 9,
+    "g3_prospective_label_px": 7,
+    "g3_prospective_value_px": 8
+  },
+  "assertions": {
+    "canonical_sheet_before_late_styles": true,
+    "late_styles_do_not_reduce_tested_text": true,
+    "no_new_priority_override": true,
+    "no_javascript_business_change": true,
+    "html_structure_448_preserved": true
+  }
+}

@@ -1,3 +1,5 @@
+/* 40.6.413 · diagnostic-only eval boundary */
+(()=>{try{const b=String(globalThis.AGENT_CRYPTO_EFFECTIVE_BUILD||document.documentElement?.dataset?.agentCryptoLoadedBuild||"");if(b==="40.6.413")globalThis.AgentCryptoBootProbe?.mark?.("probe-script-eval-enter",{src:"market-reading-depth.js",build:"40.6.413"});}catch(_){}})();
 (() => {
   "use strict";
   const BUILD = "40.4.229";
@@ -24,19 +26,19 @@
   function ensureHost(){
     const root = byId("analyste");
     if(!root) return null;
-    let host = byId("atlasMarketReadingDepth404199");
+    let host = byId("atlasMarketReadingDepth");
     if(!host){
       host = document.createElement("section");
-      host.id = "atlasMarketReadingDepth404199";
+      host.id = "atlasMarketReadingDepth";
       host.className = "atlas-market-reading-depth-404199";
       host.hidden = true;
       host.innerHTML = `
-        <header class="atlas-market-reading-head-404199">
+        <header class="atlas-market-reading-head">
           <div><small>ERITH.IA · MARKET READING DEPTH</small><strong data-reading-title>Lecture profonde</strong><span data-reading-subtitle>Mesures explicables · observation seulement</span></div>
-          <div class="atlas-market-reading-actions-404199"><span data-reading-build>Build ${BUILD}</span><button type="button" data-reading-toggle aria-expanded="false">Ouvrir la lecture détaillée</button></div>
+          <div class="atlas-market-reading-actions"><span data-reading-build>Build ${BUILD}</span><button type="button" data-reading-toggle aria-expanded="false">Ouvrir la lecture détaillée</button></div>
         </header>
-        <div class="atlas-market-reading-preview-404199" data-reading-preview>Couche froide · aucun historique supplémentaire chargé.</div>
-        <div class="atlas-market-reading-body-404199" data-reading-body hidden></div>`;
+        <div class="atlas-market-reading-preview" data-reading-preview>Couche froide · aucun historique supplémentaire chargé.</div>
+        <div class="atlas-market-reading-body" data-reading-body hidden></div>`;
       root.appendChild(host);
       host.addEventListener("click", onHostClick);
     }
@@ -201,18 +203,18 @@
       energy:[["WTI","Pétrole brut de référence nord-américain · future continu."],["Brent","Pétrole brut de référence international · future continu."],["Natural Gas","Gaz naturel · future continu · dynamique distincte du pétrole."]],
       "cross-market":[["BTC","Actif numérique."],["XAU","Or · composante refuge / métal précieux."],["S&P 500","Actions américaines."],["Brent","Énergie / pétrole."],["HG","Cuivre · activité industrielle."]]
     };
-    return `<div class="atlas-reading-structure-404199">${(blocks[domain]||[]).map(([a,b])=>`<article><b>${esc(a)}</b><span>${esc(b)}</span></article>`).join("")}</div>`;
+    return `<div class="atlas-reading-structure">${(blocks[domain]||[]).map(([a,b])=>`<article><b>${esc(a)}</b><span>${esc(b)}</span></article>`).join("")}</div>`;
   }
 
   function measurementTable(snapshot){
     const rows=(snapshot?.assets||[]).map(a=>`<tr><th>${esc(a.symbol||a.name)}<small>${esc(a.name)}</small></th><td>${pct(a.metric.change)}</td><td>${pct(a.metric.volatility)}</td><td>${pct(a.metric.drawdown)}</td><td>${pct(a.metric.amplitude)}</td><td>${a.metric.points||0}</td></tr>`).join("");
-    return rows ? `<div class="atlas-reading-table-wrap-404199"><table><thead><tr><th>Actif</th><th>Variation</th><th>Volatilité/session</th><th>Max drawdown</th><th>Amplitude</th><th>Obs.</th></tr></thead><tbody>${rows}</tbody></table></div>` : `<p>Données insuffisantes.</p>`;
+    return rows ? `<div class="atlas-reading-table-wrap"><table><thead><tr><th>Actif</th><th>Variation</th><th>Volatilité/session</th><th>Max drawdown</th><th>Amplitude</th><th>Obs.</th></tr></thead><tbody>${rows}</tbody></table></div>` : `<p>Données insuffisantes.</p>`;
   }
 
   function mathTable(snapshot){
     if(DEPTH_LEVEL < 203) return "";
     const rows=(snapshot?.assets||[]).map(a=>`<tr><th>${esc(a.symbol||a.name)}</th><td>${pct(a.metric.cagr)}</td><td>${pct(a.metric.drawdown)}</td><td>${a.metric.recoveryDays==null?"Non récupéré / n.a.":`${a.metric.recoveryDays} j`}</td><td>${num(a.metric.position,1)} %</td><td>${num(a.metric.points,0)}</td></tr>`).join("");
-    return `<details class="atlas-reading-detail-404199" open><summary>Historical Math Core · fenêtre active</summary><div class="atlas-reading-table-wrap-404199"><table><thead><tr><th>Actif</th><th>CAGR*</th><th>Max DD</th><th>Récupération après creux</th><th>Position dans l’amplitude</th><th>Obs.</th></tr></thead><tbody>${rows}</tbody></table></div><small>* CAGR uniquement lorsque la fenêtre mesurée couvre au moins un an. Aucune extrapolation.</small></details>`;
+    return `<details class="atlas-reading-detail" open><summary>Historical Math Core · fenêtre active</summary><div class="atlas-reading-table-wrap"><table><thead><tr><th>Actif</th><th>CAGR*</th><th>Max DD</th><th>Récupération après creux</th><th>Position dans l’amplitude</th><th>Obs.</th></tr></thead><tbody>${rows}</tbody></table></div><small>* CAGR uniquement lorsque la fenêtre mesurée couvre au moins un an. Aucune extrapolation.</small></details>`;
   }
 
   function periodRow(period,snapshot,current){
@@ -247,7 +249,7 @@
       const ra=[],rb=[]; for(let k=1;k<keys.length;k++){const l0=left.get(keys[k-1]),l1=left.get(keys[k]),r0=right.get(keys[k-1]),r1=right.get(keys[k]);if(l0>0&&l1>0&&r0>0&&r1>0){ra.push((l1/l0)-1);rb.push((r1/r0)-1);}}
       const c=pearson(ra,rb); if(c!==null) rows.push(`<tr><th>${esc(assets[i].symbol)} / ${esc(assets[j].symbol)}</th><td>${c.toFixed(3)}</td><td>${ra.length}</td></tr>`);
     }
-    return `<details class="atlas-reading-detail-404199" open><summary>Corrélations · dates communes</summary><div class="atlas-reading-table-wrap-404199"><table><thead><tr><th>Paire</th><th>Pearson</th><th>Retours alignés</th></tr></thead><tbody>${rows.join("")||'<tr><td colspan="3">Couverture commune insuffisante.</td></tr>'}</tbody></table></div><small>Corrélation ≠ causalité. Calcul sur rendements de périodes alignées uniquement.</small></details>`;
+    return `<details class="atlas-reading-detail" open><summary>Corrélations · dates communes</summary><div class="atlas-reading-table-wrap"><table><thead><tr><th>Paire</th><th>Pearson</th><th>Retours alignés</th></tr></thead><tbody>${rows.join("")||'<tr><td colspan="3">Couverture commune insuffisante.</td></tr>'}</tbody></table></div><small>Corrélation ≠ causalité. Calcul sur rendements de périodes alignées uniquement.</small></details>`;
   }
 
   async function horizonSnapshots(domain,current){
@@ -265,7 +267,7 @@
     if(!host||!body||!featureEnabled(domain)||!state.open) return;
     const cfg=DOMAINS[domain], period=periodOverride||currentPeriod(domain);
     state.requestedPeriod=period;
-    body.innerHTML=`<div class="atlas-reading-loading-404199">Lecture mesurée · ${esc(cfg.title)} · ${esc(periodLabel(period))}…</div>`;
+    body.innerHTML=`<div class="atlas-reading-loading">Lecture mesurée · ${esc(cfg.title)} · ${esc(periodLabel(period))}…</div>`;
     let snapshot;
     try{ snapshot=await getSnapshot(domain,period,true); }catch(error){ snapshot={loaded:false,domain,period,error:safe(error?.message||error)}; }
     if(state.domain!==domain || !state.open) return;
@@ -273,13 +275,13 @@
     const source=snapshot?.source||cfg.source;
     const generated=snapshot?.generated_at ? new Date(snapshot.generated_at).toLocaleString("fr-FR") : "—";
     body.innerHTML=`
-      <section class="atlas-reading-hero-404199"><small>LECTURE SYNTHÉTIQUE · ${esc(periodLabel(period))}</small><p>${esc(summaryText(domain,snapshot))}</p><div><span>${snapshot?.assets_count||0} séries mesurées</span><span>${esc(source)}</span><span>Généré : ${esc(generated)}</span><span>Aucune prévision</span></div></section>
-      <details class="atlas-reading-detail-404199" open><summary>Mesures de la fenêtre active</summary>${measurementTable(snapshot)}</details>
-      <details class="atlas-reading-detail-404199" open><summary>Mémoire multi-horizon · lazy</summary><div class="atlas-reading-table-wrap-404199"><table><thead><tr><th>Horizon</th><th>Leader</th><th>Retard</th><th>Dispersion</th><th>Couverture</th></tr></thead><tbody>${ALL_PERIODS.map(p=>periodRow(p,horizons.get(p),period)).join("")}</tbody></table></div><small>Les longues fenêtres non résidentes ne sont chargées qu’après action explicite.</small></details>
-      <details class="atlas-reading-detail-404199" open><summary>Structure du panier</summary>${structureHtml(domain)}</details>
+      <section class="atlas-reading-hero"><small>LECTURE SYNTHÉTIQUE · ${esc(periodLabel(period))}</small><p>${esc(summaryText(domain,snapshot))}</p><div><span>${snapshot?.assets_count||0} séries mesurées</span><span>${esc(source)}</span><span>Généré : ${esc(generated)}</span><span>Aucune prévision</span></div></section>
+      <details class="atlas-reading-detail" open><summary>Mesures de la fenêtre active</summary>${measurementTable(snapshot)}</details>
+      <details class="atlas-reading-detail" open><summary>Mémoire multi-horizon · lazy</summary><div class="atlas-reading-table-wrap"><table><thead><tr><th>Horizon</th><th>Leader</th><th>Retard</th><th>Dispersion</th><th>Couverture</th></tr></thead><tbody>${ALL_PERIODS.map(p=>periodRow(p,horizons.get(p),period)).join("")}</tbody></table></div><small>Les longues fenêtres non résidentes ne sont chargées qu’après action explicite.</small></details>
+      <details class="atlas-reading-detail" open><summary>Structure du panier</summary>${structureHtml(domain)}</details>
       ${correlationHtml(snapshot)}
       ${mathTable(snapshot)}
-      <details class="atlas-reading-detail-404199"><summary>Source Truth · méthode · limites</summary><div class="atlas-reading-limits-404199"><p><b>Base 100 :</b> comparaison relative depuis le premier point de la fenêtre ; ce n’est pas un prix absolu.</p><p><b>Historique :</b> les futures continus restent explicitement distincts du spot et peuvent refléter les mécanismes de roll du fournisseur.</p><p><b>Devises :</b> aucune conversion implicite n’est appliquée pour rendre artificiellement les séries comparables.</p><p><b>Décision :</b> observation seulement · aucune recommandation · aucune exécution · décision humaine uniquement.</p></div></details>`;
+      <details class="atlas-reading-detail"><summary>Source Truth · méthode · limites</summary><div class="atlas-reading-limits"><p><b>Base 100 :</b> comparaison relative depuis le premier point de la fenêtre ; ce n’est pas un prix absolu.</p><p><b>Historique :</b> les futures continus restent explicitement distincts du spot et peuvent refléter les mécanismes de roll du fournisseur.</p><p><b>Devises :</b> aucune conversion implicite n’est appliquée pour rendre artificiellement les séries comparables.</p><p><b>Décision :</b> observation seulement · aucune recommandation · aucune exécution · décision humaine uniquement.</p></div></details>`;
     host.dataset.hydratedPeriod=period;
   }
 
@@ -308,3 +310,5 @@
 
   globalThis.ErithMarketReadingDepth = Object.freeze({build:BUILD,depth_level:DEPTH_LEVEL,lazy:true,new_timer:false,new_observer:false,orders_allowed:false,refresh:()=>hydrate(state.domain)});
 })();
+/* 40.6.413 · diagnostic-only eval boundary */
+(()=>{try{const b=String(globalThis.AGENT_CRYPTO_EFFECTIVE_BUILD||document.documentElement?.dataset?.agentCryptoLoadedBuild||"");if(b==="40.6.413")globalThis.AgentCryptoBootProbe?.mark?.("probe-script-eval-exit",{src:"market-reading-depth.js",build:"40.6.413"});}catch(_){}})();

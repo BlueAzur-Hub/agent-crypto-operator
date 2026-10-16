@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<script src="../web/vault-data-router.js" data-erith-vault-data-router="true"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark"><title>ERITH.IA · Radar 20 — preuves</title>
+<style>
+:root{color-scheme:dark;--bg:#06101a;--panel:#0e2030;--line:#214354;--text:#e9f3f4;--sub:#9eb6c0;--accent:#83e1e8;--amber:#ffce91}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 90% 0,#18364a,transparent 43%),var(--bg);color:var(--text);font:14px/1.56 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:22px clamp(14px,3vw,34px) 45px}
+header{display:flex;justify-content:space-between;align-items:start;gap:20px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:20px}
+small,dt,p,footer{color:var(--sub)}.kicker{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
+h1{font:normal clamp(25px,3vw,37px)/1.18 Georgia,serif;margin:7px 0}h2{font-size:16px;color:var(--amber);margin:0 0 10px}
+.intro{max-width:740px;margin:0}button{background:#1c3b48;border:1px solid #447d87;border-radius:11px;padding:10px 16px;color:#e4f8f9;font:inherit;font-weight:650;cursor:pointer}
+button:disabled{opacity:.5;cursor:wait}button:focus-visible,a:focus-visible{outline:2px solid var(--amber);outline-offset:3px}a{color:var(--accent)}
+.metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:20px 0}.metrics>div,section{background:linear-gradient(145deg,#102537,#0a1927);border:1px solid var(--line);border-radius:13px}
+.metrics>div{padding:12px;min-height:112px}.metrics dt{font-size:11px;font-weight:700}.metrics dd{margin:8px 0 1px;font-size:clamp(17px,2vw,24px);font-weight:650;font-variant-numeric:tabular-nums}
+section{padding:18px;margin-top:13px}p{margin:7px 0}.scroll{overflow-x:auto}table{border-collapse:collapse;min-width:790px;width:100%;font-variant-numeric:tabular-nums;text-align:right}
+td,th{padding:10px 9px;border-bottom:1px solid #254050;white-space:nowrap}th{font-size:11px;color:var(--sub);font-weight:650}td:first-child,th:first-child{text-align:left}.pos{color:#9ae4b0}.neg{color:#ffa2ab}
+.proof{border-left:3px solid var(--accent);padding:10px 13px;background:#102e39;border-radius:0 8px 8px 0}.links{display:flex;flex-wrap:wrap;gap:16px}.note{color:var(--amber)}footer{padding-top:18px;font-size:12px}
+@media(max-width:840px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.metrics>div{min-height:95px}}@media(max-width:430px){main{padding:14px 12px 30px}}
+</style>
+</head>
+<body><main>
+<header><div><div class="kicker">ERITH.IA · LABORATOIRE IA · LECTURE SEULE</div>
+<h1>Radar 20 · Journal de recherche</h1>
+<p class="intro">20 cryptomonnaies, 90 journées de signaux + 48 heures pour clôturer les positions fictives. Deux modèles A/B, trois coûts hypothétiques. Aucune donnée privée du compte OKX.</p></div>
+<button id="refresh" type="button">Actualiser les preuves</button></header>
+<dl class="metrics" aria-label="État prospectif">
+<div><dt>Journées de signaux</dt><dd id="days">—</dd><small>Objectif 90</small></div>
+<div><dt>Archives journalières</dt><dd id="archives">—</dd><small>Jusqu'à 92 avec clôture</small></div>
+<div><dt>Transactions fictives clôturées</dt><dd id="closed">—</dd><small>Total des 6 expériences distinctes</small></div>
+<div><dt>Dernière journée archivée UTC</dt><dd id="last-day">—</dd><small>Non assimilable à du live</small></div>
+<div><dt>Statut de collecte</dt><dd id="state">—</dd><small>Source GitHub publique</small></div>
+</dl>
+<section aria-labelledby="variants-title"><h2 id="variants-title">Résultats A/B · capital fictif 400 USDT par variante</h2>
+<div class="scroll"><table><thead><tr><th>Modèle</th><th>Frais A/R</th><th>Signaux</th><th>Ouvertes</th><th>Clôturées</th><th>Capital estimé</th><th>Réalisé</th><th>Recul maximum</th></tr></thead><tbody id="variants"></tbody></table></div>
+<p class="note" id="observation" aria-live="polite">En attente des données.</p></section>
+<section aria-labelledby="proof-title"><h2 id="proof-title">Provenance et limites</h2>
+<p>Une cohérence documentaire n'est pas une preuve de rentabilité. Les frais 0,8 %, 1,2 %, 1,6 % sont hypothétiques. Les archives Binance Spot USDT ne prouvent pas les prix d'exécution OKX Europe.</p>
+<p class="proof" role="status" aria-live="polite" id="verification">En attente des sources.</p>
+<nav class="links" aria-label="Preuves publiques">
+<a href="https://github.com/BlueAzur-Hub/erith-ia-memory/blob/main/public/agent_crypto_erith_ia/data/trader_flux/radar20_forward/index.json" target="_blank" rel="noopener noreferrer">Index des journées ↗</a>
+<a href="https://github.com/BlueAzur-Hub/erith-ia-memory/blob/main/public/agent_crypto_erith_ia/data/trader_flux/radar20_forward/summary.json" target="_blank" rel="noopener noreferrer">Résumé A/B ↗</a>
+<a href="./RADAR20_ETAT_DE_PREUVE.md" target="_blank" rel="noopener noreferrer">Rapport scientifique ↗</a>
+<a href="../trader/trading-desk.html">Trader ↗</a>
+</nav></section>
+<footer>Consultation à la demande ; aucun polling, aucun stockage, aucune clé de compte, aucun ordre réel.</footer>
+</main><script src="./radar20-veille.js"></script></body></html>

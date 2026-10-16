@@ -1,0 +1,35 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.513
+Release: DEPTH BODY DOCUMENT DOCK · RESTORE + CORRECT
+Parent: 40.6.512
+Market Core: 38.15.11 UNCHANGED
+
+RESTORE SOURCE
+40.6.511 okx-microstructure module restored as the independent body-portal baseline.
+
+CORE CORRECTION
+Docked Depth:
+- parent = document.body
+- position = absolute
+- left = detailPanel rect.left + window.scrollX
+- top = detailPanel rect.top + window.scrollY
+- width/height = Lecture Technique rect
+- no scroll handler
+- no 180ms timer
+- no child dock
+
+Detached/Maximized:
+- parent = document.body
+- position = fixed
+- native menu preserved
+
+PRESERVED
+- 40.6.510 OKX context/freshness truth
+- FRESH / STALE / OFFLINE / UNKNOWN
+- dynamic asset columns
+- Market Core 38.15.11
+- Strategy / Cost Gate / Oracle / Aether
+- Backend 1.4.4 / Bridge 1.9.13
+- no wallet / private API / real order
+
+THREAD
+Close after delivery. Next chat begins with Firefox proof of 40.6.513.

@@ -1,0 +1,22 @@
+{
+  "schema": "agent_crypto_oracle_evidence_cursor_read_test_v1",
+  "build": "40.6.481",
+  "pass_pending_workflow": true,
+  "pass": false,
+  "terrain_proven": false,
+  "cases": {
+    "canonical_full_read_uses_openCursor": "PENDING",
+    "canonical_full_read_has_no_getAll": "PENDING",
+    "cursor_progresses_record_by_record": "PENDING",
+    "warm_mirror_preserved": "PENDING",
+    "cold_summary_preserved": "PENDING",
+    "prune_count_fast_path": "PENDING",
+    "retention_50000_unchanged": "PENDING",
+    "no_delete_or_clear_added": "PENDING",
+    "indexeddb_schema_unchanged": "PENDING",
+    "oracle_math_unchanged": "PENDING",
+    "strategy_a_unchanged": "PENDING",
+    "market_core_381511_unchanged": "PENDING",
+    "firefox_serialization_recovery": "PENDING_OPERATOR"
+  }
+}

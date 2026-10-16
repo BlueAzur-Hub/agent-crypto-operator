@@ -27,7 +27,7 @@ html.atlas-budget-boot-40325 #atlasSharedSynthesisContent {
   display: none !important;
 }
 
-.atlas-budget-section-40325 {
+.atlas-budget-section {
   margin: 14px 0;
   border: 1px solid rgba(121, 218, 235, .20);
   border-radius: 16px;
@@ -36,18 +36,18 @@ html.atlas-budget-boot-40325 #atlasSharedSynthesisContent {
   overflow: clip;
 }
 
-.atlas-budget-section-40325[data-budget-tone="memory"] {
+.atlas-budget-section[data-budget-tone="memory"] {
   border-color: rgba(167, 132, 255, .28);
   background: linear-gradient(135deg, rgba(21, 18, 43, .76), rgba(5, 20, 34, .60));
 }
-.atlas-budget-section-40325[data-budget-tone="audit"] {
+.atlas-budget-section[data-budget-tone="audit"] {
   border-color: rgba(255, 214, 118, .25);
 }
-.atlas-budget-section-40325[data-budget-tone="current"] {
+.atlas-budget-section[data-budget-tone="current"] {
   border-color: rgba(91, 242, 207, .28);
 }
 
-.atlas-budget-summary-40325 {
+.atlas-budget-summary {
   list-style: none;
   cursor: pointer;
   min-height: 54px;
@@ -60,11 +60,11 @@ html.atlas-budget-boot-40325 #atlasSharedSynthesisContent {
   background: linear-gradient(90deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
   user-select: none;
 }
-.atlas-budget-summary-40325::-webkit-details-marker { display: none; }
-.atlas-budget-summary-40325::marker { content: ""; }
-.atlas-budget-summary-40325:hover { background: linear-gradient(90deg, rgba(98,236,255,.085), rgba(255,255,255,.025)); }
+.atlas-budget-summary::-webkit-details-marker { display: none; }
+.atlas-budget-summary::marker { content: ""; }
+.atlas-budget-summary:hover { background: linear-gradient(90deg, rgba(98,236,255,.085), rgba(255,255,255,.025)); }
 
-.atlas-budget-chevron-40325 {
+.atlas-budget-chevron {
   width: 30px;
   height: 30px;
   border-radius: 999px;
@@ -76,24 +76,24 @@ html.atlas-budget-boot-40325 #atlasSharedSynthesisContent {
   font: 950 15px/1 system-ui, sans-serif;
   transition: transform .16s ease;
 }
-.atlas-budget-section-40325[open] > .atlas-budget-summary-40325 .atlas-budget-chevron-40325 { transform: rotate(90deg); }
+.atlas-budget-section[open] > .atlas-budget-summary .atlas-budget-chevron { transform: rotate(90deg); }
 
-.atlas-budget-copy-40325 { min-width: 0; display: grid; gap: 2px; }
-.atlas-budget-copy-40325 b {
+.atlas-budget-copy { min-width: 0; display: grid; gap: 2px; }
+.atlas-budget-copy b {
   font: 900 clamp(14px, 1.1vw, 17px)/1.15 system-ui, sans-serif;
   color: #fff0c5;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.atlas-budget-copy-40325 small {
+.atlas-budget-copy small {
   color: #9db2bf;
   font: 600 12px/1.25 system-ui, sans-serif;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.atlas-budget-badge-40325 {
+.atlas-budget-badge {
   border: 1px solid rgba(111, 231, 255, .22);
   border-radius: 999px;
   padding: 5px 9px;
@@ -105,55 +105,55 @@ html.atlas-budget-boot-40325 #atlasSharedSynthesisContent {
   white-space: nowrap;
 }
 
-.atlas-budget-body-40325 {
+.atlas-budget-body {
   padding: 12px;
   contain: layout paint style;
   content-visibility: auto;
   contain-intrinsic-size: auto 640px;
 }
-.atlas-budget-section-40325:not([open]) > .atlas-budget-body-40325 {
+.atlas-budget-section:not([open]) > .atlas-budget-body {
   display: none !important;
 }
 
 /* Once wrapped, the historical panels own their internal visuals only; the
    sectional shell owns outer spacing/borders. */
-.atlas-budget-body-40325 > #atlasMemoryIntelligence,
-.atlas-budget-body-40325 > #atlasScannerTruth37,
-.atlas-budget-body-40325 > #atlasCurrentJournal33,
-.atlas-budget-body-40325 > #atlasBookReadOnlyKnowledge,
-.atlas-budget-body-40325 > #atlasKnowledgeLibrary {
+.atlas-budget-body > #atlasMemoryIntelligence,
+.atlas-budget-body > #atlasScannerTruth37,
+.atlas-budget-body > #atlasCurrentJournal33,
+.atlas-budget-body > #atlasBookReadOnlyKnowledge,
+.atlas-budget-body > #atlasKnowledgeLibrary {
   margin: 0 !important;
 }
 
 /* Dynamic descendants created by Analytical Memory / Multi-Collector /
    Memory Health / Freeze stay inside the closed memory budget shell because
    their canonical anchor is moved into this body before those scripts load. */
-#atlasBudgetMemory40325 .atlas-budget-body-40325 > *,
-#atlasBudgetMemory40325 #atlasMemoryIntelligence > * {
+#atlasBudgetMemory .atlas-budget-body > *,
+#atlasBudgetMemory #atlasMemoryIntelligence > * {
   content-visibility: auto;
 }
 
 /* The main Aerith response header/tools remain visible; only its potentially
    multi-page markdown body is collapsed. */
-.atlas-local-response-panel > .atlas-budget-section-40325 {
+.atlas-local-response-panel > .atlas-budget-section {
   margin: 8px 10px 6px;
   border-radius: 12px;
 }
-.atlas-local-response-panel > .atlas-budget-section-40325 .atlas-budget-summary-40325 {
+.atlas-local-response-panel > .atlas-budget-section .atlas-budget-summary {
   min-height: 42px;
   padding: 8px 11px;
 }
 
 /* Decision Board keeps the operator summary visible. Only the historical
    comparison table becomes an on-demand sub-section. */
-#decision-board > .atlas-budget-section-40325 { margin: 12px 0 0; }
+#decision-board > .atlas-budget-section { margin: 12px 0 0; }
 
 /* Keep opening/closing cheap: no animations that force large-height layout. */
-.atlas-budget-section-40325 > .atlas-budget-body-40325 { transition: none !important; }
+.atlas-budget-section > .atlas-budget-body { transition: none !important; }
 
 @media (max-width: 760px) {
-  .atlas-budget-summary-40325 { grid-template-columns: auto minmax(0,1fr); }
-  .atlas-budget-badge-40325 { display: none; }
-  .atlas-budget-copy-40325 b,
-  .atlas-budget-copy-40325 small { white-space: normal; }
+  .atlas-budget-summary { grid-template-columns: auto minmax(0,1fr); }
+  .atlas-budget-badge { display: none; }
+  .atlas-budget-copy b,
+  .atlas-budget-copy small { white-space: normal; }
 }

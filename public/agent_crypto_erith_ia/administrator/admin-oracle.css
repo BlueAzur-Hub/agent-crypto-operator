@@ -25,7 +25,7 @@
 
   /* The preview now uses only phrasing elements inside <summary>, so Firefox keeps it
      inside the summary instead of repairing invalid block content out of the node. */
-  #oracle-analysis-suite>summary>.atlas-oracle-collapsed-preview-40296{
+  #oracle-analysis-suite>summary>.atlas-oracle-collapsed-preview{
     display:none!important;
     grid-column:1/-1!important;
     grid-row:2!important;
@@ -39,18 +39,18 @@
     border-radius:11px!important;
     background:linear-gradient(135deg,rgba(5,20,31,.78),rgba(10,23,36,.72))!important;
   }
-  #oracle-analysis-suite:not([open])>summary>.atlas-oracle-collapsed-preview-40296{display:grid!important}
-  #oracle-analysis-suite[open]>summary>.atlas-oracle-collapsed-preview-40296{display:none!important}
-  #oracle-analysis-suite>summary .atlas-oracle-collapsed-copy-40296{display:flex!important;flex-direction:column!important;gap:2px!important;min-width:0!important}
-  #oracle-analysis-suite>summary .atlas-oracle-collapsed-copy-40296>span{font-size:7.5px!important;line-height:1.1!important;letter-spacing:.15em!important}
-  #oracle-analysis-suite>summary .atlas-oracle-collapsed-copy-40296>b{font-size:12px!important;line-height:1.2!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
-  #oracle-analysis-suite>summary .atlas-oracle-collapsed-meta-40296{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:7px!important;flex-wrap:nowrap!important;min-width:0!important}
-  #oracle-analysis-suite>summary .atlas-oracle-collapsed-meta-40296>span{font-size:8px!important;white-space:nowrap!important}
-  #oracle-analysis-suite>summary .atlas-oracle-collapsed-directions-40296{grid-column:1/-1!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;min-width:0!important}
-  #oracle-analysis-suite>summary .atlas-oracle-collapsed-direction-40296{display:block!important;min-width:0!important;padding:8px 10px!important}
-  #oracle-analysis-suite>summary .atlas-oracle-collapsed-direction-head-40296{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;min-width:0!important}
-  #oracle-analysis-suite>summary .atlas-oracle-collapsed-direction-head-40296>span{font-size:8px!important;line-height:1.15!important;white-space:nowrap!important}
-  #oracle-analysis-suite>summary .atlas-oracle-collapsed-direction-head-40296>b{font-size:9px!important;line-height:1.15!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #oracle-analysis-suite:not([open])>summary>.atlas-oracle-collapsed-preview{display:grid!important}
+  #oracle-analysis-suite[open]>summary>.atlas-oracle-collapsed-preview{display:none!important}
+  #oracle-analysis-suite>summary .atlas-oracle-collapsed-copy{display:flex!important;flex-direction:column!important;gap:2px!important;min-width:0!important}
+  #oracle-analysis-suite>summary .atlas-oracle-collapsed-copy>span{font-size:7.5px!important;line-height:1.1!important;letter-spacing:.15em!important}
+  #oracle-analysis-suite>summary .atlas-oracle-collapsed-copy>b{font-size:12px!important;line-height:1.2!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #oracle-analysis-suite>summary .atlas-oracle-collapsed-meta{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:7px!important;flex-wrap:nowrap!important;min-width:0!important}
+  #oracle-analysis-suite>summary .atlas-oracle-collapsed-meta>span{font-size:8px!important;white-space:nowrap!important}
+  #oracle-analysis-suite>summary .atlas-oracle-collapsed-directions{grid-column:1/-1!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;min-width:0!important}
+  #oracle-analysis-suite>summary .atlas-oracle-collapsed-direction{display:block!important;min-width:0!important;padding:8px 10px!important}
+  #oracle-analysis-suite>summary .atlas-oracle-collapsed-direction-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;min-width:0!important}
+  #oracle-analysis-suite>summary .atlas-oracle-collapsed-direction-head>span{font-size:8px!important;line-height:1.15!important;white-space:nowrap!important}
+  #oracle-analysis-suite>summary .atlas-oracle-collapsed-direction-head>b{font-size:9px!important;line-height:1.15!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
 
   /* Open Oracle: menu labels stay short, aligned and readable. */
   #oracle-analysis-suite .atlas-oracle-suite-body{display:grid!important;gap:9px!important;padding:10px!important}
@@ -73,15 +73,15 @@
     #oracle-analysis-suite>summary>.atlas-oracle-suite-title{grid-column:2!important;grid-row:1!important}
     #oracle-analysis-suite>summary>.atlas-collapse-state{grid-column:3!important;grid-row:1!important}
     #oracle-analysis-suite>summary>.atlas-oracle-suite-kpis{grid-column:2/4!important;grid-row:2!important;justify-content:start!important}
-    #oracle-analysis-suite>summary>.atlas-oracle-collapsed-preview-40296{grid-row:3!important}
+    #oracle-analysis-suite>summary>.atlas-oracle-collapsed-preview{grid-row:3!important}
   }
   @media(max-width:900px){
     #oracle-analysis-suite>summary>.atlas-oracle-suite-kpis{grid-auto-flow:row!important;grid-template-columns:repeat(2,max-content)!important}
-    #oracle-analysis-suite>summary>.atlas-oracle-collapsed-preview-40296{grid-template-columns:1fr!important}
-    #oracle-analysis-suite>summary .atlas-oracle-collapsed-meta-40296{justify-content:flex-start!important;flex-wrap:wrap!important}
+    #oracle-analysis-suite>summary>.atlas-oracle-collapsed-preview{grid-template-columns:1fr!important}
+    #oracle-analysis-suite>summary .atlas-oracle-collapsed-meta{justify-content:flex-start!important;flex-wrap:wrap!important}
     #oracle-analysis-suite .atlas-oracle-suite-subsection>summary .atlas-collapse-title,
     #oracle-analysis-suite .atlas-oracle-suite-subsection>summary .atlas-collapse-subtitle{white-space:normal!important;overflow:visible!important;text-overflow:clip!important}
   }
   @media(max-width:650px){
-    #oracle-analysis-suite>summary .atlas-oracle-collapsed-directions-40296{grid-template-columns:1fr!important}
+    #oracle-analysis-suite>summary .atlas-oracle-collapsed-directions{grid-template-columns:1fr!important}
   }

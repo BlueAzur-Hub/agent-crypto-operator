@@ -1,0 +1,28 @@
+AGENT-CRYPTO EXECUTION COST CURRENCY PROOF HARDENING — 40.6.459
+
+OWNER
+js/strategy-a-execution-cost-truth.js
+
+REPRODUCED FIXTURE
+BTCUSDT + price_eur + generic bid/ask
+
+BEFORE
+compact BTCUSDT could be ignored as explicit pair
+price_eur could authorize generic bid/ask
+=> false BTC/EUR book acceptance
+
+AFTER
+compact pair identity is explicit
+non-BTCEUR explicit pair => INVALID_PAIR
+price_eur alone is not book currency proof
+generic bid/ask require EUR-specific book, explicit BTCEUR, or explicit EUR currency
+
+PROTECTED
+Market Core 38.15.11
+fees and cost math
+Strategy thresholds
+Oracle
+Source Truth
+Aether
+Paper
+No new timer / observer / storage / network owner / real order

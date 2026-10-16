@@ -1,0 +1,65 @@
+{
+  "schema": "agent_crypto_atlas_decision_context_contract_v1",
+  "build": "40.6.114",
+  "parent_build": "40.6.113",
+  "market_core": "38.15.11",
+  "owner": "js/atlas-decision-context.js",
+  "scope": "read-only composition of existing market, oracle, source, news, Strategy A and TRADUS truths",
+  "inputs": [
+    "existing market/oracle presentation",
+    "ErithPrivateBackendSources4054.sourceIntelligence",
+    "AgentCryptoDexExclusionDiagnostics.report",
+    "AtlasEventIntelligence405000.current",
+    "AgentCryptoTradusStrategyReconcile406105.readStrategyA",
+    "AgentCryptoTradusShadow.read",
+    "AgentCryptoTradusStrategyFailClosed.compare"
+  ],
+  "outputs": {
+    "visible_panel": true,
+    "market_card": true,
+    "oracle_card": true,
+    "sources_card": true,
+    "news_card": true,
+    "strategy_a_card": true,
+    "tradus_card": true,
+    "descriptive_convergence": true,
+    "contradictions_and_reserves": true,
+    "stop_point": true,
+    "financial_signal": false,
+    "automatic_order": false
+  },
+  "fail_closed": {
+    "missing_layers_weaken_conclusion": true,
+    "partial_sources_are_blocker": true,
+    "mixed_oracle_not_forced_directional": true,
+    "strategy_a_wait_does_not_confirm_directional_tradus": true,
+    "news_never_becomes_causal_by_coincidence": true
+  },
+  "protections": {
+    "market_core_modified": false,
+    "web_classic_modified": false,
+    "graph_modified": false,
+    "lecture_technique_modified": false,
+    "aether_modified": false,
+    "atlas_current_modified": false,
+    "oracle_engine_modified": false,
+    "strategy_a_engine_modified": false,
+    "tradus_engine_modified": false,
+    "bridge_protocol_modified": false,
+    "canonical_price_created": false,
+    "market_data_mutated": false,
+    "strategy_mutation": false,
+    "fetch_added": false,
+    "recurring_timer_added": false,
+    "observer_added": false,
+    "storage_write_added": false,
+    "wallet_added": false,
+    "trading_added": false
+  },
+  "self_test": {
+    "expected": "4/4",
+    "financial_signal_must_remain_false": true,
+    "automatic_order_must_remain_false": true
+  },
+  "terrain_proof": "pending Firefox Administrator 40.6.114 review after Pages propagation"
+}

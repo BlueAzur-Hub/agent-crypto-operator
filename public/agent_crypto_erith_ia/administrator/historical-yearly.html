@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr"><head>
+<script src="../web/vault-data-router.js" data-erith-vault-data-router="true"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seven Heaven · Historique authentique pluriannuel</title>
+<style>
+:root{color-scheme:dark;font:clamp(13px,.85vw,16px)/1.5 system-ui,sans-serif;color:#e9f4ff;background:#091524}
+*{box-sizing:border-box}body{max-width:1520px;margin:auto;padding:15px;background:radial-gradient(ellipse at 90% 0,rgba(46,128,173,.17),transparent 65%)}
+h1{font-size:clamp(22px,2vw,31px);margin:0}h2{font-size:18px;margin:0 0 9px}
+header{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+nav{display:flex;gap:13px;flex-wrap:wrap}a{color:#b4e5f7}
+p{margin:7px 0 11px}.fine{font-size:12px;color:#a9c1d4}.muted{color:#b5c9d9}
+.panel{background:#132439;border:1px solid #3b5b73;border-radius:12px;padding:15px;margin:12px 0}
+.note{border-left:3px solid #74c1d4;background:#0c1d30;padding:10px 13px}
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}label{font-weight:650}
+select,button{font:inherit;color:#e9f4ff;background:#133149;border:1px solid #729ab5;padding:9px;border-radius:7px}
+button{background:#216482;cursor:pointer}button:disabled{opacity:.5;cursor:default}
+select:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid #93e4ed;outline-offset:3px}
+canvas{width:100%;max-width:1200px;display:block;background:#0b1a29;border:1px solid #385d76;border-radius:9px;margin-top:14px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:13px}
+th,td{padding:6px 9px;text-align:left;border-bottom:1px solid #304c64}
+th{position:sticky;top:0;background:#183048}.scroll{overflow:auto;max-height:420px}
+.good{color:#a4e8ba}.bad{color:#ffc0b8}
+@media(max-width:650px){body{padding:9px}.panel{padding:10px}.controls{align-items:stretch}select{max-width:100%}}
+</style></head><body>
+<header><div><h1>Historique pluriannuel · Seven Heaven</h1>
+<p class="muted">Bougies Spot d'origine vérifiée · années archivées · consultation Firefox en lecture seule</p></div>
+<nav><a href="./historical-vault.html">← Coffre historique</a>
+<a href="./historical-archive-reader.html">Diagnostic R3</a><a href="./index.html">Interface</a></nav>
+</header>
+<section class="panel"><p class="note">Les années visibles proviennent des <strong>ZIP mensuels Binance Spot USDT authentiques</strong>, contrôlés au SHA-256. Les prix sont cotés en <b>USDT</b>, et non automatiquement en USD/EUR. Une première archive conservée ne prouve ni la date de création du token ni sa première transaction. Les années manquantes ne sont jamais fabriquées.</p>
+<div class="controls">
+<label for="coin">Crypto</label><select id="coin" aria-label="Choisir une crypto"><option>Chargement…</option></select>
+<label for="year">Bloc annuel</label><select id="year" aria-label="Choisir une année"><option>—</option></select>
+<label for="month">Période affichée</label><select id="month" aria-label="Choisir une période"><option value="all">Bloc complet</option></select>
+<button id="read" type="button" disabled>Lire les bougies vérifiées</button>
+</div>
+<p id="status" aria-live="polite" class="muted">Lecture de l'index annuel…</p>
+<p id="source" class="fine">Les fichiers annuels sont chargés séparément pour ne pas saturer Firefox. Les ZIP natifs restent conservés dans GitHub Releases.</p></section>
+<section class="panel"><h2>Prix historiques et bougies OHLC · USDT</h2>
+<canvas id="curve" width="1120" height="420" role="img" aria-label="Chandeliers historiques USDT issus des bougies natives validées"></canvas>
+<p id="scope" class="fine">Sélectionnez une cryptomonnaie et une année. La vue condense les heures certifiées en chandeliers OHLC, sans interpolation.</p></section>
+<section class="panel"><h2>Dernières bougies horaires du bloc sélectionné</h2>
+<div class="scroll"><table><thead><tr><th>UTC</th><th>Ouverture</th><th>Haut</th><th>Bas</th><th>Clôture</th><th>Volume base</th><th>Transactions</th></tr></thead>
+<tbody id="rows"><tr><td colspan="7">Aucune série chargée.</td></tr></tbody></table></div>
+<p class="fine">Les valeurs de la table sont des bougies horaires exactes agrégées des fichiers sources 1 minute. Les chandeliers à l'écran regroupent plusieurs heures lorsque nécessaire pour conserver un graphique lisible.</p></section>
+<script defer src="./js/historical-yearly-browser.js"></script>
+</body></html>

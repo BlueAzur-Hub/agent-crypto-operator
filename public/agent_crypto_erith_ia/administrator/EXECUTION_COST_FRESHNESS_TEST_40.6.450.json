@@ -1,0 +1,34 @@
+{
+  "build": "40.6.450",
+  "pass": true,
+  "checks": {
+    "fetch_helper_defined": true,
+    "canonical_anchor_only": true,
+    "okx_owner_route_contract": true,
+    "direct_okx_browser_internet_blocked": true,
+    "null_blank_boolean_not_zero": true,
+    "numeric_epoch_string_supported": true,
+    "fresh_quote_accepted": true,
+    "stale_quote_rejected": true,
+    "missing_timestamp_unknown": true,
+    "future_timestamp_unknown": true,
+    "crossed_quote_rejected": true,
+    "wrong_currency_rejected": true,
+    "existing_source_truth_cache_contract": true,
+    "stale_okx_preserves_kraken_partial": true,
+    "backend_demand_bounded": true,
+    "repeatable_export": true,
+    "no_real_order": true
+  },
+  "isolated_runtime": {
+    "okx_owner_available": false
+  },
+  "fixtures": {
+    "now_utc": "2026-09-28T19:00:00Z",
+    "fresh_age_seconds": 5,
+    "stale_observed_at_utc": "2020-01-01T00:00:00Z",
+    "future_offset_seconds": 120,
+    "fallback_max_age_seconds": 15
+  },
+  "note": "Self-test executed on the exact 40.6.450 candidate module in an isolated JS runtime before commit. Runtime owner availability is metadata, not an assertion."
+}

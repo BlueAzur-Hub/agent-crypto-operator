@@ -1,0 +1,29 @@
+AGENT-CRYPTO 40.6.476 — PROSPECTIVE PANEL MOUNT PERSISTENCE
+=================================================================
+
+MODIFIED
+administrator/js/strategy-a-prospective-outcome-evidence-capture.js
+administrator/js/post-boot-runtime-loader.js
+administrator/js/strategy-a-audit-demand-loader.js
+administrator/index.html
+administrator/build.json
+administrator/RELEASE.md
+administrator/HANDOFF.md
+
+ADDED
+administrator/index-40.6.476.html
+administrator/HANDOFF_FINAL_40.6.476.md
+administrator/PROSPECTIVE_PANEL_MOUNT_TEST_40.6.476.json
+administrator/PATCH_MANIFEST_40.6.476.txt
+.github/workflows/agent-crypto-package-406476.yml
+
+SCOPE
+presentation mount persistence only
+
+UNCHANGED
+Strategy A business logic
+Cost Gate / Oracle / Risk / PAPER
+plumbing exact cycle_id from 40.6.475
+IndexedDB schema
+Market Core 38.15.11
+real orders

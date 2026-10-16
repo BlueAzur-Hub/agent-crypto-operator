@@ -1,0 +1,24 @@
+{
+  "schema": "agent_crypto_execution_cost_currency_proof_test_v1",
+  "build": "40.6.459",
+  "pass": true,
+  "cases": {
+    "compact_BTCUSDT_with_price_eur": "REJECT_INVALID_PAIR",
+    "compact_symbol_BTCUSDT_with_price_eur": "REJECT_INVALID_PAIR",
+    "price_eur_plus_generic_book_without_currency_proof": "REJECT_MISSING_BOOK",
+    "eur_specific_bid_ask": "ACCEPT",
+    "explicit_BTCEUR_generic_book": "ACCEPT",
+    "explicit_EUR_currency_generic_book": "ACCEPT"
+  },
+  "invariants": {
+    "price_eur_is_orderbook_currency_proof": false,
+    "market_core": "38.15.11",
+    "fees_changed": false,
+    "cost_math_changed": false,
+    "strategy_thresholds_changed": false,
+    "new_timer": false,
+    "new_observer": false,
+    "storage_write": false,
+    "real_order": false
+  }
+}

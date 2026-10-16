@@ -1,0 +1,35 @@
+AGENT-CRYPTO STRATEGY A AFTER-COST COMPLETENESS TRUTH — 40.6.462
+
+NEW OWNER
+js/strategy-a-after-cost-completeness-truth.js
+
+SCOPE
+Only unique 1↔1 after-cost ↔ PAPER links established by 40.6.461.
+
+REQUIRED COST TRUTH
+fees_eur
+impact_eur
+spread_eur
+slippage_eur
+
+REQUIRED BASE FACTS
+quantity_btc
+entry_reference_eur
+exit_reference_eur
+net_pnl_eur
+
+COMPLETE + VERIFIED
+cost_completeness == COMPLETE
+accounting_identity_status == VERIFIED
+accounting_identity_ok == true
+no missing cost component
+no missing base fact
+
+NO COST SYNTHESIS
+UNKNOWN REMAINS UNKNOWN
+NO ARCHIVE MUTATION
+NO STORAGE WRITE
+NO GATE PROMOTION
+NO NETWORK
+NO REAL ORDER
+MARKET CORE 38.15.11 PRESERVED

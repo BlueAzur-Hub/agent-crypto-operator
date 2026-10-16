@@ -1,0 +1,600 @@
+{
+  "build": "40.6.640",
+  "surface": "trader",
+  "release": "COFFRE · HISTORIQUE VISIBLE ET CONTEXTE CT",
+  "parent_trader_build": "40.6.639",
+  "administrator_base": "40.6.640",
+  "market_core": "38.15.11",
+  "published": true,
+  "status": "TRADER_COFFRE_VISIBLE_CI_PENDING_FIREFOX",
+  "terrain_verified": false,
+  "operator_validation": "PENDING_FIREFOX_EXTERNAL_FICHE",
+  "execution": "disabled",
+  "real_orders": false,
+  "architecture": {
+    "decision": "Trader is no longer a parallel application. It mounts the exact Administrator page/runtime and filters presentation only.",
+    "runtime": "administrator/index.html inside same-origin Trader frame",
+    "core_owner": "current shared Administrator runtime remains the live owner of Graphique, Market, Lecture Technique and Math Core",
+    "additive_owners": [
+      "administrator/js/graph-native-usd-406520.js",
+      "administrator/js/market-microscope-candles.js",
+      "administrator/js/okx-microstructure-406499.js",
+      "administrator/js/quote-currency-architecture-406497.js",
+      "administrator/js/new-listings-live-asset-406529.js"
+    ],
+    "trader_adapter": "trader/trader-runtime-mirror.js",
+    "trader_adapter_role": "presentation filter only",
+    "visible_runtime_surfaces": [
+      "Trader header: TRADER · 40.6.623 + Prix live Binance + theme Metal/Glass + Administrator arrow",
+      "Minimum nav: Livecheck + Marché + Graphique + Aether dynamic status",
+      "Native status lane: Relancer + Rafraîchir + Décision + Sources + Chronos",
+      "Graphique + Lecture Technique: native fullscreen/F11 geometry",
+      "Target Top 5 below Graphique in normal document flow",
+      "Market Flow below Target Top",
+      "Market workspace",
+      "Math Core",
+      "Bougies",
+      "Profondeur",
+      "EUR/USD",
+      "Collapsible OKB case study report at the bottom of Trader"
+    ],
+    "hidden_presentation_only": [
+      "Atlas",
+      "Oracle standalone",
+      "News",
+      "Decision",
+      "System",
+      "Projects",
+      "Audience",
+      "Sources standalone"
+    ],
+    "duplicated_chart_owner": false,
+    "duplicated_market_owner": false,
+    "duplicated_math_owner": false,
+    "duplicated_detail_owner": false,
+    "duplicated_depth_owner": false,
+    "duplicated_candles_owner": false,
+    "custom_trader_history_engine_loaded": false,
+    "custom_trader_market_engine_loaded": false,
+    "custom_trader_math_engine_loaded": false,
+    "legacy_trader_files": "remain in repository for history but are not loaded by trading-desk.html",
+    "storage": "exact same origin/localStorage/IndexedDB as Administrator because the live runtime is Administrator itself",
+    "network": "exact same network behavior and error handling as Administrator runtime",
+    "bridge": "exact same Bridge/OKX owners as Administrator runtime",
+    "read_only": true,
+    "real_orders": false
+  },
+  "technical_reading": {
+    "single_portrait_owner": true,
+    "duplicate_panel_pseudo_background_removed": true,
+    "time_modes": [
+      "AUTO",
+      "AUBE",
+      "JOUR",
+      "SOIR",
+      "NUIT",
+      "LUNE",
+      "RND"
+    ],
+    "local_private_image": true,
+    "initial_support_resistance_open": true,
+    "framing": "face-priority final crop",
+    "support_resistance_current_edge_fallback": true,
+    "current_edge_support_allowed": true,
+    "current_edge_resistance_allowed": true,
+    "method": "PIVOTS_VISIBLES_W2",
+    "transport_changed": false,
+    "resolver_changed": false
+  },
+  "market": {
+    "source": "../data/crypto/latest.json + extended.json on demand",
+    "null_numeric_truth": true,
+    "default_limit": 50,
+    "extended_to_1000": true,
+    "browser_direct_coingecko": false,
+    "fiche_restored": true,
+    "new_listings": true,
+    "new_listings_owner": "administrator/js/new-listings-live-asset-406529.js + trader/new-listings-transpose.js",
+    "new_listings_horizon_days": 30,
+    "new_listings_state_coins_injection": false,
+    "new_listings_ranking_mutation": false
+  },
+  "math_core": {
+    "score_palette": {
+      "red": "<25 #FF5C78",
+      "orange": "25–54 #FF9F1C",
+      "turquoise": "55–74 #42E8E0",
+      "green": ">=75 #64EFA0",
+      "neutral": "pending only #8EA4BA"
+    },
+    "history_source": "AgentCryptoMarketMicroscope.snapshot().rows",
+    "null_numeric_truth": true,
+    "new_prediction_model": false
+  },
+  "protected": [
+    "Administrator shared runtime",
+    "Market Core 38.15.11",
+    "Administrator Graphique owner",
+    "Graph Native USD owner",
+    "Market Microscope Bougies owner",
+    "OKX Profondeur owner",
+    "Lecture Technique",
+    "Market Snapshot",
+    "Math Core",
+    "PAIR/data truth in Administrator"
+  ],
+  "delivery": {
+    "pr": "repository_history_authority",
+    "merge_commit": "repository_history_authority",
+    "github_pages": "repository_actions_authority",
+    "persistent_folder": "coordination/inter_ai_dialogues/agent_crypto",
+    "zip": "AGENT_CRYPTO_LABORATOIRE.zip (workflow artifact pending build and Firefox validation)",
+    "javascript_syntax": "CI_REQUIRED"
+  },
+  "stop_gate": {
+    "no_real_order": true,
+    "no_new_exchange_key": true,
+    "no_aether_thread": true,
+    "administrator_business_logic_modified": true,
+    "administrator_presentation_modified": false,
+    "terrain": "PENDING_FIREFOX_EXTERNAL_FICHE"
+  },
+  "next": [
+    "Panneau Explorer retiré; reprendre extension des données historiques et leur lecture dans Graphique/Trader sans recréer Market.",
+    "Qualify Binance Book off-production; do not deploy until full Windows regression PASS.",
+    "40.6.627 — OKX Account READ ONLY.",
+    "40.6.627 — Instrument/Fee Truth + Micro-Ticket Validator.",
+    "40.6.628 — Demo/Paper execution evidence.",
+    "No real order."
+  ],
+  "restore_406607": {
+    "source_build": "40.6.601",
+    "source_commit": "4c65790e6c68ae7b631e78657bab4e36e69e5ba7",
+    "scope": "TRADER_PRESENTATION_ADAPTER_ONLY",
+    "restored_file": "trader/trader-runtime-mirror.js",
+    "restored_principle": "filtered Administrator runtime only",
+    "removed_post_601_features": [
+      "injected Trader navigation",
+      "Target Top / Market Flow injected anchors",
+      "Sources custom route",
+      "Decision custom route",
+      "route fidelity audit",
+      "Aether custom geometry / repositioning",
+      "Trader-only livecheck shell collapse",
+      "custom route focus classes"
+    ],
+    "market_core_modified": false,
+    "administrator_business_logic_modified": false,
+    "oracle_modified": false,
+    "math_core_modified": false,
+    "candles_modified": false,
+    "depth_modified": false,
+    "target_top_modified": false,
+    "market_flow_modified": false,
+    "aether_business_logic_modified": false,
+    "real_order": false
+  },
+  "native_surface_406608": {
+    "enabled": true,
+    "iframe_url": "../administrator/index.html?surface=trader",
+    "surface_declared_before_first_paint": true,
+    "post_load_navigation_amputation_required": false,
+    "first_paint_matches_601_filtered_surface": true,
+    "livecheck_status_row_loaded_in_trader": false,
+    "aether_ribbon_runtime_loaded_in_trader": false,
+    "aether_ribbon_phase_timer_started_in_trader": false,
+    "aether_auto_news_wake_for_ribbon": false,
+    "aether_auto_system_wake_for_ribbon": false,
+    "aether_panel_code_preserved": true,
+    "administrator_behavior_changed": false,
+    "market_core_modified": false,
+    "oracle_modified": false,
+    "math_core_modified": false,
+    "candles_modified": false,
+    "depth_modified": false,
+    "real_order": false
+  },
+  "native_header_406609": {
+    "enabled": true,
+    "owner": "administrator/index.html#agentCryptoTraderFirstPaint + static status-stack markup",
+    "source_first": true,
+    "before_first_paint": true,
+    "visible": [
+      "TRADER",
+      "Prix live Binance",
+      "theme Metal/Glass",
+      "Administrator arrow"
+    ],
+    "hidden_in_trader": [
+      "Build/Administrator version pill",
+      "ENGINE badge",
+      "decorative sigil"
+    ],
+    "mirror_header_injection": false,
+    "administrator_default_header_unchanged": true,
+    "market_core_modified": false,
+    "business_logic_modified": false,
+    "aether_modified": false,
+    "graph_modified": false,
+    "lecture_technique_modified": false,
+    "real_order": false
+  },
+  "native_target_top_fit": {
+    "enabled": true,
+    "owner": "administrator/js/trader-cockpit-fit.js",
+    "stable_filename": true,
+    "source_first_css": "administrator/index.html#agentCryptoTraderFirstPaint",
+    "automatic_on_trader_surface": true,
+    "target_top_dom_owner": "administrator/index.html#market-workspace > .top5-ribbon",
+    "target_top_business_owner": "administrator/app.js + target-flow-display-406524.js",
+    "target_top_moved": false,
+    "target_top_duplicated": false,
+    "market_flow_hidden": false,
+    "market_flow_moved": false,
+    "market_flow_modified": false,
+    "dom_move": false,
+    "timer": false,
+    "observer": false,
+    "storage": false,
+    "network": false,
+    "market_core_modified": false,
+    "graph_business_logic_modified": false,
+    "lecture_technique_modified": false,
+    "real_order": false
+  },
+  "native_status_lane_406611": {
+    "enabled": true,
+    "owner": "Administrator native #livecheck.command-bar + aether.js native phase",
+    "source_first_visible": true,
+    "runtime_mirror_preserves_livecheck": true,
+    "native_controls_persist": true,
+    "aether_ribbon_enabled": false,
+    "aether_phase": "native",
+    "news_ready_may_hide_controls": false,
+    "empty_lane_regression_fixed": true,
+    "visible_build_in_existing_trader_badge": true,
+    "new_badge_added": false,
+    "duplicated_menu": false,
+    "dom_move": false,
+    "observer": false,
+    "new_timer": false,
+    "new_storage": false,
+    "new_network": false,
+    "market_core_modified": false,
+    "graph_business_logic_modified": false,
+    "lecture_technique_modified": false,
+    "target_top_modified": false,
+    "market_flow_modified": false,
+    "real_order": false
+  },
+  "fullscreen_restore_406612": {
+    "enabled": true,
+    "removed_owner": "administrator/js/trader-cockpit-fit.js runtime load",
+    "removed_css_variable": "--trader-target-top-analyst-height",
+    "restored_native_geometry": true,
+    "f11_contract": "full-screen behavior inherited from canonical Administrator/CSS",
+    "livecheck_preserved": true,
+    "aether_native_lane_preserved": true,
+    "target_top_moved": false,
+    "market_flow_moved": false,
+    "market_core_modified": false,
+    "graph_business_logic_modified": false,
+    "lecture_technique_modified": false,
+    "real_order": false
+  },
+  "minimum_nav_406613": {
+    "enabled": true,
+    "source_first": true,
+    "owner": "Administrator native nav + trader surface CSS filter",
+    "native_livecheck": true,
+    "native_market": true,
+    "native_graph": true,
+    "native_aether": true,
+    "aether_cloned": false,
+    "aether_moved": false,
+    "aether_dynamic_label": true,
+    "extra_admin_controls_hidden": true,
+    "duplicated_owner": false,
+    "dom_move": false,
+    "new_timer": false,
+    "new_observer": false,
+    "new_storage": false,
+    "new_network": false,
+    "fullscreen_geometry_modified": false,
+    "status_lane_modified": false,
+    "market_core_modified": false,
+    "real_order": false
+  },
+  "okb_case_study_406614": {
+    "enabled": true,
+    "owner": "administrator/index.html#traderOkbCaseStudy",
+    "default_state": "collapsed",
+    "report_date": "2026-10-07",
+    "sources": "official OKX + Exchange OS whitepaper + DefiLlama + CoinGecko",
+    "static_snapshot": true,
+    "live_market_owner_replaced": false,
+    "market_core_modified": false,
+    "candles_modified": false,
+    "depth_modified": false,
+    "pair_resolver_modified": false,
+    "new_timer": false,
+    "new_observer": false,
+    "new_storage": false,
+    "new_network": false,
+    "real_orders": false
+  },
+  "okx_pair_sync_406615": {
+    "enabled": true,
+    "resolver": "administrator/js/okx-market-pair-resolver.js",
+    "resolver_stable_filename": true,
+    "shared_by": [
+      "Candles",
+      "Depth"
+    ],
+    "selected_asset": "canonical getSelectedCoin",
+    "usd_candidates": [
+      "USDC",
+      "USDT"
+    ],
+    "eur_candidates": [
+      "EUR",
+      "USDC",
+      "USDT"
+    ],
+    "okb_expected_candidates": [
+      "OKB-USDC",
+      "OKB-USDT"
+    ],
+    "depth_hardcoded_whitelist_removed": true,
+    "actual_quote_preserved": true,
+    "market_core_modified": false,
+    "graph_modified": false,
+    "lecture_technique_modified": false,
+    "presentation_modified": false,
+    "new_timer": false,
+    "new_observer": false,
+    "new_storage": false,
+    "real_orders": false
+  },
+  "candles_selection_sync_406616": {
+    "enabled": true,
+    "canonical_event": "agent-crypto:selected-market-changed",
+    "event_owner": "administrator/app.js::atlasSetComparisonIds",
+    "consumer": "administrator/js/market-microscope-candles.js",
+    "stale_loaded_asset_cleared": true,
+    "stale_canvas_cleared": true,
+    "requested_instrument_rendered_before_success": true,
+    "legacy_global_function_wrapper_removed": true,
+    "pair_sync_406615_preserved": true,
+    "market_core_modified": false,
+    "presentation_modified": false,
+    "new_timer": false,
+    "new_observer": false,
+    "new_storage": false,
+    "new_network": false,
+    "real_orders": false
+  },
+  "candles_http_fallback_406617": {
+    "enabled": true,
+    "parent": "40.6.616",
+    "owner": "administrator/js/market-microscope-candles.js",
+    "http_status_checked_before_json": true,
+    "http_400_404_can_try_next_pair": true,
+    "usd_candidates_preserved": [
+      "USDC",
+      "USDT"
+    ],
+    "okb_candidates_preserved": [
+      "OKB-USDC",
+      "OKB-USDT"
+    ],
+    "pair_resolver_modified": false,
+    "depth_modified": false,
+    "market_core_modified": false,
+    "presentation_modified": false,
+    "backend_modified": false,
+    "bridge_modified": false,
+    "new_timer": false,
+    "new_observer": false,
+    "new_storage": false,
+    "new_network": false,
+    "real_orders": false,
+    "terrain": "PENDING_FIREFOX"
+  },
+  "backend_okx_dynamic_spot_current": {
+    "enabled": true,
+    "repaired_backend_version": "1.4.5",
+    "root_cause": "local Backend 1.4.4 instrument whitelist blocked OKB before upstream OKX",
+    "allowed_quotes": [
+      "EUR",
+      "USDC",
+      "USDT"
+    ],
+    "pair_resolver_modified": false,
+    "depth_business_logic_modified": false,
+    "market_core_modified": false,
+    "presentation_modified": false,
+    "browser_error_truth_improved": true,
+    "local_backend_install_required": true,
+    "backend_package_sha256": "ceacb8a11a5024db7048e240d5c88689f4322b5b38c21db8b03799dfc9699878",
+    "real_orders": false,
+    "terrain": "PASS_FIREFOX_OKB_2026_10_07"
+  },
+  "market_instrument_resolver_406619": {
+    "enabled": true,
+    "parent": "40.6.618",
+    "owner": "administrator/js/market-instrument-resolver.js",
+    "backend_required": "1.4.6",
+    "providers": [
+      "okx",
+      "bitget",
+      "binance"
+    ],
+    "candles_providers": [
+      "okx",
+      "bitget",
+      "binance"
+    ],
+    "book_providers": [
+      "okx",
+      "bitget"
+    ],
+    "provider_priority": [
+      "okx",
+      "bitget",
+      "binance"
+    ],
+    "usd_quote_priority": [
+      "USDC",
+      "USDT"
+    ],
+    "dynamic_execution_truth": true,
+    "per_crypto_patch": false,
+    "btc_fallback": false,
+    "line_coingecko_preserved": true,
+    "btw_reference_case": "Bitget BTW-USDT",
+    "backend_package_sha256": "85a193b4b59eb397f7f67f414112d51878682addb9039c0ff8912286e8179782",
+    "local_backend_install_required": true,
+    "market_core_modified": false,
+    "real_orders": false,
+    "terrain": "PENDING_FIREFOX",
+    "backend_package": "coordination/inter_ai_dialogues/agent_crypto/AGENT_CRYPTO_BACKEND_1_4_6_MARKET_RESOLVER_PATCH.zip",
+    "backend_patch_path": "coordination/inter_ai_dialogues/agent_crypto/BACKEND_1_4_6_MARKET_RESOLVER_PATCH.md",
+    "backend_delivery_kind": "STANDALONE_PRIVATE_BACKEND_PATCH",
+    "control_center_1_4_6_published": false
+  },
+  "single_char_ticker_406620": {
+    "enabled": true,
+    "root_cause": "one-character asset ticker rejected by browser and Backend validators",
+    "browser_candidates": [
+      "M-USDC",
+      "M-USDT"
+    ],
+    "backend_version": "1.4.6",
+    "bridge_version": "1.9.13",
+    "bridge_modified": false,
+    "market_core_modified": false,
+    "real_orders": false,
+    "patch_sha256": "0c7fd9462543c3999d1969be12063f77217567d71d48a9e2a2fa16fb3be1b7fa",
+    "terrain": "PENDING_FIREFOX",
+    "backend_patch_repo": "coordination/inter_ai_dialogues/agent_crypto/BACKEND_1_4_6_SINGLE_CHAR_TICKER.patch",
+    "backend_install_note": "coordination/inter_ai_dialogues/agent_crypto/BACKEND_1_4_6_SINGLE_CHAR_TICKER_PATCH.md",
+    "backend_patch_artifact": "AGENT_CRYPTO_40.6.620_SINGLE_CHAR_TICKER_PATCH.zip",
+    "backend_patch_delivery": "conversation_artifact"
+  },
+  "canonical_asset_identity_406621": {
+    "enabled": true,
+    "canonical_owner": "administrator/js/okx-market-pair-resolver.js::normalizeAsset",
+    "consumers": [
+      "Bougies",
+      "Profondeur",
+      "Market Instrument Resolver"
+    ],
+    "selected_m_truth": "M",
+    "btc_fallback_for_selected_m": false,
+    "memecore_alias_for_selected_m": false,
+    "backend_version": "1.4.6",
+    "bridge_version": "1.9.13",
+    "bridge_modified": false,
+    "market_core_modified": false,
+    "real_orders": false,
+    "terrain": "PASS_FIREFOX",
+    "guard_recheck": "FINAL_CONSISTENT_HEAD",
+    "terrain_cases": {
+      "memecore": {
+        "asset": "M",
+        "provider": "bitget",
+        "instrument": "M-USDT",
+        "candles": 300,
+        "book": "fresh",
+        "result": "PASS"
+      },
+      "xaut": {
+        "asset": "XAUT",
+        "provider": "okx",
+        "instrument": "XAUT-USDT",
+        "candles": 300,
+        "book": "fresh",
+        "result": "PASS"
+      }
+    }
+  },
+  "backend_1_4_7_binance_book": {
+    "version": "1.4.7",
+    "ui_build_unchanged": "40.6.621",
+    "provider_symmetry": true,
+    "expected_capabilities": {
+      "okx": [
+        "candles",
+        "book"
+      ],
+      "bitget": [
+        "candles",
+        "book"
+      ],
+      "binance": [
+        "candles",
+        "book"
+      ]
+    },
+    "bridge_modified": false,
+    "real_orders": false,
+    "terrain": "FAIL_WINDOWS_HEALTH",
+    "enabled": false,
+    "deployable": false,
+    "status": "QUARANTINED_WINDOWS_STARTUP_FAILURE",
+    "superseded_by": "Backend 1.4.6 R2 validated checkpoint"
+  },
+  "backend_restore_20261007": {
+    "active_backend": "1.4.6",
+    "package": "coordination/inter_ai_dialogues/agent_crypto/AGENT_CRYPTO_BACKEND_1_4_6_MARKET_RESOLVER_R2_SINGLE_CHAR.zip",
+    "bridge": "1.9.13",
+    "ui_build": "40.6.621",
+    "status": "RESTORE_CANONICAL"
+  },
+  "consultation_v1_certification_20261007": {
+    "certified": true,
+    "ui_build": "40.6.621",
+    "runtime_control": "2.3.2R21",
+    "bridge": "1.9.13",
+    "backend": "1.4.6 R2",
+    "read_only": true,
+    "real_orders": false,
+    "terrain": [
+      "M/Bitget PASS",
+      "XAUT/OKX PASS",
+      "OKB/OKX PASS"
+    ],
+    "known_limit": "Binance orderbook not yet certified in Backend 1.4.6",
+    "certification_kind": "engineering baseline certification"
+  },
+  "asset_context_truth_406623": {
+    "enabled": true,
+    "owner": "administrator/js/market-microscope-candles.js",
+    "stale_previous_asset_canvas_forbidden": true,
+    "stale_previous_asset_inspector_forbidden": true,
+    "external_asset_selection_not_ignored": true,
+    "mode_preserved": true,
+    "existing_provider_path_reused": true,
+    "new_timer": false,
+    "new_observer": false,
+    "bridge_changed": false,
+    "backend_changed": false,
+    "market_core_changed": false,
+    "real_orders": false,
+    "terrain": "PENDING_FIREFOX"
+  },
+  "graph_parity_top5_24h_406624": {
+    "enabled": true,
+    "owner": "administrator/js/graph-native-usd-406520.js",
+    "canonical_history_owner": "administrator/app.js atlasFetchComparisonSeriesResilient rank-5 24h path",
+    "canonical_route_preserved_in_usd": true,
+    "stale_usd_cache_refused": true,
+    "app_js_changed": false,
+    "market_core_changed": false,
+    "bridge_changed": false,
+    "backend_changed": false,
+    "real_orders": false,
+    "terrain": "PENDING_FIREFOX"
+  }
+}

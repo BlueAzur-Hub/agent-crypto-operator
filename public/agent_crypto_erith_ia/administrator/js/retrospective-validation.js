@@ -2,7 +2,9 @@
   "use strict";
 
   /* ============================================================
-     39.6.0 — RETROSPECTIVE VALIDATION READER LOCK
+     39.6.1 — RETROSPECTIVE VALIDATION READER / POST-CURRENT PROOF
+
+     RELEASE SURFACE: Agent-Crypto 40.6.151
 
      READ-ONLY CONTRACT
      - Read verified closed CURRENT units from Analytical Memory 39.4.
@@ -11,6 +13,7 @@
        the analytical close time; never select a pre-close observation.
      - Measure observed EUR price returns from the frozen CURRENT payload
        to the first and latest post-CURRENT market observations.
+     - Make the latest waiting CURRENT AND the latest evaluable CURRENT visible.
      - NEVER score forecast accuracy: CURRENT can be descriptive and may
        contain no directional forecast at all.
      - NEVER rewrite CURRENT, Market Memory, Analytical Memory or journal.
@@ -18,9 +21,10 @@
      - NO fetch, timer, WebSocket or storage write.
      ============================================================ */
 
-  const BUILD_3960 = "39.6.0";
-  const ROOT_ID = "decisionRetrospective3960";
-  const EXPORT_ID = "btnDecisionBoardRetrospectiveExport3960";
+  const BUILD_3961 = "39.6.1";
+  const RELEASE_406151 = "40.6.151";
+  const ROOT_ID = "decisionRetrospective";
+  const EXPORT_ID = "btnDecisionBoardRetrospectiveExport3961";
   const TOP5 = Object.freeze(["BTC", "ETH", "BNB", "XRP", "SOL"]);
   const FLAT_EPSILON_PCT = 0.05;
 
@@ -42,23 +46,15 @@
 
   function currentTime(record) {
     return parseTime(
-      record?.closed_at ||
-      record?.completed_at ||
-      record?.current_truth?.closed_at ||
-      record?.saved_at ||
-      record?.last_seen_at ||
-      record?.source_time ||
-      record?.market_generated_at
+      record?.closed_at || record?.completed_at || record?.current_truth?.closed_at ||
+      record?.saved_at || record?.last_seen_at || record?.source_time || record?.market_generated_at
     );
   }
 
   function marketTime(record) {
     return parseTime(
-      record?.market_generated_at ||
-      record?.source_time ||
-      record?.snapshot?.market_snapshot?.source_time ||
-      record?.saved_at ||
-      record?.last_seen_at
+      record?.market_generated_at || record?.source_time ||
+      record?.snapshot?.market_snapshot?.source_time || record?.saved_at || record?.last_seen_at
     );
   }
 
@@ -81,11 +77,8 @@
 
   function canonicalMarketId(record) {
     return String(
-      record?.market_snapshot_id ||
-      record?.snapshot?.market_snapshot?.snapshot_id ||
-      record?.snapshot_id ||
-      record?.id ||
-      ""
+      record?.market_snapshot_id || record?.snapshot?.market_snapshot?.snapshot_id ||
+      record?.snapshot_id || record?.id || ""
     ).trim();
   }
 
@@ -155,10 +148,7 @@
     const first = later[0] || null;
     const latest = later[later.length - 1] || null;
     return {
-      current,
-      closedAt,
-      first,
-      latest,
+      current, closedAt, first, latest,
       firstReturns: first ? observedReturns(current, first) : null,
       latestReturns: latest ? observedReturns(current, latest) : null
     };
@@ -215,33 +205,42 @@
 
   function ensureRoot() {
     let root = byId(ROOT_ID);
-    if (root) return root;
     const dual = byId("decisionDualMemory395");
     const anchor = dual || byId("decisionMemoryV2");
-    if (!anchor) return null;
+    if (!root && !anchor) return null;
 
-    root = document.createElement("div");
-    root.id = ROOT_ID;
-    root.className = "decision-memory-v2";
-    root.setAttribute("aria-label", "Decision Board 39.6.0 · Validation rétrospective en lecture seule");
-    root.innerHTML = `
-      <article><span>Validation rétrospective</span><b id="retroStatus3960">En attente</b><small id="retroStatusDetail3960">Le lecteur attend un CURRENT vérifié suivi d’un snapshot marché canonique.</small></article>
-      <article><span>CURRENT évaluables</span><b id="retroCount3960">0 / 0</b><small id="retroCountDetail3960">Seuls les CURRENT vérifiés avec payload détaillé sont comparables.</small></article>
-      <article><span>Dernier CURRENT</span><b id="retroCurrent3960">—</b><small id="retroCurrentDetail3960">Analyse figée et jamais réécrite.</small></article>
-      <article><span>Premier marché postérieur</span><b id="retroFirst3960">—</b><small id="retroFirstDetail3960">L’observation doit être strictement postérieure à la fermeture analytique.</small></article>
-      <article><span>TOP5 observé après CURRENT</span><b id="retroTop53960">—</b><small id="retroTop5Detail3960">Rendement EUR observé depuis les prix figés du CURRENT.</small></article>
-      <article><span>Largeur post-CURRENT</span><b id="retroBreadth3960">—</b><small id="retroBreadthDetail3960">Description du mouvement, pas validation d’une prévision.</small></article>
-      <article class="decision-memory-v2-action"><span>Contrat</span><b>OBSERVATION ≠ PRÉDICTION</b><small id="retroContract3960">Aucun score de réussite, aucune réécriture mémoire, aucun lancement Atlas.</small></article>`;
-    anchor.insertAdjacentElement("afterend", root);
+    if (!root) {
+      root = document.createElement("div");
+      root.id = ROOT_ID;
+      root.className = "decision-memory-v2";
+      anchor.insertAdjacentElement("afterend", root);
+    }
+
+    root.setAttribute("aria-label", "Decision Board 39.6.1 · Post-CURRENT en lecture seule");
+    if (root.dataset.ui3961 !== "1") {
+      root.innerHTML = `
+        <article class="decision-memory-v2-action"><span>POST-CURRENT · ${RELEASE_406151}</span><b id="retroStatus">En attente</b><small id="retroStatusDetail">Le lecteur attend un CURRENT vérifié suivi d’un snapshot marché canonique.</small></article>
+        <article><span>CURRENT évaluables</span><b id="retroCount">0 / 0</b><small id="retroCountDetail">Seuls les CURRENT vérifiés avec payload détaillé sont comparables.</small></article>
+        <article><span>Dernier CURRENT</span><b id="retroCurrent">—</b><small id="retroCurrentDetail">Analyse figée et jamais réécrite.</small></article>
+        <article><span>Premier marché postérieur</span><b id="retroFirst">—</b><small id="retroFirstDetail">L’observation doit être strictement postérieure à la fermeture analytique.</small></article>
+        <article><span>TOP5 observé après CURRENT</span><b id="retroTop5">—</b><small id="retroTop5Detail">Rendement EUR observé depuis les prix figés du CURRENT.</small></article>
+        <article><span>Largeur post-CURRENT</span><b id="retroBreadth">—</b><small id="retroBreadthDetail">Description du mouvement, pas validation d’une prévision.</small></article>
+        <article id="retroLatestEvaluableCard"><span>Dernier CURRENT évaluable</span><b id="retroEvaluable">—</b><small id="retroEvaluableDetail">Aucune unité antérieure mesurable.</small></article>
+        <article class="decision-memory-v2-action"><span>Contrat</span><b>OBSERVATION ≠ PRÉDICTION</b><small id="retroContract">Aucun score de réussite · aucune réécriture · aucun recalibrage · aucun ordre.</small></article>`;
+      root.dataset.ui3961 = "1";
+    }
 
     const actions = byId("decisionMemoryCompare")?.querySelector?.(".decision-memory-compare-actions");
-    if (actions && !byId(EXPORT_ID)) {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.id = EXPORT_ID;
-      button.textContent = "Exporter rétrospective .md";
-      button.addEventListener("click", exportMarkdown);
-      actions.appendChild(button);
+    if (actions) {
+      actions.querySelector("#btnDecisionBoardRetrospectiveExport3960")?.remove();
+      if (!byId(EXPORT_ID)) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.id = EXPORT_ID;
+        button.textContent = "Exporter post-CURRENT .md";
+        button.addEventListener("click", exportMarkdown);
+        actions.appendChild(button);
+      }
     }
     return root;
   }
@@ -253,42 +252,54 @@
     const pair = data.latestPair;
     const state = statusOf(pair);
     const firstTime = pair?.first ? marketTime(pair.first) : 0;
+    const ev = data.latestEvaluable;
+    const evFirstTime = ev?.first ? marketTime(ev.first) : 0;
 
-    setText("retroStatus3960", state.label);
-    setText("retroStatusDetail3960", state.code === "ready"
-      ? "Mesure dérivée en lecture seule depuis Analytical Memory + Market Memory."
+    setText("retroStatus", state.label);
+    setText("retroStatusDetail", state.code === "ready"
+      ? "Premier snapshot canonique strictement postérieur détecté · mesure descriptive disponible."
       : state.code === "partial"
         ? "Un snapshot postérieur existe mais moins de 3 actifs TOP5 ont des prix EUR comparables."
-        : pair ? "Aucun snapshot marché canonique strictement postérieur à la fermeture de ce CURRENT." : "Aucun CURRENT analytique vérifié disponible.");
+        : pair ? "Dernier CURRENT encore ouvert côté preuve rétrospective : aucun snapshot canonique strictement postérieur." : "Aucun CURRENT analytique vérifié disponible.");
 
-    setText("retroCount3960", `${data.evaluable.length} / ${data.currents.length}`);
-    setText("retroCountDetail3960", `${data.markets.length} snapshot(s) marché canonique(s) disponibles · aucune fusion des mémoires.`);
+    setText("retroCount", `${data.evaluable.length} / ${data.currents.length}`);
+    setText("retroCountDetail", `${data.markets.length} snapshot(s) marché canonique(s) disponibles · Analytical Memory et Market Memory restent séparées.`);
 
-    setText("retroCurrent3960", pair ? compactFingerprint(fingerprint(pair.current)) : "—");
-    setText("retroCurrentDetail3960", pair ? `${localTime(pair.closedAt)} · ${pair.current?.collector_id || "collecteur inconnu"}` : "Aucun CURRENT vérifié.");
+    setText("retroCurrent", pair ? compactFingerprint(fingerprint(pair.current)) : "—");
+    setText("retroCurrentDetail", pair ? `${localTime(pair.closedAt)} · ${pair.current?.collector_id || "collecteur inconnu"}` : "Aucun CURRENT vérifié.");
 
-    setText("retroFirst3960", firstTime ? localTime(firstTime) : "En attente");
-    setText("retroFirstDetail3960", firstTime ? `${duration(pair.closedAt, firstTime)} après fermeture · ${pair.first?.collector_id || "collecteur inconnu"}` : "Aucune observation postérieure sélectionnée.");
+    setText("retroFirst", firstTime ? localTime(firstTime) : "En attente");
+    setText("retroFirstDetail", firstTime ? `${duration(pair.closedAt, firstTime)} après fermeture · ${pair.first?.collector_id || "collecteur inconnu"}` : "Aucune observation postérieure sélectionnée.");
 
-    setText("retroTop53960", pair?.firstReturns ? returnsLine(pair.firstReturns) : "—");
-    setText("retroTop5Detail3960", pair?.latest && pair.latest !== pair.first
+    setText("retroTop5", pair?.firstReturns ? returnsLine(pair.firstReturns) : "—");
+    setText("retroTop5Detail", pair?.latest && pair.latest !== pair.first
       ? `Dernière observation disponible ${localTime(marketTime(pair.latest))} : ${returnsLine(pair.latestReturns)}`
       : "Premier état marché postérieur uniquement ; aucune fenêtre future inventée.");
 
-    setText("retroBreadth3960", pair?.firstReturns ? breadthLine(pair.firstReturns) : "—");
-    setText("retroBreadthDetail3960", pair?.firstReturns?.comparable
+    setText("retroBreadth", pair?.firstReturns ? breadthLine(pair.firstReturns) : "—");
+    setText("retroBreadthDetail", pair?.firstReturns?.comparable
       ? `${pair.firstReturns.comparable}/5 actif(s) comparables · seuil stable ±${FLAT_EPSILON_PCT.toFixed(2)} %.`
       : "Comparaison insuffisante.");
 
+    if (ev) {
+      setText("retroEvaluable", `${compactFingerprint(fingerprint(ev.current))} · ${localTime(evFirstTime)}`);
+      setText("retroEvaluableDetail", `${duration(ev.closedAt, evFirstTime)} après fermeture · ${returnsLine(ev.firstReturns)} · ${breadthLine(ev.firstReturns)}.`);
+    } else {
+      setText("retroEvaluable", "Aucun");
+      setText("retroEvaluableDetail", "Aucun CURRENT ne possède encore un snapshot postérieur avec au moins 3 prix TOP5 comparables.");
+    }
+
     root.dataset.state = state.code;
-    root.dataset.build = BUILD_3960;
+    root.dataset.build = BUILD_3961;
+    root.dataset.release = RELEASE_406151;
     root.dataset.readOnly = "true";
     root.dataset.evaluable = String(data.evaluable.length);
     root.dataset.currentCount = String(data.currents.length);
 
     const board = byId("decision-board");
     if (board) {
-      board.dataset.retrospectiveReader = BUILD_3960;
+      board.dataset.retrospectiveReader = BUILD_3961;
+      board.dataset.retrospectiveRelease = RELEASE_406151;
       board.dataset.retrospectiveEvaluable = String(data.evaluable.length);
     }
     return data;
@@ -298,9 +309,12 @@
     const pair = data.latestPair;
     const state = statusOf(pair);
     const firstTime = pair?.first ? marketTime(pair.first) : 0;
+    const ev = data.latestEvaluable;
+    const evFirstTime = ev?.first ? marketTime(ev.first) : 0;
     return [
-      "# Agent-Crypto — Retrospective Validation Reader", "",
-      `- Build : ${BUILD_3960}`,
+      "# Agent-Crypto — Post-CURRENT Validation", "",
+      `- Release : ${RELEASE_406151}`,
+      `- Reader : ${BUILD_3961}`,
       `- Généré : ${new Date().toISOString()}`,
       "- Contrat : observation rétrospective ≠ prédiction · lecture seule", "",
       "## Couverture", "",
@@ -311,17 +325,20 @@
       `- Statut : ${state.label}`,
       `- Fingerprint : ${pair ? fingerprint(pair.current) || "—" : "—"}`,
       `- Fermeture analytique : ${pair ? localTime(pair.closedAt) : "—"}`,
-      `- Collecteur : ${pair?.current?.collector_id || "—"}`, "",
-      "## Première observation marché strictement postérieure", "",
-      `- Heure : ${firstTime ? localTime(firstTime) : "—"}`,
-      `- Délai après fermeture : ${firstTime ? duration(pair.closedAt, firstTime) : "—"}`,
-      `- Collecteur : ${pair?.first?.collector_id || "—"}`,
+      `- Première observation postérieure : ${firstTime ? localTime(firstTime) : "—"}`,
+      `- Délai : ${firstTime ? duration(pair.closedAt, firstTime) : "—"}`,
       `- TOP5 : ${pair?.firstReturns ? returnsLine(pair.firstReturns) : "—"}`,
       `- Largeur : ${pair?.firstReturns ? breadthLine(pair.firstReturns) : "—"}`, "",
+      "## Dernier CURRENT évaluable", "",
+      `- Fingerprint : ${ev ? fingerprint(ev.current) || "—" : "—"}`,
+      `- Première observation postérieure : ${evFirstTime ? localTime(evFirstTime) : "—"}`,
+      `- Délai : ${evFirstTime ? duration(ev.closedAt, evFirstTime) : "—"}`,
+      `- TOP5 : ${ev?.firstReturns ? returnsLine(ev.firstReturns) : "—"}`,
+      `- Largeur : ${ev?.firstReturns ? breadthLine(ev.firstReturns) : "—"}`, "",
       "## Lecture correcte", "",
-      "- Les variations ci-dessus sont calculées à partir des prix EUR figés dans le CURRENT et des prix EUR du snapshot marché postérieur.",
-      "- Elles décrivent ce qui a été observé après la fermeture analytique.",
-      "- Elles ne transforment pas une analyse descriptive en prévision et ne produisent aucun score de réussite.",
+      "- Une observation est retenue seulement si son timestamp canonique est strictement postérieur à la fermeture du CURRENT.",
+      "- Les variations décrivent ce qui a été observé après la fermeture analytique.",
+      "- Aucun score de réussite, aucune prédiction rétrospective et aucune fenêtre future inventée.",
       "- Aucun CURRENT, journal, Market Memory ou Analytical Memory n’est modifié.",
       "- Aucun Atlas, NØX, Aerith, Bridge ou Ollama n’est lancé.",
       "- Aucun ordre financier ou recommandation n’est produit."
@@ -332,7 +349,7 @@
     const body = markdown();
     const stamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, "-");
     if (typeof globalThis.downloadTextFile === "function") {
-      globalThis.downloadTextFile(`agent_crypto_retrospective_${stamp}.md`, "text/markdown;charset=utf-8", body);
+      globalThis.downloadTextFile(`agent_crypto_post_current_${stamp}.md`, "text/markdown;charset=utf-8", body);
       return body;
     }
     try {
@@ -340,18 +357,16 @@
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = `agent_crypto_retrospective_${stamp}.md`;
+      link.download = `agent_crypto_post_current_${stamp}.md`;
       link.click();
       URL.revokeObjectURL(url);
     } catch (_) {}
     return body;
   }
 
-  const baseRenderDecisionBoard = typeof globalThis.renderDecisionBoard === "function"
-    ? globalThis.renderDecisionBoard
-    : null;
+  const baseRenderDecisionBoard = typeof globalThis.renderDecisionBoard === "function" ? globalThis.renderDecisionBoard : null;
   if (baseRenderDecisionBoard) {
-    globalThis.renderDecisionBoard = function renderDecisionBoard3960(...args) {
+    globalThis.renderDecisionBoard = function renderDecisionBoard3961(...args) {
       const result = baseRenderDecisionBoard.apply(this, args);
       try { render(); } catch (_) {}
       return result;
@@ -363,12 +378,14 @@
     if (id === "btnAtlasAnalyticalMemoryRefresh394") queueMicrotask(() => { try { render(); } catch (_) {} });
   });
 
-  globalThis.__AGENT_CRYPTO_RETROSPECTIVE_VALIDATION_3960__ = Object.freeze({
-    build: BUILD_3960,
-    role: "read-only retrospective observation reader",
+  globalThis.__AGENT_CRYPTO_RETROSPECTIVE_VALIDATION_3961__ = Object.freeze({
+    build: BUILD_3961,
+    release: RELEASE_406151,
+    role: "read-only post-CURRENT retrospective observation reader",
     market_memory: "39.4.4R1",
     analytical_memory: "39.4",
     pairs_only_after_current_close: true,
+    latest_evaluable_visible: true,
     forecast_accuracy_score: false,
     starts_atlas: false,
     starts_nox: false,
@@ -378,7 +395,7 @@
     new_timer: false,
     new_websocket: false
   });
-  globalThis.atlasRetrospectiveValidation3960 = Object.freeze({ derive, render, markdown });
+  globalThis.atlasRetrospectiveValidation = Object.freeze({ derive, render, markdown });
 
   queueMicrotask(() => { try { render(); } catch (_) {} });
 })();

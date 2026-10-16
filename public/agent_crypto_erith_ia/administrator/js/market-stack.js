@@ -1,3 +1,5 @@
+/* 40.6.413 · diagnostic-only eval boundary */
+(()=>{try{const b=String(globalThis.AGENT_CRYPTO_EFFECTIVE_BUILD||document.documentElement?.dataset?.agentCryptoLoadedBuild||"");if(b==="40.6.413")globalThis.AgentCryptoBootProbe?.mark?.("probe-script-eval-enter",{src:"market-stack.js",build:"40.6.413"});}catch(_){}})();
 (() => {
   "use strict";
   const BUILD = "40.4.211";
@@ -25,7 +27,7 @@
 
   function forceHidden(node, hidden){
     if(!node) return;
-    node.classList.toggle("atlas-market-force-hidden-404168", hidden);
+    node.classList.toggle("atlas-market-force-hidden", hidden);
     if(hidden){
       node.hidden = true;
       node.setAttribute("aria-hidden", "true");
@@ -46,16 +48,16 @@
   function clearRetired185Geometry(){
     const deck = byId("analyste");
     deck?.classList.remove("atlas-market-soft-transition-404185");
-    document.querySelectorAll(".atlas-unified-domain-shell-404185,.atlas-unified-domain-rail-404185").forEach(node => {
-      node.classList.remove("atlas-unified-domain-shell-404185","atlas-unified-domain-rail-404185");
+    document.querySelectorAll(".atlas-unified-domain-shell,.atlas-unified-domain-rail").forEach(node => {
+      node.classList.remove("atlas-unified-domain-shell","atlas-unified-domain-rail");
       ["--atlas-unified-dx","--atlas-unified-dy","--atlas-unified-w","--atlas-unified-h"].forEach(k => node.style.removeProperty(k));
       node.style.removeProperty("transform");
       node.style.removeProperty("transition");
       node.style.removeProperty("will-change");
       node.style.removeProperty("opacity");
     });
-    delete document.documentElement.dataset.unifiedGraphShell404185;
-    document.documentElement.dataset.staticGraphShell404187 = "ready";
+    delete document.documentElement.dataset.unifiedGraphShell;
+    document.documentElement.dataset.staticGraphShell = "ready";
   }
 
   function captureCryptoGeometry(){
@@ -72,24 +74,24 @@
     if(rr?.height > 240) deck.style.setProperty("--atlas-market-master-rail-h", `${Math.round(rr.height)}px`);
     if(rr?.width > 220) deck.style.setProperty("--atlas-market-master-rail-w", `${Math.round(rr.width)}px`);
     if(tr?.height > 28) deck.style.setProperty("--atlas-market-master-toolbar-h", `${Math.round(tr.height)}px`);
-    document.documentElement.dataset.cryptoSkeletonGeometry404174 = "captured";
-    document.documentElement.dataset.cryptoStaticGeometry404187 = "captured";
+    document.documentElement.dataset.cryptoSkeletonGeometry = "captured";
+    document.documentElement.dataset.cryptoStaticGeometry = "captured";
   }
 
   function installFixedAnchor(){
     const deck = byId("analyste"), button = byId("atlasMarketDomainSwitch");
     if(!deck || !button) return false;
-    let slot = byId("atlasFixedMarketAnchorSlot404168");
+    let slot = byId("atlasFixedMarketAnchorSlot");
     if(!slot){
       slot = document.createElement("div");
-      slot.id = "atlasFixedMarketAnchorSlot404168";
+      slot.id = "atlasFixedMarketAnchorSlot";
       slot.className = "atlas-fixed-market-anchor-slot-404168";
       slot.setAttribute("aria-label", "Sélecteur cyclique de marché");
       deck.prepend(slot);
     }
     if(button.parentElement !== slot) slot.appendChild(button);
     button.classList.add("atlas-fixed-market-anchor-button-404168");
-    button.dataset.fixedMarketAnchor404168 = "locked";
+    button.dataset.fixedMarketAnchor = "locked";
     button.dataset.marketGeometryOwner = "crypto-master";
     button.dataset.marketCycle = ORDER.map(item => item.id).join(">");
     button.dataset.marketGeometryLock = BUILD;
@@ -104,64 +106,64 @@
     const metalsDetail = byId("atlasMetalsDetailPanel");
     if(!chartShell || !recovery || !metalsDetail || !installFixedAnchor()) return false;
 
-    if(!byId("atlasCyclicMarketInertStage404168")){
+    if(!byId("atlasCyclicMarketInertStage")){
       const stage = document.createElement("section");
-      stage.id = "atlasCyclicMarketInertStage404168";
-      stage.className = "atlas-cyclic-market-inert-stage-404168";
+      stage.id = "atlasCyclicMarketInertStage";
+      stage.className = "atlas-cyclic-market-inert-stage";
       stage.hidden = true;
-      stage.innerHTML = `<div class="atlas-cyclic-market-inert-grid-404168" aria-live="polite"><div class="atlas-cyclic-market-inert-hero-404168"><small>ERITH.IA · MARKETS OBSERVATORY</small><h3 data-cyclic-market-title>Marché parallèle</h3><p data-cyclic-market-description>Chargement de la Source Truth publique.</p><div class="atlas-cyclic-market-inert-line-404168"></div></div><div class="atlas-cyclic-market-inert-gates-404168"><span><small>SOURCE TRUTH</small><b>CHARGEMENT</b></span><span><small>HISTORIQUE</small><b>VÉRIFICATION</b></span><span><small>UNITÉS</small><b>EXPLICITES</b></span><span><small>MOTEUR</small><b>OBSERVATION</b></span></div><footer><b>AUCUN PRIX INVENTÉ</b><span>Squelette Crypto statique · contenu métier séparé.</span></footer></div>`;
+      stage.innerHTML = `<div class="atlas-cyclic-market-inert-grid" aria-live="polite"><div class="atlas-cyclic-market-inert-hero"><small>ERITH.IA · MARKETS OBSERVATORY</small><h3 data-cyclic-market-title>Marché parallèle</h3><p data-cyclic-market-description>Chargement de la Source Truth publique.</p><div class="atlas-cyclic-market-inert-line"></div></div><div class="atlas-cyclic-market-inert-gates"><span><small>SOURCE TRUTH</small><b>CHARGEMENT</b></span><span><small>HISTORIQUE</small><b>VÉRIFICATION</b></span><span><small>UNITÉS</small><b>EXPLICITES</b></span><span><small>MOTEUR</small><b>OBSERVATION</b></span></div><footer><b>AUCUN PRIX INVENTÉ</b><span>Squelette Crypto statique · contenu métier séparé.</span></footer></div>`;
       chartShell.appendChild(stage);
     }
 
-    if(!byId("atlasCyclicMarketMirrorToolbar404168")){
+    if(!byId("atlasCyclicMarketMirrorToolbar")){
       const t = document.createElement("div");
-      t.id = "atlasCyclicMarketMirrorToolbar404168";
-      t.className = "atlas-cyclic-market-mirror-toolbar-404168";
+      t.id = "atlasCyclicMarketMirrorToolbar";
+      t.className = "atlas-cyclic-market-mirror-toolbar";
       t.hidden = true;
-      t.innerHTML = `<span class="mirror-group atlas-toolbar-view-404195"><small>VUE</small><button type="button" disabled aria-disabled="true" title="Vue Prix non disponible pour ce domaine">Prix</button><b class="active">Base 100</b></span><span class="mirror-group atlas-toolbar-scale-404195 atlas-toolbar-disabled-slot-404195"><small>ÉCHELLE</small><button type="button" disabled aria-disabled="true" title="Échelle native non disponible pour ce domaine">Normale</button><button type="button" disabled aria-disabled="true" title="Échelle logarithmique non disponible pour ce domaine">Log</button></span><span class="mirror-group atlas-toolbar-section-404195"><small>AFFICHER</small><b class="atlas-toolbar-info-404196" data-cyclic-market-toolbar-state>Source Truth publique</b></span><span class="mirror-group atlas-toolbar-period-404195 atlas-parallel-periods"><small>PÉRIODE</small><button type="button" data-parallel-period="24h">24h</button><button type="button" data-parallel-period="7j">7j</button><button type="button" data-parallel-period="30j">30j</button><button type="button" data-parallel-period="60j">60j</button><button type="button" data-parallel-period="90j">90j</button><button type="button" data-parallel-period="1a">1a</button></span>`;
+      t.innerHTML = `<span class="mirror-group atlas-toolbar-view-404195"><small>VUE</small><button type="button" disabled aria-disabled="true" title="Vue Prix non disponible pour ce domaine">Prix</button><b class="active">Base 100</b></span><span class="mirror-group atlas-toolbar-scale atlas-toolbar-disabled-slot"><small>ÉCHELLE</small><button type="button" disabled aria-disabled="true" title="Échelle native non disponible pour ce domaine">Normale</button><button type="button" disabled aria-disabled="true" title="Échelle logarithmique non disponible pour ce domaine">Log</button></span><span class="mirror-group atlas-toolbar-section"><small>AFFICHER</small><b class="atlas-toolbar-info" data-cyclic-market-toolbar-state>Source Truth publique</b></span><span class="mirror-group atlas-toolbar-period-404195 atlas-parallel-periods"><small>PÉRIODE</small><button type="button" data-parallel-period="24h">24h</button><button type="button" data-parallel-period="7j">7j</button><button type="button" data-parallel-period="30j">30j</button><button type="button" data-parallel-period="60j">60j</button><button type="button" data-parallel-period="90j">90j</button><button type="button" data-parallel-period="1a">1a</button></span>`;
       recovery.appendChild(t);
     }
 
-    if(!byId("atlasCyclicMarketInertDetail404168")){
+    if(!byId("atlasCyclicMarketInertDetail")){
       const d = document.createElement("article");
-      d.id = "atlasCyclicMarketInertDetail404168";
-      d.className = "panel glass atlas-cyclic-market-inert-detail-404168";
+      d.id = "atlasCyclicMarketInertDetail";
+      d.className = "panel glass atlas-cyclic-market-inert-detail";
       d.hidden = true;
-      d.innerHTML = `<header><span class="eyebrow">DÉTAIL ACTIF</span><strong data-cyclic-market-detail-title>Marché parallèle</strong><small>Observation seulement · Source Truth publique</small></header><div class="atlas-cyclic-market-inert-detail-state-404168"><span><small>État</small><b>CHARGEMENT</b></span><span><small>Collecte</small><b>LECTURE PUBLIQUE</b></span></div><section><b>Intégrité</b><p>Aucune valeur inventée. Les unités, sources et historiques restent séparés.</p></section>`;
+      d.innerHTML = `<header><span class="eyebrow">DÉTAIL ACTIF</span><strong data-cyclic-market-detail-title>Marché parallèle</strong><small>Observation seulement · Source Truth publique</small></header><div class="atlas-cyclic-market-inert-detail-state"><span><small>État</small><b>CHARGEMENT</b></span><span><small>Collecte</small><b>LECTURE PUBLIQUE</b></span></div><section><b>Intégrité</b><p>Aucune valeur inventée. Les unités, sources et historiques restent séparés.</p></section>`;
       metalsDetail.insertAdjacentElement("afterend", d);
     }
     /* 40.4.189 — one physical right rail. Metals keeps ownership of the
        proven geometry; parallel domains receive an overlay host inside it.
        No original Metals child is removed or rebuilt. */
-    if(!byId("atlasParallelDomainRailHost404189")){
+    if(!byId("atlasParallelDomainRailHost")){
       const h = document.createElement("div");
-      h.id = "atlasParallelDomainRailHost404189";
+      h.id = "atlasParallelDomainRailHost";
       h.className = "atlas-parallel-domain-rail-host-404189";
       h.hidden = true;
       h.setAttribute("aria-live", "polite");
       metalsDetail.appendChild(h);
     }
-    ensureGraphToolbarParity404195();
+    ensureGraphToolbarParity();
     return true;
   }
 
-  function ensureGraphToolbarParity404195(){
+  function ensureGraphToolbarParity(){
     const metals=byId("atlasMetalsUnifiedToolbar");
     if(metals){
       const groups=Array.from(metals.children).filter(n=>n instanceof Element&&n.matches('div[role="group"]'));
       const view=groups[0]||null;const period=groups.find(n=>n.querySelector('[data-metals-period]'))||groups[1]||null;const section=groups.find(n=>n.querySelector('[data-metals-section]'))||groups[2]||null;
-      view?.classList.add("atlas-toolbar-view-404195");period?.classList.add("atlas-toolbar-period-404195");section?.classList.add("atlas-toolbar-section-404195");
-      if(!metals.querySelector(".atlas-toolbar-scale-404195")){const scale=document.createElement("div");scale.className="atlas-toolbar-scale-404195 atlas-toolbar-disabled-slot-404195";scale.setAttribute("role","group");scale.setAttribute("aria-label","Échelle Métaux · non applicable");scale.innerHTML='<span>ÉCHELLE</span><button type="button" disabled aria-disabled="true">Normale</button><button type="button" disabled aria-disabled="true">Log</button>';metals.insertBefore(scale,period||section||null);}
-      metals.dataset.graphToolbarParity404195="crypto-slot-lock";
+      view?.classList.add("atlas-toolbar-view-404195");period?.classList.add("atlas-toolbar-period-404195");section?.classList.add("atlas-toolbar-section");
+      if(!metals.querySelector(".atlas-toolbar-scale")){const scale=document.createElement("div");scale.className="atlas-toolbar-scale atlas-toolbar-disabled-slot";scale.setAttribute("role","group");scale.setAttribute("aria-label","Échelle Métaux · non applicable");scale.innerHTML='<span>ÉCHELLE</span><button type="button" disabled aria-disabled="true">Normale</button><button type="button" disabled aria-disabled="true">Log</button>';metals.insertBefore(scale,period||section||null);}
+      metals.dataset.graphToolbarParity="crypto-slot-lock";
     }
-    const mirror=byId("atlasCyclicMarketMirrorToolbar404168");if(mirror)mirror.dataset.graphToolbarParity404195="crypto-slot-lock";
-    document.documentElement.dataset.graphToolbarParity404195="ready";
+    const mirror=byId("atlasCyclicMarketMirrorToolbar");if(mirror)mirror.dataset.graphToolbarParity="crypto-slot-lock";
+    document.documentElement.dataset.graphToolbarParity="ready";
   }
   function setParallelPlaceholder(domain){
     const s = specFor(domain);
-    const stage = byId("atlasCyclicMarketInertStage404168");
-    const toolbar = byId("atlasCyclicMarketMirrorToolbar404168");
-    const detail = byId("atlasCyclicMarketInertDetail404168");
+    const stage = byId("atlasCyclicMarketInertStage");
+    const toolbar = byId("atlasCyclicMarketMirrorToolbar");
+    const detail = byId("atlasCyclicMarketInertDetail");
     const title = stage?.querySelector("[data-cyclic-market-title]");
     const desc = stage?.querySelector("[data-cyclic-market-description]");
     const state = toolbar?.querySelector("[data-cyclic-market-toolbar-state]");
@@ -172,7 +174,7 @@
     if(detailTitle) detailTitle.textContent = `Lecture ${s.title}`;
   }
 
-  function syncMetalsSemanticTruth404204(parallel, metalsDetail, parallelRailHost){
+  function syncMetalsSemanticTruth(parallel, metalsDetail, parallelRailHost){
     /* 40.4.204 — semantic truth without geometry mutation.
        Metals remains the physical rail/shell owner, but its native content must
        leave the accessibility/export tree while a parallel domain owns the view.
@@ -195,19 +197,19 @@
       parallelRailHost.inert = !parallel;
       parallelRailHost.setAttribute("aria-hidden", parallel ? "false" : "true");
     }
-    document.documentElement.dataset.domainSemanticTruth404204 = parallel ? "parallel-owned" : "native-owned";
+    document.documentElement.dataset.domainSemanticTruth = parallel ? "parallel-owned" : "native-owned";
   }
 
   function syncPanels(domain){
     const parallel = isParallel(domain);
     const cryptoDetail = byId("detailPanel");
     const metalsDetail = byId("atlasMetalsDetailPanel");
-    const parallelDetail = byId("atlasCyclicMarketInertDetail404168");
-    const parallelRailHost = byId("atlasParallelDomainRailHost404189");
+    const parallelDetail = byId("atlasCyclicMarketInertDetail");
+    const parallelRailHost = byId("atlasParallelDomainRailHost");
     const cryptoToolbar = document.querySelector("#analyste .chart-v2-toolbar");
     const metalsToolbar = byId("atlasMetalsUnifiedToolbar");
-    const mirrorToolbar = byId("atlasCyclicMarketMirrorToolbar404168");
-    const stage = byId("atlasCyclicMarketInertStage404168");
+    const mirrorToolbar = byId("atlasCyclicMarketMirrorToolbar");
+    const stage = byId("atlasCyclicMarketInertStage");
     const liveStatus = byId("liveStatus");
     const metalsStatus = byId("atlasMetalsLiveStatus");
 
@@ -224,7 +226,7 @@
     if(metalsDetail){
       metalsDetail.setAttribute("aria-label", parallel ? `Lecture ${specFor(domain).title}` : "Lecture Métaux");
     }
-    syncMetalsSemanticTruth404204(parallel, metalsDetail, parallelRailHost);
+    syncMetalsSemanticTruth(parallel, metalsDetail, parallelRailHost);
 
     forceHidden(cryptoToolbar, domain !== "crypto");
     forceHidden(metalsToolbar, domain !== "metals");
@@ -238,16 +240,16 @@
     if(parallel){
       forceHidden(liveStatus, true);
       forceHidden(metalsStatus, true);
-      document.documentElement.dataset.parallelStatusRow404187 = "removed-from-graph-slot";
+      document.documentElement.dataset.parallelStatusRow = "removed-from-graph-slot";
       setParallelPlaceholder(domain);
     }else{
       forceHidden(liveStatus, false);
       forceHidden(metalsStatus, true);
-      delete document.documentElement.dataset.parallelStatusRow404187;
+      delete document.documentElement.dataset.parallelStatusRow;
     }
 
     clearRetired185Geometry();
-    document.documentElement.dataset.parallelSlotParity404187 = parallel ? "crypto-master" : "native";
+    document.documentElement.dataset.parallelSlotParity = parallel ? "crypto-master" : "native";
   }
 
   function updateButton(domain){
@@ -330,22 +332,22 @@
 
   function init(){
     document.getElementById("atlasTrueMarketStackMetals404167R1")?.remove();
-    document.getElementById("atlasMarketCascade404167")?.remove();
+    document.getElementById("atlasMarketCascade")?.remove();
     clearRetired185Geometry();
     if(!ensureHosts()){
-      document.documentElement.dataset.domainSkeletonMirror404174 = "missing-owner";
+      document.documentElement.dataset.domainSkeletonMirror = "missing-owner";
       return;
     }
     current = nativeDomain();
     const b = byId("atlasMarketDomainSwitch");
-    b.dataset.domainSkeletonMirror404174 = "bound";
+    b.dataset.domainSkeletonMirror = "bound";
     b.addEventListener("click", onMarketSwitchClick, true);
     applyDomain(current, { nativeAlreadyHandled:true });
     requestAnimationFrame(captureCryptoGeometry);
     publishBuildTruth();
-    document.documentElement.dataset.domainSkeletonMirror404174 = "ready";
-    document.documentElement.dataset.staticGraphShell404187 = "ready";
-    globalThis.ErithDomainSkeletonMirror404174 = Object.freeze({
+    document.documentElement.dataset.domainSkeletonMirror = "ready";
+    document.documentElement.dataset.staticGraphShell = "ready";
+    globalThis.ErithDomainSkeletonMirror = Object.freeze({
       build:BUILD, revision:REVISION, contract:CONTRACT,
       order:ORDER.map(x => x.id), current:() => current,
       next:() => applyDomain(nextOf(current).id), go:d => applyDomain(specFor(d).id),
@@ -365,3 +367,5 @@
   if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init, { once:true });
   else init();
 })();
+/* 40.6.413 · diagnostic-only eval boundary */
+(()=>{try{const b=String(globalThis.AGENT_CRYPTO_EFFECTIVE_BUILD||document.documentElement?.dataset?.agentCryptoLoadedBuild||"");if(b==="40.6.413")globalThis.AgentCryptoBootProbe?.mark?.("probe-script-eval-exit",{src:"market-stack.js",build:"40.6.413"});}catch(_){}})();

@@ -1,0 +1,38 @@
+AGENT-CRYPTO STRATEGY A EXECUTION COST EVIDENCE CAPTURE — 40.6.463
+
+NEW OWNER
+js/strategy-a-execution-cost-evidence-capture.js
+
+RESIDENCY CHANGE
+post-boot-runtime-loader.js
+- loads strategy-a-execution-cost-truth.js?v=40.6.459 in Strategy Core
+- loads strategy-a-execution-cost-evidence-capture.js?v=40.6.463 before Strategy autostart
+
+DURABLE CHANGE
+strategy-a-durable-evidence-store.js
+- same IndexedDB database and schema
+- PAPER fingerprint includes execution_cost_evidence revision/state
+- async evidence-only updates persist without fabricating a new record type
+
+FUTURE PAPER CAPTURE
+OPEN  -> Kraken BTC/EUR raw execution-cost measurement
+CLOSE -> Kraken BTC/EUR raw execution-cost measurement
+
+RAW EVIDENCE
+best bid / ask
+mid
+spread pct / bp
+exact 10 / 25 / 50 / 100 EUR book simulation when matched
+buy/sell average prices
+buy/sell slippage pct
+book roundtrip cost pct
+market-to-market estimated cost pct
+
+NOT DONE IN 40.6.463
+NO HISTORICAL BACKFILL
+NO AFTER-COST INJECTION
+NO ACCOUNTING SEMANTIC CHANGE
+NO GATE PROMOTION
+NO REAL ORDER
+
+MARKET CORE 38.15.11 PRESERVED

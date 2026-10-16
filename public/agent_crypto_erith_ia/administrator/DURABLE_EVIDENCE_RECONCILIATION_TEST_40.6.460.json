@@ -1,0 +1,27 @@
+{
+  "schema": "agent_crypto_strategy_a_durable_evidence_reconciliation_test_v1",
+  "build": "40.6.460",
+  "pass": true,
+  "checks": {
+    "visible_durable_cycle_overlap": true,
+    "after_durable_overlap": true,
+    "after_paper_link_truth": true,
+    "verified_after_count": true,
+    "gap_open_closed_truth": true,
+    "diagnostic_never_certifies": true,
+    "review_required": true
+  },
+  "invariants": {
+    "diagnostic_only": true,
+    "certifies_g1": false,
+    "certifies_g8": false,
+    "promotes_gate": false,
+    "market_core": "38.15.11",
+    "threshold_change": false,
+    "storage_write": false,
+    "network": false,
+    "new_timer": false,
+    "new_observer": false,
+    "real_order": false
+  }
+}

@@ -35,10 +35,10 @@
 
   function createShell(){
     const shell=document.createElement("details");
-    shell.className="atlas-collapse glass learning-lazy-shell-40443";
+    shell.className="atlas-collapse glass learning-lazy-shell";
     shell.dataset.learningLazyShell40443="true";
     shell.dataset.learningLazyShell40495="true";
-    shell.innerHTML=`<summary class="atlas-collapse-summary"><span class="atlas-collapse-icon" aria-hidden="true">▶</span><span class="atlas-collapse-title">Learning Journey · 01→11</span><span class="atlas-collapse-subtitle">Progression et IndexedDB conservées · contenu détaillé à la demande</span></summary><div class="atlas-collapse-body" data-learning-hydration-40443="empty" data-learning-hydration-40495="empty"><div class="learning-lazy-placeholder-40443"><b>Parcours pédagogique prêt</b><span>Ouvre cette section pour matérialiser le cockpit, les leçons et la feuille de route.</span></div></div>`;
+    shell.innerHTML=`<summary class="atlas-collapse-summary"><span class="atlas-collapse-icon" aria-hidden="true">▶</span><span class="atlas-collapse-title">Learning Journey · 01→11</span><span class="atlas-collapse-subtitle">Progression et IndexedDB conservées · contenu détaillé à la demande</span></summary><div class="atlas-collapse-body" data-learning-hydration-40443="empty" data-learning-hydration-40495="empty"><div class="learning-lazy-placeholder"><b>Parcours pédagogique prêt</b><span>Ouvre cette section pour matérialiser le cockpit, les leçons et la feuille de route.</span></div></div>`;
     return shell;
   }
 
@@ -119,7 +119,7 @@
       }catch(error){
         body.dataset.learningHydration40495="error";
         body.dataset.learningHydration40443="error";
-        body.innerHTML=`<div class="learning-lazy-placeholder-40443"><b>Présentation Learning indisponible</b><span>${String(error?.message||error||"Erreur inconnue")}</span></div>`;
+        body.innerHTML=`<div class="learning-lazy-placeholder"><b>Présentation Learning indisponible</b><span>${String(error?.message||error||"Erreur inconnue")}</span></div>`;
         console.warn(`Agent-Crypto ${BUILD} · Learning hydration failed`,error);
         return false;
       }finally{

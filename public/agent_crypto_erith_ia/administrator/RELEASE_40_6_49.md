@@ -20,5 +20,5 @@ Engine: **Market Core 38.15.11**
 Market Core 38.15.11, Graphique, Lecture Technique, Chronos, Oracle engine and Workbench are unchanged. No new recurring timer, observer, network owner, storage owner or order path.
 
 ### Backplate
-`assets/aether/aether-observatory-master-fidelity-406049.png`  
+`assets/aether/aether-observatory-master-fidelity.png`  
 SHA-256: `17d0f096d5fd25e774bab6ee010ea9a5ff00d38869ae87e8224c6a3aebeff8fc`

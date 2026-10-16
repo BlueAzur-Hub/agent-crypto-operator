@@ -29,5 +29,5 @@ Engine: Market Core 38.15.11
 
 ## Backplate
 
-`assets/aether/aether-observatory-empty-ui-406043.webp`
+`assets/aether/aether-observatory-empty-ui.webp`
 SHA-256: `13659dce14ed231dd29ad665ea0be95ddfe90e5cb1f672b1694fa4e9b8de9886`

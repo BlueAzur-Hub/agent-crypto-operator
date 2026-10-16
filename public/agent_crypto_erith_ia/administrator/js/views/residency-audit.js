@@ -8,8 +8,8 @@
   const PROTECTED=Object.freeze([
     "#analyste",
     "#detailPanel",
-    "#atlasStorageHealth40198",
-    "#atlasGreyPlateForensic40393"
+    "#atlasStorageHealth",
+    "#atlasGreyPlateForensic"
   ]);
   const EXPECTED_REGISTERED=Object.freeze(["system","atlas"]);
   const EXPECTED_TRUE_LAZY=Object.freeze(["projects","operations","system","oracle"]);
@@ -49,9 +49,9 @@
 
   function lazyTransports(){
     return Object.freeze({
-      projects:globalThis.ErithProjectsPresentation40420?.snapshot?.()||null,
-      operations:globalThis.ErithOperationsPresentation40421?.snapshot?.()||null,
-      system:globalThis.ErithSystemPresentation40424?.snapshot?.()||null,
+      projects:globalThis.ErithProjectsPresentation?.snapshot?.()||null,
+      operations:globalThis.ErithOperationsPresentation?.snapshot?.()||null,
+      system:globalThis.ErithSystemPresentation?.snapshot?.()||null,
       oracle:globalThis.ErithOraclePresentation?.snapshot?.()||null
     });
   }

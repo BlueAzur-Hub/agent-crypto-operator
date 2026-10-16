@@ -1,0 +1,29 @@
+AGENT-CRYPTO 40.6.491 PATCH MANIFEST
+=====================================
+Parent: 40.6.490
+Market Core: 38.15.11 protected
+
+CHANGED / ADDED
+- public/agent_crypto_erith_ia/administrator/js/oracle-evidence-retention-atomicity-406491.js
+- public/agent_crypto_erith_ia/administrator/js/oracle-evidence-auto-archive-safety-gates.js
+- public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+- public/agent_crypto_erith_ia/administrator/build.json
+- public/agent_crypto_erith_ia/administrator/index.html
+- public/agent_crypto_erith_ia/administrator/index-40.6.491.html
+- public/agent_crypto_erith_ia/administrator/RELEASE.md
+- public/agent_crypto_erith_ia/administrator/HANDOFF.md
+- public/agent_crypto_erith_ia/administrator/HANDOFF_FINAL_40.6.491.md
+- public/agent_crypto_erith_ia/administrator/ORACLE_EVIDENCE_RETENTION_ATOMICITY_40.6.491.md
+- .github/scripts/agent_crypto_oracle_evidence_atomicity_guard_406491.py
+- .github/workflows/agent-crypto-package-406491.yml
+- .github/workflows/agent-crypto-package-406489.yml (historical/manual)
+- .github/workflows/agent-crypto-package-406490.yml (historical/manual)
+
+PROTECTIONS
+- no cold archive modification
+- no Market Core modification
+- no Strategy A business-rule modification
+- no Oracle Math modification
+- no Aether / Lecture Technique / Web Classique modification
+- no automatic local delete
+- no real order / wallet

@@ -1,0 +1,64 @@
+{
+  "schema": "agent_crypto_cex_divergence_fail_closed_evidence_v1",
+  "build": "40.6.101",
+  "parent_build": "40.6.100",
+  "engine": "38.15.11",
+  "defect": {
+    "reproduced": true,
+    "audit_case": "Severely divergent controls still ready",
+    "observed_source_intelligence_state": "ready",
+    "observed_max_spread_pct": 57.142857,
+    "observed_asset_verdict": "divergent",
+    "root_cause": "Source Intelligence readiness required CEX comparability but did not fail closed on an existing fresh CEX divergent verdict"
+  },
+  "correction": {
+    "runtime_layer": "js/cex-divergence-guard-406101.js",
+    "loader": "js/views/private-source-demand-loader.js",
+    "composition_order": [
+      "private-backend-sources Source Truth owner",
+      "40.6.98 per-provider freshness fail-closed read-side gate",
+      "40.6.101 fresh-CEX divergence fail-closed quality gate"
+    ],
+    "divergence_threshold_pct": 0.75,
+    "watch_is_failure": false,
+    "divergent_is_failure": true,
+    "binance_remains_primary": true,
+    "canonical_price_changed": false
+  },
+  "local_static_proof": {
+    "node_syntax_guard": "PASS",
+    "node_syntax_loader": "PASS",
+    "mock_watch_case": "ready",
+    "mock_divergent_case": "partial",
+    "mock_divergent_asset": "BTC",
+    "mock_max_spread_pct": 12.5
+  },
+  "protected": {
+    "market_core": "38.15.11",
+    "web_classic": true,
+    "graph_history": true,
+    "aether": true,
+    "atlas_current": true,
+    "oracle": true,
+    "evidence": true,
+    "math_core": true,
+    "lecture_technique": true,
+    "strategy_a": true,
+    "dex_identity_rules": true
+  },
+  "side_effects": {
+    "new_fetch_owner": false,
+    "recurring_timer": false,
+    "observer": false,
+    "storage_write": false,
+    "wallet": false,
+    "real_order": false,
+    "trading_endpoint": false
+  },
+  "terrain": {
+    "version_truth_ci": "required",
+    "version_delivery_ci": "required",
+    "github_pages": "required",
+    "firefox": "required after deployment"
+  }
+}

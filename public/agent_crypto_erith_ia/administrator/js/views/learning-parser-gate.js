@@ -21,9 +21,9 @@
   let reason="armed";
 
   const shellHtml=`
-      <details class="atlas-collapse glass learning-lazy-shell-40443" data-learning-lazy-shell-40443="true" data-learning-lazy-shell-40495="true">
+      <details class="atlas-collapse glass learning-lazy-shell" data-learning-lazy-shell-40443="true" data-learning-lazy-shell-40495="true">
         <summary class="atlas-collapse-summary"><span class="atlas-collapse-icon" aria-hidden="true">▶</span><span class="atlas-collapse-title">Learning Journey · 01→11</span><span class="atlas-collapse-subtitle">Progression et IndexedDB conservées · contenu détaillé à la demande</span></summary>
-        <div class="atlas-collapse-body" data-learning-hydration-40443="empty" data-learning-hydration-40495="empty"><div class="learning-lazy-placeholder-40443"><b>Parcours pédagogique prêt</b><span>Ouvre cette section pour matérialiser le cockpit, les leçons et la feuille de route.</span></div></div>
+        <div class="atlas-collapse-body" data-learning-hydration-40443="empty" data-learning-hydration-40495="empty"><div class="learning-lazy-placeholder"><b>Parcours pédagogique prêt</b><span>Ouvre cette section pour matérialiser le cockpit, les leçons et la feuille de route.</span></div></div>
       </details>`;
 
   function openingSectionStart(html,markerIndex){

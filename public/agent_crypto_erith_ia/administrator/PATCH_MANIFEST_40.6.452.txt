@@ -1,0 +1,42 @@
+AGENT-CRYPTO STRATEGY DEMAND LOADER RETRY + SELF TEST — 40.6.452
+==================================================================
+
+FUNCTIONAL OWNER
+----------------
+js/strategy-a-audit-demand-loader.js
+
+FIXES
+-----
+transport load success requires expected API
+failed script node removed
+loaded=1 + missing API treated as stale
+next explicit ensure recreates script
+no automatic retry loop
+self_test uses positive invariants
+false safety metadata separated from assertions
+snapshot exposes last_retry_key + retry_count
+
+LOCAL HARNESS
+-------------
+STRATEGY_AUDIT_LOADER_RETRY_TEST_40.6.452.json
+  syntax                                  PASS
+  transport load without API              PASS fail-closed
+  second explicit ensure                  PASS 3/3
+  stale loaded=1 without API              PASS removed/replaced
+  self_test                               PASS
+
+PROTECTED
+---------
+Backend .441
+Graphique .442
+Oracle .445
+HTML .448
+Readability .449
+Execution Cost freshness .450
+Execution Cost table layout .451
+Market Core 38.15.11
+Aether
+
+NO STRATEGY THRESHOLD CHANGE
+NO AUTOMATIC RETRY LOOP
+NO POLLING / OBSERVER / STORAGE WRITE

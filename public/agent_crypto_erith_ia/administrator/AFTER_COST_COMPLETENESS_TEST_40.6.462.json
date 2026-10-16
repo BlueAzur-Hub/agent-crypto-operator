@@ -1,0 +1,28 @@
+{
+  "schema": "agent_crypto_strategy_a_after_cost_completeness_test_v1",
+  "build": "40.6.462",
+  "pass": true,
+  "checks": {
+    "three_unique_links": true,
+    "one_complete_verified": true,
+    "spread_missing_detected": true,
+    "slippage_missing_detected": true,
+    "fees_missing_detected": true,
+    "impact_missing_detected": true,
+    "orphan_paper_preserved": true,
+    "no_certification": true,
+    "read_only": true
+  },
+  "invariants": {
+    "unique_links_only": true,
+    "unknown_remains_unknown": true,
+    "fills_missing_costs": false,
+    "records_mutated": false,
+    "certifies_g1": false,
+    "certifies_g8": false,
+    "market_core": "38.15.11",
+    "storage_write": false,
+    "network": false,
+    "real_order": false
+  }
+}

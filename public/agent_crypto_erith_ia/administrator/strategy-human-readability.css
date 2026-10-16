@@ -1,0 +1,215 @@
+/* Agent-Crypto — Strategy Human Readability
+   Canonical presentation-only layer. Human reading at 100% zoom.
+   No Strategy rule, threshold, math, storage, timer, network or execution change. */
+
+/* The historical Strategy modules still contain 7–10 px micro-type.
+   This layer deliberately has greater selector specificity, so it wins the
+   cascade without priority overrides and without altering module logic. */
+body #simulation [id^="strategyA"],
+body #simulation [id^="strategyTradus"],
+body #simulation [id^="tradus"] {
+  font-size:14px;
+  line-height:1.5;
+}
+body section#simulation[id] [id^="strategyA"][id] :where(div,section,article,p,span,small,em,li,label,summary,td,th),
+body section#simulation[id] [id^="strategyTradus"][id] :where(div,section,article,p,span,small,em,li,label,summary,td,th),
+body section#simulation[id] [id^="tradus"][id] :where(div,section,article,p,span,small,em,li,label,summary,td,th) {
+  font-size:13px;
+  line-height:1.5;
+}
+body section#simulation[id] [id^="strategyA"][id] :where(b,strong),
+body section#simulation[id] [id^="strategyTradus"][id] :where(b,strong),
+body section#simulation[id] [id^="tradus"][id] :where(b,strong) {
+  font-size:14px;
+  line-height:1.4;
+}
+body section#simulation[id] [id^="strategyA"][id] :where(button,.btn),
+body section#simulation[id] [id^="strategyTradus"][id] :where(button,.btn),
+body section#simulation[id] [id^="tradus"][id] :where(button,.btn) {
+  min-height:38px;
+  padding:8px 12px;
+  font-size:13px;
+  line-height:1.2;
+}
+body section#simulation[id] [id^="strategyA"][id] :where(h2,h3,h4),
+body section#simulation[id] [id^="strategyTradus"][id] :where(h2,h3,h4),
+body section#simulation[id] [id^="tradus"][id] :where(h2,h3,h4),
+body #simulation [id^="strategyA"] [class$="-title"],
+body #simulation [id^="strategyTradus"] [class$="-title"],
+body #simulation [id^="tradus"] [class$="-title"] {
+  font-size:16px;
+  line-height:1.35;
+}
+body #simulation [id^="strategyA"] [class$="-kicker"],
+body #simulation [id^="strategyTradus"] [class$="-kicker"],
+body #simulation [id^="tradus"] [class$="-kicker"] {
+  font-size:13px;
+  line-height:1.35;
+  letter-spacing:.07em;
+}
+
+/* 40.6.449 — late-injection readability shields for the two regressions
+   reproduced by the Astra audit. The canonical sheet remains the only owner;
+   no priority override and no module/business rewrite. */
+body #simulation #strategyAPaperLifecycle .spl-title,
+body #simulation #strategyAG3ProspectiveT0Capture .t {
+  font-size:16px;
+  line-height:1.35;
+}
+body #simulation #strategyAPaperLifecycle .spl-sub,
+body #simulation #strategyAPaperLifecycle .spl-state,
+body #simulation #strategyAPaperLifecycle .spl-safety,
+body #simulation #strategyAG3ProspectiveT0Capture .n {
+  font-size:13px;
+  line-height:1.5;
+}
+body #simulation #strategyAPaperLifecycle .spl-kpi span,
+body #simulation #strategyAG3ProspectiveT0Capture .k span {
+  font-size:13px;
+  line-height:1.4;
+}
+body #simulation #strategyAPaperLifecycle .spl-kpi b,
+body #simulation #strategyAG3ProspectiveT0Capture .k b {
+  font-size:14px;
+  line-height:1.4;
+}
+
+/* Strategy state + 9-gate summary: readable first, technical density second. */
+body #simulation #strategyASimulationStatus406407 .se407-label {
+  min-height:34px;
+  padding:7px 12px;
+  font-size:16px;
+  line-height:1.2;
+}
+body #simulation #strategyASimulationStatus406407 .se407-note {font-size:13px;line-height:1.5}
+body #simulation #strategyAGateSummary406406 {padding:14px}
+body #simulation #strategyAGateSummary406406 .se406-kicker {font-size:13px;line-height:1.3}
+body #simulation #strategyAGateSummary406406 .se406-title {margin-top:5px;font-size:18px;line-height:1.3}
+body #simulation #strategyAGateSummary406406 .se406-sub,
+body #simulation #strategyAGateSummary406406 .se406-empty,
+body #simulation #strategyAGateSummary406406 .se406-evidence-state {font-size:13px;line-height:1.5}
+body #simulation #strategyAGateSummary406406 [data-strategy-evidence-demand="true"] {
+  min-height:40px;padding:9px 13px;font-size:13px;line-height:1.2
+}
+body #simulation #strategyAGateSummary406406 .se406-gates {
+  grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:12px
+}
+body #simulation #strategyAGateSummary406406 .se406-gate {padding:10px}
+body #simulation #strategyAGateSummary406406 .se406-gate b {font-size:13px;line-height:1.35}
+body #simulation #strategyAGateSummary406406 .se406-gate span,
+body #simulation #strategyAGateSummary406406 .se406-gate small {
+  margin-top:4px;font-size:12.5px;line-height:1.45;white-space:normal;
+  overflow:visible;text-overflow:clip;overflow-wrap:anywhere
+}
+
+/* On-demand Cost-Wait → Oracle/Cost → Execution Cost chain. */
+body #simulation #strategyACostWaitOutcomeAudit406429,
+body #simulation #strategyAOracleCostCalibrationAudit,
+body #simulation #strategyAExecutionCostTruth {padding:14px}
+body #simulation #strategyACostWaitOutcomeAudit406429 .cwo-t,
+body #simulation #strategyAOracleCostCalibrationAudit .occ-t,
+body #simulation #strategyAExecutionCostTruth .ect-t {
+  font-size:17px;line-height:1.35;letter-spacing:.045em
+}
+body #simulation #strategyACostWaitOutcomeAudit406429 .cwo-s,
+body #simulation #strategyAOracleCostCalibrationAudit .occ-s,
+body #simulation #strategyAExecutionCostTruth .ect-s,
+body #simulation #strategyAExecutionCostTruth .ect-transport,
+body #simulation #strategyAExecutionCostTruth .ect-note,
+body #simulation #strategyAExecutionCostTruth details.ect-diagnostic {
+  font-size:13.5px;line-height:1.55
+}
+body #simulation #strategyACostWaitOutcomeAudit406429 .cwo-g {
+  grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:11px
+}
+body #simulation #strategyAOracleCostCalibrationAudit .occ-g {
+  grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:11px
+}
+body #simulation #strategyACostWaitOutcomeAudit406429 .cwo-k,
+body #simulation #strategyAOracleCostCalibrationAudit .occ-k {padding:10px}
+body #simulation #strategyACostWaitOutcomeAudit406429 .cwo-k span,
+body #simulation #strategyAOracleCostCalibrationAudit .occ-k span,
+body #simulation #strategyAExecutionCostTruth .ect-k span {font-size:12.5px;line-height:1.4}
+body #simulation #strategyACostWaitOutcomeAudit406429 .cwo-k b,
+body #simulation #strategyAOracleCostCalibrationAudit .occ-k b,
+body #simulation #strategyAExecutionCostTruth .ect-k b {font-size:14.5px;line-height:1.4}
+body #simulation #strategyACostWaitOutcomeAudit406429 .cwo-stat,
+body #simulation #strategyAOracleCostCalibrationAudit .occ-note {
+  margin-top:10px;padding:10px;font-size:13.5px;line-height:1.6
+}
+body #simulation #strategyAExecutionCostTruth .ect-card h4 {font-size:16px;line-height:1.4}
+body #simulation #strategyAExecutionCostTruth table {font-size:13px;line-height:1.45}
+body #simulation #strategyAExecutionCostTruth th,
+body #simulation #strategyAExecutionCostTruth td {padding:8px 7px}
+
+/* 40.6.451 — Execution Cost table containment.
+   The global Administrator table contract still carries min-width:790px.
+   Inside the two half-width Execution Cost cards that minimum made each table
+   physically wider than its card, so Kraken's last header crossed into OKX.
+   This local presentation owner keeps both tables inside their cards. */
+body #simulation #strategyAExecutionCostTruth .ect-card {
+  overflow:hidden;
+}
+body #simulation #strategyAExecutionCostTruth table {
+  width:100%;
+  min-width:0;
+  max-width:100%;
+  table-layout:fixed;
+}
+body #simulation #strategyAExecutionCostTruth th,
+body #simulation #strategyAExecutionCostTruth td {
+  min-width:0;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+body #simulation #strategyAExecutionCostTruth th:nth-child(1),
+body #simulation #strategyAExecutionCostTruth td:nth-child(1) {width:18%}
+body #simulation #strategyAExecutionCostTruth th:nth-child(2),
+body #simulation #strategyAExecutionCostTruth td:nth-child(2),
+body #simulation #strategyAExecutionCostTruth th:nth-child(3),
+body #simulation #strategyAExecutionCostTruth td:nth-child(3) {width:24%}
+body #simulation #strategyAExecutionCostTruth th:nth-child(4),
+body #simulation #strategyAExecutionCostTruth td:nth-child(4) {width:34%}
+
+/* Decompress the densest technical grids without hiding any evidence. */
+body #simulation #strategyAAfterCost .sam-grid,
+body #simulation #strategyADurableEvidence .de-grid,
+body #simulation #strategyADossier .sad-grid,
+body #simulation #strategyADossier .sad-truth-grid,
+body #simulation #strategyADossier .sad-g3-grid,
+body #simulation #strategyAReplaySandbox .sar-grid,
+body #simulation #strategyAPaperV2ProofBridge .sapv2-grid,
+body #simulation #tradusPaperObservability406068 .tpo-grid {
+  grid-template-columns:repeat(3,minmax(0,1fr));gap:9px
+}
+
+@media (max-width:1100px) {
+  body #simulation #strategyAGateSummary406406 .se406-gates,
+  body #simulation #strategyAAfterCost .sam-grid,
+  body #simulation #strategyADurableEvidence .de-grid,
+  body #simulation #strategyADossier .sad-grid,
+  body #simulation #strategyADossier .sad-truth-grid,
+  body #simulation #strategyADossier .sad-g3-grid,
+  body #simulation #strategyAReplaySandbox .sar-grid,
+  body #simulation #strategyACostWaitOutcomeAudit406429 .cwo-g,
+  body #simulation #strategyAPaperV2ProofBridge .sapv2-grid,
+  body #simulation #tradusPaperObservability406068 .tpo-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr))
+  }
+}
+@media (max-width:720px) {
+  body #simulation #strategyAGateSummary406406 .se406-gates,
+  body #simulation #strategyAAfterCost .sam-grid,
+  body #simulation #strategyADurableEvidence .de-grid,
+  body #simulation #strategyADossier .sad-grid,
+  body #simulation #strategyADossier .sad-truth-grid,
+  body #simulation #strategyADossier .sad-g3-grid,
+  body #simulation #strategyAReplaySandbox .sar-grid,
+  body #simulation #strategyACostWaitOutcomeAudit406429 .cwo-g,
+  body #simulation #strategyAOracleCostCalibrationAudit .occ-g,
+  body #simulation #strategyAPaperV2ProofBridge .sapv2-grid,
+  body #simulation #tradusPaperObservability406068 .tpo-grid {
+    grid-template-columns:1fr
+  }
+}

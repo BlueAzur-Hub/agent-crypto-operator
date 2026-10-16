@@ -1,0 +1,45 @@
+{
+  "schema": "agent_crypto_operator_runtime_contract_v1",
+  "build": "40.6.94",
+  "engine": "38.15.11",
+  "shared_runtime": "administrator",
+  "operator_view_request": "?view=intermediate",
+  "role_precedence": [
+    "valid local administrator session -> administrator",
+    "otherwise ?view=intermediate -> operator",
+    "otherwise -> public"
+  ],
+  "operator_role": "presentation_and_workspace_role",
+  "authorization_boundary": "unchanged",
+  "query_parameter_is_authorization": false,
+  "grants_administrator_session": false,
+  "grants_bridge_write": false,
+  "grants_files_write": false,
+  "grants_github_write": false,
+  "grants_wallet_access": false,
+  "grants_trading": false,
+  "grants_private_exchange_api": false,
+  "source_truth": {
+    "mode": "read_only",
+    "primary": "binance",
+    "controls": ["kraken", "coinbase", "okx"],
+    "eur_only": true,
+    "synthetic_usdt_to_eur_conversion": false
+  },
+  "protected": {
+    "market_core": "38.15.11",
+    "web_classic_modified": false,
+    "aether_modified": false,
+    "oracle_modified": false,
+    "lecture_technique_modified": false,
+    "strategy_a_modified": false
+  },
+  "invariants": [
+    "view is not authorization",
+    "operator does not become administrator through URL query alone",
+    "no real order endpoint",
+    "no private exchange authentication",
+    "no API key or wallet ownership",
+    "same Version Truth runtime as Administrator"
+  ]
+}

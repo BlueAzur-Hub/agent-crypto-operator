@@ -6,7 +6,7 @@ Parent: **40.6.15**
 Market Core: **38.15.11 protected**
 
 ### Correction
-Le propriétaire `js/strategy-a-after-cost-metrics-404298.js` ferme une ambiguïté du ledger After-Cost.
+Le propriétaire `js/strategy-a-after-cost-metrics.js` ferme une ambiguïté du ledger After-Cost.
 
 - une ligne complète inclut frais, impact, spread et slippage dans son identité comptable ;
 - si tous les coûts sont connus et que `net observé != brut référence - coûts`, la ligne est refusée avec `ACCOUNTING_IDENTITY_MISMATCH` ;

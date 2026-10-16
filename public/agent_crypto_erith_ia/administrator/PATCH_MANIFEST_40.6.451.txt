@@ -1,0 +1,40 @@
+AGENT-CRYPTO EXECUTION COST TABLE LAYOUT FIX — 40.6.451
+==========================================================
+
+PRESENTATION OWNER
+------------------
+strategy-human-readability.css
+  local override of global table min-width:790px
+  Execution Cost table min-width:0 / max-width:100%
+  table-layout:fixed
+  headers/cells wrap inside card
+  columns 18 / 24 / 24 / 34 %
+  card containment
+
+LOCAL CHROMIUM TEST
+-------------------
+EXECUTION_COST_TABLE_LAYOUT_TEST_40.6.451.json
+  viewport              1644 x 920
+  card width            745 px
+  baseline table        790 px
+  baseline overflow      68 px
+  candidate table       721 px
+  candidate overflow      0 px
+  result                PASS
+
+PROTECTED
+---------
+Execution Cost freshness .450
+Strategy readability .449
+HTML structure .448
+Strategy loader .446
+Backend .441
+Graphique .442
+Oracle .445
+Market Core 38.15.11
+Aether
+
+NO JAVASCRIPT CHANGE
+NO EXECUTION COST MATH CHANGE
+NO FRESHNESS CHANGE
+NO STRATEGY THRESHOLD CHANGE

@@ -1,0 +1,29 @@
+AGENT-CRYPTO 40.6.477 — LECTURE TECHNIQUE INITIAL IMAGE RECOVERY
+=====================================================================
+
+MODIFIED
+administrator/index.html
+administrator/runtime-shell.html
+administrator/js/post-boot-runtime-loader.js        (release identity only)
+administrator/js/strategy-a-audit-demand-loader.js  (release identity only)
+administrator/build.json
+administrator/RELEASE.md
+administrator/HANDOFF.md
+
+ADDED
+administrator/index-40.6.477.html
+administrator/HANDOFF_FINAL_40.6.477.md
+administrator/LECTURE_TECHNIQUE_INITIAL_IMAGE_TEST_40.6.477.json
+administrator/PATCH_MANIFEST_40.6.477.txt
+.github/workflows/agent-crypto-package-406477.yml
+
+FUNCTIONAL SCOPE
+Lecture Technique initial image readiness/recovery only.
+
+UNCHANGED
+Strategy A business logic / gates / PAPER
+Aether
+Redivider
+Market Core 38.15.11
+IndexedDB schema
+real orders

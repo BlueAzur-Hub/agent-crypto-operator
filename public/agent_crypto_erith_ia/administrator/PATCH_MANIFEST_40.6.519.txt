@@ -1,0 +1,39 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.519
+Release: ORACLE + AETHER USD PRESENTATION · MODEL UNCHANGED
+Parent: 40.6.518
+Market Core: 38.15.11 UNCHANGED
+
+CHANGED
+- administrator/js/oracle-aether-display-406519.js
+- administrator/js/aether.js : BTC presentation only
+- 40.6.519 version truth / archive / docs / guard / package
+
+USD RULE
+- Oracle visible price: priceUsd only
+- Aether BTC visible price: priceUsd only
+- no EUR→USD browser conversion
+- missing USD => unavailable
+- Oracle model/math/evidence stay EUR
+
+PROTECTED
+- app.js / Market Core 38.15.11
+- Currency Domain V2 40.6.517
+- Market + Fiche 40.6.518
+- Graphique
+- Lecture Technique
+- Bougies
+- Profondeur
+- Strategy A / Evidence / Cost Gate
+- Backend / Bridge
+
+RUNTIME
+- no new recurring timer
+- no MutationObserver
+- no storage write
+- no new market request
+- no wallet
+- no private API
+- no real order
+
+TERRAIN
+PENDING FIREFOX.

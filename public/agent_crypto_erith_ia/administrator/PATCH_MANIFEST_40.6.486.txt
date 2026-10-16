@@ -1,0 +1,52 @@
+AGENT-CRYPTO 40.6.486 — ORACLE EVIDENCE AUTOMATIC SEQUENTIAL COLD ARCHIVE
+
+ADDED
+.github/scripts/agent_crypto_oracle_evidence_auto_archive_test_406486.py
+.github/workflows/agent-crypto-package-406486.yml
+public/agent_crypto_erith_ia/administrator/js/oracle-evidence-auto-archive-queue.js
+public/agent_crypto_erith_ia/administrator/index-40.6.486.html
+public/agent_crypto_erith_ia/administrator/HANDOFF_FINAL_40.6.486.md
+public/agent_crypto_erith_ia/administrator/ORACLE_EVIDENCE_AUTOMATIC_SEQUENTIAL_COLD_ARCHIVE_40.6.486.md
+public/agent_crypto_erith_ia/administrator/ORACLE_EVIDENCE_AUTO_ARCHIVE_TEST_40.6.486.json
+public/agent_crypto_erith_ia/administrator/PATCH_MANIFEST_40.6.486.txt
+
+MODIFIED
+.github/workflows/agent-crypto-package-406481.yml
+public/agent_crypto_erith_ia/administrator/index.html
+public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+public/agent_crypto_erith_ia/administrator/js/strategy-a-audit-demand-loader.js
+public/agent_crypto_erith_ia/administrator/build.json
+public/agent_crypto_erith_ia/administrator/RELEASE.md
+public/agent_crypto_erith_ia/administrator/HANDOFF.md
+.github/workflows/agent-crypto-package-406482.yml
+.github/workflows/agent-crypto-package-406483.yml
+.github/workflows/agent-crypto-package-406484.yml
+.github/workflows/agent-crypto-package-406485.yml
+
+HISTORICAL WORKFLOW CHANGE
+40.6.481-.485 package workflows are manual-only archives.
+They no longer execute on later build/runtime commits.
+
+PRESERVED
+40.6.482 bundle contract
+40.6.485 / Bridge V1.9.13 transport
+Bridge port 8787
+Private Backend V1.4.2 / 8790 read-only
+Seven Vault / 8780
+Market Core 38.15.11
+Strategy A
+Oracle Math
+IndexedDB schema
+all local Evidence
+no real orders
+
+QUEUE SAFETY
+500 rows/chunk
+one chunk in flight
+VERIFIED before next
+fixed target at start
+pause after current chunk
+stop after current chunk
+resume from GitHub VERIFIED watermark
+no local delete
+no browser GitHub secret

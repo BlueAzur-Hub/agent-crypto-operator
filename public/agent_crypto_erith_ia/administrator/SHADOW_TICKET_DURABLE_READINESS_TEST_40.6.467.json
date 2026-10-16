@@ -1,0 +1,21 @@
+{
+  "schema": "agent_crypto_shadow_ticket_durable_readiness_test_v1",
+  "build": "40.6.467",
+  "pass": true,
+  "checks": {
+    "canonical_ticket_fallback_50": true,
+    "durable_loading_state": true,
+    "transient_zero_suppressed": true,
+    "durable_ready_event_refresh": true,
+    "strategy_core_event_refresh": true,
+    "postboot_event_refresh": true,
+    "no_threshold_change": true,
+    "no_storage_write": true,
+    "no_real_order": true
+  },
+  "invariants": {
+    "market_core": "38.15.11",
+    "legacy_cost_gate_pct": 0.8,
+    "paper_only": true
+  }
+}

@@ -1,0 +1,26 @@
+AGENT-CRYPTO 40.6.498 — MARKET MICROSCOPE · CANDLES CORE
+parent=40.6.497
+market_core=38.15.11 protected
+cumulative=40.6.497 QUOTE CURRENCY ARCHITECTURE
+
+ADDED
+- js/market-microscope-candles-406498.js
+- Ligne/Bougies isolated mode
+- OKX public candles on explicit action
+- OHLC + volume + MA5/10/20 + crosshair
+- 1m/5m/15m/1h/4h/1j
+
+TEST
+- node --check PASS
+- module self_test PASS
+- headless Chromium mock-data harness PASS
+- Firefox terrain PENDING
+
+UNCHANGED
+- native Prix/Base100 algorithm
+- Market Core 38.15.11
+- Strategy A / gates
+- Oracle / Math / Risk / PAPER
+- Bridge / Backend
+- storage schema
+- real orders / wallet / private API

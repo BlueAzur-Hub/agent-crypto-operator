@@ -1,0 +1,28 @@
+AGENT-CRYPTO 40.6.532 — PATCH MANIFEST
+Release: NEW LISTINGS · CANONICAL OWNER + NATIVE EXIT REPAIR
+Parent: 40.6.531
+Market Core: 38.15.11 (UNCHANGED)
+
+RUNTIME
+- public/agent_crypto_erith_ia/administrator/js/new-listings-native-category.js  [NEW CANONICAL OWNER]
+- public/agent_crypto_erith_ia/administrator/index.html
+- public/agent_crypto_erith_ia/administrator/index-40.6.532.html
+- public/agent_crypto_erith_ia/administrator/js/post-boot-runtime-loader.js
+- public/agent_crypto_erith_ia/administrator/views/atlas.html
+- public/agent_crypto_erith_ia/administrator/build.json
+
+REGRESSION GUARD
+- .github/scripts/agent_crypto_new_listings_guard.py
+- .github/workflows/agent-crypto-new-listings-guard.yml
+
+RELEASE DOCS
+- NEW_LISTINGS_CANONICAL_OWNER_40.6.532.md
+- PATCH_MANIFEST_40.6.532.txt
+- SEVEN_HANDOFF_40.6.532.md
+
+NOT LOADED
+- js/new-listings-native-category-406531.js (historical only)
+
+TERRAIN
+- 40.6.531: FAIL — native controls did not release external listing context
+- 40.6.532: PENDING FIREFOX

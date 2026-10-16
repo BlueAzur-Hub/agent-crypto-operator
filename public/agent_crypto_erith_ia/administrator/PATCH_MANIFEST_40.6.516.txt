@@ -1,0 +1,46 @@
+AGENT-CRYPTO PATCH MANIFEST — 40.6.516
+Release: ROLLBACK SAFE CHECKPOINT · RESTORE 40.6.513 RUNTIME
+Parent: 40.6.515
+Rollback target runtime: 40.6.513
+Market Core: 38.15.11 UNCHANGED
+
+RESTORED FROM 40.6.513
+- administrator/index.html ownership model
+- administrator/js/quote-currency-architecture-406497.js
+- administrator/js/post-boot-runtime-loader.js
+- administrator/views/atlas.html
+
+NOT LOADED
+- js/global-quote-router-406514.js
+- js/graph-owner-handshake-406515.js
+
+DISPLAY CONTRACT
+- default DISPLAY = EUR
+- EUR / USD selector remains present as in 40.6.513
+- no forced global USD propagation
+- EXEC = BTC-EUR
+- SETTLE = EUR
+
+PROTECTED
+- app.js human core
+- Market Core 38.15.11
+- Profondeur 40.6.513
+- Oracle
+- Aether
+- Lecture Technique
+- Strategy A business logic / gates
+- Backend / Bridge
+- market data snapshots
+- wallet / private API / real order
+
+RUNTIME
+- no new recurring timer
+- no MutationObserver
+- no new storage owner
+- no new market request
+
+PACKAGE
+PATCH ONLY.
+
+TERRAIN
+PENDING FIREFOX.

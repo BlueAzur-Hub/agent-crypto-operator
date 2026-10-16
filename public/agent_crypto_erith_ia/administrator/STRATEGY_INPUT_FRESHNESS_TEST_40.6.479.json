@@ -1,0 +1,17 @@
+{
+  "schema": "agent_crypto_strategy_input_freshness_test_v1",
+  "build": "40.6.479",
+  "pass_pending_workflow": false,
+  "cases": {
+    "module_self_test": "PASS",
+    "no_network_owner": "PASS",
+    "no_storage_write": "PASS",
+    "no_timer_or_observer": "PASS",
+    "direct_inputs_classified": "PASS",
+    "atlas_context_separated": "PASS",
+    "execution_cost_shadow_separated": "PASS",
+    "parent_478_terrain_proof_present": "PASS",
+    "atlas_upstream_403_diagnosis_present": "PASS"
+  },
+  "pass": true
+}

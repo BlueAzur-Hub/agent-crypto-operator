@@ -1,0 +1,53 @@
+AGENT-CRYPTO PATCH MANIFEST
+===========================
+Build: 40.6.417
+Release: AETHER CONTRACT FREEZE + NEWS EVENT CORE FOUNDATION
+Parent: 40.6.415
+Rollback: 40.6.415
+Market Core: 38.15.11
+
+PROTECTED / UNCHANGED
+---------------------
+js/aether.js
+Aether Attention Watch shell / geometry / F11
+Administrator Window Manager aether-watch
+Market Core 38.15.11
+Graphique / Math Core / Atlas CURRENT / Oracle / Lecture Technique
+Decision Board / Strategy / Paper / Gates / Storage / Shared Memory
+Google News FR routing and native-French contract 40.4.291
+
+FUNCTIONAL CHANGES
+------------------
+public/agent_crypto_erith_ia/tools/atlas_news_collector.py
+.github/workflows/atlas_news_collector.yml
+public/agent_crypto_erith_ia/administrator/index.html (version identity/cache tokens only)
+public/agent_crypto_erith_ia/administrator/build.json
+public/agent_crypto_erith_ia/administrator/RELEASE.md
+
+NEWS EVENT CORE
+---------------
+Schema: atlas_news_event_core_v1
+Producer build: 40.6.417
+Contract: one real event = one operator story; articles = confirmations.
+Same URL clustering: retained.
+Headline similarity threshold: retained at 0.46.
+Incident entity anchor clustering: added for security/bankruptcy inside 36 h.
+Article/source confirmations preserved.
+Hack VC ambiguous-entity guard added.
+Source tier added.
+Operator relevance added as a separate descriptive dimension.
+Market reaction remains not_measured; causal_claim=false.
+Production sort policy unchanged.
+
+CI
+--
+News workflow validates Event Core schema/build/article fields and rejects Hack VC→security false positives after collection.
+
+TERRAIN
+-------
+PENDING Firefox + News Sentinel refresh.
+Stop immediately if Aether Watch/menu/Window Manager differs from 40.6.415.
+
+ZIP DELIVERY NAME
+-----------------
+AGENT_CRYPTO_AETHER_NEWS_EVENT_CORE_40.6.417.zip

@@ -1,0 +1,66 @@
+{
+  "schema": "agent_crypto_operator_runtime_contract_v2",
+  "delivery_build": "40.6.99",
+  "runtime_build": "40.6.99",
+  "engine": "38.15.11",
+  "shared_runtime": "administrator",
+  "operator_entry": "../operator/index-40.6.99.html",
+  "runtime_entry": "../administrator/index-40.6.99.html?view=intermediate",
+  "operator_view_request": "?view=intermediate",
+  "role_precedence": [
+    "valid local administrator session -> administrator",
+    "otherwise ?view=intermediate -> operator",
+    "otherwise -> public"
+  ],
+  "operator_role": "presentation_and_workspace_role",
+  "authorization_boundary": "unchanged",
+  "query_parameter_is_authorization": false,
+  "bridge": {
+    "name": "Aether Operator Bridge",
+    "source": "js/aether-operator-bridge.js",
+    "loaded_by_shared_runtime": true,
+    "canonical_livecheck_owner_reused": true,
+    "cold_boot_attempts_max": 1,
+    "veille_escape_persistent_until_resume_or_reload": true,
+    "recurring_timer": false,
+    "observer": false,
+    "fetch_owner": false,
+    "storage_write": false,
+    "trading_state_write": false,
+    "market_algorithm_changed": false
+  },
+  "grants_administrator_session": false,
+  "grants_bridge_write": false,
+  "grants_files_write": false,
+  "grants_github_write": false,
+  "grants_wallet_access": false,
+  "grants_trading": false,
+  "grants_private_exchange_api": false,
+  "source_truth": {
+    "mode": "read_only",
+    "primary": "binance",
+    "controls": ["kraken", "coinbase", "okx"],
+    "eur_only": true,
+    "synthetic_usdt_to_eur_conversion": false
+  },
+  "protected": {
+    "market_core": "38.15.11",
+    "web_classic_modified": false,
+    "aether_modified": false,
+    "atlas_current_modified": false,
+    "oracle_modified": false,
+    "lecture_technique_modified": false,
+    "strategy_a_modified": false,
+    "administrator_runtime_modified": false
+  },
+  "invariants": [
+    "operator entry redirects to the immutable 40.6.99 Administrator runtime with view=intermediate",
+    "view is not authorization",
+    "operator does not become administrator through URL query alone",
+    "Aether Operator Bridge adds no network or trading authority",
+    "no real order endpoint",
+    "no private exchange authentication",
+    "no API key or wallet ownership",
+    "same Version Truth runtime as Administrator"
+  ]
+}

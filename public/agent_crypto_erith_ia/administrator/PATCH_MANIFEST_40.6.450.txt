@@ -1,0 +1,48 @@
+AGENT-CRYPTO EXECUTION COST SOURCE TRUTH FRESHNESS — 40.6.450
+================================================================
+
+FUNCTIONAL OWNER
+----------------
+js/strategy-a-execution-cost-truth.js
+  FRESH / STALE / UNKNOWN
+  existing Source Truth cache contract fallback : 15 s
+  quote / receive / calculate times separated
+  BTC/EUR identity validation before generic bid/ask aliases
+  booleans / blank strings rejected as numbers
+  Kraken preserved when OKX invalid -> PARTIAL
+
+WIRING ONLY
+-----------
+js/strategy-a-audit-demand-loader.js
+  behavior remains 40.6.446
+  execution-cost asset token only : 40.6.446 -> 40.6.450
+
+TEST RECEIPT
+------------
+EXECUTION_COST_FRESHNESS_TEST_40.6.450.json
+  fresh                              PASS
+  stale 2020                         PASS_REJECTED_STALE
+  missing timestamp                  PASS_REJECTED_UNKNOWN
+  future timestamp                   PASS_REJECTED_UNKNOWN
+  crossed bid/ask                    PASS_REJECTED
+  wrong currency                     PASS_REJECTED
+  boolean / blank numeric            PASS_REJECTED
+  numeric epoch string               PASS
+  stale OKX + valid Kraken           PASS_PARTIAL
+
+PROTECTED
+---------
+Backend .441
+Graphique .442
+Oracle .445
+Strategy loader behavior .446
+HTML structure .448
+Strategy readability .449
+Market Core 38.15.11
+Aether
+
+NO STRATEGY THRESHOLD CHANGE
+NO ORACLE MATH CHANGE
+NO PRIVATE BACKEND CHANGE
+NO STORAGE / TIMER / OBSERVER
+NO REAL ORDER

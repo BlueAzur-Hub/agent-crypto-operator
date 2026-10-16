@@ -40,7 +40,7 @@
       const script=document.createElement("script");
       script.src=def.src;
       script.async=true;
-      script.dataset.erithPeripheralDiagnostic40464=key;
+      script.dataset.erithPeripheralDiagnostic=key;
       script.addEventListener("load",()=>{
         if(!def.ready()){
           reject(new Error(`Diagnostic chargé sans API: ${key}`));

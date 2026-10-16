@@ -1,0 +1,44 @@
+AGENT-CRYPTO 40.6.494 — STRATEGY LEDGER LIVE MERGE TRUTH
+parent=40.6.493
+market_core=38.15.11 protected
+bridge=R18 / V1.9.13 unchanged
+backend=V1.4.3 unchanged
+
+CHANGED
+- administrator/index.html
+- administrator/index-40.6.494.html
+- administrator/build.json
+- administrator/js/strategy-a-g3-prospective-t0-capture.js
+- administrator/js/strategy-a-evidence-demand-loader.js
+- administrator/RELEASE.md
+- administrator/HANDOFF.md
+- administrator/STRATEGY_LEDGER_LIVE_MERGE_TRUTH_40.6.494.md
+- administrator/HANDOFF_FINAL_40.6.494.md
+- administrator/PATCH_MANIFEST_40.6.494.txt
+- .github/scripts/agent_crypto_strategy_ledger_live_merge_guard_406494.py
+- .github/workflows/agent-crypto-package-406494.yml
+- .github/workflows/agent-crypto-package-406493.yml
+
+FIX
+- merge generic historical/durable view + prospective overlay + exact live owner by cycle_id
+- exact live fields win on overlap
+- prospective-only evidence fields remain available
+- newest exact live cycle remains visible inside bounded 240-row facade
+- cache-pin repaired facade as 40.6.494
+
+TARGETED TERRAIN REGRESSION
+- clear LEDGER_ID_MISS in 40.6.478
+- clear false stale-reader state in 40.6.479
+
+UNCHANGED
+- Strategy A business logic / thresholds
+- Cost Gate
+- Oracle math
+- Risk
+- PAPER execution
+- 40.6.492 execution-cost measurement
+- 40.6.493 OKX micro-execution shadow lab
+- Backend / Bridge
+- Market Core 38.15.11
+- storage schema
+- real orders / wallet / API keys

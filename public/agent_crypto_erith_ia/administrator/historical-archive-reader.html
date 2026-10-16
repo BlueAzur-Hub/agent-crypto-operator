@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr"><head>
+<script src="../web/vault-data-router.js" data-erith-vault-data-router="true"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seven Heaven · Diagnostic historique R3</title>
+<style>
+:root{color-scheme:dark;font:14px/1.55 system-ui,sans-serif;color:#ebf4fc;background:#0c1625}*{box-sizing:border-box}
+body{max-width:1080px;margin:auto;padding:22px}header{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+h1{font-size:23px;margin:0}h2{font-size:17px;margin:0 0 12px}p{margin:8px 0 14px}.muted{color:#a8bccd}
+.panel{background:#142439;border:1px solid #36516a;border-radius:12px;padding:17px;margin:14px 0}
+button{background:#235c7b;color:#fff;padding:9px 15px;border:1px solid #83b4cd;border-radius:8px;cursor:pointer;font:inherit}button:disabled{opacity:.55}
+a{color:#b6ddf5}.metrics{display:flex;gap:10px;flex-wrap:wrap}.metric{min-width:138px;background:#102f48;padding:10px 14px;border:1px solid #4e6680;border-radius:9px}
+.metric b{font-size:22px;display:block}.metric small{color:#c1d0e0}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;border-bottom:1px solid #344a60;padding:8px}
+.scroll{overflow-x:auto}.good{color:#9adaab}.bad{color:#ffb3a8}.note{border-left:3px solid #72bac9;padding-left:12px}.fine{font-size:12px;color:#a9bbcc}
+.btc-hero{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 16px}
+.btc-hero .metric{flex:1;min-width:180px}
+#btc-year-lab{border-color:#5b9bb5}
+#btc-year-lab summary{cursor:pointer;font-size:16px;color:#e6f7ff}
+.legacy-group{margin:22px 0}
+.legacy-group>summary{cursor:pointer;padding:14px 17px;border:1px solid #36516a;background:#142439;border-radius:10px;color:#c6dceb;font-weight:600}
+.legacy-group[open]>summary{border-radius:10px 10px 0 0}
+.legacy-group>section,.legacy-group>.reader-foot{margin-left:10px;margin-right:10px}
+</style><link rel="stylesheet" href="./historical-f11.css"></head><body>
+<header><div><h1>Diagnostic historique · R3</h1><p class="muted">Ancien prototype Top 10 · 4 452 chandelles · lecture seule</p></div>
+<a href="./index.html">← Revenir à l'Interface</a></header>
+<p class="panel note">Ancien contrôle Top 10 uniquement (7/10, 4 452 chandelles). Pour les archives réelles Top 250 et BTC : <a href="./historical-vault.html">ouvrir le Coffre historique central</a>.</p>
+<section class="panel"><p class="note">Cet outil ne lit que des fichiers publics déjà présents sur GitHub Pages. Il ne modifie ni IndexedDB, ni localStorage, ni le Graphique, ni le Bridge. Aucun ordre et aucun envoi de données privées.</p>
+<button id="start">Vérifier l'archive</button> <button id="copy" disabled>Copier le rapport</button>
+<span id="status" class="muted" aria-live="polite">En attente</span></section>
+<section class="panel"><h2>Résultat et intégrité</h2><div class="metrics" id="metrics">Aucun test lancé.</div></section>
+<section class="panel"><h2>Chandelles vérifiées par actif</h2><p class="muted">Marché Binance Spot en <b>USDT</b>, différent des prix USD/EUR et des marchés OKX.</p><div class="scroll" id="table">En attente.</div></section>
+<div class="reader-foot"><section class="panel"><h2>Actifs non couverts</h2><div id="missing">En attente.</div></section>
+<section class="panel"><h2>Diagnostic</h2><div id="diagnostic">Aucune lecture effectuée.</div><p class="fine">Cette page vérifie l'archive R2. Elle ne la raccorde pas au Graphique. Les contrôles ne constituent pas un conseil de trading.</p></section></div>
+<script>
+(()=>{"use strict";
+const ROOT=new URL("../data/historical_archive_prototype/ohlcv_spot_pilot/",location.href);
+const PERIODS={"24h":{i:"5m",ms:300000,n:288},"7d":{i:"1h",ms:3600000,n:168},"30d":{i:"4h",ms:14400000,n:180}};
+const $=id=>document.getElementById(id);
+let report=null;
+function ensure(test,msg){if(!test)throw Error(msg)}
+function moment(ms){return new Date(ms).toLocaleString("fr-FR",{timeZone:"UTC"})+" UTC"}
+function makeTable(headers,rows){const t=document.createElement("table"),tr=document.createElement("tr");headers.forEach(x=>{const th=document.createElement("th");th.textContent=x;tr.append(th)});t.append(tr);
+rows.forEach(row=>{const tr=document.createElement("tr");row.forEach(x=>{const td=document.createElement("td");td.textContent=x==null?"—":String(x);tr.append(td)});t.append(tr)});return t}
+function metrics(items){const holder=document.createDocumentFragment();items.forEach(([label,value])=>{const div=document.createElement("div"),s=document.createElement("small"),b=document.createElement("b");div.className="metric";s.textContent=label;b.textContent=value;div.append(s,b);holder.append(div)});$("metrics").replaceChildren(holder)}
+async function load(url){ensure(url.origin===location.origin,"Origine distante refusée");
+const response=await fetch(url.href,{cache:"no-store",credentials:"omit",redirect:"error"});ensure(response.ok,"HTTP "+response.status+" : "+url.pathname);
+return response.arrayBuffer()}
+async function hash(buffer){ensure(crypto?.subtle,"SHA-256 non disponible (HTTPS requis)");
+const digest=await crypto.subtle.digest("SHA-256",buffer);return Array.from(new Uint8Array(digest),v=>v.toString(16).padStart(2,"0")).join("")}
+function validate(m,d){
+ensure(m.schema==="aerith.public.ohlcv.spot.top10.pilot.manifest.v1","Manifeste inconnu");
+ensure(d.schema==="aerith.public.ohlcv.spot.top10.pilot.v1"&&d.kind==="REAL_BINANCE_SPOT_OHLCV_NO_SYNTHETIC_BARS","Schéma d'archive inconnu");
+ensure(m.quote_asset==="USDT"&&d.quote_asset==="USDT","Devise de cotation incorrecte");
+ensure(d.basket_reference===m.reference&&d.captured_at===m.created_at,"Métadonnées incompatibles");
+ensure(Array.isArray(d.columns)&&d.columns.join(",")==="open_time_ms,open,high,low,close,base_volume,quote_volume,trade_count","Colonnes incorrectes");
+ensure(d.assets&&typeof d.assets==="object"&&!Array.isArray(d.assets),"Actifs absents");
+ensure(Array.isArray(d.unavailable),"Actifs non couverts absents");
+const ids=Object.keys(d.assets),captured=Date.parse(d.captured_at),rows=[],pairs=new Set();let count=0,series=0;
+ensure(Number.isFinite(captured),"Date de collecte invalide");
+ensure(ids.length===m.spot_pairs_qualified&&Array.isArray(m.complete_assets)&&ids.length===m.complete_assets.length,"Couverture différente du manifeste");
+for(const id of ids){const asset=d.assets[id];ensure(m.complete_assets.includes(id),"Actif absent du manifeste : "+id);
+ensure(asset.quote==="USDT"&&/^[A-Z0-9]+USDT$/.test(asset.pair),"Paire mal identifiée : "+id);
+ensure(!pairs.has(asset.pair),"Paire dupliquée : "+asset.pair);pairs.add(asset.pair);
+let nums=[],first=Infinity,last=0;
+for(const label of Object.keys(PERIODS)){const spec=PERIODS[label],set=asset.periods?.[label];
+ensure(set&&set.interval===spec.i&&Array.isArray(set.rows),"Période absente : "+id+"/"+label);
+ensure(d.periods?.[label]?.candles_expected===spec.n,"Contrat période incorrect");
+ensure(set.rows.length===spec.n,"Longueur incorrecte : "+id+"/"+label);
+ensure(set.rows[0][0]===set.start_open_ms&&set.rows.at(-1)[0]===set.last_open_ms,"Bornes temporelles incorrectes");
+for(let i=0;i<set.rows.length;i++){const r=set.rows[i];ensure(Array.isArray(r)&&r.length===8&&r.every(Number.isFinite),"Valeur OHLCV invalide : "+id+"/"+label+" #"+i);
+const [t,o,h,l,c,vol,q,orders]=r;
+ensure(Number.isInteger(t)&&Number.isInteger(orders),"Timestamp ou transactions incorrectes");
+ensure(t===set.start_open_ms+i*spec.ms,"Trou/doublon temporel : "+id+"/"+label+" #"+i);
+ensure(t+spec.ms<=captured,"Chandelle inachevée : "+id+"/"+label+" #"+i);
+ensure(l>0&&l<=Math.min(o,c)&&Math.max(o,c)<=h&&vol>=0&&q>=0&&orders>=0,"OHLCV incohérent : "+id+"/"+label+" #"+i);
+first=Math.min(first,t);last=Math.max(last,t)}
+nums.push(set.rows.length);count+=set.rows.length;series++}
+rows.push([id,asset.pair,...nums,moment(first),moment(last)])}
+ensure(new Set(m.complete_assets).size===ids.length,"Doublon dans le manifeste");
+ensure(new Set(d.unavailable.map(x=>x.id)).size===d.unavailable.length,"Actifs absents dupliqués");
+ensure(d.unavailable.every(x=>!ids.includes(x.id)),"Actif déclaré présent et absent");
+ensure(ids.length+d.unavailable.length===m.top10_reference_count,"Le Top 10 est incomplet");
+return {count,series,assets:ids.length,rows,missing:d.unavailable,reference:m.reference}}
+async function run(){
+$("start").disabled=true;$("copy").disabled=true;$("status").textContent="Vérification…";report=null;
+try{
+const manifest=JSON.parse(new TextDecoder().decode(await load(new URL("manifest.json",ROOT))));
+ensure(/^ohlcv_top10_\d{4}-\d\d-\d\d\.json\.gz$/.test(manifest.archive),"Nom d'archive non autorisé");
+ensure(/^[0-9a-f]{64}$/i.test(manifest.archive_sha256),"SHA-256 absent");
+const gz=await load(new URL(manifest.archive,ROOT));ensure(gz.byteLength===manifest.archive_gzip_bytes,"Taille compressée différente");
+const digest=await hash(gz);ensure(digest===manifest.archive_sha256.toLowerCase(),"SHA-256 discordant : archive rejetée");
+ensure(typeof DecompressionStream==="function","Ce Firefox ne sait pas décompresser gzip");
+const content=await new Response(new Blob([gz]).stream().pipeThrough(new DecompressionStream("gzip"))).text();
+ensure(new TextEncoder().encode(content).byteLength===manifest.archive_raw_bytes,"Taille décompressée différente");
+const result=validate(manifest,JSON.parse(content));
+$("table").replaceChildren(makeTable(["Actif","Paire","24 h","7 j","30 j","Premier point","Dernier point"],result.rows));
+$("missing").replaceChildren(makeTable(["Actif","Motif"],result.missing.map(x=>[x.id,x.reason])));
+metrics([["SHA-256","VALIDÉ"],["Actifs",result.assets+"/10"],["Séries",result.series],["Chandelles",result.count.toLocaleString("fr-FR")],["Gzip",gz.byteLength.toLocaleString("fr-FR")+" octets"]]);
+$("diagnostic").textContent="VALIDÉ : empreinte, décompression, contrat Top 10, paires, horodatages, clôture des chandelles, prix OHLC et volumes. Aucune écriture sur le navigateur.";
+$("diagnostic").className="good";$("status").textContent="Archive vérifiée";$("status").className="good";
+report={schema:"agent_crypto_historical_archive_reader_r3",verified_at:new Date().toISOString(),status:"VALIDATED",source:"Binance Spot",quote:"USDT",sha256:digest,reference:result.reference,assets:result.assets,series:result.series,candles:result.count,missing:result.missing,compressed_bytes:gz.byteLength};
+$("copy").disabled=false;
+}catch(e){$("status").textContent="Non validé";$("status").className="bad";$("diagnostic").textContent="ÉCHEC : "+String(e?.message||e)+". Aucune donnée n'est injectée dans le Graphique.";$("diagnostic").className="bad";
+metrics([["Vérification","ÉCHEC"]]);$("table").textContent="Non validé";$("missing").textContent="Non validé";
+}finally{$("start").disabled=false}}
+$("start").addEventListener("click",run);
+$("copy").addEventListener("click",()=>{if(report)navigator.clipboard.writeText(JSON.stringify(report,null,2)).then(()=>{$("status").textContent="Rapport copié"},e=>{$("status").textContent="Copie indisponible : "+String(e)})});
+})();
+</script></body></html>

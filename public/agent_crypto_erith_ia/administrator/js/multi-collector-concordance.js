@@ -407,22 +407,22 @@
     root.className = "atlas-shared-conclusion";
     root.setAttribute("aria-label", "Multi-Collector Concordance 39.7.0 · lecture seule");
     root.innerHTML = `
-      <summary id="atlasMultiCollectorSummary3970">Multi-Collector Concordance · lecture seule</summary>
+      <summary id="atlasMultiCollectorSummary">Multi-Collector Concordance · lecture seule</summary>
       <div id="${DETAILS_ID}">
         <div class="atlas-memory-ledger-35" aria-label="État multi-collecteur">
-          <article><span>Collecteurs connus</span><b id="multiCollectorKnown3970">0</b><small>Identités collector_id réellement présentes dans Market Memory.</small></article>
-          <article><span>Collecteurs récents</span><b id="multiCollectorRecent3970">0</b><small id="multiCollectorRecentDetail3970">Fenêtre de comparaison : 20 minutes.</small></article>
-          <article><span>Paires comparables</span><b id="multiCollectorPairs3970">0</b><small>Une paire = deux collector_id distincts et des observations temporellement/canoniquement comparables.</small></article>
-          <article><span>États partagés exacts</span><b id="multiCollectorShared3970">0</b><small>Même market_snapshot_id observé historiquement par au moins deux collecteurs.</small></article>
+          <article><span>Collecteurs connus</span><b id="multiCollectorKnown">0</b><small>Identités collector_id réellement présentes dans Market Memory.</small></article>
+          <article><span>Collecteurs récents</span><b id="multiCollectorRecent">0</b><small id="multiCollectorRecentDetail">Fenêtre de comparaison : 20 minutes.</small></article>
+          <article><span>Paires comparables</span><b id="multiCollectorPairs">0</b><small>Une paire = deux collector_id distincts et des observations temporellement/canoniquement comparables.</small></article>
+          <article><span>États partagés exacts</span><b id="multiCollectorShared">0</b><small>Même market_snapshot_id observé historiquement par au moins deux collecteurs.</small></article>
         </div>
         <div class="atlas-memory-intelligence-grid">
-          <article><span>Dernière paire</span><b id="multiCollectorPair3970">—</b><small id="multiCollectorPairDetail3970">Aucune paire récente.</small></article>
-          <article><span>Écart temporel</span><b id="multiCollectorSkew3970">—</b><small id="multiCollectorSkewDetail3970">Les observations proches restent distinctes.</small></article>
-          <article><span>Écart TOP5 moyen</span><b id="multiCollectorSpread3970">—</b><small id="multiCollectorSpreadDetail3970">Comparaison de prix EUR uniquement.</small></article>
-          <article><span>Indépendance source</span><b id="multiCollectorIndependence3970">—</b><small id="multiCollectorIndependenceDetail3970">Deux collecteurs ne prouvent jamais deux sources indépendantes.</small></article>
-          <article class="atlas-memory-confidence"><span>Concordance collecteurs</span><b id="multiCollectorStatus3970">INSUFFISANTE</b><small id="multiCollectorStatusDetail3970">Pas de score artificiel : verdict technique uniquement.</small></article>
+          <article><span>Dernière paire</span><b id="multiCollectorPair">—</b><small id="multiCollectorPairDetail">Aucune paire récente.</small></article>
+          <article><span>Écart temporel</span><b id="multiCollectorSkew">—</b><small id="multiCollectorSkewDetail">Les observations proches restent distinctes.</small></article>
+          <article><span>Écart TOP5 moyen</span><b id="multiCollectorSpread">—</b><small id="multiCollectorSpreadDetail">Comparaison de prix EUR uniquement.</small></article>
+          <article><span>Indépendance source</span><b id="multiCollectorIndependence">—</b><small id="multiCollectorIndependenceDetail">Deux collecteurs ne prouvent jamais deux sources indépendantes.</small></article>
+          <article class="atlas-memory-confidence"><span>Concordance collecteurs</span><b id="multiCollectorStatus">INSUFFISANTE</b><small id="multiCollectorStatusDetail">Pas de score artificiel : verdict technique uniquement.</small></article>
         </div>
-        <p id="multiCollectorContract3970">COLLECTOR CONCORDANCE ≠ SOURCE INDEPENDENCE ≠ MARKET PREDICTION</p>
+        <p id="multiCollectorContract">COLLECTOR CONCORDANCE ≠ SOURCE INDEPENDENCE ≠ MARKET PREDICTION</p>
       </div>`;
     grid.insertAdjacentElement("afterend", root);
 
@@ -444,34 +444,34 @@
     const data = derive();
     const pair = data.pair;
 
-    setText("atlasMultiCollectorSummary3970", `Multi-Collector Concordance · ${data.status.label}`);
-    setText("multiCollectorKnown3970", String(data.knownCollectors.length));
-    setText("multiCollectorRecent3970", `${data.recentCollectors.length} / ${data.knownCollectors.length}`);
-    setText("multiCollectorRecentDetail3970", `Fenêtre récente : ${data.recentWindowMinutes} min · une trace historique ne prouve pas qu’une machine est en ligne.`);
-    setText("multiCollectorPairs3970", String(data.pairCount));
-    setText("multiCollectorShared3970", String(data.historicalSharedSnapshots));
+    setText("atlasMultiCollectorSummary", `Multi-Collector Concordance · ${data.status.label}`);
+    setText("multiCollectorKnown", String(data.knownCollectors.length));
+    setText("multiCollectorRecent", `${data.recentCollectors.length} / ${data.knownCollectors.length}`);
+    setText("multiCollectorRecentDetail", `Fenêtre récente : ${data.recentWindowMinutes} min · une trace historique ne prouve pas qu’une machine est en ligne.`);
+    setText("multiCollectorPairs", String(data.pairCount));
+    setText("multiCollectorShared", String(data.historicalSharedSnapshots));
 
-    setText("multiCollectorPair3970", pairLabel(pair));
-    setText("multiCollectorPairDetail3970", pair
+    setText("multiCollectorPair", pairLabel(pair));
+    setText("multiCollectorPairDetail", pair
       ? `${pair.sameCanonical ? "Même snapshot canonique" : pair.sameFingerprint ? "Même fingerprint marché" : "Comparaison temporelle bornée"} · ${pair.comparableAssets}/5 actif(s) EUR comparable(s).`
       : "Aucune paire récente exploitable ; aucun rapprochement artificiel n’est créé.");
 
-    setText("multiCollectorSkew3970", pair ? duration(pair.timeSkewMs) : "—");
-    setText("multiCollectorSkewDetail3970", pair
+    setText("multiCollectorSkew", pair ? duration(pair.timeSkewMs) : "—");
+    setText("multiCollectorSkewDetail", pair
       ? `${localTime(pair.timeA)} ↔ ${localTime(pair.timeB)} · fenêtre max ${data.recentWindowMinutes} min.`
       : "Il faut deux collecteurs récents distincts et des timestamps compatibles.");
 
-    setText("multiCollectorSpread3970", pair ? pct(pair.meanSpread) : "—");
-    setText("multiCollectorSpreadDetail3970", pair
+    setText("multiCollectorSpread", pair ? pct(pair.meanSpread) : "—");
+    setText("multiCollectorSpreadDetail", pair
       ? `${assetLine(pair)} · max ${pct(pair.maxSpread)}.`
       : "BTC / ETH / BNB / XRP / SOL : prix EUR comparables insuffisants.");
 
-    setText("multiCollectorIndependence3970", pair?.independence?.label || "INCONNUE");
-    setText("multiCollectorIndependenceDetail3970", pair?.independence?.detail || "Aucune paire récente pour qualifier la provenance amont.");
+    setText("multiCollectorIndependence", pair?.independence?.label || "INCONNUE");
+    setText("multiCollectorIndependenceDetail", pair?.independence?.detail || "Aucune paire récente pour qualifier la provenance amont.");
 
-    setText("multiCollectorStatus3970", data.status.label);
-    setText("multiCollectorStatusDetail3970", `${data.status.detail} Ce verdict mesure la cohérence de collecte, jamais la probabilité d’un gain.`);
-    setText("multiCollectorContract3970", data.contract);
+    setText("multiCollectorStatus", data.status.label);
+    setText("multiCollectorStatusDetail", `${data.status.detail} Ce verdict mesure la cohérence de collecte, jamais la probabilité d’un gain.`);
+    setText("multiCollectorContract", data.contract);
 
     const existing = byId("atlasMemoryCollectors");
     const existingDetail = byId("atlasMemoryCollectorsDetail");
@@ -581,7 +581,7 @@
     new_timer: false,
     new_websocket: false
   });
-  globalThis.atlasMultiCollectorConcordance3970 = Object.freeze({ derive, render, markdown });
+  globalThis.atlasMultiCollectorConcordance = Object.freeze({ derive, render, markdown });
 
   queueMicrotask(() => { try { render(); } catch (_) {} });
 })();

@@ -30,7 +30,7 @@ The bridge:
 - No new durable storage.
 - Strategy A untouched.
 - `js/aether.js` untouched.
-- `aether-406051.css` untouched.
+- `aether.css` untouched.
 - Aether approved backplate untouched.
 - Technical Reading untouched.
 - Market Core remains 38.15.11.

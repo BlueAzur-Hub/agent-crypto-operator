@@ -1,0 +1,34 @@
+{
+  "schema": "agent_crypto_private_source_ready_fail_closed_test_v1",
+  "build": "40.6.456",
+  "owner": "js/views/private-source-demand-loader.js",
+  "pass": true,
+  "cases": {
+    "missing_source_owner": "EXPECTED_FALSE",
+    "freshness_guard_inactive": "EXPECTED_FALSE",
+    "downstream_timeout": "EXPECTED_FALSE",
+    "downstream_error": "EXPECTED_FALSE",
+    "all_ready": "EXPECTED_TRUE"
+  },
+  "invariants": {
+    "ready_event_only_on_success": true,
+    "next_explicit_demand_can_retry": true,
+    "source_truth_preserved_on_downstream_failure": true,
+    "post_boot_logic_changed": false,
+    "new_timer": false,
+    "new_observer": false,
+    "storage_write": false,
+    "new_network_owner": false,
+    "real_order": false,
+    "strategy_changed": false,
+    "oracle_changed": false,
+    "aether_changed": false,
+    "market_core_changed": false
+  },
+  "protected": {
+    "market_core": "38.15.11",
+    "execution_cost_auto": "40.6.455",
+    "strategy_cycle_event": "40.6.454",
+    "aether_source_readiness": "40.6.453"
+  }
+}
