@@ -1,0 +1,143 @@
+name: Publish Yoann Interface and Trader
+
+# One-time public deployment of the exact web build already copied to tradus.
+# Deliberately does not access malabaryo/tradus or any private GitHub token.
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/publish-yoann-interface-trader.yml"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-yoann-interface-trader.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download pinned public GitHub Pages build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/yoann-source"
+          gh run download 38880531406 \
+            --repo BlueAzur-Hub/erith-ia-memory \
+            --name github-pages \
+            --dir "$RUNNER_TEMP/yoann-source"
+          test -s "$RUNNER_TEMP/yoann-source/artifact.tar"
+
+      - name: Install exact web snapshot without changing Operator-specific files
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os
+          import pathlib
+          import tarfile
+
+          archive = pathlib.Path(os.environ["RUNNER_TEMP"]) / "yoann-source/artifact.tar"
+          root = pathlib.Path("public/agent_crypto_erith_ia").resolve()
+          prefix = "public/agent_crypto_erith_ia/"
+          # Keep the existing Yoann Operator/Bridge contract and its checks intact.
+          protected = {
+              "administrator/yohan.html",
+              "administrator/js/yohan-operator-profile.js",
+              "administrator/js/yohan-operator-bridge-client.js",
+          }
+          required = {
+              "administrator/index.html",
+              "trader/trading-desk.html",
+              "web/index.html",
+              "web/vault-data-router.js",
+          }
+          seen = set()
+          replaced = 0
+          protected_count = 0
+          with tarfile.open(archive, mode="r:") as t:
+              for entry in t:
+                  name = entry.name
+                  if name.startswith("./"):
+                      name = name[2:]
+                  if not name.startswith(prefix):
+                      continue
+                  relative = name[len(prefix):]
+                  if not relative or not entry.isfile():
+                      continue
+                  parts = pathlib.PurePosixPath(relative).parts
+                  if (".." in parts or "." in parts or
+                      any(part.startswith(".git") for part in parts) or
+                      pathlib.PurePosixPath(relative).is_absolute()):
+                      raise SystemExit("Unsafe archive member")
+                  if relative in seen:
+                      raise SystemExit("Duplicate archive path: " + relative)
+                  seen.add(relative)
+                  if relative.startswith("operator/") or relative in protected:
+                      protected_count += 1
+                      continue
+                  target = (root / relative).resolve()
+                  if not target.is_relative_to(root):
+                      raise SystemExit("Unsafe destination")
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  source_file = t.extractfile(entry)
+                  if source_file is None:
+                      raise SystemExit("Missing archive content")
+                  data = source_file.read()
+                  if relative == "web/vault-data-router.js":
+                      before = b'prefixBefore!==""&&prefixBefore!=="/erith-ia-memory"'
+                      after = b'prefixBefore!==""&&prefixBefore!=="/erith-ia-memory"&&prefixBefore!=="/agent-crypto-operator"'
+                      if data.count(before) != 1:
+                          raise SystemExit("Unexpected vault router source; refusing to deploy")
+                      data = data.replace(before, after, 1)
+                  target.write_bytes(data)
+                  replaced += 1
+
+          if len(seen) != 1291:
+              raise SystemExit("Unexpected source file count: " + str(len(seen)))
+          if not required.issubset(seen):
+              raise SystemExit("Required entry points absent: " + str(required-seen))
+          for relative in required:
+              if not (root / relative).is_file():
+                  raise SystemExit("Missing deployed entry point: " + relative)
+          pathlib.Path(".nojekyll").touch()
+          print(f"Artifact verified: {len(seen)} files; installed: {replaced}; protected: {protected_count}")
+          PY
+
+      - name: Validate prior Operator contract and published JavaScript
+        run: |
+          set -euo pipefail
+          python3 .github/scripts/yohan_operator_406509_guard.py
+          node --check public/agent_crypto_erith_ia/web/vault-data-router.js
+          test -s public/agent_crypto_erith_ia/trader/trading-desk.html
+          test -s public/agent_crypto_erith_ia/administrator/index.html
+
+      - name: Publish to main after validation
+        if: github.event_name != 'pull_request'
+        run: |
+          set -euo pipefail
+          git config user.name "ERITH.IA Publication Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- public/agent_crypto_erith_ia .nojekyll
+          if git diff --cached --quiet; then
+            echo "Public Interface and Trader already match the pinned build."
+            exit 0
+          fi
+          git commit -m "Publish Yoann Interface and Trader 40.6.640"
+          git push origin HEAD:main
+
+      - name: Request GitHub Pages rebuild of the published main
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds"
