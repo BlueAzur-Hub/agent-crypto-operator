@@ -1,0 +1,86 @@
+{
+  "schema": "agent_crypto_new_listings_identity_registry_v1",
+  "version": "40.6.546",
+  "owner": "GitHub static identity memory",
+  "identities": {
+    "concrete": {
+      "symbol": "CT",
+      "displayName": "Concrete",
+      "canonicalName": "Concrete",
+      "coingeckoId": "concrete",
+      "image": "./assets/crypto/new-listings/concrete.png",
+      "verified": true,
+      "verifiedAt": "2026-10-05",
+      "provenance": "CoinGecko logo captured and stored as real PNG GitHub asset",
+      "logoStorage": "github-binary-asset",
+      "logoSource": "CoinGecko",
+      "logoSourceCoinId": "concrete"
+    },
+    "magic-hash": {
+      "symbol": "MHA",
+      "displayName": "MAGNE.AI",
+      "canonicalName": "Magic Hash",
+      "coingeckoId": "magic-hash",
+      "image": "./assets/crypto/new-listings/magic-hash.png",
+      "verified": true,
+      "verifiedAt": "2026-10-05",
+      "provenance": "CoinGecko logo captured and stored as real PNG GitHub asset",
+      "logoStorage": "github-binary-asset",
+      "logoSource": "CoinGecko",
+      "logoSourceCoinId": "magic-hash"
+    },
+    "marscat-token": {
+      "symbol": "MCAT",
+      "displayName": "MarsCat",
+      "canonicalName": "Marscat Token",
+      "coingeckoId": "marscat-token",
+      "image": "./assets/crypto/new-listings/marscat-token.png",
+      "verified": true,
+      "verifiedAt": "2026-10-05",
+      "provenance": "CoinGecko logo captured and stored as real PNG GitHub asset",
+      "logoStorage": "github-binary-asset",
+      "logoSource": "CoinGecko",
+      "logoSourceCoinId": "marscat-token"
+    },
+    "pons": {
+      "symbol": "PONS",
+      "displayName": "Pons",
+      "canonicalName": "Pons",
+      "coingeckoId": "pons",
+      "image": "./assets/crypto/new-listings/pons.png",
+      "verified": true,
+      "verifiedAt": "2026-10-05",
+      "provenance": "CoinGecko logo captured and stored as real PNG GitHub asset",
+      "logoStorage": "github-binary-asset",
+      "logoSource": "CoinGecko",
+      "logoSourceCoinId": "pons"
+    },
+    "canopy": {
+      "symbol": "CNPY",
+      "displayName": "Canopy",
+      "canonicalName": "Canopy",
+      "coingeckoId": "canopy",
+      "image": "./assets/crypto/new-listings/canopy.png",
+      "verified": true,
+      "verifiedAt": "2026-10-05",
+      "provenance": "CoinGecko logo captured and stored as real PNG GitHub asset",
+      "logoStorage": "github-binary-asset",
+      "logoSource": "CoinGecko",
+      "logoSourceCoinId": "canopy"
+    },
+    "neosoul": {
+      "symbol": "DNA",
+      "displayName": "NeoSoul",
+      "canonicalName": "NeoSoul",
+      "coingeckoId": "neosoul",
+      "image": "./assets/crypto/new-listings/neosoul.png",
+      "verified": true,
+      "verifiedAt": "2026-10-16",
+      "provenance": "Verified CoinGecko id+symbol+BNB contract; original CoinGecko small PNG",
+      "logoStorage": "github-binary-asset",
+      "logoSource": "CoinGecko",
+      "logoSourceCoinId": "neosoul",
+      "contract": "0xA991F61940095AEA0724ef54077223B048c5CF7b"
+    }
+  }
+}

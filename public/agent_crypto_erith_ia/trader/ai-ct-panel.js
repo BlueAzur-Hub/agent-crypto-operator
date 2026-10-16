@@ -41,6 +41,37 @@ const sheet=document.createElement('link');sheet.rel='stylesheet';sheet.id='aiCt
 sheet.href=new URL('../trader/ai-ct-panel.css?scope=native',document.baseURI).href;
 document.head.appendChild(sheet);
 let latest=null;
+let ctOrderTicketLoading=null;
+function ensureCtOrderTicket(){
+ // Only when the operator explicitly requests Seven's account reading.
+ // A blocked script leaves the existing account analysis fully usable.
+ if(globalThis.AgentCryptoCtOrderTicket?.mount)return Promise.resolve(true);
+ if(ctOrderTicketLoading)return ctOrderTicketLoading;
+ function load(id,file,ready){
+  return new Promise(resolve=>{
+   const script=document.createElement('script');
+   script.id=id;
+   script.src=new URL('../trader/'+file,document.baseURI).href;
+   let settled=false;
+   const finish=success=>{
+    if(settled)return;
+    settled=true;
+    clearTimeout(deadline);
+    resolve(success&&Boolean(ready()));
+   };
+   const deadline=setTimeout(()=>finish(false),4500);
+   script.onload=()=>finish(true);
+   script.onerror=()=>finish(false);
+   document.head.append(script);
+  });
+ }
+ ctOrderTicketLoading=load('traderCtOrderDraftScript','ct-order-draft.js',
+   ()=>globalThis.AgentCryptoCtOrderDraft?.prepare)
+  .then(ready=>ready&&load('traderCtOrderTicketScript','ct-order-ticket.js',
+    ()=>globalThis.AgentCryptoCtOrderTicket?.mount))
+  .then(Boolean).catch(()=>false);
+ return ctOrderTicketLoading;
+}
 function state(message){status.textContent=message;}
 function field(label,value){const row=document.createElement('div');row.className='ai-ct-row';
  const a=document.createElement('span');a.textContent=label;
@@ -368,12 +399,14 @@ async function readForAccount(target){
  target.append(waiting);
  try{
   const doc=await loadCtEvidence();
+  await ensureCtOrderTicket();
   if(!target.isConnected||target.hidden||sessionStorage.getItem(ROLE_KEY)!=='owner')
    return false;
   const chart=model.publicCandles(globalThis.AgentCryptoMarketMicroscope?.snapshot?.()||null);
   const report=model.explain(doc,chart);
   target.replaceChildren();
   showEvidence(target,doc);
+  globalThis.AgentCryptoCtOrderTicket?.mount?.(target,doc);
   showFullReport(target,report);
   return true;
  }catch(e){

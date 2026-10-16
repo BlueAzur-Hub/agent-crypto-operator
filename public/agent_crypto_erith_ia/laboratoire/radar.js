@@ -57,6 +57,7 @@ function verifyBitget(inst,tickers,registry,now){
   const t=byTicker.get(symbol),last=Number(t?.lastPrice),turnover=Number(t?.turnover24h),change=Number(t?.price24hPcnt);
   if(!Number.isFinite(last)||last<=0||!Number.isFinite(turnover)||turnover<=0)continue;
   const identity=registry.get(base),value={symbol:base,name:identity?.displayName||base,
+   providerSymbol:symbol,provider:"bitget",
    venue:"Bitget Spot",pair:base+"/"+quote,quote,price:last,volume:turnover,
    ageDays:(now-start)/DAY,change24h:Number.isFinite(change)?change*100:null,
    image:identity?.image||'',identityProved:!!identity,status:identity?"IDENTITÉ VÉRIFIÉE":"IDENTITÉ À VÉRIFIER",source:"Bitget Spot launchTime+ticker"};

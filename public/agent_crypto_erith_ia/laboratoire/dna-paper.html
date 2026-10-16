@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ERITH.IA · Cas d'école NeoSoul DNA · PAPER 48h</title>
+<meta name="description" content="Laboratoire indépendant DNA/USDT Bitget Spot : trois simulations PAPER 10, 25, 100 USDC sur 48 heures avec carnets publics et frais hypothétiques.">
+<style>
+:root{color-scheme:dark;--bg:#07131d;--panel:#10222c;--edge:#305061;--ink:#e5f3f4;--muted:#a8c0c9;--accent:#8de4d5;--warn:#f2ca89}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top left,#183644 0,var(--bg) 52%);color:var(--ink);font:14px/1.55 system-ui,"Segoe UI",sans-serif}
+main{max-width:1060px;margin:auto;padding:clamp(16px,3vw,36px)}a{color:var(--accent)}
+header{display:flex;gap:16px;align-items:center;border-bottom:1px solid var(--edge);padding-bottom:22px}
+.logo{display:grid;place-items:center;width:65px;height:65px;flex:none;background:linear-gradient(155deg,#5fd8c5,#225474);border-radius:18px;color:#061f2c;font-size:22px;font-weight:950;letter-spacing:-.05em}
+h1{font-size:clamp(21px,3vw,34px);margin:0;line-height:1.2}h2{font-size:17px;margin:0 0 13px}p{margin:8px 0}.muted,small{color:var(--muted)}
+.kicker{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.top p{margin:6px 0}
+.state{border:1px solid var(--edge);background:#142e38;color:var(--accent);font-size:12px;font-weight:800;padding:6px 11px;border-radius:20px}
+.panel{background:linear-gradient(170deg,rgba(23,53,63,.88),rgba(10,28,39,.95));border:1px solid var(--edge);border-radius:14px;padding:18px;margin:18px 0;min-width:0}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+.stat{border:1px solid var(--edge);border-radius:10px;padding:11px;background:#0e222c;min-width:0}
+.stat strong{font-size:16px;display:block;overflow-wrap:anywhere}.stat span{font-size:11px;color:var(--muted);display:block}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.card{border:1px solid var(--edge);border-radius:12px;background:#102b35;padding:16px;min-width:0}
+.card h3{margin:0;font-size:14px}.amount{font-size:27px;font-weight:850;font-variant-numeric:tabular-nums;letter-spacing:-.03em;margin:7px 0}
+.tag{font-size:11px;font-weight:750;color:var(--warn);overflow-wrap:anywhere}
+.value{font-size:18px;font-weight:800;font-variant-numeric:tabular-nums}
+.positive{color:#9aeec0}.negative{color:#ffb0af}
+dl{display:grid;grid-template-columns:1fr auto;gap:5px;font-size:12px}dt{color:var(--muted)}dd{margin:0;text-align:right}
+table{border-collapse:collapse;min-width:670px;width:100%;font-size:12px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--edge)}th{color:var(--muted);font-size:11px}td{font-variant-numeric:tabular-nums}
+.scroll{overflow:auto;max-width:100%}.small{font-size:12px}.safety{color:var(--warn);font-weight:700}footer{padding:16px 0 30px;color:var(--muted);font-size:12px}
+@media(max-width:740px){.cards,.strip{grid-template-columns:1fr}header{align-items:flex-start}.logo{width:52px;height:52px;font-size:17px}}
+</style>
+</head>
+<body>
+<main>
+<header><div class="logo" aria-hidden="true">DNA</div><div>
+  <div class="kicker">ERITH.IA · Seven Heaven · Laboratoire</div>
+  <h1>NeoSoul · DNA <span class="muted">/ USDT</span></h1>
+  <p class="muted">Bitget Spot · étude prospective 48 heures · capital strictement fictif</p>
+</div></header>
+<div class="top panel">
+ <div><div class="kicker">État de l'expérience</div><p id="message">Chargement de l'archive publique…</p></div>
+ <span id="state" class="state">Source en attente</span>
+</div>
+<div class="strip" aria-label="Traçabilité">
+ <div class="stat"><span>Entrée T0 réellement observée</span><strong id="start">—</strong></div>
+ <div class="stat"><span>Fin au plus tôt (T0 + 48 h)</span><strong id="end">—</strong></div>
+ <div class="stat"><span>Dernier relevé public</span><strong id="last">—</strong></div>
+</div>
+<section class="panel">
+ <h2>Trois portefeuilles PAPER indépendants</h2>
+ <p class="muted">Aucun achat réel. Le montant en USDC est converti fictivement via le carnet USDC/USDT avant l'achat DNA/USDT.</p>
+ <div class="cards" id="cards" aria-live="polite">
+  <article class="card"><h3>Micro</h3><p class="amount">10 USDC</p><p>En attente du premier carnet vérifié.</p></article>
+  <article class="card"><h3>Intermédiaire</h3><p class="amount">25 USDC</p><p>En attente du premier carnet vérifié.</p></article>
+  <article class="card"><h3>Référence</h3><p class="amount">100 USDC</p><p>En attente du premier carnet vérifié.</p></article>
+ </div>
+</section>
+<section class="panel">
+ <h2>Marché réellement observé</h2>
+ <div class="strip">
+  <div class="stat"><span>DNA/USDT · bid / ask</span><strong id="book">—</strong></div>
+  <div class="stat"><span>Spread DNA/USDT</span><strong id="spread">—</strong></div>
+  <div class="stat"><span>Conversion USDC/USDT · bid / ask</span><strong id="fx">—</strong></div>
+ </div>
+ <p class="small muted">Les carnets sont des instantanés publics, pas des prix garantis d'exécution. Les frais (0,1 % par étape, quatre étapes) sont des hypothèses indépendantes des tarifs réels du compte.</p>
+</section>
+<section class="panel">
+ <h2>Journal d'observations</h2>
+ <div class="scroll"><table><thead><tr><th>Observation UTC</th><th>DNA bid</th><th>DNA ask</th><th>Spread</th><th>10 USDC</th><th>25 USDC</th><th>100 USDC</th></tr></thead><tbody id="history"><tr><td colspan="7">En attente de données publiques fiables</td></tr></tbody></table></div>
+</section>
+<section class="panel">
+ <h2>Protocole et limites</h2>
+ <p>La fenêtre de 48 heures commence <strong>au premier relevé valide</strong>, pas à l'heure théorique d'ouverture du listing. Les entrées sont prises au même instant. Si une taille dépasse la profondeur disponible, le scénario est <em>bloqué</em> : aucune opération fictive n'est reconstruite à un autre prix.</p>
+ <p class="safety">PAPER uniquement · pas de connexion OKX privée · aucune API d'ordre · aucune promesse de rendement.</p>
+ <p class="small"><a href="cas-ecole-neosoul-dna.md">Lire le dossier scientifique</a> · <a href="../data/trader_flux/dna_paper/state.json">Inspecter le JSON et sa provenance</a> · <a href="https://www.bitget.com/support/articles/12560603897627">Annonce officielle Bitget</a></p>
+</section>
+<footer>ERITH.IA · Archivage public minimal · Ne jamais confondre une étude PAPER et une opération exécutée.</footer>
+</main>
+<script>
+(()=>{'use strict';
+ const $=id=>document.getElementById(id);
+ const money=(n,d=4)=>typeof n==='number'&&Number.isFinite(n)?n.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:d}):'—';
+ const when=t=>t?new Date(t).toLocaleString('fr-FR',{timeZone:'Europe/Paris',dateStyle:'short',timeStyle:'short'}):'En attente';
+ const txt=(node,text)=>{node.textContent=text;return node};
+ const e=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
+ function render(s){
+  if(s.schema!=='erith.dna.paper.48h.v1'||s.executed_order!==false||s.market!=='DNAUSDT')throw Error('Archive DNA inconnue');
+  $('start').textContent=when(s.started_at);$('end').textContent=when(s.ends_not_before);$('last').textContent=when(s.last_observed_at);
+  const labels={waiting_source:'Source en attente',open:'Étude en cours',close_pending:'Clôture en attente de carnet',complete:'Étude terminée'};
+  $('state').textContent=labels[s.status]||'État non reconnu';
+  $('message').textContent=s.status==='waiting_source'?'Aucune position fictive ouverte avant une cotation et des règles Spot vérifiées.':
+   s.status==='complete'?'Clôture fondée sur le premier carnet validé après 48 heures.':
+   s.status==='close_pending'?'Les 48 heures sont écoulées, mais le carnet ne permet pas encore de chiffrer une sortie.':
+   'Entrée verrouillée, observation prospective en cours. Aucune transaction réelle.';
+  const last=s.observations?.at(-1);
+  $('book').textContent=last?money(last.dna_bid,7)+' / '+money(last.dna_ask,7):'—';
+  $('spread').textContent=last?money(last.dna_spread_pct,4)+' %':'—';
+  $('fx').textContent=last?money(last.fx_bid,7)+' / '+money(last.fx_ask,7):'—';
+  const box=$('cards');box.replaceChildren();
+  const display=[10,25,100];
+  for(const [i,capital] of display.entries()){
+   const scenario=s.scenarios?.[i],latest=last?.scenarios?.[i];
+   const card=e('article','card');
+   card.append(e('h3','',['Micro','Intermédiaire','Référence'][i]),e('p','amount',capital+' USDC'));
+   const tag=e('p','tag',!scenario?'En attente de T0':scenario.status==='blocked'?'Entrée fictive refusée':'Position PAPER observée');
+   card.append(tag);
+   if(scenario?.status==='open'){
+    const q=e('p','small','Quantité fictive : '+money(scenario.dna_quantity,8)+' DNA');card.append(q);
+    const v=e('p','value',latest?.status==='valued'?
+      money(latest.pnl_usdc)+' USDC ('+money(latest.pnl_pct,2)+' %)':'Résultat indisponible');
+    if(latest?.status==='valued')v.classList.add(latest.pnl_usdc>=0?'positive':'negative');
+    card.append(v);
+    card.append(e('p','small muted',latest?.status==='valued'?
+      'Liquidation théorique au carnet, après frais hypothétiques':
+      latest?.reason||'Carnet insuffisant'));
+   }else card.append(e('p','small muted',scenario?.reason||'Pas encore de prix de référence'));
+   box.append(card);
+  }
+  const history=$('history');history.replaceChildren();
+  const obs=(s.observations||[]).slice(-24).reverse();
+  if(!obs.length){const row=e('tr');const td=e('td','', 'Aucun relevé confirmé');td.colSpan=7;row.append(td);history.append(row);return;}
+  for(const point of obs){
+   const row=e('tr');
+   const fields=[point.observed_at,money(point.dna_bid,8),money(point.dna_ask,8),money(point.dna_spread_pct)+' %',
+    ...[0,1,2].map(i=>point.scenarios?.[i]?.status==='valued'?money(point.scenarios[i].pnl_usdc)+' USDC':
+     point.scenarios?.[i]?.status||'—')];
+   for(const v of fields)row.append(e('td','',v));
+   history.append(row);
+  }
+ }
+ fetch('../data/trader_flux/dna_paper/state.json?no_cache='+Date.now(),{cache:'no-store'})
+  .then(r=>{if(!r.ok)throw Error('HTTP '+r.status);return r.json()})
+  .then(render)
+  .catch(err=>{$('state').textContent='Archive inaccessible';$('message').textContent='Lecture seule indisponible : '+String(err.message||err);});
+})();
+</script>
+</body>
+</html>

@@ -62,11 +62,11 @@
     "window_manager_modified": false
   },
   "sources": {
-    "replay_owner": "js/strategy-a-replay-404290.js",
-    "paper_lifecycle_owner": "js/strategy-a-paper-lifecycle-404295.js",
-    "auto_lifecycle_bridge": "js/strategy-a-auto-lifecycle-bridge-404297.js",
-    "after_cost_owner": "js/strategy-a-after-cost-metrics-404298.js",
-    "safety_owner": "js/strategy-a-safety-certification-404299.js",
-    "evidence_owner": "js/strategy-a-evidence-dossier-404295.js"
+    "replay_owner": "js/strategy-a-replay.js",
+    "paper_lifecycle_owner": "js/strategy-a-paper-lifecycle.js",
+    "auto_lifecycle_bridge": "js/strategy-a-auto-lifecycle-bridge.js",
+    "after_cost_owner": "js/strategy-a-after-cost-metrics.js",
+    "safety_owner": "js/strategy-a-safety-certification.js",
+    "evidence_owner": "js/strategy-a-evidence-dossier.js"
   }
 }

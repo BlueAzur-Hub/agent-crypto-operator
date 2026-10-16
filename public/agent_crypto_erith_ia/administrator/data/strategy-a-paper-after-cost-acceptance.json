@@ -6,12 +6,12 @@
   "mode": "PAPER_ONLY",
   "owners": {
     "lifecycle": [
-      "AgentCryptoStrategyAPaperLifecycle404295",
-      "AgentCryptoStrategyAPaperLifecycle404291"
+      "AgentCryptoStrategyAPaperLifecycle",
+      "AgentCryptoStrategyAPaperLifecycle"
     ],
     "after_cost": [
-      "AgentCryptoStrategyAAfterCostMetrics404298",
-      "AgentCryptoStrategyAAfterCostMetrics404292"
+      "AgentCryptoStrategyAAfterCostMetrics",
+      "AgentCryptoStrategyAAfterCostMetrics"
     ]
   },
   "acceptance": {

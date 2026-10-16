@@ -4,7 +4,7 @@
   "parent_build": "40.6.65",
   "release": "MULTI-STRATEGY SHADOW LEDGER · STRATEGY A ↔ TRADUS",
   "source_event": "agentcrypto:tradus-shadow-observation",
-  "source_owner": "js/tradus-shadow-adapter-406066.js",
+  "source_owner": "js/tradus-shadow-adapter.js",
   "storage": {
     "kind": "sessionStorage",
     "key": "agent_crypto_multi_strategy_shadow_ledger_406066",

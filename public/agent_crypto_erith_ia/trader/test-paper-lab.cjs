@@ -1,0 +1,81 @@
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs'),path=require('node:path');
+const core=require('./trader-paper-lab-core.js');
+const now=Date.UTC(2025,2,11,12,10,0);
+const rows=(price,last=now-60000)=>Array.from({length:50},(_,i)=>[
+  last-(49-i)*60000,price*(1+(i-49)*0.00025)
+]);
+const raw=(asset='BTC',last=now-60000)=>{
+  const btc=asset==='BTC';
+  return {asset,instrument:btc?'BTC-USD':'CT-USDT',
+    currency:'USD',provider:btc?'coingecko':'okx',
+    source:btc?'CoinGecko market_chart USD · direct':
+      'OKX CT/USDT candles · USDT/USD CoinGecko',series:rows(btc?100:0.25,last)};
+};
+const b=core.qualify(raw(),now);
+assert.equal(b.ok,true);assert.equal(b.asset,'BTC');
+const ct=core.qualify(raw('CT'),now);
+assert.equal(ct.ok,true);
+const withSlash=core.qualify({...raw('CT'),instrument:'CT/USDT'},now);
+assert.equal(withSlash.ok,true,"Owner publishes CT/USDT with a slash");
+assert.equal(withSlash.instrument,"CT-USDT");
+assert.equal(withSlash.sourceIdentity,ct.sourceIdentity);
+assert.equal(core.qualify({...raw('CT'),instrument:'CT/USDC'},now).ok,false);
+assert.equal(core.qualify({...raw('CT'),instrument:'BTC/USDT'},now).ok,false);assert.equal(ct.provider,'okx');
+assert.equal(ct.points,50);
+assert.equal(core.qualify({...raw('CT'),instrument:'CT-USDC'},now).ok,false);
+assert.equal(core.qualify({...raw('CT'),source:'BTC/USD'},now).ok,false);
+assert.equal(core.qualify({...raw(),currency:'USDC'},now).ok,false);
+assert.equal(core.qualify({...raw(),provider:'binance'},now).ok,false);
+assert.equal(core.qualify(raw('BTC',now-16*60000),now).ok,false);
+assert.equal(core.qualify(raw('BTC',now+60000),now).ok,false);
+const duplicate=raw();duplicate.series[25][0]=duplicate.series[24][0];
+assert.equal(core.qualify(duplicate,now).ok,false);
+const bad=raw();bad.series[23][1]=0;
+assert.equal(core.qualify(bad,now).ok,false);
+assert.equal(core.qualify({...raw(),series:[[now-60000,100]]},now).ok,false);
+const costs={capital:5,price:100,entryFeePct:0.2,exitFeePct:0.2,
+  spreadPct:0.1,slippagePct:0.1};
+const plan=core.assess(costs);
+assert.equal(plan.ok,true);
+assert.equal(plan.scenarios.length,3);
+assert(plan.breakEvenMovePct>0);
+assert(plan.scenarios[0].profit<plan.scenarios[1].profit);
+assert(plan.scenarios[1].profit<0);
+assert(plan.scenarios[2].profit>0);
+assert(Math.abs(plan.simulate(plan.breakEvenMovePct).profit)<1e-10);
+assert.equal(plan.realOrders,false);
+assert.equal(core.assess({...costs,capital:0}).ok,false);
+assert.equal(core.assess({...costs,entryFeePct:-1}).ok,false);
+assert.equal(core.assess({...costs,spreadPct:99}).ok,false);
+const next=core.qualify(raw('BTC',now+4*60000),now+5*60000);
+const outcome=core.prospective(b,next,costs);
+assert.equal(outcome.ok,true);assert.equal(outcome.paper,true);
+assert.equal(outcome.actualExecution,false);
+assert(outcome.exitAt>outcome.entryAt);
+assert.equal(core.prospective(b,b,costs).ok,false);
+assert.equal(core.prospective(b,ct,costs).ok,false);
+const switched={...next,sourceIdentity:'okx|BTC-USD|USD'};
+assert.equal(core.prospective(b,switched,costs).ok,false);
+const root=path.join(__dirname);
+const view=fs.readFileSync(path.join(root,'trader-paper-lab-view.js'),'utf8');
+const mirror=fs.readFileSync(path.join(root,'trader-runtime-mirror.js'),'utf8');
+assert(mirror.includes('trader-paper-lab-core.js'));
+assert(mirror.includes('trader-paper-lab-view.js'));
+assert(view.includes('AgentCryptoNewListingsNativeCategory?.mathSeriesSnapshot'));
+assert(view.includes('state?.dataBroker?.chart'));
+assert(view.includes('LABORATOIRE PAPER'));
+assert(view.includes('Démarrer Auto PAPER'));
+assert(view.includes('agent-crypto:new-listing-line-ready'));
+assert(view.includes('AUTO_LIMIT=20'));
+assert(view.includes('AUTO_GAP_MS=5*60*1000'));
+assert(view.includes('if(!automatic||automaticCount>=AUTO_LIMIT)return null'));
+const listing=fs.readFileSync(path.resolve(root,'../administrator/js/new-listings-native-category.js'),'utf8');
+assert(listing.includes('upper(spec.quote)!==upper(currency)'),'Provenance required even if USDT/USD rate is exactly one');
+assert(!view.includes('setInterval('));
+assert(!view.includes('localStorage.'));
+assert(!view.includes('/okx/order'));
+assert(!view.includes('/trade/order'));
+assert.equal(core.storage,false);assert.equal(core.fetch,false);
+console.log('BTC/CT PAPER core: source, fees, breakeven, prospective validation, isolated Trader PASS');

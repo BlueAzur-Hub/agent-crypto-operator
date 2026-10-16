@@ -33,7 +33,7 @@
     "credentials": false,
     "wallet": false,
     "observation_event": "agentcrypto:tradus-shadow-observation",
-    "shadow_ledger": "js/tradus-shadow-ledger-406066.js",
+    "shadow_ledger": "js/tradus-shadow-ledger.js",
     "session_storage_only": true
   },
   "protected": {
