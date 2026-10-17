@@ -28,6 +28,7 @@ h1{font-size:clamp(21px,3vw,34px);margin:0;line-height:1.2}h2{font-size:17px;mar
 .positive{color:#9aeec0}.negative{color:#ffb0af}
 dl{display:grid;grid-template-columns:1fr auto;gap:5px;font-size:12px}dt{color:var(--muted)}dd{margin:0;text-align:right}
 table{border-collapse:collapse;min-width:670px;width:100%;font-size:12px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--edge)}th{color:var(--muted);font-size:11px}td{font-variant-numeric:tabular-nums}
+.decision-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.decision-grid .stat strong{font-size:14px}@media(max-width:740px){.decision-grid{grid-template-columns:1fr}}
 .scroll{overflow:auto;max-width:100%}.small{font-size:12px}.safety{color:var(--warn);font-weight:700}footer{padding:16px 0 30px;color:var(--muted);font-size:12px}
 @media(max-width:740px){.cards,.strip{grid-template-columns:1fr}header{align-items:flex-start}.logo{width:52px;height:52px;font-size:17px}}
 </style>
@@ -70,6 +71,16 @@ table{border-collapse:collapse;min-width:670px;width:100%;font-size:12px}th,td{t
  <h2>Journal d'observations</h2>
  <div class="scroll"><table><thead><tr><th>Observation UTC</th><th>DNA bid</th><th>DNA ask</th><th>Spread</th><th>10 USDC</th><th>25 USDC</th><th>100 USDC</th></tr></thead><tbody id="history"><tr><td colspan="7">En attente de données publiques fiables</td></tr></tbody></table></div>
 </section>
+<section class="panel" aria-labelledby="dna-decision-title">
+ <h2 id="dna-decision-title">Décisions PAPER · quand entrer, quand sortir ?</h2>
+ <p class="small muted">Lecture rétrospective des relevés Bitget Spot DNA/USDT. Un relevé toutes les quelques heures ne constitue ni une exécution, ni une bougie continue. L'instrument Futures OKX n'est pas simulé.</p>
+ <div class="decision-grid" aria-live="polite">
+  <div class="stat"><span>Entrée contrôlée</span><strong id="decision-entry">En attente des relevés</strong></div>
+  <div class="stat"><span>Premier seuil observé · 10 USDC fictifs</span><strong id="decision-first">—</strong></div>
+  <div class="stat"><span>Meilleur puis dernier P&amp;L · 10 USDC fictifs</span><strong id="decision-peak">—</strong></div>
+ </div>
+ <p id="decision-limits" class="small safety">Les alertes −3 % et +1 % sont des repères d'étude, pas des stops ni des take-profits exécutés. Aucun ordre.</p>
+</section>
 <section class="panel">
  <h2>Protocole et limites</h2>
  <p>La fenêtre de 48 heures commence <strong>au premier relevé valide</strong>, pas à l'heure théorique d'ouverture du listing. Les entrées sont prises au même instant. Si une taille dépasse la profondeur disponible, le scénario est <em>bloqué</em> : aucune opération fictive n'est reconstruite à un autre prix.</p>
@@ -78,6 +89,7 @@ table{border-collapse:collapse;min-width:670px;width:100%;font-size:12px}th,td{t
 </section>
 <footer>ERITH.IA · Archivage public minimal · Ne jamais confondre une étude PAPER et une opération exécutée.</footer>
 </main>
+<script src="dna-decision-review.js"></script>
 <script>
 (()=>{'use strict';
  const $=id=>document.getElementById(id);
@@ -95,6 +107,26 @@ table{border-collapse:collapse;min-width:670px;width:100%;font-size:12px}th,td{t
    s.status==='close_pending'?'Les 48 heures sont écoulées, mais le carnet ne permet pas encore de chiffrer une sortie.':
    'Entrée verrouillée, observation prospective en cours. Aucune transaction réelle.';
   const last=s.observations?.at(-1);
+  try {
+   const review=window.ErithDnaReview.study(s),micro=review.portfolios[0],
+    threshold=micro.first_threshold;
+   $('decision-entry').textContent=review.candidate_spot_timestamps.length
+    ?'Tendance Spot à examiner · pas de signal Futures':'Aucune entrée démontrée';
+   $('decision-first').textContent=threshold
+    ?(threshold.kind==='loss'?'Alerte perte':'Alerte gain')+' · '+when(threshold.at)+' · '+money(threshold.observed_pct,2)+' %'
+    :'Aucun seuil franchi sur les relevés';
+   $('decision-peak').textContent=micro.best&&micro.last!==null
+    ?money(micro.best.pnl_pct,2)+' % / '+money(micro.last,2)+' %':'Non disponible';
+   $('decision-limits').textContent='STOP −3 % / TP +1 % : simples alertes observées a posteriori. '
+    +'Le prix entre deux carnets et le prix de sortie réel sont inconnus. '
+    +'Ni volume intrapériode, ni simulation du contrat OKX, ni ordre.';
+  } catch(error) {
+   $('decision-entry').textContent='Étude suspendue';
+   $('decision-first').textContent='Vérification échouée';
+   $('decision-peak').textContent='—';
+   $('decision-limits').textContent='Sécurité : '+String(error.message||error);
+  }
+
   $('book').textContent=last?money(last.dna_bid,7)+' / '+money(last.dna_ask,7):'—';
   $('spread').textContent=last?money(last.dna_spread_pct,4)+' %':'—';
   $('fx').textContent=last?money(last.fx_bid,7)+' / '+money(last.fx_ask,7):'—';
