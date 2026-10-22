@@ -195,6 +195,28 @@ function mount(){
     '<p>Auto PAPER (facultatif) : écoute uniquement les nouveaux événements du graphique BTC ou CT déjà sélectionné, sans relancer les marchés. Mesure prospective après ≥5 min de nouvelle donnée, avec un maximum de 20 observations ; s’arrête lors du rechargement ou de la fermeture. Les deux actifs ne sont pas suivis simultanément sans séries réellement publiées. Aucun fetch nouveau, aucun ordre OKX, aucune sauvegarde automatique, aucune promotion des gates Strategy A.</p></div>'
   ].join("");
   zone.appendChild(node);
+
+  // Operator Yoann: the same *handoff slot* as MASTER, not a Docker site,
+  // duplicated Trader, bridge, account connection or an automatic merge.
+  if(!document.getElementById("traderYoannOperatorSection")){
+    const operator=document.createElement("details");
+    operator.id="traderYoannOperatorSection";
+    operator.open=true;
+    operator.style.cssText="grid-column:1/-1;display:block;margin:16px 0 28px;padding:12px 16px;border:1px solid #336476;border-radius:12px;background:#0b2232;color:#dfedf3;font:13px/1.5 system-ui,sans-serif";
+    operator.innerHTML=[
+      '<summary style="cursor:pointer;font-weight:750;color:#efcf88">OPERATOR · YOANN — Développements indépendants et passerelle future</summary>',
+      '<div style="padding:12px 4px 4px">',
+      '<p>Emplacement de liaison dans le Trader Operator existant : <strong>pas un second Trader</strong> et <strong>pas un atelier Docker</strong>. Yoann développe et conserve ses travaux dans son dépôt privé. L’Administrator MASTER ne récupère que des modules compatibles, après revue et tests.</p>',
+      '<p><strong>Développement source :</strong> <a href="https://github.com/malabaryo/tradus/tree/main/public/agent_crypto_erith_ia" target="_blank" rel="noopener noreferrer">malabaryo/tradus · privé ↗</a></p>',
+      '<p><strong>Code Trader Yoann :</strong> <a href="https://github.com/malabaryo/tradus/blob/main/public/agent_crypto_erith_ia/trader/trading-desk.html" target="_blank" rel="noopener noreferrer">Trader dans le privé ↗</a></p>',
+      '<p><strong>Rendu public Operator :</strong> <a href="https://blueazur-hub.github.io/agent-crypto-operator/public/agent_crypto_erith_ia/trader/trading-desk.html" target="_blank" rel="noopener noreferrer">Ouvrir son Trader ↗</a></p>',
+      '<p><strong>Passerelle MASTER :</strong> <a href="https://github.com/BlueAzur-Hub/erith-ia-memory/tree/main/public/agent_crypto_erith_ia/trader" target="_blank" rel="noopener noreferrer">Trader Administrator ↗</a></p>',
+      '<p><strong>Règles :</strong> pas de copie de comptes, clés, Bridge, données privées ou privilèges Administrator. Jamais de fusion automatique. Ne transférer vers le dépôt public que les dépendances Web nécessaires, après inventaire des liens et validation ; ne rien supprimer du privé de Yoann.</p>',
+      '<p>Les travaux compatibles seront examinés ici en lecture seule puis proposés au MASTER par PR contrôlée. Aucun ordre et aucun appel au PC d’un autre utilisateur.</p>',
+      '</div>'
+    ].join("");
+    node.insertAdjacentElement("afterend",operator);
+  }
   for(const [key,fn] of [["capture",take],["simulate",simulate],["begin",begin],["finish",finish]])
     qs(key)?.addEventListener("click",fn);
   qs("auto")?.addEventListener("click",()=>setAutomatic(!automatic));
