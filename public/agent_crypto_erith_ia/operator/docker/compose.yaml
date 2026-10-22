@@ -1,0 +1,18 @@
+services:
+  yoann-paper-workspace:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "127.0.0.1:8097:8080"
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 64
+    mem_limit: 128m
+    restart: "no"
+    # No volumes, no mounted project, no Docker socket, no OKX credentials.
