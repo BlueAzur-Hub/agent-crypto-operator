@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'">
+<meta name="operator-role" content="operator">
+<meta name="operator-account-data" content="none">
+<title>ERITH.IA · Operator Yoann · Laboratoire personnel</title>
+<link rel="stylesheet" href="./yoann-workspace.css">
+<script src="./yoann-workspace.js" defer></script>
+</head>
+<body>
+<header class="head"><div><p class="eyebrow">ERITH.IA · OPERATOR · YOANN</p><h1>Laboratoire personnel <span>Operator</span></h1><p>Expérimenter et préparer ses développements sans toucher à Administrator ni au compte OKX.</p></div>
+<nav aria-label="Parcours"><a href="../administrator/yohan.html">Interface Yoann</a><a href="../trader/trading-desk.html">Trader Operator</a><a href="https://github.com/malabaryo/tradus/tree/main/public/agent_crypto_erith_ia/operator" target="_blank" rel="noopener noreferrer">Sources privées ↗</a></nav></header>
+<main>
+<section class="intro">
+<div class="status"><span class="pill">PAPER · LECTURE SEULE</span><span class="pill">AUCUNE CLÉ · AUCUN ORDRE</span><span class="pill">COMPTES SÉPARÉS</span></div>
+<p>Ce laboratoire appartient à l'édition de Yoann. Il présente un <strong>instantané daté</strong> des recherches publiques Seven Heaven et quatre ateliers indépendants pour ses futurs modules. La publication web n'est pas une connexion à OKX, ni une copie du Bridge Administrator.</p>
+<div class="stats"><div><strong id="proof-hours">—</strong><small>observations historiques actif-heure</small></div><div><strong id="proof-buy">—</strong><small>séquences acheteuses 3 h</small></div><div><strong id="proof-sell">—</strong><small>séquences vendeuses 3 h</small></div><div><strong id="proof-time">—</strong><small>date de référence</small></div></div>
+<p id="proof-status" role="status" aria-live="polite">Lecture du snapshot local en cours…</p>
+<button type="button" id="reload-proofs">Relire le snapshot intégré</button>
+</section>
+<h2>Les quatre bacs à sable de Yoann</h2>
+<div class="modules">
+<details open><summary><span>01</span> Sandbox Market · Observer</summary><div class="module"><p>Volumes, fréquence des échanges, spreads et résistances relatives. Comparer les sources sans convertir tacitement USDT, USDC et EUR.</p><p id="market-evidence">Archives publiques en lecture seule ; source non chargée.</p><a class="link" id="market-source" href="https://github.com/BlueAzur-Hub/erith-ia-memory" target="_blank" rel="noopener noreferrer">Rapport OKX horaire ↗</a></div></details>
+<details><summary><span>02</span> Sandbox Stratégie · Analyser</summary><div class="module"><p>Radar20 : 20 marchés, transactions natives agrégées par heure, épisodes de trois heures. Les tests rétrospectifs ne sont pas des recommandations d'achat.</p><p id="strategy-evidence">Aucune conclusion certifiée.</p><a class="link" id="strategy-source" href="https://github.com/BlueAzur-Hub/erith-ia-memory" target="_blank" rel="noopener noreferrer">Voir les archives et limites ↗</a></div></details>
+<details><summary><span>03</span> Sandbox Ledger · Simuler</summary><div class="module"><p>Calcul local fictif : aucun solde OKX, aucun enregistrement ni carnet live. Le montant saisi représente un budget expérimental indépendant.</p><form id="ledger-form">
+<label>Capital fictif (USDC)<input name="capital" type="number" min="1" max="100000" step="0.01" value="10" required></label>
+<label>Évolution de prix supposée (%)<input name="move" type="number" min="-99" max="1000" step="0.1" value="1" required></label>
+<label>Frais par côté (%)<input name="fee" type="number" min="0" max="10" step="0.01" value="0.10" required></label>
+<label>Coût supplémentaire estimé (%)<input name="friction" type="number" min="0" max="20" step="0.01" value="0.30" required></label>
+<button type="submit">Calculer en PAPER</button>
+</form><output id="ledger-result" role="status" aria-live="polite">Aucune simulation calculée.</output>
+<p class="notice">Le coût supplémentaire est une approximation (spread/slippage), pas une mesure d'exécution. Minimums de lot, taxe et disponibilité du carnet non certifiés.</p></div></details>
+<details><summary><span>04</span> Sandbox Microtransactions · Préparer</summary><div class="module"><p>Tester les hypothèses de petites tailles, la répétition, les minimums d'ordre et l'impossibilité de revendre un reliquat après frais. Sans permission d'ordre, bot ni API privée.</p>
+<p>Trois statuts à documenter à chaque recherche : <strong>identité et paire vérifiées</strong>, <strong>liquidité et minimums vérifiés</strong>, <strong>vente nette faisable</strong>. Sinon : <strong>entrée refusée</strong>.</p>
+<p id="capital-evidence">Journal Seven Capital non chargé.</p><a class="link" id="capital-source" href="https://github.com/BlueAzur-Hub/erith-ia-memory" target="_blank" rel="noopener noreferrer">Cohorte PAPER datée ↗</a></div></details>
+</div>
+<section class="future"><h2>Développements futurs réservés à Yoann</h2><p>Cette zone est volontairement dédiée à ses expériences : comparaison multi-CEX, étude horaire 1m/5m lorsque les sources sont disponibles, microtransactions PAPER, rapports et futures propositions.</p>
+<p>Travail privé : <code>malabaryo/tradus/public/agent_crypto_erith_ia/operator/</code>. Publication web séparée : <code>BlueAzur-Hub/agent-crypto-operator</code>. Aucun mécanisme de déploiement automatique sans autorisation explicite.</p>
+<a href="https://github.com/malabaryo/tradus/issues" target="_blank" rel="noopener noreferrer">Ouvrir les travaux de Yoann ↗</a></section>
+</main>
+<footer>ERITH.IA · Operator Yoann · isolé et autonome. Pas de droits Owner ni de comptes d'autrui. Aucun ordre financier.</footer>
+</body></html>

@@ -1,0 +1,42 @@
+name: Operator Yoann · Docker PAPER laboratory
+on:
+  pull_request:
+    paths:
+      - 'public/agent_crypto_erith_ia/operator/yoann-workspace.*'
+      - 'public/agent_crypto_erith_ia/operator/research-snapshot.json'
+      - 'public/agent_crypto_erith_ia/operator/test-yoann-workspace.cjs'
+      - 'public/agent_crypto_erith_ia/operator/docker/**'
+      - '.github/workflows/operator-yoann-workspace.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'public/agent_crypto_erith_ia/operator/yoann-workspace.*'
+      - 'public/agent_crypto_erith_ia/operator/research-snapshot.json'
+      - 'public/agent_crypto_erith_ia/operator/test-yoann-workspace.cjs'
+      - 'public/agent_crypto_erith_ia/operator/docker/**'
+      - '.github/workflows/operator-yoann-workspace.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  paper-laboratory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify contract, source truth and calculation
+        run: |
+          set -euo pipefail
+          ROOT=public/agent_crypto_erith_ia/operator
+          node --check "$ROOT/yoann-workspace.js"
+          node --test "$ROOT/test-yoann-workspace.cjs"
+          node -e 'const fs=require("fs"); const d=JSON.parse(fs.readFileSync("public/agent_crypto_erith_ia/operator/research-snapshot.json","utf8")); if(d.isolation.no_execution!==true||d.seven_capital.orders!==0) process.exit(1);'
+      - name: Validate isolated local Docker service configuration
+        run: |
+          set -euo pipefail
+          docker compose -f public/agent_crypto_erith_ia/operator/docker/compose.yaml config -q
+          grep -F '127.0.0.1:8097:8080' public/agent_crypto_erith_ia/operator/docker/compose.yaml
+          ! grep -R -E '(docker\.sock|--privileged|network_mode:[[:space:]]*host)' public/agent_crypto_erith_ia/operator/docker/
