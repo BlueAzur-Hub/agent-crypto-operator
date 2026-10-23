@@ -14,7 +14,7 @@
   const EVENT="agent-crypto:external-asset-changed";
   const DISCOVERY_ID="atlasNewListingsLive529";
   const ACTIVE_ID="atlasNewListingActive529";
-  const state={loadRevision:0,loadController:null,active:null,discovered:[],discovering:false,lastDiscoveryAt:null,lastError:null};
+  const state={loadRevision:0,loadController:null,active:null,discovered:[],tracked:[],discovering:false,lastDiscoveryAt:null,lastError:null};
 
   const n=v=>{if(v===null||v===undefined||String(v).trim()==="")return null;const x=Number(v);return Number.isFinite(x)?x:null;};
   const upper=v=>String(v??"").trim().toUpperCase();
@@ -236,7 +236,7 @@
         const launch=n(row?.launchTime),base=upper(row?.baseCoin),quote=upper(row?.quoteCoin),symbol=upper(row?.symbol);
         if(!(launch>0)||!base||!quote||!symbol)return null;
         const age=now-launch;
-        if(age<0||age>horizon)return null;
+        if(age<0||age>365*86400000)return null;
         if(String(row?.status||"").toLowerCase()!=="online")return null;
         if(String(row?.symbolType||"crypto").toLowerCase()!=="crypto")return null;
         if(String(row?.isRwa||"NO").toUpperCase()==="YES")return null;
@@ -257,9 +257,14 @@
           identityScope:"EXCHANGE_INSTRUMENT"
         });
       }).filter(Boolean).sort((a,b)=>b.launchTime-a.launchTime);
-      state.discovered=rows;state.lastDiscoveryAt=new Date().toISOString();
+      // Retain known exchange instruments after 30 days, without broadening
+      // the regular <=30 day New Listings result or injecting Market Core.
+      const trackedSymbols=new Set(["MHAUSDT","MCATUSDT","PONSUSDT","CNPYUSDT","DNAUSDT"]);
+      state.tracked=rows.filter(x=>x.ageDays>30&&trackedSymbols.has(x.providerSymbol));
+      state.discovered=rows.filter(x=>x.ageDays<=Math.min(30,Number(days)||30));
+      state.lastDiscoveryAt=new Date().toISOString();
       renderDiscovery();
-      return rows.slice();
+      return state.discovered.slice();
     }catch(error){
       state.lastError=String(error?.message||error);renderDiscovery();throw error;
     }finally{state.discovering=false;}
@@ -372,8 +377,9 @@
     return frozen({build:BUILD,pass,checks:frozen({okx_context:!!okx,bitget_context:!!bitget,wrong_symbol_rejected:!bad,candle_normalization:bars.length===2&&bars[0].t===1,discovery_operator_only:true,no_top1000_injection:true,no_storage:true,no_recurring_timer:true,no_observer:true,no_order:true,no_wallet:true})});
   }
 
+  function trackedInstruments(){return frozen(state.tracked.slice());}
   globalThis.AgentCryptoNewListingLiveAsset=frozen({
-    build:BUILD,snapshot,load,deactivate,probeContext,fetchCandles,fetchOrderBook,discoverBitget,ensureRadarPanel,renderActiveRibbon,self_test:selfTest,
+    build:BUILD,snapshot,load,deactivate,probeContext,fetchCandles,fetchOrderBook,discoverBitget,trackedInstruments,ensureRadarPanel,renderActiveRibbon,self_test:selfTest,
     event:EVENT,providers:frozen(["okx","bitget"]),read_only:true,top1000_injection:false,ranking_mutation:false,storage_write:false,recurring_timer:false,mutation_observer:false,real_order:false,wallet:false,strategy_changed:false,market_core_changed:false
   });
 
