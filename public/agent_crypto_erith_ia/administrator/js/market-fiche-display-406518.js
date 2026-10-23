@@ -21,6 +21,8 @@
   };
 
   const finite=value=>{
+    // An unavailable value is not an observed zero.
+    if(value===null||value===undefined||(typeof value==="string"&&!value.trim()))return null;
     const n=Number(value);
     return Number.isFinite(n)?n:null;
   };
@@ -205,6 +207,17 @@
     const volume=helpMetric(root,label=>label==="Volume 24 h");
     const projection=projectCoin(coin,selected);
     const usd=projectCoin(coin,"USD");
+
+    // The native Market coerces absent Spot listing 7d/30d history to 0%.
+    // Keep unavailable history distinct from a measured, genuine zero.
+    if(coin.externalNewListing===true){
+      for(const [label,field] of [["7 j marché","change7d"],["30 j marché","change30d"]]){
+        const metric=helpMetric(root,text=>text===label);
+        const value=coin[field];
+        setHelpMetric(metric,label,typeof value==="number"&&Number.isFinite(value)
+          ?(value>=0?"+":"")+value.toFixed(2)+" %":"—");
+      }
+    }
 
     if(selected==="USD"){
       const usdPrice=usd?.price!==null&&usd?.price!==undefined?formatMoney(usd.price,"USD"):"—";
@@ -560,6 +573,8 @@
       &&missing?.price===null
       &&missing?.marketCap===null
       &&missing?.volume24h===null
+      &&projectCoin({priceUsd:0.007,marketCapUsd:null},"USD")?.marketCap===null
+      &&projectCoin({priceUsd:0.007,marketCapUsd:0},"USD")?.marketCap===0
       &&["EUR","USD"].includes(displayCurrency())
     );
     return Object.freeze({
@@ -570,6 +585,8 @@
         explicit_usd_market_cap_only:usd?.marketCap===1122.5,
         explicit_usd_volume_only:usd?.volume24h===28.0625,
         no_eur_to_usd_fallback:missing?.price===null&&missing?.marketCap===null&&missing?.volume24h===null,
+        missing_cap_not_zero:projectCoin({priceUsd:0.007,marketCapUsd:null},"USD")?.marketCap===null,
+        observed_zero_stays_zero:projectCoin({priceUsd:0.007,marketCapUsd:0},"USD")?.marketCap===0,
         display_currency_supported:["EUR","USD"].includes(displayCurrency()),
         late_market_price_rebind:true,
         market_help_fiche_projection:true,

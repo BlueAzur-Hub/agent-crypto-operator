@@ -14,6 +14,20 @@ function mount(){
   doc.body.classList.add("atlas-trader-runtime-mirror");
   doc.body.dataset.traderRuntimeMirror=BUILD;
 
+  // Same Operator profile as the Yoann Interface. Presentation metadata never
+  // creates an Administrator session or changes the Bridge role.
+  for(const [id,source] of [
+    ["erithYohanOperatorLayer0","../administrator/js/yohan-operator-profile.js"],
+    ["erithYohanOperatorLayer1","../administrator/js/yohan-operator-bridge-client.js"]
+  ]){
+    if(doc.getElementById(id))continue;
+    const script=doc.createElement("script");
+    script.id=id;
+    script.src=new URL(source,doc.baseURI).href;
+    script.dataset.operatorDeliveryBuild=BUILD;
+    doc.body.appendChild(script);
+  }
+
   if(!doc.getElementById("agentCryptoTraderRuntimeMirrorStyle")){
     const style=doc.createElement("style");
     style.id="agentCryptoTraderRuntimeMirrorStyle";
@@ -44,7 +58,7 @@ function mount(){
 
   const adminLink=doc.getElementById("traderSurfaceAdminLink");
   if(adminLink){
-    adminLink.href="../administrator/index.html";
+    adminLink.href="../administrator/yohan.html";
     adminLink.target="_top";
     adminLink.rel="noopener";
     adminLink.setAttribute("aria-label","Ouvrir Administrator");

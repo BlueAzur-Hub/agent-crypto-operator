@@ -6,7 +6,7 @@
   "use strict";
   const BUILD="40.6.619";
   const ROOT_ID="atlasQuoteCurrencyArchitecture";
-  const state={displayCurrency:"EUR",executionInstrument:"BTC-EUR",settlementAsset:"EUR",executionProvider:"legacy",executionAvailable:true};
+  const state={displayCurrency:"USD",executionInstrument:"BTC-EUR",settlementAsset:"EUR",executionProvider:"legacy",executionAvailable:true};
   const validDisplay=new Set(["EUR","USD"]);
   const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
   const snapshot=()=>Object.freeze({...state,build:BUILD,separation_locked:true});

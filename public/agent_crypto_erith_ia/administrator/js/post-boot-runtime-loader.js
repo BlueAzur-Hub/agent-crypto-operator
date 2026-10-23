@@ -54,6 +54,7 @@
     "./js/oracle-evidence-hot-window-sizing-406489.js?v=40.6.489",
     "./js/oracle-evidence-retention-atomicity-406491.js?v=40.6.491",
     "./js/market-stack.js?v=40.6.413-probe",
+    "./js/market-radar-canonical-selection.js",
     "./js/parallel-markets.js",
     "./js/admin-theme-glass.js?v=40.6.413-probe",
     "./js/event-intelligence.js",
@@ -82,6 +83,7 @@
   const MARKET_DEMAND_MODULES=Object.freeze([
     "./js/markets-domain-contract.js",
     "./js/market-stack.js?v=40.6.413-probe",
+    "./js/market-radar-canonical-selection.js",
     "./js/parallel-markets.js",
     "./js/cross-market-owner-map.js",
     "./js/market-reading-depth.js?v=40.6.413-probe"
