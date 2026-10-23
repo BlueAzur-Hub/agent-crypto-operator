@@ -140,3 +140,81 @@
 #atlasRadarBelowMarket > .radar-native{min-width:0}
 #atlasRadarBelowMarket .radar-native-bottom{margin-top:0}
 #atlasRadarBelowMarket .radar-native-opportunities{margin-top:12px}
+
+/* Seven Heaven: presentation-only folding, valid on both Administrator and Trader.
+   No fetch, cache or graph owner depends on the details open attribute. */
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-fold>summary.radar-native-fold-summary{
+ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+ gap:6px 16px;margin:0;padding:2px 1px;cursor:pointer;list-style:none;
+ color:var(--text);font-size:13px;font-weight:800;line-height:1.6;
+}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-fold>summary.radar-native-fold-summary::-webkit-details-marker{display:none}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-fold>summary.radar-native-fold-summary>strong{display:flex;align-items:center;gap:8px;min-width:0}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-fold>summary.radar-native-fold-summary>strong::before{content:"▸";color:var(--cyan);font-size:13px}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-fold[open]>summary.radar-native-fold-summary>strong::before{content:"▾"}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-fold[open]>summary.radar-native-fold-summary{padding-bottom:9px;border-bottom:1px solid var(--line);margin-bottom:10px}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) .radar-native-fold-indicator{
+ font-size:10px;font-weight:650;color:var(--muted);overflow-wrap:anywhere;
+}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-fold>summary.radar-native-fold-summary:focus-visible,
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-opportunity-group>summary:focus-visible{
+ outline:2px solid var(--cyan);outline-offset:3px;border-radius:5px;
+}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-opportunity-group>summary{
+ cursor:pointer;list-style:revert;font-size:11px;font-weight:850;color:var(--text);
+ padding:6px 0;margin:0;line-height:1.5;
+}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-opportunity-group[open]>summary{margin-bottom:8px}
+@media(max-width:620px){
+ :is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-fold>summary.radar-native-fold-summary{align-items:flex-start}
+}
+
+/* Radar candidate dossiers: concise evidence first; deeper facts open on demand.
+   These cards are inside the existing Radar20 fold, not a second panel owner. */
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-candidate{
+ min-width:0;border:1px solid var(--line);border-radius:9px;
+ background:rgba(2,12,22,.36);overflow:hidden;
+}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-candidate>summary.radar-native-candidate-summary{
+ cursor:pointer;position:relative;list-style:none;
+ border:0;border-radius:0;padding:9px 9px 9px 24px;
+ grid-template-columns:minmax(125px,1.12fr) minmax(120px,1.05fr) minmax(110px,1.2fr) minmax(110px,1fr);
+ gap:8px;
+}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-candidate>summary::-webkit-details-marker{display:none}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-candidate>summary::before{
+ content:"▸";position:absolute;left:8px;top:11px;color:var(--cyan);font-size:12px;
+}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-candidate[open]>summary::before{content:"▾"}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-candidate>summary:focus-visible{
+ outline:2px solid var(--cyan);outline-offset:-2px;
+}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) .radar-native-candidate-identity{
+ display:flex;min-width:0;flex-direction:column;gap:3px;
+}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) .radar-native-candidate-identity small{
+ color:var(--muted);font-size:10px;line-height:1.4;
+}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) .radar-native-candidate-more{
+ margin:0 8px 8px 23px;border-top:1px solid var(--line);padding:9px 4px 3px;
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px;row-gap:6px;
+}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) .radar-native-candidate-more p{
+ min-width:0;margin:0;font-size:11px;line-height:1.55;color:var(--text);overflow-wrap:anywhere;
+}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) .radar-native-candidate-more p strong{color:var(--cyan);font-weight:750}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) .radar-native-candidate-more .radar-native-candidate-source,
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) .radar-native-candidate-more .radar-native-candidate-warning,
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) .radar-native-candidate-more .radar-native-candidate-links{
+ grid-column:1/-1;
+}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) .radar-native-candidate-more .radar-native-candidate-source{color:var(--muted);font-size:10px}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) .radar-native-candidate-more .radar-native-candidate-warning{font-size:10px;color:var(--muted)}
+:is(#marketSnapshotPanel, #atlasRadarBelowMarket) .radar-native-candidate-links a{color:var(--cyan)}
+@media(max-width:980px){
+ :is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-candidate>summary.radar-native-candidate-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:620px){
+ :is(#marketSnapshotPanel, #atlasRadarBelowMarket) details.radar-native-candidate>summary.radar-native-candidate-summary,
+ :is(#marketSnapshotPanel, #atlasRadarBelowMarket) .radar-native-candidate-more{grid-template-columns:1fr}
+}
