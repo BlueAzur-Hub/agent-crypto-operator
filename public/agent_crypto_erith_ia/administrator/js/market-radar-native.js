@@ -198,7 +198,7 @@ function build(root){
  const refresh=node("button","btn small","Actualiser");
  refresh.type="button";refresh.dataset.radarNative="refresh";
  const large=node("a","","Agrandir ↗");
- large.href=new URL("../laboratoire/radar.html",document.baseURI).href;
+ large.href="https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/laboratoire/radar.html";
  large.target="_blank";large.rel="noopener noreferrer";
  commands.append(refresh,large);header.append(intro,commands);root.append(header);
  const status=node("p","table-note","Radar non encore chargé");status.dataset.radarNative="status";status.setAttribute("role","status");root.append(status);
@@ -249,13 +249,13 @@ function build(root){
  researchLists.dataset.radarNative="researchLists";research.append(researchLists);supplementary.append(research);
  const qualifying=foldSection("radar-native-qualification","Radar 20 · qualification Spot et coûts PAPER","foldQualification","20 candidats · lecture datée");
  const dossier=node("a","","Dossiers IA · projets, usages et historiques ↗");
- dossier.href=new URL("../laboratoire/crypto-knowledge.html",document.baseURI).href;
+ dossier.href="https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/laboratoire/crypto-knowledge.html";
  dossier.target="_blank";dossier.rel="noopener noreferrer";
  dossier.setAttribute("aria-label","Consulter le référentiel scientifique Crypto sans changer le graphique");
  qualifying.append(dossier);
  // Historical PAPER is a distinct fixed 20-market experiment, not the 20 dynamic Radar candidates.
  const historicalLink=node("a",""," · Historiques et simulations PAPER (Radar 20 fixe) ↗");
- historicalLink.href=new URL("../laboratoire/radar-historique.html",document.baseURI).href;
+ historicalLink.href="https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/laboratoire/radar-historique.html";
  historicalLink.target="_blank";historicalLink.rel="noopener noreferrer";
  historicalLink.setAttribute("aria-label","Ouvrir le laboratoire historique Radar 20 fixe en lecture seule, sans modifier le Trader");
  qualifying.append(historicalLink);
@@ -264,7 +264,7 @@ function build(root){
  const followNote=node("p","table-note","Suivi historique J+1/J+7 · archives en lecture…");
  followNote.dataset.radarNative="followupNote";qualifying.append(followNote);
  const followLink=node("a","","Journal dynamique daté ↗");
- followLink.href=new URL("../laboratoire/crypto-knowledge.html",document.baseURI).href;
+ followLink.href="https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/laboratoire/crypto-knowledge.html";
  followLink.target="_blank";followLink.rel="noopener noreferrer";
  qualifying.append(followLink);
  // Compact evidence comparison lives inside the existing foldable Radar.
@@ -787,7 +787,7 @@ function printQualification(root,model){
   add("Coût PAPER",m?number(m.estimated_roundtrip_cost_pct,3)+" % aller-retour théorique pour 100 USDT ; frais hypothétiques":"Impossible sans paire Spot documentée");
   add("Vérification suivante",doc?.required_next_verification||"Identité du token, carnet et preuve d'usage indépendants à recueillir");
   const links=node("p","radar-native-candidate-links");
-  const dossier=node("a","","Fiche projet détaillée ↗");dossier.href=new URL("../laboratoire/crypto-knowledge.html",document.baseURI).href;
+  const dossier=node("a","","Fiche projet détaillée ↗");dossier.href="https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/laboratoire/crypto-knowledge.html";
   dossier.target="_blank";dossier.rel="noopener noreferrer";links.append(dossier);
   if(doc?.primary_project_source&&/^https:\/\//i.test(doc.primary_project_source)){
    const official=node("a",""," · Source primaire ↗");official.href=doc.primary_project_source;
