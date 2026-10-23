@@ -26,6 +26,7 @@ function selectMarket(rows,tier=10,query="",sort="rank"){
  const sorts={
   rank:(a,b)=>a.rank-b.rank,
   change24h:(a,b)=>(b.change24h??-Infinity)-(a.change24h??-Infinity)||a.rank-b.rank,
+  change7d:(a,b)=>(b.change7d??-Infinity)-(a.change7d??-Infinity)||a.rank-b.rank,
   drop24h:(a,b)=>(a.change24h??Infinity)-(b.change24h??Infinity)||a.rank-b.rank,
   volume24hUsd:(a,b)=>(b.volume24hUsd??-Infinity)-(a.volume24hUsd??-Infinity)||a.rank-b.rank
  };
@@ -84,34 +85,69 @@ function selectOpportunities(core,extended){
  const a=Date.parse(core.generated_at||""),b=Date.parse(extended.generated_at||"");
  if(!Number.isFinite(a)||!Number.isFinite(b)||Math.abs(a-b)>6*3600000)
     throw Error("Snapshots Top 250 et Extended non contemporains, veille suspendue");
- const ids=new Set(),ranks=new Set(),candidates=[];
+ // Each public producer proves its OWN full rank interval. The pair is
+ // not atomic: an ID can cross ranks 250/251 between their timestamps.
+ // Retain both dated rows as evidence, never reassign a price to a new rank.
+ const owners=new Map(),ranks=new Set(),observations=[],overlaps=[];
  for(const [source,arr] of [["core",core.coins],["extended",extended.coins]]){
   for(const x of arr){
-   const rank=Number(x.rank),id=String(x.id||""),symbol=String(x.symbol||"").toUpperCase(),
-    price=positive(x.priceUsd),cap=positive(x.marketCapUsd),vol=positive(x.volume24hUsd),
-    day=finite(x.change24h),week=finite(x.change7d),month=finite(x.change30d);
-   if(!id||!symbol||!Number.isInteger(rank)||rank<1||rank>1000||
-      (source==="core"&&rank>250)||(source==="extended"&&rank<251)||ids.has(id)||ranks.has(rank))
+   const rank=Number(x?.rank),id=String(x?.id||""),symbol=String(x?.symbol||"").toUpperCase();
+   if(!id||!symbol||!Number.isInteger(rank)||
+      (source==="core"&&(rank<1||rank>250))||
+      (source==="extended"&&(rank<251||rank>1000))||ranks.has(rank))
       throw Error("Identités de rang Top 1000 incohérentes");
-   ids.add(id);ranks.add(rank);
-   if(EXCLUDED_SYMBOLS.has(symbol)||price===null||cap===null||vol===null||day===null||week===null||
-      cap<25000000||vol<1000000||vol/cap<0.015||vol/cap>2)continue;
-   candidates.push({id,name:String(x.name||symbol),symbol,rank,priceUsd:price,
-    change24h:day,change7d:week,change30d:month,marketCapUsd:cap,volume24hUsd:vol,
-    turnoverPct:Math.round(vol/cap*10000)/100,
-    sourceSnapshot:source==="core"?core.generated_at:extended.generated_at,
-    riskNote:Math.abs(day)>=25?"Variation 24 h extrême · risque de retournement":"Spread et carnet non vérifiés",
-    graphEligible:false});
+   ranks.add(rank);
+   const previous=owners.get(id);
+   if(previous){
+    // The only known benign collision is the exact SAME coin crossing the
+    // 250/251 boundary in independently timestamped source snapshots.
+    // Same-source repeats, identity collisions and broad rank drift fail closed.
+    if(previous.source!=="core"||source!=="extended"||
+       previous.rank!==250||rank!==251||previous.symbol!==symbol||a===b)
+       throw Error("Identités de rang Top 1000 incohérentes");
+    overlaps.push({id,symbol,core:{rank:previous.rank,generated_at:core.generated_at},
+                   extended:{rank,generated_at:extended.generated_at}});
+   }else owners.set(id,{source,rank,symbol});
+   observations.push({source,rank,id,symbol,coin:x});
   }
  }
- if(ids.size!==1000||ranks.size!==1000)throw Error("Rangs Top 1000 discontinus");
+ if(ranks.size!==1000||owners.size!==1000-overlaps.length)
+   throw Error("Rangs Top 1000 discontinus");
+ const ambiguous=new Set(overlaps.map(x=>x.id)),candidates=[];
+ for(const row of observations){
+  // Conflicting snapshot observations remain in boundaryOverlaps below,
+  // but neither observation becomes a research/trading suggestion.
+  if(ambiguous.has(row.id))continue;
+  const x=row.coin,{id,symbol,rank,source}=row;
+  const price=positive(x.priceUsd),cap=positive(x.marketCapUsd),vol=positive(x.volume24hUsd),
+   day=finite(x.change24h),week=finite(x.change7d),month=finite(x.change30d);
+  if(EXCLUDED_SYMBOLS.has(symbol)||price===null||cap===null||vol===null||day===null||week===null||
+     cap<25000000||vol<1000000||vol/cap<0.015||vol/cap>2)continue;
+  candidates.push({id,name:String(x.name||symbol),symbol,rank,priceUsd:price,
+   change24h:day,change7d:week,change30d:month,marketCapUsd:cap,volume24hUsd:vol,
+   turnoverPct:Math.round(vol/cap*10000)/100,
+   sourceSnapshot:source==="core"?core.generated_at:extended.generated_at,
+   riskNote:Math.abs(day)>=25?"Variation 24 h extrême · risque de retournement":"Spread et carnet non vérifiés",
+   graphEligible:false});
+ }
  const sort=(a,b)=>b.change24h-a.change24h||a.rank-b.rank;
  const trend=candidates.filter(c=>c.change24h>=4&&c.change7d>0).sort(sort).slice(0,12);
  const rebound=candidates.filter(c=>c.change24h>=4&&c.change7d<0).sort(sort).slice(0,12);
+ // Ranked from the same qualified-for-research universe; never a Spot execution list.
+ const take=(key)=>[...candidates].sort((a,b)=>b[key]-a[key]||a.rank-b.rank).slice(0,10);
+ const rankings={rise24:take("change24h"),rise7:take("change7d"),
+   volume:take("volume24hUsd"),fall24:[...candidates].sort((a,b)=>a.change24h-b.change24h||a.rank-b.rank).slice(0,10)};
  return {sourceTimes:{core:core.generated_at,extended:extended.generated_at},
+  status:overlaps.length?"MIXED_SNAPSHOT_BOUNDARY":"DISTINCT_IDENTITIES",
+  observedRows:observations.length,
+  snapshotSkewSeconds:Math.abs(a-b)/1000,
+  boundaryOverlaps:overlaps,
+  ambiguousIdsExcludedFromResearch:[...ambiguous],
   filters:{market_cap_min_usd:25000000,volume_24h_min_usd:1000000,turnover_min_pct:1.5,turnover_max_pct:200,
    excludes_symbols:[...EXCLUDED_SYMBOLS].sort(),exchange_spread_orderbook_checked:false},
-  universe:1000,eligible:candidates.length,trend,rebound,
+  universe:owners.size,eligible:candidates.length,trend,rebound,rankings,
+   // Expose complete pre-ranked validated research pool, without changing top-12.
+   scoutUniverse:candidates,
   disclaimer:"Observations transversales de snapshots, non opportunités négociables ni conseils d'achat. Aucune paire d'exécution vérifiée."};
 }
 const API=Object.freeze({TIERS,validMarket,selectMarket,verifyPaper,verifyRegistry,verifyBitget,observeMarket,selectOpportunities});
