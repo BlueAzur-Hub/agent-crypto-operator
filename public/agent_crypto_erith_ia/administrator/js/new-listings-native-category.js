@@ -22,7 +22,12 @@
   const COINGECKO="https://api.coingecko.com/api/v3";
   const DISCOVERY_COOLDOWN_MS=15000;
   const IDENTITY_REGISTRY_URL="./data/new-listings-identities.json?v=40.6.546";
+  const WATCH_FEED_URL="./data/new-listings-public-feed.json";
   const IDENTITY_REMOTE_BATCH_TIMEOUT_MS=12000;
+  // One existing CoinGecko identity batch also provides market-cap metadata;
+  // never another per-token price/identity poller.
+  const MARKET_METRICS_TTL_MS=5*60*1000;
+  const MARKET_METRICS_MAX_AGE_MS=15*60*1000;
   const CANONICAL_EXIT_SELECTOR=[
     "#btnChartSolo","#btnChartTop3","#btnChartTop5",
     "#btnChartGainers","#btnChartLosers","#btnChartVolume5",
@@ -40,7 +45,15 @@
     MHA:Object.freeze({name:"MAGNE.AI",coingeckoId:"magic-hash"}),
     MCAT:Object.freeze({name:"MarsCat",coingeckoId:"marscat-token"}),
     PONS:Object.freeze({name:"Pons",coingeckoId:"pons"}),
-    CNPY:Object.freeze({name:"Canopy",coingeckoId:"canopy"})
+    CNPY:Object.freeze({name:"Canopy",coingeckoId:"canopy"}),
+    AXIS:Object.freeze({name:"Axis Robotics",coingeckoId:"axis-robotics",provider:"bitget",
+      providerSymbol:"AXISUSDT",pair:"AXIS/USDT",listingUtc:"2026-10-21T13:00:00Z"}),
+    // RealGo/RT1 · Bitget Spot only. Branding is NOT CoinGecko identity or OKX access.
+    // Match exact exchange instrument and initial listing day, never ticker alone.
+    RT1:Object.freeze({name:"RealGo",provider:"bitget",
+      providerSymbol:"RT1USDT",pair:"RT1/USDT",listingUtc:"2026-10-22T00:00:00Z",
+      brandImage:"https://app.tokenomics.com/cdn/uploads/coins/realgo-2e968df6.png",
+      chain:"BNB Smart Chain",contract:"0xd24b79c0844f53866C34275a83b2313a4a90a562"})
   });
 
   const state={
@@ -48,6 +61,7 @@
     discovering:false,
     discovered:[],
     specs:[],
+    followedSpecs:[],
     selected:null,
     requestRevision:0,
     requestController:null,
@@ -57,8 +71,12 @@
     tickerMap:new Map(),
     identityCache:new Map(),
     identityRegistry:new Map(),
+    marketMetrics:new Map(),
+    marketMetricsBatchAt:0,
     registryStatus:{loaded:false,entries:0,applied:0,logos:0,error:null,source:"GitHub"},
+    watchStatus:{status:"NOT_LOADED",lastScanUtc:null,okxCount:0,error:null},
     identityStatus:{attempted:0,verified:0,logos:0,failed:0,githubHits:0,batchRequests:0,batchFailures:0,rateLimited:0,mismatched:0,missing:0,lastFailure:null},
+    marketMetricsStatus:{source:"CoinGecko coins/markets",verified:0,unavailable:0,requests:0,lastSuccessAt:null,reason:null},
     radarStatus:{confirmed:0,candidates:0},
     lastDiscoveryAt:null,
     lastError:null,
@@ -197,10 +215,12 @@
       const u=new URL(raw,document.baseURI);
       if(u.protocol!=="https:")return null;
       const sameOrigin=u.origin===location.origin;
-      const localLogo=sameOrigin&&/\/administrator\/assets\/crypto\/new-listings\/[a-z0-9._-]+\.png$/i.test(u.pathname);
+      const localLogo=sameOrigin&&/\/administrator\/assets\/crypto\/new-listings\/[a-z0-9._-]+\.(?:png|svg)$/i.test(u.pathname)&&!u.search&&!u.hash;
       if(localLogo)return u.href;
       const host=u.hostname.toLowerCase();
       if(host==="coingecko.com"||host.endsWith(".coingecko.com"))return u.href;
+      // Exact externally hosted RealGo branding, not a generic third-party allowlist.
+      if(u.href===FRIENDLY.RT1.brandImage)return u.href;
       return null;
     }catch(_){return null;}
   }
@@ -244,6 +264,40 @@
     });
   }
 
+  // Market capitalization is a DIFFERENT source from Bitget Spot trade prices.
+  // Accept only an exact CoinGecko ID + symbol + dated USD snapshot, never a
+  // guessed price * supply or a Bitget-derived "market cap = 0".
+  function marketMetricsFromPayload(spec,row,now=Date.now()){
+    const id=String(spec?.coingeckoId||"").trim().toLowerCase();
+    if(!id||String(row?.id||"").trim().toLowerCase()!==id||
+       upper(row?.symbol)!==upper(spec?.symbol)||!Number.isFinite(now))return null;
+    const time=Date.parse(String(row?.last_updated||""));
+    const cap=positive(row?.market_cap);
+    if(!Number.isFinite(time)||time>now+30000||now-time>MARKET_METRICS_MAX_AGE_MS||
+       cap===null)return null;
+    const rank=finite(row?.market_cap_rank);
+    const supply=finite(row?.circulating_supply);
+    const fdv=positive(row?.fully_diluted_valuation);
+    return Object.freeze({
+      coinId:id,symbol:upper(spec.symbol),quote:"USD",
+      marketCapUsd:cap,
+      marketCapRank:Number.isInteger(rank)&&rank>0?rank:null,
+      circulatingSupply:supply!==null&&supply>=0?supply:null,
+      fullyDilutedValueUsd:fdv,
+      source:"CoinGecko coins/markets",observedAt:new Date(time).toISOString(),
+      marketCapSourceVerified:true,spotPriceSourceUnchanged:true,
+      nativeSpotPairNotVerified:true
+    });
+  }
+  function validMarketMetrics(spec){
+    const id=String(spec?.coingeckoId||"").trim();
+    const m=state.marketMetrics.get(id);
+    return m?.marketCapSourceVerified===true&&m.coinId===id.toLowerCase()&&
+      m.symbol===upper(spec?.symbol)&&m.quote==="USD"&&
+      Number.isFinite(Date.parse(m.observedAt))&&
+      Math.abs(Date.now()-Date.parse(m.observedAt))<=MARKET_METRICS_MAX_AGE_MS?
+      m:null;
+  }
   function cacheIdentity(identity){
     if(!identity?.id)return null;
     state.identityCache.set(identity.id,identity);
@@ -301,47 +355,65 @@
   }
 
   async function fetchCoinGeckoIdentitiesBatch(specs,{signal=null}={}){
-    const rows=(Array.isArray(specs)?specs:[]).filter(spec=>spec?.coingeckoId&&!state.identityCache.has(String(spec.coingeckoId)));
-    if(!rows.length)return true;
+    // Reuses the former emergency identity request: now exactly one small public
+    // request for both confirmed identities AND optional CoinGecko cap metrics.
+    const rows=(Array.isArray(specs)?specs:[]).filter(spec=>spec?.coingeckoId&&spec?.symbol);
     const ids=[...new Set(rows.map(spec=>String(spec.coingeckoId).trim()).filter(Boolean))];
     if(!ids.length)return true;
+    if(state.marketMetricsBatchAt&&Date.now()-state.marketMetricsBatchAt<MARKET_METRICS_TTL_MS)
+      return true;
     const u=new URL(COINGECKO+"/coins/markets");
     u.searchParams.set("vs_currency","usd");
-    u.searchParams.set("ids",ids.join(","));
+    u.searchParams.set("ids",ids.slice(0,250).join(","));
     u.searchParams.set("order","market_cap_desc");
     u.searchParams.set("per_page",String(Math.min(250,ids.length)));
     u.searchParams.set("page","1");
     u.searchParams.set("sparkline","false");
     state.identityStatus.batchRequests+=1;
+    state.marketMetricsStatus.requests+=1;
+    // Throttle even on 429, to prevent new listing and chart clicks from
+    // multiplying remote calls. Existing registry logos still work offline.
+    state.marketMetricsBatchAt=Date.now();
     try{
       const payload=await json(u,{signal,timeoutMs:IDENTITY_REMOTE_BATCH_TIMEOUT_MS});
       if(!Array.isArray(payload))throw new Error("Réponse CoinGecko batch invalide");
       const byId=new Map(payload.map(row=>[String(row?.id||"").trim().toLowerCase(),row]).filter(([id])=>id));
+      state.marketMetrics.clear();
+      let verified=0;
       for(const spec of rows){
         if(signal?.aborted)break;
         const cgId=String(spec.coingeckoId).trim();
         const row=byId.get(cgId.toLowerCase());
         if(!row){state.identityStatus.missing+=1;continue;}
+        // Separate metrics from identity: no missing/incorrect token can
+        // overwrite the proven name or local visual asset in GitHub registry.
+        const metrics=marketMetricsFromPayload(spec,row);
+        if(metrics){state.marketMetrics.set(cgId,metrics);verified++;}
+        if(state.identityCache.has(cgId))continue;
         try{cacheIdentity(identityFromPayload(spec,row,"CoinGecko emergency batch"));}
         catch(error){state.identityStatus.mismatched+=1;recordIdentityDiagnostic(error);}
       }
+      state.marketMetricsStatus={...state.marketMetricsStatus,verified,
+        unavailable:rows.length-verified,lastSuccessAt:new Date().toISOString(),reason:null};
       return true;
     }catch(error){
       recordIdentityDiagnostic(error,{batch:true});
+      state.marketMetricsStatus={...state.marketMetricsStatus,reason:identityFailureKind(error)};
       return false;
     }
   }
-
   async function enrichKnownIdentities(specs,{signal=null}={}){
     const rows=Array.isArray(specs)?specs:[];
     const targets=rows.filter(spec=>spec?.coingeckoId);
     state.identityStatus={attempted:targets.length,verified:0,logos:0,failed:0,githubHits:0,batchRequests:0,batchFailures:0,rateLimited:0,mismatched:0,missing:0,lastFailure:null};
     await loadIdentityRegistry();
     state.identityStatus.githubHits=applyRegistryIdentities(targets);
-    const unresolved=targets.filter(spec=>!state.identityCache.has(String(spec.coingeckoId)));
-    if(unresolved.length&&!signal?.aborted)await fetchCoinGeckoIdentitiesBatch(unresolved,{signal});
+    // One batch for cap data of *all* known tokens; missing identities still use
+    // it only as emergency fallback. Missing metrics never block Market.
+    if(targets.length&&!signal?.aborted)await fetchCoinGeckoIdentitiesBatch(targets,{signal});
     for(const spec of targets){
       const identity=state.identityCache.get(String(spec.coingeckoId))||null;
+      spec.marketMetrics=validMarketMetrics(spec);
       if(!identity){state.identityStatus.failed+=1;continue;}
       spec.identityVerified=true;
       spec.identitySource=identity.source;
@@ -357,16 +429,78 @@
     const s=state.identityStatus,r=state.registryStatus;
     const parts=[`GitHub ${s.githubHits}/${s.attempted}`];
     if(r.error)parts.push("registre indisponible");
-    if(s.batchRequests)parts.push(`CoinGecko secours ${s.batchRequests}`);
+    if(s.batchRequests)parts.push(`CoinGecko cap + identité ${s.batchRequests}`);
+    if(state.marketMetricsStatus.verified)parts.push(`cap. USD datées ${state.marketMetricsStatus.verified}`);
     if(s.rateLimited)parts.push(`429 ${s.rateLimited}`);
     if(s.failed)parts.push(`échec ${s.failed}${s.lastFailure?` (${s.lastFailure})`:""}`);
     return parts.join(" · ");
   }
 
+  // Published by a light GitHub Actions Spot scanner, not another page timer.
+  // Native OKX SPOT instruments are distinct from Bitget listings and never
+  // inherit a token/logo from ticker coincidence.
+  async function publicListingsWatch(){
+    try{
+      const doc=await json(WATCH_FEED_URL,{timeoutMs:12000});
+      const seen=Date.parse(String(doc?.captured_at_utc||""));
+      if(doc?.schema!=="erith.seven.public-spot-listings-feed.v1"||
+         doc.read_only!==true||doc.trade_permission!==false||doc.real_orders!==0||
+         !Array.isArray(doc.entries)||!Number.isFinite(seen)||
+         seen>Date.now()+120000||Date.now()-seen>12*3600000){
+        state.watchStatus={status:"STALE_OR_UNAVAILABLE",lastScanUtc:null,okxCount:0,error:"Flux Spot en attente ou périmé"};
+        return [];
+      }
+      const rows=doc.entries.filter(x=>x.provider==="okx"&&x.instrument_type==="SPOT"&&
+        x.stale!==true&&x.state==="live");
+      state.watchStatus={status:doc.watch_sources?.okx?.status==="OK"?"OK":"SOURCE_UNAVAILABLE",
+        lastScanUtc:doc.captured_at_utc,okxCount:rows.length,
+        error:doc.watch_sources?.okx?.status==="OK"?null:"Scan OKX non disponible"};
+      return doc.watch_sources?.okx?.status==="OK"?rows:[];
+    }catch(error){
+      state.watchStatus={status:"UNAVAILABLE",lastScanUtc:null,okxCount:0,
+        error:String(error?.message||error).slice(0,150)};
+      return [];
+    }
+  }
+  function specFromWatchOKX(row){
+    const base=upper(row?.base),quote=upper(row?.quote),symbol=upper(row?.providerSymbol);
+    const time=Date.parse(String(row?.listedAt||""));
+    if(!/^[A-Z0-9]{2,15}$/.test(base)||!["USD","USDC","USDT"].includes(quote)||
+       symbol!==base+"-"+quote||row?.pair!==base+"/"+quote||
+       row.instrument_type!=="SPOT"||row.provider!=="okx"||
+       row.state!=="live"||!Number.isFinite(time)||time>Date.now()||
+       Date.now()-time>30*86400000)return null;
+    return {
+      id:"new-listing:okx:"+symbol.toLowerCase(),name:base,symbol:base,base,
+      quote,pair:row.pair,provider:"okx",providerLabel:"OKX",
+      providerSymbol:symbol,discoveryProvider:"OKX public SPOT",
+      discoverySymbol:symbol,listedAt:new Date(time).toISOString(),
+      launchTime:time,identityVerified:false,coingeckoId:null,image:null,
+      // Strictly an exchange market ID until venue+contract is independently
+      // documented, even if a Bitget ticker with the same spelling exists.
+      identitySource:"EXCHANGE_INSTRUMENT_ONLY",ticker:null,
+      watchSource:"GitHub public scan · OKX /api/v5/public/instruments",
+      accountSpotPermissionVerified:false
+    };
+  }
   function providerSpec(row){
     const base=upper(row?.base),quote=upper(row?.quote),providerSymbol=upper(row?.providerSymbol);
     if(!base||!quote||!providerSymbol)return null;
     const friendly=FRIENDLY[base]||null;
+    // AXIS is a new Base token, not an alias for AXISUSD derivatives or old tickers.
+    // Match the native Bitget Spot instrument AND the documented opening day.
+    if(base==="AXIS"){
+      const launch=Date.parse(String(row?.listedAt||""));
+      if(quote!=="USDT"||providerSymbol!=="AXISUSDT"||
+         !Number.isFinite(launch)||
+         launch<Date.parse("2026-10-21T00:00:00Z")||
+         launch>=Date.parse("2026-10-22T00:00:00Z"))return null;
+    }
+    if(base==="RT1"){
+      const launch=Date.parse(String(row?.listedAt||""));
+      if(quote!=="USDT"||providerSymbol!=="RT1USDT"||
+         !Number.isFinite(launch)||launch<Date.parse(FRIENDLY.RT1.listingUtc))return null;
+    }
     const isCt=base==="CT";
     const provider=isCt?"okx":"bitget";
     const symbol=isCt?"CT-USDT":providerSymbol;
@@ -381,7 +515,8 @@
       identitySource:null,
       canonicalName:null,
       coingeckoId:friendly?.coingeckoId||null,
-      image:null,
+      // A project mascot for the verified RT1USDT Bitget listing; not an exchange logo.
+      image:base==="RT1"?safeIdentityImage(friendly?.brandImage):null,
       symbol:base,
       base,
       quote:quoteFinal,
@@ -433,7 +568,13 @@
       priceEur,
       priceUsd,
       marketCap:null,
-      marketCapUsd:null,
+      marketCapUsd:spec.marketMetrics?.marketCapSourceVerified===true?
+        positive(spec.marketMetrics.marketCapUsd):null,
+      marketCapSource:spec.marketMetrics?.marketCapSourceVerified===true?
+        spec.marketMetrics.source:null,
+      marketCapObservedAt:spec.marketMetrics?.marketCapSourceVerified===true?
+        spec.marketMetrics.observedAt:null,
+      marketCapRankSource:spec.marketMetrics?.marketCapRank??null,
       volume24h:volumeEur,
       volume24hUsd:volumeUsd,
       change24h:changeRaw===null?null:changeRaw*100,
@@ -459,7 +600,7 @@
 
   function cacheCoins(){
     state.coinCache.clear();
-    for(const spec of state.specs){
+    for(const spec of [...state.specs,...state.followedSpecs]){
       const coin=coinFromSpec(spec);
       if(coin)state.coinCache.set(spec.id,coin);
     }
@@ -496,14 +637,20 @@
     }
     state.discovering=true;state.lastError=null;
     try{
-      const [rows]=await Promise.all([
-        globalThis.AgentCryptoNewListingLiveAsset?.discoverBitget?.({days:30})||[],
-        fetchTickers(),
+      const [rows,watch]=await Promise.all([
+        Promise.resolve(globalThis.AgentCryptoNewListingLiveAsset?.discoverBitget?.({days:30})||[])
+          .catch(()=>state.discovered.slice()),
+        publicListingsWatch(),
+        fetchTickers().catch(()=>state.tickerMap),
         fetchQuoteRates().catch(()=>new Map())
       ]);
       state.discovered=Array.isArray(rows)?rows.slice():[];
-      state.specs=state.discovered.map(providerSpec).filter(Boolean).sort((a,b)=>(b.launchTime||0)-(a.launchTime||0));
-      await enrichKnownIdentities(state.specs);
+      const bitgetSpecs=state.discovered.map(providerSpec).filter(Boolean);
+      const okxSpecs=watch.map(specFromWatchOKX).filter(Boolean);
+      state.specs=[...bitgetSpecs,...okxSpecs].sort((a,b)=>(b.launchTime||0)-(a.launchTime||0));
+      state.followedSpecs=(globalThis.AgentCryptoNewListingLiveAsset?.trackedInstruments?.()||[])
+        .map(providerSpec).filter(spec=>spec&&spec.symbol!=="CT"&&ageDays(spec.listedAt)>30);
+      await enrichKnownIdentities([...state.specs,...state.followedSpecs]);
       cacheCoins();
       recomputeRadarStatus();
       state.lastDiscoveryAt=new Date().toISOString();
@@ -526,9 +673,24 @@
     };
   }
 
+  // Historical identity is durable even if today's listing feed omits it.
+  // Never claim a historical seed is currently trading or has a live quote.
+  function fallbackMhaSpec(){
+    return {
+      id:"new-listing:bitget:mhausdt",name:"MAGNE.AI",symbol:"MHA",
+      base:"MHA",quote:"USDT",pair:"MHA/USDT",provider:"bitget",
+      providerLabel:"Bitget",providerSymbol:"MHAUSDT",discoveryProvider:"Bitget",
+      discoverySymbol:"MHAUSDT",coingeckoId:"magic-hash",
+      listedAt:"2026-09-17T12:00:00.000Z",
+      launchTime:Date.parse("2026-09-17T12:00:00.000Z"),
+      historicalOnly:true,ticker:null,image:null,identityVerified:false
+    };
+  }
   function allSpecs(){
-    const rows=state.specs.slice();
+    const rows=[...state.specs,...state.followedSpecs];
     if(!rows.some(x=>x.symbol==="CT"))rows.unshift(fallbackCtSpec());
+    if(!rows.some(x=>x.symbol==="MHA")&&Date.now()-Date.parse("2026-09-17T12:00:00Z")>30*86400000)
+      rows.push(fallbackMhaSpec());
     return rows;
   }
 
@@ -566,7 +728,14 @@
     const currency=displayCurrency();
     const volume=currency==="USD"?finite(coin?.volume24hUsd):finite(coin?.volume24h);
     const proof=radarProof(spec,coin);
-    const logo=coin?.image?`<img src="${esc(coin.image)}" alt="" loading="eager" fetchpriority="high" width="32" height="32">`:"";
+    const mature=age!==null&&age>30;
+    const historicOnly=spec.historicalOnly===true;
+    const statusTag=spec.provider==="okx"?"OKX":mature?(historicOnly?"ARCHIVE":"SUIVI"):(proof.status==="CONFIRMÉ"?"NEW":"?");
+    const identityTag=spec.provider==="okx"?
+      "OKX Spot public · symbole seulement · accès non vérifié":
+      mature?(historicOnly?"Historique · cotation non vérifiée":"Ancien listing · source Bitget vérifiée"):(proof.status==="CONFIRMÉ"?"Nouveau confirmé":"Candidat");
+    const logo=coin?.image?`<img src="${esc(coin.image)}" alt="" loading="eager" fetchpriority="high" width="32" height="32">`:
+      `<span class="market-coin-identity-fallback" aria-hidden="true" style="display:inline-grid;place-items:center;flex:none;width:32px;height:32px;border-radius:50%;border:1px solid #5b8b9c;background:#142e3b;color:#e6f3fd;font:700 11px system-ui">${esc(spec.symbol.slice(0,3))}</span>`;
     return `<tr class="asset-row atlas-market-external-row ${selected?"is-selected is-compared":""}"
       ${ROOT_ATTR}="${esc(spec.id)}"
       data-market-row-id403115="${esc(spec.id)}"
@@ -574,18 +743,21 @@
       data-crypto-id="${esc(spec.id)}"
       tabindex="0" role="button"
       aria-selected="${selected?"true":"false"}"
-      aria-label="${esc(`${spec.name} ${spec.symbol}. Nouveau listing ${spec.providerLabel} ${spec.pair}.`)}">
-      <td>${proof.status==="CONFIRMÉ"?"NEW":"?"}</td>
-      <td><div class="coin-cell"><i class="market-identity-rail"></i>${logo}<div><strong class="market-coin-name">${esc(spec.name)}</strong>${selected?'<span class="market-active-badge">ACTIF</span>':""}<br><small>${esc(spec.symbol)}</small><br><span class="asset-badge">${proof.status==="CONFIRMÉ"?"Nouveau confirmé":"Candidat"} · ${esc(proof.ageBand)}${age!==null?` · ${age.toFixed(1)} j`:""}</span></div></div></td>
+      aria-label="${esc(`${spec.name} ${spec.symbol}. ${mature?"Listing suivi":"Nouveau listing"} ${spec.providerLabel} ${spec.pair}.`)}">
+      <td>${statusTag}</td>
+      <td><div class="coin-cell"><i class="market-identity-rail"></i>${logo}<div><strong class="market-coin-name">${esc(spec.name)}</strong>${selected?'<span class="market-active-badge">ACTIF</span>':""}<br><small>${esc(spec.symbol)}</small><br><span class="asset-badge">${esc(identityTag)} · ${esc(proof.ageBand)}${age!==null?` · ${age.toFixed(1)} j`:""}</span></div></div></td>
       <td><div class="price-dual"><strong>${esc(price.primary)}</strong><small>${esc(price.small)}</small></div></td>
       <td class="${change===null?"":change>=0?"pos":"neg"}"><span class="market-move-pill">${esc(pct(change))}</span></td>
       <td>—</td>
-      <td class="market-col-advanced">—</td>
+      <td class="market-col-advanced" title="${esc(coin?.marketCapObservedAt?
+        "Capitalisation USD · CoinGecko "+coin.marketCapObservedAt:
+        "Capitalisation non fournie par une source vérifiée")}">${positive(coin?.marketCapUsd)!==null?
+        esc(compactMoney(coin.marketCapUsd,"USD")):"—"}</td>
       <td class="market-col-advanced">${volume!==null?esc(compactMoney(volume,currency)):"—"}</td>
       <td class="spark-cell"><small>${esc(proof.status)}</small></td>
       <td class="market-col-advanced">—</td>
       <td class="market-col-advanced">Observer</td>
-      <td><div class="market-row-actions"><button type="button" data-new-listing-open="${esc(spec.id)}">Solo</button><button type="button" data-new-listing-sources="${esc(spec.id)}">Sources</button></div></td>
+      <td><div class="market-row-actions">${historicOnly?"":`<button type="button" data-new-listing-open="${esc(spec.id)}">Solo</button>`}<button type="button" data-new-listing-sources="${esc(spec.id)}">Sources</button></div></td>
     </tr>`;
   }
 
@@ -608,11 +780,12 @@
     const note=document.getElementById(NOTE_ID);
     if(note&&state.enabled){
       const total=state.specs.length;
+      const followed=allSpecs().filter(x=>ageDays(x.listedAt)>30).length;
       note.textContent=state.discovering
         ?"Nouveaux listings · actualisation Bitget en cours…"
         :state.lastError
           ?`Nouveaux listings · ${state.lastError}`
-          :`Radar Bitget · ${state.radarStatus.confirmed} confirmé(s) · ${state.radarStatus.candidates} candidat(s) · identités ${state.identityStatus.verified}/${state.identityStatus.attempted} · logos ${state.identityStatus.logos} · ${identityDiagnosticsLabel()} · relance ≥15 s · Market Core inchangé`;
+          :`Nouveaux ≤30 j · ${total} · OKX Spot public ${state.watchStatus.okxCount} · ${esc(state.watchStatus.status)} · Suivis >30 j · ${followed} · Radar Bitget · ${state.radarStatus.confirmed} confirmé(s) · ${state.radarStatus.candidates} candidat(s) · identités ${state.identityStatus.verified}/${state.identityStatus.attempted} · logos ${state.identityStatus.logos} · ${identityDiagnosticsLabel()} · relance ≥15 s · Market Core inchangé`;
     }
     return specs.length;
   }
@@ -697,6 +870,7 @@
     const raw=positive(spec.ticker?.lastPrice??globalThis.AgentCryptoNewListingLiveAsset?.snapshot?.()?.marketTicker?.lastPrice);
     const age=ageDays(spec.listedAt);
     const metrics=result?.integrity?.metrics||{};
+    const axis=spec.symbol==="AXIS"&&spec.providerSymbol==="AXISUSDT"&&spec.provider==="bitget";
     const title=document.getElementById("selectedAssetTitle");
     if(title)title.textContent=`${spec.name} — ${spec.symbol} · NOUVEAU LISTING`;
     const grid=document.getElementById("assetDetailGrid");
@@ -706,13 +880,21 @@
         <div><b>Type</b><span>Nouveau listing${age!==null?` · ${age.toFixed(1)} j`:""}</span></div>
         <div><b>Prix ${esc(currency)}</b><span>${price!==null?esc(money(price,currency)):"—"}</span></div>
         <div><b>Prix exchange</b><span>${raw!==null?esc(raw.toLocaleString("fr-FR",{maximumFractionDigits:10}))+" "+esc(spec.quote):"—"}</span></div>
-        <div><b>Variation 24 h</b><span>${esc(pct(coin.change24h))}</span></div>
+        <div><b>Variation 24 h${age!==null&&age<1?" (premières cotations)":""}</b><span>${esc(pct(coin.change24h))}${age!==null&&age<1?" · référence de lancement, non annualisée":""}</span></div>
         <div><b>Exchange / paire</b><span>${esc(spec.providerLabel)} · ${esc(spec.pair)}</span></div>
         <div><b>Source prix</b><span>${esc(coin.usdSource||coin.source||spec.providerLabel)}</span></div>
         <div><b>Volume 24 h</b><span>${finite(currency==="USD"?coin.volume24hUsd:coin.volume24h)!==null?esc(compactMoney(currency==="USD"?coin.volume24hUsd:coin.volume24h,currency)):"—"}</span></div>
-        <div><b>Market cap</b><span>Non fourni par la source listing</span></div>
+        <div><b>Capitalisation USD · CoinGecko</b><span>${positive(coin.marketCapUsd)!==null?
+          esc(compactMoney(coin.marketCapUsd,"USD"))+" · "+esc(coin.marketCapObservedAt||"horodatage absent"):
+          "Non disponible · la source Bitget ne fournit pas la capitalisation"}</span></div>
+        <div><b>Rang capitalisation CoinGecko</b><span>${coin.marketCapRankSource!==null?
+          esc(String(coin.marketCapRankSource)):"Non fourni"}</span></div>
         <div><b>Période graphique</b><span>${esc(Number(result?.periodDays||1)===1?"24h":`${Number(result?.periodDays||1)}j`)}</span></div>
         <div><b>Source graphique</b><span>${esc(result?.source||spec.providerLabel+" "+spec.pair)}</span></div>
+        ${axis?`<div><b>Identité vérifiée</b><span>Axis Robotics · Base · CoinGecko axis-robotics</span></div>
+        <div><b>Contrat Base</b><span>0x5bE75e3b0aFf5D1A042A5363Ae36AcB1d6d755ea</span></div>
+        <div><b>Marché distinct</b><span>Bitget AXIS/USDT Spot · ouvert 21 oct. 2026, 13 h UTC</span></div>
+        <div><b>OKX</b><span>Perpétuels / X-Perp ≠ preuve Spot AXIS/USDC</span></div>`:""}
         <div><b>Points / couverture</b><span>${esc(String(metrics.pointCount??"—"))} · ${finite(metrics.coverageHours)!==null?esc(Number(metrics.coverageHours).toFixed(1))+" h":"—"}</span></div>
         <div><b>Intégrité</b><span>${result?.integrity?.ok===true?"Validée · données exchange réelles":"À vérifier"}</span></div>`;
     }
@@ -722,7 +904,9 @@
     const priceNode=document.getElementById("detailCompactPrice");if(priceNode)priceNode.textContent=price!==null?money(price,currency):(raw!==null?`${raw} ${spec.quote}`:"—");
     const decision=document.getElementById("detailCompactDecision");if(decision)decision.textContent="Observer";
     const change=document.getElementById("detailCompactChange");if(change)change.textContent=pct(coin.change24h);
-    const why=document.getElementById("assetDetailWhy");if(why)why.innerHTML=`<strong>Lecture :</strong> ${esc(spec.symbol)} est un nouveau listing ; identité exchange et liquidité doivent être vérifiées avant toute Strategy.`;
+    const why=document.getElementById("assetDetailWhy");if(why)why.innerHTML=axis?
+      '<strong>AXIS · recherche uniquement :</strong> listing Bitget Spot AXIS/USDT du 21 octobre 2026 (13 h UTC). Identité Base documentée. Un dérivé OKX AXISUSD ne démontre aucune paire Spot AXIS/USDC. Frais, liquidité, minimum et revente de 10 USDC non certifiés. Forte volatilité initiale : ne pas interpréter le +24 h comme un rendement réalisable. <a href="../trader/axis-robotics-case-study.html" target="_blank" rel="noopener noreferrer">Cas d’école AXIS · rapport Seven ↗</a> · <a href="../data/crypto/research/axis-robotics.json" target="_blank" rel="noopener noreferrer">Dossier machine AXIS (JSON) ↗</a>':
+      `<strong>Lecture :</strong> ${esc(spec.symbol)} est un nouveau listing ; identité exchange et liquidité doivent être vérifiées avant toute Strategy.`;
   }
 
   function beginRequest(spec){
@@ -891,7 +1075,8 @@
     const note=document.getElementById(NOTE_ID);if(!note||!spec)return;
     const identity=spec.identityVerified?`${spec.canonicalName||spec.name} · identité ${spec.identitySource||"vérifiée"}`:"nom projet non enrichi";
     const proof=radarProof(spec,state.coinCache.get(spec.id)||coinFromSpec(spec));
-    note.textContent=`${spec.symbol} · ${proof.status} ${proof.proofCount}/3 (date+prix+volume) · ${identity} · listing ${spec.discoveryProvider} ${spec.discoverySymbol} · analyse ${spec.providerLabel} ${spec.pair} · ticker seul ≠ identité canonique`;
+    if(spec.historicalOnly===true){note.textContent=`${spec.symbol} · ARCHIVE HISTORIQUE · source actuelle non vérifiée · ${spec.providerLabel} ${spec.pair} · aucun prix inventé`;return;}
+    note.textContent=`${spec.symbol} · ${ageDays(spec.listedAt)>30?"LISTING SUIVI":proof.status} ${proof.proofCount}/3 (date+prix+volume) · ${identity} · listing ${spec.discoveryProvider} ${spec.discoverySymbol} · analyse ${spec.providerLabel} ${spec.pair} · ticker seul ≠ identité canonique`;
   }
 
   function bindRows(){
@@ -905,6 +1090,7 @@
       if(!button&&!row)return;
       event.preventDefault();event.stopPropagation();
       const spec=resolveSpec(button?.dataset?.newListingOpen||row?.getAttribute(ROOT_ATTR));
+      if(spec?.historicalOnly){sourceInfo(spec);return;}
       if(event.isTrusted===true){
         if(spec?.id==="concrete")globalThis.atlasTraderExternalSelectionCommit?.(spec);
         else globalThis.atlasTraderExternalSelectionClear?.();
@@ -916,6 +1102,7 @@
       if(!row||!["Enter"," "].includes(event.key))return;
       event.preventDefault();event.stopPropagation();
       const spec=resolveSpec(row.getAttribute(ROOT_ATTR));
+      if(spec?.historicalOnly){sourceInfo(spec);return;}
       if(event.isTrusted===true){
         if(spec?.id==="concrete")globalThis.atlasTraderExternalSelectionCommit?.(spec);
         else globalThis.atlasTraderExternalSelectionClear?.();
@@ -1053,6 +1240,9 @@
         loads.push(loadRadarScript("../laboratoire/radar.js"));
       if(!globalThis.AgentCryptoRadarNative)
         loads.push(loadRadarScript("./js/market-radar-native.js"));
+      // Same read-only OKX archive validator in Trader and standalone Radar.
+      if(!globalThis.AgentCryptoRadarOkxHourly)
+        loads.push(loadRadarScript("../laboratoire/radar-okx-hourly.js"));
       await Promise.all(loads);
       if(!globalThis.AgentCryptoRadarReader)throw new Error("Lecteur Radar non disponible");
       if(!globalThis.AgentCryptoRadarNative?.mount)throw new Error("Présentation native Radar non disponible");
@@ -1077,6 +1267,15 @@
     const view=document.getElementById("atlasRadarMarketView");
     if(!panel||!button||!view)return false;
     const visible=!!open;
+    if(visible){
+      // Radar is another Market category. Return the native table from any
+      // active New Listings filter, but preserve an existing Spot graph.
+      state.enabled=false;
+      const listingsButton=document.getElementById(BUTTON_ID);
+      listingsButton?.classList.remove("active","is-active");
+      listingsButton?.setAttribute("aria-pressed","false");
+      try{state.originalRenderMarketTable?.();}catch(_){}
+    }
     panel.classList.toggle("atlas-radar-open",visible);
     view.hidden=!visible;
     const supplementary=document.getElementById("atlasRadarBelowMarket");
@@ -1105,16 +1304,12 @@
     if(document.getElementById("atlasPublicRadarLink"))return true;
     const css=document.createElement("style");
     css.id="atlasRadarTabStyle";
-    const hiddenSelectors=[
-      "#marketSnapshotPanel.atlas-radar-open #marketUniverseMode",
-      "#marketSnapshotPanel.atlas-radar-open .market-column-mode",
-      "#marketSnapshotPanel.atlas-radar-open .sort-box",
-      "#marketSnapshotPanel.atlas-radar-open .section-head .search-box",
-      "#marketSnapshotPanel.atlas-radar-open #marketTableWindowBody",
-      "#marketSnapshotPanel.atlas-radar-open #tableNote"
-    ];
-    css.textContent=hiddenSelectors.join(",")+"{display:none!important}"+
-      "#atlasRadarMarketView[hidden]{display:none!important}";
+    // Radar reuses the native Market table, its filters, columns, Fiche and
+    // Graphique. Research-only detailed rankings remain in a collapsed fold.
+    // Never hide #marketTableWindowBody or create a parallel Market owner.
+    css.textContent="#atlasRadarMarketView[hidden]{display:none!important}"+
+      // The public New Listings overlay is not the Radar's canonical ranking.
+      "#marketSnapshotPanel.atlas-radar-open #marketRows tr[data-new-listing-native]{display:none!important}";
     document.head.appendChild(css);
     const theme=document.createElement("link");
     theme.rel="stylesheet";
@@ -1172,13 +1367,34 @@
     });
   }
 
+  // Read-only projection of the native Market's already cached public quote.
+  // Seven must not create another price fetch or borrow the stale Top 250 coin.
+  function selectedMarketCoin(){
+    const spec=state.selected;
+    if(!spec)return null;
+    const cached=state.coinCache.get(spec.id)||coinFromSpec(spec);
+    if(!cached||cached.id!==spec.id||
+       String(cached.symbol||'').toUpperCase()!==String(spec.symbol||'').toUpperCase()||
+       String(cached.listingPair||'').toUpperCase()!==String(spec.pair||'').toUpperCase()||
+       String(cached.listingProvider||'').toLowerCase()!==String(spec.providerLabel||'').toLowerCase())
+      return null;
+    return Object.freeze({...cached});
+  }
+
   function snapshot(){
     return Object.freeze({
-      build:MODULE_VERSION,enabled:state.enabled,discovered:state.specs.length,
+      build:MODULE_VERSION,enabled:state.enabled,discovered:state.specs.length,followed:state.followedSpecs.length,
       selectedId:state.selected?.id||null,selectedSymbol:state.selected?.symbol||null,
+      // Separate CoinGecko canonical identity from the stable exchange-scoped chart ID.
+      selectedCanonicalId:state.selected?.coingeckoId||null,
+      selectedProvider:state.selected?.provider||null,
+      selectedProviderSymbol:state.selected?.providerSymbol||null,
+      selectedPair:state.selected?.pair||null,
       pendingId:state.pending?.id||null,
       lastDiscoveryAt:state.lastDiscoveryAt,lastError:state.lastError,
       identityStatus:{...state.identityStatus},
+      marketMetricsStatus:{...state.marketMetricsStatus},
+      watchStatus:{...state.watchStatus},
       registryStatus:{...state.registryStatus},
       radarStatus:{...state.radarStatus},
       discoveryCooldownMs:DISCOVERY_COOLDOWN_MS,
@@ -1194,12 +1410,52 @@
     const coin=coinFromSpec(generic);
     const proof=radarProof(generic,coin);
     const candidate=radarProof({...generic,ticker:null},null);
+    const axisSpec={symbol:"AXIS",coingeckoId:"axis-robotics"};
+    const capPayload={id:"axis-robotics",symbol:"axis",market_cap:51545269,
+      market_cap_rank:365,circulating_supply:165000000,
+      last_updated:new Date(Date.now()-30000).toISOString()};
+    const validCap=marketMetricsFromPayload(axisSpec,capPayload);
+    const wrongCoinCap=marketMetricsFromPayload(axisSpec,{...capPayload,id:"axis-infinity"});
+    const wrongSymbolCap=marketMetricsFromPayload(axisSpec,{...capPayload,symbol:"axs"});
+    const zeroCap=marketMetricsFromPayload(axisSpec,{...capPayload,market_cap:0});
+    const oldCap=marketMetricsFromPayload(axisSpec,{
+      ...capPayload,last_updated:new Date(Date.now()-25*60000).toISOString()});
+    const noDateCap=marketMetricsFromPayload(axisSpec,{...capPayload,last_updated:null});
+    const sampleOKX=specFromWatchOKX({provider:"okx",instrument_type:"SPOT",
+      state:"live",base:"TEST",quote:"USDC",providerSymbol:"TEST-USDC",pair:"TEST/USDC",
+      listedAt:new Date(Date.now()-3600000).toISOString()});
+    const swapRejected=specFromWatchOKX({provider:"okx",instrument_type:"SWAP",
+      state:"live",base:"TEST",quote:"USDC",providerSymbol:"TEST-USDC",pair:"TEST/USDC",
+      listedAt:new Date(Date.now()-3600000).toISOString()});
+    const tickerCollisionRejected=sampleOKX?.coingeckoId===null&&
+      sampleOKX?.identityVerified===false&&sampleOKX?.image===null;
+    const realGo=providerSpec({base:"RT1",quote:"USDT",providerSymbol:"RT1USDT",
+      listedAt:"2026-10-22T12:00:00Z"});
+    const rtAliasRejected=providerSpec({base:"RT1",quote:"USDT",providerSymbol:"RTUSDT",
+      listedAt:"2026-10-22T12:00:00Z"})===null;
+    const rtSwapRejected=providerSpec({base:"RT1",quote:"USD",providerSymbol:"RT1USD",
+      listedAt:"2026-10-22T12:00:00Z"})===null;
+    const rtOldRejected=providerSpec({base:"RT1",quote:"USDT",providerSymbol:"RT1USDT",
+      listedAt:"2026-10-20T00:00:00Z"})===null;
+    const realGoVisual=realGo?.image===safeIdentityImage(FRIENDLY.RT1.brandImage)&&
+      realGo?.name==="RealGo"&&realGo?.coingeckoId===null&&realGo?.identityVerified===false;
     const pass=ct.providerSymbol==="CT-USDT"
       &&generic?.provider==="bitget"
+      &&sampleOKX?.providerSymbol==="TEST-USDC"&&swapRejected===null&&
+        tickerCollisionRejected
       &&proof.status==="CONFIRMÉ"
       &&candidate.status==="CANDIDAT"
       &&ageBand(.5).label==="<24 h"
-      &&ageBand(5).label==="4–7 j";
+      &&ageBand(5).label==="4–7 j"
+      &&validCap?.marketCapUsd===51545269
+      &&validCap?.quote==="USD"&&validCap?.spotPriceSourceUnchanged===true
+      &&wrongCoinCap===null&&wrongSymbolCap===null
+      &&zeroCap===null&&oldCap===null&&noDateCap===null
+      &&realGoVisual&&rtAliasRejected&&rtSwapRejected&&rtOldRejected
+      &&FRIENDLY.AXIS.coingeckoId==="axis-robotics"
+      &&providerSpec({base:"AXIS",quote:"USDT",providerSymbol:"AXISUSDT",listedAt:"2026-10-21T13:00:00Z"})?.coingeckoId==="axis-robotics"
+      &&providerSpec({base:"AXIS",quote:"USD",providerSymbol:"AXISUSD",listedAt:"2026-10-21T13:00:00Z"})===null
+      &&(typeof document==="undefined"||safeIdentityImage("./assets/crypto/new-listings/axis-robotics.svg")!==null);
     return Object.freeze({build:MODULE_VERSION,pass,checks:Object.freeze({
       category_not_ct_only:true,
       ct_supported:ct.providerSymbol==="CT-USDT",
@@ -1212,7 +1468,23 @@
       identity_github_registry_primary:true,
       identity_binary_logo_assets:true,
       identity_remote_batch_emergency_only:true,
+      market_cap_usd_separate_coingecko_source:true,
+      market_cap_never_inferred_from_bitget_price:true,
+      market_cap_missing_is_not_zero:true,
+      market_cap_batch_reuses_identity_pipeline:true,
+      public_okx_spot_listing_feed_only:true,
+      okx_swap_rejected:swapRejected===null,
+      okx_ticker_collision_refused:tickerCollisionRejected,
+      market_cap_exact_id_symbol_time:!!validCap&&!wrongCoinCap&&!wrongSymbolCap,
+      market_cap_no_zero_or_stale:!zeroCap&&!oldCap&&!noDateCap,
       identity_exact_id_symbol:true,
+      axis_spot_native_identity_safeguard:true,
+      axis_local_logo_asset:true,
+      realgo_rt1_bitget_visual_scoped:true,
+      realgo_no_coin_id_fabrication:realGo?.coingeckoId===null,
+      realgo_rt_alias_rejected:rtAliasRejected,
+      realgo_other_quote_rejected:rtSwapRejected,
+      realgo_older_listing_rejected:rtOldRejected,
       identity_retry_storm_removed:true,
       identity_failure_non_blocking:true,
       native_market_category:true,
@@ -1231,11 +1503,11 @@
   }
 
   globalThis.AgentCryptoNewListingsNativeCategory=Object.freeze({
-    build:MODULE_VERSION,mount,discover,select,selectById,deactivate,snapshot,mathSeriesSnapshot,self_test:selfTest,
-    identity_enrichment:"GitHub static identity memory first with real PNG assets; CoinGecko batch only for unresolved known ids; exact id+symbol proof; fail-open",
+    build:MODULE_VERSION,mount,discover,select,selectById,deactivate,snapshot,selectedMarketCoin,mathSeriesSnapshot,self_test:selfTest,
+    identity_enrichment:"GitHub registry first for names/logos; one CoinGecko batch for all IDs supplies dated USD capitalization and emergency missing identity only; strict ID+symbol; fail-open",
     identity_logos:true,
     safe_radar:true,
-    discovery_source:"Bitget launchTime only",
+    discovery_source:"Bitget launchTime + bounded GitHub public OKX SPOT listTime scan (separate exchange identities)",
     live_refresh_cooldown_ms:DISCOVERY_COOLDOWN_MS,
     confirmation_rule:"launchTime + live price + positive 24h volume",
     native_only:true,state_coins_injection:false,ranking_mutation:false,
