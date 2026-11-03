@@ -1,7 +1,7 @@
 "use strict";
 /* Seven Heaven: a separate annual archive reader, NEVER an exchange request. */
 (() => {
-  const ROOT = new URL("../data/historical_archive_prototype/calendar_year_hourly_shards/", location.href);
+  const ROOT = new URL("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/historical_archive_prototype/calendar_year_hourly_shards/");
   // One validated engine: standalone yearly page and inline Coffre use the same code.
   const prefix = document.getElementById("vault-year-coin") ? "vault-year-" : "";
   const $ = (id) => document.getElementById(prefix + id);
