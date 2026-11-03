@@ -575,5 +575,231 @@
         'USDC, USDT et USD ne sont pas interchangeables sans conversion vérifiée.',
         'Le prix futur de revente et le bénéfice réalisé ne sont pas connus.']});
   }
-  return Object.freeze({SCHEMA,PAIR,MAX_BOOK_AGE_MS,balanceFor,portfolio,position,acquisition,takerRate,sellEstimate,exitMetrics,ctScenarioGrid,ctPartialExitGrid,spotTradingRules,assessSpotQuantity,planGrossBuyForNetSpot,assessPartialRules,compareCtExitDecisions,ctClosedCycleReport,publicCandles,explain,compose});
+  // Additional validated Spot primitives shared with Seven's read-only dossier.
+  // Legacy CT public/private ownership and existing calculations are unchanged.
+  const POSITION_SCALE=10n**18n;
+  function positionDecimal(value){
+    if(typeof value!=='string'||!/^(?:0|[1-9]\d{0,17})(?:\.\d{1,18})?$/.test(value))return null;
+    const [whole,tail='']=value.split('.');
+    return BigInt(whole)*POSITION_SCALE+BigInt(tail.padEnd(18,'0'));
+  }
+  function positionPrint(amount){
+    const head=String(amount/POSITION_SCALE),
+      tail=String(amount%POSITION_SCALE).padStart(18,'0').replace(/0+$/,'');
+    return head+(tail?'.'+tail:'');
+  }
+
+
+  function remainingFor(context,position,rules,now=Date.now()){
+    const base=String(context?.base||'').toUpperCase(),
+      quote=String(context?.quote||'').toUpperCase(),
+      venue=String(context?.venue||'').toLowerCase(),pair=base+'-'+quote;
+    const state=(status,reason,more={})=>Object.freeze({status,reason,pair,
+      read_only:true,orders_enabled:false,real_orders:0,
+      sellable_size_base:null,residual_base:null,
+      ...more});
+    if(!/^[A-Z][A-Z0-9]{0,19}$/.test(base)||!['USDC','USDT','EUR'].includes(quote)||
+       venue!=='okx')return state('UNKNOWN','Place de marché ou paire non certifiée');
+    const at=Date.parse(position?.observed_at_utc||'');
+    if(position?.pair!==pair||position?.verified!==true||position?.read_only!==true||
+       position?.orders_enabled!==false||position?.real_orders!==0||
+       !Number.isFinite(at)||at>now+30000||now-at>120000)
+      return state('UNKNOWN','Deux sous-soldes exacts et récents nécessaires');
+    const trading=positionDecimal(position.trading_base),
+      funding=positionDecimal(position.funding_base);
+    if(trading===null||funding===null)
+      return state('UNKNOWN','Quantité Trading/Funding absente ou invalide');
+    const amounts={trading_base:positionPrint(trading),
+      funding_base:positionPrint(funding),
+      total_base:positionPrint(trading+funding),
+      observed_at_utc:position.observed_at_utc};
+    if(trading===0n&&funding===0n)
+      return state('EMPTY','Solde disponible Trading ET Funding nul et vérifié',amounts);
+    if(trading===0n)
+      return state('FUNDING_ONLY','Aucune quantité disponible en Trading ; Funding distinct',amounts);
+    const proof=rules?.status==='verified'?rules:
+      spotTradingRulesFor({base,quote,venue},rules,now);
+    const proofAt=Date.parse(proof?.checked_at||'');
+    if(proof?.status!=='verified'||proof.market!==pair||proof.base!==base||
+       proof.quote!==quote||proof.state!=='live'||
+       proof.source!=='OKX Public Data · /api/v5/public/instruments'||
+       !Number.isFinite(proofAt)||proofAt>now+30000||now-proofAt>120000)
+      return state('RULES_UNVERIFIED','Règles Spot exactes, récentes et actives nécessaires',amounts);
+    const min=positionDecimal(proof.min_sz),lot=positionDecimal(proof.lot_sz);
+    if(min===null||lot===null||min<=0n||lot<=0n)
+      return state('RULES_UNVERIFIED','Minimum/pas non représentable sans arrondi',amounts);
+    const lotQuantity=trading/lot*lot,remainder=trading-lotQuantity;
+    const calc={...amounts,min_sz_base:proof.min_sz,lot_sz_base:proof.lot_sz,
+      residual_base:positionPrint(remainder)};
+    if(lotQuantity<min)
+      return state('DUST','Trading positif, quantité sous minimum ou pas Spot ; aucune vente normale certifiée',
+        {...calc,residual_base:positionPrint(trading)});
+    return state('SIZE_FILTER_MATCHES','Quantité conforme à minSz/lotSz ; acceptation/exécution non garanties',
+      {...calc,sellable_size_base:positionPrint(lotQuantity)});
+  }
+
+
+  function acquisitionFor(context,fills,qty){
+    const base=String(context?.base||'').toUpperCase(),
+      quote=String(context?.quote||'').toUpperCase(),
+      venue=String(context?.venue||'').toLowerCase(),
+      pair=base+'-'+quote;
+    const unknown=reason=>Object.freeze({status:'unknown',reason});
+    if(!/^[A-Z][A-Z0-9]{0,19}$/.test(base)||
+      !['USDC','USDT','EUR'].includes(quote)||venue!=='okx')
+      return unknown('Marché Spot ou plateforme non vérifiée');
+    if(!validSource(fills)||!Array.isArray(fills.fills_3m)||
+      typeof qty!=='number'||!Number.isFinite(qty)||qty<0)
+      return unknown('Transactions OKX incomplètes');
+    const rows=fills.fills_3m.filter(f=>f?.instId===pair);
+    if(!rows.length)return unknown('Aucune transaction '+pair+' retrouvée');
+    let acquired=0,spent=0,count=0,grossBase=0,baseFee=0,baseFeeOnly=true;
+    const seen=new Set();
+    for(const fill of rows){
+      // Transfers, sells, other fee currencies or duplicate receipts
+      // prevent a claim that the current holdings were acquired at this cost.
+      if(fill.side!=='buy')
+        return unknown('Achats et ventes mélangés : coût d’acquisition non établi');
+      const id=String(fill.tradeId??'').trim();
+      if(!id||seen.has(id))
+        return unknown('Identifiants de transaction absents ou répétés');
+      seen.add(id);
+      const size=numeric(fill.fillSz),price=numeric(fill.fillPx),
+        fee=numeric(fill.fee);
+      if(size===null||size<=0||price===null||price<=0||fee===null)
+        return unknown('Prix, quantité ou frais non prouvés');
+      const feeCcy=String(fill.feeCcy??'');
+      if(fee!==0&&![base,quote].includes(feeCcy))
+        return unknown('Frais prélevés dans une autre devise');
+      grossBase+=size;
+      if(feeCcy===base&&fee<=0)baseFee+=-fee;
+      else if(fee!==0)baseFeeOnly=false;
+      acquired+=size+(feeCcy===base?fee:0);
+      spent+=size*price-(feeCcy===quote?fee:0);
+      count++;
+    }
+    // Preserve the historical CT tolerance exactly; other assets, especially
+    // small BTC fractions, must not inherit a loose absolute 0.000001 floor.
+    const tolerance=base==='CT'?Math.max(.000001,qty*.0001):
+      Math.max(1e-12,qty*1e-8);
+    if(acquired<=0||spent<=0||Math.abs(acquired-qty)>tolerance)
+      return unknown('Le solde et les achats retrouvés ne concordent pas');
+    return Object.freeze({
+      status:'reconciled_fills_only',market:pair,base,quote,venue:'okx',
+      net_acquired_base:acquired,spent_quote:spent,
+      cost_per_base_quote:spent/acquired,fill_count:count,
+      observed_buy_base_fee_pct:baseFeeOnly&&grossBase>0?
+        100*baseFee/grossBase:null,
+      observed_buy_base_fee_qty:baseFeeOnly&&grossBase>0?baseFee:null,
+      historical_gross_base:grossBase,
+      profit_proven:false,orders_enabled:false,read_only:true,
+      caveat:'Transactions retrouvées et solde concordants ; historique externe/transferts non certifiés'
+    });
+  }
+
+
+  function spotBookEstimateFor(context,book,qty,feeRate=null,now=Date.now()){
+    const base=String(context?.base||'').toUpperCase(),
+      quote=String(context?.quote||'').toUpperCase(),
+      venue=String(context?.venue||'').toLowerCase(),
+      pair=base+'-'+quote;
+    const unknown=reason=>Object.freeze({status:'unknown',market:pair,
+      reason,read_only:true,orders_enabled:false,
+      gross_quote:null,net_quote:null,fee_quote:null});
+    if(!/^[A-Z][A-Z0-9]{0,19}$/.test(base)||
+       !['USDC','USDT','EUR'].includes(quote)||venue!=='okx')
+      return unknown('Marché Spot ou plateforme non vérifiée');
+    const qtyText=typeof qty==='number'&&Number.isFinite(qty)?
+      (String(qty).includes('e')?qty.toFixed(18):String(qty)):qty;
+    const requested=positionDecimal(qtyText);
+    if(requested===null||requested<=0n)
+      return unknown('Quantité de base non vérifiée ou nulle');
+    if(book?.status!=='ok'||book.provider!=='okx'||
+       book.pair!==pair||book.quote!==quote)
+      return unknown('Carnet '+pair+' indisponible ou d’une autre place');
+    const observed=Date.parse(book.observed_at_utc||'');
+    if(!Number.isFinite(now)||!Number.isFinite(observed)||
+       observed>now||now-observed>MAX_BOOK_AGE_MS)
+      return unknown('Carnet trop ancien pour une estimation');
+    if(!Array.isArray(book.bids)||!book.bids.length)
+      return unknown('Aucune offre acheteuse');
+    let rest=requested,gross=0n,previous=null;
+    for(const row of book.bids){
+      if(!Array.isArray(row)||row.length<2)
+        return unknown('Format carnet invalide');
+      const price=positionDecimal(String(row[0])),
+        amount=positionDecimal(String(row[1]));
+      if(price===null||price<=0n||amount===null||amount<0n||
+        (previous!==null&&price>previous))
+        return unknown('Carnet incohérent');
+      previous=price;
+      const used=rest<amount?rest:amount;
+      rest-=used;
+      gross+=used*price/POSITION_SCALE;
+      if(rest===0n)break;
+    }
+    if(rest!==0n)return unknown('Profondeur insuffisante pour revendre le solde');
+    let net=null,fee=null,rate=null;
+    if(typeof feeRate==='number'&&Number.isFinite(feeRate)&&
+       feeRate>=0&&feeRate<=.05){
+      const feeText=String(feeRate).includes('e')?feeRate.toFixed(18):String(feeRate);
+      rate=positionDecimal(feeText);
+      if(rate!==null){
+        fee=gross*rate/POSITION_SCALE;
+        net=gross-fee;
+      }
+    }
+    return Object.freeze({status:'indicative',market:pair,quote,
+      gross_quote:positionPrint(gross),net_quote:net===null?null:positionPrint(net),
+      fee_quote:fee===null?null:positionPrint(fee),
+      fee_rate_assumed:rate===null?null:feeRate,
+      observed_at:book.observed_at_utc,age_ms:now-observed,
+      read_only:true,orders_enabled:false,profit_proven:false,
+      caveat:'Hypothèse PAPER sur carnet observé ; frais futurs, autre minimum notionnel et exécution non garantis'});
+  }
+
+
+  function spotTradingRulesFor(context,source,now=Date.now()){
+    const base=String(context?.base||'').toUpperCase(),
+      quote=String(context?.quote||'').toUpperCase(),
+      venue=String(context?.venue||'').toLowerCase(),
+      market=base+'-'+quote;
+    const unknown=reason=>Object.freeze({status:'unverified',market,reason});
+    if(!/^[A-Z][A-Z0-9]{0,19}$/.test(base)||
+       !['USDC','USDT','EUR'].includes(quote)||
+       venue!=='okx')
+      return unknown('Identité Spot ou source OKX non vérifiée');
+    const time=Date.parse(source?.observed_at_utc||'');
+    if(!Number.isFinite(time)||time>now||now-time>120000)
+      return unknown('Règles OKX absentes ou trop anciennes');
+    // Seven's existing public adapter supplies one normalized native row.
+    // Legacy CT supplies the complete OKX code/data envelope. Both require
+    // an exact pair, never a guessed rule or cross-market substitution.
+    const payload=source?.payload||
+      (source?.instId?{code:'0',data:[source]}:null);
+    if(payload?.code!=='0'||!Array.isArray(payload.data))
+      return unknown('API publique OKX non vérifiée');
+    const exact=payload.data.filter(r=>r?.instId===market&&r?.instType==='SPOT');
+    if(exact.length!==1)return unknown('Instrument SPOT '+market+' absent ou ambigu');
+    const row=exact[0];
+    // The raw-row Seven adapter MUST prove base and quote explicitly.
+    if(source?.instId&&
+      (row.baseCcy!==base||row.quoteCcy!==quote))
+      return unknown('Devises de base et cotation incohérentes');
+    const maxDigits=base==='CT'?12:18;
+    const validDecimal=v=>typeof v==='string'&&/^\d+(?:\.\d+)?$/.test(v)&&
+      Number.isFinite(Number(v))&&Number(v)>0&&
+      (v.split('.')[1]||'').length<=maxDigits;
+    if(!['live','suspend','preopen','post_only','rebase'].includes(row.state))
+      return unknown('État de négociation inconnu');
+    if(!validDecimal(row.minSz)||!validDecimal(row.lotSz)||!validDecimal(row.tickSz))
+      return unknown('Minimum, pas de quantité ou pas de prix invalide');
+    // State must be checked separately: "verified" does NOT mean tradable.
+    return Object.freeze({status:'verified',market,
+      source:'OKX Public Data · /api/v5/public/instruments',
+      checked_at:source.observed_at_utc,state:row.state,min_sz:row.minSz,
+      lot_sz:row.lotSz,tick_sz:row.tickSz,quote,base});
+  }
+
+  return Object.freeze({SCHEMA,PAIR,MAX_BOOK_AGE_MS,balanceFor,portfolio,position,acquisition,remainingFor,acquisitionFor,takerRate,spotBookEstimateFor,spotTradingRulesFor,sellEstimate,exitMetrics,ctScenarioGrid,ctPartialExitGrid,spotTradingRules,assessSpotQuantity,planGrossBuyForNetSpot,assessPartialRules,compareCtExitDecisions,ctClosedCycleReport,publicCandles,explain,compose});
 });
