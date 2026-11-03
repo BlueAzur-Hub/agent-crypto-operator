@@ -16,7 +16,7 @@
     "runtime": "administrator/index.html inside same-origin Trader frame",
     "core_owner": "current shared Administrator runtime remains the live owner of Graphique, Market, Lecture Technique and Math Core",
     "additive_owners": [
-      "administrator/js/graph-native-usd-406520.js",
+      "administrator/js/graph-native-usd.js",
       "administrator/js/market-microscope-candles.js",
       "administrator/js/okx-microstructure-406499.js",
       "administrator/js/quote-currency-architecture-406497.js",
@@ -586,7 +586,7 @@
   },
   "graph_parity_top5_24h_406624": {
     "enabled": true,
-    "owner": "administrator/js/graph-native-usd-406520.js",
+    "owner": "administrator/js/graph-native-usd.js",
     "canonical_history_owner": "administrator/app.js atlasFetchComparisonSeriesResilient rank-5 24h path",
     "canonical_route_preserved_in_usd": true,
     "stale_usd_cache_refused": true,

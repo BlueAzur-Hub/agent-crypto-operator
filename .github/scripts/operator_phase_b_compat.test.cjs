@@ -7,7 +7,7 @@ const vm=require('node:vm');
 const base=path.resolve(__dirname,'../../public/agent_crypto_erith_ia');
 const get=p=>fs.readFileSync(path.join(base,p),'utf8');
 const app=get('administrator/app.js');
-const graph=get('administrator/js/graph-native-usd-406520.js');
+const graph=get('administrator/js/graph-native-usd.js');
 const interfaceHtml=get('administrator/index.html');
 const desk=get('trader/trading-desk.html');
 function namedFunction(source,name){const match=source.match(new RegExp('^(?:async )?function '+name+'\\([^]*?^\\}\\n','m'));assert.ok(match,`Missing ${name}`);return match[0];}
@@ -42,9 +42,12 @@ test('Freshness cannot be inferred from cache save time for incomplete 24h histo
 test('USD owner self-test and missing timestamp fail closed',()=>{
   const context=vm.createContext({AgentCryptoQuoteCurrencyArchitecture:{snapshot:()=>({displayCurrency:'USD'})}});
   new vm.Script(graph).runInContext(context);
-  const api=context.AgentCryptoGraphNativeUsd406520;
+  const api=context.AgentCryptoGraphNativeUsd;
   assert.equal(api?.self_test?.().pass,true);
-  assert.equal(api.self_test().checks.usd_source_timestamp_required,true);
+  assert.equal(api.self_test().checks.top5_stale_usd_refused,true);
+  assert.equal(api.self_test().checks.top5_missing_change_refused,true);
+  const unknown=api.usdTooltipSource({dataset:{atlasCoin:{id:'btc',priceUsd:100,change24hUsd:1}}},Date.now());
+  assert.notEqual(unknown.source,'coingecko-usd-snapshot','No timestamp cannot be qualified as fresh');
   assert.equal(api.real_order,false);
 });
 test('Public Spot OHLCV reader does not enable account or orders',()=>{

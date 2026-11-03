@@ -118,6 +118,16 @@ function mount(){
     };
     doc.head.appendChild(contract);
   }
+  // Existing Operator technical reading data sync, no new source owner or Bridge capability.
+  if(!doc.getElementById("traderTechnicalReadingSyncScript")){
+    const script=doc.createElement("script");
+    script.id="traderTechnicalReadingSyncScript";
+    script.src=new URL("../trader/technical-reading-data-sync.js",doc.baseURI).href;
+    script.onerror=()=>{
+      if(status){status.textContent="Synchronisation Lecture technique indisponible";status.dataset.state="error";}
+    };
+    doc.head.appendChild(script);
+  }
   // Visible PAPER laboratory. Its arithmetic is isolated and it only consumes
   // canonical publicly loaded BTC/CT series. Never inherits Bridge credentials.
   if(!doc.getElementById("traderPaperLabCoreScript")){
