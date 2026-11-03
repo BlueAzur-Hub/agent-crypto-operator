@@ -74,7 +74,7 @@ jobs:
           printf 'Application files in incremental update: %s\n' "${#files[@]}"
           printf '%s\n' "${files[@]}" | tee phase_c_candidate/FILES_CHANGED.txt
 
-          ARCHIVE="AGENT_CRYPTO_OPERATOR_YOANN_MARKET_RADAR_GRAPHS_INCREMENTAL_UPDATE_PHASE_C_2026_11_03.zip"
+          ARCHIVE="AGENT_CRYPTO_OPERATOR_YOANN_40_6_719_VERSION_TRUTH_INCREMENTAL_UPDATE_2026_11_03.zip"
           git archive --format=zip --output="phase_c_candidate/$ARCHIVE" "$HEAD_SHA" "${files[@]}"
           unzip -tqq "phase_c_candidate/$ARCHIVE"
           INSIDE_COUNT="$(unzip -Z1 "phase_c_candidate/$ARCHIVE" | grep -v '/$' | wc -l)"
@@ -91,14 +91,15 @@ jobs:
             "INCREMENTAL PATCH ONLY. Do not replace the complete Operator tree." \
             "Apply changed files at their matching repository-relative paths." \
             "PR #10: source commit in SOURCE_COMMIT.txt, original base in BASE_COMMIT.txt." \
-            "This is a candidate, NOT merged or published; keep Yoann Trader and Bridge files intact." \
+            "Shared runtime Version Truth: 40.6.719 for Administrator / Operator / Trader; no new Bridge capabilities." \
+            "This is a candidate, NOT merged or published; protect Yoann Bridge roles and credentials." \
             "Linux headless Firefox CI does not certify Windows Firefox market data." \
             > phase_c_candidate/READ_ME_FIRST.txt
       - name: Store Phase C candidate ZIP with SHA-256
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: operator-phase-c-incremental-update-zip
+          name: operator-40-6-719-version-truth-incremental-zip
           path: phase_c_candidate/
           retention-days: 14
           if-no-files-found: error
