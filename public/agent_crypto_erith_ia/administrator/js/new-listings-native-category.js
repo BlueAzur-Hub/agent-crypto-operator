@@ -18,11 +18,38 @@
   const ROWS_ID="marketRows";
   const NOTE_ID="tableNote";
   const ROOT_ATTR="data-new-listing-native";
+  const SEGMENT_TOOLBAR_ID="newListingsSegmentToolbar";
+  const SEGMENT_OPTIONS=Object.freeze([
+    ["quoted","Avec prix"],["other","Autres plateformes"],["tokenized","Actions / ETF"],["review","À qualifier"],["all","Tout le registre"]
+  ]);
+  // Exact instrument allowlist: published OKX tokenized-stock notices (9–23 Oct 2026).
+  // Do NOT use symbol prefix alone (XDP is unrelated). Dated official sources:
+  // https://www.okx.com/en-gb/help/okx-to-list-unified-tokenized-stocks-xbrkb-xwen-and-more-for-spot-trading
+  // https://www.okx.com/fr-fr/help/okx-to-list-unified-tokenized-stocks-xlunr-xoscr-and-more-for-spot-trading
+  // https://www.okx.com/en-us/help/okx-to-list-unified-tokenized-stocks-xshld-xsqqq-and-more-for-spot-trading
+  // https://www.okx.com/help/okx-to-list-usdc-trading-pairs-for-tokenized-stocks-xwdc
+  // https://www.okx.com/en-br/help/okx-to-list-unified-tokenized-stocks-xacn-xaxti-and-more-for-spot-trading
+  const DOCUMENTED_TOKENIZED_OKX_SPOT=new Set([
+    "XBRKB-USDT","XWEN-USDT","XAEHR-USDT","XCRDO-USDT","XFLNC-USDT","XOUST-USDT","XGPRO-USDT","XPOET-USDT","XQNT-USDT","XAMC-USDT","XBB-USDT","XIONQ-USDT","XCGNX-USDT","XFLY-USDT","XFWDI-USDT","XINFQ-USDT",
+    "XLUNR-USDT","XOSCR-USDT","XPENG-USDT","XPURR-USDT","XRDW-USDT","XSHOP-USDT","XSIMO-USDT","XSONY-USDT","XTSEM-USDT","XTTMI-USDT","XEWJ-USDT","XEWT-USDT","XEWZ-USDT","XLYTE-USDT","XSPCH-USDT","XRAM-USDT",
+    "XSHLD-USDT","XSQQQ-USDT","XTMF-USDT","XTSLL-USDT","XURNM-USDT","XUSO-USDT","XUVXY-USDT","XXBI-USDT",
+    "XNFLX-USDC","XWDC-USDC",
+    "XACN-USDT","XAXTI-USDT","XCOST-USDT","XDDOG-USDT","XGS-USDT","XGTLB-USDT","XHUT-USDT","XJPM-USDT",
+  ]);
+  // Exact Bitget spot instruments whose recent start time is a trading RESUMPTION.
+  // Never turn the resumed quote into a new token launch date.
+  const RESUMED_SPOT_PAIRS=Object.freeze({
+    CUDISUSDT:Object.freeze({symbol:"CUDIS",category:"Jeton DePIN",history:"coté sur Bitget depuis juin 2025",date:"23/10/2026"}),
+    RLUSDUSDC:Object.freeze({symbol:"RLUSD",category:"Stablecoin Ripple USD",history:"lancé en décembre 2024",date:"23/10/2026"})
+  });
   const BITGET="https://api.bitget.com";
   const COINGECKO="https://api.coingecko.com/api/v3";
   const DISCOVERY_COOLDOWN_MS=15000;
-  const IDENTITY_REGISTRY_URL="./data/new-listings-identities.json?v=40.6.546";
-  const WATCH_FEED_URL="./data/new-listings-public-feed.json";
+  // GitHub Pages intentionally excludes every /data/ directory: use the public RAW canonical archive.
+  // Read-only JSON: no user account, private key or new feed service.
+  const PUBLIC_DATA_RAW="https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/administrator/data/";
+  const IDENTITY_REGISTRY_URL=PUBLIC_DATA_RAW+"new-listings-identities.json";
+  const WATCH_FEED_URL=PUBLIC_DATA_RAW+"new-listings-public-feed.json";
   const IDENTITY_REMOTE_BATCH_TIMEOUT_MS=12000;
   // One existing CoinGecko identity batch also provides market-cap metadata;
   // never another per-token price/identity poller.
@@ -58,6 +85,7 @@
 
   const state={
     enabled:false,
+    activeSegment:"quoted",
     discovering:false,
     discovered:[],
     specs:[],
@@ -441,6 +469,8 @@
   // inherit a token/logo from ticker coincidence.
   async function publicListingsWatch(){
     try{
+      // A public RAW document is required because the lightweight Pages build omits /data/.
+      // Keep the original 12-hour freshness, schema and spot-only trust gates.
       const doc=await json(WATCH_FEED_URL,{timeoutMs:12000});
       const seen=Date.parse(String(doc?.captured_at_utc||""));
       if(doc?.schema!=="erith.seven.public-spot-listings-feed.v1"||
@@ -462,6 +492,18 @@
       return [];
     }
   }
+  // Accept only a dated exact public SPOT instrument. No live/executable price promise.
+  function observedOKXTicker(row,now=Date.now()){
+    const q=row?.quote_snapshot,id=upper(row?.providerSymbol),ts=Date.parse(String(q?.observed_at_utc||""));
+    const last=positive(q?.last),open=positive(q?.open24h),vol=finite(q?.volCcy24h);
+    if(row?.provider!=="okx"||row?.instrument_type!=="SPOT"||
+      upper(q?.instId)!==id||upper(q?.quote)!==upper(row?.quote)||
+      !Number.isFinite(ts)||ts>now+120000||now-ts>90*60000||
+      last===null||open===null||vol===null||vol<0||
+      q?.account_spot_access_verified!==false||q?.executable_price_verified!==false)return null;
+    return {lastPrice:String(q.last),price24hPcnt:String(last/open-1),
+      turnover24h:String(q.volCcy24h),bidPx:positive(q.bidPx),askPx:positive(q.askPx),ts};
+  }
   function specFromWatchOKX(row){
     const base=upper(row?.base),quote=upper(row?.quote),symbol=upper(row?.providerSymbol);
     const time=Date.parse(String(row?.listedAt||""));
@@ -470,6 +512,7 @@
        row.instrument_type!=="SPOT"||row.provider!=="okx"||
        row.state!=="live"||!Number.isFinite(time)||time>Date.now()||
        Date.now()-time>30*86400000)return null;
+    const publicTicker=observedOKXTicker(row);
     return {
       id:"new-listing:okx:"+symbol.toLowerCase(),name:base,symbol:base,base,
       quote,pair:row.pair,provider:"okx",providerLabel:"OKX",
@@ -478,7 +521,9 @@
       launchTime:time,identityVerified:false,coingeckoId:null,image:null,
       // Strictly an exchange market ID until venue+contract is independently
       // documented, even if a Bitget ticker with the same spelling exists.
-      identitySource:"EXCHANGE_INSTRUMENT_ONLY",ticker:null,
+      identitySource:"EXCHANGE_INSTRUMENT_ONLY",ticker:publicTicker,
+      quoteSnapshotAt:publicTicker?new Date(publicTicker.ts).toISOString():null,
+      quoteSource:publicTicker?"OKX SPOT public · observation datée":null,
       watchSource:"GitHub public scan · OKX /api/v5/public/instruments",
       accountSpotPermissionVerified:false
     };
@@ -583,8 +628,8 @@
       lastUpdated:ts?new Date(ts).toISOString():new Date().toISOString(),
       usdUpdatedAt:ts?new Date(ts).toISOString():new Date().toISOString(),
       snapshotGeneratedAt:new Date().toISOString(),
-      source:`${spec.providerLabel} ${spec.pair} · marché public`,
-      usdSource:usdRate?`${spec.providerLabel} ${spec.pair} × ${spec.quote}/USD CoinGecko`:null,
+      source:`${quotedVenueLabel(spec)} ${spec.pair} · marché public`,
+      usdSource:usdRate?`${quotedVenueLabel(spec)} ${spec.pair} × ${spec.quote}/USD CoinGecko`:null,
       sourceMode:"new-listing-native-category",
       externalLookup403100:true,
       externalLookup403102:true,
@@ -647,6 +692,7 @@
       state.discovered=Array.isArray(rows)?rows.slice():[];
       const bitgetSpecs=state.discovered.map(providerSpec).filter(Boolean);
       const okxSpecs=watch.map(specFromWatchOKX).filter(Boolean);
+      state.watchStatus.pricedCount=okxSpecs.filter(spec=>spec.ticker!==null).length;
       state.specs=[...bitgetSpecs,...okxSpecs].sort((a,b)=>(b.launchTime||0)-(a.launchTime||0));
       state.followedSpecs=(globalThis.AgentCryptoNewListingLiveAsset?.trackedInstruments?.()||[])
         .map(providerSpec).filter(spec=>spec&&spec.symbol!=="CT"&&ageDays(spec.listedAt)>30);
@@ -694,28 +740,172 @@
     return rows;
   }
 
-  function visibleSpecs(){
-    const q=upper(rawQuery());
-    const all=allSpecs();
-    if(!q)return state.enabled?all:[];
-    return all.filter(spec=>{
-      const hay=[spec.id,spec.name,spec.symbol,spec.pair,spec.providerLabel,spec.providerSymbol,spec.discoveryProvider,spec.discoverySymbol].join(" ").toUpperCase();
-      return hay.includes(q);
+  // Display provenance only. Do not change CT's working chart/Bridge route.
+  function quotedVenue(spec){
+    return spec?.discoveryProvider==="Bitget"&&spec?.symbol==="CT"&&
+      upper(spec?.discoverySymbol)==="CTUSDT"?"bitget":spec?.provider;
+  }
+  function quotedVenueLabel(spec){
+    return quotedVenue(spec)==="bitget"?"Bitget":spec?.providerLabel||"Source inconnue";
+  }
+  // Cross-venue merge requires documented identity; CT is explicit.
+  // For other unknown tickers, only collapse pairs on the same exchange.
+  function listingIdentityKey(spec){
+    const base=upper(spec?.base||spec?.symbol),inst=upper(spec?.providerSymbol);
+    if(base==="CT"&&(
+      (quotedVenue(spec)==="okx"&&["CT-USDC","CT-USDT"].includes(inst))||
+      (quotedVenue(spec)==="bitget"&&inst==="CT-USDT")))
+      return "canonical:concrete";
+    if(spec?.identityVerified===true&&spec?.coingeckoId)
+      return "canonical:"+String(spec.coingeckoId).toLowerCase();
+    return "venue:"+String(quotedVenue(spec)||"unknown")+":"+base;
+  }
+  function groupListingSpecs(specs){
+    const buckets=new Map();
+    for(const spec of specs){
+      const key=listingIdentityKey(spec);
+      if(!buckets.has(key))buckets.set(key,[]);
+      buckets.get(key).push(spec);
+    }
+    return [...buckets.values()].map(markets=>{
+      const selected=markets.find(x=>x.id===state.selected?.id)||null;
+      const priced=markets.find(x=>positive(x?.ticker?.lastPrice)!==null)||null;
+      return {...(selected||priced||markets[0]),presentationMarkets:markets};
     });
+  }
+  function listingMarketsLabel(specs){
+    return specs.map(x=>quotedVenueLabel(x)+" "+x.pair+
+      (positive(x?.ticker?.lastPrice)!==null?" · prix public":" · prix indisponible")).join(" ; ");
+  }
+  function isDocumentedTokenized(spec){
+    return spec?.provider==="okx"&&
+      DOCUMENTED_TOKENIZED_OKX_SPOT.has(upper(spec.providerSymbol));
+  }
+  // Explain public Spot evidence without creating another market or API request.
+  function spotEvidence(spec){
+    const price=positive(spec?.ticker?.lastPrice);
+    if(price===null)return {label:"Prix absent ou périmé",detail:"Cotation publique récente indisponible",needsReview:true};
+    // CT Bitget may be routed through the canonical OKX chart: never misattribute it.
+    const exactOkx=quotedVenue(spec)==="okx"&&spec?.quoteSource==="OKX SPOT public · observation datée";
+    if(!exactOkx)return {label:"Prix public · offres non évaluées",
+      detail:"Prix de plateforme affiché ; profondeur et offres non vérifiées par cette source",needsReview:false};
+    const volume=finite(spec?.ticker?.turnover24h);
+    const bid=positive(spec?.ticker?.bidPx),ask=positive(spec?.ticker?.askPx);
+    if(volume===0)return {label:"Volume nul · liquidité non démontrée",
+      detail:"Volume public 24 h nul ; dernier prix enregistré sans liquidité démontrée",needsReview:true};
+    if(bid===null||ask===null||ask<bid)return {label:"Offres absentes ou incohérentes",
+      detail:"Pas de couple bid/ask public positif et cohérent dans ce relevé",needsReview:true};
+    if(volume===null)return {label:"Volume inconnu · à qualifier",
+      detail:"Offres bid/ask présentes ; volume public non qualifié",needsReview:true};
+    const spread=100*(ask-bid)/((ask+bid)/2);
+    const detail="Bid/ask publics ; écart indicatif "+spread.toFixed(2).replace(".",",")+
+      " % ; profondeur, frais, éligibilité et exécution non vérifiés";
+    return {label:spread>1?"Écart bid/ask > 1 % · à étudier":"Prix + offres publics observés",
+      detail,needsReview:spread>1};
+  }
+  function listingClass(spec){
+    if(isDocumentedTokenized(spec))return "tokenized";
+    const observation=state.coinCache.get(spec.id)||coinFromSpec(spec);
+    if(positive(observation?.priceUsd)===null)return "review";
+    return spotEvidence(spec).needsReview?"review":"quoted";
+  }
+  function inSegment(spec,segment){
+    if(segment==="all")return true;
+    if(segment==="okx")return quotedVenue(spec)==="okx"; // legacy test compatibility
+    if(segment==="other")return quotedVenue(spec)!=="okx";
+    // "À qualifier" is also a quality filter; tokenized instruments can overlap.
+    if(segment==="review")return listingClass(spec)==="review"||spotEvidence(spec).needsReview;
+    if(["quoted","tokenized"].includes(segment))return listingClass(spec)===segment;
+    return false;
+  }
+  function visibleSpecs(){
+    if(!state.enabled)return [];
+    const q=upper(rawQuery());
+    return groupListingSpecs(allSpecs())
+      .filter(group=>{
+        if(!group.presentationMarkets.some(spec=>inSegment(spec,state.activeSegment)))return false;
+        if(!q)return true;
+        return group.presentationMarkets.some(spec=>{
+          const hay=[spec.id,spec.name,spec.symbol,spec.pair,quotedVenueLabel(spec),spec.providerSymbol,spec.discoveryProvider,spec.discoverySymbol].join(" ").toUpperCase();
+          return hay.includes(q);
+        });
+      });
+  }
+  function mountSegmentToolbar(){
+    let bar=document.getElementById(SEGMENT_TOOLBAR_ID);
+    if(bar)return bar;
+    const chips=document.querySelector("#marketTools .filter-chips");
+    if(!chips)return null;
+    const style=document.createElement("style");
+    style.id="newListingsSegmentStyle";
+    const root="#"+SEGMENT_TOOLBAR_ID;
+    style.textContent=[
+      root+"[hidden]{display:none!important}",
+      root+"{display:flex;flex-wrap:wrap;align-items:center;gap:7px;width:100%;margin:4px 0 8px;padding:7px 9px;border:1px solid rgba(82,164,189,.27);border-radius:12px;background:rgba(4,23,35,.54)}",
+      root+" .new-listing-segment-caption{font:700 10px system-ui;letter-spacing:.07em;text-transform:uppercase;color:#9acfe1;margin-right:5px}",
+      root+" button{border:1px solid #34566c;border-radius:999px;background:#102838;color:#e6f6fb;padding:7px 10px;cursor:pointer;font:700 11px system-ui}",
+      root+" button[aria-pressed='true']{background:#164b5d;border-color:#77d8e6;color:#fff}",
+      root+" button:focus-visible{outline:2px solid #f6d78b;outline-offset:2px}",
+      root+" .new-listing-segment-note{color:#8eb4c7;font:11px system-ui;margin-left:auto}"
+    ].join("");
+    document.head.appendChild(style);
+    bar=document.createElement("div");
+    bar.id=SEGMENT_TOOLBAR_ID;
+    bar.setAttribute("role","group");
+    bar.setAttribute("aria-label","Familles de nouveaux listings");
+    bar.hidden=true;
+    const caption=document.createElement("span");
+    caption.className="new-listing-segment-caption";
+    caption.textContent="Nouveaux listings ·";
+    bar.append(caption);
+    for(const [key,label] of SEGMENT_OPTIONS){
+      const button=document.createElement("button");
+      button.type="button";
+      button.dataset.newListingSegment=key;
+      button.textContent=label;
+      button.setAttribute("aria-pressed",String(key===state.activeSegment));
+      button.addEventListener("click",()=>{
+        if(!state.enabled)return;
+        state.activeSegment=key;
+        renderCategory(); // presentation only; no extra public fetch
+      });
+      bar.append(button);
+    }
+    const note=document.createElement("span");
+    note.className="new-listing-segment-note";
+    note.textContent="Prix ≠ liquidité ni accès OKX · « À qualifier » : cotations fragiles";
+    bar.append(note);
+    chips.insertAdjacentElement("afterend",bar);
+    return bar;
+  }
+  function refreshSegmentToolbar(){
+    const bar=document.getElementById(SEGMENT_TOOLBAR_ID);
+    if(!bar)return;
+    bar.hidden=!state.enabled||!!state.radarOpen;
+    if(bar.hidden)return;
+    const specs=allSpecs();
+    for(const button of bar.querySelectorAll("button[data-new-listing-segment]")){
+      const key=button.dataset.newListingSegment;
+      const option=SEGMENT_OPTIONS.find(row=>row[0]===key);
+      button.textContent=(option?.[1]||key)+" ("+groupListingSpecs(specs).filter(group=>group.presentationMarkets.some(spec=>inSegment(spec,key))).length+")";
+      button.setAttribute("aria-pressed",String(key===state.activeSegment));
+    }
   }
 
   function priceTruth(spec,coin){
     const currency=displayCurrency(),derived=currency==="USD"?finite(coin?.priceUsd):finite(coin?.priceEur);
+    const quoteAge=spec?.quoteSnapshotAt?Date.now()-Date.parse(spec.quoteSnapshotAt):null;
+    const observation=quoteAge!==null&&quoteAge>=0?` · OKX observé il y a ${Math.round(quoteAge/60000)} min · non exécutable`:"";
     if(derived!==null){
       return {
         primary:money(derived,currency),
-        small:`${currency} dérivé · ${spec.providerLabel} ${spec.pair} × ${spec.quote}/${currency}`
+        small:`${currency} dérivé · ${quotedVenueLabel(spec)} ${spec.pair} × ${spec.quote}/${currency}${observation}`
       };
     }
     const raw=positive(spec?.ticker?.lastPrice);
     return {
-      primary:raw!==null?`${raw.toLocaleString("fr-FR",{maximumFractionDigits:10})} ${spec.quote}`:"Prix live indisponible",
-      small:`${spec.providerLabel} ${spec.pair}`
+      primary:raw!==null?`${raw.toLocaleString("fr-FR",{maximumFractionDigits:10})} ${spec.quote}`:"Prix non relevé",
+      small:raw!==null?`${quotedVenueLabel(spec)} ${spec.pair}${observation}`:"Cours absent de notre flux · "+quotedVenueLabel(spec)
     };
   }
 
@@ -728,12 +918,19 @@
     const currency=displayCurrency();
     const volume=currency==="USD"?finite(coin?.volume24hUsd):finite(coin?.volume24h);
     const proof=radarProof(spec,coin);
+    const evidence=spotEvidence(spec);
+    const tokenized=isDocumentedTokenized(spec);
     const mature=age!==null&&age>30;
     const historicOnly=spec.historicalOnly===true;
-    const statusTag=spec.provider==="okx"?"OKX":mature?(historicOnly?"ARCHIVE":"SUIVI"):(proof.status==="CONFIRMÉ"?"NEW":"?");
-    const identityTag=spec.provider==="okx"?
-      "OKX Spot public · symbole seulement · accès non vérifié":
+    const resumed=quotedVenue(spec)==="bitget" && RESUMED_SPOT_PAIRS[upper(spec.discoverySymbol||spec.providerSymbol)]?.symbol===spec.symbol ? RESUMED_SPOT_PAIRS[upper(spec.discoverySymbol||spec.providerSymbol)] : null;
+    const statusTag=resumed?"REPRISE":tokenized?"ACTION":listingClass(spec)==="review"?"À VÉRIF.":quotedVenue(spec)==="okx"?"OKX":mature?(historicOnly?"ARCHIVE":"SUIVI"):(proof.status==="CONFIRMÉ"?"NEW":"?");
+    const identityTag=resumed?`${resumed.category} · reprise Spot Bitget ${resumed.date} · ${resumed.history}`:tokenized?"Action / ETF tokenisé · source OKX officielle · accès personnel non vérifié":
+      quotedVenue(spec)==="okx"?`Instrument OKX repéré · ${positive(spec?.ticker?.lastPrice)!==null?"cours public observé":"cours non relevé"} · accès personnel non vérifié`:
+      spec.symbol==="CT"?"Bitget Spot · provenance du prix, accès OKX non vérifié":
       mature?(historicOnly?"Historique · cotation non vérifiée":"Ancien listing · source Bitget vérifiée"):(proof.status==="CONFIRMÉ"?"Nouveau confirmé":"Candidat");
+    const group=spec.presentationMarkets||[spec];
+    const marketSummary=group.length>1?
+      `<div class="new-listing-venue-summary" style="margin-top:5px;font:11px/1.5 system-ui;color:#9fd1df;overflow-wrap:anywhere"><b>Marchés (${group.length}) :</b> ${esc(listingMarketsLabel(group))}</div>`:"";
     const logo=coin?.image?`<img src="${esc(coin.image)}" alt="" loading="eager" fetchpriority="high" width="32" height="32">`:
       `<span class="market-coin-identity-fallback" aria-hidden="true" style="display:inline-grid;place-items:center;flex:none;width:32px;height:32px;border-radius:50%;border:1px solid #5b8b9c;background:#142e3b;color:#e6f3fd;font:700 11px system-ui">${esc(spec.symbol.slice(0,3))}</span>`;
     return `<tr class="asset-row atlas-market-external-row ${selected?"is-selected is-compared":""}"
@@ -743,9 +940,9 @@
       data-crypto-id="${esc(spec.id)}"
       tabindex="0" role="button"
       aria-selected="${selected?"true":"false"}"
-      aria-label="${esc(`${spec.name} ${spec.symbol}. ${mature?"Listing suivi":"Nouveau listing"} ${spec.providerLabel} ${spec.pair}.`)}">
+      aria-label="${esc(`${spec.name} ${spec.symbol}. ${resumed?"Reprise Spot":mature?"Listing suivi":"Nouveau listing"} ${quotedVenueLabel(spec)} ${spec.pair}. ${group.length} marché(s).`)}">
       <td>${statusTag}</td>
-      <td><div class="coin-cell"><i class="market-identity-rail"></i>${logo}<div><strong class="market-coin-name">${esc(spec.name)}</strong>${selected?'<span class="market-active-badge">ACTIF</span>':""}<br><small>${esc(spec.symbol)}</small><br><span class="asset-badge">${esc(identityTag)} · ${esc(proof.ageBand)}${age!==null?` · ${age.toFixed(1)} j`:""}</span></div></div></td>
+      <td><div class="coin-cell"><i class="market-identity-rail"></i>${logo}<div><strong class="market-coin-name">${esc(spec.name)}</strong>${selected?'<span class="market-active-badge">ACTIF</span>':""}<br><small>${esc(spec.symbol)}</small><br><span class="asset-badge">${esc(identityTag)} · ${esc(resumed?"âge de reprise":proof.ageBand)}${age!==null?` · ${age.toFixed(1)} j`:""}</span><br><small style="color:${evidence.needsReview?"#f4cc88":"#8cdbdc"}">${esc(evidence.label)}</small>${marketSummary}</div></div></td>
       <td><div class="price-dual"><strong>${esc(price.primary)}</strong><small>${esc(price.small)}</small></div></td>
       <td class="${change===null?"":change>=0?"pos":"neg"}"><span class="market-move-pill">${esc(pct(change))}</span></td>
       <td>—</td>
@@ -754,7 +951,7 @@
         "Capitalisation non fournie par une source vérifiée")}">${positive(coin?.marketCapUsd)!==null?
         esc(compactMoney(coin.marketCapUsd,"USD")):"—"}</td>
       <td class="market-col-advanced">${volume!==null?esc(compactMoney(volume,currency)):"—"}</td>
-      <td class="spark-cell"><small>${esc(proof.status)}</small></td>
+      <td class="spark-cell"><small title="${esc(evidence.detail)}">${esc(evidence.needsReview?"À QUALIFIER":quotedVenue(spec)==="okx"?"COURS + OFFRES":"PRIX PUBLIC")}</small></td>
       <td class="market-col-advanced">—</td>
       <td class="market-col-advanced">Observer</td>
       <td><div class="market-row-actions">${historicOnly?"":`<button type="button" data-new-listing-open="${esc(spec.id)}">Solo</button>`}<button type="button" data-new-listing-sources="${esc(spec.id)}">Sources</button></div></td>
@@ -766,6 +963,7 @@
     hideLegacyUx();
     const body=document.getElementById(ROWS_ID);if(!body)return 0;
     const specs=visibleSpecs();
+    refreshSegmentToolbar();
 
     body.querySelectorAll(`tr[${ROOT_ATTR}]`).forEach(node=>node.remove());
 
@@ -773,19 +971,21 @@
       body.innerHTML=specs.length
         ?specs.map(nativeRow).join("")
         :`<tr ${ROOT_ATTR}="empty"><td colspan="11" class="empty">${esc(state.discovering?"Chargement des nouveaux listings…":state.lastError?`Nouveaux listings indisponibles · ${state.lastError}`:"Aucun nouveau listing pour ce filtre.")}</td></tr>`;
-    }else if(specs.length){
+    }else if(specs.length&&!state.radarOpen){
       body.insertAdjacentHTML("afterbegin",specs.map(nativeRow).join(""));
     }
 
     const note=document.getElementById(NOTE_ID);
     if(note&&state.enabled){
       const total=state.specs.length;
+      const sourceLines=allSpecs().filter(x=>inSegment(x,state.activeSegment)).length;
       const followed=allSpecs().filter(x=>ageDays(x.listedAt)>30).length;
+      const segmentName=SEGMENT_OPTIONS.find(row=>row[0]===state.activeSegment)?.[1]||"Tous";
       note.textContent=state.discovering
         ?"Nouveaux listings · actualisation Bitget en cours…"
         :state.lastError
           ?`Nouveaux listings · ${state.lastError}`
-          :`Nouveaux ≤30 j · ${total} · OKX Spot public ${state.watchStatus.okxCount} · ${esc(state.watchStatus.status)} · Suivis >30 j · ${followed} · Radar Bitget · ${state.radarStatus.confirmed} confirmé(s) · ${state.radarStatus.candidates} candidat(s) · identités ${state.identityStatus.verified}/${state.identityStatus.attempted} · logos ${state.identityStatus.logos} · ${identityDiagnosticsLabel()} · relance ≥15 s · Market Core inchangé`;
+          :`Nouveaux listings · ${segmentName} : ${specs.length} fiches · Registre : ${groupListingSpecs(allSpecs()).length} actifs / ${allSpecs().length} marchés · La cotation publique ne garantit pas la négociation sur ton compte. « À qualifier » : prix absents, volume nul, offres absentes ou spread > 1 %. Catégories parfois recoupées. Market Core inchangé`;
     }
     return specs.length;
   }
@@ -870,6 +1070,7 @@
     const raw=positive(spec.ticker?.lastPrice??globalThis.AgentCryptoNewListingLiveAsset?.snapshot?.()?.marketTicker?.lastPrice);
     const age=ageDays(spec.listedAt);
     const metrics=result?.integrity?.metrics||{};
+    const evidence=spotEvidence(spec);
     const axis=spec.symbol==="AXIS"&&spec.providerSymbol==="AXISUSDT"&&spec.provider==="bitget";
     const title=document.getElementById("selectedAssetTitle");
     if(title)title.textContent=`${spec.name} — ${spec.symbol} · NOUVEAU LISTING`;
@@ -884,6 +1085,7 @@
         <div><b>Exchange / paire</b><span>${esc(spec.providerLabel)} · ${esc(spec.pair)}</span></div>
         <div><b>Source prix</b><span>${esc(coin.usdSource||coin.source||spec.providerLabel)}</span></div>
         <div><b>Volume 24 h</b><span>${finite(currency==="USD"?coin.volume24hUsd:coin.volume24h)!==null?esc(compactMoney(currency==="USD"?coin.volume24hUsd:coin.volume24h,currency)):"—"}</span></div>
+        <div><b>Liquidité publique</b><span>${esc(evidence.label)} · ${esc(evidence.detail)}</span></div>
         <div><b>Capitalisation USD · CoinGecko</b><span>${positive(coin.marketCapUsd)!==null?
           esc(compactMoney(coin.marketCapUsd,"USD"))+" · "+esc(coin.marketCapObservedAt||"horodatage absent"):
           "Non disponible · la source Bitget ne fournit pas la capitalisation"}</span></div>
@@ -906,7 +1108,7 @@
     const change=document.getElementById("detailCompactChange");if(change)change.textContent=pct(coin.change24h);
     const why=document.getElementById("assetDetailWhy");if(why)why.innerHTML=axis?
       '<strong>AXIS · recherche uniquement :</strong> listing Bitget Spot AXIS/USDT du 21 octobre 2026 (13 h UTC). Identité Base documentée. Un dérivé OKX AXISUSD ne démontre aucune paire Spot AXIS/USDC. Frais, liquidité, minimum et revente de 10 USDC non certifiés. Forte volatilité initiale : ne pas interpréter le +24 h comme un rendement réalisable. <a href="../trader/axis-robotics-case-study.html" target="_blank" rel="noopener noreferrer">Cas d’école AXIS · rapport Seven ↗</a> · <a href="../data/crypto/research/axis-robotics.json" target="_blank" rel="noopener noreferrer">Dossier machine AXIS (JSON) ↗</a>':
-      `<strong>Lecture :</strong> ${esc(spec.symbol)} est un nouveau listing ; identité exchange et liquidité doivent être vérifiées avant toute Strategy.`;
+      `<strong>Lecture :</strong> ${esc(spec.symbol)} : ${esc(evidence.detail)}. Achat/revente personnels non vérifiés.`;
   }
 
   function beginRequest(spec){
@@ -1075,8 +1277,11 @@
     const note=document.getElementById(NOTE_ID);if(!note||!spec)return;
     const identity=spec.identityVerified?`${spec.canonicalName||spec.name} · identité ${spec.identitySource||"vérifiée"}`:"nom projet non enrichi";
     const proof=radarProof(spec,state.coinCache.get(spec.id)||coinFromSpec(spec));
+    const evidence=spotEvidence(spec);
     if(spec.historicalOnly===true){note.textContent=`${spec.symbol} · ARCHIVE HISTORIQUE · source actuelle non vérifiée · ${spec.providerLabel} ${spec.pair} · aucun prix inventé`;return;}
-    note.textContent=`${spec.symbol} · ${ageDays(spec.listedAt)>30?"LISTING SUIVI":proof.status} ${proof.proofCount}/3 (date+prix+volume) · ${identity} · listing ${spec.discoveryProvider} ${spec.discoverySymbol} · analyse ${spec.providerLabel} ${spec.pair} · ticker seul ≠ identité canonique`;
+    const group=allSpecs().filter(row=>listingIdentityKey(row)===listingIdentityKey(spec));
+    const resumed=quotedVenue(spec)==="bitget" ? RESUMED_SPOT_PAIRS[upper(spec.discoverySymbol||spec.providerSymbol)] : null;
+    note.textContent=`${spec.symbol}${resumed?` · REPRISE BITGET ${resumed.date} · ${resumed.history} (pas lancement de jeton)`:""} · Marchés : ${listingMarketsLabel(group)} · ${isDocumentedTokenized(spec)?"ACTION TOKENISÉE DOCUMENTÉE · ":""}${evidence.label} · ${evidence.detail} · date/prix/volume ${proof.proofCount}/3 · ${identity} · listing ${spec.discoveryProvider} ${spec.discoverySymbol} · analyse ${spec.providerLabel} ${spec.pair} · ticker seul ≠ identité canonique`;
   }
 
   function bindRows(){
@@ -1137,9 +1342,11 @@
       hideLegacyUx();
       if(state.enabled){
         document.querySelectorAll(".filter-btn[data-filter]").forEach(b=>{if(b!==button)b.classList.remove("active");});
+        refreshSegmentToolbar();
         void discover({force:false});
       }else{
         state.originalRenderMarketTable?.();
+        refreshSegmentToolbar();
       }
     },true);
   }
@@ -1151,6 +1358,7 @@
       if(state.radarOpen)radarView(false);
       if(state.enabled||state.selected||state.pending){
         state.enabled=false;
+        refreshSegmentToolbar();
         const category=document.getElementById(BUTTON_ID);
         category?.classList.remove("active","is-active");
         category?.setAttribute("aria-pressed","false");
@@ -1281,6 +1489,8 @@
     const supplementary=document.getElementById("atlasRadarBelowMarket");
     if(supplementary)supplementary.hidden=!visible;
     state.radarOpen=visible;
+    if(!visible)globalThis.AtlasMarketRadarCategory?.set?.(false);
+    refreshSegmentToolbar();
     button.classList.toggle("active",visible);
     button.classList.toggle("is-active",visible);
     button.setAttribute("aria-pressed",String(visible));
@@ -1289,6 +1499,8 @@
       void ensureNativeRadar().then(()=>{
         if(!state.radarOpen||!view.isConnected)return;
         globalThis.AgentCryptoRadarNative.mount(view);
+        if(globalThis.AtlasMarketRadarCategory?.set?.(true)!==true)
+          throw new Error("Market Radar category owner unavailable");
       }).catch(error=>{
         if(!state.radarOpen)return;
         view.textContent="Radar indisponible : "+String(error?.message||error);
@@ -1305,7 +1517,7 @@
     const css=document.createElement("style");
     css.id="atlasRadarTabStyle";
     // Radar reuses the native Market table, its filters, columns, Fiche and
-    // Graphique. Research-only detailed rankings remain in a collapsed fold.
+    // Graphique. Research evidence remains below the native Market table.
     // Never hide #marketTableWindowBody or create a parallel Market owner.
     css.textContent="#atlasRadarMarketView[hidden]{display:none!important}"+
       // The public New Listings overlay is not the Radar's canonical ranking.
@@ -1321,12 +1533,24 @@
     tab.type="button";
     tab.className="filter-btn";
     tab.textContent="Radar";
-    tab.title="Radar · Top 10/20/50/250, nouveaux listings Spot, BTC/CT PAPER";
+    tab.title="Radar · Candidats Market, veille Spot et études PAPER BTC/CT";
     tab.setAttribute("aria-label","Afficher Radar dans Market Snapshot");
     tab.setAttribute("aria-expanded","false");
     tab.setAttribute("aria-controls","atlasRadarMarketView");
     tab.setAttribute("aria-pressed","false");
     button.insertAdjacentElement("afterend",tab);
+    // Persistent documentary route: research survives moves outside the Market Top 1000.
+    // No extra table, network poll, chart ownership or Market ranking modification.
+    let dossierLink=document.getElementById("atlasCryptoFollowedDossiersLink");
+    if(!dossierLink){
+      dossierLink=document.createElement("a");
+      dossierLink.id="atlasCryptoFollowedDossiersLink";
+      dossierLink.className="filter-btn";
+      dossierLink.textContent="Dossiers suivis ↗";
+      dossierLink.href=new URL("../laboratoire/crypto-knowledge.html#veille-fil-crypto",document.baseURI).href;
+      dossierLink.setAttribute("aria-label","Consulter les dossiers suivis, y compris hors Top 1000");
+      tab.insertAdjacentElement("afterend",dossierLink);
+    }
     const view=document.createElement("section");
     view.id="atlasRadarMarketView";
     view.hidden=true;
@@ -1345,7 +1569,7 @@
   }
   function mount(){
     if(typeof document==="undefined")return false;
-    hideLegacyUx();patchUniverseResolver();wrapMarketRender();bindRows();bindCategoryButton();bindSearch();mountRadarLink();
+    hideLegacyUx();patchUniverseResolver();wrapMarketRender();bindRows();bindCategoryButton();bindSearch();mountSegmentToolbar();mountRadarLink();
     if(!state.mounted){bindOtherFilters();bindPeriod();bindPresentationRefresh();bindCanonicalExit();state.mounted=true;}
     renderCategory();
     return true;
@@ -1383,7 +1607,7 @@
 
   function snapshot(){
     return Object.freeze({
-      build:MODULE_VERSION,enabled:state.enabled,discovered:state.specs.length,followed:state.followedSpecs.length,
+      build:MODULE_VERSION,enabled:state.enabled,activeSegment:state.activeSegment,groupedMarketCount:groupListingSpecs(allSpecs()).length,marketInstrumentCount:allSpecs().length,documentedTokenizedSpotCount:state.specs.filter(isDocumentedTokenized).length,datedOkxQuotesCount:state.specs.filter(spec=>spec.provider==="okx"&&spec.ticker).length,discovered:state.specs.length,followed:state.followedSpecs.length,
       selectedId:state.selected?.id||null,selectedSymbol:state.selected?.symbol||null,
       // Separate CoinGecko canonical identity from the stable exchange-scoped chart ID.
       selectedCanonicalId:state.selected?.coingeckoId||null,
@@ -1421,6 +1645,71 @@
     const oldCap=marketMetricsFromPayload(axisSpec,{
       ...capPayload,last_updated:new Date(Date.now()-25*60000).toISOString()});
     const noDateCap=marketMetricsFromPayload(axisSpec,{...capPayload,last_updated:null});
+    const documentedTokenized={provider:"okx",providerSymbol:"XWDC-USDC"};
+    const unverifiedPrefix={provider:"okx",providerSymbol:"XDP-USDC"};
+    const external={provider:"bitget",providerSymbol:"RT1USDT"};
+    const segmentTests=isDocumentedTokenized(documentedTokenized)&&
+      isDocumentedTokenized({provider:"okx",providerSymbol:"XNFLX-USDC"})&&
+      !isDocumentedTokenized(unverifiedPrefix)&&!isDocumentedTokenized(external)&&
+      inSegment(documentedTokenized,"okx")&&inSegment(documentedTokenized,"tokenized")&&
+      inSegment(external,"other")&&!inSegment(external,"okx")&&
+      inSegment(unverifiedPrefix,"okx")&&!inSegment(unverifiedPrefix,"tokenized");
+    const pricedForUi={id:"selftest:usd",provider:"bitget",providerLabel:"Bitget",
+      symbol:"TEST",quote:"USD",pair:"TEST/USD",ticker:{lastPrice:"1.25"}};
+    const unpricedForUi={id:"selftest:pending",provider:"okx",providerLabel:"OKX",
+      symbol:"TEST002",quote:"USDT",pair:"TEST002/USDT",providerSymbol:"TEST002-USDT",ticker:null};
+    const tokenizedForUi={id:"selftest:stock",provider:"okx",providerLabel:"OKX",
+      symbol:"XJPM",quote:"USD",pair:"XJPM/USD",providerSymbol:"XJPM-USDT",ticker:{lastPrice:"330.5"}};
+    const readableTests=DOCUMENTED_TOKENIZED_OKX_SPOT.size===50&&
+      listingClass(pricedForUi)==="quoted"&&
+      inSegment(pricedForUi,"quoted")&&
+      listingClass(unpricedForUi)==="review"&&
+      inSegment(unpricedForUi,"review")&&
+      listingClass(tokenizedForUi)==="tokenized"&&
+      !inSegment(tokenizedForUi,"quoted")&&
+      !isDocumentedTokenized({provider:"okx",providerSymbol:"XDP-USDT"});
+    const zeroVolume={id:"selftest:zero",provider:"okx",providerLabel:"OKX",
+      quote:"USD",symbol:"TEST002",pair:"TEST002/USD",
+      quoteSource:"OKX SPOT public · observation datée",
+      ticker:{lastPrice:"7.3",turnover24h:"0",bidPx:null,askPx:null}};
+    const withOffers={...zeroVolume,ticker:{lastPrice:"7.3",turnover24h:"9000",bidPx:7.27,askPx:7.3}};
+    const wideSpread={...withOffers,ticker:{...withOffers.ticker,bidPx:6.5,askPx:7.3}};
+    const tokenizedZero={...zeroVolume,providerSymbol:"XWDC-USDC"};
+    const liquidityChecks=listingClass(zeroVolume)==="review"&&!inSegment(zeroVolume,"quoted")&&
+      inSegment(zeroVolume,"review")&&listingClass(withOffers)==="quoted"&&
+      !spotEvidence(withOffers).needsReview&&spotEvidence(wideSpread).needsReview&&
+      inSegment(wideSpread,"review")&&listingClass(tokenizedZero)==="tokenized"&&
+      inSegment(tokenizedZero,"tokenized")&&inSegment(tokenizedZero,"review");
+    const publicQuote={instId:"ABC-USDC",quote:"USDC",last:"1.50",open24h:"1.00",
+      volCcy24h:"4000",bidPx:"1.49",askPx:"1.51",observed_at_utc:new Date().toISOString(),
+      account_spot_access_verified:false,executable_price_verified:false};
+    const quoteSpec={provider:"okx",instrument_type:"SPOT",providerSymbol:"ABC-USDC",
+      quote:"USDC",quote_snapshot:publicQuote};
+    const observed=observedOKXTicker(quoteSpec);
+    const okxQuoteChecks=observed?.lastPrice==="1.50"&&observed.bidPx===1.49&&observed.askPx===1.51&&
+      Number(observed.price24hPcnt)===.5&&
+      observedOKXTicker({...quoteSpec,quote_snapshot:{...publicQuote,
+        observed_at_utc:new Date(Date.now()-2*3600000).toISOString()}})===null&&
+      observedOKXTicker({...quoteSpec,providerSymbol:"DIFFERENT-USDC"})===null&&
+      observedOKXTicker({...quoteSpec,provider:"bitget"})===null;
+    const ctFromBitget=providerSpec({base:"CT",quote:"USDT",providerSymbol:"CTUSDT",
+      listedAt:new Date(Date.now()-86400000).toISOString()});
+    if(ctFromBitget)ctFromBitget.ticker={lastPrice:"0.25",turnover24h:"6000"};
+    const ctOnOkx=specFromWatchOKX({provider:"okx",instrument_type:"SPOT",state:"live",
+      base:"CT",quote:"USDC",providerSymbol:"CT-USDC",pair:"CT/USDC",
+      listedAt:new Date(Date.now()-86400000).toISOString()});
+    const ctOnOkxUsdt=specFromWatchOKX({provider:"okx",instrument_type:"SPOT",state:"live",
+      base:"CT",quote:"USDT",providerSymbol:"CT-USDT",pair:"CT/USDT",
+      listedAt:new Date(Date.now()-86400000).toISOString()});
+    const maybeCollision={provider:"bitget",base:"XDP",symbol:"XDP",id:"bitget:xdp",providerSymbol:"XDPUSDT"};
+    const okxXdp={provider:"okx",base:"XDP",symbol:"XDP",id:"okx:xdp",providerSymbol:"XDP-USDT"};
+    const groupedExample=groupListingSpecs([ctOnOkx,ctOnOkxUsdt,ctFromBitget,maybeCollision,okxXdp]);
+    const groupingChecks=quotedVenue(ctFromBitget)==="bitget"&&
+      quotedVenueLabel(ctFromBitget)==="Bitget"&&
+      inSegment(ctFromBitget,"other")&&!inSegment(ctFromBitget,"okx")&&
+      groupedExample.length===3&&
+      groupedExample.some(x=>x.id==="concrete"&&x.presentationMarkets.length===3)&&
+      groupedExample.filter(x=>x.symbol==="XDP").length===2;
     const sampleOKX=specFromWatchOKX({provider:"okx",instrument_type:"SPOT",
       state:"live",base:"TEST",quote:"USDC",providerSymbol:"TEST-USDC",pair:"TEST/USDC",
       listedAt:new Date(Date.now()-3600000).toISOString()});
@@ -1444,6 +1733,7 @@
       &&sampleOKX?.providerSymbol==="TEST-USDC"&&swapRejected===null&&
         tickerCollisionRejected
       &&proof.status==="CONFIRMÉ"
+      &&segmentTests&&groupingChecks&&readableTests&&okxQuoteChecks&&liquidityChecks
       &&candidate.status==="CANDIDAT"
       &&ageBand(.5).label==="<24 h"
       &&ageBand(5).label==="4–7 j"
@@ -1473,6 +1763,12 @@
       market_cap_missing_is_not_zero:true,
       market_cap_batch_reuses_identity_pipeline:true,
       public_okx_spot_listing_feed_only:true,
+      market_segment_filters:segmentTests,
+      tokenized_requires_documented_instrument:segmentTests,
+      provenance_grouping_verified:groupingChecks,
+      readable_market_categories:readableTests,
+      okx_spot_quote_freshness_and_exact_id:okxQuoteChecks,
+      public_spot_liquidity_classification:liquidityChecks,
       okx_swap_rejected:swapRejected===null,
       okx_ticker_collision_refused:tickerCollisionRejected,
       market_cap_exact_id_symbol_time:!!validCap&&!wrongCoinCap&&!wrongSymbolCap,
