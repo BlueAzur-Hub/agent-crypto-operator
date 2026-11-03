@@ -252,7 +252,7 @@ test('unknown New Listing identity never creates a guessed position',()=>{
 });
 test('Trader iframe actually loads the Technical Reading owner once; Administrator does not',()=>{
  assert.match(entry,/src="\.\/trader-runtime-mirror\.js/);
- assert.match(entry,/src="\.\.\/administrator\/index\.html\?surface=trader"/);
+ assert.match(entry,/src="\.\.\/administrator\/index\.html\?surface=trader&amp;view=intermediate&amp;profile=yohan"/);
  assert.match(mirror,/if\(!doc\.getElementById\("traderTechnicalReadingSyncScript"\)\)/);
  assert.equal((mirror.match(/script\.id="traderTechnicalReadingSyncScript"/g)||[]).length,1);
  assert.match(mirror,/script\.src=new URL\("\.\.\/trader\/technical-reading-data-sync\.js",doc\.baseURI\)\.href/);
@@ -323,8 +323,8 @@ test('CT source files unchanged by renderer and account proof is opt-in only',()
  assert.match(code,/!same\(initial.identity,token\)/);
  assert.match(code,/basePositionReadOnly\(pair\)/);
  assert.match(code,/privateButton\.addEventListener\('click'/);
- assert.match(account,/async function basePositionReadOnly\(instId\)/);
- assert.match(account,/Une sous-position/);
+ assert.doesNotMatch(account,/async function basePositionReadOnly\(instId\)/);
+ assert.match(code,/privateButton\.disabled=busy\|\|!isNativeOkx\|\|!privateAllowed\(\)/);
  assert.doesNotMatch(code,/aiCtPanel\.hidden|aiCtPanel\.open|aiCtDetails|localStorage\./);
  assert.match(ctBefore,/Lire ma position CT\/USDC/);
 });
