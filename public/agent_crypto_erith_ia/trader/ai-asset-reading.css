@@ -1,0 +1,45 @@
+/* Seven Reading · alternate content inside the existing native CT details.
+   Never create a second panel border, accordion row or navigation entry. */
+#detailPanel #aiCtPanel .ai-ct-panel-body[hidden]{display:none!important}
+#detailPanel #aiCtPanel #sevenAssetReading{width:100%;min-width:0;box-sizing:border-box;margin:0;
+ border:0;border-radius:0;background:transparent;color:#e6f5f6;
+ font:12px/1.45 system-ui,sans-serif}
+#detailPanel #sevenAssetReading[hidden]{display:none!important}
+#detailPanel #sevenAssetReading>summary{cursor:pointer;padding:9px 11px;
+ display:flex;flex-wrap:wrap;gap:3px;align-items:baseline;justify-content:space-between;
+ background:rgba(18,53,63,.84);border-radius:9px;overflow-wrap:anywhere}
+#detailPanel #sevenAssetReading>summary strong{font-size:13px;color:#9fe9f0}
+#detailPanel #sevenAssetReading>summary small{font-size:10px;color:#bed5e0}
+#detailPanel #sevenAssetReading .seven-asset-body{box-sizing:border-box;
+ padding:9px 11px 13px;min-width:0}
+#detailPanel #sevenAssetReading .seven-asset-intro,
+#detailPanel #sevenAssetReading .seven-asset-state{margin:5px 0 9px;color:#c0d7e0;
+ font-size:11px;line-height:1.5;overflow-wrap:anywhere}
+#detailPanel #sevenAssetReading .seven-asset-modes,
+#detailPanel #sevenAssetReading .seven-asset-actions{display:flex;flex-wrap:wrap;gap:5px;margin:7px 0}
+#detailPanel #sevenAssetReading button{cursor:pointer;min-height:30px;padding:5px 9px;border-radius:7px;
+ border:1px solid rgba(102,194,213,.57);background:#0c303d;color:#deedf2;font:600 11px system-ui,sans-serif}
+#detailPanel #sevenAssetReading button[aria-pressed="true"]{background:#80d6e3;color:#08232c}
+#detailPanel #sevenAssetReading button:disabled{opacity:.48;cursor:not-allowed}
+#detailPanel #sevenAssetReading button:focus-visible,
+#detailPanel #sevenAssetReading summary:focus-visible{outline:2px solid #a7edf5;outline-offset:2px}
+#detailPanel #sevenAssetReading .seven-asset-help{border-left:2px solid #71d5e2;
+ padding:2px 8px;margin:8px 0;background:rgba(3,30,40,.42)}
+#detailPanel #sevenAssetReading .seven-asset-help p{margin:5px 0;color:#c9dde4}
+#detailPanel #sevenAssetReading .seven-asset-card{border:1px solid rgba(124,184,203,.27);
+ margin:6px 0 0;border-radius:7px;background:rgba(2,24,34,.68);overflow:hidden}
+#detailPanel #sevenAssetReading .seven-asset-card>summary{cursor:pointer;
+ display:flex;gap:5px;align-items:baseline;justify-content:space-between;
+ padding:7px 9px;background:rgba(21,56,67,.6)}
+#detailPanel #sevenAssetReading .seven-asset-card>summary b{font-size:11px;color:#b8f0f5}
+#detailPanel #sevenAssetReading .seven-asset-card>summary small{font-size:10px;color:#efcf99}
+#detailPanel #sevenAssetReading .seven-asset-note{margin:6px 9px;color:#bad3df;
+ font-size:11px;overflow-wrap:anywhere}
+#detailPanel #sevenAssetReading .seven-asset-values{padding:0 8px 6px}
+#detailPanel #sevenAssetReading .seven-asset-row{display:flex;justify-content:space-between;
+ align-items:flex-start;gap:8px;border-top:1px solid rgba(125,197,209,.13);
+ padding:6px 0;overflow-wrap:anywhere}
+#detailPanel #sevenAssetReading .seven-asset-row span{color:#9dbac7;max-width:47%}
+#detailPanel #sevenAssetReading .seven-asset-row strong{color:#f0e6cb;max-width:53%;
+ font-variant-numeric:tabular-nums;text-align:right}
+@media(max-width:700px){#detailPanel #sevenAssetReading .seven-asset-row{font-size:11px}}
