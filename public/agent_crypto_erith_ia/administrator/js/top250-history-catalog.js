@@ -1,7 +1,7 @@
 /* Seven Heaven · one canonical Top250 view, read-only · Binance + Bitget. */
 (() => {
 "use strict";
-const ROOT=new URL("../../data/historical_archive_prototype/",document.currentScript.src);
+const ROOT=new URL("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/historical_archive_prototype/");
 const $=id=>document.getElementById(id);
 const check=(ok,msg)=>{if(!ok)throw Error(msg)};
 let catalog=null,binance=null,bitget=null,yearDepth=null,privateWBT=null;
@@ -14,7 +14,7 @@ function cell(row,value){
 }
 async function getJson(name,limit=2000000){
  const path=new URL(name,ROOT);
- check(path.origin===location.origin&&path.pathname.startsWith(ROOT.pathname),"Origine du Coffre interdite");
+ check(path.origin===ROOT.origin&&path.pathname.startsWith(ROOT.pathname),"Origine du Coffre interdite");
  const res=await fetch(path.href,{credentials:"omit",cache:"no-store",redirect:"error"});
  check(res.ok,"Index indisponible : "+name+" HTTP "+res.status);
  const body=await res.text();check(body.length>0&&body.length<=limit,"Index trop volumineux : "+name);
