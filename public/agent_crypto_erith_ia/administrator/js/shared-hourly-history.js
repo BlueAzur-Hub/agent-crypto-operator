@@ -3,7 +3,7 @@
  */
 (() => {
 "use strict";
-const root=new URL("../../data/historical_archive_prototype/shared_hourly_views/",document.currentScript.src);
+const root=new URL("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/historical_archive_prototype/shared_hourly_views/");
 const need=(ok,message)=>{if(!ok)throw Error(message)};
 const windows={"60j":1440,"90j":2160,"1an":8760,"Max":null};
 const cache=new Map(),pending=new Map();let index=null,indexPromise=null;
@@ -13,7 +13,7 @@ async function read(file,cap){
  need(file==="index.json"||/^[a-z0-9-]{1,90}-hourly\.json\.gz$/.test(file),
       "Nom de projection interdit");
  const url=new URL(file,root);
- need(url.origin===location.origin&&url.pathname.startsWith(root.pathname),
+ need(url.origin===root.origin&&url.pathname.startsWith(root.pathname),
       "Source historique externe interdite");
  const response=await fetch(url.href,{credentials:"omit",redirect:"error",cache:"no-store"});
  need(response.ok,"HTTP "+response.status+" : "+file);

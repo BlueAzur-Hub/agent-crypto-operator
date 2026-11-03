@@ -29,6 +29,17 @@
       vault: "Comparer le volume, les périodes de cotation, les fenêtres manquantes et les sources exactes avant toute simulation.",
       risks: "Volatilité, liquidité, échéances de distribution des jetons, prix d’achat après forte hausse et slippage.",
       links: [["Site officiel", "https://quackai.ai/"],["CoinGecko", "https://www.coingecko.com/en/coins/quack-ai"]]
+    },
+    AXIS: {
+      name: "Axis Robotics", type: "Nouveau listing · IA physique · rapport Seven",
+      purpose: "Un projet robotique identifié n'est pas automatiquement une bonne entrée. Prix communautaire AXIS de 0,10 USD mais engagement minimal 100 USDC, KYC, prorata et déblocages. Budget Seven : 10 USDC ; décision du 21 octobre : observer, 0 achat.",
+      market: "Le Market natif reste propriétaire du prix, du volume et de la capitalisation USD datée. La série Bitget AXIS/USDT Spot et l'éventuelle pool Base AXIS/USDC ne sont pas interchangeables, ni une preuve d'accès Spot AXIS/USDC chez OKX.",
+      vault: "Premières heures de bougies Bitget datées depuis le 21 octobre 2026 à 13 h UTC ; historique du premier jour partiel, pas 24 h complètes ni mois de Coffre certifiés. Dossier de preuves JSON séparé.",
+      risks: "Vente communautaire inaccessible avec 10 USDC ; prix observé ≈ 2,54× le prix de vente (comparaison seulement), seulement 16,5 % de l'offre annoncée en circulation, déblocages futurs, frais/minimums/liquidité de sortie OKX non prouvés.",
+      links: [["Rapport humain AXIS · cas d'école", "../trader/axis-robotics-case-study.html"],
+        ["Preuves structurées pour les IA (JSON)", "../data/crypto/research/axis-robotics.json"],
+        ["Projet officiel", "https://axisrobotics.ai/"],
+        ["Annonce Bitget Spot AXIS/USDT", "https://www.bitget.com/support/articles/12560603898107"]]
     }
   });
   const TABS = [
@@ -55,6 +66,101 @@
   // owners do the actual selection, loads, technical reading and depth.
   let selectionRevision=0,selectionPending=false,selectionTruth="Dossier pédagogique · aucune sélection Trader demandée";
   const marketIds=Object.freeze({BTC:"bitcoin",Q:"quack-ai"});
+  // One canonical external AXIS identity, not an OKX perpetual with the same ticker.
+  const externalMarket=Object.freeze({
+    CT:Object.freeze({id:"concrete",canonical:"concrete",symbol:"CT",
+      provider:"okx",providerSymbol:"CT-USDT",pair:"CT/USDT",instrument:"CT-USDT"}),
+    AXIS:Object.freeze({id:"new-listing:bitget:axisusdt",canonical:"axis-robotics",
+      symbol:"AXIS",provider:"bitget",providerSymbol:"AXISUSDT",
+      pair:"AXIS/USDT",instrument:"AXIS-USDT"})
+  });
+  function confirmedExternal(symbol){
+    const expected=externalMarket[symbol],owner=globalThis.AgentCryptoNewListingsNativeCategory;
+    const selection=owner?.snapshot?.(),ext=globalThis.AgentCryptoNewListingLiveAsset?.snapshot?.();
+    // CT's legacy owner is intentionally less verbose: preserve its proven
+    // selection contract while requiring stronger contract identity for AXIS.
+    if(symbol==="CT")return selection?.selectedId==="concrete"&&
+      ext?.active===true&&ext.id==="concrete"&&
+      ext.provider==="okx"&&ext.instrument==="CT-USDT";
+    return !!expected&&selection?.selectedId===expected.id&&
+      selection.selectedCanonicalId===expected.canonical&&
+      selection.selectedSymbol===expected.symbol&&
+      selection.selectedProvider===expected.provider&&
+      selection.selectedProviderSymbol===expected.providerSymbol&&
+      selection.selectedPair===expected.pair&&ext?.active===true&&
+      ext.id===expected.id&&ext.provider===expected.provider&&
+      ext.instrument===expected.instrument;
+  }
+  function nativeMarketEvidence(symbol){
+    if(!confirmedExternal(symbol))return null;
+    const c=globalThis.AgentCryptoNewListingsNativeCategory?.selectedMarketCoin?.();
+    const e=externalMarket[symbol];
+    if(!c||c.id!==e.id||c.symbol!==e.symbol||
+       c.listingPair!==e.pair||String(c.listingProvider).toLowerCase()!==e.provider)return null;
+    const value=k=>typeof c[k]==="number"&&Number.isFinite(c[k])&&c[k]>0?c[k]:null;
+    const stamp=Date.parse(String(c.usdUpdatedAt||""));
+    const nativeStamp=Number(c.providerContext?.ticker?.ts);
+    if(!(value("priceUsd"))||!Number.isSafeInteger(nativeStamp)||
+      !Number.isFinite(stamp)||Math.abs(stamp-nativeStamp)>1000||
+      stamp>Date.now()+120000||Date.now()-stamp>15*60*1000)return null;
+    const capStamp=Date.parse(String(c.marketCapObservedAt||""));
+    const verifiedCap=Number.isFinite(capStamp)&&capStamp<=Date.now()+120000&&
+      Date.now()-capStamp<=15*60*1000&&
+      c.marketCapSource==="CoinGecko coins/markets";
+    return Object.freeze({
+      priceUsd:value("priceUsd"),volume24hUsd:value("volume24hUsd"),
+      marketCapUsd:verifiedCap?value("marketCapUsd"):null,
+      marketCapObservedAt:verifiedCap?c.marketCapObservedAt:null,
+      change24h:typeof c.change24h==="number"&&Number.isFinite(c.change24h)?
+        c.change24h:null,
+      observedAt:new Date(stamp).toISOString(),priceSource:c.usdSource||c.source,
+      rank:c.marketCapRankSource??null,read_only:true,real_order:false
+    });
+  }
+  // Reuse the Market's EXACT already loaded record; no new polling, API request,
+  // storage key, synthetic price or UI Market owner. Read again only on click.
+  function axisSnapshotPanel(){
+    const section=elt("section","lab-note lab-market-snapshot");
+    section.setAttribute("aria-label","AXIS · mesures sourcées du Market natif");
+    section.append(elt("h4",null,"AXIS · données du Market déjà chargé"));
+    const content=elt("div","lab-market-snapshot-content");
+    const update=()=>{
+      content.replaceChildren();
+      const m=nativeMarketEvidence("AXIS");
+      if(!m){
+        content.append(elt("p","lab-hint",
+          "Lecture indisponible : identité Bitget AXIS/USDT non confirmée, cours absent ou observation de plus de 15 minutes. La décision historique reste inchangée ; aucune donnée BTC ou Futures n'est substituée."));
+        return;
+      }
+      const grid=elt("div","lab-market-metrics");
+      const metric=(label,val,detail)=>{
+        const box=elt("div","lab-market-metric");
+        box.append(elt("small",null,label),elt("strong",null,val),
+          elt("small",null,detail));
+        grid.append(box);
+      };
+      metric("Prix indicatif USD",fmt(m.priceUsd," USD"),"Bitget AXIS/USDT × USDT/USD");
+      metric("Variation 24 h publiée",m.change24h===null?"non fournie":
+        fmt(m.change24h," %"),"Listing récent · fenêtre potentiellement partielle");
+      metric("Volume 24 h (USD)",m.volume24hUsd===null?"non fourni":
+        fmt(m.volume24hUsd," USD"),"Volume natif converti en USD");
+      metric("Capitalisation (USD)",m.marketCapUsd===null?"non vérifiée":
+        fmt(m.marketCapUsd," USD"),m.marketCapObservedAt?
+          "CoinGecko · "+new Date(m.marketCapObservedAt).toLocaleString("fr-FR"):
+          "Source fraîche indisponible");
+      content.append(grid);
+      content.append(elt("p","lab-hint",
+        "Prix relevé "+new Date(m.observedAt).toLocaleString("fr-FR")+
+        " · source : "+m.priceSource+
+        ". Lecture à cet instant, pas un flux temps réel. Aucun de ces chiffres n'est un prix d'achat ou de revente garanti en USDC."));
+    };
+    const action=elt("button","lab-action","Relire les données du Market");
+    action.type="button";
+    action.addEventListener("click",update);
+    section.append(content,action);
+    update();
+    return section;
+  }
   function showSelectionTruth(message){
     selectionTruth=message;
     const node=byId("lab-market-sync-state");
@@ -73,25 +179,23 @@
     selectionPending=true;
     showSelectionTruth(next+" · synchronisation du Trader en cours…");
     try{
-      if(next==="CT"){
+      if(externalMarket[next]){
+        const expected=externalMarket[next];
         const owner=globalThis.AgentCryptoNewListingsNativeCategory;
-        if(typeof owner?.selectById!=="function")throw Error("Sélecteur natif CT indisponible");
-        const accepted=await owner.selectById("concrete");
+        if(typeof owner?.selectById!=="function")throw Error("Sélecteur natif "+next+" indisponible");
+        const accepted=await owner.selectById(expected.id);
         if(revision!==selectionRevision)return false;
-        const external=globalThis.AgentCryptoNewListingLiveAsset?.snapshot?.();
-        if(!accepted||owner.snapshot?.()?.selectedId!=="concrete"
-          ||!external?.active||external.id!=="concrete"
-          ||external.provider!=="okx"||external.instrument!=="CT-USDT")
-          throw Error("Contexte CT/USDT public non confirmé");
+        if(!accepted||!confirmedExternal(next))
+          throw Error("Contexte "+expected.pair+" Spot public non confirmé");
         const filter=byId("atlasNewListingsButton406528");
         if(filter && owner.snapshot?.()?.enabled!==true)filter.click();
         if(retainCandles)globalThis.AgentCryptoMarketMicroscope?.setMode?.("candles");
         const saved=globalThis.atlasTraderExternalSelectionCommit?.({
-          id:"concrete",provider:"okx",providerSymbol:"CT-USDT"
+          id:expected.id,provider:expected.provider,providerSymbol:expected.providerSymbol
         })===true;
-        showSelectionTruth(saved
-          ?"CT · graphique OKX CT/USDT confirmé · Market Nouveau listing · mémoire V7 confirmée · carnet selon fraîcheur"
-          :"CT · graphique OKX CT/USDT confirmé · mémoire V7 non confirmée · carnet selon fraîcheur");
+        showSelectionTruth(next+" · "+expected.pair+" Spot "+expected.provider.toUpperCase()+
+          " confirmé · Market propriétaire du cours · mémoire V7 "+
+          (saved?"confirmée":"non confirmée")+" · aucun ordre");
       }else{
         const coin=exactCoreCoin(next);
         if(!coin)throw Error(next+" absent du Market canonique : aucune substitution par BTC/CT");
@@ -159,9 +263,10 @@
     if (comparisons.some(id=>byId(id)?.classList?.contains?.("active"))) return;
     const title=(byId("atlasChartInsightOverlayTitle")?.textContent||"").trim();
     // Do not equate a Top 3/Top 5 comparative view with one selected coin.
-    const match=/^(BTC|CT|Q)\s*[·:—-]/i.exec(title);
+    const match=/^(BTC|CT|Q|AXIS)\s*[·:—-]/i.exec(title);
     if (match && ASSETS[match[1].toUpperCase()]) {
       const next=match[1].toUpperCase();
+      if(next==="AXIS"&&!confirmedExternal("AXIS"))return;
       if (next!==asset) select(next);
     }
   }
@@ -217,10 +322,20 @@
         pane.append(elt("p","lab-hint",
           "Le rapport BTC original reste disponible à sa place, au-dessus du Laboratoire. Aucun panneau du Trader n'est déplacé."));
       }
+      if(asset==="AXIS"){
+        pane.append(axisSnapshotPanel());
+        pane.append(card("Décision Seven · 21 octobre 2026",
+          "Observer · 0 USDC investis. Prix de vente communautaire 0,10 USD inaccessible avec notre capital 10 USDC (minimum 100 USDC et conditions d'attribution). Ce n'est pas la preuve d'un maximum futur."));
+        const study=elt("a","lab-link","Ouvrir le rapport AXIS complet · simulations 10/100 USDC ↗");
+        study.href="../trader/axis-robotics-case-study.html";
+        study.target="_blank";study.rel="noopener noreferrer";
+        pane.append(study);
+      }
       pane.append(sourceLinks(data));
     } else if (tab==="marche"){
       pane.append(card("Marché public",data.market),card("Interprétation prudente",data.risks));
-      pane.append(elt("p","lab-hint","Un clic sur BTC, CT ou Q demande la sélection au propriétaire Market existant. La synchronisation est confirmée ou refusée explicitement ; le Laboratoire ne produit aucun cours et aucun ordre."));
+      if(asset==="AXIS")pane.append(axisSnapshotPanel());
+      pane.append(elt("p","lab-hint","Un clic sur BTC, CT, Q ou AXIS demande la sélection au propriétaire Market existant. La synchronisation est confirmée ou refusée explicitement ; le Laboratoire ne produit aucun cours et aucun ordre."));
     } else if(tab==="coffre"){
       pane.append(card("Disponibilité des preuves",data.vault));
       const link=elt("a","lab-link","Ouvrir le Coffre historique vérifié ↗");
@@ -228,6 +343,13 @@
       const radar=elt("a","lab-link","Radar 20 · suivi scientifique prospectif ↗");
       radar.href="../laboratoire/radar20-veille.html";radar.target="_blank";radar.rel="noopener noreferrer";pane.append(radar);
     } else if(tab==="simulation"){
+      if(asset==="AXIS"){
+        pane.append(card("PAPER AXIS · 10 ou 100 USDC, scénarios datés",
+          "Notre calculateur ci-dessous est hypothétique. Le rapport complet compare deux budgets fictifs (10 et 100 USDC), des entrées 0,11/0,15 USD, des sorties 0,25/0,40/0,45 USD, les frais et la prévente à 100 USDC, sans exécution réelle."));
+        const study=elt("a","lab-link","Voir la grille AXIS 10/100 USDC et le prorata de la prévente ↗");
+        study.href="../trader/axis-robotics-case-study.html";
+        study.target="_blank";study.rel="noopener noreferrer";pane.append(study);
+      }
       renderSimulation();
     } else if(tab==="journal"){
       renderJournal();
@@ -247,7 +369,8 @@
       ["Frais par opération (%)","0,2"],
       ["Glissement à la sortie (%)","0,1"]
     ],inputs=[];
-    const draft=simulationDrafts[asset]||(simulationDrafts[asset]=Array(fields.length).fill(""));
+    const draft=simulationDrafts[asset]||(simulationDrafts[asset]=
+      asset==="AXIS"?["10","0,15","0,40","0,1","0,1"]:Array(fields.length).fill(""));
     for(const [label,placeholder] of fields){
       const [field,input]=labeledNumber(label,placeholder),index=inputs.length;
       input.value=draft[index];
@@ -312,7 +435,7 @@
     root.id="agentCryptoLearningLab";
     root.setAttribute("aria-label","Laboratoire IA · dossiers de recherche");
     const summary=elt("summary","lab-summary");
-    summary.append(elt("span","lab-kicker","LABORATOIRE IA"),elt("strong",null,"Cas d’école · BTC / CT / Q"),elt("small",null,"Navigation en largeur · recherche en longueur · lecture seule"));
+    summary.append(elt("span","lab-kicker","LABORATOIRE IA"),elt("strong",null,"Cas d’école · BTC / CT / Q / AXIS"),elt("small",null,"Navigation en largeur · recherche en longueur · lecture seule"));
     const body=elt("div","lab-body"),header=elt("div","lab-header");
     const picker=elt("div","lab-picker");
     for(const [id,data] of Object.entries(ASSETS)){

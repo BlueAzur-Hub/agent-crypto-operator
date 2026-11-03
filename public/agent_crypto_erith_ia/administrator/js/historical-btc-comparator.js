@@ -4,13 +4,13 @@
  */
 (()=>{"use strict";
 const current=document.currentScript;
-const marketURL=new URL("../../data/crypto/latest.json",current.src);
+const marketURL=new URL("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/crypto/latest.json");
 const proxy="http://127.0.0.1:8790/okx-public?endpoint=ticker&instId=BTC-USDC";
 const assetId="bitcoin",period="24h";
 function ensure(cond,message){if(!cond)throw Error(message)}
 function time(value){const n=Date.parse(value);ensure(Number.isFinite(n)&&n>0,"Horodatage CoinGecko invalide");return n}
 function number(value){const n=Number(value);ensure(Number.isFinite(n)&&n>0,"Prix non disponible");return n}
-function isFetchOriginSafe(){return marketURL.origin===location.origin}
+function isFetchOriginSafe(){return marketURL.origin==="https://raw.githubusercontent.com"&&marketURL.pathname.startsWith("/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/")}
 async function fetchMarket(){
  ensure(isFetchOriginSafe(),"Source CoinGecko externe interdite");
  const r=await fetch(marketURL.href,{method:"GET",cache:"no-store",credentials:"omit",redirect:"error"});

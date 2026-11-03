@@ -2,14 +2,14 @@
    NO modifications to administrator/app.js, Chart, Trader, Bridge or IndexedDB. */
 (() => {
 "use strict";
-const root=new URL("../../data/historical_archive_prototype/ohlcv_spot_pilot/",document.currentScript.src);
+const root=new URL("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/historical_archive_prototype/ohlcv_spot_pilot/");
 const S={"24h":[300000,"5m"],"7d":[3600000,"1h"],"30d":[14400000,"4h"]};
 let promise=null;
 function check(v,msg){if(!v)throw Error(msg)}
 function finite(v){return typeof v==="number"&&Number.isFinite(v)}
 async function get(path){
  const u=new URL(path,root);
- check(u.origin===location.origin&&u.pathname.startsWith(root.pathname),"Source externe refusée");
+ check(u.origin===root.origin&&u.pathname.startsWith(root.pathname),"Source externe refusée");
  const r=await fetch(u.href,{credentials:"omit",cache:"no-store",redirect:"error"});
  check(r.ok,"HTTP "+r.status+" : "+path);
  const bin=await r.arrayBuffer();check(bin.byteLength<=2000000,"Fichier trop volumineux");return bin;

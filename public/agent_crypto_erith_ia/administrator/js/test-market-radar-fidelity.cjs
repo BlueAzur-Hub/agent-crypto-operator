@@ -12,67 +12,23 @@ class Element{
  setAttribute(name,value){this.attributes[name]=value;}
  addEventListener(name,fn){(this.events[name]??=[]).push(fn);}
 }
-test("Radar uses 7 native Market columns with verified identity, USD source, cap and existing fiche",()=>{
- const oldDoc=globalThis.document,oldReader=globalThis.AgentCryptoRadarReader,oldFiche=globalThis.AgentCryptoTraderNativeFiche,oldNative=globalThis.AgentCryptoRadarNative;
- try{
-  globalThis.document={createElement:tag=>new Element(tag)};
-  delete globalThis.AgentCryptoRadarNative;
-  const filename=path.join(__dirname,"market-radar-native.js");
-  delete require.cache[require.resolve(filename)];
-  const {printMarket}=require(filename);
-  const asset={id:"bitcoin",name:"Bitcoin",symbol:"BTC",rank:1,
-   image:"https://assets.coingecko.com/coins/images/1/small/bitcoin.png",
-   priceUsd:81000.75,change24h:2.5,change7d:-1.25,
-   marketCapUsd:1600000000000,volume24hUsd:12000000000};
-  globalThis.AgentCryptoRadarReader={
-   selectMarket:(rows,tier)=>{assert.equal(tier,10);return rows;},
-   observeMarket:()=>({label:"Hausse 24 h",tone:"up",detail:"Variation constatée ; aucun ordre"})
-  };
-  let legacyFicheCalls=0;
-  globalThis.AgentCryptoTraderNativeFiche={showAsset:()=>{legacyFicheCalls++;return true;},hide:()=>{}};
-  const body=new Element("tbody"),note=new Element("p");
-  const root={querySelector:selector=>{
-    if(selector==='[data-radar-native="rows"]')return body;
-    if(selector==='[data-radar-native="filter"]')return {value:""};
-    if(selector==='[data-radar-native="sort"]')return {value:"rank"};
-    if(selector==='[data-radar-native="marketNote"]')return note;
-    throw new Error("Unexpected selector: "+selector);
-  }};
-  const group={querySelectorAll:()=>[]};
-  printMarket(root,{market:{rows:[asset],at:"2026-10-16T14:30:00Z"},group,tier:10});
-  assert.equal(body.children.length,1);
-  const row=body.children[0];
-  assert.equal(row.children.length,7);
-  assert.equal(row.dataset.radarSymbol,"BTC");
-  assert.equal(row.dataset.radarKind,"market");
-  const identity=row.children[1].children[0];
-  assert.equal(identity.className,"coin-cell radar-native-identity");
-  assert.equal(identity.children[1].src,asset.image);
-  const nameSymbolCategory=identity.children[2];
-  assert.equal(nameSymbolCategory.children[0].textContent,"Bitcoin");
-  assert.equal(nameSymbolCategory.children[1].textContent,"BTC");
-  assert.equal(nameSymbolCategory.children[2].textContent,"Repère marché");
-  const price=row.children[2].children;
-  assert.match(price[0].textContent,/81.?000,75/);
-  assert.match(price[1].textContent,/USD · CoinGecko/);
-  assert.match(price[1].textContent,/16\/10\/2026/);
-  const volume=row.children[5].children;
-  assert.match(volume[0].textContent,/Md/);
-  assert.match(volume[1].textContent,/Cap\. /);
-  const reading=row.children[6].children;
-  assert.equal(reading[0].textContent,"Hausse 24 h");
-  assert.match(reading[1].textContent,/Fiche au survol · Solo au clic/);
-  assert.equal(note.textContent.includes("CoinGecko"),true);
-  assert.equal(row.attributes.role,"button");
-  assert.equal(row.dataset.marketHelpId,"bitcoin");
-  assert.equal(row.events.pointerenter,undefined);
-  assert.equal(row.events.focus,undefined);
-  assert.equal(legacyFicheCalls,0);
- }finally{
-  globalThis.document=oldDoc;globalThis.AgentCryptoRadarReader=oldReader;
-  globalThis.AgentCryptoTraderNativeFiche=oldFiche;
-  globalThis.AgentCryptoRadarNative=oldNative;
- }
+test("Radar uses the canonical Market table and preserves native Operator routes",()=>{
+ const native=fs.readFileSync(path.join(__dirname,"market-radar-native.js"),"utf8");
+ const category=fs.readFileSync(path.join(__dirname,"new-listings-native-category.js"),"utf8");
+ const app=fs.readFileSync(path.join(__dirname,"../app.js"),"utf8");
+ const radar=require("../../laboratoire/radar.js");
+ assert.match(native,/Canonical #marketRows renders all Radar quote rankings/);
+ assert.doesNotMatch(native,/Classement Radar détaillé|function printMarket\(root,model\)|data-radar-native="rows"/);
+ assert.match(category,/globalThis\.AgentCryptoRadarNative\.mount\(view\)/);
+ assert.match(category,/AtlasMarketRadarCategory\?\.set\?\.\(true\)/);
+ assert.match(category,/AtlasMarketRadarCategory\?\.set\?\.\(false\)/);
+ assert.match(app,/AtlasMarketRadarCategory=Object\.freeze/);
+ assert.match(app,/state\.assetFilter === "radar"/);
+ const market={id:"bitcoin",symbol:"BTC",priceUsd:81000,marketCapUsd:1600000000000,
+   volume24hUsd:32000000000,change24h:2.5,change7d:-1.25};
+ assert.equal(radar.eligibleResearchCoin(market),true);
+ assert.equal(radar.eligibleResearchCoin({...market,symbol:"USDT"}),false);
+ assert.equal(radar.eligibleResearchCoin({...market,volume24hUsd:1000}),false);
 });
 test("Radar Market fidelity does not introduce a second graph, iframe, OKX or trading route",()=>{
  const js=fs.readFileSync(path.join(__dirname,"market-radar-native.js"),"utf8");
@@ -86,7 +42,7 @@ test("Radar Market fidelity does not introduce a second graph, iframe, OKX or tr
  assert.match(marketCore,/function atlasShowHelpLayer/);
  assert.match(marketCore,/function scoreCoin\(/);
  assert.match(js,/AgentCryptoCommands/);
- assert.match(js,/new URL\("..\/laboratoire\/radar.html"/);
+ assert.match(js,/https:\/\/blueazur-hub\.github\.io\/erith-ia-memory\/public\/agent_crypto_erith_ia\/laboratoire\/radar\.html/);
  for(const forbidden of ["createElement(\"iframe\")","api/v5/trade/order","localStorage.setItem","submitOrder(","withdrawal"])
   assert.equal(js.includes(forbidden),false,forbidden);
  assert.match(css,/:is\(#marketSnapshotPanel, #atlasRadarBelowMarket\) \.radar-native-market-row/);

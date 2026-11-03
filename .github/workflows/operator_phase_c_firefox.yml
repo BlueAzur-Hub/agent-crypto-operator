@@ -1,0 +1,104 @@
+name: Operator Phase C Firefox read-only smoke
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/scripts/operator_phase_c_firefox.py"
+      - ".github/workflows/operator_phase_c_firefox.yml"
+      - "public/agent_crypto_erith_ia/administrator/**"
+      - "public/agent_crypto_erith_ia/trader/**"
+      - "public/agent_crypto_erith_ia/laboratoire/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  firefox-operator:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Firefox testing runtime
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.55.0
+          python -m playwright install --with-deps firefox
+      - name: Firefox read-only Operator and Trader branch smoke
+        run: python .github/scripts/operator_phase_c_firefox.py
+      - name: Preserve Firefox screenshots and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: operator-phase-c-firefox-evidence
+          path: phase_c_firefox_evidence/
+          retention-days: 14
+          if-no-files-found: warn
+
+      - name: Create minimal Operator Phase C update (only changed application files)
+        if: success()
+        shell: bash
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          mkdir -p phase_c_candidate
+          HEAD_SHA="$(git rev-parse HEAD)"
+          BASE_SHA="${PR_BASE_SHA:-7fb07b39f3f8b5a64e1b2213ef27a430c046b6ef}"
+          git fetch --no-tags --depth=1 origin "$BASE_SHA"
+
+          # Only public application files changed since the published Operator base.
+          # CI test files and workflow definitions are not deployment files.
+          files=()
+          while IFS= read -r -d '' file; do
+            case "$file" in
+              */test-*.cjs|*/test-*.js|*.test.cjs|*.test.js) continue ;;
+            esac
+            test -f "$file"
+            files+=("$file")
+          done < <(git diff --name-only -z --diff-filter=ACMRT "$BASE_SHA" "$HEAD_SHA" -- public/agent_crypto_erith_ia/)
+
+          # A deletion is never silently ignored by a patch archive.
+          if test -n "$(git diff --name-only --diff-filter=D "$BASE_SHA" "$HEAD_SHA" -- public/agent_crypto_erith_ia/)"; then
+            echo "STOP: a deployment file deletion requires a separate removal manifest"
+            exit 1
+          fi
+          test "${#files[@]}" -gt 0
+          test "${#files[@]}" -le 40
+          printf 'Application files in incremental update: %s\n' "${#files[@]}"
+          printf '%s\n' "${files[@]}" | tee phase_c_candidate/FILES_CHANGED.txt
+
+          ARCHIVE="AGENT_CRYPTO_OPERATOR_YOANN_MARKET_RADAR_GRAPHS_INCREMENTAL_UPDATE_PHASE_C_2026_11_03.zip"
+          git archive --format=zip --output="phase_c_candidate/$ARCHIVE" "$HEAD_SHA" "${files[@]}"
+          unzip -tqq "phase_c_candidate/$ARCHIVE"
+          INSIDE_COUNT="$(unzip -Z1 "phase_c_candidate/$ARCHIVE" | grep -v '/$' | wc -l)"
+          test "$INSIDE_COUNT" -eq "${#files[@]}"
+          BYTES="$(stat -c %s "phase_c_candidate/$ARCHIVE")"
+          test "$BYTES" -le 20971520
+          printf 'Incremental ZIP: %s bytes, %s modified application files\n' "$BYTES" "$INSIDE_COUNT"
+
+          printf '%s\n' "$BASE_SHA" > phase_c_candidate/BASE_COMMIT.txt
+          printf '%s\n' "$HEAD_SHA" > phase_c_candidate/SOURCE_COMMIT.txt
+          sha256sum "${files[@]}" > phase_c_candidate/FILES_SHA256.txt
+          (cd phase_c_candidate && sha256sum "$ARCHIVE" > "$ARCHIVE.sha256")
+          printf '%s\n' \
+            "INCREMENTAL PATCH ONLY. Do not replace the complete Operator tree." \
+            "Apply changed files at their matching repository-relative paths." \
+            "PR #10: source commit in SOURCE_COMMIT.txt, original base in BASE_COMMIT.txt." \
+            "This is a candidate, NOT merged or published; keep Yoann Trader and Bridge files intact." \
+            "Linux headless Firefox CI does not certify Windows Firefox market data." \
+            > phase_c_candidate/READ_ME_FIRST.txt
+      - name: Store Phase C candidate ZIP with SHA-256
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: operator-phase-c-incremental-update-zip
+          path: phase_c_candidate/
+          retention-days: 14
+          if-no-files-found: error

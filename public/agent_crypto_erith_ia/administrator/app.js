@@ -5680,6 +5680,35 @@ function atlasValidateChartSeries({ c, days, prices, payload = null, sourceMode 
   if (coverageHours < rules.minCoverageHours) return fail(`couverture insuffisante : ${coverageHours.toFixed(1)} h/${rules.minCoverageHours} h minimum`, { coverageHours });
   if (lastTimestamp > Date.now() + ATLAS_CHART_MAX_FUTURE_MS) return fail("dernier point daté dans le futur");
 
+  // A valid first/last pair cannot certify 24 hours with a hole in between.
+  // Native 5m, 30m and hourly sources have different cadences; accept real
+  // hourly observations, but never bridge multi-hour missing history.
+  if (period === 1) {
+    const gaps = [];
+    for (let i = 1; i < prices.length; i += 1) {
+      const gap = Number(prices[i]?.[0]) - Number(prices[i - 1]?.[0]);
+      if (!(Number.isFinite(gap) && gap > 0)) return fail("horodatages non strictement croissants");
+      gaps.push(gap);
+      const previousPrice = Number(prices[i - 1]?.[1]);
+      const currentPrice = Number(prices[i]?.[1]);
+      const ratio = currentPrice / previousPrice;
+      if (!(Number.isFinite(ratio) && ratio > 0) || ratio > 8 || ratio < 0.125) {
+        return fail("pic de prix non qualifié : observation brute conservée, série bloquée", {
+          pointIndex: i, previousPrice, currentPrice
+        });
+      }
+    }
+    const sorted = [...gaps].sort((a, b) => a - b);
+    const cadenceMs = sorted[Math.floor(sorted.length / 2)] || 0;
+    const maxGapMs = Math.max(30 * 60000, Math.min(2 * 3600000, cadenceMs * 3));
+    const largestGapMs = Math.max(...gaps);
+    if (largestGapMs > maxGapMs) {
+      return fail("historique 24 h discontinu : trou temporel détecté", {
+        cadenceMs, largestGapMs, maxGapMs, coverageHours
+      });
+    }
+  }
+
   if (sourceMode === "github-cache") {
     if (payload?.live_ok !== true) return fail("cache GitHub non validé");
     if (String(payload?.source || "").toLowerCase() !== "coingecko") return fail("source cache différente de CoinGecko");
@@ -5843,6 +5872,18 @@ function atlasChartResultFingerprint(result) {
 function atlasChartNeedsRefresh(result, days) {
   if (!result) return true;
   const rules = atlasChartRules(days);
+  // A recently-written cache is NOT fresh if its actual final price is old
+  // or its 24h series is incomplete. Do not trust savedAt over market timestamps.
+  if (Number(days) === 1) {
+    const series = atlasSanitizeChartRows(result.series || []);
+    const first = Number(series[0]?.[0]);
+    const last = Number(series[series.length - 1]?.[0]);
+    const now = Date.now();
+    if (!Number.isFinite(first) || !Number.isFinite(last)
+        || first > now - 24 * 3600000 + 12 * 60000
+        || last < now - 12 * 60000 || last > now + 12 * 60000
+        || last - first < 23.5 * 3600000) return true;
+  }
   const savedAt = Number(result.savedAt || 0);
   if (savedAt && Date.now() - savedAt <= rules.refreshMs) return false;
   const freshness = result?.integrity?.metrics?.freshness;
@@ -12160,10 +12201,12 @@ async function atlasRespectComparisonRequestSpacing(signal = null, period = Numb
   const minimumSpacing = Number(period || 1) >= 60
     ? ATLAS_COMPARISON_LONG_HORIZON_SPACING_MS
     : ATLAS_COMPARISON_REQUEST_SPACING_MS;
-  const elapsed = Date.now() - Number(comparison.lastDirectRequestAt || 0);
-  const waitMs = Math.max(0, minimumSpacing - elapsed);
-  if (waitMs) await atlasWaitWithSignal(waitMs, signal);
-  comparison.lastDirectRequestAt = Date.now();
+  // Reserve request slots synchronously so concurrent workers never
+  // collapse the same rate-limit wait into simultaneous provider requests.
+  const now = Date.now();
+  const nextSlot = Math.max(now, Number(comparison.lastDirectRequestAt || 0) + minimumSpacing);
+  comparison.lastDirectRequestAt = nextSlot;
+  if (nextSlot > now) await atlasWaitWithSignal(nextSlot - now, signal);
 }
 
 function atlasRenderComparisonDetail(entries, period) {
@@ -15402,7 +15445,7 @@ function atlasScannerRestoreSnapshot(snapshot) {
 }
 
 function atlasScannerCommit(tx, finalEntries, rejected) {
-  if (!atlasScannerCurrent(tx) || !Array.isArray(finalEntries) || !finalEntries.length) {
+  if (!atlasScannerCurrent(tx) || !Array.isArray(finalEntries) || finalEntries.length !== ATLAS_SCANNER_TARGET) {
     return false;
   }
 
@@ -15411,7 +15454,7 @@ function atlasScannerCommit(tx, finalEntries, rejected) {
     tx.period,
     tx.candidateIds
   );
-  if (!prevalidated.length) return false;
+  if (prevalidated.length !== ATLAS_SCANNER_TARGET) return false;
 
   const ids = prevalidated.map(entry => entry.coin.id);
   const availableCount = ids.length;
@@ -15763,7 +15806,7 @@ async function atlasScannerRun(tx) {
       tx.candidateIds
     );
 
-    if (finalEntries.length >= 1) {
+    if (finalEntries.length === ATLAS_SCANNER_TARGET) {
       return atlasScannerCommit(tx, finalEntries, rejected);
     }
 
@@ -15776,7 +15819,7 @@ async function atlasScannerRun(tx) {
     atlasScannerSetTransactionFlag(false);
     return atlasScannerVisibleFailure(
       tx.preset,
-      `${atlasScannerLabel(tx.preset)} indisponible · 0/5 historique compatible`
+      `${atlasScannerLabel(tx.preset)} indisponible · ${finalEntries.length}/5 historiques compatibles · pas de panier partiel`
       + ` · cache ${tx.cacheHits}/${tx.cacheChecked}`
       + ` · réseau ${tx.directAttempts}/${tx.directLimit}`,
       detail
@@ -19134,8 +19177,28 @@ function atlasSelectMarketCoin(coin) {
   requestAnimationFrame(() => { void renderAnalystPanel({ selection: true, forceSingle: true }); });
 }
 
-function matchAssetFilter(c) { const type = classifyAsset(c); if (state.assetFilter === "pillar") return type === "Pilier marché"; if (state.assetFilter === "stablecoin") return type === "Stablecoin"; if (state.assetFilter === "major") return type === "Altcoin majeur"; if (state.assetFilter === "speculative") return type === "Token spéculatif" || type === "Altcoin"; return true;
+function matchAssetFilter(c) { const type = classifyAsset(c); if (state.assetFilter === "pillar") return type === "Pilier marché"; if (state.assetFilter === "stablecoin") return type === "Stablecoin"; if (state.assetFilter === "major") return type === "Altcoin majeur"; if (state.assetFilter === "speculative") return type === "Token spéculatif" || type === "Altcoin"; if (state.assetFilter === "radar") return globalThis.AgentCryptoRadarReader?.eligibleResearchCoin?.(c) === true; return true;
 }
+
+// Market is the sole Radar quote renderer, filter and pagination owner.
+let atlasRadarPreviousMarketView=null;
+function atlasMarketRadarCategorySet(enabled){
+ if(enabled){
+  if(state.assetFilter!=="radar")atlasRadarPreviousMarketView={filter:state.assetFilter,sort:state.sortKey};
+  state.assetFilter="radar"; state.sortKey="change24-desc";
+ }else{
+  if(state.assetFilter!=="radar")return false;
+  state.assetFilter=atlasRadarPreviousMarketView?.filter||"all";
+  state.sortKey=atlasRadarPreviousMarketView?.sort||"rank-asc";
+  atlasRadarPreviousMarketView=null;
+ }
+ atlasMarketUniverseState.page=0;
+ if(els.sortSelect&&[...els.sortSelect.options].some(x=>x.value===state.sortKey))els.sortSelect.value=state.sortKey;
+ document.querySelectorAll(".filter-btn[data-filter]").forEach(b=>b.classList.toggle("active",!enabled&&b.dataset.filter===state.assetFilter));
+ renderMarketTable();
+ return true;
+}
+globalThis.AtlasMarketRadarCategory=Object.freeze({set:atlasMarketRadarCategorySet});
 
 function volCapRatio(c) { return c?.volume24h && c?.marketCap ? c.volume24h / c.marketCap : 0;
 }

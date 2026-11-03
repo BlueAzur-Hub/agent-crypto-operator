@@ -77,6 +77,13 @@ function observeMarket(asset){
 }
 // A research watchlist, never an execution or exchange-liquidity signal.
 const EXCLUDED_SYMBOLS=new Set(("USDT USDC DAI FDUSD USDE USDS PYUSD TUSD EURC RLUSD USDD FRAX USD1 USDF USDG USDB AVUSD USD0 CUSD USDX GHO SUSD XAUT PAXG WBTC WETH WEETH STETH WSTETH CBETH WBETH JITOSOL MSOL RETH LSETH").split(" "));
+function eligibleResearchCoin(x){
+ if(!x||EXCLUDED_SYMBOLS.has(String(x.symbol||"").toUpperCase()))return false;
+ const price=positive(x.priceUsd),cap=positive(x.marketCapUsd),vol=positive(x.volume24hUsd);
+ const day=finite(x.change24h),week=finite(x.change7d);
+ return price!==null&&cap!==null&&vol!==null&&day!==null&&week!==null&&
+  cap>=25000000&&vol>=1000000&&vol/cap>=0.015&&vol/cap<=2;
+}
 function selectOpportunities(core,extended){
  if(core?.schema!=="agent_crypto_public_market_snapshot_v1"||core?.source?.provider_id!=="coingecko"||
     extended?.schema!=="agent_crypto_public_extended_market_snapshot_v1"||extended?.source?.provider_id!=="coingecko"||
@@ -121,8 +128,7 @@ function selectOpportunities(core,extended){
   const x=row.coin,{id,symbol,rank,source}=row;
   const price=positive(x.priceUsd),cap=positive(x.marketCapUsd),vol=positive(x.volume24hUsd),
    day=finite(x.change24h),week=finite(x.change7d),month=finite(x.change30d);
-  if(EXCLUDED_SYMBOLS.has(symbol)||price===null||cap===null||vol===null||day===null||week===null||
-     cap<25000000||vol<1000000||vol/cap<0.015||vol/cap>2)continue;
+  if(!eligibleResearchCoin(x))continue;
   candidates.push({id,name:String(x.name||symbol),symbol,rank,priceUsd:price,
    change24h:day,change7d:week,change30d:month,marketCapUsd:cap,volume24hUsd:vol,
    turnoverPct:Math.round(vol/cap*10000)/100,
@@ -150,7 +156,7 @@ function selectOpportunities(core,extended){
    scoutUniverse:candidates,
   disclaimer:"Observations transversales de snapshots, non opportunités négociables ni conseils d'achat. Aucune paire d'exécution vérifiée."};
 }
-const API=Object.freeze({TIERS,validMarket,selectMarket,verifyPaper,verifyRegistry,verifyBitget,observeMarket,selectOpportunities});
+const API=Object.freeze({TIERS,validMarket,selectMarket,verifyPaper,verifyRegistry,verifyBitget,observeMarket,eligibleResearchCoin,selectOpportunities});
 if(typeof module!=="undefined"&&module.exports)module.exports=API;
 // Shared pure parser between standalone Radar and Trader-native view; never start
 // the standalone UI in a page without its own #tiers control.
