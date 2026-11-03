@@ -118,8 +118,8 @@ assert(!tab.includes('iframe')&&!tab.includes('frame.src'),"Nested standalone if
 assert(native.includes('if(state.radarOpen)radarView(false)'),"Canonical Market buttons return to native table");
 assert(native.includes('if(state.enabled)'),"Returning to an active New Listings preserves native CT selection");
 assert(!tab.includes('placeOrder')&&!tab.includes('fetch(')&&!tab.includes('localStorage.'),"No duplicated Market owner or order execution");
-assert(nativeView.includes('radar-native-head')&&nativeView.includes('market-universe-mode')&&nativeView.includes('table-wrap'),"Reuse canonical Trader UI classes");
-assert(nativeView.includes('Agrandir ↗')&&nativeView.includes('../laboratoire/radar.html'),"Standalone view remains available");
+assert(nativeView.includes('radar-native-head')&&nativeView.includes('Canonical #marketRows renders all Radar quote rankings.')&&nativeView.includes('table-wrap'),"Reuse canonical Trader UI classes");
+assert(nativeView.includes('Agrandir ↗')&&nativeView.includes('https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/laboratoire/radar.html'),"Standalone view remains available");
 assert(nativeView.includes('global.AgentCryptoRadarReader'),"Renderer shares public parser with standalone");
 assert(!nativeView.includes('createElement("iframe")')&&!nativeView.includes('placeOrder')&&!nativeView.includes('api/v5/trade/order'),"No iframe or private trading routes");
 assert(nativeCss.includes(':is(#marketSnapshotPanel, #atlasRadarBelowMarket) .radar-native')&&nativeCss.includes('var(--text)')&&nativeCss.includes('var(--line)'),"Shared Market/Radar CSS is scoped correctly");
@@ -135,17 +135,17 @@ assert(!router.compactMoney(40313967652).includes('40313967652'));
 assert(nativeView.includes('selectGraph(root,model,identity)'));
 assert(nativeView.includes('commands.chart(identity.id,"24h")'));
 assert(nativeView.includes('category.selectById(identity.id)'));
-assert(nativeView.includes('clickable(r,{kind:"market"')&&nativeView.includes('clickable(r,{kind:"listing"'));
+assert(!nativeView.includes('function printMarket(root,model)')&&nativeView.includes('clickable(r,{kind:"listing"'));
 assert(nativeView.includes('model.listings.filter(x=>x.symbol!=="CT")'),"No duplicate CT row");
 assert(nativeView.includes('identityRegistry()'),"Canonical public identity registry failover");
-assert(nativeView.includes('printMarket(root,model);')&&nativeView.includes('const live=await Promise.allSettled'),"Render market before Bitget finishes");
+assert(!nativeView.includes('printMarket(root,model);')&&nativeView.includes('const live=await Promise.allSettled'),"Market owns ranking while Radar continues independent Bitget");
 assert(nativeCss.includes('.radar-native-selectable:focus-visible'),"Keyboard click affordance");
-assert(nativeView.includes('identityCell(r,asset)')&&nativeView.includes('identityCell(r,item)'),"Shared identity rendering");
+assert(nativeView.includes('Canonical #marketRows renders all Radar quote rankings.')&&nativeView.includes('identityCell(r,item)'),"Shared identity rendering");
 assert(nativeView.includes('global.AgentCryptoTraderNativeFiche?.showAsset?.'),"Existing fiche owner");
 assert(marketFiche.includes('showAsset,hide,preferredMode'),"Fiche API exposed");
 assert(nativeCss.includes('.market-identity-rail')&&nativeCss.includes('[data-radar-symbol="BTC"]'),"Market color accents");
 assert(!nativeView.includes('syncGraphSelection(')&&!nativeView.includes('graphSelection()'),"Rejected graph-state strip removed");
-assert(nativeView.includes('radarObservation:movement.label'),"Factual movement is forwarded to the existing fiche");
+assert(!nativeView.includes('radarObservation:movement.label'),"Factual movement is forwarded to the existing fiche");
 assert(!nativeView.includes('Voir la fiche')&&!nativeView.includes('focusFiche')&&!nativeView.includes('focusName'),
  "Rejected fiche button and selection banner absent");
 assert(nativeView.includes('global.AgentCryptoTraderNativeFiche?.showAsset?.(row,coin'),
