@@ -3,7 +3,7 @@
  */
 (() => {
 "use strict";
-const base=new URL("../../data/historical_archive_prototype/btc_annual_view/",document.currentScript.src);
+const base=new URL("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/historical_archive_prototype/btc_annual_view/");
 const specs={"24h":["1m",1440],"7j":["5m",2016],"30j":["5m",8640],
              "60j":["1h",1440],"90j":["1h",2160],"1an":["1h",8760],"Max":["1h",null]};
 const step={"1m":60000,"5m":300000,"1h":3600000};
@@ -15,7 +15,7 @@ function digestHex(buffer){return crypto.subtle.digest("SHA-256",buffer).then(d=
 async function read(relative,cap) {
  strict(/^(?:index\.json|btc-history-year\.json\.gz)$/.test(relative),"Chemin inconnu");
  const u=new URL(relative,base);
- strict(u.origin===location.origin&&u.pathname.startsWith(base.pathname),"Origine d'archive interdite");
+ strict(u.origin===base.origin&&u.pathname.startsWith(base.pathname),"Origine d'archive interdite");
  const response=await fetch(u.href,{credentials:"omit",redirect:"error",cache:"no-store"});
  strict(response.ok,"HTTP "+response.status+" : "+relative);
  const buffer=await response.arrayBuffer();
