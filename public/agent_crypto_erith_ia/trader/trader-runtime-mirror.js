@@ -128,16 +128,6 @@ function mount(){
     };
     doc.head.appendChild(script);
   }
-  // TRADUS on Yoann Trader: passive visual projection, not a second market or order owner.
-  if(!doc.getElementById("traderTradusReadOnlyScript")){
-    const tradus=doc.createElement("script");
-    tradus.id="traderTradusReadOnlyScript";
-    tradus.src=new URL("../trader/trader-tradus-readonly.js",doc.baseURI).href;
-    tradus.onerror=()=>{
-      if(status){status.textContent="Vue TRADUS indisponible";status.dataset.state="error";}
-    };
-    doc.head.appendChild(tradus);
-  }
   // Visible PAPER laboratory. Its arithmetic is isolated and it only consumes
   // canonical publicly loaded BTC/CT series. Never inherits Bridge credentials.
   if(!doc.getElementById("traderPaperLabCoreScript")){
@@ -155,6 +145,22 @@ function mount(){
       view.src=new URL("../trader/trader-paper-lab-view.js",doc.baseURI).href;
       view.onerror=()=>{
         if(status){status.textContent="Vue laboratoire PAPER indisponible";status.dataset.state="error";}
+      };
+      // The Yoann handoff slot is mounted by the PAPER view. Never load TRADUS
+      // ahead of that slot or inject a navigation entry into Market/Graphique.
+      view.onload=()=>{
+        if(!doc.getElementById("traderYoannOperatorSection")){
+          if(status){status.textContent="Zone Operator Yoann introuvable";status.dataset.state="error";}
+          return;
+        }
+        if(doc.getElementById("traderTradusReadOnlyScript"))return;
+        const tradus=doc.createElement("script");
+        tradus.id="traderTradusReadOnlyScript";
+        tradus.src=new URL("../trader/trader-tradus-readonly.js",doc.baseURI).href;
+        tradus.onerror=()=>{
+          if(status){status.textContent="Vue TRADUS indisponible";status.dataset.state="error";}
+        };
+        doc.head.appendChild(tradus);
       };
       doc.head.appendChild(view);
     };
