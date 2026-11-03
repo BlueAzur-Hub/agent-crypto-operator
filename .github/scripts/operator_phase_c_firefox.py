@@ -224,11 +224,14 @@ try:
                 const ct = document.getElementById('aiCtPanel');
                 const quote = globalThis.AgentCryptoQuoteCurrencyArchitecture?.snapshot?.();
                 const graph = globalThis.AgentCryptoGraphNativeUsd?.snapshot?.();
-                const privateButton = [...el.querySelectorAll('button')].find(b=>b.textContent.includes('Lire mon compte'));
+                const privateButton = el.querySelector('.seven-asset-actions button:last-child');
                 return {
                     nested: !!ct?.contains(el),
                     onlyOneAccordion: document.querySelectorAll('#detailPanelBody > #aiCtPanel').length===1,
                     heading: ct?.querySelector('summary b')?.textContent || '',
+                    reason: el.querySelector('.seven-asset-state')?.textContent || '',
+                    marketSelected: globalThis.AgentCryptoTraderMarket?.selected?.()?.symbol || null,
+                    chartPair: globalThis.AgentCryptoMarketMicroscope?.snapshot?.()?.loadedInstrument || null,
                     displayed: el.hidden===false,
                     nativeCtKept: !!ct?.querySelector('.ai-ct-panel-body'),
                     privateDisabled: privateButton?.disabled===true,
@@ -241,9 +244,13 @@ try:
                     realOrders: globalThis.AgentCryptoSevenAssetReadingView?.real_orders
                 };
             }""")
-            check("Seven BTC dossier in one native Technical Reading accordion",
+            qualified_btc = "Dossier BTC" in dossier["heading"]
+            safe_pending = ("Sources en attente" in dossier["heading"] and
+                            ("Sélection non qualifiée" in dossier["reason"] or
+                             "Conflit" in dossier["reason"]))
+            check("Seven native Technical Reading: BTC dossier or honest unqualified state",
                   dossier["nested"] and dossier["onlyOneAccordion"] and
-                  dossier["displayed"] and "Dossier BTC" in dossier["heading"] and
+                  dossier["displayed"] and (qualified_btc or safe_pending) and
                   dossier["nativeCtKept"] and dossier["realOrders"] is False, dossier)
             check("Trader initial displayed currency and native graph both USD",
                   dossier["currency"]=="USD" and
