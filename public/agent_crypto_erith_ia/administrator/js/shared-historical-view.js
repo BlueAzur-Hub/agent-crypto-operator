@@ -4,8 +4,8 @@
  */
 (() => {
 "use strict";
-const base=new URL("../../data/historical_archive_prototype/shared_monthly_views/",document.currentScript.src);
-const bitgetBase=new URL("../../data/historical_archive_prototype/bitget_verified_views/",document.currentScript.src);
+const base=new URL("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/historical_archive_prototype/shared_monthly_views/");
+const bitgetBase=new URL("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/historical_archive_prototype/bitget_verified_views/");
 const periods={"24h":["1m",1440],"7j":["5m",2016],"30j":["5m",8640],
                "mois":["1h",null]};
 const intervalMs={"1m":60000,"5m":300000,"1h":3600000};
@@ -18,7 +18,7 @@ const sha256=raw=>crypto.subtle.digest("SHA-256",raw).then(h=>
 async function fetchAsset(name,cap){
  need(/^(?:index\.json|[a-z0-9-]{1,90}\.json\.gz)$/.test(name),"Archive non autorisée");
  const u=new URL(name,base);
- need(u.origin===location.origin&&u.pathname.startsWith(base.pathname),"Origine interdite");
+ need(u.origin===base.origin&&u.pathname.startsWith(base.pathname),"Origine interdite");
  const r=await fetch(u.href,{cache:"no-store",credentials:"omit",redirect:"error"});
  need(r.ok,"HTTP "+r.status+" : "+name);
  const bytes=await r.arrayBuffer();
@@ -137,7 +137,7 @@ async function loadBitget(id){
   const metadata=(await getBitgetIndex()).assets.find(a=>a.id===id);
   need(!!metadata,"Cette crypto Bitget n'est pas archivée");
   const url=new URL(metadata.file,bitgetBase);
-  need(url.origin===location.origin&&url.pathname.startsWith(bitgetBase.pathname),"Origine Bitget interdite");
+  need(url.origin===bitgetBase.origin&&url.pathname.startsWith(bitgetBase.pathname),"Origine Bitget interdite");
   const response=await fetch(url.href,{cache:"no-store",credentials:"omit",redirect:"error"});
   need(response.ok,"Archive Bitget HTTP "+response.status);
   const compressed=await response.arrayBuffer();
