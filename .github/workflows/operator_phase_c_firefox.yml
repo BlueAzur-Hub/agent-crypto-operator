@@ -90,7 +90,7 @@ jobs:
           printf '%s\n' \
             "INCREMENTAL PATCH ONLY. Do not replace the complete Operator tree." \
             "Apply changed files at their matching repository-relative paths." \
-            "PR #10: source commit in SOURCE_COMMIT.txt, original base in BASE_COMMIT.txt." \
+            "Shared-build patch: source commit in SOURCE_COMMIT.txt, original base in BASE_COMMIT.txt." \
             "Shared runtime Version Truth: 40.6.719 for Administrator / Operator / Trader; no new Bridge capabilities." \
             "This is a candidate, NOT merged or published; protect Yoann Bridge roles and credentials." \
             "Linux headless Firefox CI does not certify Windows Firefox market data." \
