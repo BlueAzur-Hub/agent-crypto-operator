@@ -23,7 +23,7 @@ checks={
  'trader_profile_attached':'erithYohanOperatorLayer0' in trader_mirror and 'yohan-operator-profile.js' in trader_mirror,
  'trader_bridge_attached':'erithYohanOperatorLayer1' in trader_mirror and 'yohan-operator-bridge-client.js' in trader_mirror,
  'shared_operator_admin_link':'adminLink.href="../administrator/yohan.html"' in trader_mirror,
- 'market_radar_native':'detailRanking=foldSection' in radar and 'foldRanking' in radar,
+ 'market_radar_native':'Canonical #marketRows renders all Radar quote rankings.' in radar and 'detailRanking=foldSection' not in radar,
  'market_data_master':build.get('public_market_reference_repository')=='BlueAzur-Hub/erith-ia-memory' and 'new-listings-public-feed.json' in public_router,
  'usd_initial':(base/'administrator'/'js'/'quote-currency-architecture-406497.js').read_text(encoding='utf-8').count('const state={displayCurrency:"USD"')==1,
  'local_admin_router':'../web/vault-data-router.js' in local_admin,
