@@ -113,6 +113,7 @@ try:
         })""")
         check("Market shell and canonical table present", dom["shell"] and dom["rows"], dom)
         check("Operator first-paint permission is not Owner", dom["role"] != "administrator", dom["role"])
+        check("Operator loads Administrator shared build 40.6.719", dom["build"] == "40.6.719", dom["build"])
         check("Market scope 50/100/250/500/1000", all(str(n) in dom["limits"] for n in (50,100,250,500,1000)), dom["limits"])
         check("Graph and public history script wiring", dom["appScript"] and dom["graphScript"] and dom["spotScript"], dom)
 
@@ -209,6 +210,8 @@ try:
             inner.locator("#marketSnapshotPanel").wait_for(state="attached", timeout=35000)
             frame_role = inner.locator("html").get_attribute("data-atlas-role")
             check("Trader runtime loads in Operator role", frame_role == "operator", frame_role)
+            frame_build = inner.locator("html").get_attribute("data-agent-crypto-loaded-build")
+            check("Trader shares Administrator 40.6.719 Version Truth", frame_build == "40.6.719", frame_build)
         except Exception as exc:
             check("Trader runtime loads in Operator role", False, str(exc))
         desk.screenshot(path=str(ARTIFACT / "trader_firefox.png"),
@@ -224,7 +227,7 @@ try:
                role: document.documentElement.dataset.atlasRole
             })""")
             check("Offline Firefox retains Operator shell without elevation",
-                  visible["shell"] and visible["role"] != "administrator", visible)
+                  visible["shell"] and visible["role"] != "administrator" and visible["build"] == "40.6.719", visible)
         except Exception as exc:
             check("Offline Firefox retains Operator shell without elevation", False, str(exc))
         report["trader_dom"] = trader
