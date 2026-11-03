@@ -605,6 +605,9 @@
     "no_new_market_owner": true,
     "no_new_trading_owner": true,
     "real_orders": false,
-    "windows_terrain_pending": true
+    "windows_terrain_pending": true,
+    "placement": "existing_traderYoannOperatorSection_bottom_handoff",
+    "new_top_navigation": false,
+    "master_trader_untouched": true
   }
 }
