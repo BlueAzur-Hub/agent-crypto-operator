@@ -596,5 +596,15 @@
     "backend_changed": false,
     "real_orders": false,
     "terrain": "PENDING_FIREFOX"
+  },
+  "tradus_trader_candidate": {
+    "mode": "SHADOW_PAPER_READONLY",
+    "status": "CANDIDATE_NOT_PUBLISHED",
+    "adapter": "trader/trader-tradus-readonly.js",
+    "canonical_owner": "administrator/js/tradus-shadow-adapter.js",
+    "no_new_market_owner": true,
+    "no_new_trading_owner": true,
+    "real_orders": false,
+    "windows_terrain_pending": true
   }
 }
