@@ -55,6 +55,21 @@ test('Public Spot OHLCV reader does not enable account or orders',()=>{
   assert.equal(api.eligible({id:'bitcoin',symbol:'BTC'},{peers:[{id:'other',symbol:'BTC'}]}),false);
   assert.throws(()=>api.validateArchive({},'BTC-USDC'),/identity|currency/i);
 });
+test('Market listings use canonical owner and documented external prices',()=>{
+  const market=get('administrator/js/new-listings-native-category.js');
+  const micro=get('administrator/js/okx-microstructure-406499.js');
+  const lab=get('administrator/js/learning-lab.js');
+  assert.match(app,/AtlasMarketRadarCategory=Object.freeze/);
+  assert.match(app,/state.assetFilter === "radar"/);
+  assert.match(market,/SEGMENT_OPTIONS/);
+  assert.match(market,/PUBLIC_DATA_RAW/);
+  assert.match(market,/quoteSnapshotAt/);
+  assert.match(micro,/bookFreshnessAt/);
+  assert.match(lab,/AXIS/);
+  const publicReader=interfaceHtml.indexOf('./js/okx-public-chart-history.js');
+  const core=interfaceHtml.indexOf('<script src="./app.js?');
+  assert.ok(publicReader>=0&&core>publicReader,'Public archive reader must register before chart core');
+});
 test('Read-only canonical archives and candle source remain independent of private credentials',()=>{
   const reader=get('administrator/js/verified-periods-reader.js');
   const microscope=get('administrator/js/market-microscope-candles.js');
