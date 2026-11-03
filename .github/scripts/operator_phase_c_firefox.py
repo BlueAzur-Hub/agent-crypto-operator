@@ -20,6 +20,7 @@ ARTIFACT.mkdir(exist_ok=True)
 checks = []
 diagnostics = []
 unsafe_requests = []
+offline_mode = {"enabled": False}
 
 
 def check(name, passed, detail=""):
@@ -67,7 +68,7 @@ try:
             url = urlparse(req.url)
             local_site = url.hostname == "127.0.0.1" and url.port == server.server_port
             private = url.hostname in ("127.0.0.1", "localhost", "::1") and not local_site
-            if req.method not in ("GET", "HEAD", "OPTIONS") or private:
+            if req.method not in ("GET", "HEAD", "OPTIONS") or private or (offline_mode["enabled"] and not local_site):
                 if len(unsafe_requests) < 60:
                     unsafe_requests.append({"method": req.method, "url": req.url[:210]})
                 return route.abort()
@@ -108,7 +109,8 @@ try:
                 check(f"Firefox Market limit {amount} interactive", False, str(exc))
 
         try:
-            radar = admin.locator('.filter-btn[data-filter="radar"]').first
+            radar = admin.locator('#atlasPublicRadarLink').first
+            radar.wait_for(state="attached", timeout=17000)
             radar.click(timeout=14000, force=True)
             admin.wait_for_timeout(2400)
             state = admin.evaluate("""() => ({
@@ -116,7 +118,7 @@ try:
                duplicateRadarTable: document.querySelectorAll('[data-radar-native="rows"]').length,
                reader: typeof globalThis.AgentCryptoRadarReader?.eligibleResearchCoin === 'function',
                renderer: typeof globalThis.AgentCryptoRadarNative?.mount === 'function',
-               filter: document.querySelector('.filter-btn[data-filter="radar"]')?.className || ''
+               filter: document.getElementById('atlasPublicRadarLink')?.className || ''
             })""")
             check("Radar uses one canonical Market table", state["singleMarket"] and state["duplicateRadarTable"] == 0, state)
             check("Radar public reader and renderer loaded", state["reader"] and state["renderer"], state)
@@ -157,7 +159,7 @@ try:
                         animations="disabled", timeout=30000)
 
         # Offline: no local Bridge and no network; only shell/fail-closed state tested.
-        context.set_offline(True)
+        offline_mode["enabled"] = True
         try:
             admin.reload(wait_until="domcontentloaded", timeout=60000)
             visible = admin.evaluate("""() => ({
@@ -182,5 +184,7 @@ finally:
                          "total": len(checks)}
     (ARTIFACT / "report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(report["summary"]), flush=True)
+    for message in diagnostics[:10]:
+        print("DIAGNOSTIC: " + message[:250], flush=True)
 
 sys.exit(1 if any(not c["pass"] for c in checks) else 0)
