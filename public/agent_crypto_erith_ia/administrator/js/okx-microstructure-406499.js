@@ -45,6 +45,20 @@
     const ms=Date.parse(raw);
     return Number.isFinite(ms)?ms:null;
   };
+  // On receipt a book can be fresh, but stored FRESH is never a timeless truth.
+  // Derive the badge from the source timestamp at every render/snapshot.
+  function bookFreshnessAt(sourceTime,status="UNKNOWN",nowMs=Date.now()){
+    const observed=parseSourceTime(sourceTime);
+    if(status!=="FRESH")return status||"UNKNOWN";
+    if(observed===null||!Number.isFinite(nowMs))return "UNKNOWN";
+    const age=nowMs-observed;
+    if(age < -FUTURE_TOLERANCE_MS)return "UNKNOWN";
+    return age>FRESH_MAX_AGE_MS?"STALE":"FRESH";
+  }
+  function liveBookAgeMs(nowMs=Date.now()){
+    const observed=parseSourceTime(state.sourceObservedAt);
+    return observed===null?null:Math.max(0,nowMs-observed);
+  }
   function classifyError(error){
     if(error?.code==="STALE_BOOK")return "STALE";
     if(error?.name==="AbortError")return "OFFLINE";
@@ -89,8 +103,19 @@
     !!(external?.active&&graph?.active&&
       String(graph.coin_id||"")!==String(external.id||""));
   const visibleGraphConflict=()=>{
-    try{return externalGraphConflict(globalThis.AtlasExternalChart?.state?.(),externalContext());}
-    catch(_){return false;}
+    try{
+      const graph=globalThis.AtlasExternalChart?.state?.(),ext=externalContext();
+      if(externalGraphConflict(graph,ext))return true;
+      const graphId=String(graph?.coin_id||"");
+      // A visible external chart must never inherit a stale BTC orderbook.
+      if(graph?.active&&(graphId.startsWith("new-listing:")||graphId==="concrete")){
+        const listing=globalThis.AgentCryptoNewListingsNativeCategory?.snapshot?.();
+        return !(ext.active&&graphId===String(ext.id||"")&&
+          graphId===String(listing?.selectedId||"")&&
+          normalizeSelectedAsset(ext.base)===normalizeSelectedAsset(listing?.selectedSymbol));
+      }
+      return false;
+    }catch(_){return true;}
   };
   const bookMismatch=(requestedAsset,requestedQuote,expectedAsset,expectedQuote)=>
     !!expectedAsset&&(
@@ -478,7 +503,7 @@
     if(!state.open){clearLive();document.getElementById("detailPanel")?.classList.remove("atlas-depth-active");return false;}
     const asset=selectedAsset();
     if(state.asset!==asset||!state.capturedAt)void refresh();
-    else scheduleLive();
+    else {render();scheduleLive();}
     return true;
   }
 
@@ -605,7 +630,10 @@
     // Wait for the matching public exchange context, then the existing open-only
     // 2-second refresh/event path will retry normally.
     if(!externalReady(visible,ext)||visibleGraphConflict()){
-      clearBookForAsset(visible||normalizeSelectedAsset(ext.base)||"BTC",ext.active?ext.quote:"USDT");
+      try{state.activeController?.abort();}catch(_){}
+      const listing=globalThis.AgentCryptoNewListingsNativeCategory?.snapshot?.();
+      clearBookForAsset(visible||normalizeSelectedAsset(listing?.selectedSymbol)||
+        normalizeSelectedAsset(ext.base)||"INCONNU",ext.active?ext.quote:"USDT");
       state.error="Contexte public du graphique externe non synchronisé · carnet indisponible";
       state.errorCode="EXTERNAL_CONTEXT_MISSING";
       render();
@@ -756,7 +784,8 @@
     const visible=visibleExternalAsset();
     const expected=visible||normalizeSelectedAsset(ext.active?ext.base:null)||selectedAsset();
     const inconsistent=bookMismatch(state.loadedAsset,state.loadedQuote,expected,ext.active?ext.quote:null)||
-      (visible&&!externalReady(visible,ext))||visibleGraphConflict();
+      (visible&&!externalReady(visible,ext))||visibleGraphConflict()||
+      (visible&&state.provider&&state.provider!==String(ext.provider||"").toLowerCase());
     if(inconsistent){
       if(title)title.textContent="CARNET D’ORDRES · SYNCHRONISATION";
       if(live){live.dataset.state="UNKNOWN";live.textContent="UNKNOWN";}
@@ -767,7 +796,7 @@
     }
 
     if(title)title.textContent=ext.active?`${String(ext.providerLabel||ext.provider||"SOURCE").toUpperCase()} · CARNET D’ORDRES`:`${String(state.provider||"MARKET").toUpperCase()} · CARNET D’ORDRES`;
-    const freshness=state.loading?"UNKNOWN":String(state.freshness||"UNKNOWN");
+    const freshness=state.loading?"UNKNOWN":bookFreshnessAt(state.sourceObservedAt,state.freshness);
     if(live){live.dataset.state=freshness;live.textContent=freshness;}
     const sourceTime=state.sourceObservedAt?new Date(state.sourceObservedAt).toLocaleTimeString("fr-FR"):"source inconnue";
     const receivedTime=state.receivedAt?new Date(state.receivedAt).toLocaleTimeString("fr-FR"):null;
@@ -775,7 +804,7 @@
       `${state.requestedAsset}/${state.requestedQuote||desiredQuote()} · actualisation…`:
       state.error?
         `${state.loadedAsset===state.requestedAsset&&state.bids.length?state.pair:state.requestedAsset+"/"+(state.requestedQuote||desiredQuote())} · ${freshness} · ${state.error}`:
-        `${state.pair} · source ${sourceTime}${receivedTime?" · reçu "+receivedTime:""} · âge ${Number.isFinite(state.sourceAgeMs)?Math.round(state.sourceAgeMs/1000)+" s":"—"} · ${state.lastLatencyMs??"—"} ms`;
+        `${state.pair} · source ${sourceTime}${receivedTime?" · reçu "+receivedTime:""} · âge ${liveBookAgeMs()===null?"—":Math.round(liveBookAgeMs()/1000)+" s"} · ${state.lastLatencyMs??"—"} ms`;
 
     if(state.loading&&!state.bids.length){
       kpis.innerHTML="";
@@ -793,6 +822,14 @@
       return;
     }
 
+    // Historical book may remain in memory for diagnosis, but must never
+    // continue to look executable as live bid/ask and depth.
+    if(freshness!=="FRESH"){
+      kpis.innerHTML="";
+      body.textContent="Carnet non frais ou source indisponible · "+freshness+
+        " · ancien relevé masqué. Attendre un nouveau carnet validé.";
+      return;
+    }
     const m=metrics();
     kpis.innerHTML=`
       <span><small>BEST BID</small><b>${fmtPrice(m.bid)}</b></span>
@@ -883,7 +920,8 @@
 
   globalThis.AgentCryptoOkxMicrostructure=Object.freeze({
     build:BUILD,extension_build:EXTENSION_BUILD,mount,setOpen,setDetached,setMinimized,setMaximized,refresh,
-    snapshot:()=>Object.freeze({...state,bids:state.bids.slice(),asks:state.asks.slice(),external:externalContext().active}),
+    snapshot:()=>Object.freeze({...state,freshness:bookFreshnessAt(state.sourceObservedAt,state.freshness),sourceAgeMs:liveBookAgeMs(),bids:state.bids.slice(),asks:state.asks.slice(),external:externalContext().active}),
+    freshness_at:bookFreshnessAt,
     self_test:selfTest,
     validation_contract:Object.freeze({fresh_max_age_ms:FRESH_MAX_AGE_MS,future_tolerance_ms:FUTURE_TOLERANCE_MS,quotes:Object.freeze(["EUR","USDC","USDT"]),usd_display_preference:Object.freeze(["USDC","USDT"])}),
     read_only:true,
@@ -921,7 +959,7 @@
     const boot=()=>mount();
     if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
     window.addEventListener("pageshow",boot,{passive:true});
-    document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")clearLive();else if(state.open)scheduleLive();},{passive:true});
+    document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")clearLive();else if(state.open){render();scheduleLive();}},{passive:true});
     window.addEventListener("resize",()=>{if(state.maximized)applyPlacement();else if(state.detached){rememberFloatRect();applyPlacement();}else if(state.open)snapToLectureTechnique();},{passive:true});
     // Market selection is the canonical owner of the selected asset.
     // Currency-only events cannot keep an old BTC orderbook in sync with OKB.
@@ -949,7 +987,10 @@
     window.addEventListener("agent-crypto:new-listing-line-ready",()=>{
       if(!state.open)return;
       const next=visibleExternalAsset();
-      if(!next)return;
+      if(!next||visibleGraphConflict()){
+        void refresh({automatic:true});
+        return;
+      }
       const nextQuote=desiredQuote();
       if(state.loadedAsset!==next||state.loadedQuote!==nextQuote)
         clearBookForAsset(next,nextQuote);
