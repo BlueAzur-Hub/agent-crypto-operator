@@ -79,20 +79,28 @@
     const selected=globalThis.AgentCryptoTraderMarket?.selected?.()||null;
     const isSelected=selected?.id===c?.id;
     const cur=c?.radarSource?'USD':displayCurrency(),quote=String(c?.radarQuote||'').toUpperCase(),unit=quote&&quote!=='USD'?quote:cur;
-    const cap=finite(cur==="USD"?c?.marketCapUsd:c?.marketCap);
+    // External and new-listing feeds may encode unknown capitalisation as 0.
+    // Zero is not a measured market cap: never present it as a sourced price.
+    const capRaw=finite(cur==="USD"?c?.marketCapUsd:c?.marketCap);
+    const cap=capRaw!==null&&capRaw>0?capRaw:null;
     const vol=finite(cur==="USD"?c?.volume24hUsd:c?.volume24h);
     const ratio=cap!==null&&cap>0&&vol!==null?vol/cap*100:null;
     const score=isSelected&&!c?.radarSource?finite(globalThis.AgentCryptoTraderMathCore?.score?.()?.score):null;
     const image=c?.image?'<img class="atlas-help-market-icon" src="'+esc(c.image)+'" alt="" loading="eager">':'<span class="atlas-help-market-fallback" aria-hidden="true">'+esc(String(c?.symbol||"?").slice(0,1))+'</span>';
-    const ch24=c?.partial?c.rendered24:pct(c?.change24h),ch7=c?.partial?c.rendered7:pct(c?.change7d),ch30=c?.partial?"—":pct(c?.change30d??c?.change30D??c?.change30);
+    // External datasets often fill missing 7d/30d change with zero. An
+    // unverified exact 0.00% must not be rendered as a measured fact.
+    const externalMissing=v=>c?.radarSource&&finite(v)===0?null:v;
+    const ch24=c?.partial?c.rendered24:pct(c?.change24h),
+      ch7=c?.partial?c.rendered7:pct(externalMissing(c?.change7d)),
+      ch30=c?.partial?"—":pct(externalMissing(c?.change30d??c?.change30D??c?.change30));
     return toolbar()+
       '<div class="atlas-help-market-head">'+image+'<span><strong>'+esc(c?.name||"Actif")+'</strong><b>'+esc(String(c?.symbol||"").toUpperCase())+'</b><small>Rang '+esc(c?.rank??"—")+' · Repère marché</small></span></div>'+
       '<div class="atlas-help-market-grid">'+
       '<span><small>Prix '+(quote&&quote!=='USD'?'coté ':'affichage ')+esc(unit)+'</small><strong>'+esc(priceOf(c))+'</strong></span>'+
       '<span><small>Source '+esc(unit)+'</small><strong>'+esc(c?.radarSource||(c?.partial?"Market visible":"CoinGecko public"))+'</strong></span>'+
       '<span><small>'+(c?.radarSource?'24 h source':'24 h direct')+'</small><strong class="'+(c?.partial?"neutral":cls(c?.change24h))+'">'+esc(ch24)+'</strong></span>'+
-      '<span><small>7 j marché</small><strong class="'+(c?.partial?"neutral":cls(c?.change7d))+'">'+esc(ch7)+'</strong></span>'+
-      '<span><small>30 j marché</small><strong class="'+(c?.partial?"neutral":cls(c?.change30d??c?.change30D??c?.change30))+'">'+esc(ch30)+'</strong></span>'+
+      '<span><small>7 j marché</small><strong class="'+(c?.partial?"neutral":cls(externalMissing(c?.change7d)))+'">'+esc(ch7)+'</strong></span>'+
+      '<span><small>30 j marché</small><strong class="'+(c?.partial?"neutral":cls(externalMissing(c?.change30d??c?.change30D??c?.change30)))+'">'+esc(ch30)+'</strong></span>'+
       '<span><small>Vol./cap.</small><strong>'+(ratio===null?"—":ratio.toFixed(2)+" %")+'</strong></span>'+
       '<span><small>Capitalisation</small><strong>'+esc(compact(cap,cur))+'</strong></span>'+
       '<span><small>Volume 24 h</small><strong>'+esc(compact(vol,cur))+'</strong></span>'+

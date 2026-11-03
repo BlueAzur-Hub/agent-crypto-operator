@@ -45,6 +45,9 @@ jobs:
             /public/agent_crypto_erith_ia/trader/ai-asset-reading-core.js
             /public/agent_crypto_erith_ia/trader/ai-asset-reading-view.js
             /public/agent_crypto_erith_ia/trader/ai-asset-reading.css
+            /public/agent_crypto_erith_ia/trader/market-fiche-native.js
+            /public/agent_crypto_erith_ia/administrator/data/new-listings-identities.json
+            /public/agent_crypto_erith_ia/administrator/assets/crypto/new-listings/axis-robotics.svg
             /public/agent_crypto_erith_ia/trader/ai-ct-contract.js
             /.github/workflows/operator-trader-parity-delta.yml
       - name: Validate JavaScript syntax and native USD source
@@ -145,6 +148,24 @@ jobs:
             assert "agent-crypto:quote-architecture-changed" in mirror
             assert "real_orders:false" in mirror
             print("OPERATOR_SEVEN_DOSSIER_USD_DELTA_GUARD_PASS; ZIP owned by Phase C")
+            raise SystemExit(0)
+          # Narrow, audited read-only market fact + static logo/identity patch.
+          # Never treat missing cap or unverified external zeros as measured values.
+          facts_paths=[
+            "public/agent_crypto_erith_ia/trader/market-fiche-native.js",
+            "public/agent_crypto_erith_ia/administrator/data/new-listings-identities.json"
+          ]
+          if sorted(modified)==sorted(facts_paths):
+            import json
+            fiche=(root/"trader/market-fiche-native.js").read_text()
+            identities=json.loads((root/"administrator/data/new-listings-identities.json").read_text())["identities"]
+            assert "const cap=capRaw!==null&&capRaw>0?capRaw:null;" in fiche
+            assert "const externalMissing=v=>c?.radarSource&&finite(v)===0?null:v;" in fiche
+            assert identities["axis-robotics"]["spotUsdcOkxVerified"] is False
+            assert identities["axis-robotics"]["okxDerivativesNotSpot"] is True
+            assert identities["neosoul"]["verifiedAt"]=="2026-10-25"
+            assert (root/"administrator/assets/crypto/new-listings/axis-robotics.svg").exists()
+            print("OPERATOR_VERIFIED_MARKET_FACTS_AND_IDENTITY_PARITY_PASS; ZIP owned by Phase C")
             raise SystemExit(0)
           assert sorted(modified)==sorted(rootpaths),(modified,rootpaths)
           folder=pathlib.Path("operator_trader_delta")
