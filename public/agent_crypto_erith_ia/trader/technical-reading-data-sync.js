@@ -84,6 +84,24 @@
     window.addEventListener("agent-crypto:trader-technical-levels",()=>render("levels"),{passive:true});
     setTimeout(()=>render("boot"),0);
   }
+  // Seven's new dossier belongs to Technical Reading, not the shared
+  // Administrator runtime mirror or the legacy Concrete private CT module.
+  function mountSevenDossier(){
+    if(document.getElementById("traderSevenAssetCoreScript"))return;
+    const core=document.createElement("script");
+    core.id="traderSevenAssetCoreScript";
+    core.src=new URL("../trader/ai-asset-reading-core.js",document.baseURI).href;
+    core.onload=()=>{
+      if(!globalThis.AgentCryptoAiAssetReading||
+         document.getElementById("traderSevenAssetViewScript"))return;
+      const view=document.createElement("script");
+      view.id="traderSevenAssetViewScript";
+      view.src=new URL("../trader/ai-asset-reading-view.js",document.baseURI).href;
+      document.head.append(view);
+    };
+    document.head.append(core);
+  }
   globalThis.AgentCryptoTraderTechnicalData=Object.freeze({build:BUILD,render,snapshot:()=>Object.freeze({build:BUILD,asset:selected()?.id||null,currency:currency(),line:line()}),single_context_owner:true,real_order:false});
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bind,{once:true});else bind();
+  function start(){bind();mountSevenDossier();}
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();

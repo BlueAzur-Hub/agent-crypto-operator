@@ -72,6 +72,25 @@ function mount(){
     marketSwitch.disabled=true;
   }
 
+  // Trader-only one-shot reconciliation of displayed USD and the actual
+  // chart/table source. The shared graph owner already listens for this event.
+  // A second event is needed when the canonical quote state started as USD:
+  // setDisplayCurrency then returns without emitting, leaving old EUR history.
+  // Do not relabel EUR prices. The native USD graph owner must refetch/repaint.
+  if(doc.documentElement.dataset.operatorTraderUsdBoot!=="1"){
+    doc.documentElement.dataset.operatorTraderUsdBoot="1";
+    const quote=win.AgentCryptoQuoteCurrencyArchitecture;
+    const current=quote?.snapshot?.();
+    if(typeof quote?.setDisplayCurrency==="function"){
+      const alreadyUsd=current?.displayCurrency==="USD";
+      quote.setDisplayCurrency("USD",{reason:"operator-trader-default-usd"});
+      if(alreadyUsd){
+        try{win.dispatchEvent(new win.CustomEvent("agent-crypto:quote-architecture-changed",{
+          detail:{...quote.snapshot(),reason:"operator-trader-usd-redraw"}
+        }));}catch(_){}
+      }
+    }
+  }
   // Trader-only read surfaces mounted inside the SAME Administrator runtime.
   // No duplicated market/chart owner and no real order route.
   if(!doc.getElementById("traderOkxAccountScript")){

@@ -214,6 +214,66 @@ try:
             check("Trader shares Administrator 40.6.719 Version Truth", frame_build == "40.6.719", frame_build)
         except Exception as exc:
             check("Trader runtime loads in Operator role", False, str(exc))
+        # The shared Technical Reading accordion must now host the Seven
+        # dossier without replacing Concrete or adding another IA control.
+        try:
+            inner = desk.frame_locator("#traderInterfaceRuntime")
+            seven = inner.locator("#sevenAssetReading")
+            seven.wait_for(state="attached", timeout=30000)
+            dossier = seven.evaluate("""el => {
+                const ct = document.getElementById('aiCtPanel');
+                const quote = globalThis.AgentCryptoQuoteCurrencyArchitecture?.snapshot?.();
+                const graph = globalThis.AgentCryptoGraphNativeUsd?.snapshot?.();
+                const privateButton = el.querySelector('.seven-asset-actions button:last-child');
+                return {
+                    nested: !!ct?.contains(el),
+                    onlyOneAccordion: document.querySelectorAll('#detailPanelBody > #aiCtPanel').length===1,
+                    heading: ct?.querySelector('summary b')?.textContent || '',
+                    reason: el.querySelector('.seven-asset-state')?.textContent || '',
+                    marketSelected: globalThis.AgentCryptoTraderMarket?.selected?.()?.symbol || null,
+                    chartPair: globalThis.AgentCryptoMarketMicroscope?.snapshot?.()?.loadedInstrument || null,
+                    displayed: el.hidden===false,
+                    nativeCtKept: !!ct?.querySelector('.ai-ct-panel-body'),
+                    privateDisabled: privateButton?.disabled===true,
+                    privateOwnerAvailable:
+                        typeof globalThis.AgentCryptoTraderOkxAccount?.ticketReadOnly==='function' &&
+                        typeof globalThis.AgentCryptoTraderOkxAccount?.basePositionReadOnly==='function',
+                    currency: quote?.displayCurrency || 'N/D',
+                    graphCurrency: graph?.displayCurrency || 'N/D',
+                    graphInstalled: graph?.installed===true,
+                    realOrders: globalThis.AgentCryptoSevenAssetReadingView?.real_orders
+                };
+            }""")
+            qualified_btc = "Dossier BTC" in dossier["heading"]
+            safe_pending = ("Sources en attente" in dossier["heading"] and
+                            ("Sélection non qualifiée" in dossier["reason"] or
+                             "Conflit" in dossier["reason"]))
+            check("Seven native Technical Reading: BTC dossier or honest unqualified state",
+                  dossier["nested"] and dossier["onlyOneAccordion"] and
+                  dossier["displayed"] and (qualified_btc or safe_pending) and
+                  dossier["nativeCtKept"] and dossier["realOrders"] is False, dossier)
+            check("Trader initial displayed currency and native graph both USD",
+                  dossier["currency"]=="USD" and
+                  dossier["graphCurrency"]=="USD" and dossier["graphInstalled"], dossier)
+            check("Operator private account remains fail-closed when owner lacks methods",
+                  dossier["privateOwnerAvailable"] or dossier["privateDisabled"], dossier)
+            # The original manual EUR option must not be removed by the
+            # Trader-only default-USD reconciliation. Restore USD afterwards.
+            buttons = inner.locator('#atlasQuoteCurrencyArchitecture [data-aqca]')
+            buttons.first.wait_for(state="attached", timeout=12000)
+            eur = inner.locator('#atlasQuoteCurrencyArchitecture [data-aqca="EUR"]')
+            usd = inner.locator('#atlasQuoteCurrencyArchitecture [data-aqca="USD"]')
+            eur.click(force=True, timeout=12000)
+            eur_state = eur.evaluate("""el => globalThis.AgentCryptoQuoteCurrencyArchitecture?.snapshot?.()?.displayCurrency""")
+            usd.click(force=True, timeout=12000)
+            usd_state = usd.evaluate("""el => globalThis.AgentCryptoQuoteCurrencyArchitecture?.snapshot?.()?.displayCurrency""")
+            check("Operator manual EUR then USD remains available",
+                  eur_state=="EUR" and usd_state=="USD",
+                  {"eur":eur_state,"usd":usd_state})
+            desk.screenshot(path=str(ARTIFACT / "trader_seven_btc_usd_firefox.png"),
+                            animations="disabled", timeout=30000)
+        except Exception as exc:
+            check("Operator Seven BTC / native USD Firefox regression", False, str(exc))
         # TRADUS is a NESTED section in the existing end-of-page Yoann
         # development handoff, not a Market or global navigation control.
         try:

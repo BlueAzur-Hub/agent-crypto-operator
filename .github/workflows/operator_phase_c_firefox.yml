@@ -47,6 +47,13 @@ jobs:
         run: |
           node --check public/agent_crypto_erith_ia/trader/trader-tradus-readonly.js
           node public/agent_crypto_erith_ia/trader/test-tradus-readonly.cjs
+          node --check public/agent_crypto_erith_ia/trader/ai-asset-reading-core.js
+          node --check public/agent_crypto_erith_ia/trader/ai-asset-reading-view.js
+          node --check public/agent_crypto_erith_ia/trader/ai-ct-contract.js
+          node --check public/agent_crypto_erith_ia/trader/technical-reading-data-sync.js
+          node --check public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js
+          node --test public/agent_crypto_erith_ia/trader/test-ai-asset-reading-core.cjs
+          node --test public/agent_crypto_erith_ia/trader/test-ai-asset-reading-view.cjs
       - name: Firefox read-only Operator and Trader branch smoke
         run: python .github/scripts/operator_phase_c_firefox.py
       - name: Preserve Firefox screenshots and diagnostics
@@ -91,7 +98,12 @@ jobs:
           printf 'Application files in incremental update: %s\n' "${#files[@]}"
           printf '%s\n' "${files[@]}" | tee phase_c_candidate/FILES_CHANGED.txt
 
+          # Exact scope determines delivery filename; no duplicate packages.
+          if grep -q ai-asset-reading-core.js phase_c_candidate/FILES_CHANGED.txt; then
+            ARCHIVE="AGENT_CRYPTO_OPERATOR_YOANN_TRADER_SEVEN_BTC_USD_TECHNICAL_READING_READONLY_INCREMENTAL_UPDATE_2026_11_03.zip"
+          else
           ARCHIVE="AGENT_CRYPTO_OPERATOR_YOANN_TRADER_TRADUS_SHADOW_PAPER_READONLY_INCREMENTAL_UPDATE_2026_11_03.zip"
+          fi
           git archive --format=zip --output="phase_c_candidate/$ARCHIVE" "$HEAD_SHA" "${files[@]}"
           unzip -tqq "phase_c_candidate/$ARCHIVE"
           INSIDE_COUNT="$(unzip -Z1 "phase_c_candidate/$ARCHIVE" | grep -v '/$' | wc -l)"
