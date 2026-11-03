@@ -2,7 +2,7 @@
  * Fetch ONE index + ONE selected gzip; do not modify R5/R6/R7 or live charts.
  */
 (()=>{"use strict";
-const urlRoot=new URL("../../data/historical_archive_prototype/compact_v1/",document.currentScript.src);
+const urlRoot=new URL("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/historical_archive_prototype/compact_v1/");
 const NS="aerith.public.ohlcv.spot.compact.index.v1";
 const BLOCK="aerith.public.ohlcv.spot.compact.series.v1";
 const SPECS={"24h":[300000,"5m"],"7d":[3600000,"1h"],"30d":[14400000,"4h"]};
@@ -15,7 +15,7 @@ async function read(path) {
     (path==="index.json"||/^series\/[a-z0-9-]+_(24h|7d|30d)_[a-f0-9]{16}\.json\.gz$/.test(path)),
     "Chemin R9 interdit");
  const url=new URL(path,urlRoot);
- ok(url.origin===location.origin&&url.pathname.startsWith(urlRoot.pathname),"Archive externe refusée");
+ ok(url.origin===urlRoot.origin&&url.pathname.startsWith(urlRoot.pathname),"Archive externe refusée");
  const response=await fetch(url.href,{credentials:"omit",cache:"no-store",redirect:"error"});
  ok(response.ok,"Archive R9 HTTP "+response.status);
  const data=await response.arrayBuffer();
