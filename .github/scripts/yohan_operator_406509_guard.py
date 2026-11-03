@@ -5,6 +5,9 @@ import json
 root=Path(__file__).resolve().parents[2]
 base=root/'public'/'agent_crypto_erith_ia'
 build=json.loads((base/'operator'/'build.json').read_text(encoding='utf-8'))
+admin_manifest=json.loads((base/'administrator'/'build.json').read_text(encoding='utf-8'))
+trader_manifest=json.loads((base/'trader'/'build.json').read_text(encoding='utf-8'))
+operator_entry=(base/'operator'/'index.html').read_text(encoding='utf-8')
 yohan=(base/'administrator'/'yohan.html').read_text(encoding='utf-8')
 profile=(base/'administrator'/'js'/'yohan-operator-profile.js').read_text(encoding='utf-8')
 trader=(base/'trader'/'trading-desk.html').read_text(encoding='utf-8')
@@ -16,10 +19,17 @@ client=(base/'administrator'/'js'/'yohan-operator-bridge-client.js').read_text(e
 contract=json.loads((base/'operator'/'bridge_yohan'/'R19Y1_OPERATOR_CONTROL_CONTRACT.json').read_text(encoding='utf-8'))
 
 checks={
- 'build_640':build.get('build')=='40.6.640',
- 'operator_local_640':build.get('runtime_repository')=='BlueAzur-Hub/agent-crypto-operator' and build.get('runtime_mode')=='operator-local-shared-administrator-surface',
- 'yoann_640_local_entry':'./index.html?view=intermediate&amp;operator-entry=40.6.640&amp;profile=yohan' in yohan,
- 'trader_640_local_entry':'../administrator/index.html?surface=trader&amp;view=intermediate&amp;profile=yohan' in trader,
+ 'build_719':build.get('build')=='40.6.719',
+ 'shared_administrator_truth':admin_manifest.get('build')=='40.6.719' and admin_manifest.get('administrator_build')=='40.6.719' and admin_manifest.get('engine')=='38.15.11',
+ 'trader_shared_truth':trader_manifest.get('build')=='40.6.719' and trader_manifest.get('administrator_base')=='40.6.719' and trader_manifest.get('market_core')=='38.15.11',
+ 'shared_html_boot':'build:"40.6.719",loaded_build:"40.6.719"' in local_admin,
+ 'operator_redirect_truth':'<meta name="operator-build" content="40.6.719">' in operator_entry,
+ 'operator_manifest_entry_truth':'operator-entry=40.6.719&profile=yohan' in build.get('runtime_entry',''),
+ 'profile_delivery_truth':'deliveryBuild: "40.6.719"' in profile,
+ 'trader_mirror_truth':'const BUILD="40.6.719"' in trader_mirror,
+ 'operator_local_719':build.get('runtime_repository')=='BlueAzur-Hub/agent-crypto-operator' and build.get('runtime_mode')=='operator-local-shared-administrator-surface',
+ 'yoann_719_local_entry':'./index.html?view=intermediate&amp;operator-entry=40.6.719&amp;profile=yohan' in yohan,
+ 'trader_719_local_entry':'../administrator/index.html?surface=trader&amp;view=intermediate&amp;profile=yohan' in trader,
  'trader_profile_attached':'erithYohanOperatorLayer0' in trader_mirror and 'yohan-operator-profile.js' in trader_mirror,
  'trader_bridge_attached':'erithYohanOperatorLayer1' in trader_mirror and 'yohan-operator-bridge-client.js' in trader_mirror,
  'shared_operator_admin_link':'adminLink.href="../administrator/yohan.html"' in trader_mirror,
@@ -55,4 +65,4 @@ checks={
 for k,v in checks.items(): print(f'{k}: {"PASS" if v else "FAIL"}')
 failed=[k for k,v in checks.items() if not v]
 if failed: raise SystemExit('Guard failed: '+', '.join(failed))
-print('YOANN OPERATOR 40.6.640 · CONTROL CENTER R19Y1 · OKX BACKEND 1.4.4 GUARD PASS')
+print('YOANN OPERATOR 40.6.719 · CONTROL CENTER R19Y1 · OKX BACKEND 1.4.4 GUARD PASS')
