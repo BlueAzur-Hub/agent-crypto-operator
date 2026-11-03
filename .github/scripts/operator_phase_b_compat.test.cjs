@@ -78,3 +78,26 @@ test('Read-only canonical archives and candle source remain independent of priva
   assert.match(microscope,/real_order:false/);
   assert.doesNotMatch(microscope,/apiKey|secretKey|placeOrder\(/);
 });
+
+test('Canonical Master historical archives use verified public read-only paths',()=>{
+ const files=['top250-history-catalog.js','shared-historical-view.js','shared-hourly-history.js','btc-annual-view.js'];
+ for(const file of files){
+  const src=get('administrator/js/'+file);
+  assert.match(src,/raw\.githubusercontent\.com\/BlueAzur-Hub\/erith-ia-memory\/main\/public\/agent_crypto_erith_ia\/data\/historical_archive_prototype\//,file);
+  assert.match(src,/credentials:"omit"/,file);
+  assert.doesNotMatch(src,/location\.origin|apiKey|secretKey|placeOrder\(/,file);
+ }
+});
+test('Radar uses the canonical Market table with only supplementary read-only research',()=>{
+ const native=get('administrator/js/market-radar-native.js');
+ const category=get('administrator/js/new-listings-native-category.js');
+ assert.match(native,/Canonical #marketRows renders all Radar quote rankings/);
+ assert.doesNotMatch(native,/Classement Radar détaillé|function printMarket\(root,model\)|data-radar-native="rows"/);
+ assert.match(native,/printOpportunities\(root,model\)/);
+ assert.match(native,/printQualification\(root,model\)/);
+ assert.match(native,/printOkxHourly\(root,model\)/);
+ assert.match(native,/https:\/\/blueazur-hub\.github\.io\/erith-ia-memory\/public\/agent_crypto_erith_ia\/laboratoire\/radar\.html/);
+ assert.match(category,/AtlasMarketRadarCategory\?\.set\?\.\(true\)/);
+ assert.match(category,/AtlasMarketRadarCategory\?\.set\?\.\(false\)/);
+ assert.doesNotMatch(native,/api\/v5\/trade\/order|placeOrder\(|localStorage\.setItem/);
+});
