@@ -10,7 +10,7 @@ const app=get('administrator/app.js');
 const graph=get('administrator/js/graph-native-usd-406520.js');
 const interfaceHtml=get('administrator/index.html');
 const desk=get('trader/trading-desk.html');
-function namedFunction(source,name){const match=source.match(new RegExp('^(?:async )?function '+name+'\\([^]*?^\\}\\n','m'));assert.ok(match,\`Missing \${name}\`);return match[0];}
+function namedFunction(source,name){const match=source.match(new RegExp('^(?:async )?function '+name+'\\([^]*?^\\}\\n','m'));assert.ok(match,`Missing ${name}`);return match[0];}
 test('Market canonical 50/100/250/500/1000 and Yoann Trader entry unchanged',()=>{
   for(const n of [50,100,250,500,1000])assert.match(interfaceHtml,new RegExp('data-market-limit="'+n+'"'));
   assert.match(desk,/surface=trader&amp;view=intermediate&amp;profile=yohan/);
