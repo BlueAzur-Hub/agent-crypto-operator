@@ -19177,8 +19177,28 @@ function atlasSelectMarketCoin(coin) {
   requestAnimationFrame(() => { void renderAnalystPanel({ selection: true, forceSingle: true }); });
 }
 
-function matchAssetFilter(c) { const type = classifyAsset(c); if (state.assetFilter === "pillar") return type === "Pilier marché"; if (state.assetFilter === "stablecoin") return type === "Stablecoin"; if (state.assetFilter === "major") return type === "Altcoin majeur"; if (state.assetFilter === "speculative") return type === "Token spéculatif" || type === "Altcoin"; return true;
+function matchAssetFilter(c) { const type = classifyAsset(c); if (state.assetFilter === "pillar") return type === "Pilier marché"; if (state.assetFilter === "stablecoin") return type === "Stablecoin"; if (state.assetFilter === "major") return type === "Altcoin majeur"; if (state.assetFilter === "speculative") return type === "Token spéculatif" || type === "Altcoin"; if (state.assetFilter === "radar") return globalThis.AgentCryptoRadarReader?.eligibleResearchCoin?.(c) === true; return true;
 }
+
+// Market is the sole Radar quote renderer, filter and pagination owner.
+let atlasRadarPreviousMarketView=null;
+function atlasMarketRadarCategorySet(enabled){
+ if(enabled){
+  if(state.assetFilter!=="radar")atlasRadarPreviousMarketView={filter:state.assetFilter,sort:state.sortKey};
+  state.assetFilter="radar"; state.sortKey="change24-desc";
+ }else{
+  if(state.assetFilter!=="radar")return false;
+  state.assetFilter=atlasRadarPreviousMarketView?.filter||"all";
+  state.sortKey=atlasRadarPreviousMarketView?.sort||"rank-asc";
+  atlasRadarPreviousMarketView=null;
+ }
+ atlasMarketUniverseState.page=0;
+ if(els.sortSelect&&[...els.sortSelect.options].some(x=>x.value===state.sortKey))els.sortSelect.value=state.sortKey;
+ document.querySelectorAll(".filter-btn[data-filter]").forEach(b=>b.classList.toggle("active",!enabled&&b.dataset.filter===state.assetFilter));
+ renderMarketTable();
+ return true;
+}
+globalThis.AtlasMarketRadarCategory=Object.freeze({set:atlasMarketRadarCategorySet});
 
 function volCapRatio(c) { return c?.volume24h && c?.marketCap ? c.volume24h / c.marketCap : 0;
 }
