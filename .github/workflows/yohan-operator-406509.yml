@@ -20,3 +20,10 @@ jobs:
         run: |
           node --check public/agent_crypto_erith_ia/administrator/js/yohan-operator-profile.js
           node --check public/agent_crypto_erith_ia/administrator/js/yohan-operator-bridge-client.js
+          node --check public/agent_crypto_erith_ia/administrator/app.js
+          node --check public/agent_crypto_erith_ia/administrator/js/graph-native-usd-406520.js
+          node --check public/agent_crypto_erith_ia/administrator/js/market-microscope-candles.js
+          node --check public/agent_crypto_erith_ia/administrator/js/okx-public-chart-history.js
+          node --check public/agent_crypto_erith_ia/administrator/js/verified-periods-reader.js
+      - name: Verify Phase B read-only Market and Scanner compatibility
+        run: node --test .github/scripts/operator_phase_b_compat.test.cjs
