@@ -1,10 +1,10 @@
 /* Seven Heaven — seven certified historical windows, in the ONE existing Coffre.
- * Uses GitHub Pages only; no Trader/Interface/IndexedDB writes and no live prices.
+ * Uses canonical Raw GitHub archives; Pages deliberately excludes cold data.
  * Distinct Binance Spot USDT OHLCV. Max is materialized history, not all-time.
  */
 (() => {
 "use strict";
-const root=new URL("../../data/historical_archive_prototype/verified_periods/",document.currentScript.src);
+const root=new URL("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/historical_archive_prototype/verified_periods/");
 const btcDeepRoot=new URL("../btc_max_integrated/",root);
 const btcDailyRoot=new URL("../btc_native_daily_reconciliation/",root);
 const pairs=Object.freeze({bitcoin:"BTCUSDT",ethereum:"ETHUSDT",binancecoin:"BNBUSDT",ripple:"XRPUSDT",solana:"SOLUSDT"});
@@ -26,7 +26,7 @@ async function read(filename,cap){
    /^(?:bitcoin|ethereum|binancecoin|ripple|solana)-(?:24h|7j|30j|60j|90j|1an|Max)\.json\.gz$/.test(filename),
    "Fichier historique non autorisé");
  const url=new URL(filename,root);
- need(url.origin===location.origin&&url.pathname.startsWith(root.pathname),"Source hors du Coffre");
+ need(url.origin===root.origin&&url.pathname.startsWith(root.pathname),"Source hors du Coffre");
  const reply=await fetch(url.href,{credentials:"omit",redirect:"error",cache:"no-store"});
  need(reply.ok,"Archive HTTP "+reply.status+" : "+filename);
  const raw=await reply.arrayBuffer();
@@ -37,7 +37,7 @@ async function readDeep(filename,cap){
  need(filename==="index.json"||filename==="bitcoin-Max.json.gz",
       "Fichier BTC source non autorisé");
  const url=new URL(filename,btcDeepRoot);
- need(url.origin===location.origin&&url.pathname.startsWith(btcDeepRoot.pathname),
+ need(url.origin===root.origin&&url.pathname.startsWith(btcDeepRoot.pathname),
       "Source profonde BTC hors du Coffre");
  const response=await fetch(url.href,{credentials:"omit",redirect:"error",cache:"no-store"});
  need(response.ok,"Historique BTC approfondi non publié : HTTP "+response.status);
@@ -121,7 +121,7 @@ async function loadOfficialDailyBtc(){
   need(filename==="index.json"||filename==="bitcoin-Max.json.gz",
        "Fichier BTC 1d non autorisé");
   const url=new URL(filename,btcDailyRoot);
-  need(url.origin===location.origin&&url.pathname.startsWith(btcDailyRoot.pathname),
+  need(url.origin===root.origin&&url.pathname.startsWith(btcDailyRoot.pathname),
        "Archive journalière hors du Coffre");
   const response=await fetch(url.href,{credentials:"omit",redirect:"error",cache:"no-store"});
   need(response.ok,"Bougies Binance quotidiennes non publiées : HTTP "+response.status);
