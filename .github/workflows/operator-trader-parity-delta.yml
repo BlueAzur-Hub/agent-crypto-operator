@@ -97,11 +97,27 @@ jobs:
           head=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
           modified=subprocess.check_output(["git","diff","--name-only","--diff-filter=ACMRT",base,head,"--","public/agent_crypto_erith_ia/"],text=True).splitlines()
           modified=[p for p in modified if not (p.endswith(".test.mjs") or p.endswith(".test.js") or p.endswith(".test.cjs") or pathlib.Path(p).name.startswith("test-"))]
-          assert sorted(modified)==sorted(rootpaths),(modified,rootpaths)
           deleted=subprocess.check_output(["git","diff","--name-only","--diff-filter=D",base,head,"--","public/agent_crypto_erith_ia/"],text=True).strip()
           assert not deleted,deleted
-          canonical=subprocess.check_output(["git","hash-object",rootpaths[2]],text=True).strip()
+          canonical=subprocess.check_output(["git","hash-object","public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js"],text=True).strip()
           assert canonical=="aa2bbdc4f6473c949a1864b13c077fb63e694281",canonical
+          # Preserve the exact historic six-file parity release contract.
+          # New TRADUS-only candidates are checked here but packaged solely by
+          # the Operator Phase C Firefox differential workflow (one ZIP owner).
+          tradus_paths=[
+            "public/agent_crypto_erith_ia/trader/build.json",
+            "public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js",
+            "public/agent_crypto_erith_ia/trader/trader-tradus-readonly.js",
+            "public/agent_crypto_erith_ia/trader/trading-desk.html"
+          ]
+          if sorted(modified)==sorted(tradus_paths):
+            assert 'tradus.id="traderTradusReadOnlyScript"' in mirror
+            assert "trader-tradus-readonly.js" in mirror
+            assert trader.get("tradus_trader_candidate",{}).get("real_orders") is False
+            assert trader.get("tradus_trader_candidate",{}).get("status")=="CANDIDATE_NOT_PUBLISHED"
+            print("OPERATOR_TRADUS_PARITY_GUARD_PASS; ZIP owned by Phase C")
+            raise SystemExit(0)
+          assert sorted(modified)==sorted(rootpaths),(modified,rootpaths)
           folder=pathlib.Path("operator_trader_delta")
           folder.mkdir(exist_ok=True)
           name="AGENT_CRYPTO_OPERATOR_YOANN_TRADER_MARKET_USD_TECHNICAL_SYNC_40_6_719_INCREMENTAL_UPDATE_2026_11_03.zip"
@@ -127,4 +143,4 @@ jobs:
           name: operator-trader-406719-six-file-incremental-zip
           path: operator_trader_delta/
           retention-days: 14
-          if-no-files-found: error
+          if-no-files-found: warn
