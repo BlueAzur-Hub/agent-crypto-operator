@@ -80,7 +80,7 @@ test('Read-only canonical archives and candle source remain independent of priva
 });
 
 test('Canonical Master historical archives use verified public read-only paths',()=>{
- const files=['top250-history-catalog.js','shared-historical-view.js','shared-hourly-history.js','btc-annual-view.js'];
+ const files=['top250-history-catalog.js','shared-historical-view.js','shared-hourly-history.js','btc-annual-view.js','historical-archive-adapter.js','historical-compact-reader.js'];
  for(const file of files){
   const src=get('administrator/js/'+file);
   assert.match(src,/raw\.githubusercontent\.com\/BlueAzur-Hub\/erith-ia-memory\/main\/public\/agent_crypto_erith_ia\/data\/historical_archive_prototype\//,file);
@@ -100,4 +100,13 @@ test('Radar uses the canonical Market table with only supplementary read-only re
  assert.match(category,/AtlasMarketRadarCategory\?\.set\?\.\(true\)/);
  assert.match(category,/AtlasMarketRadarCategory\?\.set\?\.\(false\)/);
  assert.doesNotMatch(native,/api\/v5\/trade\/order|placeOrder\(|localStorage\.setItem/);
+});
+
+test('BTC comparator and yearly explorer read only canonical public archives',()=>{
+ const btc=get('administrator/js/historical-btc-comparator.js');
+ const yearly=get('administrator/js/historical-yearly-browser.js');
+ assert.match(btc,/raw\.githubusercontent\.com\/BlueAzur-Hub\/erith-ia-memory\/main\/public\/agent_crypto_erith_ia\/data\/crypto\/latest\.json/);
+ assert.match(btc,/credentials:"omit"/);
+ assert.match(yearly,/raw\.githubusercontent\.com\/BlueAzur-Hub\/erith-ia-memory\/main\/public\/agent_crypto_erith_ia\/data\/historical_archive_prototype\/calendar_year_hourly_shards\//);
+ assert.doesNotMatch(btc+yearly,/location\.origin|apiKey|secretKey|placeOrder\(/);
 });
