@@ -28,5 +28,14 @@ jobs:
           node --check public/agent_crypto_erith_ia/administrator/js/new-listings-native-category.js
           node --check public/agent_crypto_erith_ia/administrator/js/okx-microstructure-406499.js
           node --check public/agent_crypto_erith_ia/administrator/js/learning-lab.js
+          node --check public/agent_crypto_erith_ia/administrator/js/market-radar-native.js
+          node --check public/agent_crypto_erith_ia/administrator/js/top250-history-catalog.js
+          node --check public/agent_crypto_erith_ia/administrator/js/shared-historical-view.js
+          node --check public/agent_crypto_erith_ia/administrator/js/shared-hourly-history.js
+          node --check public/agent_crypto_erith_ia/administrator/js/btc-annual-view.js
       - name: Verify Phase B read-only Market and Scanner compatibility
         run: node --test .github/scripts/operator_phase_b_compat.test.cjs
+      - name: Verify canonical Radar native and standalone behavior
+        run: |
+          node --test public/agent_crypto_erith_ia/administrator/js/test-market-radar-fidelity.cjs
+          node public/agent_crypto_erith_ia/laboratoire/test-radar.cjs
