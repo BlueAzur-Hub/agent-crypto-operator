@@ -202,30 +202,7 @@ function build(root){
  large.target="_blank";large.rel="noopener noreferrer";
  commands.append(refresh,large);header.append(intro,commands);root.append(header);
  const status=node("p","table-note","Radar non encore chargé");status.dataset.radarNative="status";status.setAttribute("role","status");root.append(status);
- const dock=node("div","radar-native-dock");
- dock.setAttribute("aria-label","Périmètre Radar par capitalisation");
- const group=node("div","market-universe-mode","");
- for(const tier of [10,20,50,250]){
-  const b=node("button","","Top "+tier);b.type="button";b.dataset.tier=String(tier);b.setAttribute("aria-pressed",String(tier===10));b.classList.toggle("is-active",tier===10);group.append(b);
- }
- const filter=node("input","","");filter.type="search";filter.placeholder="Chercher une crypto";filter.dataset.radarNative="filter";filter.setAttribute("aria-label","Filtrer les cryptomonnaies du Radar");
- const sort=node("select","","");sort.dataset.radarNative="sort";sort.setAttribute("aria-label","Trier le Radar");
- for(const [value,label] of [["rank","Rang"],["change24h","Hausses 24h"],["change7d","Hausses 7j"],["drop24h","Baisses 24h"],["volume24hUsd","Volume 24h"]]){
-  const option=node("option","",label);option.value=value;sort.append(option);
- }
- // The canonical Administrator Market table stays visible as the primary
- // ranking. Preserve this separate dated Radar research ranking on demand,
- // without showing two competing Market tables at the same time.
- const detailRanking=foldSection("radar-native-ranking",
-   "Classement Radar détaillé · Top 10 / 20 / 50 / 250",
-   "foldRanking","Source Radar datée · ouvrir pour comparer");
- dock.append(group,filter,sort);detailRanking.append(dock);
- const subtitle=node("p","table-note","Top 10 · CoinGecko · pas de recommandation d'achat");subtitle.dataset.radarNative="marketNote";detailRanking.append(subtitle);
- const wrap=node("div","table-wrap radar-native-table");const table=node("table");
- const thead=node("thead"),tr=node("tr");
- for(const t of ["Rang","Crypto","Prix USD","24h","7j","Volume 24h","Lecture"]){tr.append(node("th","",t));}
- thead.append(tr);table.append(thead);
- const tbody=node("tbody");tbody.dataset.radarNative="rows";table.append(tbody);wrap.append(table);detailRanking.append(wrap);root.append(detailRanking);
+ // Canonical #marketRows renders all Radar quote rankings.
  const bottom=node("div","radar-native-bottom");
  const listings=foldSection("","Nouveaux listings · Spot","foldListings","Spot Bitget · statut en lecture");
  const proof=node("p","table-note","En attente des sources Bitget");proof.dataset.radarNative="listingProof";listings.append(proof);
@@ -293,34 +270,7 @@ function build(root){
  supplementary.append(okxHourly);
  const foot=node("p","table-note","Lecture seule · aucun ordre OKX · USDT n'est pas automatiquement USDC · Radar20 de recherche inchangé");
  supplementary.append(foot);
- return {filter,sort,tbody,lb,refresh,group};
-}
-function printMarket(root,model){
- const api=global.AgentCryptoRadarReader;
- const body=lookup(root,"rows");body.replaceChildren();
- if(!model.market){const r=node("tr");cell(r,"Top 250 indisponible · aucune cotation inventée");body.append(r);return;}
- const rows=api.selectMarket(model.market.rows,model.tier,lookup(root,"filter").value,lookup(root,"sort").value);
- for(const asset of rows){
-  const r=node("tr","asset-row radar-native-market-row");r.dataset.radarSymbol=asset.symbol;r.dataset.radarCategory=radarCategory(asset);
-  const rank=cell(r,"","radar-native-rank");rank.append(node('b','',String(asset.rank)));
-  identityCell(r,asset);
-  factCell(r,displayPrice(asset.priceUsd)+" $US","USD · CoinGecko · "+safeDate(model.market.at),"radar-native-quote");
-  const a=cell(r,pct(asset.change24h));a.className=asset.change24h>0?"pos":asset.change24h<0?"neg":"";
-  const b=cell(r,pct(asset.change7d));b.className=asset.change7d>0?"pos":asset.change7d<0?"neg":"";
-  factCell(r,compactMoney(asset.volume24hUsd),"Cap. "+compactMoney(asset.marketCapUsd),"radar-native-volume");
-  const movement=api.observeMarket(asset),reading=cell(r,"","radar-native-reading "+movement.tone);
-  reading.append(node('strong','',movement.label),node('small','radar-native-solo-hint',"Fiche au survol · Solo au clic"));
-  reading.title=movement.detail;
-  clickable(r,{kind:"market",id:asset.id,symbol:asset.symbol},root,model,{
-    ...asset,radarSource:"CoinGecko · snapshot public USD",radarObservedAt:model.market.at,
-    radarObservation:movement.label,radarReason:movement.detail,
-    radarEvidence:"Variations 24 h / 7 j archivées · bougies exactes vérifiées seulement par le Graphique"
-  });body.append(r);
- }
- if(!rows.length){const r=node("tr");cell(r,"Aucun résultat pour ce filtre");body.append(r);}
- lookup(root,"marketNote").textContent=rows.length+" actifs · Top "+model.tier+" par capitalisation · CoinGecko "+safeDate(model.market.at)+" · lecture seule";
- for(const b of model.group.querySelectorAll("[data-tier]")){const active=Number(b.dataset.tier)===model.tier;b.classList.toggle("is-active",active);b.setAttribute("aria-pressed",String(active));}
- 
+ return {lb,refresh};
 }
 function printListings(root,model){
  const body=lookup(root,"listings");body.replaceChildren();
@@ -898,7 +848,6 @@ async function refresh(root,model){
     printOkxHourly(root,model);
   });
   printQualification(root,model);
-  printMarket(root,model);
   printWatch(root,model);
   printListings(root,model);printOpportunities(root,model);printResearchLists(root,model);
   lookup(root,"status").textContent="Radar · classement et PAPER chargés · découverte Spot Bitget en cours…"+
@@ -950,7 +899,7 @@ async function refresh(root,model){
   }
   printQualification(root,model);
   lookup(root,"status").textContent=issues.length?"Radar partiel · "+issues.join(" · "):
-   "Radar · Top 250 / nouveaux listings Spot / PAPER BTC et CT · sélection Solo disponible";
+   "Radar · Candidats du Market sélectionné / veille Spot / études PAPER BTC et CT · sélection Solo disponible";
  }catch(e){
   lookup(root,"status").textContent="Radar indisponible : "+String(e?.message||e);
  }finally{
@@ -964,15 +913,9 @@ function mount(root){
  if(!global.AgentCryptoRadarReader)throw Error("Le lecteur public Radar est indisponible");
  root.dataset.radarNativeMounted="1";
  const controls=build(root);
- const model={tier:10,market:null,paper:null,listings:[],registry:new Map(),listingError:null,group:controls.group,loading:false,selectionRevision:0};
+ const model={market:null,paper:null,listings:[],registry:new Map(),listingError:null,loading:false,selectionRevision:0};
  root.radarModel=model;
- controls.group.addEventListener("click",e=>{
-  const b=e.target.closest("[data-tier]");if(!b)return;
-  model.tier=Number(b.dataset.tier);printMarket(root,model);
- });
- controls.filter.addEventListener("input",()=>printMarket(root,model));
- controls.sort.addEventListener("change",()=>printMarket(root,model));
- controls.refresh.addEventListener("click",()=>void refresh(root,model));
+controls.refresh.addEventListener("click",()=>void refresh(root,model));
  
  
  
@@ -980,6 +923,6 @@ function mount(root){
  return true;
 }
 if(typeof module!=="undefined"&&module.exports)
- module.exports=Object.freeze({selectGraph,compactMoney,printMarket,openOpportunityFiche,matchedCandidateKnowledge,verifiedDynamicFollowups,dynamicCandidateHistory,describeDynamicPoint,trajectoryEvidence,trajectoryVolumeReadout,verifyProspectiveSpotComparison,spotComparisonLine,printTrajectories,printQualification,describeOkxHourly,printOkxHourly});
+ module.exports=Object.freeze({selectGraph,compactMoney,openOpportunityFiche,matchedCandidateKnowledge,verifiedDynamicFollowups,dynamicCandidateHistory,describeDynamicPoint,trajectoryEvidence,trajectoryVolumeReadout,verifyProspectiveSpotComparison,spotComparisonLine,printTrajectories,printQualification,describeOkxHourly,printOkxHourly});
 global.AgentCryptoRadarNative=Object.freeze({mount});
 })(typeof globalThis!=="undefined"?globalThis:this);
