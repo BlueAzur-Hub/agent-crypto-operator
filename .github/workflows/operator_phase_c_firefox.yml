@@ -98,48 +98,11 @@ jobs:
           printf 'Application files in incremental update: %s\n' "${#files[@]}"
           printf '%s\n' "${files[@]}" | tee phase_c_candidate/FILES_CHANGED.txt
 
-          # Keep long, precise delivery names; never label a Seven/UTC delta
-          # as the previous TRADUS-only patch.
-          if printf '%s\n' "${files[@]}" | grep -q '/ai-asset-reading-core.js
-          git archive --format=zip --output="phase_c_candidate/$ARCHIVE" "$HEAD_SHA" "${files[@]}"
-          unzip -tqq "phase_c_candidate/$ARCHIVE"
-          INSIDE_COUNT="$(unzip -Z1 "phase_c_candidate/$ARCHIVE" | grep -v '/$' | wc -l)"
-          test "$INSIDE_COUNT" -eq "${#files[@]}"
-          BYTES="$(stat -c %s "phase_c_candidate/$ARCHIVE")"
-          test "$BYTES" -le 20971520
-          printf 'Incremental ZIP: %s bytes, %s modified application files\n' "$BYTES" "$INSIDE_COUNT"
-
-          printf '%s\n' "$BASE_SHA" > phase_c_candidate/BASE_COMMIT.txt
-          printf '%s\n' "$HEAD_SHA" > phase_c_candidate/SOURCE_COMMIT.txt
-          sha256sum "${files[@]}" > phase_c_candidate/FILES_SHA256.txt
-          (cd phase_c_candidate && sha256sum "$ARCHIVE" > "$ARCHIVE.sha256")
-          if test "${GITHUB_EVENT_NAME}" = "push"; then
-            DELIVERY_STATUS="PUBLISHED_MAIN_EXACT_COMMIT"
-          else
-            DELIVERY_STATUS="PREMERGE_CANDIDATE"
-          fi
-          printf '%s\n' \
-            "RELEASE STATUS: $DELIVERY_STATUS" \
-            "SHARED BUILD: 40.6.719" \
-            "INCREMENTAL PATCH ONLY. Do not replace the complete Operator tree." \
-            "Apply changed files at their matching repository-relative paths." \
-            "Shared-build patch: source commit in SOURCE_COMMIT.txt, original base in BASE_COMMIT.txt." \
-            "Shared runtime Version Truth: 40.6.719 for Administrator / Operator / Trader; no new Bridge capabilities." \
-            "Source commit is exact for this archive; review the release status above before installation." \
-            "Linux headless Firefox CI does not certify Windows Firefox market data." \
-            > phase_c_candidate/READ_ME_FIRST.txt
-      - name: Store Phase C candidate ZIP with SHA-256
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: operator-trader-tradus-shadow-paper-readonly-incremental-zip
-          path: phase_c_candidate/
-          retention-days: 14
-          if-no-files-found: error
-; then
+          # Exact scope determines delivery filename; no duplicate packages.
+          if grep -q ai-asset-reading-core.js phase_c_candidate/FILES_CHANGED.txt; then
             ARCHIVE="AGENT_CRYPTO_OPERATOR_YOANN_TRADER_SEVEN_BTC_USD_TECHNICAL_READING_READONLY_INCREMENTAL_UPDATE_2026_11_03.zip"
           else
-            ARCHIVE="AGENT_CRYPTO_OPERATOR_YOANN_TRADER_TRADUS_SHADOW_PAPER_READONLY_INCREMENTAL_UPDATE_2026_11_03.zip"
+          ARCHIVE="AGENT_CRYPTO_OPERATOR_YOANN_TRADER_TRADUS_SHADOW_PAPER_READONLY_INCREMENTAL_UPDATE_2026_11_03.zip"
           fi
           git archive --format=zip --output="phase_c_candidate/$ARCHIVE" "$HEAD_SHA" "${files[@]}"
           unzip -tqq "phase_c_candidate/$ARCHIVE"
