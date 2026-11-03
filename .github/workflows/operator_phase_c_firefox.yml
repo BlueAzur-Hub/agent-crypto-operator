@@ -37,3 +37,30 @@ jobs:
           path: phase_c_firefox_evidence/
           retention-days: 14
           if-no-files-found: warn
+
+      - name: Create immutable Operator Phase C candidate archive
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p phase_c_candidate
+          ARCHIVE="AGENT_CRYPTO_OPERATOR_YOANN_MARKET_RADAR_GRAPHS_HARMONIZATION_PHASE_C_CANDIDATE_2026_11_03.zip"
+          git archive --format=zip --output="phase_c_candidate/$ARCHIVE" HEAD public/agent_crypto_erith_ia
+          unzip -tqq "phase_c_candidate/$ARCHIVE"
+          sha256sum "phase_c_candidate/$ARCHIVE" > "phase_c_candidate/$ARCHIVE.sha256"
+          git rev-parse HEAD > phase_c_candidate/SOURCE_COMMIT.txt
+          git ls-files -z public/agent_crypto_erith_ia | xargs -0 sha256sum > phase_c_candidate/FILES_SHA256.txt
+          printf '%s\n' \
+            "Operator Phase C candidate from PR #10, NOT MERGED OR PUBLISHED." \
+            "Firefox CI is Linux headless; Firefox Windows terrain validation remains pending." \
+            "No Bridge or TRADUS private archive is part of this package." \
+            "Main and source build number remain unchanged until approval." \
+            > phase_c_candidate/READ_ME_FIRST.txt
+      - name: Store Phase C candidate ZIP with SHA-256
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: operator-phase-c-candidate-zip
+          path: phase_c_candidate/
+          retention-days: 14
+          if-no-files-found: error
