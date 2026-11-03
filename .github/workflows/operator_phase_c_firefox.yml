@@ -9,6 +9,19 @@ on:
       - "public/agent_crypto_erith_ia/administrator/**"
       - "public/agent_crypto_erith_ia/trader/**"
       - "public/agent_crypto_erith_ia/laboratoire/**"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/operator_phase_c_firefox.yml"
+      - "public/agent_crypto_erith_ia/administrator/index.html"
+      - "public/agent_crypto_erith_ia/administrator/build.json"
+      - "public/agent_crypto_erith_ia/administrator/yohan.html"
+      - "public/agent_crypto_erith_ia/administrator/js/yohan-operator-profile.js"
+      - "public/agent_crypto_erith_ia/operator/build.json"
+      - "public/agent_crypto_erith_ia/operator/index.html"
+      - "public/agent_crypto_erith_ia/trader/build.json"
+      - "public/agent_crypto_erith_ia/trader/trading-desk.html"
+      - "public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js"
   workflow_dispatch:
 
 permissions:
@@ -45,12 +58,12 @@ jobs:
         if: success()
         shell: bash
         env:
-          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: |
           set -euo pipefail
           mkdir -p phase_c_candidate
           HEAD_SHA="$(git rev-parse HEAD)"
-          BASE_SHA="${PR_BASE_SHA:-7fb07b39f3f8b5a64e1b2213ef27a430c046b6ef}"
+          BASE_SHA="${PR_BASE_SHA:?Missing base commit for exact incremental update}"
           git fetch --no-tags --depth=1 origin "$BASE_SHA"
 
           # Only public application files changed since the published Operator base.
@@ -87,12 +100,19 @@ jobs:
           printf '%s\n' "$HEAD_SHA" > phase_c_candidate/SOURCE_COMMIT.txt
           sha256sum "${files[@]}" > phase_c_candidate/FILES_SHA256.txt
           (cd phase_c_candidate && sha256sum "$ARCHIVE" > "$ARCHIVE.sha256")
+          if test "${GITHUB_EVENT_NAME}" = "push"; then
+            DELIVERY_STATUS="PUBLISHED_MAIN_EXACT_COMMIT"
+          else
+            DELIVERY_STATUS="PREMERGE_CANDIDATE"
+          fi
           printf '%s\n' \
+            "RELEASE STATUS: $DELIVERY_STATUS" \
+            "SHARED BUILD: 40.6.719" \
             "INCREMENTAL PATCH ONLY. Do not replace the complete Operator tree." \
             "Apply changed files at their matching repository-relative paths." \
             "Shared-build patch: source commit in SOURCE_COMMIT.txt, original base in BASE_COMMIT.txt." \
             "Shared runtime Version Truth: 40.6.719 for Administrator / Operator / Trader; no new Bridge capabilities." \
-            "This is a candidate, NOT merged or published; protect Yoann Bridge roles and credentials." \
+            "Source commit is exact for this archive; review the release status above before installation." \
             "Linux headless Firefox CI does not certify Windows Firefox market data." \
             > phase_c_candidate/READ_ME_FIRST.txt
       - name: Store Phase C candidate ZIP with SHA-256
