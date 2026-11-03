@@ -214,32 +214,48 @@ try:
             check("Trader shares Administrator 40.6.719 Version Truth", frame_build == "40.6.719", frame_build)
         except Exception as exc:
             check("Trader runtime loads in Operator role", False, str(exc))
-        # TRADUS must be a visible Operator Trader-only read-only projection.
+        # TRADUS is a NESTED section in the existing end-of-page Yoann
+        # development handoff, not a Market or global navigation control.
         try:
             inner = desk.frame_locator("#traderInterfaceRuntime")
-            toggle = inner.locator("#traderTradusToggle")
-            toggle.wait_for(state="visible", timeout=25000)
+            owner = inner.locator("#traderYoannOperatorSection")
+            owner.wait_for(state="visible", timeout=30000)
+            panel = owner.locator("#traderTradusPanel")
+            toggle = owner.locator("#traderTradusToggle")
+            toggle.wait_for(state="visible", timeout=20000)
+            placement = panel.evaluate("""el => {
+                const owner = document.querySelector('#traderYoannOperatorSection');
+                const paper = document.querySelector('#traderPaperLab');
+                return {
+                    nested: !!owner?.contains(el) && !!owner.querySelector(':scope > div')?.contains(el),
+                    noTopControl: !document.querySelector('#accueil #traderTradusToggle'),
+                    afterPaper: !!paper && !!(paper.compareDocumentPosition(owner) & Node.DOCUMENT_POSITION_FOLLOWING),
+                    linksPreserved: (owner?.querySelectorAll('a').length || 0) >= 4,
+                    closedByDefault: el.tagName === 'DETAILS' && el.open === false
+                };
+            }""")
+            check("TRADUS anchored after PAPER inside Yoann bottom development zone",
+                  all(placement.values()), placement)
             toggle.click(timeout=12000)
-            panel = inner.locator("#traderTradusPanel")
-            panel.wait_for(state="visible", timeout=12000)
+            panel.locator('[data-tt="status"]').wait_for(state="visible", timeout=12000)
             info = panel.evaluate("""el => ({
                 status: el.querySelector('[data-tt="status"]')?.textContent,
                 signal: el.querySelector('[data-tt="signal"]')?.textContent,
-                displayed: getComputedStyle(el).display,
+                expanded: el.open,
                 selfTest: window.AgentCryptoTraderTradusView?.self_test?.(),
                 sourceButton: !!el.querySelector('#traderTradusRefreshSource')
             })""")
-            check("TRADUS Trader SHADOW/PAPER panel visible and read-only",
-                  bool(info["status"]) and info["displayed"] != "none" and
-                  info["sourceButton"] and bool(info["selfTest"] and info["selfTest"]["pass"] and
+            check("TRADUS bottom SHADOW/PAPER panel visible and read-only",
+                  info["expanded"] and bool(info["status"]) and info["sourceButton"] and
+                  bool(info["selfTest"] and info["selfTest"]["pass"] and
                   info["selfTest"]["real_orders"] is False), info)
-            desk.screenshot(path=str(ARTIFACT / "trader_tradus_readonly_firefox.png"),
+            desk.screenshot(path=str(ARTIFACT / "trader_yohan_bottom_tradus_firefox.png"),
                             animations="disabled", timeout=30000)
-            inner.locator("#traderTradusClose").click(timeout=12000)
-            check("TRADUS panel closes without mutating Trader runtime",
-                  inner.locator("#traderTradusToggle").get_attribute("aria-expanded") == "false")
+            panel.locator("#traderTradusClose").click(timeout=12000)
+            check("TRADUS section folds without changing Operator role",
+                  panel.evaluate("(el) => el.open === false"))
         except Exception as exc:
-            check("TRADUS Trader panel visible", False, str(exc))
+            check("TRADUS bottom handoff section visible", False, str(exc))
         desk.screenshot(path=str(ARTIFACT / "trader_firefox.png"),
                         animations="disabled", timeout=30000)
 
