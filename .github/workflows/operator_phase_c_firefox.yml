@@ -47,6 +47,13 @@ jobs:
         run: |
           node --check public/agent_crypto_erith_ia/trader/trader-tradus-readonly.js
           node public/agent_crypto_erith_ia/trader/test-tradus-readonly.cjs
+          node --check public/agent_crypto_erith_ia/trader/ai-asset-reading-core.js
+          node --check public/agent_crypto_erith_ia/trader/ai-asset-reading-view.js
+          node --check public/agent_crypto_erith_ia/trader/ai-ct-contract.js
+          node --check public/agent_crypto_erith_ia/trader/technical-reading-data-sync.js
+          node --check public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js
+          node --test public/agent_crypto_erith_ia/trader/test-ai-asset-reading-core.cjs
+          node --test public/agent_crypto_erith_ia/trader/test-ai-asset-reading-view.cjs
       - name: Firefox read-only Operator and Trader branch smoke
         run: python .github/scripts/operator_phase_c_firefox.py
       - name: Preserve Firefox screenshots and diagnostics
