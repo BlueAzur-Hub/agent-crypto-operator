@@ -8408,7 +8408,7 @@
   "graph_native_usd_406520": {
     "enabled": true,
     "parent": "40.6.519",
-    "owner": "js/graph-native-usd-406520.js",
+    "owner": "js/graph-native-usd.js",
     "scope": "GRAPH_SOURCE_CACHE_CONTEXT_PRESENTATION",
     "default_display_currency": "EUR",
     "analysis_currency": "EUR",
@@ -10937,7 +10937,7 @@
   "graph_parity_top5_24h_406624": {
     "enabled": true,
     "defect": "Trader USD Top 5 24h Base100 could bypass the canonical comparison history owner and render an older CoinGecko USD cache while Administrator showed fresh direct histories",
-    "owner": "js/graph-native-usd-406520.js",
+    "owner": "js/graph-native-usd.js",
     "canonical_owner_preserved": "app.js atlasFetchComparisonSeriesResilient rank-5 24h path",
     "trigger": "period=1 and comparison preset=rank-5",
     "fix": [

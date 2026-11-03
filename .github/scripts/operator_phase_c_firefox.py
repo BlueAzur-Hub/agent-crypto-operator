@@ -108,7 +108,7 @@ try:
             build: document.documentElement.dataset.agentCryptoLoadedBuild,
             limits: [...document.querySelectorAll('[data-market-limit]')].map(x=>x.dataset.marketLimit),
             appScript: !!document.querySelector('script[src^="./app.js?"]'),
-            graphScript: !!document.querySelector('script[src*="graph-native-usd-406520.js"]'),
+            graphScript: !!document.querySelector('script[src*="/graph-native-usd.js?"]'),
             spotScript: !!document.querySelector('script[src*="okx-public-chart-history.js"]')
         })""")
         check("Market shell and canonical table present", dom["shell"] and dom["rows"], dom)
