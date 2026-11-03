@@ -20,6 +20,9 @@ jobs:
     timeout-minutes: 18
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -47,7 +50,7 @@ jobs:
           ARCHIVE="AGENT_CRYPTO_OPERATOR_YOANN_MARKET_RADAR_GRAPHS_HARMONIZATION_PHASE_C_CANDIDATE_2026_11_03.zip"
           git archive --format=zip --output="phase_c_candidate/$ARCHIVE" HEAD public/agent_crypto_erith_ia
           unzip -tqq "phase_c_candidate/$ARCHIVE"
-          sha256sum "phase_c_candidate/$ARCHIVE" > "phase_c_candidate/$ARCHIVE.sha256"
+          (cd phase_c_candidate && sha256sum "$ARCHIVE" > "$ARCHIVE.sha256")
           git rev-parse HEAD > phase_c_candidate/SOURCE_COMMIT.txt
           git ls-files -z public/agent_crypto_erith_ia | xargs -0 sha256sum > phase_c_candidate/FILES_SHA256.txt
           printf '%s\n' \
