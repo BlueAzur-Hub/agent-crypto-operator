@@ -1,0 +1,130 @@
+name: Verify Operator Trader parity and six-file differential
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/operator-trader-parity-delta.yml"
+      - "public/agent_crypto_erith_ia/administrator/index.html"
+      - "public/agent_crypto_erith_ia/administrator/build.json"
+      - "public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js"
+      - "public/agent_crypto_erith_ia/trader/**"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/operator-trader-parity-delta.yml"
+      - "public/agent_crypto_erith_ia/administrator/index.html"
+      - "public/agent_crypto_erith_ia/administrator/build.json"
+      - "public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js"
+      - "public/agent_crypto_erith_ia/trader/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-and-package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /public/agent_crypto_erith_ia/administrator/index.html
+            /public/agent_crypto_erith_ia/administrator/build.json
+            /public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js
+            /public/agent_crypto_erith_ia/trader/build.json
+            /public/agent_crypto_erith_ia/trader/trading-desk.html
+            /public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js
+            /public/agent_crypto_erith_ia/trader/technical-reading-data-sync.js
+            /.github/workflows/operator-trader-parity-delta.yml
+      - name: Validate JavaScript syntax and native USD source
+        run: |
+          set -euo pipefail
+          node --check public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js
+          node --check public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js
+          node --check public/agent_crypto_erith_ia/trader/technical-reading-data-sync.js
+          node - <<'NODE'
+          const assert=require('node:assert/strict');
+          require('./public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js');
+          const api=globalThis.AgentCryptoGraphNativeUsd;
+          const test=api?.self_test?.();
+          assert.equal(test?.pass,true,JSON.stringify(test?.checks));
+          assert.equal(test.checks.top5_stale_usd_refused,true);
+          assert.equal(test.checks.top5_missing_change_refused,true);
+          assert.equal(api.real_order,false);
+          console.log('CANONICAL_USD_OWNER_PASS');
+          NODE
+      - name: Verify role boundary and exact incremental package
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin "$BASE_SHA"
+          python3 - <<'PY'
+          import hashlib,json,os,pathlib,subprocess,zipfile
+          root=pathlib.Path("public/agent_crypto_erith_ia")
+          index=(root/"administrator/index.html").read_text()
+          mirror=(root/"trader/trader-runtime-mirror.js").read_text()
+          desk=(root/"trader/trading-desk.html").read_text()
+          trader=json.loads((root/"trader/build.json").read_text())
+          admin=json.loads((root/"administrator/build.json").read_text())
+          assert index.count("./js/graph-native-usd.js?v=")==1
+          assert "./js/graph-native-usd-406520.js?v=" not in index
+          assert mirror.count('script.id="traderTechnicalReadingSyncScript"')==1
+          for marker in ("technical-reading-data-sync.js","yohan-operator-profile.js","yohan-operator-bridge-client.js","real_orders:false"):
+            assert marker in mirror,marker
+          assert "surface=trader&amp;view=intermediate&amp;profile=yohan" in desk
+          assert trader["build"]=="40.6.719" and trader["administrator_base"]=="40.6.719"
+          assert trader["market_core"]=="38.15.11"
+          assert trader["execution"]=="disabled" and trader["real_orders"] is False
+          assert "administrator/js/graph-native-usd.js" in json.dumps(trader)
+          assert "js/graph-native-usd.js" in json.dumps(admin)
+          rootpaths=[
+            "public/agent_crypto_erith_ia/administrator/index.html",
+            "public/agent_crypto_erith_ia/administrator/build.json",
+            "public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js",
+            "public/agent_crypto_erith_ia/trader/build.json",
+            "public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js",
+            "public/agent_crypto_erith_ia/trader/trading-desk.html"
+          ]
+          base=os.environ["BASE_SHA"]
+          head=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+          modified=subprocess.check_output(["git","diff","--name-only","--diff-filter=ACMRT",base,head,"--","public/agent_crypto_erith_ia/"],text=True).splitlines()
+          modified=[p for p in modified if not (p.endswith(".test.mjs") or p.endswith(".test.js") or p.endswith(".test.cjs") or pathlib.Path(p).name.startswith("test-"))]
+          assert sorted(modified)==sorted(rootpaths),(modified,rootpaths)
+          deleted=subprocess.check_output(["git","diff","--name-only","--diff-filter=D",base,head,"--","public/agent_crypto_erith_ia/"],text=True).strip()
+          assert not deleted,deleted
+          canonical=subprocess.check_output(["git","hash-object",rootpaths[2]],text=True).strip()
+          assert canonical=="aa2bbdc4f6473c949a1864b13c077fb63e694281",canonical
+          folder=pathlib.Path("operator_trader_delta")
+          folder.mkdir(exist_ok=True)
+          name="AGENT_CRYPTO_OPERATOR_YOANN_TRADER_MARKET_USD_TECHNICAL_SYNC_40_6_719_INCREMENTAL_UPDATE_2026_11_03.zip"
+          dest=folder/name
+          with zipfile.ZipFile(dest,"w",zipfile.ZIP_DEFLATED,compresslevel=9) as out:
+            for path in rootpaths:out.write(path,path)
+          with zipfile.ZipFile(dest) as out:
+            assert out.testzip() is None
+            assert set(out.namelist())==set(rootpaths)
+            for path in rootpaths:assert out.read(path)==pathlib.Path(path).read_bytes()
+          assert dest.stat().st_size<20*1024*1024
+          digest=hashlib.sha256(dest.read_bytes()).hexdigest()
+          (folder/(name+".sha256")).write_text(digest+"  "+name+"\n")
+          (folder/"SOURCE_COMMIT.txt").write_text(head+"\n")
+          (folder/"BASE_COMMIT.txt").write_text(base+"\n")
+          (folder/"FILES_CHANGED.txt").write_text("\n".join(rootpaths)+"\n")
+          (folder/"FILES_SHA256.txt").write_text("\n".join(hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()+"  "+p for p in rootpaths)+"\n")
+          (folder/"READ_ME_FIRST.txt").write_text("Six changed public application files only, not a full GitHub package. Operator profile and private Bridge unchanged; no real orders. Firefox Windows remains a user verification.\n")
+          print("OPERATOR_TRADER_SIX_FILE_DELTA_PASS",head,dest.stat().st_size,digest)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: operator-trader-406719-six-file-incremental-zip
+          path: operator_trader_delta/
+          retention-days: 14
+          if-no-files-found: error
