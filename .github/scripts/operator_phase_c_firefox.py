@@ -154,6 +154,32 @@ try:
         except Exception as exc:
             check("Radar category usable in Firefox", False, str(exc))
 
+        # Graph controls: tests commands and selection state, NOT 5 certified data series.
+        for control_id, label in (("btnChartSolo", "Solo"), ("btnChartTop5", "Top 5")):
+            try:
+                control = admin.locator("#" + control_id)
+                control.click(force=True, timeout=14000)
+                admin.wait_for_timeout(1000)
+                cls = control.get_attribute("class") or ""
+                check("Firefox graph control " + label + " responds", "active" in cls.split(), cls)
+            except Exception as exc:
+                check("Firefox graph control " + label + " responds", False, str(exc))
+        for period, label in (("7", "7j"), ("1", "24h")):
+            try:
+                control = admin.locator('button.period-btn[data-period="' + period + '"]').first
+                control.click(force=True, timeout=14000)
+                admin.wait_for_timeout(850)
+                cls = control.get_attribute("class") or ""
+                check("Firefox graph period " + label + " responds", "active" in cls.split(), cls)
+            except Exception as exc:
+                check("Firefox graph period " + label + " responds", False, str(exc))
+        report["chart_display"] = admin.evaluate("""() => ({
+          selected: document.getElementById('selectedAssetTitle')?.textContent || '',
+          overlay: document.getElementById('atlasChartInsightOverlaySummary')?.textContent || '',
+          currency: globalThis.AgentCryptoQuoteCurrencyArchitecture?.snapshot?.()?.displayCurrency || 'UNKNOWN',
+          chartCanvas: !!document.getElementById('mainChart')
+        })""")
+
         admin.screenshot(path=str(ARTIFACT / "operator_market_firefox.png"),
                          animations="disabled", timeout=30000)
         report["operator_dom"] = dom
