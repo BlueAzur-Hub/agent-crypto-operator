@@ -1,0 +1,39 @@
+name: Operator Phase C Firefox read-only smoke
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/scripts/operator_phase_c_firefox.py"
+      - ".github/workflows/operator_phase_c_firefox.yml"
+      - "public/agent_crypto_erith_ia/administrator/**"
+      - "public/agent_crypto_erith_ia/trader/**"
+      - "public/agent_crypto_erith_ia/laboratoire/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  firefox-operator:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Firefox testing runtime
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.55.0
+          python -m playwright install --with-deps firefox
+      - name: Firefox read-only Operator and Trader branch smoke
+        run: python .github/scripts/operator_phase_c_firefox.py
+      - name: Preserve Firefox screenshots and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: operator-phase-c-firefox-evidence
+          path: phase_c_firefox_evidence/
+          retention-days: 14
+          if-no-files-found: warn
