@@ -22,6 +22,14 @@ diagnostics = []
 unsafe_requests = []
 offline_mode = {"enabled": False}
 
+def safe_url(raw):
+    parsed = urlparse(raw)
+    if parsed.hostname == "ntfy.sh":
+        return "https://ntfy.sh/[topic-redacted]"
+    if parsed.hostname not in ("127.0.0.1", "localhost", "::1"):
+        return f"{parsed.scheme}://{parsed.netloc}{parsed.path[:110]}"
+    return f"{parsed.scheme}://{parsed.netloc}{parsed.path[:110]}"
+
 
 def check(name, passed, detail=""):
     checks.append({"check": name, "pass": bool(passed), "detail": str(detail)[:400]})
@@ -53,7 +61,7 @@ def record_page(page, label):
     page.on("pageerror", err)
     def failed(req):
         if len(diagnostics) < 70:
-            diagnostics.append(label + " request-failed: " + req.url[:190])
+            diagnostics.append(label + " request-failed: " + safe_url(req.url))
     page.on("requestfailed", failed)
 
 
@@ -70,10 +78,20 @@ try:
             private = url.hostname in ("127.0.0.1", "localhost", "::1") and not local_site
             if req.method not in ("GET", "HEAD", "OPTIONS") or private or (offline_mode["enabled"] and not local_site):
                 if len(unsafe_requests) < 60:
-                    unsafe_requests.append({"method": req.method, "url": req.url[:210]})
+                    unsafe_requests.append({"method": req.method, "url": safe_url(req.url)})
                 return route.abort()
             return route.continue_()
         context.route("**/*", guard)
+        context.add_init_script("""(() => {
+            const oldFetch = window.fetch;
+            window.__phaseCNotificationStacks = [];
+            window.fetch = function(...args) {
+              const candidate = String(typeof args[0] === "string" ? args[0] : (args[0]?.url || ""));
+              if (candidate.includes("ntfy.sh"))
+                window.__phaseCNotificationStacks.push(new Error("outbound notification attempt").stack.slice(0, 1000));
+              return oldFetch.apply(this, args);
+            };
+        })();""")
 
         admin = context.new_page()
         record_page(admin, "operator")
@@ -98,13 +116,24 @@ try:
         check("Market scope 50/100/250/500/1000", all(str(n) in dom["limits"] for n in (50,100,250,500,1000)), dom["limits"])
         check("Graph and public history script wiring", dom["appScript"] and dom["graphScript"] and dom["spotScript"], dom)
 
+        try:
+            admin.wait_for_function("document.querySelectorAll('#marketRows tr').length > 1", timeout=22000)
+            admin.wait_for_timeout(600)
+        except Exception as exc:
+            diagnostics.append("Market data readiness unavailable: " + str(exc)[:200])
         for amount in (100, 50):
             try:
                 btn = admin.locator(f'[data-market-limit="{amount}"]').first
-                btn.click(timeout=14000, force=True)
-                admin.wait_for_timeout(650)
-                state = btn.get_attribute("aria-pressed")
-                check(f"Firefox Market limit {amount} interactive", state == "true", "aria-pressed=" + str(state))
+                attempts = []
+                for attempt in (1, 2):
+                    btn.click(timeout=14000, force=True)
+                    admin.wait_for_timeout(1000)
+                    state = btn.get_attribute("aria-pressed")
+                    attempts.append(state)
+                    if state == "true":
+                        break
+                    admin.wait_for_timeout(1300)
+                check(f"Firefox Market limit {amount} interactive", state == "true", "aria-pressed attempts=" + repr(attempts))
             except Exception as exc:
                 check(f"Firefox Market limit {amount} interactive", False, str(exc))
 
@@ -128,6 +157,7 @@ try:
         admin.screenshot(path=str(ARTIFACT / "operator_market_firefox.png"),
                          animations="disabled", timeout=30000)
         report["operator_dom"] = dom
+        report["operator_notification_stacks"] = admin.evaluate("window.__phaseCNotificationStacks || []")[:8]
 
         desk = context.new_page()
         record_page(desk, "trader")
