@@ -160,10 +160,9 @@ assert(marketFiche.includes('Lecture Radar · descriptive')&&marketFiche.include
 assert(nativeView.includes('extendedPromise=get("../data/crypto/extended.json")'),"Shared extended archive, no extra network API");
 assert(nativeView.includes('printOpportunities(root,model)'),"Opportunity research section present");
 delete globalThis.AtlasExternalChart;
-const opportunityScript=fs.readFileSync(path.resolve(__dirname,'../tools/radar_opportunity_history.cjs'),'utf8');
-assert(opportunityScript.includes('followup_status')&&opportunityScript.includes('record_kind'),"Traceable separate history kinds");
-assert(opportunityScript.includes('Math.abs(now.getTime()-newest)>8*3600000'),"Stale sources must be refused");
-assert(opportunityScript.includes('observed_followup_price_usd:valid?futurePrice:null'),"Missing history stays null");
+assert(nativeView.includes('dynamicPromise=get("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/crypto/radar-opportunities/dynamic-followups.json")'),"Operator reads published follow-up history, no private generator required");
+assert(nativeView.includes('verifiedDynamicFollowups('),"Public follow-up archive is validated before use");
+assert(nativeView.includes('model.dynamicFollowups=null'),"Missing follow-up history is explicit, not invented");
 
 (async()=>{
  const status={textContent:""};
