@@ -94,16 +94,19 @@ async function refreshSource(){
 }
 function mount(){
   if(typeof document==="undefined"||!allowedLocation())return false;
-  const dock=document.querySelector("#accueil .atlas-v2-nav-essential.atlas-quick-dock");
-  const market=document.getElementById("market-zone");
-  if(!dock||!market)return false;
+  // Use the existing bottom handoff zone created by trader-paper-lab-view.js.
+  // No new top navigation control, trading workspace, or market owner.
+  const operator=document.getElementById("traderYoannOperatorSection");
+  const handoffBody=operator?.querySelector(":scope > div");
+  if(!operator||!handoffBody)return false;
   if(document.getElementById("traderTradusPanel")){render();return true;}
   const style=document.createElement("style");
   style.id="traderTradusReadonlyStyle";
   style.textContent=[
-    "#traderTradusPanel[hidden]{display:none!important}",
-    "#traderTradusToggle{white-space:nowrap;border-color:rgba(105,224,200,.38);color:#9af6db}",
-    "#traderTradusToggle[aria-expanded='true']{background:rgba(46,143,135,.23);border-color:#91f3db}",
+    "#traderYoannOperatorSection #traderTradusPanel{margin-top:18px!important}",
+    "#traderTradusToggle{display:list-item;cursor:pointer;padding:9px 6px;color:#9af6db;font-size:14px;font-weight:800}",
+    "#traderTradusPanel[open] > #traderTradusToggle{color:#d7fff4}",
+    "#traderTradusPanel .tt-content{padding:10px 4px 5px}",
     "#traderTradusPanel{position:relative;z-index:3;display:block;box-sizing:border-box;width:100%;margin:0 0 12px;padding:15px 18px;border:1px solid rgba(111,233,205,.4);border-radius:15px;background:linear-gradient(135deg,#091b27,#0a1f25);color:#e8f7fb;box-shadow:0 12px 36px rgba(0,0,0,.22)}",
     "#traderTradusPanel .tt-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}",
     "#traderTradusPanel h2{font-size:18px;line-height:1.25;margin:0}",
@@ -122,18 +125,12 @@ function mount(){
     "@media(max-width:650px){#traderTradusPanel{padding:10px}#traderTradusPanel .tt-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}"
   ].join("\n");
   document.head.appendChild(style);
-  const toggle=document.createElement("button");
-  toggle.type="button";toggle.id="traderTradusToggle";toggle.className="atlas-quick-link";
-  toggle.setAttribute("aria-controls","traderTradusPanel");
-  toggle.setAttribute("aria-expanded","false");
-  toggle.setAttribute("aria-label","Ouvrir le suivi TRADUS en lecture seule");
-  toggle.textContent="TRADUS · PAPER";
-  const after=dock.querySelector('[data-atlas-essential-target="analyste"]');
-  if(after)after.after(toggle);else dock.appendChild(toggle);
-  const panel=document.createElement("section");
+  const panel=document.createElement("details");
   panel.id="traderTradusPanel";panel.className="trader-tradus-readonly";
-  panel.hidden=true;panel.setAttribute("aria-label","TRADUS · SHADOW et PAPER sans ordres");
+  panel.open=false;panel.setAttribute("aria-label","TRADUS · SHADOW et PAPER sans ordres");
   panel.innerHTML=[
+    '<summary id="traderTradusToggle">TRADUS · SHADOW / PAPER — consultation</summary>',
+    '<div class="tt-content">',
     '<div class="tt-head"><div><span class="tt-kicker">TRADER YOANN · OBSERVATION SEULE</span>',
     '<h2>TRADUS · SHADOW / PAPER</h2></div>',
     '<button id="traderTradusClose" type="button">Fermer ×</button></div>',
@@ -155,22 +152,20 @@ function mount(){
     '</dl><div class="tt-actions">',
     '<button type="button" id="traderTradusReadState">Relire l’état</button>',
     '<button type="button" id="traderTradusRefreshSource">Actualiser carnet public</button></div>',
-    '<p class="tt-foot">Simulation sans argent réel. BUY/SELL est un signal d’étude, jamais une approbation de risque ou un ordre. Source inconnue, absente ou périmée = N/D. Aucun accès au Bridge privé ni aux clés OKX.</p>'
+    '<p class="tt-foot">Simulation sans argent réel. BUY/SELL est un signal d’étude, jamais une approbation de risque ou un ordre. Source inconnue, absente ou périmée = N/D. Aucun accès au Bridge privé ni aux clés OKX.</p>',
+    '</div>'
   ].join("");
-  market.insertBefore(panel,market.firstChild);
-  const close=()=>{panel.hidden=true;toggle.setAttribute("aria-expanded","false");toggle.focus();};
-  toggle.addEventListener("click",()=>{
-    panel.hidden=!panel.hidden;
-    toggle.setAttribute("aria-expanded",panel.hidden?"false":"true");
-    if(!panel.hidden){render();panel.scrollIntoView({behavior:"auto",block:"start"});}
-  });
+  handoffBody.appendChild(panel);
+  const summary=panel.querySelector("#traderTradusToggle");
+  const close=()=>{panel.open=false;summary?.focus();};
+  panel.addEventListener("toggle",()=>{if(panel.open)render();});
   panel.querySelector("#traderTradusClose").addEventListener("click",close);
   panel.querySelector("#traderTradusReadState").addEventListener("click",render);
   panel.querySelector("#traderTradusRefreshSource").addEventListener("click",refreshSource);
   panel.addEventListener("keydown",event=>{if(event.key==="Escape")close();});
-  document.addEventListener(SOURCE_EVENT,()=>{if(!panel.hidden)render();},{passive:true});
-  document.addEventListener(PAPER_EVENT,()=>{if(!panel.hidden)render();},{passive:true});
-  globalThis.addEventListener("agent-crypto:postboot-runtime-ready",()=>{if(!panel.hidden)render();},{passive:true});
+  document.addEventListener(SOURCE_EVENT,()=>{if(panel.open)render();},{passive:true});
+  document.addEventListener(PAPER_EVENT,()=>{if(panel.open)render();},{passive:true});
+  globalThis.addEventListener("agent-crypto:postboot-runtime-ready",()=>{if(panel.open)render();},{passive:true});
   render();
   return true;
 }
