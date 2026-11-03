@@ -146,6 +146,22 @@ function mount(){
       view.onerror=()=>{
         if(status){status.textContent="Vue laboratoire PAPER indisponible";status.dataset.state="error";}
       };
+      // The Yoann handoff slot is mounted by the PAPER view. Never load TRADUS
+      // ahead of that slot or inject a navigation entry into Market/Graphique.
+      view.onload=()=>{
+        if(!doc.getElementById("traderYoannOperatorSection")){
+          if(status){status.textContent="Zone Operator Yoann introuvable";status.dataset.state="error";}
+          return;
+        }
+        if(doc.getElementById("traderTradusReadOnlyScript"))return;
+        const tradus=doc.createElement("script");
+        tradus.id="traderTradusReadOnlyScript";
+        tradus.src=new URL("../trader/trader-tradus-readonly.js",doc.baseURI).href;
+        tradus.onerror=()=>{
+          if(status){status.textContent="Vue TRADUS indisponible";status.dataset.state="error";}
+        };
+        doc.head.appendChild(tradus);
+      };
       doc.head.appendChild(view);
     };
     script.onerror=()=>{

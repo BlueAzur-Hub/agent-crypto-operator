@@ -43,6 +43,10 @@ jobs:
         run: |
           python -m pip install --disable-pip-version-check playwright==1.55.0
           python -m playwright install --with-deps firefox
+      - name: Validate TRADUS read-only adapter contract
+        run: |
+          node --check public/agent_crypto_erith_ia/trader/trader-tradus-readonly.js
+          node public/agent_crypto_erith_ia/trader/test-tradus-readonly.cjs
       - name: Firefox read-only Operator and Trader branch smoke
         run: python .github/scripts/operator_phase_c_firefox.py
       - name: Preserve Firefox screenshots and diagnostics
@@ -87,7 +91,7 @@ jobs:
           printf 'Application files in incremental update: %s\n' "${#files[@]}"
           printf '%s\n' "${files[@]}" | tee phase_c_candidate/FILES_CHANGED.txt
 
-          ARCHIVE="AGENT_CRYPTO_OPERATOR_YOANN_TRADER_MARKET_USD_TECHNICAL_SYNC_40_6_719_INCREMENTAL_UPDATE_2026_11_03.zip"
+          ARCHIVE="AGENT_CRYPTO_OPERATOR_YOANN_TRADER_TRADUS_SHADOW_PAPER_READONLY_INCREMENTAL_UPDATE_2026_11_03.zip"
           git archive --format=zip --output="phase_c_candidate/$ARCHIVE" "$HEAD_SHA" "${files[@]}"
           unzip -tqq "phase_c_candidate/$ARCHIVE"
           INSIDE_COUNT="$(unzip -Z1 "phase_c_candidate/$ARCHIVE" | grep -v '/$' | wc -l)"
@@ -119,7 +123,7 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: operator-trader-406719-parity-incremental-zip
+          name: operator-trader-tradus-shadow-paper-readonly-incremental-zip
           path: phase_c_candidate/
           retention-days: 14
           if-no-files-found: error
