@@ -4335,6 +4335,7 @@ function atlasBinanceChartSupported(coinOrId) {
 
 function atlasChartProviderLabel(result = null) {
   const family = atlasChartResultSourceFamily(result);
+  if (family === "okx") return "OKX Spot";
   if (family === "binance") return "Binance";
   if (family === "mixed") return "Sources mixtes";
   return "CoinGecko";
@@ -6820,6 +6821,8 @@ function atlasComparisonTooltipRows(chart, targetX) {
       gradientCss: dataset.atlasGradientCss || "",
       baseValue: usable ? Number(point.y) : NaN,
       rawPrice: usable ? Number(point.rawPrice) : NaN,
+      quoteCurrency: dataset.atlasHistoricalQuote?.currency || null,
+      historicalSource: dataset.atlasHistoricalQuote?.source || "",
       timestamp: usable ? Number(point.x) : Number(targetX),
       isLiveEndpoint: usable && point?.atlasLiveEndpoint === true,
       liveSource: usable ? String(point?.atlasLiveSource || "") : "",
@@ -6939,6 +6942,8 @@ function atlasExternalChartTooltip(context) {
         color: point.dataset?.atlasPrimaryColor || point.dataset?.borderColor,
         gradientCss: point.dataset?.atlasGradientCss || "",
         rawPrice: Number(point.raw?.rawPrice),
+        quoteCurrency: point.dataset?.atlasHistoricalQuote?.currency || null,
+        historicalSource: point.dataset?.atlasHistoricalQuote?.source || "",
         baseValue: Number(point.raw?.baseValue ?? point.raw?.y),
         timestamp: Number(point.raw?.x ?? point.parsed?.x),
         isLiveEndpoint: point.raw?.atlasLiveEndpoint === true,
@@ -6958,7 +6963,9 @@ function atlasExternalChartTooltip(context) {
   const atHistoricalEndpoint = hoveredData.length > 0
     && Number.isInteger(hoveredIndex)
     && hoveredIndex >= hoveredData.length - 1;
-  if (atHistoricalEndpoint) {
+  // A historical hover must remain historical, even at its last point.
+  // Only a dataset point explicitly declared LIVE may use spot presentation.
+  if (atHistoricalEndpoint && !comparison && point?.raw?.atlasLiveEndpoint === true) {
     const datasets = atlasChartPriceDatasets(chart);
     const virtual = datasets.map((dataset, index) => {
       const coin = dataset?.atlasCoin || chart.$atlasCoin || null;
@@ -6969,12 +6976,14 @@ function atlasExternalChartTooltip(context) {
         color: dataset.atlasPrimaryColor || dataset.borderColor,
         gradientCss: dataset.atlasGradientCss || "",
         rawPrice: live.price,
+        quoteCurrency: live.quote?.kind === "coingecko-usd-explicit" ? "USD" : "EUR",
+        historicalSource: String(live.quote?.source || "Source spot"),
         baseValue: 100 + live.change24h,
         timestamp: Number(live.quote?.timestamp || Date.now()),
         isLiveEndpoint: true,
         liveSource: String(live.quote?.source || "Binance WebSocket"),
         liveStatus: String(live.quote?.status || "live"),
-        liveKind: "live-binance",
+        liveKind: live.quote?.kind === "coingecko-usd-explicit" ? "snapshot" : "live-binance",
         liveObservedAt: Number(live.quote?.timestamp || Date.now()),
         virtualLivePresentation: true,
         virtualIndex: index
@@ -6992,16 +7001,21 @@ function atlasExternalChartTooltip(context) {
     const palette = atlasCryptoPalette(row.coin, index);
     const gradientCss = row.gradientCss || atlasCryptoGradientCss(row.coin, index);
     const historicalPrice = Number(row.rawPrice);
-    const currentPrice = Number.isFinite(historicalPrice) && historicalPrice > 0
-      ? atlasFormatEUR(historicalPrice)
-      : "—";
+    const quote = ["EUR", "USD", "USDC"].includes(row.quoteCurrency) ? row.quoteCurrency : null;
+    const currentPrice = quote && Number.isFinite(historicalPrice) && historicalPrice > 0
+      ? atlasFormatNativeChartQuote(historicalPrice, quote) : "—";
+    const timestamp = Number(row.timestamp);
+    const priceTitle = !quote
+      ? "Devise historique non qualifiée : prix masqué, courbe Base100 conservée"
+      : `${row.virtualLivePresentation ? "Spot Binance" : "Historique"} ${quote} · ${row.historicalSource || "source indiquée dans la série"}${Number.isFinite(timestamp) ? " · " + new Date(timestamp).toLocaleString("fr-FR") : ""}`;
     const style = `--atlas-series-color:${escapeHtml(palette.primary)};--atlas-series-gradient:${escapeHtml(gradientCss)}`;
 
     return `<div class="atlas-chart-tooltip-row" style="${style}">
       ${atlasChartTooltipCoinMarkup(row.coin, palette.primary, gradientCss)}
+
       <span class="atlas-chart-tooltip-color-bridge" aria-hidden="true"><i></i></span>
       <span class="atlas-chart-tooltip-values">
-        <strong>${escapeHtml(currentPrice)}</strong>
+        <strong title="${escapeHtml(priceTitle)}">${escapeHtml(currentPrice)}</strong>
         ${atlasChartTooltipChangeMarkup(row.baseValue)}
       </span>
     </div>`;
@@ -7014,10 +7028,14 @@ function atlasExternalChartTooltip(context) {
     : [];
   const allKinds = kind => kinds.length > 0 && kinds.every(value => value === kind);
   const tooltipPeriodLabel = atlasChartPeriodLabel(Number(chart.$atlasPeriod || state.chartPeriodDays || 1));
+  const historicalQuotes = [...new Set(rows.map(row => row.quoteCurrency || "?"))];
+  const quoteTitle = historicalQuotes.length === 1 && historicalQuotes[0] !== "?"
+    ? ` ${historicalQuotes[0]}`
+    : historicalQuotes.length === 1 ? " · DEVISE NON QUALIFIÉE" : " · DEVISES MIXTES";
   const tooltipTitle = !everyRowIsCurrent
-    ? `PRIX HISTORIQUE · VARIATION ${tooltipPeriodLabel}`
+    ? `PRIX HISTORIQUES${quoteTitle} · VARIATION ${tooltipPeriodLabel}`
     : allKinds("live-binance")
-      ? "PRIX LIVE BINANCE · VARIATION 24h"
+      ? "PRIX LIVE BINANCE EUR · VARIATION 24h"
       : allKinds("collected")
         ? "OBSERVATIONS COLLECTÉES"
         : allKinds("conserved")
@@ -7029,7 +7047,20 @@ function atlasExternalChartTooltip(context) {
               : kinds.some(kind => ["conserved", "snapshot"].includes(kind))
                 ? "DERNIERS PRIX DISPONIBLES"
                 : "PRIX ACTUELS";
-  node.innerHTML = `<div class="atlas-chart-tooltip-date">${tooltipTitle}</div>${body}`;
+  const retained = comparison ? atlasComparisonCurrencyTransition(chart) : null;
+  const qualifiedTooltipTitle = retained
+    ? `${tooltipTitle} · ${retained.requested} DEMANDÉ · HISTORIQUE ${retained.visible} CONSERVÉ`
+    : tooltipTitle;
+  node.innerHTML = `<div class="atlas-chart-tooltip-date">${qualifiedTooltipTitle}</div>${body}`;
+  // Display currency is NOT the currency of a historical series.
+  // The legacy graph-native USD decorator yields when app.js owns this
+  // historical board. Without this handshake, it replaces EUR historical
+  // values with USD spot snapshots after our tooltip has rendered.
+  if (comparison) node.dataset.top5UsdOwner = "canonical-app";
+  else delete node.dataset.top5UsdOwner;
+  delete node.dataset.usdQuotesVerified;
+  node.dataset.priceSource = everyRowIsCurrent ? "live-presentation" : "historical-point";
+  node.dataset.displayCurrency = historicalQuotes.length === 1 ? historicalQuotes[0] : "MIXED";
   node.hidden = false;
   node.setAttribute("aria-hidden", "false");
 
@@ -7060,7 +7091,7 @@ function atlasRenderComparisonCaption(
     ? unavailableItems.length
     : Number(unavailableItems || 0);
   const selectedCount = Number(
-    requestedCount || atlasComparisonIds().length || entries.length
+    state.dataBroker?.chart?.result?.scanner?.targetCount || requestedCount || atlasComparisonIds().length || entries.length
   );
   const complete =
     entries.length === selectedCount
@@ -12012,9 +12043,13 @@ function drawComparisonChart(canvas, entries, period, chartKey = "") {
     && normalizedEntries.every(entry =>
       String(entry?.result?.truthRoute || "") === "target-top5-24h-binance-eur-direct"
     );
-  const comparisonSourceTruth = targetTop5EurDirect
+  const comparisonQuotes = normalizedEntries.map(entry => atlasHistoricalDisplayQuote(entry.result));
+  const currencies = [...new Set(comparisonQuotes.map(quote => quote.currency || "?"))];
+  const comparisonCurrencyLabel = currencies.length === 1 && currencies[0] !== "?"
+    ? currencies[0] : currencies.includes("?") ? "DEVISE NON QUALIFIÉE" : "DEVISES MIXTES";
+  const comparisonSourceTruth = targetTop5EurDirect && comparisonCurrencyLabel === "EUR"
     ? `Binance EUR DIRECT${comparisonIntervals.length === 1 ? ` · ${comparisonIntervals[0]}` : ""} · ${normalizedEntries.length}/5`
-    : `${comparisonProvider === "CoinGecko" ? "CoinGecko EUR" : comparisonProvider}${comparisonOrigin === "cache" ? " · cache" : comparisonOrigin === "direct" ? " · direct" : ""}`;
+    : `${comparisonProvider} · ${comparisonCurrencyLabel}${comparisonOrigin === "cache" ? " · cache" : comparisonOrigin === "direct" ? " · direct" : ""}`;
   const summary = `${atlasComparisonSummary(normalizedEntries)} · ${normalizedEntries.length} séries · ${comparisonSourceTruth}`;
 
   const comparisonFingerprint =
@@ -12074,6 +12109,7 @@ function drawComparisonChart(canvas, entries, period, chartKey = "") {
       return {
         label: `${entry.coin.symbol}`,
         atlasCoin: { id: entry.coin.id, symbol: entry.coin.symbol, name: entry.coin.name, image: entry.coin.image || "" },
+        atlasHistoricalQuote: atlasHistoricalDisplayQuote(entry.result),
         atlasPrimaryColor: palette.primary,
         atlasGradientCss: atlasCryptoGradientCss(entry.coin, index),
         data: entry.data,
@@ -13705,7 +13741,7 @@ function atlasChartOverlayTitleHtml(context, mode, truthLabel) {
 function atlasChartOverlayComparison(chart, period, options = {}) {
   const result = chart?.result || {};
   const entries = atlasChartOverlayOrderedEntries(result);
-  const selectedCount = Number(options.selectedCount || atlasComparisonIds().length || entries.length);
+  const selectedCount = Number(result?.scanner?.targetCount || options.selectedCount || atlasComparisonIds().length || entries.length);
   const periodLabel = atlasChartPeriodLabel(period);
   const preset = String(options.preset || state.dataBroker?.comparison?.preset || "manual");
   const truth = atlasChartOverlayTruth(
@@ -13723,6 +13759,9 @@ function atlasChartOverlayComparison(chart, period, options = {}) {
       coin,
       symbol: String(coin.symbol || coin.name || "ACTIF").toUpperCase(),
       change: Number(historicalChange),
+      // Frozen Market metric determines rank; historical return belongs to curve timestamps.
+      marketChange: typeof entry?.atlasMarketMetric === "number"
+        ? entry.atlasMarketMetric : NaN,
       live: false,
       volume: Number.isFinite(Number(entry?.atlasMarketMetric)) && preset === "volume"
         ? Number(entry.atlasMarketMetric)
@@ -13732,6 +13771,7 @@ function atlasChartOverlayComparison(chart, period, options = {}) {
     };
   });
 
+  // Keep Market rank metrics in data; display the observed curve return only.
   const seriesLine = rows.map((row, index) => {
     const value = preset === "volume"
       ? (Number.isFinite(row.volume) ? fmtCompactEUR.format(row.volume) : "non mesuré")
@@ -13755,11 +13795,16 @@ function atlasChartOverlayComparison(chart, period, options = {}) {
     comparison: true,
     entries
   });
+  const currencySet = [...new Set(entries.map(entry =>
+    atlasHistoricalDisplayQuote(entry?.result).currency || "?"))];
+  const quoteLabel = currencySet.length === 1 && currencySet[0] !== "?"
+    ? currencySet[0] : currencySet.includes("?") ? "devise non qualifiée" : "devises mixtes";
+  const historyLabel = `${providerLabel} · ${quoteLabel}`;
 
   let primarySummaryItems = [
     {
       className: "atlas-hud-detail",
-      text: `${coverage} · ${providerLabel} EUR`
+      text: `${coverage} · ${historyLabel}`
     }
   ];
   let secondarySummaryItems = [
@@ -13771,13 +13816,13 @@ function atlasChartOverlayComparison(chart, period, options = {}) {
     }
   ];
 
-  if (scannerHistorySummary) {
+  if (scannerHistorySummary && preset !== "gainers" && preset !== "losers") {
     secondarySummaryItems.push({
       className: "atlas-hud-detail",
       text: `historiques ${scannerHistorySummary}`
     });
   }
-  if (scannerMarketBasis) {
+  if (scannerMarketBasis && preset !== "gainers" && preset !== "losers") {
     secondarySummaryItems.push({
       className: "atlas-hud-detail",
       text: `classement ${scannerMarketBasis}`
@@ -13815,7 +13860,7 @@ function atlasChartOverlayComparison(chart, period, options = {}) {
         },
         {
           className: "atlas-hud-detail",
-          text: `${providerLabel} EUR`
+          text: historyLabel
         },
         {
           className: "atlas-hud-oldest",
@@ -13948,12 +13993,45 @@ function atlasChartOverlayComparison(chart, period, options = {}) {
   );
 }
 
+function atlasFormatNativeChartQuote(value, currency = "EUR") {
+  if(currency!=="USDC")return atlasFormatCurrency(value,currency==="USD"?"USD":"EUR");
+  const n=Number(value);
+  if(!Number.isFinite(n))return "—";
+  const digits=atlasPriceDigits(n);
+  return new Intl.NumberFormat("fr-FR",{
+    minimumFractionDigits:Math.min(2,digits),maximumFractionDigits:digits
+  }).format(n)+" USDC";
+}
+
+function atlasRequestedHistoricalCurrency() {
+  const selected = String(globalThis.AgentCryptoQuoteCurrencyArchitecture?.snapshot?.()?.displayCurrency || "EUR").toUpperCase();
+  return selected === "EUR" ? "EUR" : "USD";
+}
+
+function atlasComparisonVisibleCurrency(chart) {
+  if (chart?.$atlasMode !== "comparison" || !Array.isArray(chart.data?.datasets)
+    || !chart.data.datasets.length) return null;
+  const quotes = chart.data.datasets.map(dataset => dataset?.atlasHistoricalQuote?.currency || null);
+  return quotes.every(quote => quote === quotes[0] && ["EUR", "USD"].includes(quote))
+    ? quotes[0] : null;
+}
+
+function atlasComparisonCurrencyTransition(chart) {
+  const visible = atlasComparisonVisibleCurrency(chart);
+  const requested = atlasRequestedHistoricalCurrency();
+  return visible && visible !== requested ? { visible, requested } : null;
+}
+
 function atlasChartOverlaySolo(chart, period, options = {}) {
   const result = chart?.result || {};
   const coin = result?.coin || getSelectedCoin() || {};
   const metrics = result?.integrity?.metrics || {};
   const periodLabel = atlasChartPeriodLabel(period);
-  const view = String(options.viewLabel || (atlasChartV2EffectiveView() === "base100" ? "BASE 100" : "PRIX EUR"));
+  const historicalQuote = atlasHistoricalDisplayQuote(result);
+  const view = String(options.viewLabel || (atlasChartV2EffectiveView() === "base100"
+    ? "BASE 100" : historicalQuote.currency ? `PRIX ${historicalQuote.currency}` : "PRIX · DEVISE NON QUALIFIÉE"));
+  const historicalFormat = value => historicalQuote.currency
+    ? atlasFormatNativeChartQuote(value, historicalQuote.currency) : "—";
   const scaleLabel = String(options.scaleLabel || (atlasChartV2EffectiveScale() === "logarithmic" ? "LOG" : "NORMALE"));
   const truth = atlasChartOverlayTruth(result, period);
 
@@ -13974,18 +14052,20 @@ function atlasChartOverlaySolo(chart, period, options = {}) {
   const displayedTruthLabel = options.preserved ? "historique conservé" : truthLabel;
 
   const seriesParts = [];
-  if (Number.isFinite(last)) seriesParts.push(atlasFormatEUR(last));
+  if (Number.isFinite(last)) seriesParts.push(historicalFormat(last));
   if (Number.isFinite(change)) seriesParts.push(fmtPct(change));
-  if (Number.isFinite(min)) seriesParts.push(`bas ${atlasFormatEUR(min)}`);
-  if (Number.isFinite(max)) seriesParts.push(`haut ${atlasFormatEUR(max)}`);
+  if (Number.isFinite(min)) seriesParts.push(`bas ${historicalFormat(min)}`);
+  if (Number.isFinite(max)) seriesParts.push(`haut ${historicalFormat(max)}`);
   if (Number.isFinite(amplitude)) seriesParts.push(`amplitude ${amplitude.toFixed(2)} %`);
 
   const summaryParts = [];
-  if (Number.isFinite(first)) summaryParts.push(`départ ${atlasFormatEUR(first)}`);
-  if (Number.isFinite(last)) summaryParts.push(`dernière ${atlasFormatEUR(last)}`);
+  if (Number.isFinite(first)) summaryParts.push(`départ ${historicalFormat(first)}`);
+  if (Number.isFinite(last)) summaryParts.push(`dernière ${historicalFormat(last)}`);
   if (points) summaryParts.push(`${points} points`);
   if (lastTimestamp > 0) summaryParts.push(`série ${atlasExactTimestampLabel(lastTimestamp)}`);
-  summaryParts.push(`${atlasChartProviderLabel(result)} EUR`);
+  summaryParts.push(historicalQuote.currency
+    ? `${atlasChartProviderLabel(result)} · historique ${historicalQuote.currency}`
+    : `${atlasChartProviderLabel(result)} · devise historique non qualifiée`);
 
   const soloTitleHtml = atlasChartOverlayTitleHtml(
     `${symbol} · ${name} · ${periodLabel}`,
@@ -14020,7 +14100,7 @@ function atlasChartOverlayExternal() {
   const period = Number(ctx.period || result?.periodDays || 1);
   const periodLabel = atlasChartPeriodLabel(period);
   const currencyRaw = String(result?.quoteCurrency || result?.currency || "EUR").toUpperCase();
-  const currency = currencyRaw === "USD" ? "USD" : "EUR";
+  const currency = currencyRaw === "USDC" ? "USDC" : currencyRaw === "USD" ? "USD" : "EUR";
   const scaleLabel = atlasExternalPresentation().scale === "logarithmic" ? "LOG" : "NORMALE";
   const symbol = String(coin.symbol || coin.name || "ACTIF").toUpperCase();
   const name = String(coin.name || symbol);
@@ -14050,7 +14130,7 @@ function atlasChartOverlayExternal() {
   const amplitude = Number.isFinite(min) && min > 0 && Number.isFinite(max)
     ? (max - min) / min * 100
     : null;
-  const formatPrice = value => atlasFormatCurrency(value, currency);
+  const formatPrice = value => atlasFormatNativeChartQuote(value, currency);
 
   const seriesParts = [];
   if (Number.isFinite(last)) seriesParts.push(formatPrice(last));
@@ -14069,9 +14149,9 @@ function atlasChartOverlayExternal() {
   const color = atlasChartOverlayCoinColor(coin, 0);
   atlasChartOverlaySet(
     atlasChartOverlayTitleHtml(
-      `${symbol} · ${name} · ${periodLabel}`,
+      `${symbol} · ${name} · ${periodLabel}${result?.coverageNote ? " · "+result.coverageNote : ""}`,
       `PRIX ${currency} · ${scaleLabel}`,
-      "EXTERNE"
+      result?.nativeSpotVerified ? "ARCHIVE OKX SPOT" : "EXTERNE"
     ),
     `<span class="atlas-hud-coin" style="--coin-color:${escapeHtml(color)}"><b>${escapeHtml(symbol)}</b><em>${escapeHtml(seriesParts.join(" · ") || "Mesures externes non disponibles")}</em></span>`,
     `<span class="atlas-hud-detail">${escapeHtml(summaryParts.join(" · "))}</span>`,
@@ -48795,7 +48875,7 @@ function atlasChartPreferredSourceFamily(coinOrId) {
 
 function atlasChartResultSourceFamily(result = null) {
   const explicitFamily = String(result?.sourceFamily || "").toLowerCase();
-  if (explicitFamily === "binance" || explicitFamily === "coingecko") return explicitFamily;
+  if (["binance", "coingecko", "okx", "coinbase"].includes(explicitFamily)) return explicitFamily;
   if (result?.comparison && Array.isArray(result.entries)) {
     const families = new Set(result.entries.map(entry => atlasChartResultSourceFamily(entry?.result)));
     return families.size === 1 ? [...families][0] : "mixed";
@@ -48838,6 +48918,7 @@ function atlasChartSourceMode(result = null) {
       ? "cache"
       : "direct";
   }
+  if (mode === "okx-github-spot-candles") return "cache";
   if (["browser-cache", "local-cache", "github-cache", "recent-cache"].includes(mode)) return "cache";
   return "unknown";
 }
