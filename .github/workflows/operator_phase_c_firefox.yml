@@ -56,6 +56,10 @@ jobs:
           node --test public/agent_crypto_erith_ia/trader/test-ai-asset-reading-view.cjs
           node --test public/agent_crypto_erith_ia/trader/test-market-fiche-facts.cjs
           node --test public/agent_crypto_erith_ia/trader/test-new-listing-identity.cjs
+      - name: Validate B1 historical EUR/USD provenance and cache isolation
+        run: |
+          node --check public/agent_crypto_erith_ia/administrator/app.js
+          node --test public/agent_crypto_erith_ia/tools/test_operator_history_quote_cache.test.cjs
       - name: Firefox read-only Operator and Trader branch smoke
         run: python .github/scripts/operator_phase_c_firefox.py
       - name: Preserve Firefox screenshots and diagnostics
