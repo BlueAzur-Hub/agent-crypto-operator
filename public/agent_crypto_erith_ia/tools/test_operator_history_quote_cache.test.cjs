@@ -153,3 +153,114 @@ test("USD comparison does not use an EUR Bridge or Binance series",async()=>{
  assert.equal(blocked.result.blocked,true);
  assert.equal(blocked.result.series.length,0);
 });
+
+test("Solo graphical board uses the certified historical quote in every field",()=>{
+  let captured=null;
+  const context={
+    state:{chartPeriodDays:1}, Date, Intl,
+    getSelectedCoin:()=>coin,
+    atlasHistoricalDisplayQuote:r=>({currency:r?.currency||null}),
+    atlasChartPeriodLabel:()=>"24h",
+    atlasChartV2EffectiveView:()=>"price",
+    atlasChartV2EffectiveScale:()=>"normal",
+    atlasChartOverlayTruth:()=>({label:"HISTORIQUE DIRECT COINGECKO"}),
+    atlasFormatNativeChartQuote:(value,quote)=>quote==="USD" ? value+" $US" : value+" €",
+    fmtPct:x=>(Number(x)>0?"+":"")+x+" %",
+    atlasExactTimestampLabel:()=>"04/11/2026 14:05",
+    atlasChartProviderLabel:()=>"CoinGecko",
+    atlasChartOverlayTitleHtml:(head,mode,truth)=>head+" / "+mode+" / "+truth,
+    atlasChartOverlayCoinColor:()=>"#ff9b15",
+    escapeHtml:s=>String(s),
+    atlasChartOverlaySet:(title,series,detail)=>{captured={title,series,detail}}
+  };
+  vm.runInNewContext(extract("atlasChartOverlaySolo"),context);
+  const base={
+    coin,source:"CoinGecko market_chart USD",currency:"USD",
+    integrity:{metrics:{firstPrice:77000,lastPrice:78340.69,minPrice:76000,maxPrice:79000,
+      changePct:1.44,pointCount:289,lastTimestamp:1793797520000}}
+  };
+  context.atlasChartOverlaySolo({result:base},1);
+  assert.match(captured.title,/PRIX USD/);
+  assert.match(captured.series,/78340.69 \$US/);
+  assert.match(captured.detail,/77000 \$US/);
+  assert.doesNotMatch(captured.series+captured.detail,/€/);
+  context.atlasChartOverlaySolo({result:{...base,currency:"EUR"}},1);
+  assert.match(captured.title,/PRIX EUR/);
+  assert.match(captured.series,/78340.69 €/);
+  assert.doesNotMatch(captured.series,/\$US/);
+  context.atlasChartOverlaySolo({result:{...base,currency:null}},1);
+  assert.match(captured.title,/DEVISE NON QUALIFIÉE/);
+  assert.doesNotMatch(captured.series,/78340.69/);
+});
+
+test("Historical price board shows USD/EUR only when the dataset proves that quote",()=>{
+  const node={dataset:{},innerHTML:"",hidden:true,setAttribute:()=>{}};
+  const ctx={
+    state:{chartPeriodDays:1}, Date,
+    atlasChartTooltipNode:()=>node,
+    atlasHideChartTooltip:()=>{},
+    atlasComparisonTooltipRows:()=>[],
+    atlasChartPriceDatasets:()=>[],
+    atlasCryptoPalette:()=>({primary:"#ff9900"}),
+    atlasCryptoGradientCss:()=>"#ff9900",
+    atlasFormatNativeChartQuote:(value,quote)=>value+(quote==="USD"?" $US":quote==="EUR"?" €":" USDC"),
+    atlasChartTooltipCoinMarkup:c=>c.symbol,
+    atlasChartTooltipChangeMarkup:()=>"",
+    atlasChartPeriodLabel:()=>"24h",
+    atlasComparisonCurrencyTransition:()=>null,
+    atlasPositionChartTooltip:()=>{},
+    requestAnimationFrame:f=>f(),
+    escapeHtml:s=>String(s)
+  };
+  vm.runInNewContext(extract("atlasExternalChartTooltip"),ctx);
+  function display(quote){
+    const series={atlasCoin:coin,atlasHistoricalQuote:{currency:quote,source:"CoinGecko market_chart "+quote},
+      atlasPrimaryColor:"#ff9900",data:[{x:1,y:1},{x:2,y:2}]};
+    const point={dataset:series,dataIndex:0,parsed:{x:1},raw:{rawPrice:78340.69,y:101,x:1}};
+    ctx.atlasExternalChartTooltip({chart:{$atlasMode:"single",$atlasCoin:coin,$atlasPeriod:1},tooltip:{opacity:1,dataPoints:[point]}});
+    return node.innerHTML;
+  }
+  assert.match(display("USD"),/PRIX HISTORIQUES USD/);
+  assert.match(node.innerHTML,/78340.69 \$US/);
+  assert.doesNotMatch(node.innerHTML,/€/);
+  assert.equal(node.dataset.displayCurrency,"USD");
+  assert.match(display("EUR"),/PRIX HISTORIQUES EUR/);
+  assert.match(node.innerHTML,/78340.69 €/);
+  assert.doesNotMatch(node.innerHTML,/\$US/);
+  assert.match(display(null),/DEVISE NON QUALIFIÉE/);
+  assert.doesNotMatch(node.innerHTML,/78340.69/);
+});
+
+test("Comparison and tooltip series carry source quote metadata, not a fixed EUR label",()=>{
+  const comparison=extract("drawComparisonChart");
+  const overlay=extract("atlasChartOverlayComparison");
+  const tooltipRows=extract("atlasComparisonTooltipRows");
+  assert.match(comparison,/atlasHistoricalQuote: atlasHistoricalDisplayQuote\(entry\.result\)/);
+  assert.match(comparison,/comparisonCurrencyLabel/);
+  assert.doesNotMatch(comparison,/comparisonProvider === "CoinGecko" \? "CoinGecko EUR"/);
+  assert.match(overlay,/atlasHistoricalDisplayQuote\(entry\?\.result\)\.currency/);
+  assert.doesNotMatch(overlay,/providerLabel\} EUR/);
+  assert.match(tooltipRows,/quoteCurrency: dataset\.atlasHistoricalQuote\?\.currency \|\| null/);
+  assert.doesNotMatch(extract("atlasExternalChartTooltip"),/atlasFormatEUR\(historicalPrice\)/);
+});
+
+test("Retained Solo snapshot remembers the verified quote instead of hardcoding EUR",()=>{
+  let expected="USD";
+  const context={
+    state:{chartPeriodDays:1,dataBroker:{comparison:{preset:"solo"}}},
+    atlasChartOverlayLastReady:null,
+    atlasChartOverlayModeLabelFor:()=>"Solo",
+    atlasChartV2EffectiveView:()=>"price",
+    atlasChartV2EffectiveScale:()=>"normal",
+    atlasHistoricalDisplayQuote:r=>({currency:r?.currency||null})
+  };
+  vm.runInNewContext(extract("atlasChartOverlayCaptureReady"),context);
+  const chart={status:"ready",period:1,result:{coin,currency:"USD",series:usd.series}};
+  assert.equal(context.atlasChartOverlayCaptureReady(chart).viewLabel,"PRIX USD");
+  chart.result={...chart.result,currency:"EUR",series:eur.series};
+  assert.equal(context.atlasChartOverlayCaptureReady(chart).viewLabel,"PRIX EUR");
+  chart.result={...chart.result,currency:null};
+  assert.match(context.atlasChartOverlayCaptureReady(chart).viewLabel,/NON CERTIFIÉE/);
+  assert.doesNotMatch(extract("atlasChartOverlayCaptureReady"),/"PRIX EUR"/);
+  assert.doesNotMatch(app,/Aucune courbe valide n’est encore affichée · CoinGecko EUR/);
+});

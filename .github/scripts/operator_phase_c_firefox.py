@@ -177,9 +177,19 @@ try:
         report["chart_display"] = admin.evaluate("""() => ({
           selected: document.getElementById('selectedAssetTitle')?.textContent || '',
           overlay: document.getElementById('atlasChartInsightOverlaySummary')?.textContent || '',
+          overlayTitle: document.getElementById('atlasChartInsightOverlayTitle')?.textContent || '',
+          overlaySeries: document.getElementById('atlasChartInsightOverlaySeries')?.textContent || '',
           currency: globalThis.AgentCryptoQuoteCurrencyArchitecture?.snapshot?.()?.displayCurrency || 'UNKNOWN',
           chartCanvas: !!document.getElementById('mainChart')
         })""")
+        # Regression from real Firefox screenshots: a retained USD price
+        # must never be captioned as EUR during Solo -> Top 5 transitions.
+        title = report["chart_display"]["overlayTitle"].upper()
+        values = report["chart_display"]["overlaySeries"]
+        mixed_label = ("PRIX EUR" in title and ("$US" in values or "$" in values)) or (
+            "PRIX USD" in title and "€" in values)
+        check("Firefox retained historical board never labels USD values as EUR",
+              not mixed_label, report["chart_display"])
 
         admin.screenshot(path=str(ARTIFACT / "operator_market_firefox.png"),
                          animations="disabled", timeout=30000)

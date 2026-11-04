@@ -167,6 +167,19 @@ jobs:
             assert (root/"administrator/assets/crypto/new-listings/axis-robotics.svg").exists()
             print("OPERATOR_VERIFIED_MARKET_FACTS_AND_IDENTITY_PARITY_PASS; ZIP owned by Phase C")
             raise SystemExit(0)
+          # Currency-board parity changes use the shared Administrator runtime,
+          # not the historical six-file Trader delivery. Keep the six-file
+          # assertion intact below, and let Phase C own the new differential.
+          chart_quote_paths=[
+            "public/agent_crypto_erith_ia/administrator/app.js",
+            "public/agent_crypto_erith_ia/administrator/index.html"
+          ]
+          if sorted(modified)==sorted(chart_quote_paths):
+            assert "operator-chart-quote-parity" in index
+            assert "38.15.11" in json.dumps(trader)
+            assert trader["real_orders"] is False
+            print("OPERATOR_CHART_CURRENCY_PARITY_SCOPE_PASS; ZIP owned by Phase C")
+            raise SystemExit(0)
           assert sorted(modified)==sorted(rootpaths),(modified,rootpaths)
           folder=pathlib.Path("operator_trader_delta")
           folder.mkdir(exist_ok=True)
