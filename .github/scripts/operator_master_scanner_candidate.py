@@ -26,9 +26,9 @@ REPLACE=[
 # Seven new MASTER helpers are inserted in the original scanner scope.
 INSERT=[
  "atlasScannerSeriesCoversWindow","atlasScannerQualifyNativeEurTwoDay",
- "atlasScannerCoinbaseUsdSpot","atlasScannerNativeUsdKey",
- "atlasScannerNativeUsdRequested","atlasScannerNativeUsdStore",
- "atlasScannerNativeUsdStored",
+ "atlasScannerCoinbaseUsdSpot","atlasScannerNativeUsdRequested",
+ "atlasScannerNativeUsdKey","atlasScannerNativeUsdStored",
+ "atlasScannerNativeUsdStore",
 ]
 CONST="ATLAS_SCANNER_COINBASE_USD_IDS"
 
