@@ -121,7 +121,7 @@ jobs:
           base=os.environ["BASE_SHA"]
           head=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
           modified=subprocess.check_output(["git","diff","--name-only","--diff-filter=ACMRT",base,head,"--","public/agent_crypto_erith_ia/"],text=True).splitlines()
-          modified=[p for p in modified if not (p.endswith(".test.mjs") or p.endswith(".test.js") or p.endswith(".test.cjs") or pathlib.Path(p).name.startswith("test-"))]
+          modified=[p for p in modified if not (p.endswith(".test.mjs") or p.endswith(".test.js") or p.endswith(".test.cjs") or pathlib.Path(p).name.startswith("test-") or pathlib.Path(p).name.startswith("test_"))]
           deleted=subprocess.check_output(["git","diff","--name-only","--diff-filter=D",base,head,"--","public/agent_crypto_erith_ia/"],text=True).strip()
           assert not deleted,deleted
           canonical=subprocess.check_output(["git","hash-object","public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js"],text=True).strip()
