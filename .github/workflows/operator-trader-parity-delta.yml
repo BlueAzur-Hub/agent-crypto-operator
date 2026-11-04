@@ -211,6 +211,22 @@ jobs:
             "public/agent_crypto_erith_ia/trader/trader-paper-lab-view.js",
             "public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js"
           ]
+          # Shared scanner runtime migrates once for both Operator and Trader.
+          # Require the exact pinned functional transplant plus PAPER scope.
+          integrated_scanner_paths=public_paper_paths+[
+            "public/agent_crypto_erith_ia/administrator/app.js"
+          ]
+          if sorted(modified)==sorted(integrated_scanner_paths):
+            scanner_blob=subprocess.check_output([
+                "git","hash-object",
+                "public/agent_crypto_erith_ia/administrator/app.js"
+              ],text=True).strip()
+            assert scanner_blob=="477c53766a0f412e59a99cf556c65928f4c51b08",scanner_blob
+            assert "mountPublicPaper();" in mirror
+            assert "trader-tradus-readonly.js" in mirror
+            assert trader["real_orders"] is False
+            print("OPERATOR_MASTER_SCANNER_AND_TRADER_DATA_PARITY_PASS; ZIP owned by Phase C")
+            raise SystemExit(0)
           if sorted(modified)==sorted(public_paper_paths):
             assert 'mountPublicPaper();' in mirror
             assert 'trader-tradus-readonly.js' in mirror
