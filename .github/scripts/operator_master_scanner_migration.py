@@ -15,6 +15,7 @@ ROOT_REL="public/agent_crypto_erith_ia/administrator/app.js"
 MASTER_COMMIT="9b48648f2b36f643065993e65abec9243153df7c"
 MASTER_BLOB="55014b47dc2afea639403357bf1b1413a793a1ec"
 OPERATOR_BLOB="4e3936a40165a5db4a2e4f2426fc2521e487fe3c"
+APPLIED_BLOB="477c53766a0f412e59a99cf556c65928f4c51b08"
 MASTER_URL=("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/"+
             MASTER_COMMIT+"/"+ROOT_REL)
 OUTPUT=ROOT/"phase_c_firefox_evidence"
@@ -64,7 +65,7 @@ def audit():
             raise ValueError("Source exceeds read-only bound")
     operator=(ROOT/ROOT_REL).read_bytes()
     msha,osha=git_blob(upstream),git_blob(operator)
-    if msha!=MASTER_BLOB or osha!=OPERATOR_BLOB:
+    if msha!=MASTER_BLOB or osha not in (OPERATOR_BLOB, APPLIED_BLOB):
         raise ValueError("Pinned source SHA mismatch: "+msha+" / "+osha)
     master=upstream.decode("utf-8")
     local=operator.decode("utf-8")
@@ -83,7 +84,8 @@ def audit():
                for symbol in symbols}
     report={"at_utc":datetime.now(timezone.utc).isoformat(),
             "master_commit":MASTER_COMMIT,"master_blob":msha,"operator_blob":osha,
-            "mode":"READ_ONLY_DIFF","scope":"Scanner/public graph owner functions only",
+            "mode":"READ_ONLY_DIFF_AFTER_PORT" if osha==APPLIED_BLOB else "READ_ONLY_DIFF_BEFORE_PORT",
+            "scope":"Scanner/public graph owner functions only",
             "symbols":available,"entries":[]}
     combined=[]
     for name in TARGETS:
