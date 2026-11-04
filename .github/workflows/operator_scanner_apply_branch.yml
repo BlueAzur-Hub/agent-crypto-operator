@@ -39,7 +39,7 @@ jobs:
           APP=public/agent_crypto_erith_ia/administrator/app.js
           test -s phase_c_firefox_evidence/operator_scanner_candidate_app.js
           cp phase_c_firefox_evidence/operator_scanner_candidate_app.js "$APP"
-          test "$(git hash-object "$APP")" = "78d72c7539f91c2bea1c8871acd0d0c002f88a64"
+          test "$(git hash-object "$APP")" = "477c53766a0f412e59a99cf556c65928f4c51b08"
           node --check "$APP"
           node --test public/agent_crypto_erith_ia/tools/test_scanner_full_window.cjs
           node --test public/agent_crypto_erith_ia/tools/test_scanner_native_usd_reuse.cjs
@@ -58,7 +58,7 @@ jobs:
         run: |
           set -euo pipefail
           APP=public/agent_crypto_erith_ia/administrator/app.js
-          test "$(git hash-object "$APP")" = "78d72c7539f91c2bea1c8871acd0d0c002f88a64"
+          test "$(git hash-object "$APP")" = "477c53766a0f412e59a99cf556c65928f4c51b08"
           test "$(git diff --name-only)" = "$APP"
           git config user.name "ERITH.IA Integration Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
