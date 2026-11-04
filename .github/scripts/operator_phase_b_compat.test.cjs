@@ -16,13 +16,59 @@ test('Market canonical 50/100/250/500/1000 and Yoann Trader entry unchanged',()=
   assert.match(desk,/surface=trader&amp;view=intermediate&amp;profile=yohan/);
   assert.match(desk,/trader-runtime-mirror\.js/);
 });
-test('Scanner requires exactly five compatible histories before commit',()=>{
-  const commit=namedFunction(app,'atlasScannerCommit');
-  const run=namedFunction(app,'atlasScannerRun');
-  assert.match(commit,/finalEntries\.length !== ATLAS_SCANNER_TARGET/);
-  assert.match(commit,/prevalidated\.length !== ATLAS_SCANNER_TARGET/);
-  assert.match(run,/finalEntries\.length === ATLAS_SCANNER_TARGET/);
-  assert.match(run,/pas de panier partiel/);
+test('Scanner commits only five compatible histories in frozen Market order', () => {
+  const ids = ['bitcoin', 'ethereum', 'binancecoin', 'ripple', 'solana'];
+  const entries = ids.map(id => ({ coin: { id }, result: { series: [[1, 10], [2, 11]] } }));
+  const tx = { candidateIds: ids, preset: 'gainers', period: 1, displayedSnapshot: {} };
+  const previousChart = { status: 'previous' };
+  const previousComparison = { renderedIds: ['previous'] };
+  const state = { dataBroker: { chart: previousChart, comparison: previousComparison } };
+  const draws = [];
+  const noop = () => {};
+  // Exercise the production commit against in-memory chart and UI adapters.
+  // The full-window suite separately checks the time coverage of each history.
+  const context = {
+    state, els: {}, window: { setTimeout: noop },
+    ATLAS_SCANNER_TARGET: 5, ATLAS_CANONICAL_MARKET_SOURCE: 'fixture',
+    atlasScannerTransaction: tx, atlasScannerQueuedRequest: null, atlasScannerCommitEpoch: 1,
+    atlasScannerCurrent: candidate => candidate === tx,
+    atlasScannerAligned: items => items.filter(entry => entry.result.series.length),
+    atlasExpectedChartContextKey: members => members.join(','),
+    atlasChartContextMatches: chart => chart.contextKey === ids.join(','),
+    atlasScannerInvalidateChartWork: () => 1, atlasScannerHistorySummary: () => 'cache',
+    atlasScannerLabel: preset => preset, atlasExactTimestampLabel: () => '',
+    atlasWorkspaceWrite: () => true,
+    drawComparisonChart: (_canvas, histories) => {
+      draws.push(Array.from(histories, entry => entry.coin.id));
+      return histories;
+    }
+  };
+  for (const name of [
+    'atlasScannerSetTransactionFlag', 'atlasScannerSetUiState', 'setText',
+    'atlasRenderComparisonDetail', 'atlasChartV2RenderLegend', 'atlasRenderComparisonControls',
+    'atlasChartV2SyncControls', 'atlasChartOverlayUpdate', 'atlasRenderBrokerStrip',
+    'atlasPatchMarketSelectionState', 'renderMultiHorizon', 'atlasRuntimeDemandWakeAtlas',
+    'atlasSetCleanLensCollapsed', 'atlasSetChartCaptionText', 'atlasHideChartRefresh'
+  ]) context[name] = noop;
+  const commit = vm.runInNewContext(`(${namedFunction(app, 'atlasScannerCommit')})`, context);
+  const invalidBaskets = {
+    incomplete: entries.slice(0, 4),
+    incompatible: [...entries.slice(0, 4), { coin: entries[4].coin, result: { series: [] } }],
+    substituted: [...entries.slice(0, 4), { ...entries[4], coin: { id: 'other' } }],
+    duplicate: [...entries.slice(0, 4), entries[3]],
+    reordered: [entries[1], entries[0], ...entries.slice(2)]
+  };
+  for (const [reason, basket] of Object.entries(invalidBaskets)) {
+    assert.equal(commit(tx, basket, []), false, reason);
+    assert.equal(state.dataBroker.chart, previousChart, reason);
+    assert.equal(state.dataBroker.comparison, previousComparison, reason);
+  }
+  assert.deepEqual(draws, []);
+  assert.equal(commit(tx, entries, []), true);
+  assert.deepEqual(draws, [ids]);
+  assert.deepEqual(Array.from(state.dataBroker.comparison.renderedIds), ids);
+  assert.equal(state.dataBroker.comparison.status, 'ready');
+  assert.match(namedFunction(app,'atlasScannerRun'),/finalEntries\.length === ATLAS_SCANNER_TARGET/);
   assert.match(namedFunction(app,'atlasValidateChartSeries'),/historique 24 h discontinu/);
 });
 test('CoinGecko comparison request slots reserved before async wait',async()=>{

@@ -35,6 +35,7 @@ jobs:
           persist-credentials: false
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /public/agent_crypto_erith_ia/administrator/app.js
             /public/agent_crypto_erith_ia/administrator/index.html
             /public/agent_crypto_erith_ia/administrator/build.json
             /public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js
