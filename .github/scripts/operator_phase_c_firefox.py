@@ -328,7 +328,7 @@ try:
                     lab: !!document.getElementById('traderPaperLab'),
                     comparator: !!document.getElementById('traderStrategyComparator'),
                     decision: !!document.getElementById('traderPaperDecision'),
-                    orderEntry: !!document.getElementById('erithTraderOrderEntry'),
+                    orderEntry: api.AgentCryptoTraderOrderEntryView?.realOrders === false,
                     css: !!document.getElementById('traderOrderEntryStyle'),
                     strategyReadOnly: api.AgentCryptoStrategyComparator?.realOrders === false,
                     spotPaperOnly: api.AgentCryptoSpotPaperOrders?.realOrders === false
@@ -338,7 +338,7 @@ try:
                     qualifiedLab: typeof api.AgentCryptoPaperLabCore?.historicalStudy === 'function',
                     tradusPreserved: api.AgentCryptoTraderTradusView?.realOrders === false,
                     dataRouter: route?.read_only === true && route?.private_access === false,
-                    realOrderDisabled: api.AgentCryptoTraderRuntimeMirror?.real_orders === false
+                    realOrderDisabled: api.parent?.AgentCryptoTraderRuntimeMirror?.real_orders === false
                 };
             }""")
             report["public_paper_modules"] = paper_modules
