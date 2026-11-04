@@ -319,6 +319,63 @@ try:
                   info["expanded"] and bool(info["status"]) and info["sourceButton"] and
                   bool(info["selfTest"] and info["selfTest"]["pass"] and
                   info["selfTest"]["real_orders"] is False), info)
+            # Full MASTER Trader public PAPER/Strategy chain, mounted in the
+            # original Yoann Operator iframe. No second Chart owner or live order.
+            paper_modules = panel.evaluate("""el => {
+                const api = globalThis;
+                const route = api.AgentCryptoVaultDataRouter;
+                return {
+                    lab: !!document.getElementById('traderPaperLab'),
+                    comparator: !!document.getElementById('traderStrategyComparator'),
+                    decision: !!document.getElementById('traderPaperDecision'),
+                    orderEntry: !!document.getElementById('erithTraderOrderEntry'),
+                    css: !!document.getElementById('traderOrderEntryStyle'),
+                    strategyReadOnly: api.AgentCryptoStrategyComparator?.realOrders === false,
+                    spotPaperOnly: api.AgentCryptoSpotPaperOrders?.realOrders === false
+                        && api.AgentCryptoSpotPaperOrders?.network === false,
+                    decisionCoreOnly: api.AgentCryptoTraderPaperDecision?.realOrders === false
+                        && api.AgentCryptoTraderPaperDecision?.network === false,
+                    qualifiedLab: typeof api.AgentCryptoPaperLabCore?.historicalStudy === 'function',
+                    tradusPreserved: api.AgentCryptoTraderTradusView?.realOrders === false,
+                    dataRouter: route?.read_only === true && route?.private_access === false,
+                    realOrderDisabled: api.AgentCryptoTraderRuntimeMirror?.real_orders === false
+                };
+            }""")
+            report["public_paper_modules"] = paper_modules
+            check("MASTER PAPER and Strategy readers mounted inside original Yoann Trader",
+                  all(paper_modules.values()), paper_modules)
+
+            # Fetch actual canonical MASTER public records through the
+            # Operator iframe's existing read-only vault router. No data copy.
+            data_sources = panel.evaluate("""async el => {
+                const paths = [
+                  ['../data/trader_flux/radar20_portfolio/summary.json',
+                   'erith.trader.radar20.shared-capital-paper.v1'],
+                  ['../data/crypto/radar-opportunities/qualification-latest.json',
+                   'erith.radar.spot-qualification.v1'],
+                  ['../data/crypto/okx-hourly/latest.json',
+                   'erith.radar.okx-hourly-health.v1']
+                ];
+                const output=[];
+                for (const [path,schema] of paths){
+                    const controller=new AbortController();
+                    const timer=setTimeout(()=>controller.abort(),9000);
+                    try{
+                        const response=await fetch(path,{cache:'no-store',credentials:'omit',
+                          signal:controller.signal});
+                        const item=response.ok?await response.json():null;
+                        output.push({path,ok:response.ok&&item?.schema===schema&&
+                          item?.orders_enabled===false,
+                          code:response.status,schema:item?.schema||null});
+                    }catch(error){output.push({path,ok:false,error:String(error).slice(0,160)});}
+                    finally{clearTimeout(timer);}
+                }
+                return output;
+            }""")
+            report["public_master_data_sources"] = data_sources
+            check("Operator Trader reads verified public MASTER historical/PAPER data",
+                  all(row.get("ok") is True for row in data_sources), data_sources)
+
             desk.screenshot(path=str(ARTIFACT / "trader_yohan_bottom_tradus_firefox.png"),
                             animations="disabled", timeout=30000)
             panel.locator("#traderTradusClose").click(timeout=12000)
