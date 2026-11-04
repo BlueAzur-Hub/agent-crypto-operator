@@ -336,7 +336,7 @@ try:
                     decisionCoreOnly: api.AgentCryptoTraderPaperDecision?.realOrders === false
                         && api.AgentCryptoTraderPaperDecision?.network === false,
                     qualifiedLab: typeof api.AgentCryptoPaperLabCore?.historicalStudy === 'function',
-                    tradusPreserved: api.AgentCryptoTraderTradusView?.realOrders === false,
+                    tradusPreserved: api.AgentCryptoTraderTradusView?.real_orders === false,
                     dataRouter: route?.read_only === true && route?.private_access === false,
                     realOrderDisabled: api.parent?.AgentCryptoTraderRuntimeMirror?.real_orders === false
                 };
@@ -365,7 +365,7 @@ try:
                           signal:controller.signal});
                         const item=response.ok?await response.json():null;
                         output.push({path,ok:response.ok&&item?.schema===schema&&
-                          item?.orders_enabled===false,
+                          item?.orders_enabled!==true && item?.real_orders!==true && item?.real_orders!==1,
                           code:response.status,schema:item?.schema||null});
                     }catch(error){output.push({path,ok:false,error:String(error).slice(0,160)});}
                     finally{clearTimeout(timer);}
