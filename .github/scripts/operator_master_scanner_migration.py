@@ -39,7 +39,7 @@ def git_blob(raw):
     return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
 
 def exact_function(source,name):
-    match=re.search(r"(?m)^function\s+"+re.escape(name)+r"\s*\(",source)
+    match=re.search(r"(?m)^(?:async\s+)?function\s+"+re.escape(name)+r"\s*\(",source)
     if not match:
         return None
     lines=source[match.start():].splitlines(keepends=True)
@@ -75,12 +75,19 @@ def audit():
         missing=[c for c in calls(one or "") if not re.search(r"\b"+re.escape(c)+r"\s*\(",local)]
         state="MASTER_ONLY" if one and not other else ("OPERATOR_ONLY" if other and not one
                 else "SAME" if one==other else "DIFFERENT")
+        signal_symbols=["ATLAS_MARKET_REQUESTED_ASSETS","ATLAS_NETWORK_MAX_CHART",
+                        "ATLAS_NETWORK_MAX_OTHER","atlasMarketUniverseCoins",
+                        "atlasScannerSeriesCoversWindow","atlasScannerQualifyNativeEurTwoDay"]
+        unresolved=[x for x in signal_symbols if x in (one or "") and x not in local]
         report["entries"].append({
           "function":name,"status":state,"master_lines":len((one or "").splitlines()),
           "operator_lines":len((other or "").splitlines()),
           "master_sha256":hashlib.sha256((one or "").encode()).hexdigest(),
           "operator_sha256":hashlib.sha256((other or "").encode()).hexdigest(),
-          "missing_called_names_in_operator":missing})
+          "missing_called_names_in_operator":missing,
+          "unresolved_references_in_operator":unresolved,
+          "first_master_line":(one or "").splitlines()[0] if one else None,
+          "first_operator_line":(other or "").splitlines()[0] if other else None})
         if state!="SAME":
             combined.extend(list(difflib.unified_diff(
                 (other or "").splitlines(keepends=True),
