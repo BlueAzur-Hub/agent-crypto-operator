@@ -76,3 +76,80 @@ test("Canvas axis quote comes from result, unknown is visibly uncertain",()=>{
  assert.match(app,/atlasChartAxisPriceLabel\(tick\.value, view, chart\.\$atlasQuoteCurrency\)/);
  assert.match(app,/visibleCurrency = atlasHistoricalDisplayQuote\(result\)\.currency \|\| "UNKNOWN"/);
 });
+
+function extractAsync(name) {
+ const prefix="async function "+name+"(";
+ const p=app.indexOf(prefix);
+ assert.ok(p>=0,"missing async "+name);
+ const brace=app.indexOf("{",p),end=/^}\s*$/m.exec(app.slice(brace));
+ assert.ok(end,"unclosed async "+name);
+ return app.slice(p,brace+end.index+1);
+}
+test("USD requests use the native CoinGecko collector even when Binance is preferred",async()=>{
+ const calls=[];
+ const context={
+   atlasChartDisplayCurrency:()=>"USD",
+   globalThis:{AgentCryptoGraphNativeUsd:{fetchCoinGeckoUsd:async(c,period)=>{
+     calls.push(c.id+":"+period);return {...usd,quoteCurrency:"USD",currency:"USD"};
+   }}},
+   fetchBinanceChartDirect:async()=>{throw Error("EUR Binance must not run")},
+   fetchCoinGeckoChartDirect:async()=>{throw Error("EUR CoinGecko must not run")}
+ };
+ vm.runInNewContext(extractAsync("atlasFetchChartDirectForFamily"),context);
+ const result=await context.atlasFetchChartDirectForFamily(coin,1,"binance");
+ assert.equal(result.quoteCurrency,"USD");
+ assert.deepEqual(calls,["bitcoin:1"]);
+ context.globalThis.AgentCryptoGraphNativeUsd=null;
+ await assert.rejects(()=>context.atlasFetchChartDirectForFamily(coin,1,"binance"),/USD natif indisponible/);
+});
+test("CoinGecko direct route never silently requests EUR when display is USD",async()=>{
+ let calls=0;
+ const context={
+   atlasChartDisplayCurrency:()=>"USD",
+   globalThis:{AgentCryptoGraphNativeUsd:{fetchCoinGeckoUsd:async()=>{
+     calls++;return {...usd,currency:"USD",quoteCurrency:"USD"};
+   }}}
+ };
+ vm.runInNewContext(extractAsync("fetchCoinGeckoChartDirect"),context);
+ const result=await context.fetchCoinGeckoChartDirect(coin,1);
+ assert.equal(calls,1);
+ assert.equal(result.currency,"USD");
+});
+test("Solo rejects a caller-supplied EUR cache when USD is selected",async()=>{
+ const context={
+   atlasChartDisplayCurrency:()=>"USD",
+   atlasChartPreferredSourceFamily:()=>"binance",
+   atlasGetStoredChartResult:()=>null,
+   atlasHistoricalDisplayQuote:r=>({currency:r?.source?.includes(" EUR")?"EUR":null}),
+   atlasFetchChartDirectForFamily:async()=>{throw Error("native USD offline")},
+   atlasExactTimestampLabel:()=>"legacy"
+ };
+ vm.runInNewContext(extractAsync("fetchChartSeries"),context);
+ const result=await context.fetchChartSeries(coin,1,{fallback:eur});
+ assert.equal(result.blocked,true);
+ assert.equal(result.series.length,0);
+});
+test("USD comparison does not use an EUR Bridge or Binance series",async()=>{
+ let fetches=0,stores=0;
+ const context={
+   atlasChartDisplayCurrency:()=>"USD",
+   atlasGetStoredChartResult:()=>eur,
+   atlasHistoricalDisplayQuote:r=>({currency:r?.source?.includes(" USD")?"USD":r?.source?.includes(" EUR")?"EUR":null}),
+   atlasChartNeedsRefresh:()=>false,
+   atlasRespectComparisonRequestSpacing:async()=>{},
+   atlasFetchChartDirectForFamily:async()=>{fetches++;return {...usd,currency:"USD",quoteCurrency:"USD"};},
+   atlasStoreChartResult:()=>{stores++},
+   atlasComparisonAbortError:()=>false,
+   ATLAS_COMPARISON_DIRECT_TIMEOUT_MS:12000
+ };
+ vm.runInNewContext(extractAsync("atlasFetchComparisonSeriesResilient"),context);
+ const result=await context.atlasFetchComparisonSeriesResilient(coin,1);
+ assert.equal(result.result.quoteCurrency,"USD");
+ assert.equal(result.source,"coingecko-usd-native-direct");
+ assert.equal(fetches,1);
+ assert.equal(stores,1);
+ context.atlasFetchChartDirectForFamily=async()=>{throw Error("network offline")};
+ const blocked=await context.atlasFetchComparisonSeriesResilient(coin,1);
+ assert.equal(blocked.result.blocked,true);
+ assert.equal(blocked.result.series.length,0);
+});
