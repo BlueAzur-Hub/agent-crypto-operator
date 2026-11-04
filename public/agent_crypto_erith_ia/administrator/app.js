@@ -50123,6 +50123,13 @@ async function atlasFetchTargetTop5BinanceEur24hTruth(c, options = {}) {
 }
 
 async function atlasFetchChartDirectForFamily(c, days, family, options = {}) {
+  // B1: a requested USD history must come from an actually native USD source.
+  // A Binance EUR series is never a USD fallback, regardless of the UI label.
+  if (atlasChartDisplayCurrency() === "USD") {
+    const nativeUsd = globalThis.AgentCryptoGraphNativeUsd?.fetchCoinGeckoUsd;
+    if (typeof nativeUsd !== "function") throw new Error("Collecteur CoinGecko USD natif indisponible");
+    return await nativeUsd(c, days, options);
+  }
   return family === "binance"
     ? fetchBinanceChartDirect(c, days, options)
     : fetchCoinGeckoChartDirect(c, days, options);
@@ -50231,6 +50238,12 @@ async function fetchBinanceChartDirectDynamic(c, days, options = {}) {
 }
 
 async function fetchCoinGeckoChartDirect(c, days, options = {}) {
+  // Even if the optional graph wrapper was not installed yet, forbid EUR on USD.
+  if (atlasChartDisplayCurrency() === "USD") {
+    const nativeUsd = globalThis.AgentCryptoGraphNativeUsd?.fetchCoinGeckoUsd;
+    if (typeof nativeUsd !== "function") throw new Error("Collecteur CoinGecko USD natif indisponible");
+    return await nativeUsd(c, days, options);
+  }
   const period=Number(days||1), apiDays=atlasChartApiDays(period);
   const url=`https://api.coingecko.com/api/v3/coins/${encodeURIComponent(c.id)}/market_chart?vs_currency=eur&days=${encodeURIComponent(apiDays)}&precision=full`;
   const payload=await atlasFetchJson(url,{signal:options.signal,timeoutMs:Number(options.timeoutMs||ATLAS_CHART_DIRECT_TIMEOUT_MS)});
@@ -50244,8 +50257,11 @@ async function fetchChartSeries(c, days, options = {}) {
   if (!c?.id) return { series: [], blocked: true, reason: "actif absent" };
   const period = Number(days || 1);
   const family = atlasChartPreferredSourceFamily(c);
-  const stored = options.fallback || atlasGetStoredChartResult(c, period, family);
-  const provider = family === "binance" ? "Binance" : "CoinGecko";
+  // A caller-provided old cache is not evidence of its currency.
+  const candidate = options.fallback || atlasGetStoredChartResult(c, period, family);
+  const wanted = atlasChartDisplayCurrency();
+  const stored = atlasHistoricalDisplayQuote(candidate).currency === wanted ? candidate : null;
+  const provider = wanted === "USD" ? "CoinGecko USD" : family === "binance" ? "Binance EUR" : "CoinGecko EUR";
   try {
     return await atlasFetchChartDirectForFamily(c, period, family, options);
   } catch (error) {
@@ -50276,6 +50292,32 @@ function atlasWaitWithSignal(ms, signal = null) {
 
 async function atlasFetchComparisonSeriesResilient(coin, period, options = {}) {
   const signal = options.signal || null;
+  // B1: own USD comparisons before the legacy Binance/Bridge EUR routes.
+  // This is shared by the Operator Interface and Trader (same app.js owner).
+  if (atlasChartDisplayCurrency() === "USD") {
+    const cached = atlasGetStoredChartResult(coin, period, "coingecko", "USD");
+    const certified = result => atlasHistoricalDisplayQuote(result).currency === "USD";
+    if (certified(cached) && !atlasChartNeedsRefresh(cached, period))
+      return { coin, result: cached, attempts: 0, source: "coingecko-usd-native-cache" };
+    try {
+      await atlasRespectComparisonRequestSpacing(signal, period);
+      const result = await atlasFetchChartDirectForFamily(coin, period, "coingecko", {
+        signal, timeoutMs: ATLAS_COMPARISON_DIRECT_TIMEOUT_MS
+      });
+      if (!certified(result)) throw new Error("Historique CoinGecko USD non certifié");
+      atlasStoreChartResult(coin, period, result, "coingecko");
+      return { coin, result, attempts: 1, source: "coingecko-usd-native-direct" };
+    } catch (error) {
+      if (atlasComparisonAbortError(error)) throw error;
+      // Never revive an old/stale EUR history or an outdated USD cache.
+      return { coin, result: {
+        series: [], blocked: true, currency: "USD", quoteCurrency: "USD",
+        sourceFamily: "coingecko", sourceMode: "coingecko-direct",
+        reason: "Historique CoinGecko USD natif indisponible.",
+        technicalReason: String(error?.message || error || "source indisponible")
+      }, attempts: 1, source: "coingecko-usd-native-unavailable" };
+    }
+  }
 
   // Build 38.15.11 forensic route:
   // Target Top 5 + 24h must prove the raw historical source before any cache,
