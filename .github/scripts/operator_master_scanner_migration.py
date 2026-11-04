@@ -69,22 +69,17 @@ def audit():
     master=upstream.decode("utf-8")
     local=operator.decode("utf-8")
     symbols=[
-        "ATLAS_SCANNER_COINBASE_USD_IDS",
-        "ATLAS_SCANNER_NETWORK_CONCURRENCY",
-        "ATLAS_MARKET_REQUESTED_ASSETS",
-        "atlasMarketUniverseCoins",
-        "atlasMarketUniverseLimit",
-        "atlasHistoryBridgeCanTry",
-        "atlasScannerNativeUsdRequested",
-        "atlasScannerNativeUsdStore",
-        "atlasScannerHistoryKind",
-        "atlasScannerDecorateEntry",
+        "ATLAS_SCANNER_COINBASE_USD_IDS","ATLAS_SCANNER_NETWORK_CONCURRENCY",
+        "ATLAS_MARKET_REQUESTED_ASSETS","atlasMarketUniverseCoins",
+        "atlasMarketUniverseLimit","atlasHistoryBridgeCanTry",
+        "atlasScannerNativeUsdRequested","atlasScannerNativeUsdStore",
+        "atlasScannerHistoryKind","atlasScannerDecorateEntry",
         "atlasScannerRetryableError"
     ]
-    available={symbol:{"master":bool(re.search(r"\\b"+symbol+r"\\b",master)),
-                       "operator":bool(re.search(r"\\b"+symbol+r"\\b",local)),
-                       "master_definitions":len(re.findall(r"(?m)^(?:async\\s+)?function\\s+"+symbol+r"\\s*\\(",master)),
-                       "operator_definitions":len(re.findall(r"(?m)^(?:async\\s+)?function\\s+"+symbol+r"\\s*\\(",local))}
+    available={symbol:{"master":bool(re.search(r"\b"+symbol+r"\b",master)),
+                       "operator":bool(re.search(r"\b"+symbol+r"\b",local)),
+                       "master_definitions":len(re.findall(r"(?m)^(?:async\s+)?function\s+"+symbol+r"\s*\(",master)),
+                       "operator_definitions":len(re.findall(r"(?m)^(?:async\s+)?function\s+"+symbol+r"\s*\(",local))}
                for symbol in symbols}
     report={"at_utc":datetime.now(timezone.utc).isoformat(),
             "master_commit":MASTER_COMMIT,"master_blob":msha,"operator_blob":osha,
