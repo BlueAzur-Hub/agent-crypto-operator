@@ -60,6 +60,9 @@ jobs:
         run: |
           node --check public/agent_crypto_erith_ia/administrator/app.js
           node --test public/agent_crypto_erith_ia/tools/test_operator_history_quote_cache.test.cjs
+      - name: Document pinned MASTER scanner differences without code replacement
+        run: |
+          python .github/scripts/operator_master_scanner_migration.py
       - name: Firefox read-only Operator and Trader branch smoke
         run: python .github/scripts/operator_phase_c_firefox.py
       - name: Preserve Firefox screenshots and diagnostics
