@@ -41,6 +41,16 @@ jobs:
             /public/agent_crypto_erith_ia/trader/build.json
             /public/agent_crypto_erith_ia/trader/trading-desk.html
             /public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js
+            /public/agent_crypto_erith_ia/trader/strategy-comparator.js
+            /public/agent_crypto_erith_ia/trader/spot-paper-order-engine.js
+            /public/agent_crypto_erith_ia/trader/trader-paper-decision-core.js
+            /public/agent_crypto_erith_ia/trader/trader-paper-decision-view.js
+            /public/agent_crypto_erith_ia/trader/trader-order-entry-view.js
+            /public/agent_crypto_erith_ia/trader/trader-order-entry.css
+            /public/agent_crypto_erith_ia/trader/trader-paper-lab-core.js
+            /public/agent_crypto_erith_ia/trader/trader-paper-lab-view.js
+            /public/agent_crypto_erith_ia/trader/test-master-public-parity.cjs
+            /public/agent_crypto_erith_ia/web/vault-data-router.js
             /public/agent_crypto_erith_ia/trader/technical-reading-data-sync.js
             /public/agent_crypto_erith_ia/trader/ai-asset-reading-core.js
             /public/agent_crypto_erith_ia/trader/ai-asset-reading-view.js
@@ -55,6 +65,14 @@ jobs:
           set -euo pipefail
           node --check public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js
           node --check public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js
+          for file in \
+            strategy-comparator.js spot-paper-order-engine.js \
+            trader-paper-decision-core.js trader-paper-decision-view.js \
+            trader-order-entry-view.js trader-paper-lab-core.js trader-paper-lab-view.js; do
+            node --check "public/agent_crypto_erith_ia/trader/$file"
+          done
+          node --check public/agent_crypto_erith_ia/web/vault-data-router.js
+          node --test public/agent_crypto_erith_ia/trader/test-master-public-parity.cjs
           node --check public/agent_crypto_erith_ia/trader/technical-reading-data-sync.js
           node - <<'NODE'
           const assert=require('node:assert/strict');
@@ -179,6 +197,27 @@ jobs:
             assert "38.15.11" in json.dumps(trader)
             assert trader["real_orders"] is False
             print("OPERATOR_CHART_CURRENCY_PARITY_SCOPE_PASS; ZIP owned by Phase C")
+            raise SystemExit(0)
+          # Whole, source-identical MASTER public PAPER readers plus the preserved
+          # Operator-specific TRADUS handoff. No historical six-file overwrite.
+          public_paper_paths=[
+            "public/agent_crypto_erith_ia/trader/strategy-comparator.js",
+            "public/agent_crypto_erith_ia/trader/spot-paper-order-engine.js",
+            "public/agent_crypto_erith_ia/trader/trader-paper-decision-core.js",
+            "public/agent_crypto_erith_ia/trader/trader-paper-decision-view.js",
+            "public/agent_crypto_erith_ia/trader/trader-order-entry-view.js",
+            "public/agent_crypto_erith_ia/trader/trader-order-entry.css",
+            "public/agent_crypto_erith_ia/trader/trader-paper-lab-core.js",
+            "public/agent_crypto_erith_ia/trader/trader-paper-lab-view.js",
+            "public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js"
+          ]
+          if sorted(modified)==sorted(public_paper_paths):
+            assert 'mountPublicPaper();' in mirror
+            assert 'trader-tradus-readonly.js' in mirror
+            assert 'trader-order-entry.css' in mirror
+            assert 'real_orders:false' in mirror
+            assert trader["real_orders"] is False
+            print("OPERATOR_CANONICAL_PUBLIC_PAPER_DATA_PARITY_PASS; ZIP owned by Phase C")
             raise SystemExit(0)
           assert sorted(modified)==sorted(rootpaths),(modified,rootpaths)
           folder=pathlib.Path("operator_trader_delta")
