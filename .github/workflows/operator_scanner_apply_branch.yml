@@ -1,0 +1,78 @@
+name: Apply audited MASTER scanner parity to Operator integration branch
+
+on:
+  push:
+    branches:
+      - integrate/master-public-data-trader-parity
+    paths:
+      - ".github/workflows/operator_scanner_apply_branch.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  port-scanner:
+    if: github.repository == 'BlueAzur-Hub/agent-crypto-operator' && github.ref == 'refs/heads/integrate/master-public-data-trader-parity'
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Establish exact immutable source and branch guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git branch --show-current)" = "integrate/master-public-data-trader-parity"
+          test "$(git hash-object public/agent_crypto_erith_ia/administrator/app.js)" = "4e3936a40165a5db4a2e4f2426fc2521e487fe3c"
+          git diff --quiet
+      - name: Recreate source-identical candidate and execute scanner regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          python .github/scripts/operator_master_scanner_migration.py
+          python .github/scripts/operator_master_scanner_candidate.py
+          APP=public/agent_crypto_erith_ia/administrator/app.js
+          test -s phase_c_firefox_evidence/operator_scanner_candidate_app.js
+          cp phase_c_firefox_evidence/operator_scanner_candidate_app.js "$APP"
+          test "$(git hash-object "$APP")" = "78d72c7539f91c2bea1c8871acd0d0c002f88a64"
+          node --check "$APP"
+          node --test public/agent_crypto_erith_ia/tools/test_scanner_full_window.cjs
+          node --test public/agent_crypto_erith_ia/tools/test_scanner_native_usd_reuse.cjs
+          node --test public/agent_crypto_erith_ia/tools/test_operator_history_quote_cache.test.cjs
+          node --test public/agent_crypto_erith_ia/trader/test-master-public-parity.cjs
+          python .github/scripts/yohan_operator_406509_guard.py
+      - name: Test Operator and Trader in Firefox with patched scanner candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check playwright==1.55.0
+          python -m playwright install --with-deps firefox
+          python .github/scripts/operator_phase_c_firefox.py
+      - name: Commit only verified shared scanner source on integration branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          APP=public/agent_crypto_erith_ia/administrator/app.js
+          test "$(git hash-object "$APP")" = "78d72c7539f91c2bea1c8871acd0d0c002f88a64"
+          test "$(git diff --name-only)" = "$APP"
+          git config user.name "ERITH.IA Integration Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- "$APP"
+          git commit -m "Port source-identical MASTER scanner owners into Operator runtime"
+          git push origin HEAD:refs/heads/integrate/master-public-data-trader-parity
+      - name: Retain candidate diagnostics and source provenance
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: operator-scanner-master-source-parity-evidence
+          path: |
+            phase_c_firefox_evidence/scanner_candidate_manifest.json
+            phase_c_firefox_evidence/scanner_migration_matrix.json
+            phase_c_firefox_evidence/report.json
+          retention-days: 14
+          if-no-files-found: warn
