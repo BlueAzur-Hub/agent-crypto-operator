@@ -16,6 +16,7 @@ OUT=EVIDENCE/"operator_scanner_candidate_app.js"
 FILES={
  "master":"55014b47dc2afea639403357bf1b1413a793a1ec",
  "operator":"4e3936a40165a5db4a2e4f2426fc2521e487fe3c",
+ "integrated":"477c53766a0f412e59a99cf556c65928f4c51b08",
 }
 # Eight existing owners are replaced ONLY from the canonical MASTER source.
 REPLACE=[
@@ -45,12 +46,28 @@ def function(text,name):
 def main():
     mraw=MASTER.read_bytes()
     oraw=OPERATOR.read_bytes()
-    if git_sha(mraw)!=FILES["master"] or git_sha(oraw)!=FILES["operator"]:
+    operator_blob=git_sha(oraw)
+    if git_sha(mraw)!=FILES["master"] or operator_blob not in (FILES["operator"],FILES["integrated"]):
         raise ValueError("Pinned source blob changed — no integration")
     if ROOT_APP.read_bytes()!=oraw:
         raise ValueError("Operator app.js checkout differs from audited baseline")
     master=mraw.decode("utf-8")
     original=oraw.decode("utf-8")
+    if operator_blob==FILES["integrated"]:
+        for name in REPLACE+INSERT:
+            if function(original,name)!=function(master,name):
+                raise ValueError("Previously integrated owner differs from MASTER: "+name)
+        if original.count("const ATLAS_SCANNER_NETWORK_CONCURRENCY = 1;")!=1:
+            raise ValueError("Scanner concurrency lost")
+        OUT.write_bytes(oraw)
+        report={"mode":"ALREADY_INTEGRATED_AND_VERIFIED",
+                "pinned_blobs":FILES,"replaced":REPLACE,"inserted":INSERT,
+                "status":"BRANCH_CANDIDATE_APPLIED","candidate_sha256":hashlib.sha256(oraw).hexdigest(),
+                "candidate_size":len(oraw),"original_size":len(oraw)}
+        (EVIDENCE/"scanner_candidate_manifest.json").write_text(
+            json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
+        print("MASTER_SCANNER_ALREADY_INTEGRATED",operator_blob,flush=True)
+        return
     output=original
     report={"mode":"CANDIDATE_NO_GITHUB_COMMIT",
             "pinned_blobs":FILES,"replaced":[],"inserted":[]}
