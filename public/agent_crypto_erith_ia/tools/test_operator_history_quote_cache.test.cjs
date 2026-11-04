@@ -243,3 +243,24 @@ test("Comparison and tooltip series carry source quote metadata, not a fixed EUR
   assert.match(tooltipRows,/quoteCurrency: dataset\.atlasHistoricalQuote\?\.currency \|\| null/);
   assert.doesNotMatch(extract("atlasExternalChartTooltip"),/atlasFormatEUR\(historicalPrice\)/);
 });
+
+test("Retained Solo snapshot remembers the verified quote instead of hardcoding EUR",()=>{
+  let expected="USD";
+  const context={
+    state:{chartPeriodDays:1,dataBroker:{comparison:{preset:"solo"}}},
+    atlasChartOverlayLastReady:null,
+    atlasChartOverlayModeLabelFor:()=>"Solo",
+    atlasChartV2EffectiveView:()=>"price",
+    atlasChartV2EffectiveScale:()=>"normal",
+    atlasHistoricalDisplayQuote:r=>({currency:r?.currency||null})
+  };
+  vm.runInNewContext(extract("atlasChartOverlayCaptureReady"),context);
+  const chart={status:"ready",period:1,result:{coin,currency:"USD",series:usd.series}};
+  assert.equal(context.atlasChartOverlayCaptureReady(chart).viewLabel,"PRIX USD");
+  chart.result={...chart.result,currency:"EUR",series:eur.series};
+  assert.equal(context.atlasChartOverlayCaptureReady(chart).viewLabel,"PRIX EUR");
+  chart.result={...chart.result,currency:null};
+  assert.match(context.atlasChartOverlayCaptureReady(chart).viewLabel,/NON CERTIFIÉE/);
+  assert.doesNotMatch(extract("atlasChartOverlayCaptureReady"),/"PRIX EUR"/);
+  assert.doesNotMatch(app,/Aucune courbe valide n’est encore affichée · CoinGecko EUR/);
+});
