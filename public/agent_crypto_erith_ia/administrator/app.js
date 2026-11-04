@@ -13649,7 +13649,11 @@ function atlasChartOverlayCaptureReady(chart) {
     preset,
     count: ids.length || (comparison ? entries.length : 1),
     modeLabel: atlasChartOverlayModeLabelFor(preset, ids.length || entries.length || 1),
-    viewLabel: comparison || atlasChartV2EffectiveView() === "base100" ? "BASE 100" : "PRIX EUR",
+    // Preserve the currency actually displayed, not the newly requested one.
+    viewLabel: comparison || atlasChartV2EffectiveView() === "base100" ? "BASE 100"
+      : (atlasHistoricalDisplayQuote(chart.result).currency
+          ? `PRIX ${atlasHistoricalDisplayQuote(chart.result).currency}`
+          : "PRIX · DEVISE NON CERTIFIÉE"),
     scaleLabel: comparison || atlasChartV2EffectiveScale() !== "logarithmic" ? "NORMALE" : "LOG",
   };
 
@@ -14220,7 +14224,7 @@ function atlasChartOverlayUpdate() {
   atlasChartOverlaySet(
     `<span class="atlas-hud-context">ANALYSE DU MARCHÉ</span> · <span class="atlas-hud-mode">${escapeHtml(atlasChartPeriodLabel(requestedPeriod))}</span><span class="atlas-hud-truth">EN ATTENTE</span>`,
     '<span class="atlas-hud-detail">Première série réelle en cours de chargement</span>',
-    '<span class="atlas-hud-detail">Aucune courbe valide n’est encore affichée · CoinGecko EUR</span>',
+    '<span class="atlas-hud-detail">Aucune courbe valide n’est encore affichée · historique non qualifié en attente</span>',
     "attente",
     "empty"
   );
