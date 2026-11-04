@@ -1,0 +1,257 @@
+/* ERITH.IA Trader · visual order-entry surface. Scope to the existing PAPER ticket. */
+#traderOkxTicket .erith-order-desk{--od-ink:#e4f4fc;--od-muted:#94adbc;--od-stroke:rgba(119,190,208,.25);--od-green:#71dfbf;--od-red:#ff91a6;display:block;color:var(--od-ink);margin:14px 0 20px;font:inherit;letter-spacing:normal}
+#traderOkxTicket .erith-order-desk *{box-sizing:border-box}
+#traderOkxTicket .erith-od-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:15px 18px;border:1px solid var(--od-stroke);border-radius:14px 14px 0 0;background:linear-gradient(112deg,rgba(22,68,83,.73),rgba(9,25,39,.93))}
+#traderOkxTicket .erith-od-eyebrow{display:block;color:#8ee5e9;letter-spacing:.12em;text-transform:uppercase;font-size:11px;font-weight:800;margin-bottom:5px}
+#traderOkxTicket .erith-od-pair{font-size:23px;line-height:1.2;font-weight:790;color:#f0faff}
+#traderOkxTicket .erith-od-modes{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+#traderOkxTicket .erith-od-tag{font-size:11px;padding:5px 9px;border:1px solid rgba(135,197,211,.35);border-radius:999px;color:#cae7ef;background:rgba(12,31,46,.7);font-weight:700}
+#traderOkxTicket .erith-od-lock{border-color:rgba(255,181,128,.5);color:#ffcc97}
+#traderOkxTicket .erith-od-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+#traderOkxTicket .erith-od-side{min-width:0;background:linear-gradient(160deg,rgba(10,40,51,.92),rgba(4,20,32,.98));border:1px solid var(--od-stroke);border-radius:13px;padding:17px;display:grid;gap:12px;align-content:start}
+#traderOkxTicket .erith-od-side[data-side="sell"]{background:linear-gradient(160deg,rgba(45,27,42,.70),rgba(7,21,34,.98))}
+#traderOkxTicket .erith-od-sidehead{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+#traderOkxTicket .erith-od-sidehead strong{font-size:17px;color:var(--od-green);font-weight:800}
+#traderOkxTicket .erith-od-side[data-side="sell"] .erith-od-sidehead strong{color:var(--od-red)}
+#traderOkxTicket .erith-od-sidehead span{font-size:11px;color:var(--od-muted);font-weight:700;letter-spacing:.07em}
+#traderOkxTicket .erith-od-side label{display:grid!important;gap:6px;width:100%;margin:0!important;font-size:12px;color:var(--od-muted)}
+#traderOkxTicket .erith-od-side select,#traderOkxTicket .erith-od-side input{width:100%!important;max-width:none!important;min-width:0;height:41px;background:#0b1d2c;color:#f4fbff;border:1px solid rgba(116,184,202,.38);border-radius:8px;padding:9px 11px;font-size:15px;box-shadow:none}
+#traderOkxTicket .erith-od-side select:focus-visible,#traderOkxTicket .erith-od-side input:focus-visible{outline:2px solid #8fdde8;outline-offset:2px}
+#traderOkxTicket .erith-od-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+#traderOkxTicket .erith-od-stat{padding:10px 11px;border-radius:9px;border:1px solid rgba(130,187,204,.2);background:rgba(3,16,27,.64);min-width:0}
+#traderOkxTicket .erith-od-stat span{display:block;font-size:11px;color:var(--od-muted);margin-bottom:6px}
+#traderOkxTicket .erith-od-stat strong{display:block;font-size:16px;line-height:1.3;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;color:#eef7fe}
+#traderOkxTicket .erith-od-side>p,#traderOkxTicket .erith-od-note{margin:0;font-size:12px;line-height:1.55;color:#afcbd7}
+#traderOkxTicket .erith-od-cta{width:100%;min-height:43px;background:#116676!important;border:1px solid #52cddd!important;border-radius:9px!important;font-weight:780;color:#fff!important}
+#traderOkxTicket .erith-od-cta:focus-visible{outline:2px solid white;outline-offset:2px}
+#traderOkxTicket .erith-od-inactive{min-height:42px;display:flex;align-items:center;justify-content:center;border:1px dashed rgba(248,184,140,.4);color:#f0c2a0;border-radius:9px;font-size:12px;font-weight:700;text-align:center;padding:8px}
+#traderOkxTicket .erith-od-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(111,167,186,.26);border:1px solid var(--od-stroke);border-radius:12px;overflow:hidden;margin:12px 0}
+#traderOkxTicket .erith-od-strip>div{padding:13px 12px;background:#0a2331;min-width:0}
+#traderOkxTicket .erith-od-strip small{display:block;color:var(--od-muted);font-size:10px;text-transform:uppercase;letter-spacing:.06em}
+#traderOkxTicket .erith-od-strip strong{display:block;font-size:15px;line-height:1.35;font-variant-numeric:tabular-nums;margin-top:5px;overflow-wrap:anywhere}
+#traderOkxTicket .erith-od-detail{border:1px solid var(--od-stroke);border-radius:12px;background:rgba(5,25,38,.86);margin:10px 0;overflow:hidden}
+#traderOkxTicket .erith-od-detail>summary{cursor:pointer;padding:14px 16px;color:#e2f8fc!important;background:rgba(28,67,82,.55);font-weight:750;font-size:14px;list-style:revert}
+#traderOkxTicket .erith-od-proof{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:13px}
+#traderOkxTicket .erith-od-proof div{background:rgba(8,33,46,.75);border:1px solid rgba(113,167,182,.16);padding:10px 11px;border-radius:8px;min-width:0}
+#traderOkxTicket .erith-od-proof small{display:block;color:var(--od-muted);font-size:11px}
+#traderOkxTicket .erith-od-proof strong{display:block;color:#def6fc;font-size:13px;overflow-wrap:anywhere;margin-top:5px}
+#traderOkxTicket .erith-od-timeline{margin:0;padding:17px 22px 18px 39px;color:#cee5ef}
+#traderOkxTicket .erith-od-timeline li{padding:0 0 12px 8px;font-size:12px;line-height:1.5}
+#traderOkxTicket .erith-od-timeline li strong{font-size:13px;display:block}
+#traderOkxTicket .erith-od-timeline li small{color:var(--od-muted)}
+#traderOkxTicket .erith-od-disclaimer{font-size:11px;color:#9ebaca;margin:8px 2px 0;line-height:1.55}
+#traderOkxTicket .erith-order-desk[data-ready="false"] .erith-od-head{border-color:rgba(182,154,113,.3)}
+@media(max-width:880px){#traderOkxTicket .erith-od-grid{grid-template-columns:1fr}#traderOkxTicket .erith-od-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:490px){#traderOkxTicket .erith-od-proof,#traderOkxTicket .erith-od-values{grid-template-columns:1fr}#traderOkxTicket .erith-od-pair{font-size:19px}#traderOkxTicket .erith-od-side{padding:12px}}
+@media(prefers-reduced-motion:reduce){#traderOkxTicket .erith-order-desk *{transition:none!important}}
+
+
+/* SEVEN HEAVEN · GOLDEN TICKET recto/verso. Only the Trader ticket is styled.
+   Real form inputs, account evidence and PAPER handlers remain the original DOM.
+   No image texture: decorative gradients and filigree are CSS/aria-hidden. */
+#traderOkxTicket .erith-golden-ticket{
+ --gt-gold:#dab675;--gt-pale:#f4e1ac;--gt-ink:#142c34;
+ --gt-edge:#583412;--gt-night:#061c28;--gt-sky:#a8c3ca;
+ margin:18px 0 22px;max-width:100%;background:none;
+}
+#traderOkxTicket .erith-gt-face{
+ position:relative;isolation:isolate;min-width:0;padding:11px;
+ border:1px solid #efd293;border-radius:15px;
+ background:linear-gradient(120deg,#64401d 0%,#d7b56b 7%,#f5dea0 15%,#875b27 29%,#e7be70 47%,#96621e 68%,#ffdf95 86%,#754419 100%);
+ box-shadow:0 0 0 2px #6f4b26,0 0 0 5px #102732,0 9px 26px #0008,0 0 30px #d7a85022;
+}
+#traderOkxTicket .erith-gt-face::before{
+ content:"";position:absolute;inset:5px;border:1px solid #512f12b9;
+ border-radius:11px;box-shadow:inset 0 0 0 1px #ffe1a682;
+ pointer-events:none;z-index:3;
+}
+#traderOkxTicket .erith-gt-face::after{
+ content:"";position:absolute;inset:8px;border:1px dotted #67401b94;
+ border-radius:8px;pointer-events:none;z-index:3;
+}
+#traderOkxTicket .erith-gt-flourish{
+ position:absolute;z-index:5;color:#59320f;
+ text-shadow:0 1px 0 #ffe5a7;font:31px/1 Georgia,serif;pointer-events:none;
+}
+#traderOkxTicket .erith-gt-tl{top:0;left:4px;transform:rotate(-25deg)}
+#traderOkxTicket .erith-gt-tr{top:0;right:4px;transform:scaleX(-1) rotate(-25deg)}
+#traderOkxTicket .erith-gt-bl{bottom:0;left:4px;transform:scaleY(-1) rotate(-25deg)}
+#traderOkxTicket .erith-gt-br{bottom:0;right:4px;transform:scale(-1) rotate(-25deg)}
+#traderOkxTicket .erith-gt-inner{position:relative;min-width:0;overflow:hidden;border:1px solid #8e682e;border-radius:7px;background:#071f2c;box-shadow:inset 0 0 0 1px #f6db9d62}
+#traderOkxTicket .erith-od-head{
+ padding:17px 28px 15px;border:0;border-bottom:1px solid #917038;
+ border-radius:0;background:radial-gradient(ellipse at 50% -50%,#97723455,transparent 66%),linear-gradient(135deg,#15313a,#071c27);
+}
+#traderOkxTicket .erith-gt-side-label{display:block;font-size:10px;font-weight:700;letter-spacing:.19em;color:#e5c58c;margin-bottom:5px}
+#traderOkxTicket .erith-od-eyebrow{color:#a0dadd;font-size:10px;letter-spacing:.13em;margin-bottom:3px}
+#traderOkxTicket .erith-gt-title{display:block;font:normal clamp(24px,2.7vw,37px)/1.2 Georgia,"Times New Roman",serif;letter-spacing:.04em;color:#f0d496;text-shadow:0 1px 1px #160f08,0 2px 3px #080708}
+#traderOkxTicket .erith-od-pair{display:block;font-size:13px;color:#e2dbc9;font-weight:700;letter-spacing:.11em;margin-top:5px}
+#traderOkxTicket .erith-od-tag{border-color:#b19159;color:#f0dfb4;background:#132d32}
+#traderOkxTicket .erith-od-lock{color:#ffce9e;border-color:#bb7f4e;background:#33271f}
+#traderOkxTicket .erith-od-grid{gap:12px;margin:0;padding:14px 17px 12px;background:linear-gradient(150deg,#0b2a36,#071e29)}
+#traderOkxTicket .erith-od-side{border-color:#4c7477;border-top:2px solid #6bba9c;border-radius:6px;background:linear-gradient(150deg,#0a3033,#061d29);padding:16px}
+#traderOkxTicket .erith-od-side[data-side="sell"]{border-color:#654c56;border-top:2px solid #d88a99;background:linear-gradient(150deg,#301f30,#0b1d29)}
+#traderOkxTicket .erith-od-sidehead strong{font-size:19px}
+#traderOkxTicket .erith-od-side label{color:#afced2}
+#traderOkxTicket .erith-od-side select,#traderOkxTicket .erith-od-side input{
+ border-color:#5b7c83;border-radius:5px;background:#0a2130;min-height:42px;
+}
+#traderOkxTicket .erith-od-stat{border-radius:5px;border-color:#36515d}
+#traderOkxTicket .erith-od-side[data-side="sell"] .erith-od-stat{border-color:#5b4556}
+#traderOkxTicket .erith-od-cta{border-color:#d5b06b!important;border-radius:5px!important;color:#fff0c9!important;background:linear-gradient(180deg,#216b72,#0d4557)!important}
+#traderOkxTicket .erith-od-inactive{border-radius:5px;border-color:#ac805b}
+#traderOkxTicket .erith-od-strip{margin:0 17px 15px;border-color:#9e7e47;gap:1px;border-radius:5px;background:#937140}
+#traderOkxTicket .erith-od-strip>div{background:#0d2b36;padding:12px 13px}
+#traderOkxTicket .erith-od-strip strong{color:#f5e4c3}
+#traderOkxTicket .erith-gt-hinge{position:relative;height:40px;display:grid;place-items:center;color:#ddb978;font:26px Georgia,serif;text-shadow:0 0 6px #a77a36}
+#traderOkxTicket .erith-gt-hinge::before{content:"";position:absolute;left:16%;right:16%;top:50%;border-top:1px solid #b28a5294;z-index:-1}
+#traderOkxTicket .erith-gt-hinge{background:radial-gradient(ellipse 32px 20px at 50% 50%,#0a2230 20%,transparent 95%)}
+#traderOkxTicket .erith-gt-verso .erith-gt-inner{background:linear-gradient(155deg,#e6d09c,#cbaa6e 60%,#ddbf85);color:#172f38}
+#traderOkxTicket .erith-gt-back-title{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:17px 26px;border-bottom:1px solid #9d753b;background:#ead5a6}
+#traderOkxTicket .erith-gt-back-label{font-size:10px;letter-spacing:.17em;color:#6b4b23;font-weight:850}
+#traderOkxTicket .erith-gt-back-title strong{color:#322617;font:normal clamp(17px,2vw,24px)/1.3 Georgia,serif;letter-spacing:.045em}
+#traderOkxTicket .erith-gt-back-title small{color:#6a542e;font-size:11px}
+#traderOkxTicket .erith-gt-back-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;padding:17px 18px 12px;align-items:stretch}
+#traderOkxTicket .erith-gt-back-grid .erith-od-detail{min-width:0;margin:0;border-radius:5px;border:1px solid #9c783d;background:#092331}
+#traderOkxTicket .erith-gt-back-grid .erith-od-detail>summary{
+ display:list-item;margin:0;padding:13px 14px;border-radius:0;background:#19333a;color:#f2dba8!important;
+ font:700 14px/1.4 Georgia,serif;cursor:pointer;
+}
+#traderOkxTicket .erith-gt-back-grid .erith-od-proof{gap:7px;padding:10px}
+#traderOkxTicket .erith-gt-back-grid .erith-od-proof div{background:#0d2935;border-color:#476170;border-radius:4px;padding:9px}
+#traderOkxTicket .erith-gt-back-grid .erith-od-proof strong{color:#f1e3c2;font-size:12px}
+#traderOkxTicket .erith-gt-back-grid .erith-od-timeline{color:#ecddbf}
+#traderOkxTicket .erith-golden-back-reports{margin:0 18px 14px;border-top:1px solid #aa854c;padding-top:10px;min-width:0}
+#traderOkxTicket .erith-golden-back-reports>[data-ticket-brief]{white-space:pre-wrap;overflow-wrap:anywhere;margin:5px 0 10px;padding:11px 12px;border:1px solid #846b42;border-radius:5px;background:#0d2b37;color:#bfe6e9;font-size:12px}
+#traderOkxTicket .erith-golden-back-reports>details{margin:8px 0;border:1px solid #8f7244;border-radius:5px;background:#0d2c38;color:#e3e2d7}
+#traderOkxTicket .erith-golden-back-reports>details>summary{cursor:pointer;background:#1d3941;color:#f2d89f;padding:12px 14px;font-weight:750}
+#traderOkxTicket .erith-golden-back-reports>details>div{padding:12px}
+#traderOkxTicket .erith-golden-back-reports pre{white-space:pre-wrap;overflow-wrap:anywhere;color:#c8e6e8;max-width:100%;overflow-x:auto;font-size:12px}
+#traderOkxTicket .erith-golden-back-reports button{max-width:100%;white-space:normal}
+#traderOkxTicket .erith-gt-verso .erith-od-disclaimer{margin:0;padding:8px 18px 16px;color:#473b25;font-size:11px;line-height:1.6}
+#traderOkxTicket .erith-order-desk[data-ready="false"] .erith-od-head{border-bottom-color:#b08b52}
+#traderOkxTicket .erith-gt-face :focus-visible{outline:2px solid #ffe4a3;outline-offset:2px}
+@media(max-width:880px){
+ #traderOkxTicket .erith-gt-back-grid{grid-template-columns:1fr}
+ #traderOkxTicket .erith-od-grid{grid-template-columns:1fr}
+}
+@media(max-width:540px){
+ #traderOkxTicket .erith-gt-face{padding:7px}
+ #traderOkxTicket .erith-gt-flourish{font-size:22px}
+ #traderOkxTicket .erith-od-head{padding:16px 19px}
+ #traderOkxTicket .erith-od-grid{padding:10px}
+ #traderOkxTicket .erith-od-strip{grid-template-columns:repeat(2,minmax(0,1fr));margin:0 10px 11px}
+ #traderOkxTicket .erith-gt-back-title{padding:14px 18px}
+ #traderOkxTicket .erith-gt-back-grid{padding:10px}
+ #traderOkxTicket .erith-golden-back-reports{margin:0 10px 10px}
+ #traderOkxTicket .erith-gt-back-title small{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+ #traderOkxTicket .erith-golden-ticket *,#traderOkxTicket .erith-golden-ticket *::before,#traderOkxTicket .erith-golden-ticket *::after{animation:none!important;transition:none!important}
+}
+
+/* Golden Ticket · qualification visible, without a trading permission. */
+#traderOkxTicket .erith-od-guard{
+ min-width:0;padding:11px 13px;border:1px solid #56707a;border-left:3px solid #9baeb1;
+ border-radius:5px;background:linear-gradient(110deg,#102b37,#0a2330);
+ color:#e7e2cf;
+}
+#traderOkxTicket .erith-od-guard>strong{
+ display:block;font-size:13px;line-height:1.45;color:#e8d7a9;
+}
+#traderOkxTicket .erith-od-guard>p{
+ font-size:12px;line-height:1.6;margin:5px 0 0;color:#bcd0d4;
+ overflow-wrap:anywhere;
+}
+#traderOkxTicket .erith-od-guard[data-level="warning"]{
+ border-color:#ad783f;border-left-color:#f5c36d;background:linear-gradient(110deg,#49311c,#1e2831);
+}
+#traderOkxTicket .erith-od-guard[data-level="warning"]>strong{color:#ffd08c}
+#traderOkxTicket .erith-od-guard[data-level="warning"]>p{color:#ffe2b3}
+#traderOkxTicket .erith-od-guard[data-level="neutral"]{
+ border-color:#5c847f;border-left-color:#83caba;background:linear-gradient(110deg,#133736,#0b2530);
+}
+#traderOkxTicket .erith-od-guard[data-level="neutral"]>strong{color:#aae5cf}
+
+/* Golden Ticket: single reading-only feasibility verdict (recto). */
+#traderOkxTicket .erith-od-verdict{
+ margin:0 17px 12px;padding:12px 15px;border:1px solid #947f55;
+ border-left:4px solid #bca56b;border-radius:5px;min-width:0;
+ background:linear-gradient(115deg,#0b2936,#0a222d)
+}
+#traderOkxTicket .erith-od-verdict[data-level="warning"]{
+ border-color:#b28b57;border-left-color:#ffe0a1;
+ background:linear-gradient(115deg,#402c1d,#192833)
+}
+#traderOkxTicket .erith-od-verdict>strong{color:#f4dfb4;display:block;font-size:14px;letter-spacing:.045em}
+#traderOkxTicket .erith-od-verdict>p{color:#e2dad0;font-size:12px;line-height:1.6;margin:6px 0 0;overflow-wrap:anywhere}
+#traderOkxTicket .erith-od-verdict .erith-od-budget{
+ border-top:1px solid #d6b77a66;padding-top:8px;color:#f2d5a6
+}
+#traderOkxTicket [data-od-field="sellNet"]{overflow-wrap:anywhere;font-size:clamp(12px,1vw,16px);line-height:1.5}
+@media(max-width:540px){#traderOkxTicket .erith-od-verdict{margin:0 10px 10px;padding:10px 12px}}
+
+
+/* Golden Ticket · diagnostics à deux niveaux.
+   Tout le texte PAPER et les preuves restent présents, mais les détails se
+   déplient volontairement. Aucune modification du moteur de décision. */
+#traderOkxTicket .erith-od-guard,
+#traderOkxTicket .erith-od-verdict {transition:border-color .12s ease;}
+#traderOkxTicket .erith-od-guard>summary,
+#traderOkxTicket .erith-od-verdict>summary {
+  cursor:pointer;
+  display:list-item;
+  list-style:disclosure-closed inside;
+  outline-offset:3px;
+}
+#traderOkxTicket .erith-od-guard[open]>summary,
+#traderOkxTicket .erith-od-verdict[open]>summary {
+  list-style:disclosure-open inside;
+}
+#traderOkxTicket .erith-od-guard>summary::marker,
+#traderOkxTicket .erith-od-verdict>summary::marker {color:#ecc886;font-size:11px;}
+#traderOkxTicket .erith-od-guard>summary>strong {
+  color:#e8d7a9;
+  font-size:13px;
+  font-weight:800;
+  line-height:1.5;
+  display:inline;
+}
+#traderOkxTicket .erith-od-guard[data-level="warning"]>summary>strong{color:#ffd08c;}
+#traderOkxTicket .erith-od-guard[data-level="neutral"]>summary>strong{color:#aae5cf;}
+#traderOkxTicket .erith-od-guard>p {
+  border-top:1px solid #d5a66f3b;
+  padding-top:8px;
+  margin:9px 0 0;
+}
+#traderOkxTicket .erith-od-verdict>summary>strong {
+  color:#f4dfb4;
+  font-size:14px;
+  font-weight:850;
+  letter-spacing:.045em;
+  line-height:1.5;
+  display:inline;
+}
+#traderOkxTicket .erith-od-verdict>summary>small {
+  display:block;
+  color:#f0d5a6;
+  font-size:12px;
+  font-weight:650;
+  line-height:1.6;
+  margin:4px 0 0 16px;
+  overflow-wrap:anywhere;
+}
+#traderOkxTicket .erith-od-verdict>p:first-of-type{
+  border-top:1px solid #d6b77a66;
+  margin-top:10px;padding-top:10px;
+}
+#traderOkxTicket .erith-od-guard>summary:focus-visible,
+#traderOkxTicket .erith-od-verdict>summary:focus-visible{
+  outline:2px solid #ffe1a0;
+  outline-offset:3px;
+  border-radius:3px;
+}
+@media(prefers-reduced-motion:reduce){
+ #traderOkxTicket .erith-od-guard,
+ #traderOkxTicket .erith-od-verdict {transition:none}
+}
