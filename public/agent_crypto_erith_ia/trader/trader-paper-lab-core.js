@@ -7,11 +7,16 @@
 })(typeof globalThis!=="undefined"?globalThis:null,()=>{
 "use strict";
 const assets=Object.freeze(["BTC","CT"]);
+const spotSymbol=/^[A-Z0-9]{1,20}$/;
+const coingeckoId=/^[a-z0-9][a-z0-9-]{1,99}$/;
 const finite=n=>typeof n==="number"&&Number.isFinite(n);
 const range=(n,min,max)=>finite(n)&&n>=min&&n<=max;
 const reject=reason=>Object.freeze({ok:false,reason});
 function qualify(input,now=Date.now()){
-  if(!input||!assets.includes(input.asset))return reject("BTC ou CT uniquement");
+  const symbol=String(input?.asset||"");
+  const isMarketCoin=symbol!=="BTC"&&symbol!=="CT"&&spotSymbol.test(symbol);
+  if(!input||(symbol!=="BTC"&&symbol!=="CT"&&!isMarketCoin))
+    return reject("Symbole crypto absent ou invalide");
   if(input.currency!=="USD")return reject("Prix et devise USD non attestés");
   if(!Array.isArray(input.series)||input.series.length<21||input.series.length>2000)
     return reject("21 à 2000 points de source réelle nécessaires");
@@ -22,8 +27,13 @@ function qualify(input,now=Date.now()){
   const canonicalInstrument=String(input.instrument||"").toUpperCase().replace("/","-");
   if(input.asset==="CT" &&
      !(canonicalInstrument==="CT-USDT"&&input.provider==="okx"&&
-       /OKX.*CT[/\-]USDT/i.test(source)&&/USDT[/\-]USD.*CoinGecko/i.test(source)))
+       /OKX.*CT[/-]USDT/i.test(source)&&/USDT[/-]USD.*CoinGecko/i.test(source)))
     return reject("CT/USDT et conversion USDT/USD CoinGecko non démontrés");
+  const id=isMarketCoin?String(input.coinId||""):null;
+  if(isMarketCoin&&!(coingeckoId.test(id)&&input.provider==="coingecko"&&
+     canonicalInstrument===symbol+"-USD"&&/coingecko/i.test(source)&&
+     !/USDT|USDC|conversion|converti|proxy/i.test(source)))
+    return reject("Identité CoinGecko, paire directe USD ou fournisseur non vérifiés");
   let prev=0;
   for(const p of input.series){
     if(!Array.isArray(p)||p.length<2||!finite(p[0])||!finite(p[1])||p[0]<=prev||p[1]<=0)
@@ -33,10 +43,11 @@ function qualify(input,now=Date.now()){
   const age=now-prev;
   if(!finite(now)||age<0||age>15*60000)return reject("Cours différé ou horodatage non cohérent (15 min max)");
   const price=input.series[input.series.length-1][1];
-  return Object.freeze({ok:true,asset:input.asset,instrument:canonicalInstrument,
+  return Object.freeze({ok:true,asset:input.asset,coinId:id,instrument:canonicalInstrument,
     currency:"USD",provider:input.provider,source,points:input.series.length,
     lastAt:new Date(prev).toISOString(),capturedAt:new Date(now).toISOString(),
-    price,ageMs:age,sourceIdentity:input.provider+"|"+canonicalInstrument+"|USD"});
+    price,ageMs:age,sourceIdentity:input.provider+"|"+canonicalInstrument+"|USD"+
+      (isMarketCoin?"|"+id:"")});
 }
 function assess(config){
   const c=config||{};
@@ -85,6 +96,42 @@ function prospective(entry,current,config){
     paper:true,actualExecution:false,marketDepthChecked:false,
     minimumOrderChecked:false,realOrders:false});
 }
-return Object.freeze({qualify,assess,prospective,realOrders:false,storage:false,
+// Retrospective rolling example, NOT a signal, a backtested portfolio, or a live result.
+// All windows overlap. Each one is an independent hypothetical buy then sale.
+function historicalStudy(input,config,now=Date.now()){
+  const q=qualify(input,now);
+  if(!q.ok)return q;
+  const priceRows=input.series,holdMs=60*60000,maxGap=10*60000;
+  let j=1,win=0,loss=0;
+  const results=[];
+  for(let i=0;i<priceRows.length-1;i++){
+    const start=priceRows[i][0],target=start+holdMs;
+    if(j<=i)j=i+1;
+    while(j<priceRows.length&&priceRows[j][0]<target)j++;
+    if(j>=priceRows.length)break;
+    const elapsed=priceRows[j][0]-start;
+    if(elapsed>holdMs+maxGap)continue;
+    const plan=assess({...config,price:priceRows[i][1]});
+    if(!plan.ok)return plan;
+    const movePct=100*(priceRows[j][1]/priceRows[i][1]-1);
+    const r=plan.simulate(movePct);
+    results.push(r.profit);
+    if(r.profit>0)win++;
+    else if(r.profit<0)loss++;
+  }
+  if(results.length<10)return reject("Historique insuffisant pour une étude 1 h (au moins 10 fenêtres).");
+  const sorted=results.slice().sort((a,b)=>a-b);
+  const n=sorted.length,mid=Math.floor(n/2);
+  return Object.freeze({ok:true,asset:q.asset,sourceIdentity:q.sourceIdentity,
+    firstAt:new Date(priceRows[0][0]).toISOString(),lastAt:q.lastAt,
+    windows:n,profitable:win,losing:loss,profitablePct:100*win/n,
+    medianProfit:n%2?sorted[mid]:(sorted[mid-1]+sorted[mid])/2,
+    bestProfit:sorted[n-1],worstProfit:sorted[0],
+    avgProfit:results.reduce((a,b)=>a+b,0)/n,
+    capital:Number(config?.capital),holdMinutes:60,
+    overlapping:true,independentTrades:true,retrospective:true,
+    predictive:false,realOrders:false,feesProven:false});
+}
+return Object.freeze({qualify,assess,prospective,historicalStudy,realOrders:false,storage:false,
   fetch:false,readOnly:true,versionlessFiles:true});
 });
