@@ -9,7 +9,7 @@ const vm=require("node:vm");
 const root=path.resolve(__dirname,"..");
 const dir=__dirname;
 const read=name=>fs.readFileSync(path.join(dir,name),"utf8");
-const gitBlob=text=>crypto.createHash("sha1").update("blob "+Buffer.byteLength(text)+"\\0").update(text).digest("hex");
+const gitBlob=text=>crypto.createHash("sha1").update("blob "+Buffer.byteLength(text)).update(Buffer.from([0])).update(text).digest("hex");
 
 const canonical=Object.freeze({
  "strategy-comparator.js":"b38bb9bb611bf40918b372708737c109aa19dda5",
@@ -50,18 +50,18 @@ test("one shared Operator graph + preserved Yoann TRADUS + PAPER chain",()=>{
  const mirror=read("trader-runtime-mirror.js");
  const desk=read("trading-desk.html");
  const admin=fs.readFileSync(path.join(root,"administrator/index.html"),"utf8");
- assert.match(desk,/\\.\\.\\/administrator\\/index\\.html\\?surface=trader/);
- assert.match(admin,/\\.\\.\\/web\\/vault-data-router\\.js/);
- assert.match(mirror,/mountPublicPaper\\(\\)/);
+ assert.ok(desk.includes("../administrator/index.html?surface=trader"));
+ assert.ok(admin.includes("../web/vault-data-router.js"));
+ assert.ok(mirror.includes("mountPublicPaper();"));
  for(const file of ["strategy-comparator.js","spot-paper-order-engine.js",
   "trader-paper-decision-core.js","trader-order-entry-view.js","trader-paper-decision-view.js",
   "trader-order-entry.css","trader-tradus-readonly.js"]){
   assert.ok(mirror.includes(file),file);
  }
  assert.ok(mirror.indexOf('mountPublicPaper();')<mirror.indexOf('tradus.id="traderTradusReadOnlyScript"'));
- assert.match(mirror,/duplicated_chart_owner:false/);
- assert.match(mirror,/real_orders:false/);
- assert.match(mirror,/if\\(!doc\\.getElementById\\("traderYoannOperatorSection"\\)\\)/);
+ assert.ok(mirror.includes("duplicated_chart_owner:false"));
+ assert.ok(mirror.includes("real_orders:false"));
+ assert.ok(mirror.includes('if(!doc.getElementById("traderYoannOperatorSection"))'));
 });
 
 test("public MASTER data paths resolve, while private, external and writes do not",async()=>{
