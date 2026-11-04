@@ -117,6 +117,8 @@ def audit():
                 fromfile="OPERATOR/"+name,tofile="MASTER/"+name,n=3)))
             combined.append("\n")
     OUTPUT.mkdir(exist_ok=True)
+    (OUTPUT/"master_scanner_source_reference_app.js").write_bytes(upstream)
+    (OUTPUT/"operator_scanner_source_baseline_app.js").write_bytes(operator)
     (OUTPUT/"scanner_migration_matrix.json").write_text(
         json.dumps(report,indent=2,ensure_ascii=False),encoding="utf-8")
     (OUTPUT/"scanner_function_differences.patch").write_text(
