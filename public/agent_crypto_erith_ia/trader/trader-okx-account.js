@@ -837,11 +837,26 @@ async function submitInlineAuth(event){
   event.preventDefault();
   const input=q("secret"),button=q("connect");
   const secret=String(input?.value||"");
+  setSecretVisibility(false);
   if(button)button.disabled=true;
   text("authstatus","Connexion Aether Trust au Bridge…");
   try{await login(secret);if(input)input.value="";}
   catch(error){text("authstatus",shortError(error));}
   finally{if(button)button.disabled=false;}
+}
+
+/* Eye-only local display. Never persist, transmit, or log the password. */
+function setSecretVisibility(visible){
+  const input=q("secret"),button=q("reveal");
+  if(!input||!button)return;
+  const shown=visible===true;
+  input.type=shown?"text":"password";
+  const label=shown?"Masquer le mot de passe":"Afficher le mot de passe";
+  button.setAttribute("aria-label",label);
+  button.setAttribute("title",label);
+  button.setAttribute("aria-pressed",String(shown));
+  const slash=button.querySelector("[data-okx-eye-slash]");
+  if(slash)slash.hidden=!shown;
 }
 
 function bindCanonicalTrust(){
@@ -950,6 +965,12 @@ function mount(){
       "#traderOkxAccountPanel .okx-auth{display:grid;grid-template-columns:auto minmax(220px,1fr) auto;align-items:center;gap:8px;margin:8px 0 0;padding:8px 10px;border:1px solid rgba(255,201,103,.25);border-radius:10px;background:rgba(45,29,8,.25)}",
       "#traderOkxAccountPanel .okx-auth[hidden]{display:none!important}",
       "#traderOkxAccountPanel .okx-auth input{min-width:0;width:100%;height:34px;box-sizing:border-box}",
+      "#traderOkxAccountPanel .okx-secret-field{display:flex;min-width:0;align-items:center;gap:6px}",
+      "#traderOkxAccountPanel .okx-secret-field input{flex:1 1 auto}",
+      "#traderOkxAccountPanel .okx-auth .okx-secret-eye{display:grid;place-items:center;flex:0 0 38px;min-width:38px;height:34px;padding:0;border-color:rgba(83,222,222,.5);background:#0a2a38;color:#abecf5}",
+      "#traderOkxAccountPanel .okx-secret-eye svg{width:20px;height:20px;pointer-events:none}",
+      "#traderOkxAccountPanel .okx-secret-eye [hidden]{display:none}",
+      "#traderOkxAccountPanel .okx-secret-eye:focus-visible{outline:2px solid #58dede;outline-offset:2px}",
       "#traderOkxAccountPanel .okx-auth button{height:34px;white-space:nowrap}",
       "#traderOkxAccountPanel .okx-auth small{color:#d9c08d;white-space:nowrap}",
       "@media(max-width:1200px){#traderOkxAccountPanel .okx-primary{grid-template-columns:repeat(2,minmax(0,1fr))}#traderOkxAccountPanel .okx-position,#traderOkxAccountPanel .okx-activity{grid-template-columns:repeat(2,minmax(0,1fr))}}",
@@ -975,7 +996,7 @@ function mount(){
     '<article class="okx-card"><span>Historique Spot</span><b data-okx-history>—</b><small>Ordres Spot · 3 mois, hors achat PayPal</small></article>',
     '<article class="okx-card"><span>Exécutions Spot</span><b data-okx-fills>—</b><small>Transactions Spot · 3 mois, hors achat PayPal</small></article>',
     '<article class="okx-card"><span>Frais BTC-USDC</span><b data-okx-fees>—</b><small>tarification du compte</small></article>',
-    '</div><section class="okx-ledger" aria-label="Historique financier OKX en lecture seule"><div class="okx-ledger-head"><strong>HISTORIQUE DU COMPTE OKX</strong><button type="button" data-okx-ledgerrefresh>Actualiser l’historique</button></div><p role="status" data-okx-ledgerstatus>En attente de connexion.</p><div class="okx-ledger-summary" data-okx-ledgersummary hidden><strong data-okx-ledgersummarydate>—</strong><span data-okx-ledgersummaryeur>—</span><span>→</span><strong data-okx-ledgersummarybtc>—</strong><span>· Taux déduit : <b data-okx-ledgersummaryrate>—</b></span><small>Rapprochement indicatif des écritures OKX, pas une preuve du paiement externe ni du coût de toutes les acquisitions.</small></div><p data-okx-ledgerwarning></p><details class="okx-ledger-movements"><summary data-okx-ledgerdetailcount>Afficher les mouvements détaillés</summary><p class="okx-ledger-note">Chaque ligne correspond à une variation de solde, pas nécessairement à un achat distinct.</p><ul class="okx-ledger-results" data-okx-ledgerentries></ul></details><details class="okx-ledger-technical"><summary>Afficher les références et les sources OKX</summary><p data-okx-ledgercoverage>En attente de lecture.</p><ol data-okx-ledgerreferences></ol></details></section><form class="okx-auth" data-okx-auth hidden><small data-okx-authstatus>Aether Trust requis.</small><input data-okx-secret type="password" minlength="6" autocomplete="current-password" placeholder="Mot de passe Aether Trust"><button data-okx-connect type="submit">Connecter</button></form>',
+    '</div><section class="okx-ledger" aria-label="Historique financier OKX en lecture seule"><div class="okx-ledger-head"><strong>HISTORIQUE DU COMPTE OKX</strong><button type="button" data-okx-ledgerrefresh>Actualiser l’historique</button></div><p role="status" data-okx-ledgerstatus>En attente de connexion.</p><div class="okx-ledger-summary" data-okx-ledgersummary hidden><strong data-okx-ledgersummarydate>—</strong><span data-okx-ledgersummaryeur>—</span><span>→</span><strong data-okx-ledgersummarybtc>—</strong><span>· Taux déduit : <b data-okx-ledgersummaryrate>—</b></span><small>Rapprochement indicatif des écritures OKX, pas une preuve du paiement externe ni du coût de toutes les acquisitions.</small></div><p data-okx-ledgerwarning></p><details class="okx-ledger-movements"><summary data-okx-ledgerdetailcount>Afficher les mouvements détaillés</summary><p class="okx-ledger-note">Chaque ligne correspond à une variation de solde, pas nécessairement à un achat distinct.</p><ul class="okx-ledger-results" data-okx-ledgerentries></ul></details><details class="okx-ledger-technical"><summary>Afficher les références et les sources OKX</summary><p data-okx-ledgercoverage>En attente de lecture.</p><ol data-okx-ledgerreferences></ol></details></section><form class="okx-auth" data-okx-auth hidden><small data-okx-authstatus>Aether Trust requis.</small><span class="okx-secret-field"><input data-okx-secret type="password" minlength="6" autocomplete="current-password" placeholder="Mot de passe Aether Trust"><button type="button" data-okx-reveal class="okx-secret-eye" aria-label="Afficher le mot de passe" aria-pressed="false" title="Afficher le mot de passe"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="2.7"/><path data-okx-eye-slash d="M3 21 21 3" hidden/></svg></button></span><button data-okx-connect type="submit">Connecter</button></form>',
     '<div class="okx-foot"><b data-okx-bridge>Bridge local 8787 · OKX Private REST</b><span>Dernière lecture : <span data-okx-updated>—</span></span><button type="button" data-okx-refresh>Actualiser</button></div></div>'
   ].join("");
   const caseStudy=document.getElementById("traderOkbCaseStudy");
@@ -1019,6 +1040,7 @@ function mount(){
       if(button)button.disabled=false;
     }
   });
+  p.querySelector("[data-okx-reveal]")?.addEventListener("click",()=>setSecretVisibility(q("secret")?.type==="password"));
   p.querySelector("[data-okx-auth]")?.addEventListener("submit",submitInlineAuth);
   p.querySelector("[data-okx-refresh]")?.addEventListener("click",()=>void refresh({force:true}));
   p.querySelector("[data-okx-ledgerrefresh]")?.addEventListener("click",()=>void refreshLedger(true));
@@ -1026,7 +1048,7 @@ function mount(){
   bindCanonicalTrust();
   window.addEventListener("aether-trust:logout-requested",logoutBridge,{passive:true});
   window.addEventListener("pageshow",()=>{bindCanonicalTrust();if(p.open)void refresh({force:true});},{passive:true});
-  document.addEventListener("visibilitychange",()=>{if(!document.hidden&&p.open)void refresh();},{passive:true});
+  document.addEventListener("visibilitychange",()=>{if(document.hidden)setSecretVisibility(false);else if(p.open)void refresh();},{passive:true});
   clearInterval(timer);timer=setInterval(()=>{if(!document.hidden&&p.open&&token())void refresh();},AUTO_REFRESH_MS);
   void refresh({force:true});
   return true;
