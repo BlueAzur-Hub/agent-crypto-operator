@@ -21,16 +21,20 @@ function source(){
       currency:row.currency,source:row.source,series:row.series}};
   }
   const coin=safe(()=>globalThis.getSelectedCoin?.());
-  if(coin?.id!=="bitcoin"||String(coin.symbol||"").toUpperCase()!=="BTC")
-    return {reason:"Sélectionne BTC Solo 24h USD, ou CT dans Nouveaux listings."};
+  const coinId=String(coin?.id||"");
+  const symbol=String(coin?.symbol||"").toUpperCase();
+  if(!/^[a-z0-9][a-z0-9-]{1,99}$/.test(coinId)||!/^[A-Z0-9]{1,20}$/.test(symbol)||
+     symbol==="CT"||(symbol==="BTC"&&coinId!=="bitcoin"))
+    return {reason:"Sélectionne un actif Market Core en Solo 24h USD, ou CT dans Nouveaux listings."};
   const ch=safe(()=>typeof state!=="undefined"?state?.dataBroker?.chart:null);
-  if(ch?.status!=="ready"||ch.coinId!=="bitcoin"||ch.period!==1||
-     ch.contextKey!=="single:bitcoin:1:USD"||ch.result?.blocked)
-    return {reason:"BTC : série 24h USD du graphique non prête."};
+  if(ch?.status!=="ready"||ch.coinId!==coinId||ch.period!==1||
+     ch.contextKey!=="single:"+coinId+":1:USD"||ch.result?.blocked)
+    return {reason:symbol+" : graphique Solo 24h USD non prêt ou sélection différente."};
   const r=ch.result;
-  if(r.currency!=="USD"||!/coingecko/i.test(String(r.source||"")+" "+String(r.sourceFamily||"")))
-    return {reason:"BTC : série USD CoinGecko sans provenance suffisante."};
-  return {input:{asset:"BTC",instrument:"BTC-USD",provider:"coingecko",
+  if(r.currency!=="USD"||!/coingecko/i.test(String(r.source||"")+" "+String(r.sourceFamily||""))||
+     (r.coinId!==undefined&&r.coinId!==coinId))
+    return {reason:symbol+" : série USD CoinGecko directe sans provenance suffisante."};
+  return {input:{asset:symbol,coinId,instrument:symbol+"-USD",provider:"coingecko",
     currency:"USD",source:r.source,series:r.series}};
 }
 function assumptions(){

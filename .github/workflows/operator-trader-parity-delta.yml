@@ -35,12 +35,23 @@ jobs:
           persist-credentials: false
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /public/agent_crypto_erith_ia/administrator/app.js
             /public/agent_crypto_erith_ia/administrator/index.html
             /public/agent_crypto_erith_ia/administrator/build.json
             /public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js
             /public/agent_crypto_erith_ia/trader/build.json
             /public/agent_crypto_erith_ia/trader/trading-desk.html
             /public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js
+            /public/agent_crypto_erith_ia/trader/strategy-comparator.js
+            /public/agent_crypto_erith_ia/trader/spot-paper-order-engine.js
+            /public/agent_crypto_erith_ia/trader/trader-paper-decision-core.js
+            /public/agent_crypto_erith_ia/trader/trader-paper-decision-view.js
+            /public/agent_crypto_erith_ia/trader/trader-order-entry-view.js
+            /public/agent_crypto_erith_ia/trader/trader-order-entry.css
+            /public/agent_crypto_erith_ia/trader/trader-paper-lab-core.js
+            /public/agent_crypto_erith_ia/trader/trader-paper-lab-view.js
+            /public/agent_crypto_erith_ia/trader/test-master-public-parity.cjs
+            /public/agent_crypto_erith_ia/web/vault-data-router.js
             /public/agent_crypto_erith_ia/trader/technical-reading-data-sync.js
             /public/agent_crypto_erith_ia/trader/ai-asset-reading-core.js
             /public/agent_crypto_erith_ia/trader/ai-asset-reading-view.js
@@ -55,6 +66,14 @@ jobs:
           set -euo pipefail
           node --check public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js
           node --check public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js
+          for file in \
+            strategy-comparator.js spot-paper-order-engine.js \
+            trader-paper-decision-core.js trader-paper-decision-view.js \
+            trader-order-entry-view.js trader-paper-lab-core.js trader-paper-lab-view.js; do
+            node --check "public/agent_crypto_erith_ia/trader/$file"
+          done
+          node --check public/agent_crypto_erith_ia/web/vault-data-router.js
+          node --test public/agent_crypto_erith_ia/trader/test-master-public-parity.cjs
           node --check public/agent_crypto_erith_ia/trader/technical-reading-data-sync.js
           node - <<'NODE'
           const assert=require('node:assert/strict');
@@ -103,7 +122,7 @@ jobs:
           base=os.environ["BASE_SHA"]
           head=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
           modified=subprocess.check_output(["git","diff","--name-only","--diff-filter=ACMRT",base,head,"--","public/agent_crypto_erith_ia/"],text=True).splitlines()
-          modified=[p for p in modified if not (p.endswith(".test.mjs") or p.endswith(".test.js") or p.endswith(".test.cjs") or pathlib.Path(p).name.startswith("test-"))]
+          modified=[p for p in modified if not (p.endswith(".test.mjs") or p.endswith(".test.js") or p.endswith(".test.cjs") or pathlib.Path(p).name.startswith("test-") or pathlib.Path(p).name.startswith("test_"))]
           deleted=subprocess.check_output(["git","diff","--name-only","--diff-filter=D",base,head,"--","public/agent_crypto_erith_ia/"],text=True).strip()
           assert not deleted,deleted
           canonical=subprocess.check_output(["git","hash-object","public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js"],text=True).strip()
@@ -179,6 +198,43 @@ jobs:
             assert "38.15.11" in json.dumps(trader)
             assert trader["real_orders"] is False
             print("OPERATOR_CHART_CURRENCY_PARITY_SCOPE_PASS; ZIP owned by Phase C")
+            raise SystemExit(0)
+          # Whole, source-identical MASTER public PAPER readers plus the preserved
+          # Operator-specific TRADUS handoff. No historical six-file overwrite.
+          public_paper_paths=[
+            "public/agent_crypto_erith_ia/trader/strategy-comparator.js",
+            "public/agent_crypto_erith_ia/trader/spot-paper-order-engine.js",
+            "public/agent_crypto_erith_ia/trader/trader-paper-decision-core.js",
+            "public/agent_crypto_erith_ia/trader/trader-paper-decision-view.js",
+            "public/agent_crypto_erith_ia/trader/trader-order-entry-view.js",
+            "public/agent_crypto_erith_ia/trader/trader-order-entry.css",
+            "public/agent_crypto_erith_ia/trader/trader-paper-lab-core.js",
+            "public/agent_crypto_erith_ia/trader/trader-paper-lab-view.js",
+            "public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js"
+          ]
+          # Shared scanner runtime migrates once for both Operator and Trader.
+          # Require the exact pinned functional transplant plus PAPER scope.
+          integrated_scanner_paths=public_paper_paths+[
+            "public/agent_crypto_erith_ia/administrator/app.js"
+          ]
+          if sorted(modified)==sorted(integrated_scanner_paths):
+            scanner_blob=subprocess.check_output([
+                "git","hash-object",
+                "public/agent_crypto_erith_ia/administrator/app.js"
+              ],text=True).strip()
+            assert scanner_blob=="477c53766a0f412e59a99cf556c65928f4c51b08",scanner_blob
+            assert "mountPublicPaper();" in mirror
+            assert "trader-tradus-readonly.js" in mirror
+            assert trader["real_orders"] is False
+            print("OPERATOR_MASTER_SCANNER_AND_TRADER_DATA_PARITY_PASS; ZIP owned by Phase C")
+            raise SystemExit(0)
+          if sorted(modified)==sorted(public_paper_paths):
+            assert 'mountPublicPaper();' in mirror
+            assert 'trader-tradus-readonly.js' in mirror
+            assert 'trader-order-entry.css' in mirror
+            assert 'real_orders:false' in mirror
+            assert trader["real_orders"] is False
+            print("OPERATOR_CANONICAL_PUBLIC_PAPER_DATA_PARITY_PASS; ZIP owned by Phase C")
             raise SystemExit(0)
           assert sorted(modified)==sorted(rootpaths),(modified,rootpaths)
           folder=pathlib.Path("operator_trader_delta")

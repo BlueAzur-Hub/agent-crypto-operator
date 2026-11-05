@@ -91,6 +91,14 @@ function mount(){
       }
     }
   }
+  // MASTER read-only PAPER ticket style, scoped to the Trader iframe only.
+  if(!doc.getElementById("traderOrderEntryStyle")){
+    const sheet=doc.createElement("link");
+    sheet.id="traderOrderEntryStyle";
+    sheet.rel="stylesheet";
+    sheet.href=new URL("../trader/trader-order-entry.css",doc.baseURI).href;
+    doc.head.appendChild(sheet);
+  }
   // Trader-only read surfaces mounted inside the SAME Administrator runtime.
   // No duplicated market/chart owner and no real order route.
   if(!doc.getElementById("traderOkxAccountScript")){
@@ -165,6 +173,27 @@ function mount(){
       view.onerror=()=>{
         if(status){status.textContent="Vue laboratoire PAPER indisponible";status.dataset.state="error";}
       };
+      // MASTER parity: augment the existing PAPER lab, never replace the Yoann slot.
+      // The reports are public and lazily fetched by their canonical readers.
+      const mountPublicPaper=()=>{
+        const add=(id,file,next)=>{
+          if(doc.getElementById(id)){next?.();return;}
+          const part=doc.createElement("script");
+          part.id=id;
+          part.src=new URL("../trader/"+file,doc.baseURI).href;
+          part.onload=()=>next?.();
+          part.onerror=()=>{
+            if(status){status.textContent="Lecture PAPER publique indisponible";status.dataset.state="error";}
+          };
+          doc.head.appendChild(part);
+        };
+        add("traderStrategyComparatorScript","strategy-comparator.js");
+        const decisionView=()=>add("traderPaperDecisionViewScript","trader-paper-decision-view.js");
+        const orderEntry=()=>add("traderOrderEntryViewScript","trader-order-entry-view.js",decisionView);
+        const decisionCore=()=>add("traderPaperDecisionCoreScript","trader-paper-decision-core.js",orderEntry);
+        if(win.AgentCryptoSpotPaperOrders)decisionCore();
+        else add("traderSpotPaperOrdersReadScript","spot-paper-order-engine.js",decisionCore);
+      };
       // The Yoann handoff slot is mounted by the PAPER view. Never load TRADUS
       // ahead of that slot or inject a navigation entry into Market/Graphique.
       view.onload=()=>{
@@ -172,6 +201,7 @@ function mount(){
           if(status){status.textContent="Zone Operator Yoann introuvable";status.dataset.state="error";}
           return;
         }
+        mountPublicPaper();
         if(doc.getElementById("traderTradusReadOnlyScript"))return;
         const tradus=doc.createElement("script");
         tradus.id="traderTradusReadOnlyScript";
