@@ -15,7 +15,7 @@ ROOT_REL="public/agent_crypto_erith_ia/administrator/app.js"
 MASTER_COMMIT="9b48648f2b36f643065993e65abec9243153df7c"
 MASTER_BLOB="55014b47dc2afea639403357bf1b1413a793a1ec"
 OPERATOR_BLOB="4e3936a40165a5db4a2e4f2426fc2521e487fe3c"
-APPLIED_BLOB="477c53766a0f412e59a99cf556c65928f4c51b08"
+APPLIED_BLOB="4db2a0bd85439fe079e55206040b64575f915c06"
 MASTER_URL=("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/"+
             MASTER_COMMIT+"/"+ROOT_REL)
 OUTPUT=ROOT/"phase_c_firefox_evidence"
