@@ -39,6 +39,10 @@ jobs:
             /public/agent_crypto_erith_ia/administrator/index.html
             /public/agent_crypto_erith_ia/administrator/build.json
             /public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js
+            /public/agent_crypto_erith_ia/administrator/js/market-microscope-candles.js
+            /public/agent_crypto_erith_ia/administrator/js/market-microscope-strategy-options.js
+            /public/agent_crypto_erith_ia/administrator/js/market-microscope-paper-backtest-v5.js
+            /public/agent_crypto_erith_ia/administrator/js/market-microscope-orderbook-paper-v6.js
             /public/agent_crypto_erith_ia/trader/build.json
             /public/agent_crypto_erith_ia/trader/trading-desk.html
             /public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js
