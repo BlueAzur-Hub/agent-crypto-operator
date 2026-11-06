@@ -146,6 +146,24 @@ def state_snapshot(page):
         seriesText:el("atlasChartInsightOverlaySeries"),
         summary:el("atlasChartInsightOverlaySummary"),
         selectedAsset:el("selectedAssetTitle"),
+        comparison:(() => {
+          try {
+            const b = (typeof state !== "undefined" && state?.dataBroker?.comparison) || {};
+            return {
+              preset:b.preset||null,status:b.status||null,
+              ids:[...(b.ids||[])].slice(0,10),
+              renderedIds:[...(b.renderedIds||[])].slice(0,10),
+              unavailableIds:[...(b.unavailableIds||[])].slice(0,10),
+              histories:Object.entries(b.results||{}).slice(0,10).map(([id,r])=>({
+                id,source:String(r?.source||"").slice(0,115),
+                quoteCurrency:String(r?.quoteCurrency||r?.currency||"UNKNOWN").slice(0,10),
+                points:Array.isArray(r?.series)?r.series.length:0,
+                first:Number(r?.series?.[0]?.[0]||0),
+                last:Number(r?.series?.at?.(-1)?.[0]||0)
+              }))
+            };
+          } catch(e) {return {error:String(e).slice(0,130)};}
+        })(),
         shell:!!document.getElementById("marketSnapshotPanel"),
         canvas:!!document.getElementById("mainChart"),
         marketRows:document.querySelectorAll("#marketRows tr").length
@@ -169,7 +187,8 @@ def persist():
         cols = ("quote", "period", "mode", "status", "reason", "mode_control",
                 "period_control", "selected_quote", "active_mode", "active_period",
                 "response_count", "responses_ok", "responses_429",
-                "source_evidence", "view_title", "view_selected_asset")
+                "source_evidence", "view_title", "view_selected_asset",
+                "scanner_state", "comparison_proof")
         writer = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
@@ -259,7 +278,8 @@ try:
                         "mode_control":"", "period_control":"", "selected_quote":"",
                         "active_mode":"", "active_period":"", "response_count":0,
                         "responses_ok":0, "responses_429":0,
-                        "source_evidence":"", "view_title":"", "view_selected_asset":""
+                        "source_evidence":"", "view_title":"", "view_selected_asset":"",
+                        "scanner_state":"", "comparison_proof":""
                     }
                     before = len(requests_observed)
                     if not quote_available:
@@ -274,9 +294,24 @@ try:
                             else:
                                 period_control.click(force=True,timeout=7500)
                                 mode_control.click(force=True,timeout=7500)
-                                # Give bounded opportunity for public data to arrive, not a fake wait-for-success.
-                                page.wait_for_timeout(2100 if mode in ("Top 3","Top 5") else 1200)
+                                # Scanner movers become "active" ONLY on an atomic
+                                # five-history commit; pending is a supported state.
+                                # One controlled long probe per quote distinguishes
+                                # true completion/failure from a too-fast click check.
+                                if mode == "Hausses 5" and label == "24 h":
+                                    try:
+                                        page.wait_for_function(
+                                            """css => {const b=document.querySelector(css);
+                                            return !!b && (b.classList.contains('active')
+                                              || ['committed','failed'].includes(b.dataset.scannerState));}""",
+                                            arg=mode_src, timeout=18000)
+                                    except Exception:
+                                        pass
+                                else:
+                                    page.wait_for_timeout(2100 if mode in ("Top 3","Top 5") else 1200)
                                 snap=state_snapshot(page)
+                                case["scanner_state"]=mode_control.get_attribute("data-scanner-state") or ""
+                                case["comparison_proof"]=json.dumps(snap["comparison"],ensure_ascii=False)[:2200]
                                 case["selected_quote"]=snap["quote"] or ""
                                 case["active_mode"]=json.dumps(snap["activeMode"],ensure_ascii=False)[:230]
                                 case["active_period"]=json.dumps(snap["activePeriod"],ensure_ascii=False)[:130]
@@ -305,8 +340,14 @@ try:
                                         "No qualifying historical chart or market rows; never label this as a passed market test")
                                 elif not active_period:
                                     case["status"],case["reason"]="FAIL_UI","Selected period not active"
+                                elif not active_mode and case["scanner_state"] in ("waiting-direct","warming","running"):
+                                    case["status"],case["reason"]="SCANNER_PENDING",(
+                                        "Five historical series not committed; previous chart intentionally retained")
+                                elif not active_mode and case["scanner_state"] == "failed":
+                                    case["status"],case["reason"]="SCANNER_FAILED",(
+                                        "Scanner explicitly rejected/failed this transaction; inspect Market and source availability")
                                 elif not active_mode:
-                                    case["status"],case["reason"]="FAIL_UI","Selected scanner not active"
+                                    case["status"],case["reason"]="FAIL_UI","Scanner inactive without a pending/failed state"
                                 else:
                                     # A UI control transition does NOT demonstrate full history or provenance.
                                     case["status"],case["reason"]="UI_OK_SOURCE_UNVERIFIED",(
