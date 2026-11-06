@@ -127,6 +127,32 @@ jobs:
           assert not deleted,deleted
           canonical=subprocess.check_output(["git","hash-object","public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js"],text=True).strip()
           assert canonical=="aa2bbdc4f6473c949a1864b13c077fb63e694281",canonical
+          # Dedicated shared microscope migration: 5 application files, never
+          # pretend it is the historical six-file Trader delivery. The separate
+          # V4-V6 workflow owns syntax, deterministic maths and UI wiring.
+          microscope_paths=[
+            "public/agent_crypto_erith_ia/administrator/index.html",
+            "public/agent_crypto_erith_ia/administrator/js/market-microscope-candles.js",
+            "public/agent_crypto_erith_ia/administrator/js/market-microscope-strategy-options.js",
+            "public/agent_crypto_erith_ia/administrator/js/market-microscope-paper-backtest-v5.js",
+            "public/agent_crypto_erith_ia/administrator/js/market-microscope-orderbook-paper-v6.js"
+          ]
+          if sorted(modified)==sorted(microscope_paths):
+            expected={
+              "market-microscope-candles.js":"c07c9e78dba9d081832991ce71e8796cf22e6add",
+              "market-microscope-strategy-options.js":"b862de85562cab4873f2d46a099a62db1da93204",
+              "market-microscope-paper-backtest-v5.js":"70b3807ba635e58776333c563ac0bda7452b1dee",
+              "market-microscope-orderbook-paper-v6.js":"7ae813cd1268ddd657052cc1e2ca474e8b1aed3b",
+            }
+            for name,sha in expected.items():
+              path=root/"administrator/js"/name
+              assert subprocess.check_output(["git","hash-object",str(path)],text=True).strip()==sha,name
+              assert index.count("./js/"+name)==1,name
+            assert "operator-microscope-ema-v4-20261106" in index
+            assert "TECH_PANEL_UNAVAILABLE" in (root/"administrator/js/market-microscope-orderbook-paper-v6.js").read_text()
+            assert trader["real_orders"] is False
+            print("OPERATOR_SHARED_MICROSCOPE_V4_V5_V6_SCOPE_PASS; tests owned by dedicated workflow and Firefox Phase C")
+            raise SystemExit(0)
           # Preserve the exact historic six-file parity release contract.
           # New TRADUS-only candidates are checked here but packaged solely by
           # the Operator Phase C Firefox differential workflow (one ZIP owner).
