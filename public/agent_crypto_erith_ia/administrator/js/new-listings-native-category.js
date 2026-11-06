@@ -1541,16 +1541,21 @@
     button.insertAdjacentElement("afterend",tab);
     // Persistent documentary route: research survives moves outside the Market Top 1000.
     // No extra table, network poll, chart ownership or Market ranking modification.
+    // MASTER owns the public documentary library; Operator keeps only the link.
+    const PUBLIC_FOLLOWED_DOSSIERS_URL="https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/laboratoire/crypto-knowledge.html#veille-fil-crypto";
     let dossierLink=document.getElementById("atlasCryptoFollowedDossiersLink");
     if(!dossierLink){
       dossierLink=document.createElement("a");
       dossierLink.id="atlasCryptoFollowedDossiersLink";
       dossierLink.className="filter-btn";
       dossierLink.textContent="Dossiers suivis ↗";
-      dossierLink.href=new URL("../laboratoire/crypto-knowledge.html#veille-fil-crypto",document.baseURI).href;
-      dossierLink.setAttribute("aria-label","Consulter les dossiers suivis, y compris hors Top 1000");
       tab.insertAdjacentElement("afterend",dossierLink);
     }
+    // Reconcile both freshly created and reused anchors after page remount.
+    dossierLink.href=PUBLIC_FOLLOWED_DOSSIERS_URL;
+    dossierLink.target="_blank";
+    dossierLink.rel="noopener noreferrer";
+    dossierLink.setAttribute("aria-label","Ouvrir les dossiers suivis publics du MASTER dans un nouvel onglet");
     const view=document.createElement("section");
     view.id="atlasRadarMarketView";
     view.hidden=true;
