@@ -74,6 +74,13 @@ def classify_request(req):
         return True, "LOCAL_READ_ONLY"
     if is_public_host(parsed.hostname) and parsed.scheme == "https":
         return True, "PUBLIC_PROVIDER"
+    # Public presentation dependencies; never grant a private API or a POST.
+    if parsed.scheme == "https" and parsed.hostname == "cdn.jsdelivr.net" and parsed.path.startswith("/npm/chart.js@"):
+        return True, "PUBLIC_CHART_LIBRARY"
+    if parsed.scheme == "https" and parsed.hostname == "raw.githubusercontent.com" and (
+            parsed.path.startswith("/BlueAzur-Hub/erith-ia-memory/main/") or
+            parsed.path.startswith("/BlueAzur-Hub/agent-crypto-operator/main/")):
+        return True, "PROJECT_PUBLIC_STATIC"
     return False, "NOT_ALLOWLISTED"
 
 def response_seen(response):
@@ -285,8 +292,17 @@ try:
                                 id_mode=mode_control.get_attribute("id") or ""
                                 active_mode=any(x.get("id")==id_mode and id_mode
                                                 for x in snap["activeMode"])
+                                no_data = (
+                                    snap["marketRows"] <= 1 and
+                                    ("aucune courbe valide" in snap["summary"].lower() or
+                                     "première série réelle" in snap["seriesText"].lower() or
+                                     "aucun actif sélectionné" in snap["selectedAsset"].lower())
+                                )
                                 if snap["quote"] != quote:
                                     case["status"],case["reason"]="FAIL_QUOTE","Displayed currency did not match selected toggle"
+                                elif no_data:
+                                    case["status"],case["reason"]="BLOCKED_MARKET_DATA",(
+                                        "No qualifying historical chart or market rows; never label this as a passed market test")
                                 elif not active_period:
                                     case["status"],case["reason"]="FAIL_UI","Selected period not active"
                                 elif not active_mode:
