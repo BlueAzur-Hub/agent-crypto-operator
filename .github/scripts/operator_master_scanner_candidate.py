@@ -17,6 +17,7 @@ FILES={
  "master":"55014b47dc2afea639403357bf1b1413a793a1ec",
  "operator":"4e3936a40165a5db4a2e4f2426fc2521e487fe3c",
  "integrated":"477c53766a0f412e59a99cf556c65928f4c51b08",
+ "integrated_b3_b5":"4db2a0bd85439fe079e55206040b64575f915c06",
 }
 # Eight existing owners are replaced ONLY from the canonical MASTER source.
 REPLACE=[
@@ -47,13 +48,13 @@ def main():
     mraw=MASTER.read_bytes()
     oraw=OPERATOR.read_bytes()
     operator_blob=git_sha(oraw)
-    if git_sha(mraw)!=FILES["master"] or operator_blob not in (FILES["operator"],FILES["integrated"]):
+    if git_sha(mraw)!=FILES["master"] or operator_blob not in (FILES["operator"],FILES["integrated"],FILES["integrated_b3_b5"]):
         raise ValueError("Pinned source blob changed — no integration")
     if ROOT_APP.read_bytes()!=oraw:
         raise ValueError("Operator app.js checkout differs from audited baseline")
     master=mraw.decode("utf-8")
     original=oraw.decode("utf-8")
-    if operator_blob==FILES["integrated"]:
+    if operator_blob in (FILES["integrated"],FILES["integrated_b3_b5"]):
         for name in REPLACE+INSERT:
             if function(original,name)!=function(master,name):
                 raise ValueError("Previously integrated owner differs from MASTER: "+name)
