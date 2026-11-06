@@ -1,4 +1,4 @@
-name: Operator scanner 84 read-only acceptance matrix
+name: Operator scanner 84 stable read-only observations
 
 on:
   pull_request:
@@ -12,35 +12,102 @@ permissions:
   contents: read
 
 jobs:
-  scanner-84:
+  verify:
+    name: Verify audit classifier and scanner regressions
     runs-on: ubuntu-latest
-    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - name: Verify read-only audit script syntax
-        run: python -m py_compile .github/scripts/operator_scanner_84_acceptance.py
-      - name: Confirm source baseline and scanner regression
+      - name: Check syntax and reject false source certificates
         run: |
+          python -m py_compile .github/scripts/operator_scanner_84_acceptance.py
+          python .github/scripts/operator_scanner_84_acceptance.py --self-test
           node --check public/agent_crypto_erith_ia/administrator/app.js
           node --test public/agent_crypto_erith_ia/tools/test_scanner_full_window.cjs
           node --test public/agent_crypto_erith_ia/tools/test_scanner_native_usd_reuse.cjs
           node --test public/agent_crypto_erith_ia/tools/test_operator_history_quote_cache.test.cjs
+
+  observe:
+    name: Observe ${{ matrix.mode }} ${{ matrix.quote }} until terminal state
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [solo, rank-3, rank-5, gainers, losers, volume]
+        quote: [USD, EUR]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
       - name: Install Firefox automation
         run: |
           python -m pip install --disable-pip-version-check playwright==1.55.0
           python -m playwright install --with-deps firefox
-      - name: Execute 84 real UI combinations with public read-only sources
-        run: python .github/scripts/operator_scanner_84_acceptance.py
-      - name: Upload complete per-case evidence, even on failure
+      - name: Record seven isolated transactions; completion is not data certification
+        env:
+          TESTED_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+          AUDIT_MODE: ${{ matrix.mode }}
+          AUDIT_QUOTE: ${{ matrix.quote }}
+        run: python .github/scripts/operator_scanner_84_acceptance.py --mode "$AUDIT_MODE" --quote "$AUDIT_QUOTE" --deadline 180
+      - name: Preserve every observation, including source rejection and timeout
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: operator-scanner-84-readonly-evidence
+          name: operator-scanner84-${{ matrix.mode }}-${{ matrix.quote }}
           path: operator_scanner_84_evidence/
           retention-days: 30
-          if-no-files-found: warn
+          if-no-files-found: error
+
+  summarize:
+    name: Publish actual certification count separately from runner completion
+    needs: observe
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: operator-scanner84-*
+          path: evidence
+      - name: Consolidate 84 observations without turning unavailable sources into passes
+        run: |
+          python - <<'PY'
+          import csv, json, os
+          from collections import Counter
+          from pathlib import Path
+          reports=[json.loads(p.read_text()) for p in Path('evidence').glob('*/cases.json')]
+          cases=[c for r in reports for c in r['cases']]
+          statuses=Counter(c['status'] for c in cases)
+          keys={(c['mode'],c['quote'],c['period']) for c in cases}
+          out=Path('consolidated');out.mkdir()
+          report={'cases':cases,'statuses':dict(statuses),'observed':len(keys),'expected':84,
+                  'certified':statuses['PASS_HISTORY_EVIDENCED'],
+                  'runtime_sha256':sorted({r['runtime_sha256'] for r in reports}),
+                  'tested_commits':sorted({r['tested_commit'] for r in reports})}
+          (out/'operator_scanner_84_stable.json').write_text(json.dumps(report,indent=2,ensure_ascii=False))
+          with (out/'operator_scanner_84_stable.csv').open('w',newline='') as f:
+              w=csv.DictWriter(f,fieldnames=['mode','quote','period','status','reason','elapsed_seconds','expected_ids'],extrasaction='ignore')
+              w.writeheader();w.writerows(cases)
+          text=f'# Scanner audit: {len(keys)}/84 observed, {statuses["PASS_HISTORY_EVIDENCED"]}/84 evidenced\n\n'
+          text+='Workflow success means observations were collected; it does not certify unavailable histories.\n\n'
+          text+='| Status | Cases |\n|---|---:|\n'+''.join(f'| {k} | {v} |\n' for k,v in sorted(statuses.items()))
+          text+='\nEach case used a fresh Firefox context, with up to 180 seconds after selection. MAX certifies observed bounds only.\n'
+          (out/'README.md').write_text(text)
+          Path(os.environ['GITHUB_STEP_SUMMARY']).write_text(text)
+          print(text)
+          assert len(keys)==84 and len(cases)==84, 'Audit incomplete or duplicate cases; inspect per-job evidence'
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: operator-scanner-84-stable-consolidated
+          path: consolidated/
+          retention-days: 30
+          if-no-files-found: error
