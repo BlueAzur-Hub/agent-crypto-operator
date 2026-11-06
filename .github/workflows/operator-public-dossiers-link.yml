@@ -1,0 +1,29 @@
+name: Operator public followed-dossiers navigation
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "public/agent_crypto_erith_ia/administrator/js/new-listings-native-category.js"
+      - "public/agent_crypto_erith_ia/administrator/tests/test-operator-dossiers-link.cjs"
+      - ".github/workflows/operator-public-dossiers-link.yml"
+  push:
+    branches: [main]
+    paths:
+      - "public/agent_crypto_erith_ia/administrator/js/new-listings-native-category.js"
+      - "public/agent_crypto_erith_ia/administrator/tests/test-operator-dossiers-link.cjs"
+      - ".github/workflows/operator-public-dossiers-link.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  dossier-link-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify syntax
+        run: |
+          node --check public/agent_crypto_erith_ia/administrator/js/new-listings-native-category.js
+          node --check public/agent_crypto_erith_ia/administrator/tests/test-operator-dossiers-link.cjs
+      - name: Verify shared Operator/Trader link behavior
+        run: node public/agent_crypto_erith_ia/administrator/tests/test-operator-dossiers-link.cjs
