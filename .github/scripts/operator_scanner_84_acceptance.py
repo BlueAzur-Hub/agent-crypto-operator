@@ -37,7 +37,7 @@ PERIODS = (
     ("60 j", "60", ("60j", "60 j")),
     ("90 j", "90", ("90j", "90 j")),
     ("1 an", "365", ("1an", "1 an", "1y", "365j", "365 j")),
-    ("Max", "max", ("max", "maximum"))
+    ("Max", "36500", ("Max ?", "max", "maximum"))
 )
 QUOTES = ("USD", "EUR")
 ALLOWED_PUBLIC_HOSTS = (
