@@ -51123,7 +51123,34 @@ function atlasVerifiedReferenceHistoryCache(coin, period, currency = "EUR", sour
 async function atlasFetchComparisonSeriesResilient(coin, period, options = {}) {
   const signal = options.signal || null;
 
-  // Build 38.15.11 forensic route:
+  // B1: own USD comparisons before the legacy Binance/Bridge EUR routes.
+  // This is shared by the Operator Interface and Trader (same app.js owner).
+  if (atlasChartDisplayCurrency() === "USD") {
+    const cached = atlasGetStoredChartResult(coin, period, "coingecko", "USD");
+    const certified = result => atlasHistoricalDisplayQuote(result).currency === "USD";
+    if (certified(cached) && !atlasChartNeedsRefresh(cached, period))
+      return { coin, result: cached, attempts: 0, source: "coingecko-usd-native-cache" };
+    try {
+      await atlasRespectComparisonRequestSpacing(signal, period);
+      const result = await atlasFetchChartDirectForFamily(coin, period, "coingecko", {
+        signal, timeoutMs: ATLAS_COMPARISON_DIRECT_TIMEOUT_MS
+      });
+      if (!certified(result)) throw new Error("Historique CoinGecko USD non certifié");
+      atlasStoreChartResult(coin, period, result, "coingecko");
+      return { coin, result, attempts: 1, source: "coingecko-usd-native-direct" };
+    } catch (error) {
+      if (atlasComparisonAbortError(error)) throw error;
+      // Never revive an old/stale EUR history or an outdated USD cache.
+      return { coin, result: {
+        series: [], blocked: true, currency: "USD", quoteCurrency: "USD",
+        sourceFamily: "coingecko", sourceMode: "coingecko-direct",
+        reason: "Historique CoinGecko USD natif indisponible.",
+        technicalReason: String(error?.message || error || "source indisponible")
+      }, attempts: 1, source: "coingecko-usd-native-unavailable" };
+    }
+  }
+
+    // Build 38.15.11 forensic route:
   // Target Top 5 + 24h must prove the raw historical source before any cache,
   // Bridge or CoinGecko fallback can influence the picture. Renderer, Base100,
   // workspace and Atlas remain untouched.
