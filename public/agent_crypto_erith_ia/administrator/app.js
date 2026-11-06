@@ -4731,9 +4731,10 @@ function atlasCryptoCanvasGradient(ctx, coin, fallbackIndex = 0, width = 980) {
 function atlasExpectedChartContextKey(ids = atlasComparisonIds(), period = Number(state.chartPeriodDays || 1)) {
   const normalizedIds = Array.isArray(ids) ? ids.filter(Boolean).slice(0, ATLAS_COMPARISON_MAX_SERIES) : [];
   const days = Number(period || 1);
-  if (!normalizedIds.length) return `empty:${days}`;
-  if (normalizedIds.length === 1) return `single:${normalizedIds[0]}:${days}`;
-  return `comparison:${normalizedIds.join(",")}:${days}`;
+  const quote = atlasChartDisplayCurrency();
+  if (!normalizedIds.length) return `empty:${days}:${quote}`;
+  if (normalizedIds.length === 1) return `single:${normalizedIds[0]}:${days}:${quote}`;
+  return `comparison:${normalizedIds.join(",")}:${days}:${quote}`;
 }
 
 function atlasChartContextMatches(chart = state.dataBroker?.chart) {
@@ -4753,14 +4754,29 @@ function atlasChartContextStatus() {
   };
 }
 
+/* Canonical named baskets carry stable identities, not market-cap slots.
+   Manual and scanner selections remain independent, including V7 restore. */
+function atlasCanonicalPresetSelection(preset, ids, selected = null) {
+  const kind = String(preset || "");
+  if (kind !== "rank-5" && kind !== "rank-3") {
+    return { ids: Array.isArray(ids) ? [...ids] : [], selected };
+  }
+  const canonical = atlasCuratedTopIds(kind === "rank-3" ? 3 : 5);
+  return { ids: canonical, selected: canonical[0] };
+}
+
 function atlasComparisonIds() {
   const validIds = new Set((state.coins || []).map(coin => coin.id));
+  const preset = String(state.dataBroker?.comparison?.preset || "");
   const raw = Array.isArray(state.dataBroker?.comparison?.ids) ? state.dataBroker.comparison.ids : [];
+  const locked = atlasCanonicalPresetSelection(preset, raw, state.selectedCoinId);
   const ids = [];
-  for (const id of raw) {
+  for (const id of locked.ids) {
     if (validIds.has(id) && !ids.includes(id)) ids.push(id);
   }
   if (state.graphSelectionCleared && !ids.length) return [];
+  // The selected market must never inject USDT or change the order of a locked preset.
+  if (preset === "rank-5" || preset === "rank-3") return ids;
   const primary = validIds.has(state.selectedCoinId) ? state.selectedCoinId : ids[0] || null;
   if (primary && !ids.includes(primary)) ids.unshift(primary);
   return ids.slice(0, ATLAS_COMPARISON_MAX_SERIES);
@@ -5553,7 +5569,7 @@ const ATLAS_CHART_SELECTION_AUTO_RETRIES = 3;
 const ATLAS_CHART_SELECTION_RETRY_DELAYS_MS = [15000, 45000, 120000];
 
 const ATLAS_CHART_RULES = Object.freeze({
-  1: Object.freeze({ minPoints: 20, minCoverageHours: 20, refreshMs: ATLAS_CHART_BACKGROUND_REFRESH_MS, delayedMs: 6 * 60 * 60 * 1000, archiveMs: 7 * 24 * 60 * 60 * 1000 }),
+  1: Object.freeze({ minPoints: 20, minCoverageHours: 23.5, refreshMs: ATLAS_CHART_BACKGROUND_REFRESH_MS, delayedMs: 6 * 60 * 60 * 1000, archiveMs: 7 * 24 * 60 * 60 * 1000 }),
   7: Object.freeze({ minPoints: 40, minCoverageHours: 132, refreshMs: ATLAS_CHART_BACKGROUND_REFRESH_MS, delayedMs: 24 * 60 * 60 * 1000, archiveMs: 14 * 24 * 60 * 60 * 1000 }),
   30: Object.freeze({ minPoints: 100, minCoverageHours: 600, refreshMs: ATLAS_CHART_BACKGROUND_REFRESH_MS, delayedMs: 72 * 60 * 60 * 1000, archiveMs: 60 * 24 * 60 * 60 * 1000 }),
   60: Object.freeze({ minPoints: 120, minCoverageHours: 1200, refreshMs: 15 * 60 * 1000, delayedMs: 5 * 24 * 60 * 60 * 1000, archiveMs: 120 * 24 * 60 * 60 * 1000 }),
@@ -11917,7 +11933,11 @@ function atlasInitOracleV0() {
 queueMicrotask(() => { try { atlasInitOracleV0(); } catch (_) {} });
 
 function atlasComparisonResultFingerprint(entries, period) {
-  return `${Number(period || 1)}|${entries.map(entry => `${entry.coin.id}:${atlasChartResultFingerprint(entry.result)}`).join("|")}`;
+  // Rebuild metadata even when two series have identical point prices.
+  return `${Number(period || 1)}|${entries.map(entry => {
+    const quote = atlasHistoricalDisplayQuote(entry.result);
+    return `${entry.coin.id}:${atlasChartResultFingerprint(entry.result)}:${quote.currency || "?"}:${quote.source}`;
+  }).join("|")}`;
 }
 
 function atlasComparisonCurveChange(entry) {
@@ -11967,14 +11987,25 @@ function atlasComparisonMaximumPoints(period) {
 
 function atlasDownsampleNativeComparisonRows(rows, maximumPoints) {
   const source = Array.isArray(rows) ? rows : [];
-  const limit = Math.max(32, Number(maximumPoints || 640));
+  const limit = Math.max(32, Math.floor(Number(maximumPoints || 640)));
   if (source.length <= limit) return source;
-  const stride = Math.max(1, Math.ceil((source.length - 2) / Math.max(1, limit - 2)));
-  return source.filter((_, index) =>
-    index === 0
-    || index === source.length - 1
-    || index % stride === 0
-  );
+  // Preserve the actual high and low of each time bucket, plus endpoints.
+  // Sampling by stride could erase a real peak even on a 24h chart.
+  const interior = source.length - 2;
+  const pairBudget = Math.max(1, Math.floor((limit - 2) / 2));
+  const bucketSize = Math.ceil(interior / pairBudget);
+  const selected = [source[0]];
+  for (let start = 1; start < source.length - 1; start += bucketSize) {
+    const end = Math.min(source.length - 1, start + bucketSize);
+    let min = start, max = start;
+    for (let i = start + 1; i < end; i += 1) {
+      if (Number(source[i].price) < Number(source[min].price)) min = i;
+      if (Number(source[i].price) > Number(source[max].price)) max = i;
+    }
+    for (const i of [...new Set([min, max])].sort((a, b) => a - b)) selected.push(source[i]);
+  }
+  selected.push(source[source.length - 1]);
+  return selected;
 }
 
 function atlasBuildNativeComparisonTimeline(entries, maximumPoints = 720) {
@@ -12003,6 +12034,76 @@ function atlasBuildAlignedComparisonEntries(entries, period) {
 
   if (!prepared.length) return [];
 
+  // Hausses/Baisses/Volumes 24h: one immutable target window per scanner click.
+  // Compare only observed EUR samples inside that window. NEVER interpolate a
+  // missing quote, backfill from another coin, or turn USD into EUR.
+  // This SAME path applies to 4/5 and 5/5: obtaining a fifth history must not
+  // redefine the Base 100 of the first four histories.
+  const scannerNative = Number(period) === 1 && prepared.every(e =>
+    e.atlasScannerVerified24h === true
+    && Number.isFinite(Number(e.atlasScannerWindowEnd))
+    && Math.abs(Number(e.atlasScannerWindowEnd)
+      - Number(prepared[0].atlasScannerWindowEnd)) < 1000
+  );
+  // A scanner basket is never a manual comparison. Falling back to manual
+  // overlap when one entry loses its 24h-window proof silently re-bases the
+  // first four curves when the fifth arrives. Require one certified clock
+  // for every scanner entry; partial sets are diagnosed by the caller.
+  const scannerMarked = Number(period) === 1 && prepared.some(e =>
+    Object.prototype.hasOwnProperty.call(e, "atlasScannerVerified24h")
+    || Object.prototype.hasOwnProperty.call(e, "atlasScannerWindowEnd")
+  );
+  if (scannerMarked && !scannerNative) return [];
+  if (scannerNative) {
+    const targetEnd = Number(prepared[0].atlasScannerWindowEnd);
+    const targetStart = targetEnd - 24 * 3600000;
+    const plotted = prepared.map(e => {
+      const rowsInWindow = e.rows.filter(row =>
+        Number(row.t) >= targetStart && Number(row.t) <= targetEnd
+      );
+      // An actual observation at/before targetStart is a valid as-of anchor.
+      // 40.6.646 discarded it, then treated a later hourly tick (up to 90m
+      // after the target) as if the five histories shared a baseline clock.
+      // Direct 1d responses without a preceding tick may use their earliest
+      // post-start native sample, but the exact offset is explicitly disclosed.
+      const hourly = e.result?.atlasNativeEurTwoDay?.cadence === "hourly-native"
+        && e.result?.atlasNativeEurTwoDay?.nativeCurrency === "EUR";
+      const maxAnchorAge = hourly ? 90 * 60000 : 12 * 60000;
+      const before = e.rows.filter(row => row.t <= targetStart).at(-1);
+      const after = rowsInWindow[0];
+      const anchoredBefore = before && targetStart - before.t <= maxAnchorAge;
+      const anchor = anchoredBefore ? before : after;
+      const anchorDirection = anchoredBefore ? "as-of-before" : "first-after";
+      if (!anchor || rowsInWindow.length < minimum
+        || (anchorDirection === "first-after" && anchor.t - targetStart > maxAnchorAge)) return null;
+      const sampledRows = atlasDownsampleNativeComparisonRows(rowsInWindow, maximumPoints);
+      const first = Number(anchor.price);
+      if (!Number.isFinite(first) || first <= 0) return null;
+      const data = sampledRows.map(r => ({
+        x: r.t, y: r.price / first * 100, rawPrice: r.price
+      })).filter(r => Number.isFinite(r.x) && Number.isFinite(r.y)
+        && Number.isFinite(r.rawPrice) && r.rawPrice > 0);
+      if (data.length < minimum) return null;
+      return {
+        ...e, rows: sampledRows, first, data,
+        baselineTargetAt: targetStart,
+        baselineObservedAt: anchor.t,
+        baselineOffsetMs: anchor.t - targetStart,
+        baselineAnchorDirection: anchorDirection,
+        baselineAnchorQuality: anchorDirection === "as-of-before" ? "NATIVE_AS_OF" : "NATIVE_FIRST_AFTER",
+        baselineNativeCadence: hourly ? "1h" : "native-1d",
+        nativePointCount: rowsInWindow.length,
+        sampledPointCount: data.length, missingPointCount: 0
+      };
+    });
+    // Fail closed: no partial or fabricated output from this transformer.
+    if (plotted.some(item => !item)) return [];
+    const alignedTimeline = atlasBuildNativeComparisonTimeline(plotted, maximumPoints);
+    return plotted.map(e => ({ ...e, alignedTimeline }));
+  }
+
+  // Non-scanner/manual comparisons preserve the established common-overlap
+  // route. This correction is scoped to the authenticated 24h scanner route.
   const commonStart = Math.max(...prepared.map(entry => entry.rows[0].t));
   const commonEnd = Math.min(...prepared.map(entry => entry.rows[entry.rows.length - 1].t));
   if (!Number.isFinite(commonStart) || !Number.isFinite(commonEnd) || commonEnd <= commonStart) return [];
@@ -12025,24 +12126,18 @@ function atlasBuildAlignedComparisonEntries(entries, period) {
     );
     if (data.length < minimum) return null;
     return {
-      ...entry,
-      rows: sampledRows,
-      first,
-      data,
+      ...entry, rows: sampledRows, first, data,
       nativePointCount: overlapRows.length,
-      sampledPointCount: data.length,
-      missingPointCount: 0
+      sampledPointCount: data.length, missingPointCount: 0
     };
   }).filter(Boolean);
 
   if (!nativeEntries.length) return [];
   const nativeTimeline = atlasBuildNativeComparisonTimeline(nativeEntries, maximumPoints);
   return nativeEntries.map(entry => ({
-    ...entry,
-    alignedTimeline: nativeTimeline
+    ...entry, alignedTimeline: nativeTimeline
   }));
 }
-
 function atlasBuildBestAlignedComparisonEntries(entries, period, targetCount = ATLAS_COMPARISON_MAX_SERIES) {
   const source = Array.isArray(entries) ? entries.filter(Boolean).slice(0, ATLAS_COMPARISON_MAX_SERIES) : [];
   const maximum = Math.min(Math.max(1, Number(targetCount || source.length)), source.length);
@@ -14608,6 +14703,11 @@ function atlasWorkspaceStoredChartResult(coin, period) {
 }
 
 function atlasWorkspaceRestoreCachedGraph(ids, period, preset) {
+  const requestedCurrency = atlasRequestedHistoricalCurrency();
+  const verifiedStored = coin => {
+    const result = atlasWorkspaceStoredChartResult(coin, period);
+    return result && atlasHistoricalDisplayQuote(result).currency === requestedCurrency ? result : null;
+  };
   // Never render the retained Market/BTC cache when V7 says CT is active.
   // Restore CT directly via its existing OKX native listing owner.
   if (atlasTraderCtSelectionOwnsView()) return false;
@@ -14618,7 +14718,7 @@ function atlasWorkspaceRestoreCachedGraph(ids, period, preset) {
 
   if (coins.length === 1) {
     const coin = coins[0];
-    const result = atlasWorkspaceStoredChartResult(coin, period);
+    const result = verifiedStored(coin);
     if (!result?.series?.length) return false;
     const chartKey = atlasExpectedChartContextKey([coin.id], period);
     state.selectedCoinId = coin.id;
@@ -14630,7 +14730,7 @@ function atlasWorkspaceRestoreCachedGraph(ids, period, preset) {
   }
 
   const rawEntries = coins.map(coin => {
-    const result = atlasWorkspaceStoredChartResult(coin, period);
+    const result = verifiedStored(coin);
     if (!result?.series?.length) return null;
     const scannerPreset = ATLAS_SCANNER_PRESETS.has(preset);
     const metric = scannerPreset ? atlasScannerMarketMetric(preset, coin, period) : undefined;
@@ -14651,7 +14751,8 @@ function atlasWorkspaceRestoreCachedGraph(ids, period, preset) {
     ? atlasBuildAlignedComparisonEntries(rawEntries, period)
     : atlasBuildBestAlignedComparisonEntries(rawEntries, period, coins.length))
     .sort((a, b) => ids.indexOf(a.coin.id) - ids.indexOf(b.coin.id));
-  if (!aligned.length || (strictWorkspacePreset && aligned.length !== coins.length)) return false;
+  if (!aligned.length || (strictWorkspacePreset && aligned.length !== coins.length)
+    || atlasComparisonCertifiedCurrency(aligned) !== requestedCurrency) return false;
 
   const chartKey = atlasExpectedChartContextKey(ids, period);
   const latestTimestamp = Math.max(...aligned.map(entry => Number(entry.result?.integrity?.metrics?.lastTimestamp || 0)));
@@ -14661,7 +14762,7 @@ function atlasWorkspaceRestoreCachedGraph(ids, period, preset) {
     entries: aligned,
     periodDays: period,
     sourceMode: "comparison-base100",
-    source: `${atlasChartProviderLabel({ comparison: true, entries: aligned })} · historiques EUR · Base 100`
+    source: atlasComparisonSourceDescription(aligned)
   };
 
   const alignedIds = aligned.map(entry => entry.coin.id);

@@ -60,10 +60,22 @@ jobs:
         run: |
           node --check public/agent_crypto_erith_ia/administrator/app.js
           node --test public/agent_crypto_erith_ia/tools/test_operator_history_quote_cache.test.cjs
+      - name: Choose pinned baseline audit or integrated scanner tests
+        id: scanner-scope
+        run: |
+          SHA="$(git hash-object public/agent_crypto_erith_ia/administrator/app.js)"
+          if test "$SHA" = "4db2a0bd85439fe079e55206040b64575f915c06"; then
+            echo "pinned=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "pinned=false" >> "$GITHUB_OUTPUT"
+            echo "Updated Operator app.js: run direct regression tests on the checked-out branch."
+          fi
       - name: Document pinned MASTER scanner differences without code replacement
+        if: steps.scanner-scope.outputs.pinned == 'true'
         run: |
           python .github/scripts/operator_master_scanner_migration.py
       - name: Validate exact MASTER scanner candidate without committing it
+        if: steps.scanner-scope.outputs.pinned == 'true'
         run: |
           set -euo pipefail
           python .github/scripts/operator_master_scanner_candidate.py
@@ -76,6 +88,12 @@ jobs:
           node --test public/agent_crypto_erith_ia/tools/test_scanner_native_usd_reuse.cjs
           node --test public/agent_crypto_erith_ia/tools/test_operator_history_quote_cache.test.cjs
           python .github/scripts/operator_phase_c_firefox.py
+      - name: Validate changed Operator scanner directly, preserving read-only rules
+        if: steps.scanner-scope.outputs.pinned == 'false'
+        run: |
+          node --test public/agent_crypto_erith_ia/tools/test_scanner_full_window.cjs
+          node --test public/agent_crypto_erith_ia/tools/test_scanner_native_usd_reuse.cjs
+          node --test public/agent_crypto_erith_ia/tools/test_operator_history_quote_cache.test.cjs
       - name: Firefox read-only Operator and Trader branch smoke
         run: python .github/scripts/operator_phase_c_firefox.py
       - name: Preserve Firefox screenshots and diagnostics
@@ -125,6 +143,8 @@ jobs:
             ARCHIVE="AGENT_CRYPTO_OPERATOR_YOANN_TRADER_SEVEN_BTC_USD_TECHNICAL_READING_READONLY_INCREMENTAL_UPDATE_2026_11_03.zip"
           elif grep -q market-fiche-native.js phase_c_candidate/FILES_CHANGED.txt; then
             ARCHIVE="AGENT_CRYPTO_OPERATOR_YOANN_TRADER_MARKET_FACTS_NEW_LISTINGS_IDENTITY_INCREMENTAL_UPDATE_2026_11_03.zip"
+          elif grep -q 'administrator/app.js' phase_c_candidate/FILES_CHANGED.txt && grep -q 'trader-paper-lab-view.js' phase_c_candidate/FILES_CHANGED.txt; then
+            ARCHIVE="AGENT_CRYPTO_OPERATOR_ADMINISTRATOR_TRADER_MASTER_MIRROR_INCREMENTAL_UPDATE.zip"
           else
             ARCHIVE="AGENT_CRYPTO_OPERATOR_YOANN_TRADER_TRADUS_SHADOW_PAPER_READONLY_INCREMENTAL_UPDATE_2026_11_03.zip"
           fi

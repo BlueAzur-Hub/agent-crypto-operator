@@ -1,0 +1,30 @@
+name: Operator Master mirror parity
+
+on:
+  pull_request:
+    paths:
+      - public/agent_crypto_erith_ia/administrator/app.js
+      - public/agent_crypto_erith_ia/trader/**
+      - .github/scripts/operator_master_mirror_guard.cjs
+      - .github/workflows/operator_master_mirror_parity.yml
+  workflow_dispatch:
+
+jobs:
+  mirror-contract:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check shared script syntax
+        run: |
+          node --check public/agent_crypto_erith_ia/administrator/app.js
+          node --check public/agent_crypto_erith_ia/trader/trader-paper-lab-view.js
+          node --check .github/scripts/operator_master_mirror_guard.cjs
+      - name: Verify shared mirror and Yoann boundaries
+        run: node .github/scripts/operator_master_mirror_guard.cjs
+      - name: Run Trader regression checks
+        run: |
+          node public/agent_crypto_erith_ia/trader/test-paper-lab.cjs
+          node public/agent_crypto_erith_ia/trader/test-master-public-parity.cjs
+          node public/agent_crypto_erith_ia/trader/test-tradus-readonly.cjs

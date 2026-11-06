@@ -266,6 +266,24 @@ jobs:
             assert trader["real_orders"] is False
             print("OPERATOR_CANONICAL_PUBLIC_PAPER_DATA_PARITY_PASS; ZIP owned by Phase C")
             raise SystemExit(0)
+          # The Administrator mirror + Trader PAPER view is a distinct two-file
+          # functional parity change. Keep the original six-file contract above
+          # untouched, while checking this integration by its dedicated workflow.
+          shared_mirror_paths=[
+            "public/agent_crypto_erith_ia/administrator/app.js",
+            "public/agent_crypto_erith_ia/trader/trader-paper-lab-view.js"
+          ]
+          if sorted(modified)==sorted(shared_mirror_paths):
+            app=(root/"administrator/app.js").read_text()
+            paper=(root/"trader/trader-paper-lab-view.js").read_text()
+            assert "function atlasCanonicalPresetSelection(" in app
+            assert "atlasComparisonCertifiedCurrency(aligned) !== requestedCurrency" in app
+            assert "function studyNow()" in paper and "function watchTick()" in paper
+            assert "traderYoannOperatorSection" in paper
+            assert "trader-tradus-readonly.js" in mirror
+            assert trader["real_orders"] is False
+            print("OPERATOR_MASTER_MIRROR_AND_PAPER_SCOPE_PASS; full guard owned by dedicated workflow")
+            raise SystemExit(0)
           assert sorted(modified)==sorted(rootpaths),(modified,rootpaths)
           folder=pathlib.Path("operator_trader_delta")
           folder.mkdir(exist_ok=True)
