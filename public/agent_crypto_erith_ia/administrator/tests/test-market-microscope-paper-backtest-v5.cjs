@@ -27,5 +27,42 @@
   test("mismatched V4 signal denied",()=>assert.equal(run(snapshot,{...cross,events:[{...events[1],price:120}]}).code,"SIGNAL_INVALID"));
   test("invalid costs denied",()=>assert.equal(run(snapshot,cross,{initialCapital:1000,feePercent:-1,slippagePercent:0}).code,"INVALID_SETTINGS"));
   test("future candles cannot affect earlier completed trade",()=>{const s={...snapshot,rows:rows.map((r,i)=>i>16?{...r,o:r.o+100,h:r.h+100,l:r.l+100,c:r.c+100}:r)};const x={...cross,events:events.filter(e=>e.index<=15)};assert.equal(run(s,x).ok,true);assert.ok(Math.abs(run(s,x).closedTrades[0].pnl-run(snapshot,x).closedTrades[0].pnl)<1e-9);});
+
+  test("Buy & Hold uses exactly the EMA warm-up date and final closed candle",()=>{
+    const r=run(),c=r.comparison,fee=1.001,slipIn=1.0005,slipOut=.9995,feeOut=.999;
+    const start=rows[5].o,end=rows.at(-1).c;
+    const final=(1000/(start*slipIn*fee))*end*slipOut*feeOut;
+    assert.equal(c.startAt,rows[5].t);assert.equal(c.endAt,rows.at(-1).t);
+    assert.ok(Math.abs(c.holdFinal-final)<1e-8);assert.equal(c.orders,0);
+    assert.equal(c.read_only,true);assert.equal(c.quote,"USDC");
+  });
+  test("EMA liquidation comparison includes open position but keeps V5 realized PnL",()=>{
+    const r=run(),c=r.comparison;
+    assert.equal(c.emaHasOpenPosition,true);
+    assert.ok(Math.abs(c.emaFinal-r.openPosition.quantity*rows.at(-1).c*.9995*.999)<1e-8);
+    assert.ok(Math.abs(r.closedNetPnL-r.closedTrades.reduce((s,t)=>s+t.pnl,0))<1e-8);
+    assert.ok(Math.abs(c.advantage-(c.emaFinal-c.holdFinal))<1e-8);
+  });
+  test("No EMA signals leaves original capital in cash, compared with buy and hold",()=>{
+    const r=run(snapshot,{...cross,events:[]});
+    assert.equal(r.ok,true);assert.equal(r.closedNetPnL,0);
+    assert.equal(r.comparison.emaFinal,1000);assert.equal(r.comparison.emaHasOpenPosition,false);
+    assert.ok(r.comparison.holdFinal>0);
+  });
+  test("Forming final candle is excluded from both comparison methods",()=>{
+    const modified={...snapshot,rows:[...rows.slice(0,-1),{...rows.at(-1),c:99,h:100,l:98,confirm:"0"}]};
+    const r=run(modified),c=r.comparison;
+    assert.equal(r.ok,true);assert.equal(r.excludedFormingBars,1);
+    assert.equal(c.endAt,rows.at(-2).t);
+    assert.equal(c.holdFinal,1000/(rows[5].o*1.0005*1.001)*rows.at(-2).c*.9995*.999);
+  });
+  test("Flat candles without costs make Buy & Hold exactly neutral",()=>{
+    const data=rows.map(r=>({...r,o:10,h:11,l:9,c:10}));
+    const s={...snapshot,rows:data};
+    const c={...cross,events:[]};
+    const result=run(s,c,{initialCapital:1000,feePercent:0,slippagePercent:0});
+    assert.equal(result.ok,true);assert.equal(result.comparison.holdFinal,1000);
+    assert.equal(result.comparison.emaFinal,1000);
+  });
   process.stdout.write(count+"/"+count+" focused tests PASS\n");
 })();
