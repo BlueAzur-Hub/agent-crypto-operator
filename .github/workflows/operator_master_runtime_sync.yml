@@ -1,0 +1,109 @@
+name: Operator single-source MASTER runtime sync
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/scripts/operator_master_runtime_sync.py"
+      - ".github/workflows/operator_master_runtime_sync.yml"
+      - "public/agent_crypto_erith_ia/administrator/**"
+      - "public/agent_crypto_erith_ia/trader/**"
+  workflow_dispatch:
+  schedule:
+    - cron: "17 6 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: operator-master-runtime-sync-${{ github.event_name }}
+  cancel-in-progress: false
+
+jobs:
+  verify-candidate:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read public MASTER without checking out its giant archive
+        shell: bash
+        run: |
+          git clone --quiet --depth=1 --filter=blob:none --no-checkout \
+            https://github.com/BlueAzur-Hub/erith-ia-memory.git \
+            "$RUNNER_TEMP/operator-master-source"
+      - name: Verify candidate runtime parity and protected role boundary
+        run: |
+          python3 .github/scripts/operator_master_runtime_sync.py \
+            --master "$RUNNER_TEMP/operator-master-source" --check
+          test -s public/agent_crypto_erith_ia/administrator/js/yohan-operator-profile.js
+          test -s public/agent_crypto_erith_ia/administrator/js/yohan-operator-bridge-client.js
+          test -s public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js
+          test -s public/agent_crypto_erith_ia/trader/trader-tradus-readonly.js
+          test -s public/agent_crypto_erith_ia/web/vault-data-router.js
+          node --check public/agent_crypto_erith_ia/administrator/app.js
+          node --check public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js
+          node --check public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js
+          node public/agent_crypto_erith_ia/trader/test-tradus-readonly.cjs
+          node public/agent_crypto_erith_ia/trader/test-master-public-parity.cjs
+      - name: Refuse role and runtime regressions before approval
+        run: |
+          node public/agent_crypto_erith_ia/administrator/tests/test-operator-dossiers-link.cjs
+          node --test public/agent_crypto_erith_ia/tools/test_operator_history_quote_cache.test.cjs
+          node --test .github/scripts/operator_phase_b_compat.test.cjs
+          node .github/scripts/operator_master_mirror_guard.cjs
+
+  propose-master-updates:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Read the latest public MASTER (no private files or archives)
+        shell: bash
+        run: |
+          git clone --quiet --depth=1 --filter=blob:none --no-checkout \
+            https://github.com/BlueAzur-Hub/erith-ia-memory.git \
+            "$RUNNER_TEMP/operator-master-source"
+      - name: Apply only public runtime changes, keeping Yoann layers intact
+        run: |
+          python3 .github/scripts/operator_master_runtime_sync.py \
+            --master "$RUNNER_TEMP/operator-master-source" --apply
+          python3 .github/scripts/operator_master_runtime_sync.py \
+            --master "$RUNNER_TEMP/operator-master-source" --check
+          node --check public/agent_crypto_erith_ia/administrator/app.js
+          node --check public/agent_crypto_erith_ia/trader/ai-ct-panel.js
+          node --check public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js
+          node public/agent_crypto_erith_ia/trader/test-tradus-readonly.cjs
+          node public/agent_crypto_erith_ia/administrator/tests/test-operator-dossiers-link.cjs
+          node --test public/agent_crypto_erith_ia/tools/test_operator_history_quote_cache.test.cjs
+          node --test .github/scripts/operator_phase_b_compat.test.cjs
+          node .github/scripts/operator_master_mirror_guard.cjs
+      - name: Open or update one reviewable PR; never push directly to main
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/master-runtime-sync
+          base: main
+          delete-branch: false
+          draft: true
+          title: "Sync Operator public runtime from Administrator MASTER"
+          commit-message: "Sync Operator public runtime from MASTER"
+          add-paths: |
+            public/agent_crypto_erith_ia/administrator
+            public/agent_crypto_erith_ia/trader
+          body: |
+            Automatic public application-code candidate from BlueAzur-Hub/erith-ia-memory.
+            The Master is the source of truth. No manual function-by-function porting.
+            Operator-owned Yohan profile, local Bridge, account boundaries, Trader runtime
+            and TRADUS are excluded. Public data stays on the Master via the vault router.
+            No private data, real orders, archives, or automatic merge.
+            Review CI, Firefox results and build metadata before approval.

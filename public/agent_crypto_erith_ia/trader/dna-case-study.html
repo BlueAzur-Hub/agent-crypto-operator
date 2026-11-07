@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>ERITH.IA · Dossier DNA · IA et humain · Trader</title>
+<meta name="description" content="Étude de cas DNA/USDT Spot Bitget, protocole PAPER 48h, relevés et décisions vérifiables. Aucun ordre réel.">
+<link rel="alternate" type="application/json" title="Archive canonique DNA PAPER" href="https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/trader_flux/dna_paper/state.json">
+<style>
+:root{color-scheme:dark;--bg:#07121d;--panel:#112632;--line:#305566;--ink:#edf8fb;--muted:#acc6d0;--cyan:#79e3e9;--amber:#ffe0a0;--red:#ffa3ac;--green:#8cf3ca}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 system-ui,"Segoe UI",sans-serif}
+main{max-width:980px;margin:auto;padding:clamp(14px,3vw,30px)}a{color:var(--cyan)}a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+h1{font-size:clamp(23px,3vw,32px);margin:3px 0}h2{font-size:17px;margin:0 0 9px}h3{font-size:15px;margin:0 0 6px}p{margin:6px 0}.kicker{color:var(--cyan);font-size:11px;letter-spacing:.11em;font-weight:800;text-transform:uppercase}
+.muted,small{color:var(--muted)}.panel{background:var(--panel);border:1px solid var(--line);border-radius:13px;margin:13px 0;padding:16px;min-width:0}
+.note{border-left:3px solid var(--amber);padding:8px 12px;background:#2c271d;color:#ffe7be}.warn{color:var(--red)}.good{color:var(--green)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.tile{border:1px solid var(--line);border-radius:9px;background:#0b1e2b;padding:10px;min-width:0}
+.tile b{font-size:18px;font-variant-numeric:tabular-nums}.tile span{display:block;color:var(--muted);font-size:11px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}th,td{text-align:left;padding:9px 7px;border-bottom:1px solid var(--line)}th{color:var(--cyan)}.scroll{overflow:auto}
+dl{display:grid;grid-template-columns:minmax(110px,160px) 1fr;gap:6px 12px;margin:0}dt{color:var(--muted)}dd{margin:0;overflow-wrap:anywhere}
+details{margin:12px 0}summary{cursor:pointer;font-weight:750;color:var(--cyan);padding:5px 0}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#071723;padding:12px;border-radius:8px;border:1px solid var(--line);font-size:11px}
+footer{margin:20px 0;color:var(--muted);font-size:12px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}dl{grid-template-columns:1fr}th,td{font-size:12px;padding:7px 5px}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<p class="kicker">ERITH.IA · Trader · Atlas / Aerith-7 · Dossier documentaire</p>
+<h1>Cas d'école DNA · NeoSoul</h1>
+<p><strong>Bitget DNA/USDT Spot</strong> · observation PAPER 48 heures · entrée et sortie fictives · lecture humaine et IA.</p>
+<p class="note">Aucun ordre réel. Aucune connexion OKX privée. Le Futures <strong>DNAUSD UM X-Perp</strong> est un instrument distinct qui n'est pas analysé comme s'il s'agissait du Spot Bitget.</p>
+</header>
+<section class="panel" aria-labelledby="status-title">
+<h2 id="status-title">1 · Vérité et provenance</h2>
+<dl>
+<dt>Identité</dt><dd>NeoSoul (DNA) · BNB Chain · contrat 0xA991F61940095AEA0724ef54077223B048c5CF7b</dd>
+<dt>Marché mesuré</dt><dd>Bitget <code>DNAUSDT</code> · catégorie SPOT · cotation USDT</dd>
+<dt>Portefeuilles</dt><dd>10, 25 et 100 USDC <strong>fictifs</strong> · conversion USDC/USDT au carnet</dd>
+<dt>État de l'étude</dt><dd id="case-status" role="status" aria-live="polite">Chargement des observations publiques…</dd>
+<dt>Premier relevé</dt><dd id="case-start">—</dd>
+<dt>Fin théorique minimale</dt><dd id="case-end">—</dd>
+<dt>Dernier relevé</dt><dd id="case-last">—</dd>
+<dt>Fraîcheur</dt><dd id="case-age">—</dd>
+</dl>
+</section>
+<section class="panel" aria-labelledby="overview-title">
+<h2 id="overview-title">2 · Ce que montrent les carnets</h2>
+<div class="grid">
+<div class="tile"><span>Meilleur bid Spot observé</span><b id="case-bid">—</b><span>USDT par DNA</span></div>
+<div class="tile"><span>Meilleur ask Spot observé</span><b id="case-ask">—</b><span>USDT par DNA</span></div>
+<div class="tile"><span>Spread observé</span><b id="case-spread">—</b><span>Instantané, pas prix garanti</span></div>
+</div>
+<h3 style="margin-top:15px">Performance PAPER par portefeuille</h3>
+<div class="scroll"><table><thead><tr><th>Capital fictif</th><th>Dernière valorisation</th><th>Meilleur relevé</th><th>Première alerte</th></tr></thead><tbody id="case-portfolios"><tr><td colspan="4">Chargement…</td></tr></tbody></table></div>
+<p class="muted">Les P&amp;L sont des valorisations de liquidation fictive au carnet après frais hypothétiques. Les meilleures observations ne démontrent pas qu'une sortie réelle aurait été exécutable.</p>
+</section>
+<section class="panel" aria-labelledby="decision-title">
+<h2 id="decision-title">3 · Discernement · entrée, sortie, abstention</h2>
+<p id="case-decision">L'étude PAPER n'émet jamais d'ordre.</p>
+<p id="case-threshold">Seuils pédagogiques : alerte perte −3 %, alerte gain +1 %. Un seuil franchi entre deux relevés ne garantit aucune exécution à ce niveau.</p>
+<p class="note">Conclusion d'architecture : <strong>aucun signal Futures exécutable</strong> tant que les données du contrat OKX (carnet, frais, financement, taille minimale, mark price et risque de liquidation) ne sont pas étudiées séparément.</p>
+</section>
+<section class="panel" aria-labelledby="log-title">
+<h2 id="log-title">4 · Journal des relevés vérifiés</h2>
+<p class="muted">Instants horodatés provenant du même fichier canonique, aucune interpolation ni bougie reconstruite.</p>
+<div class="scroll"><table><thead><tr><th>Heure Paris</th><th>Bid USDT</th><th>Ask USDT</th><th>Spread</th><th>P&amp;L 10 USDC</th></tr></thead><tbody id="case-observations"><tr><td colspan="5">Chargement…</td></tr></tbody></table></div>
+</section>
+<section class="panel" aria-labelledby="sources-title">
+<h2 id="sources-title">5 · Coffre et dossier machine</h2>
+<p>Une IA peut lire directement la <a href="https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/trader_flux/dna_paper/state.json">source structurée JSON</a> et les règles de calcul. Cette page en propose une lecture humaine ; elle ne crée aucune deuxième base de données.</p>
+<p><a href="../laboratoire/dna-paper.html">Laboratoire PAPER complet</a> · <a href="../laboratoire/cas-ecole-neosoul-dna.md">Protocole scientifique</a> · <a href="../laboratoire/dna-decision-review.js">Moteur d'analyse rétrospective</a> · <a href="https://www.bitget.com/support/articles/12560603897627" rel="noopener noreferrer" target="_blank">Annonce Bitget (origine du listing)</a></p>
+<details><summary>Contrat de lecture IA (copiable)</summary><pre id="case-machine">En attente des données vérifiées.</pre></details>
+</section>
+<footer>ERITH.IA · Seven Heaven · PAPER seulement · source Spot Bitget publique. La recherche n'est pas une instruction d'investissement.</footer>
+</main>
+<script src="../laboratoire/dna-decision-review.js"></script>
+<script>
+(()=>{"use strict";
+const $=id=>document.getElementById(id);
+const fmt=(v,d=5)=>typeof v==="number"&&Number.isFinite(v)?v.toLocaleString("fr-FR",{minimumFractionDigits:Math.min(2,d),maximumFractionDigits:d}):"indisponible";
+const when=s=>s?new Date(s).toLocaleString("fr-FR",{timeZone:"Europe/Paris",dateStyle:"short",timeStyle:"short"}):"—";
+const el=(t,value)=>{const n=document.createElement(t);n.textContent=String(value);return n;};
+function rows(id,all,empty){const target=$(id);target.replaceChildren();if(!all.length){const tr=el("tr",""),td=el("td",empty);td.colSpan=id==="case-portfolios"?4:5;tr.append(td);target.append(tr);return;}for(const values of all){const tr=document.createElement("tr");for(const value of values)tr.append(el("td",value));target.append(tr);}}
+function render(s){
+ if(!globalThis.ErithDnaReview?.study)throw Error("Moteur PAPER indisponible");
+ const r=globalThis.ErithDnaReview.study(s),obs=s.observations||[],latest=obs.at(-1);
+ const age=latest?(Date.now()-Date.parse(latest.observed_at))/3600000:null;
+ $("case-status").textContent=({waiting_source:"En attente de données",open:"En cours",close_pending:"Clôture en attente",complete:"Étude terminée"})[s.status]||"Statut non reconnu";
+ $("case-start").textContent=when(s.started_at);$("case-end").textContent=when(s.ends_not_before);$("case-last").textContent=when(s.last_observed_at);
+ $("case-age").textContent=age===null?"Pas de relevé":age<0?"Horodatage futur : vérifier":age>6?"Ancien relevé ("+fmt(age,1)+" h)":"Relevé récent ("+fmt(age,1)+" h)";
+ $("case-bid").textContent=fmt(latest?.dna_bid,8);
+ $("case-ask").textContent=fmt(latest?.dna_ask,8);
+ $("case-spread").textContent=latest?fmt(latest.dna_spread_pct,3)+" %":"—";
+ rows("case-portfolios",r.portfolios.map(p=>[
+   p.capital_usdc+" USDC",p.last===null?"non valorisé":fmt(p.last,2)+" %",
+   p.best?fmt(p.best.pnl_pct,2)+" % ("+when(p.best.at)+")":"—",
+   p.first_threshold?(p.first_threshold.kind==="loss"?"Perte ":"Gain ")+fmt(p.first_threshold.observed_pct,2)+" % ("+when(p.first_threshold.at)+")":"Aucune"
+ ]),"Aucun portefeuille validé");
+ rows("case-observations",obs.slice(-24).reverse().map(o=>[when(o.observed_at),fmt(o.dna_bid,8),fmt(o.dna_ask,8),fmt(o.dna_spread_pct,3)+" %",o.scenarios?.[0]?.status==="valued"?fmt(o.scenarios[0].pnl_pct,2)+" %":"non valorisé"]),"Aucune observation");
+ $("case-decision").textContent=r.candidate_spot_timestamps.length?"Tendance Spot à étudier sur certains relevés ; volume et continuité insuffisants. Aucun ordre.":"Aucune entrée suffisamment documentée par ces relevés espacés. Maintenir la lecture seule.";
+ const safe={schema:r.schema,source:r.source,asset:"NeoSoul (DNA)",contract:s.token.contract,market:s.market,venue:s.venue,study_status:s.status,first_at:s.started_at,last_at:r.last_at,observations:r.count,portfolios:r.portfolios,spot_candidates:r.candidate_spot_timestamps,order_decision:r.order_decision,futures_decision:r.futures_decision,limitations:r.disclaimer,canonical_json:"https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/trader_flux/dna_paper/state.json"};
+ $("case-machine").textContent=JSON.stringify(safe,null,2);
+}
+fetch("../data/trader_flux/dna_paper/state.json?source=dna-case-study",{cache:"no-store"})
+ .then(x=>{if(!x.ok)throw Error("HTTP "+x.status);return x.json();})
+ .then(render)
+ .catch(e=>{$("case-status").textContent="Source inaccessible / non validée";$("case-age").textContent=String(e.message||e);$("case-machine").textContent="Aucune étude chiffrée en l'absence de source vérifiée.";});
+})();
+</script>
+</body>
+</html>

@@ -69,6 +69,22 @@
       impact:{score:finite(event?.impact?.score),level:text(event?.impact?.level)||null},
       decision:{action:text(event?.decision?.action)||null,tone:text(event?.decision?.tone)||null,checks:text(event?.decision?.checks)||null},
       language:{display:displayLanguage,translation_status:translationStatus,headline_original:headlineOriginal,display_headline:displayHeadline},
+      news_intelligence:Object.freeze({
+        schema:text(event?.news_intelligence?.schema)||null,
+        category:text(event?.news_intelligence?.category)||"UNCLASSIFIED",
+        watch:text(event?.news_intelligence?.watch)||"CONTEXT_ONLY",
+        money_role:text(event?.news_intelligence?.money_role)||"UNCLASSIFIED",
+        reported_usd_loss:event?.news_intelligence?.reported_usd_loss==null?null:finite(event.news_intelligence.reported_usd_loss),
+        reported_usd_profit:null,
+        automated_trading_profit_proven:false,
+        bot_is_ai_agent_confirmed:false,
+        claim_conflict_requires_review:event?.news_intelligence?.claim_conflict_requires_review===true,
+        multi_story_requires_separation:event?.news_intelligence?.multi_story_requires_separation===true,
+        source_truth:text(event?.news_intelligence?.source_truth)||"RSS_NOT_REVIEWED",
+        market_causality_proven:false,
+        direct_market_trade_approved:false,
+        read_only:true
+      }),
       reaction_windows:[...WINDOWS],
       reaction_memory:null,
       causal_claim:false,
@@ -94,8 +110,12 @@
     const source=sourceSnapshot();
     return normalize(source?.current||null);
   }
+  function watches(){
+    return Object.freeze(archive().filter(e=>e.news_intelligence?.watch!=="CONTEXT_ONLY"
+      &&e.news_intelligence?.watch!=="UNCLASSIFIED"));
+  }
   globalThis.AtlasEventIntelligence=Object.freeze({
-    build:BUILD,schema:SCHEMA,normalize,archive,current,reaction_windows:WINDOWS,
+    build:BUILD,schema:SCHEMA,normalize,archive,current,watches,reaction_windows:WINDOWS,
     read_only:true,new_fetch:false,new_timer:false,new_storage_owner:false,storage_write:false,
     causal_claim:false,financial_signal:false,automatic_order:false,
     source_owner:"AgentCryptoNewsEventSource read-only bridge over News Sentinel canonical archive",

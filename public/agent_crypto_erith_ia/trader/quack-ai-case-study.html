@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark">
+<title>ERITH.IA · Étude PAPER Q / Quack AI · Trader</title>
+<meta name="description" content="Cas d'école Q/USDT Spot Bitget — provenance, bougies horaires, carnet daté, observations PAPER et limites. Lecture seule.">
+<link rel="alternate" type="application/json" href="https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/trader_flux/q_paper/state.json" title="Journal public Q PAPER">
+<style>
+:root{color-scheme:dark;--bg:#07121e;--panel:#102638;--border:#32546a;--ink:#edf7ff;--muted:#a4bfd2;--cyan:#8aeaff;--gold:#ffe5a0;--red:#ff9da9;--green:#8cecc5}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#10263e,var(--bg) 46%);color:var(--ink);font:14px/1.55 system-ui,-apple-system,'Segoe UI',sans-serif}
+main{max-width:1120px;margin:auto;padding:clamp(14px,3vw,34px)}header{margin:5px 0 18px}.eyebrow{color:var(--cyan);font-weight:700;letter-spacing:.15em;font-size:11px}
+h1{font-size:clamp(24px,4vw,36px);line-height:1.2;margin:6px 0}h2{font-size:17px;margin:0 0 10px}h3{font-size:14px;margin:14px 0 6px}
+p{margin:7px 0}a{color:var(--cyan)}a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.panel{border:1px solid var(--border);background:rgba(11,30,46,.93);border-radius:14px;padding:16px;margin:13px 0}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.card{background:#0b1e2c;border:1px solid #2f5366;border-radius:9px;padding:12px;min-width:0}
+.card span{display:block;font-size:11px;color:var(--muted)}.card strong{font-size:17px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.muted,small{color:var(--muted)}
+.warn{border-left:3px solid var(--gold);padding:8px 13px;background:#282719;color:#ffe5b6}
+.error{color:var(--red)}.ok{color:var(--green)}.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between}
+button{cursor:pointer;border:1px solid #7bb7cd;color:var(--ink);background:#153d54;border-radius:8px;padding:8px 14px}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--border);vertical-align:top}th{color:var(--cyan)}
+.scroll{overflow:auto}code{color:var(--gold)}dl{display:grid;grid-template-columns:155px 1fr;gap:8px 12px}dt{color:var(--muted)}dd{margin:0;overflow-wrap:anywhere}
+footer{margin:18px 0;color:var(--muted);font-size:12px}
+@media(max-width:760px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}dl{grid-template-columns:1fr}}
+</style></head><body><main>
+<header>
+<div class="eyebrow">ERITH.IA · TRADER LABORATORY · SEVEN HEAVEN</div>
+<h1>Étude de cas Q · Quack AI</h1>
+<p>Un actif coté depuis septembre 2025 · accélération observée le 17 octobre 2026 · <strong>Bitget Spot Q/USDT</strong> · dossier PAPER, aucun ordre réel.</p>
+<p class="warn">Ce dossier présente des observations datées, pas un signal d'entrée. Les chiffres CoinGecko sont en USD, ceux du carnet Bitget en USDT. Ils ne sont ni synchrones ni interchangeables.</p>
+<div class="row"><span><a href="trading-desk.html">← Trader</a> · <a href="../administrator/historical-vault.html">Coffre Seven</a> · <a href="../laboratoire/cas-ecole-quack-ai.md">Méthode scientifique .md</a></span><button id="reload" type="button">Actualiser les sources</button></div>
+</header>
+<section class="panel" aria-label="État des données"><div class="row"><h2>1 · Provenance des relevés</h2><strong id="overall" role="status" aria-live="polite">Chargement des sources publiques…</strong></div>
+<dl>
+<dt>Identifiant</dt><dd>CoinGecko <code>quack-ai</code> · symbole <code>Q</code> · contrat BNB Smart Chain déclaré <code>0xc07e1300dc138601FA6B0b59f8D0FA477e690589</code></dd>
+<dt>Cotation initiale</dt><dd>2 septembre 2025 · Bitget Spot Q/USDT ; ne pas confondre Alpha, Spot et Futures</dd>
+<dt>Archive ancienne</dt><dd><a href="https://github.com/BlueAzur-Hub/erith-ia-memory/releases/tag/crypto-bitget-spot-native-daily-2026-09-single-symbol-owners">390 bougies Bitget 1 jour (catalogue)</a> · 4 lacunes, fin septembre 2026 ; aucune preuve de mois complet 1m Q</dd>
+<dt>Dernier snapshot marché</dt><dd id="market-source">—</dd>
+<dt>Qualification carnet</dt><dd id="qualification-source">—</dd>
+<dt>Journal Q PAPER</dt><dd id="paper-source">—</dd>
+</dl></section>
+<section class="panel" aria-label="Marché CoinGecko">
+<h2>2 · Marché Q · variations CoinGecko</h2>
+<div class="cards">
+<div class="card"><span>Prix au snapshot · USD</span><strong id="price">—</strong></div>
+<div class="card"><span>Variation 24 h</span><strong id="day">—</strong></div>
+<div class="card"><span>Variation 7 j</span><strong id="week">—</strong></div>
+<div class="card"><span>Variation 30 j</span><strong id="month">—</strong></div>
+<div class="card"><span>Volume agrégé 24 h · USD</span><strong id="volume">—</strong></div>
+<div class="card"><span>Capitalisation · USD</span><strong id="cap">—</strong></div>
+<div class="card"><span>Rang snapshot</span><strong id="rank">—</strong></div>
+<div class="card"><span>Premier relevé Radar</span><strong>17/10 · 10:35 UTC</strong></div>
+</div>
+<p class="muted">Le premier relevé du 17 octobre montre déjà Q à 0,0711509725 USD, +32,11 % sur 24 h. Ce n'est donc pas une prédiction avant le mouvement.</p>
+</section>
+<section class="panel" aria-label="Carnet daté">
+<h2>3 · Dernière qualification Spot disponible</h2>
+<div class="cards">
+<div class="card"><span>Marché et source</span><strong id="pair">—</strong></div>
+<div class="card"><span>Spread mesuré, pb</span><strong id="spread">—</strong></div>
+<div class="card"><span>Coût aller-retour théorique</span><strong id="cost">—</strong></div>
+<div class="card"><span>Identité par la paire</span><strong id="identity">—</strong></div>
+</div><p id="book-note" class="muted">Lecture de l'archive de qualification…</p>
+</section>
+<section class="panel" aria-label="Journal prospectif">
+<h2>4 · Journal PAPER prospectif · Bitget Spot Q/USDT</h2>
+<p id="paper-status" class="warn">Aucun relevé prospectif fictif ne doit être injecté.</p>
+<div class="scroll"><table><thead><tr><th>UTC</th><th>Clôture horaire</th><th>Volume Q 1 h</th><th>Bid / Ask USDT</th><th>Spread (pb)</th><th>État</th></tr></thead><tbody id="observations"><tr><td colspan="6">En attente</td></tr></tbody></table></div>
+<p class="muted">Le relevé PAPER public ne démarre qu'après une vraie collecte du workflow. Son historique horaire n'est pas une archive minute certifiée. En cas de panne, le dernier état reste daté et n'est pas remplacé par des valeurs de démonstration.</p>
+</section>
+<section class="panel"><h2>5 · Protocole des prochaines décisions d'étude</h2>
+<p><strong>Continuation :</strong> confirmer une cassure par bougie horaire close, volume de confirmation, carnet cohérent et risque de poursuite tardive.</p>
+<p><strong>Essoufflement :</strong> documenter un repli des clôtures, des volumes, des supports et les anomalies de spread. Une absence de preuve conduit à « incomplet », pas à une recommandation.</p>
+<p><strong>Mesurer :</strong> confronter les observations à +1 h, +4 h, +24 h et +7 j, sans réécrire les hypothèses après les résultats. Atlas contrôle les calculs ; Aerith explique et contextualise ; Seven conserve les preuves.</p>
+<p><a href="../data/trader_flux/q_paper/state.json">État machine Q (JSON)</a> · <a href="https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/crypto/radar-opportunities/qualification-latest.json">Qualification des 20 candidats</a> · <a href="../laboratoire/PROTOCOLE_RADAR_CIBLAGE.md">Protocole Radar</a></p></section>
+<footer>ERITH.IA · Lecture seule / PAPER · Aucune transaction réelle, aucun compte lié, aucune prédiction garantie.</footer>
+</main>
+<script>
+(()=>{"use strict";
+const $=id=>document.getElementById(id);
+const rawRoot="https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/";
+const fmt=(v,n=3)=>typeof v==="number"&&Number.isFinite(v)?new Intl.NumberFormat("fr-FR",{maximumFractionDigits:n}).format(v):"—";
+const date=s=>{const x=new Date(s);return Number.isFinite(x.getTime())?x.toLocaleString("fr-FR",{timeZone:"UTC"})+" UTC":"date inconnue"};
+const errorText=x=>String(x?.message||x);
+async function get(url){const c=new AbortController(),t=setTimeout(()=>c.abort(),12000);try{const r=await fetch(url,{cache:"no-store",signal:c.signal});if(!r.ok)throw Error("HTTP "+r.status);return await r.json();}finally{clearTimeout(t)}}
+async function load(){
+$("reload").disabled=true;$("overall").textContent="Lecture des archives…";$("overall").className="";
+const results=await Promise.allSettled([get(rawRoot+"crypto/latest.json"),get(rawRoot+"crypto/radar-opportunities/qualification-latest.json"),get(rawRoot+"trader_flux/q_paper/state.json")]);
+const issues=[];
+try{
+ const o=results[0];if(o.status!=="fulfilled")throw o.reason;
+ const j=o.value; if(j.schema!=="agent_crypto_public_market_snapshot_v1"||!Array.isArray(j.coins))throw Error("Snapshot non conforme");
+ const q=j.coins.find(c=>c.id==="quack-ai"&&String(c.symbol).toUpperCase()==="Q");if(!q)throw Error("Q absent du Top 250");
+ $("market-source").textContent="CoinGecko · "+date(j.generated_at)+" · USD · "+(Date.now()-Date.parse(j.generated_at)>2*3600000?"ARCHIVE DATÉE":"relevé récent");
+ $("price").textContent=fmt(q.priceUsd,8)+" USD";$("day").textContent=fmt(q.change24h,2)+" %";$("week").textContent=fmt(q.change7d,2)+" %";
+ $("month").textContent=fmt(q.change30d,2)+" %";$("volume").textContent=fmt(q.volume24hUsd,0)+" USD";$("cap").textContent=fmt(q.marketCapUsd,0)+" USD";$("rank").textContent=String(q.rank);
+}catch(e){issues.push("CoinGecko : "+errorText(e));$("market-source").textContent="Source indisponible · valeurs absentes";}
+try{
+ const o=results[1];if(o.status!=="fulfilled")throw o.reason;const j=o.value;
+ if(j.schema!=="erith.radar.spot-qualification.v1"||j.real_orders_enabled!==false)throw Error("Archive non conforme");
+ const q=j.candidates.find(c=>c.id==="quack-ai"&&c.symbol==="Q");
+ if(!q||q.market?.pair!=="QUSDT"||q.market?.provider!=="Bitget")throw Error("Paire qualifiée indisponible");
+ const m=q.market;$("qualification-source").textContent="Bitget Spot · "+date(j.qualified_at_utc)+" · archivage et frais hypothétiques";
+ $("pair").textContent="Q/USDT Spot";$("spread").textContent=fmt(m.book.spread_bps,3);$("cost").textContent=fmt(m.estimated_roundtrip_cost_pct,3)+" %";
+ $("identity").textContent="Contrat à confirmer";$("book-note").textContent="Pour 100 USDT fictifs · 0,1 % de frais supposés de chaque côté. Ce carnet est daté, pas en direct. Statut de qualification : "+q.identity_status;
+}catch(e){issues.push("Carnet : "+errorText(e));$("qualification-source").textContent="Non vérifiable";$("book-note").textContent="Aucune substitution de carnet BTC ni d'autre paire."}
+try{
+ const o=results[2];if(o.status!=="fulfilled")throw o.reason;const s=o.value;
+ if(s.schema!=="erith.quack-ai.spot-paper.observations.v1"||s.coin_id!=="quack-ai"||s.market!=="QUSDT"||
+    s.orders_enabled!==false||s.executed_order!==false||s.paper_only!==true)throw Error("Contrat PAPER invalide");
+ $("paper-source").textContent=s.last_observed_at?date(s.last_observed_at):"Aucun relevé prospectif encore enregistré";
+ const a=s.recent_observations||[];if(!Array.isArray(a)||a.some(x=>x.market!=="QUSDT"||x.paper_only!==true))throw Error("Journal inconnu");
+ const body=$("observations");body.replaceChildren();
+ for(const x of a.slice(-20).reverse()){
+  const tr=document.createElement("tr");
+  for(const v of [date(x.at_utc),fmt(x.candles?.close_usdt,8),fmt(x.candles?.last_hour_volume_q,2),
+    fmt(x.book?.best_bid_usdt,8)+" / "+fmt(x.book?.best_ask_usdt,8),fmt(x.book?.spread_bps,3),"PAPER · observé"]){
+   const td=document.createElement("td");td.textContent=v;tr.append(td)
+  }body.append(tr)
+ }
+ if(!a.length){const tr=document.createElement("tr"),td=document.createElement("td");td.colSpan=6;td.textContent="En attente du premier relevé vérifié";tr.append(td);body.append(tr)}
+ const stale=s.last_observed_at && Date.now()-Date.parse(s.last_observed_at)>3*3600000;
+ $("paper-status").textContent=s.last_observed_at?"Dernier point : "+date(s.last_observed_at)+(stale?" · PÉRIMÉ, pas de cotation live":" · historique papier à actualiser"):"Étude initialisée, en attente de la première collecte Bitget valide.";
+}catch(e){issues.push("Journal : "+errorText(e));$("paper-source").textContent="Indisponible";$("paper-status").textContent="Journal absent : pas de résultats supposés";}
+$("overall").textContent=issues.length?"Données partielles · "+issues.join(" · "):"Sources consultées · lecture seule";$("overall").className=issues.length?"error":"ok";
+$("reload").disabled=false;
+}
+$("reload").addEventListener("click",()=>void load());load();
+})();
+</script></body></html>

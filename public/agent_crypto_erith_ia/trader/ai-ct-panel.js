@@ -253,6 +253,16 @@ function showEvidence(target,doc){
   rules.status==='verified'
    ?'Pas quantité '+rules.lot_sz+' CT · état '+rules.state
    :'API publique OKX inaccessible ou données absentes');
+ const remaining=doc.remaining_status;
+ const holdingText={EMPTY:'Vide vérifié',FUNDING_ONLY:'Funding uniquement',
+   DUST:'Poussières / sous minimum',SIZE_FILTER_MATCHES:'Quantité conforme aux filtres',
+   RULES_UNVERIFIED:'Règles non vérifiées',UNKNOWN:'Solde non certifié'};
+ addMetric('État après lecture OKX',holdingText[remaining?.status]||'Non certifié',
+   remaining?.status==='DUST'?
+     'Trading positif mais vente normale sous minSz/lotSz. Les fonds ne sont pas effacés.':
+     remaining?.status==='EMPTY'?
+     'Zéro confirmé en Trading ET Funding, pas une absence de relevé.':
+     'Lecture seule, état des quantités ; aucune exécution ni vente garantie');
  wrapper.append(metrics);
  const note=el('div','ai-ct-execution-status',
   rules.status==='verified'

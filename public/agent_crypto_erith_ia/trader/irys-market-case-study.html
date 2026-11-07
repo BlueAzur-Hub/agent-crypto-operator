@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Dossier IRYS : enquête sur le mouvement OKX du 23 octobre 2026, comparaison de sources, identité, limites de cotation et protocole de preuve. Lecture seule.">
+<title>ERITH.IA · IRYS · Cas d'école de vérité des cotations</title>
+<link rel="alternate" type="application/json" title="Dossier IA IRYS" href="../data/crypto/research/irys.json">
+<style>
+:root{color-scheme:dark;--bg:#07131f;--panel:#102536;--line:#345368;--ink:#f0f7fc;--muted:#bed1dd;--cyan:#8ce5ef;--amber:#f9d88f;--red:#ffb0b6;--green:#9fe1c1}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:radial-gradient(ellipse at 80% 0%,#173b4b,transparent 40%),var(--bg);font:15px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1120px;margin:auto;padding:clamp(16px,4vw,40px)}a{color:var(--cyan)}a:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+small,.muted{color:var(--muted)}h1{font-size:clamp(29px,4vw,43px);line-height:1.2;margin:6px 0}h2{font-size:20px;margin:0 0 11px}.top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:15px}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan)}
+.panel{margin:18px 0;border:1px solid var(--line);background:rgba(11,32,47,.94);border-radius:16px;padding:clamp(15px,2.8vw,24px)}
+.verdict{border-color:#b79964;background:linear-gradient(115deg,#332a1c,#102a3b 72%)}
+.badge{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid #b79964;color:#ffe4af;font-weight:750;font-size:11px;letter-spacing:.04em}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.card{border-radius:12px;border:1px solid var(--line);background:#0a1c2b;padding:14px;min-width:0}.card small{display:block}.card strong{font-size:22px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}.card em{display:block;color:var(--muted);font-style:normal;font-size:12px}
+.scroll{overflow:auto}table{border-collapse:collapse;min-width:730px;width:100%}th,td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--cyan)}.note{border-left:3px solid var(--amber);padding:10px 13px;background:#282619;border-radius:5px;color:#fff0cf}
+ul,ol{padding-left:23px}li{margin:7px 0}code{font-size:13px;overflow-wrap:anywhere;color:#ffe4ae}.sources{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.sources a{padding:10px;background:#0a2132;border:1px solid var(--line);border-radius:9px;overflow-wrap:anywhere}footer{font-size:12px;color:var(--muted);margin:25px 0}
+@media(max-width:750px){.cards{grid-template-columns:1fr}.sources{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<nav class="top"><span><a href="trading-desk.html">← Retour au Trader</a> · <a href="../laboratoire/crypto-knowledge.html">Dossiers crypto</a></span><span class="eyebrow">Seven Heaven · étude documentaire</span></nav>
+<header>
+<p class="eyebrow">ERITH.IA · cas d'école · 23 octobre 2026</p>
+<h1>IRYS · Comment vérifier une hausse de +867,55 % ?</h1>
+<p class="muted">Observation sur OKX, recoupements Internet et protocole de vérification destiné au Radar. Archives datées, pas une cotation temps réel ni un signal d'achat.</p>
+</header>
+<section class="panel verdict" aria-labelledby="verdict">
+<div class="top"><h2 id="verdict">Verdict : mouvement extrême observé, pas encore réconcilié</h2><span class="badge">À qualifier · lecture seule</span></div>
+<p>Le 23 octobre à 21 h 33 (heure de Paris, 19 h 33 UTC), une capture Firefox fournie par l'opérateur montre IRYS/USDC à <strong>0,20870 USDC</strong> et <strong>+867,55 % sur 24 h</strong>. La capture constitue une observation de l'interface OKX, pas la preuve d'une transaction exécutée à ce prix.</p>
+<p>Les sources publiques consultées plus tôt dans la journée rapportent des prix nettement plus bas. Leurs données n'ont pas le même horodatage ni nécessairement le même instrument : aucune contradiction ne peut être résolue sans transactions ou bougies de la paire exacte autour de 19 h 33 UTC.</p>
+</section>
+<section class="panel" aria-labelledby="observations"><h2 id="observations">1 · Trois observations qu'il ne faut pas fusionner</h2>
+<div class="cards">
+<div class="card"><small>Capture OKX · 23 octobre · 19 h 33 UTC (heure du navigateur)</small><strong>0,20870 USDC</strong><em>IRYS/USDC · +867,55 % / 24 h · preuve visuelle fournie par l'opérateur</em></div>
+<div class="card"><small>Page prix OKX · 23 octobre · 15 h 00 UTC</small><strong>0,04564 USD</strong><em>IRYS global · +96,22 % / 24 h · instant différent</em></div>
+<div class="card"><small>CoinPaprika · 23 octobre · 15 h 13 UTC</small><strong>0,045833 USD</strong><em>IRYS agrégé · +108,62 % / 24 h · méthode différente</em></div>
+</div>
+<p class="note">Calcul vérifiable : 0,20870 ÷ (1 + 867,55 / 100) = <strong>environ 0,02157 USDC</strong> comme prix de référence implicite 24 heures auparavant. Ce résultat montre la cohérence arithmétique du pourcentage affiché, pas sa validation marché.</p>
+<div class="scroll"><table><thead><tr><th>Point</th><th>Preuve</th><th>Ce que l'on peut dire</th><th>Inconnue</th></tr></thead><tbody>
+<tr><td>Prix capturé</td><td>Capture Firefox OKX 21 h 33 Paris</td><td>Valeur affichée sur IRYS/USDC</td><td>Last trade vérifié, quantité, spread, profondeur</td></tr>
+<tr><td>Recoupement</td><td>Page prix OKX et CoinPaprika 15 h UTC</td><td>Prix global autour de 0,045–0,046 USD à cet instant</td><td>Évolution exacte jusqu'à 19 h 33 UTC</td></tr>
+<tr><td>24 heures</td><td>Pourcentage +867,55 % de la capture</td><td>Base implicite ≈ 0,02157 USDC</td><td>open24h OKX brut et ts du ticker</td></tr>
+<tr><td>Cotation</td><td>Annonces Spot OKX du 27 mai 2026</td><td>IRYS/USDT et IRYS/USD, IRYS/EUR annoncés</td><td>Admissibilité du compte utilisateur et statut exact IRYS/USDC</td></tr>
+</tbody></table></div>
+</section>
+<section class="panel" aria-labelledby="identity"><h2 id="identity">2 · Identité canonique et risques de confusion</h2>
+<p><strong>Nom :</strong> Irys · <strong>symbole :</strong> IRYS · <strong>secteur :</strong> blockchain Layer 1 de données programmables, stockage, IrysVM compatible EVM et applications IA.</p>
+<p><strong>Contrat ERC-20 selon l'annonce OKX :</strong> <code>0x50f41F589aFACa2EF41FDF590FE7b90cD26DEe64</code>.</p>
+<p><strong>Date des annonces OKX Europe :</strong> 27 mai 2026. Le token n'est donc pas un « nouveau lancement » le 23 octobre. L'identité d'un instrument Spot doit reposer sur la plateforme, la paire exacte et les références du token, jamais uniquement sur le ticker.</p>
+<p class="note">Les libellés « USDC », « USDT » et « USD » ne sont pas interchangeables pour une cotation brute. Une conversion vers USD doit mentionner son taux, sa source et son heure. Ne pas déduire une autorisation de trading personnelle d'une annonce publique.</p>
+</section>
+<section class="panel" aria-labelledby="protocol"><h2 id="protocol">3 · Contrôle technique que le Radar doit exiger</h2>
+<ol>
+<li>Identifier explicitement l'instrument sur OKX : <code>IRYS-USDC</code>, type Spot, statut de la paire et disponibilité dans la région et le compte concernés.</li>
+<li>Archiver la réponse brute du ticker OKX : <code>instId</code>, <code>last</code>, <code>open24h</code>, <code>high24h</code>, <code>low24h</code>, <code>bidPx</code>, <code>askPx</code>, <code>volCcy24h</code>, <code>ts</code>.</li>
+<li>Récupérer les bougies historiques 1 minute et les transactions autour du 23 octobre 2026, 19 h 33 UTC. Distinguer bougies terminées et bougies en cours.</li>
+<li>Recouper au même instant une seconde plateforme, pour le même token et une paire comparable. Documenter la conversion et l'écart temporel, ne pas effacer les valeurs discordantes.</li>
+<li>Vérifier profondeur, spread et tailles d'ordres : le dernier prix ne garantit pas l'exécution d'une taille supérieure. Conserver le statut « non réconcilié » si les preuves manquent.</li>
+<li>Ne pas déclencher d'ordre réel, d'accès privé OKX ou de mutation du Market Core à partir de cette enquête.</li>
+</ol>
+<p>Étiquettes proposées pour le Radar : <strong>OBSERVÉ SUR OKX</strong>, <strong>VARIATION EXTRÊME</strong>, <strong>SOURCE DIVERGENTE</strong>, <strong>SPOT COMPTE NON VÉRIFIÉ</strong>.</p>
+</section>
+<section class="panel" aria-labelledby="sources"><h2 id="sources">4 · Sources traçables</h2>
+<div class="sources">
+<a target="_blank" rel="noopener noreferrer" href="https://www.okx.com/en-eu/help/okx-to-list-irys-usdt-irys-for-spot-trading">OKX Europe · annonce IRYS/USDT · 27 mai 2026</a>
+<a target="_blank" rel="noopener noreferrer" href="https://www.okx.com/fr/help/okx-will-launch-irys-usd-and-irys-eur-for-spot-trading">OKX Europe · annonce IRYS/USD et EUR · 27 mai 2026</a>
+<a target="_blank" rel="noopener noreferrer" href="https://www.okx.com/en-gb/price/irys-irys">OKX · page prix IRYS et relevé 23 octobre à 15 h UTC</a>
+<a target="_blank" rel="noopener noreferrer" href="https://coinpaprika.com/coin/irys-irys">CoinPaprika · prix IRYS et relevé 23 octobre à 15 h 13 UTC</a>
+<a target="_blank" rel="noopener noreferrer" href="https://app.okx.com/docs-v5/en">OKX · documentation API ticker, bougies et horodatages</a>
+<a target="_blank" rel="noopener noreferrer" href="https://www.coingecko.com/en/coins/irys">CoinGecko · identité et marchés IRYS</a>
+</div>
+</section>
+<footer>ERITH.IA · Seven Heaven · Dossier public de recherche en lecture seule · Situation au 23 octobre 2026. Aucune donnée de compte, aucune clé privée, aucun ordre et aucun prix inventé.</footer>
+</main></body></html>

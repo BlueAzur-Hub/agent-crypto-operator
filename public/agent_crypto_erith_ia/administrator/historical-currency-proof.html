@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agent-Crypto · Preuve des prix historiques EUR/USD</title>
+<style>
+:root{color-scheme:dark;font:15px/1.55 system-ui,sans-serif;background:#091523;color:#e8f1fc}
+body{max-width:1050px;margin:auto;padding:24px}
+h1{font-size:23px;margin:0 0 8px}h2{font-size:17px;margin:10px 0}
+a{color:#9ce0fa}p{line-height:1.65}
+.panel{background:#142539;border:1px solid #35516b;border-radius:12px;padding:16px;margin:16px 0}
+button{font:inherit;background:#195b7b;color:white;border:1px solid #70b1d0;padding:9px 14px;border-radius:8px;cursor:pointer;margin:2px}
+button:disabled{opacity:.45;cursor:default}
+small,.subtle{color:#b0c5d9}
+.notice{border-left:4px solid #76bdd8;padding:12px;background:#0b1c2e}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;border-bottom:1px solid #36516b;padding:8px}
+.scroller{overflow:auto}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;max-height:240px;overflow:auto}
+</style>
+</head>
+<body>
+<header>
+<h1>Preuve des prix historiques · EUR / USD</h1>
+<p class="subtle">Seven Heaven · Diagnostic ciblé BTC, ETH, BNB, XRP, SOL · Lecture seule</p>
+<p><a href="./historical-inventory.html">← Inventaire historique</a> · <a href="./index.html">Retour à l'Interface</a></p>
+</header>
+<section class="panel">
+<p class="notice"><strong>Aucune modification de l'Interface.</strong> L'outil lit uniquement l'IndexedDB de cette origine, en transaction <code>readonly</code>. Il ne supprime rien, n'envoie aucune donnée sur Internet et ne demande aucune clé privée. Le JSON comprend seulement les métadonnées et trois prix échantillons par série des cinq actifs sélectionnés, et jamais leur historique complet.</p>
+<button id="analyze">1 · Analyser les cinq actifs</button>
+<button id="copy" disabled>2 · Copier JSON</button>
+<button id="download" disabled>Télécharger JSON</button>
+<p id="status" role="status" class="subtle">Prêt. Lancez l'analyse depuis ce Firefox.</p>
+</section>
+<section class="panel">
+<h2>Résultat</h2>
+<div id="summary" class="subtle">Aucun relevé effectué.</div>
+<div class="scroller" id="table"></div>
+</section>
+<section class="panel">
+<h2>Limites de cette preuve</h2>
+<p>Une clé marquée USD est une <strong>déclaration</strong>, pas une garantie de cours USD correct. Une clé ancienne sans devise reste <strong>non qualifiée</strong> ; elle n'est pas automatiquement EUR. Les trois prix par série sont les valeurs réellement stockées, sans conversion ni remplacement par une cotation actuelle. L'exactitude de la source et la correspondance avec les courbes affichées nécessitent une étape ultérieure.</p>
+<details><summary>Aperçu du JSON exporté</summary><pre id="preview"></pre></details>
+</section>
+<script>
+(function(){
+"use strict";
+var DB="agent_crypto_storage_relief_40278";
+var STORE="payloads";
+var KEY="agent_crypto_erith_ia_real_charts_v1_1_alpha_26_37_top50";
+var IDS=["bitcoin","ethereum","binancecoin","ripple","solana"];
+var report=null;
+function el(id){return document.getElementById(id);}
+function err(e){return String(e&&e.message||e);}
+function asNum(v){if(v===null||v===undefined||v==="")return null;var n=Number(v);return Number.isFinite(n)?n:null;}
+function iso(value){var n=asNum(value);if(n===null||n<=0)return null;var d=new Date(n);return Number.isNaN(+d)?null:d.toISOString();}
+function point(series,i){
+  var p=series[i],time=null,price=null;
+  if(Array.isArray(p)){time=asNum(p[0]);price=asNum(p[1]);}
+  else if(p&&typeof p==="object"){time=asNum(p.x===undefined?p.t:p.x);price=asNum(p.price===undefined?(p.y===undefined?p.value:p.y):p.price);}
+  return {index:i,timeMs:time,timeIso:iso(time),priceRaw:price};
+}
+function parseKey(k){
+  var m=k.match(/^(.*?):USD:([^:]+):([0-9]+)$/i);
+  if(m)return {coinId:m[1].toLowerCase(),currencyInKey:"USD",sourceInKey:m[2],periodDays:Number(m[3])};
+  m=k.match(/^(.*?):([0-9]+):([^:]+)$/);
+  if(m)return {coinId:m[1].toLowerCase(),currencyInKey:null,sourceInKey:m[3],periodDays:Number(m[2])};
+  return null;
+}
+function read(){
+ return new Promise(function(resolve,reject){
+  if(typeof indexedDB==="undefined"||typeof indexedDB.databases!=="function"){
+    reject(new Error("indexedDB.databases() indisponible : lecture annulée pour éviter de créer une base."));return;
+  }
+  indexedDB.databases().then(function(list){
+   if(!list.some(function(info){return info.name===DB;})){reject(new Error("Base IndexedDB absente sur cette origine. Ouvrir la page dans le même profil Firefox que l'Interface."));return;}
+   var request=indexedDB.open(DB);
+   request.onupgradeneeded=function(){request.transaction.abort();reject(new Error("Une migration serait nécessaire : ouverture annulée."));};
+   request.onerror=function(){reject(request.error||new Error("IndexedDB inaccessible."));};
+   request.onsuccess=function(){
+    var db=request.result;
+    if(!db.objectStoreNames.contains(STORE)){db.close();reject(new Error("Magasin payloads absent."));return;}
+    var tx=db.transaction(STORE,"readonly");
+    var get=tx.objectStore(STORE).get(KEY);
+    get.onsuccess=function(){resolve(get.result);};
+    get.onerror=function(){reject(get.error||new Error("Lecture refusée."));};
+    tx.oncomplete=function(){db.close();};
+    tx.onabort=function(){db.close();reject(tx.error||new Error("Transaction annulée."));};
+    tx.onerror=function(){db.close();};
+   };
+  }).catch(reject);
+ });
+}
+function makeReport(record){
+ if(!record||typeof record.payload!=="string")throw new Error("Entrée historique introuvable.");
+ var data=JSON.parse(record.payload);
+ if(!data||typeof data!=="object"||Array.isArray(data))throw new Error("Format du cache inconnu.");
+ var entries=[];
+ Object.keys(data).forEach(function(key){
+  var identity=parseKey(key);
+  if(!identity||IDS.indexOf(identity.coinId)===-1)return;
+  var item=data[key];
+  if(!item||typeof item!=="object")item={};
+  var series=Array.isArray(item.series)?item.series:[];
+  var declaredCurrency=typeof item.currency==="string"?item.currency:null;
+  var quoteCurrency=typeof item.quoteCurrency==="string"?item.quoteCurrency:null;
+  var conflict=!!((identity.currencyInKey&&declaredCurrency&&identity.currencyInKey!==declaredCurrency.toUpperCase())||
+    (identity.currencyInKey&&quoteCurrency&&identity.currencyInKey!==quoteCurrency.toUpperCase())||
+    (declaredCurrency&&quoteCurrency&&declaredCurrency.toUpperCase()!==quoteCurrency.toUpperCase()));
+  var ix=[0,Math.floor((series.length-1)/2),series.length-1].filter(function(i,pos,a){return series.length>0&&a.indexOf(i)===pos;});
+  entries.push({
+   key:key,coinId:identity.coinId,periodDays:identity.periodDays,sourceInKey:identity.sourceInKey,
+   currencyInKey:identity.currencyInKey,declaredCurrency:declaredCurrency,
+   declaredQuoteCurrency:quoteCurrency,currencyConflict:conflict,
+   source:typeof item.source==="string"?item.source:null,
+   sourceFamily:typeof item.sourceFamily==="string"?item.sourceFamily:null,
+   sourceMode:typeof item.sourceMode==="string"?item.sourceMode:null,
+   originalSourceMode:typeof item.originalSourceMode==="string"?item.originalSourceMode:null,
+   coinIdInRecord:typeof item.coinId==="string"?item.coinId:null,
+   periodDaysInRecord:asNum(item.periodDays),
+   savedAt:iso(item.savedAt),
+   generatedAt:typeof item.generatedAt==="string"?item.generatedAt:null,
+   totalPoints:series.length,
+   samples:ix.map(function(i){return point(series,i);}),
+   integrityOk:typeof item.integrity?.ok==="boolean"?item.integrity.ok:null,
+   integrityReason:typeof item.integrity?.reason==="string"?item.integrity.reason:null
+  });
+ });
+ entries.sort(function(a,b){return IDS.indexOf(a.coinId)-IDS.indexOf(b.coinId)||a.periodDays-b.periodDays||a.key.localeCompare(b.key);});
+ var found=new Set(entries.map(function(x){return x.coinId;}));
+ return {
+  schema:"agent_crypto_history_currency_evidence_1",
+  generatedAt:new Date().toISOString(),
+  source:"Firefox IndexedDB · diagnostic lecture seule",
+  database:DB,store:STORE,
+  targetAssets:IDS,
+  sourceGlobalVerified:record.verified===true,
+  seriesFound:entries.length,
+  assetsFound:Array.from(found),
+  keyUsdCount:entries.filter(function(x){return x.currencyInKey==="USD";}).length,
+  keyWithoutCurrencyCount:entries.filter(function(x){return x.currencyInKey===null;}).length,
+  currencyConflicts:entries.filter(function(x){return x.currencyConflict;}).length,
+  samplesPerSeriesMaximum:3,
+  caveat:"Devise dans la clé et métadonnées = déclarations à vérifier, pas preuve de cotation native ; aucune série intégrale exportée.",
+  entries:entries
+ };
+}
+function show(report){
+ var total=report.seriesFound;
+ el("summary").textContent=total+" séries trouvées pour "+report.assetsFound.length+"/5 actifs · "+
+  report.keyUsdCount+" clés USD · "+report.keyWithoutCurrencyCount+" clés sans devise · "+
+  report.currencyConflicts+" conflit(s) de devise déclarée · verified global="+report.sourceGlobalVerified+".";
+ var table=document.createElement("table"),thead=document.createElement("tr");
+ ["Actif","Période","Clé","Devise annoncée","Dernier prix enregistré","Dernier point"].forEach(function(label){
+  var th=document.createElement("th");th.textContent=label;thead.appendChild(th);
+ });
+ table.appendChild(thead);
+ report.entries.forEach(function(e){
+  var row=document.createElement("tr"),last=e.samples[e.samples.length-1];
+  [e.coinId,e.periodDays===36500?"Max":e.periodDays+" j",e.sourceInKey,
+   (e.currencyInKey||"clé sans devise")+" / "+(e.declaredCurrency||"métadonnée absente"),
+   last&&last.priceRaw!==null?String(last.priceRaw):"—",
+   last&&last.timeIso||"—"].forEach(function(val){var td=document.createElement("td");td.textContent=val;row.appendChild(td);});
+  table.appendChild(row);
+ });
+ el("table").replaceChildren(table);
+ el("preview").textContent=JSON.stringify(report,null,2);
+}
+el("analyze").addEventListener("click",function(){
+ el("analyze").disabled=true;el("copy").disabled=true;el("download").disabled=true;
+ el("status").textContent="Lecture du cache IndexedDB...";
+ read().then(function(record){
+  report=makeReport(record);show(report);
+  el("copy").disabled=false;el("download").disabled=false;
+  el("status").textContent="Analyse terminée. Copier JSON pour transmettre les valeurs dans le chat.";
+ }).catch(function(error){el("status").textContent="Erreur : "+err(error);})
+ .finally(function(){el("analyze").disabled=false;});
+});
+el("copy").addEventListener("click",function(){
+ if(!report)return;
+ navigator.clipboard.writeText(JSON.stringify(report,null,2))
+  .then(function(){el("status").textContent="JSON copié. Coller directement dans ChatGPT (Ctrl+V).";})
+  .catch(function(e){el("status").textContent="Copie refusée : "+err(e)+". Utiliser Télécharger JSON.";});
+});
+el("download").addEventListener("click",function(){
+ if(!report)return;
+ var blob=new Blob([JSON.stringify(report,null,2)],{type:"application/json;charset=utf-8"});
+ var url=URL.createObjectURL(blob),link=document.createElement("a");
+ link.href=url;link.download="historique-eur-usd-preuves.json";document.body.appendChild(link);link.click();link.remove();
+ URL.revokeObjectURL(url);el("status").textContent="Fichier JSON enregistré. Joignez-le dans ChatGPT.";
+});
+})();
+</script>
+</body>
+</html>
