@@ -11,7 +11,7 @@
   let lastAttempt=0, busy=false, timer=null, lastResult='';
   const owner=()=>globalThis.AgentCryptoMarketMicroscope;
   const snap=()=>{try{return owner()?.snapshot?.()||null;}catch(_){return null;}};
-  const current=state=>state?.mode==='candles'&&state.bar==='1m'&&
+  const current=state=>(state?.mode==='candles'||state?.mode==='hybrid')&&state.bar==='1m'&&
     /^CT-(USDT|USDC)$/.test(String(state.loadedInstrument||state.instrument||''));
   const newest=state=>{const rows=state?.rows||[];const t=Number(rows[rows.length-1]?.t);return Number.isFinite(t)&&t>0?t:null;};
   const ageMs=state=>{const t=newest(state);return t===null?null:Math.max(0,Date.now()-t);};

@@ -41,7 +41,7 @@
   function verifiedSeries(ctx){
     const pair=String(ctx.instrument||"").toUpperCase(),snap=microscope();
     // Prefer exact candles, when they have actually been loaded and published.
-    if(snap?.external&&snap.mode==="candles"&&!snap.loading&&!snap.error&&
+    if(snap?.external&&(snap.mode==="candles"||snap.mode==="hybrid")&&!snap.loading&&!snap.error&&
        String(snap.loadedInstrument||"").toUpperCase()===pair&&
        Array.isArray(snap.rows)){
       const bars=snap.rows.map(row=>[row?.t,row?.c]);

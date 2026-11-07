@@ -109,11 +109,12 @@ html[data-agent-crypto-surface="trader"] #accueil .atlas-v2-nav-essential #aiCtT
 .ai-ct-execution-top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:10px}
 .ai-ct-execution-title{font:800 13px/1.35 system-ui,sans-serif;letter-spacing:.055em;color:#adf1ea}
 .ai-ct-execution-sub{margin:0!important;color:#9fc9d2!important;font:11px/1.4 system-ui,sans-serif!important}
-.ai-ct-execution-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+/* Adapt to the actual IA Concrete pane width (rail or detached), not viewport. */
+.ai-ct-execution-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,126px),1fr));gap:8px}
 .ai-ct-execution-metric{display:flex;flex-direction:column;gap:5px;min-width:0;padding:10px;
  border:1px solid rgba(142,205,212,.21);border-radius:9px;background:rgba(3,20,29,.6)}
 .ai-ct-execution-metric span{color:#acc5d0;font-size:11px}
-.ai-ct-execution-metric strong{color:#e5fcf8;font-size:clamp(13px,1.4vw,17px);font-weight:800;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.ai-ct-execution-metric strong{color:#e5fcf8;font-size:clamp(13px,1.2vw,16px);font-weight:800;font-variant-numeric:tabular-nums;overflow-wrap:break-word;word-break:normal}
 .ai-ct-execution-metric small{color:#98b7c3;font-size:10px;line-height:1.45}
 .ai-ct-execution-status{margin-top:10px;padding:9px 10px;border-left:3px solid #dbb778;
  border-radius:6px;background:rgba(86,62,17,.19);color:#ffe1a5;font-size:11px;line-height:1.5;overflow-wrap:anywhere}
@@ -131,7 +132,7 @@ html[data-agent-crypto-surface="trader"] #accueil .atlas-v2-nav-essential #aiCtT
 .ai-ct-rule-state[data-state="not_live"]{color:#ffc199!important;font-weight:700}
 .ai-ct-rule-state[data-state="unverified"]{color:#f6dba1!important}
 .ai-ct-rule-state[data-state="size_matches"]{color:#a0e6cd!important}
-.ai-ct-price-scenarios{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.ai-ct-price-scenarios{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,142px),1fr));gap:8px}
 .ai-ct-price-scenario{display:flex;flex-direction:column;gap:4px;padding:10px;border:1px solid rgba(136,194,192,.23);border-radius:8px;background:rgba(13,39,52,.58)}
 .ai-ct-price-scenario span{font-size:11px;color:#aed4db;font-weight:750}
 .ai-ct-price-scenario strong{font-size:14px;color:#e3f6f5;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
@@ -140,15 +141,14 @@ html[data-agent-crypto-surface="trader"] #accueil .atlas-v2-nav-essential #aiCtT
 .ai-ct-analysis-details{margin-top:8px;padding:9px 10px;border:1px solid rgba(120,197,196,.25);border-radius:8px;background:rgba(5,29,39,.55)}
 .ai-ct-analysis-details>summary{cursor:pointer;color:#b4e9ea;font-size:12px;font-weight:700}
 .ai-ct-analysis-details p{font:12px/1.6 system-ui,sans-serif;color:#d4e7ea;margin:8px 0;overflow-wrap:anywhere}
-@media(max-width:900px){.ai-ct-execution-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:480px){.ai-ct-price-scenarios{grid-template-columns:1fr}.ai-ct-execution-metrics{grid-template-columns:1fr 1fr}}
+/* Responsive card counts are content-width driven; Firefox desktop can have a 300px rail. */
 
 
 /* Plan de quantité BRUTE/NETTE après frais, intégré aux panneaux Seven CT. */
 .ai-ct-buy-planner{margin-top:13px;padding:11px 12px;border:1px solid rgba(231,191,118,.38);background:rgba(46,38,21,.24);border-radius:9px;min-width:0}
 .ai-ct-buy-planner>summary{cursor:pointer;color:#f7d99f;font-weight:800;font:800 12px/1.55 system-ui,sans-serif}
 .ai-ct-buy-intro,.ai-ct-buy-source,.ai-ct-buy-historic{margin:9px 0!important;color:#d0e1df!important;font:11px/1.55 system-ui,sans-serif!important}
-.ai-ct-buy-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0 9px}
+.ai-ct-buy-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,155px),1fr));gap:9px;margin:12px 0 9px}
 .ai-ct-buy-label{display:flex;flex-direction:column;gap:5px;min-width:0;color:#e2ece7;font:700 11px/1.4 system-ui,sans-serif}
 .ai-ct-buy-label input,.ai-ct-buy-label select{box-sizing:border-box;width:100%;min-width:0;background:#08202d;border:1px solid #497784;color:#e8faf5;padding:8px 9px;border-radius:7px;font:12px/1.4 system-ui,sans-serif}
 .ai-ct-buy-label input[readonly]{background:rgba(83,121,119,.15);color:#b9d3d2}
@@ -157,11 +157,11 @@ html[data-agent-crypto-surface="trader"] #accueil .atlas-v2-nav-essential #aiCtT
 .ai-ct-buy-compute:focus-visible,.ai-ct-buy-suggest:focus-visible{outline:2px solid #fee0aa;outline-offset:2px}
 .ai-ct-buy-result{margin-top:10px;padding:10px;background:rgba(2,17,27,.66);border:1px solid rgba(137,181,180,.27);border-radius:8px;color:#cce7e2;font-size:11px;line-height:1.55;overflow-wrap:anywhere}
 .ai-ct-buy-result>strong{color:#bdf4e9;display:block;margin-bottom:9px}
-.ai-ct-buy-result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:0}
+.ai-ct-buy-result-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,155px),1fr));gap:7px;margin:0}
 .ai-ct-buy-result-grid>div{padding:8px;border:1px solid rgba(137,181,180,.18);border-radius:6px;background:rgba(18,49,58,.65)}
 .ai-ct-buy-result-grid dt{color:#aac8cc;font:11px/1.4 system-ui,sans-serif}
 .ai-ct-buy-result-grid dd{margin:4px 0 0;color:#f2fff9;font:800 13px/1.4 system-ui,sans-serif;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
-@media(max-width:520px){.ai-ct-buy-fields,.ai-ct-buy-result-grid{grid-template-columns:1fr}}
+/* Buy planner fields also adapt when the Technical Reading is docked. */
 
 
 /* Comparaison décisionnelle locale : prix Convert MANUEL, jamais ordre. */
@@ -173,10 +173,10 @@ html[data-agent-crypto-surface="trader"] #accueil .atlas-v2-nav-essential #aiCtT
 .ai-ct-choice-button{display:inline-block;margin:9px 0;border:1px solid #6bbeb3;border-radius:7px;background:#12515a;color:#f5fffa;padding:8px 12px;cursor:pointer;font:800 11px/1.4 system-ui,sans-serif}
 .ai-ct-choice-button:focus-visible{outline:2px solid #fce4b2;outline-offset:2px}
 .ai-ct-choice-results{margin:8px 0;padding:10px;border:1px solid rgba(114,186,182,.25);border-radius:8px;background:rgba(3,22,30,.6);color:#deeeee;font:11px/1.6 system-ui,sans-serif}
-.ai-ct-choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.ai-ct-choice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,142px),1fr));gap:8px}
 .ai-ct-choice-cell{padding:10px;display:flex;flex-direction:column;gap:7px;min-width:0;border:1px solid rgba(136,193,186,.27);border-radius:8px;background:rgba(20,58,63,.5)}
 .ai-ct-choice-cell span{font:700 11px/1.35 system-ui,sans-serif;color:#a1e3d5}
 .ai-ct-choice-cell strong{color:#fff2d0;font:800 15px/1.35 system-ui,sans-serif;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
 .ai-ct-choice-cell small{color:#c5d9dc;font:11px/1.55 system-ui,sans-serif;overflow-wrap:anywhere}
 .ai-ct-choice-warning{color:#f2ca9d!important;margin:10px 0 0!important;font:11px/1.55 system-ui,sans-serif!important}
-@media(max-width:760px){.ai-ct-choice-grid{grid-template-columns:1fr}}
+/* Three-way comparison stacks automatically within the narrow Technical Reading rail. */

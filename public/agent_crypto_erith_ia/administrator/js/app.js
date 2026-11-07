@@ -77,7 +77,7 @@
     technical_portrait_complete_foreground_preserved: true,
     technical_portrait_letterbox_backdrop_fill: true,
     intelligence_family_emblem_added: true,
-    asset_used_for_intelligence_family: "https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/assets/images/visual/admin-analytical-memory.png",
+    asset_used_for_intelligence_family: "../../../assets/images/visual/admin-analytical-memory.png",
     image_generation_added: false,
     storage_write_added: false,
     network_request_added: false,
@@ -97,7 +97,7 @@
         const img = document.createElement("img");
         img.className = "admin-family-emblem-r3";
         img.dataset.for = "intelligence-40230";
-        img.src = "https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/assets/images/visual/admin-analytical-memory.png";
+        img.src = "../../../assets/images/visual/admin-analytical-memory.png";
         img.alt = "";
         img.setAttribute("aria-hidden", "true");
         img.loading = "lazy";

@@ -7,7 +7,7 @@
   const DB_VERSION = 1;
   const STORE = "assets";
   const GENERATION = "administrator-visuals-2026-09-23-406389-v3";
-  const CHART_OFFICE = "https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/assets/images/visual/admin-chart-office.png";
+  const CHART_OFFICE = "../../../assets/images/visual/admin-chart-office.png";
   const objectUrls = new Map();
   const stats = { memory: 0, indexeddb: 0, network: 0, miss: 0, error: 0 };
 

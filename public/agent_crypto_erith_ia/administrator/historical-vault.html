@@ -1,6 +1,5 @@
 <!doctype html>
-<html lang="fr"><head>
-<script src="../web/vault-data-router.js" data-erith-vault-data-router="true"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Seven Heaven · Coffre historique</title><style>
 :root{color-scheme:dark;font:clamp(12px,.79vw,15px)/1.4 system-ui,-apple-system,sans-serif;color:#ebf3fc;background:#091524}
 *{box-sizing:border-box}body{max-width:min(97.5vw,1570px);margin:auto;padding:clamp(10px,.9vw,18px);
@@ -193,7 +192,7 @@ select:focus-visible{outline:2px solid #a5dcec}#r6-table{max-height:27vh;margin-
 <div id="details" class="fine">La source GitHub doit passer la vérification SHA-256, la décompression gzip, la chronologie et l'index de couverture. Aucun fichier local n'est envoyé sur Internet.</div></details>
 <script>
 (()=>{"use strict";
-const ROOT=new URL("../data/historical_archive_prototype/ohlcv_spot_pilot/",location.href);
+const ROOT=new URL("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/data/historical_archive_prototype/ohlcv_spot_pilot/");
 const DB="agent_crypto_storage_relief_40278",STORE="payloads",KEY="agent_crypto_erith_ia_real_charts_v1_1_alpha_26_37_top50";
 const SPECS={"24h":{ms:300000,count:288,interval:"5m"},"7d":{ms:3600000,count:168,interval:"1h"},"30d":{ms:14400000,count:180,interval:"4h"}};
 const $=id=>document.getElementById(id);let exported=null;
@@ -205,7 +204,7 @@ function showMetrics(a){const frag=document.createDocumentFragment();a.forEach(x
 function utc(t){return Number.isFinite(t)&&t>0?new Date(t).toLocaleString("fr-FR",{timeZone:"UTC",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})+" UTC":"—"}
 function dmsg(e){return String(e?.message||e).slice(0,200)}
 async function fetchBuf(url){
-yes(url.origin===location.origin,"URL externe refusée");
+yes(url.origin===ROOT.origin&&url.pathname.startsWith(ROOT.pathname),"URL externe refusée");
 const r=await fetch(url.href,{credentials:"omit",cache:"no-store",redirect:"error"});
 yes(r.ok,"Échec HTTP "+r.status+" : "+url.pathname);
 return r.arrayBuffer()}

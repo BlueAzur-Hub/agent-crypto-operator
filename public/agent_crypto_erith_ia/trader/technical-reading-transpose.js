@@ -6,8 +6,8 @@
      Adaptation unique : chemins assets depuis /trader/. */
 
   const BUILD = "40.6.586";
-  const BASE = "https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/assets/images/technical-reading/";
-  const DEFAULT_IMAGE = "https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/assets/images/technical-reading/admin-technical-reading-default.png";
+  const BASE = "../../../assets/images/technical-reading/";
+  const DEFAULT_IMAGE = "../../../assets/images/technical-reading/admin-technical-reading-default.png";
   const DB_NAME = "agent_crypto_private_visuals";
   const DB_VERSION = 1;
   const STORE = "visual_slots";

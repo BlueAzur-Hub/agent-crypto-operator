@@ -34,8 +34,21 @@ html:not([data-agent-crypto-surface="trader"]) #agentCryptoLearningLab{display:n
 #agentCryptoLearningLab .lab-journal-form{display:grid;gap:10px}
 #agentCryptoLearningLab .lab-journal-list{display:grid;gap:8px}
 #agentCryptoLearningLab .lab-journal-list small{color:#7fbbc8}
+#agentCryptoLearningLab .lab-market-snapshot{display:grid;gap:12px}
+#agentCryptoLearningLab .lab-market-snapshot-content{display:grid;gap:10px;min-width:0}
+#agentCryptoLearningLab .lab-market-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+#agentCryptoLearningLab .lab-market-metric{display:grid;gap:5px;padding:11px;border:1px solid #315266;border-radius:10px;background:rgba(5,27,40,.82);min-width:0}
+#agentCryptoLearningLab .lab-market-metric small{font-size:11px;line-height:1.35;color:#a2becc;overflow-wrap:anywhere}
+#agentCryptoLearningLab .lab-market-metric strong{font-size:clamp(13px,1.4vw,18px);font-weight:800;font-variant-numeric:tabular-nums;color:#f1f8fa;overflow-wrap:anywhere}
+#agentCryptoLearningLab .lab-market-snapshot .lab-action{justify-self:start}
 #agentCryptoLearningLab .lab-btc-report{min-width:0}
 #agentCryptoLearningLab .lab-btc-report #traderOkbCaseStudy{margin:0;max-width:100%}
+@media(max-width:850px){
+  #agentCryptoLearningLab .lab-market-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:530px){
+  #agentCryptoLearningLab .lab-market-metrics{grid-template-columns:minmax(0,1fr)}
+}
 @media(max-width:800px){
   #agentCryptoLearningLab .lab-grid,#agentCryptoLearningLab .lab-form-grid{grid-template-columns:minmax(0,1fr)}
   #agentCryptoLearningLab .lab-body{padding:11px}
