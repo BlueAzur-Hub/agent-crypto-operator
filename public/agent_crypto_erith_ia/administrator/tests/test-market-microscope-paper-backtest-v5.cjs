@@ -50,7 +50,7 @@
     assert.ok(r.comparison.holdFinal>0);
   });
   test("Forming final candle is excluded from both comparison methods",()=>{
-    const modified={...snapshot,rows:[...rows.slice(0,-1),{...rows.at(-1),c:99,h:100,l:98,confirm:"0"}]};
+    const modified={...snapshot,rows:[...rows.slice(0,-1),{...rows.at(-1),o:99,c:99,h:100,l:98,confirm:"0"}]};
     const r=run(modified),c=r.comparison;
     assert.equal(r.ok,true);assert.equal(r.excludedFormingBars,1);
     assert.equal(c.endAt,rows.at(-2).t);
