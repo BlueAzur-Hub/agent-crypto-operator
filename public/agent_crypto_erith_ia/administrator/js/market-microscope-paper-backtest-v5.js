@@ -65,7 +65,31 @@
       }
     }
     const closedNetPnL=trades.reduce((sum,t)=>sum+t.pnl,0);
-    return Object.freeze({ok:true,mode:"HISTORICAL_PAPER_LONG_ONLY",read_only:true,orders:0,source,pair,bar,quote:currencyCode(pair),bars:rows.length,excludedFormingBars:unfinished,fastPeriod:cross.fastPeriod,slowPeriod:cross.slowPeriod,settings:Object.freeze({...settings}),events:events.length,ignoredSignals:ignored,pendingSignal:pending,openPosition:position?Object.freeze({...position}):null,closedTrades:Object.freeze(trades),closedNetPnL,closedReturnPercent:100*closedNetPnL/settings.initialCapital,capitalAfterClosedTrades:settings.initialCapital+closedNetPnL,lastClosedAt:rows.at(-1).t,method:"Closed OKX OHLC, V4 EMA cross; next contiguous bar open; long-only spot; fee/slippage each side; no look-ahead, mark-to-market or orders"});
+    // Comparison V5: same eligible entry opportunity after slow-EMA warm-up,
+    // and same last CLOSED bar. Both equity figures include hypothetical exit costs.
+    // The existing realized (closed trades only) V5 profit remains unchanged.
+    const firstTradable=rows[cross.slowPeriod+1],lastClosed=rows.at(-1);
+    const holdEntryPrice=firstTradable.o*(1+slip);
+    const holdQuantity=settings.initialCapital/(holdEntryPrice*(1+fee));
+    const hypotheticalExitPrice=lastClosed.c*(1-slip);
+    const holdFinal=holdQuantity*hypotheticalExitPrice*(1-fee);
+    const emaFinal=position?position.quantity*hypotheticalExitPrice*(1-fee):cash;
+    if(![holdEntryPrice,holdQuantity,hypotheticalExitPrice,holdFinal,emaFinal].every(Number.isFinite)
+       ||Math.min(holdEntryPrice,holdQuantity,hypotheticalExitPrice,holdFinal,emaFinal)<0)
+      return error("COMPARISON_INVALID","Comparaison de valeur finale impossible.");
+    const comparison=Object.freeze({
+      read_only:true,orders:0,startAt:firstTradable.t,endAt:lastClosed.t,
+      quote:currencyCode(pair),initialCapital:settings.initialCapital,
+      holdEntryPrice,holdQuantity,holdFinal,
+      holdNetPnL:holdFinal-settings.initialCapital,
+      holdReturnPercent:100*(holdFinal/settings.initialCapital-1),
+      emaFinal,emaNetPnL:emaFinal-settings.initialCapital,
+      emaReturnPercent:100*(emaFinal/settings.initialCapital-1),
+      emaHasOpenPosition:!!position,
+      advantage:emaFinal-holdFinal,
+      method:"Same eligible entry date after slow EMA warm-up, same last closed candle; buy and hold enters once at next open; both valued at hypothetical liquidation with entry/exit fees and slippage, no real trades"
+    });
+    return Object.freeze({ok:true,mode:"HISTORICAL_PAPER_LONG_ONLY",read_only:true,orders:0,source,pair,bar,quote:currencyCode(pair),bars:rows.length,excludedFormingBars:unfinished,fastPeriod:cross.fastPeriod,slowPeriod:cross.slowPeriod,settings:Object.freeze({...settings}),events:events.length,ignoredSignals:ignored,pendingSignal:pending,openPosition:position?Object.freeze({...position}):null,closedTrades:Object.freeze(trades),closedNetPnL,closedReturnPercent:100*closedNetPnL/settings.initialCapital,comparison,capitalAfterClosedTrades:settings.initialCapital+closedNetPnL,lastClosedAt:rows.at(-1).t,method:"Closed OKX OHLC, V4 EMA cross; next contiguous bar open; long-only spot; fee/slippage each side; no look-ahead, mark-to-market or orders"});
   }
   function node(tag,attributes={},value){const el=document.createElement(tag);for(const [k,v] of Object.entries(attributes))el.setAttribute(k,String(v));if(value!==undefined)el.textContent=value;return el;}
   function mount(){
@@ -82,22 +106,51 @@
     const action=node("button",{type:"button","data-v5-run":"true"},"Calculer la simulation PAPER");section.append(action);
     const output=node("p",{id:"erithPaperV5Result",role:"status","aria-live":"polite"},"À la demande uniquement ; aucun ordre, aucune connexion supplémentaire.");section.append(output);
     const details=node("div",{id:"erithPaperV5Trades"});section.append(details);
+    const comparisonPanel=node("div",{id:"erithPaperV5BuyHold",style:"margin-top:12px;padding:10px;border:1px solid #397b81;border-radius:9px;background:#061d29"});
+    comparisonPanel.append(node("strong",{},"Comparer à Acheter et conserver (Buy & Hold)"));
+    const comparisonBody=node("div",{id:"erithPaperV5BuyHoldResult",role:"status","aria-live":"polite"});
+    comparisonBody.append(node("p",{},"Cliquez sur « Calculer la simulation PAPER » : le comparatif utilisera les mêmes bougies, le même capital, les mêmes frais et le même glissement."));
+    comparisonPanel.append(comparisonBody);section.insertBefore(comparisonPanel,details);
     action.addEventListener("click",()=>{
       const value=key=>Number(section.querySelector(`[data-v5="${key}"]`)?.value);
       const source=globalThis.AgentCryptoMarketMicroscope;
       const result=simulate(source?.snapshot?.(),source?.paperEmaCrossSnapshot?.(),{initialCapital:value("capital"),feePercent:value("fee"),slippagePercent:value("slippage")});
-      details.replaceChildren();
-      if(!result.ok){output.textContent="Simulation refusée : "+result.message+" ["+result.code+"]";return;}
+      details.replaceChildren();comparisonBody.replaceChildren();
+      if(!result.ok){
+        output.textContent="Simulation refusée : "+result.message+" ["+result.code+"]";
+        comparisonBody.append(node("p",{},"Comparaison indisponible : simulation V5 refusée, aucune valeur inventée."));
+        return;
+      }
       const f=n=>Number(n).toLocaleString("fr-FR",{maximumFractionDigits:2});
       output.textContent=`${result.pair} · ${result.bar} · ${result.bars} bougies clôturées · ${result.events} signaux · ${result.closedTrades.length} allers-retours · PnL clôturé ${f(result.closedNetPnL)} ${result.quote} (${f(result.closedReturnPercent)} %) · ${result.openPosition?"position fictive EN COURS, résultat non réalisé exclu":"aucune position ouverte"}.`;
       details.append(node("small",{},`Capital fictif initial ${f(result.settings.initialCapital)} ${result.quote} · frais ${f(result.settings.feePercent)} %/côté · glissement ${f(result.settings.slippagePercent)} %/côté · ${result.pendingSignal?"dernier signal en attente d'une bougie suivante clôturée":"aucun signal en attente"}. Résultat historique non prédictif.`));
+      const cmp=result.comparison;
+      comparisonBody.append(node("p",{},"Même période : "+new Date(cmp.startAt).toISOString().slice(0,10)
+        +" → "+new Date(cmp.endAt).toISOString().slice(0,10)+" UTC · capital fictif "+f(cmp.initialCapital)+" "+cmp.quote+"."));
+      const grid=node("div",{style:"display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px"});
+      for(const [label,finalValue,pnl,pct] of [
+        ["EMA "+result.fastPeriod+"/"+result.slowPeriod,cmp.emaFinal,cmp.emaNetPnL,cmp.emaReturnPercent],
+        ["Acheter et conserver",cmp.holdFinal,cmp.holdNetPnL,cmp.holdReturnPercent]
+      ]){
+        const card=node("div",{style:"min-width:0;border:1px solid #385e6d;border-radius:7px;padding:8px;background:#082637"});
+        card.append(node("strong",{},label));
+        card.append(node("div",{style:"margin-top:5px;font-weight:900;color:#dcf7ff"},f(finalValue)+" "+cmp.quote));
+        card.append(node("div",{style:"font-size:11px;color:"+(pnl>=0?"#a9e8cd":"#ffb7ad")},(pnl>=0?"+":"")+f(pnl)+" "+cmp.quote+" ("+(pct>=0?"+":"")+f(pct)+" %)"));
+        grid.append(card);
+      }
+      comparisonBody.append(grid);
+      const better=cmp.advantage>0?"EMA devant de ":cmp.advantage<0?"Acheter et conserver devant de ":"Égalité (écart : ";
+      comparisonBody.append(node("p",{style:"font-weight:800;color:#ffdfa0"},better+f(Math.abs(cmp.advantage))+" "+cmp.quote+(cmp.advantage===0?").":".")));
+      comparisonBody.append(node("small",{},"Valeurs de liquidation FICTIVE à la dernière clôture : frais et glissement appliqués à l'entrée et à la sortie hypothétique. "+
+        (cmp.emaHasOpenPosition?"Une position EMA reste fictivement ouverte ; sa valeur est estimée, non réalisée. ":"Aucune position EMA ouverte. ")+
+        "Le PnL clôturé V5 ci-dessus reste inchangé. Historique non prédictif, aucun ordre."));
       for(const trade of result.closedTrades.slice(-8))details.append(node("p",{},`${new Date(trade.entryAt).toISOString().slice(0,16)} → ${new Date(trade.exitAt).toISOString().slice(0,16)} UTC · PnL ${f(trade.pnl)} ${result.quote} (${f(trade.returnPercent)} %)`));
     });
     const anchor=host.querySelector("#erithStrategyName")?.closest(".erith-row")?.previousElementSibling;
     if(anchor)host.insertBefore(section,anchor);else host.append(section);
     return true;
   }
-  const api=Object.freeze({version:"2026-11-06-v5-historical-paper-ema",simulate,mount,defaults:DEFAULT,read_only:true,real_order:false,paper_execution:false,api_credentials:false});
+  const api=Object.freeze({version:"2026-11-07-v5-historical-paper-ema-buy-hold",simulate,mount,defaults:DEFAULT,read_only:true,real_order:false,paper_execution:false,api_credentials:false});
   globalThis.ErithMarketPaperBacktestV5=api;
   if(typeof document!=="undefined"){
     const boot=()=>mount();
