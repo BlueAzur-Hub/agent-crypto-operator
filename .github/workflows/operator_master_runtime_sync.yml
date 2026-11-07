@@ -48,6 +48,12 @@ jobs:
           node --check public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js
           node public/agent_crypto_erith_ia/trader/test-tradus-readonly.cjs
           node public/agent_crypto_erith_ia/trader/test-master-public-parity.cjs
+      - name: Refuse role and runtime regressions before approval
+        run: |
+          node public/agent_crypto_erith_ia/administrator/tests/test-operator-dossiers-link.cjs
+          node --test public/agent_crypto_erith_ia/tools/test_operator_history_quote_cache.test.cjs
+          node --test .github/scripts/operator_phase_b_compat.test.cjs
+          node .github/scripts/operator_master_mirror_guard.cjs
 
   propose-master-updates:
     if: github.event_name != 'pull_request'
@@ -77,6 +83,10 @@ jobs:
           node --check public/agent_crypto_erith_ia/trader/ai-ct-panel.js
           node --check public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js
           node public/agent_crypto_erith_ia/trader/test-tradus-readonly.cjs
+          node public/agent_crypto_erith_ia/administrator/tests/test-operator-dossiers-link.cjs
+          node --test public/agent_crypto_erith_ia/tools/test_operator_history_quote_cache.test.cjs
+          node --test .github/scripts/operator_phase_b_compat.test.cjs
+          node .github/scripts/operator_master_mirror_guard.cjs
       - name: Open or update one reviewable PR; never push directly to main
         uses: peter-evans/create-pull-request@v7
         with:
