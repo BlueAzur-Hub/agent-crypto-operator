@@ -8,12 +8,9 @@
   const ROLE_OWNER = "owner";
   const ROLE_OPERATOR = "operator";
   const OWNER_ONLY = new Set([
-    "security.read", "book_mirror.publish", "oracle_evidence.publish",
-    "okx.account.read", "okx.orders.read", "okx.fills.read",
-    "okx.fees.read", "okx.ledger.read", "okx.fee_type.read",
-    "okx.order_gates.read"
+    "security.read", "book_mirror.publish", "oracle_evidence.publish"
   ]);
-  const OPERATOR_CAPABILITIES = new Set(["history.read","scanner.read","atlas.run","aerith.run","chat.run","okx.instruments.read"]);
+  const OPERATOR_CAPABILITIES = new Set(["history.read","scanner.read","atlas.run","aerith.run","chat.run","okx.status.read","okx.account.read","okx.orders.read","okx.fills.read","okx.fees.read","okx.ledger.read","okx.fee_type.read","okx.order_gates.read","okx.instruments.read"]);
   const selectedDefault = new URL(location.href).searchParams.get("profile") === "yohan"
     ? ROLE_OPERATOR : ROLE_OWNER;
   let selected = selectedDefault;
