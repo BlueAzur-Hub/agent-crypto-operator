@@ -8,9 +8,12 @@
   const ROLE_OWNER = "owner";
   const ROLE_OPERATOR = "operator";
   const OWNER_ONLY = new Set([
-    "security.read", "book_mirror.publish", "oracle_evidence.publish"
+    "security.read", "book_mirror.publish", "oracle_evidence.publish",
+    "okx.account.read", "okx.orders.read", "okx.fills.read",
+    "okx.fees.read", "okx.ledger.read", "okx.fee_type.read",
+    "okx.order_gates.read"
   ]);
-  const OPERATOR_CAPABILITIES = new Set(["history.read","scanner.read","atlas.run","aerith.run","chat.run","okx.status.read","okx.account.read","okx.orders.read","okx.fills.read","okx.fees.read","okx.ledger.read","okx.fee_type.read","okx.order_gates.read","okx.instruments.read"]);
+  const OPERATOR_CAPABILITIES = new Set(["history.read","scanner.read","atlas.run","aerith.run","chat.run"]);
   const selectedDefault = new URL(location.href).searchParams.get("profile") === "yohan"
     ? ROLE_OPERATOR : ROLE_OWNER;
   let selected = selectedDefault;
@@ -203,33 +206,6 @@
     }
   }
 
-  // Canonical Aether Trust session: no second form, password, token store or account owner.
-  // The Bridge grants this per-account READ capability only when credentials are isolated.
-  async function readSpotCatalog() {
-    const token=typeof atlasBridgeAuthToken === "function" ? atlasBridgeAuthToken() : "";
-    if (!token) throw new Error("Aether Trust doit d'abord être déverrouillé dans cette interface.");
-    const caps=await request("/capabilities", {token,timeout:5000});
-    if (![ROLE_OWNER, ROLE_OPERATOR].includes(caps.role) ||
-        !Array.isArray(caps.capabilities) ||
-        !caps.capabilities.includes("okx.instruments.read")) {
-      throw new Error("Le Bridge de ce profil n'autorise pas encore le catalogue privé OKX.");
-    }
-    // A full account Spot catalog: no symbol or Top N allowlist and no trade endpoint.
-    const payload=await request("/okx/instruments", {token,timeout:30000});
-    if (typeof atlasBridgeAuthToken !== "function" || atlasBridgeAuthToken() !== token) {
-      throw new Error("La session Aether Trust a changé pendant la lecture.");
-    }
-    if (payload.schema !== "erith_okx_account_spot_catalog_v1" ||
-        payload.read_only !== true || payload.orders_enabled !== false ||
-        !Array.isArray(payload.instruments) ||
-        !Number.isInteger(payload.count) || payload.count !== payload.instruments.length ||
-        !Number.isInteger(payload.qualified_count) ||
-        payload.qualified_count < 0 || payload.qualified_count > payload.count) {
-      throw new Error("Contrat de catalogue Spot OKX non vérifiable.");
-    }
-    return payload;
-  }
-
   function bind() {
     const dialog=$("atlasAccessDialog");
     const form=$("atlasAccessForm");
@@ -269,7 +245,7 @@
     document.addEventListener("DOMContentLoaded",bind,{once:true});
   else bind();
   globalThis.ErithAetherTrustDualRoleR28 = Object.freeze({
-    version:"R28 DUAL ROLE", choose, login, validateRole, readSpotCatalog,
+    version:"R28 DUAL ROLE", choose, login, validateRole,
     selected:()=>selected, bridge_base:ROOT, no_real_orders:true
   });
 })();
