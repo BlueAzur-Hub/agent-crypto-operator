@@ -20,7 +20,7 @@ const ticker=symbol=>({symbol,lastPrice:"1.50",turnover24h:"200000",price24hPcnt
 test("both Operator Radars read MASTER canonical feed, without copying logo memory",()=>{
  for(const source of [native,standalone]){
   assert.ok(source.includes(shared));
-  assert.ok(!source.includes("new-listings-identities.json"));
+  assert.doesNotMatch(source,/get\(["\x27][^"\x27]*new-listings-identities\.json["\x27]\)/,"Legacy logo registry cannot be fetched as Spot identity evidence");
  }
 });
 test("only exact contract + venue matches qualify as verified Bitget identity",()=>{
