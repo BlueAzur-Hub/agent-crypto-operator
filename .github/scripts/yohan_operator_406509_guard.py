@@ -8,7 +8,8 @@ build=json.loads((base/'operator'/'build.json').read_text(encoding='utf-8'))
 admin_manifest=json.loads((base/'administrator'/'build.json').read_text(encoding='utf-8'))
 trader_manifest=json.loads((base/'trader'/'build.json').read_text(encoding='utf-8'))
 operator_entry=(base/'operator'/'index.html').read_text(encoding='utf-8')
-yohan=(base/'administrator'/'yohan.html').read_text(encoding='utf-8')
+yoann=(base/'administrator'/'yoann.html').read_text(encoding='utf-8')
+legacy_yohan=(base/'administrator'/'yohan.html').read_text(encoding='utf-8')
 profile=(base/'administrator'/'js'/'yohan-operator-profile.js').read_text(encoding='utf-8')
 trader=(base/'trader'/'trading-desk.html').read_text(encoding='utf-8')
 trader_mirror=(base/'trader'/'trader-runtime-mirror.js').read_text(encoding='utf-8')
@@ -28,11 +29,14 @@ checks={
  'profile_delivery_truth':'deliveryBuild: "40.6.719"' in profile,
  'trader_mirror_truth':'const BUILD="40.6.719"' in trader_mirror,
  'operator_local_719':build.get('runtime_repository')=='BlueAzur-Hub/agent-crypto-operator' and build.get('runtime_mode')=='operator-local-shared-administrator-surface',
- 'yoann_719_local_entry':'./index.html?view=intermediate&amp;operator-entry=40.6.719&amp;profile=yohan' in yohan,
+ 'yoann_719_local_entry':'./index.html?view=intermediate&amp;operator-entry=40.6.719&amp;profile=yohan' in yoann,
+ 'legacy_yohan_redirect':'./yoann.html' in legacy_yohan and 'index.html?view=' not in legacy_yohan,
+ 'operator_manifest_canonical_entry':build.get('local_entry')=='../administrator/yoann.html' and '/administrator/yoann.html?' in build.get('runtime_entry',''),
+ 'operator_index_canonical_redirect':'../administrator/yoann.html' in operator_entry,
  'trader_719_local_entry':'../administrator/index.html?surface=trader&amp;view=intermediate&amp;profile=yohan' in trader,
  'trader_profile_attached':'erithYohanOperatorLayer0' in trader_mirror and 'yohan-operator-profile.js' in trader_mirror,
  'trader_bridge_attached':'erithYohanOperatorLayer1' in trader_mirror and 'yohan-operator-bridge-client.js' in trader_mirror,
- 'shared_operator_admin_link':'adminLink.href="../administrator/yohan.html"' in trader_mirror,
+ 'shared_operator_admin_link':'adminLink.href="../administrator/yoann.html"' in trader_mirror,
  'market_radar_native':'Canonical #marketRows renders all Radar quote rankings.' in radar and 'detailRanking=foldSection' not in radar,
  'market_data_master':build.get('public_market_reference_repository')=='BlueAzur-Hub/erith-ia-memory' and 'new-listings-public-feed.json' in public_router,
  'usd_initial':(base/'administrator'/'js'/'quote-currency-architecture-406497.js').read_text(encoding='utf-8').count('const state={displayCurrency:"USD"')==1,
@@ -57,6 +61,10 @@ checks={
  'no_exchange':build.get('bridge_private_exchange') is False,
  'no_wallet':build.get('grants_wallet') is False,
  'token_memory':'token_storage: "memory_only"' in client,
+ 'operator_canonical_aether_session':'session_owner: "aether-trust"' in client and 'const token = currentToken()' in client,
+ 'operator_bridge_role_verified':'capabilities.role !== ROLE' in client and 'currentToken() !== token' in client,
+ 'operator_bridge_no_parallel_auth':'request("/auth/login"' not in client and 'request("/auth/register"' not in client,
+ 'operator_bridge_legacy_registration_disabled':'const register = async () => {' in client and 'Configure Operator dans le Control Center local' in client,
  'zip_sha':build.get('bridge_package_sha256')=='d1b9c7191144157eec45404657d259c48ee6741a4b9c37c75a07deb50f8ad998',
  'exe_sha':build.get('bridge_exe_sha256')=='2d333589fa4352c6aa3b4a43f563df4d19e26ccff312c0e2525ccdf581acca99',
  'backend_sha':build.get('backend_sha256')=='782e6d1e73b7e1d2c09e1aa19b82e16a17be5d75f49a98a59d6623590f4a5c17',
