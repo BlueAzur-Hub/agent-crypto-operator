@@ -787,13 +787,11 @@ function printOkxHourly(root,model){
  }
 }
 async function identityRegistry(){
- const local="./data/new-listings-identities.json";
- try{return await get(local);}
- catch(_){
-  // Data folder may be excluded from the lightweight Pages artifact. The
-  // canonical PUBLIC file is GitHub RAW; no identity is inferred on failure.
-  return get("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/administrator/data/new-listings-identities.json");
- }
+ // One shared public Spot identity registry belongs to MASTER. Operator's
+ // local new-listings-identities.json is a legacy logo memory with a different
+ // schema and MUST NOT be passed to the strict Spot feed validator.
+ // Do not copy the live feed into the Yoann profile or infer ticker identities.
+ return get("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/administrator/data/new-listings-public-feed.json");
 }
 async function refresh(root,model){
  if(model.loading)return;
