@@ -38,6 +38,7 @@ jobs:
             /public/agent_crypto_erith_ia/administrator/app.js
             /public/agent_crypto_erith_ia/administrator/index.html
             /public/agent_crypto_erith_ia/administrator/build.json
+            /public/agent_crypto_erith_ia/administrator/js/aether-trust-r28-dual-role.js
             /public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js
             /public/agent_crypto_erith_ia/administrator/js/market-microscope-candles.js
             /public/agent_crypto_erith_ia/administrator/js/market-microscope-strategy-options.js
@@ -283,6 +284,32 @@ jobs:
             assert "trader-tradus-readonly.js" in mirror
             assert trader["real_orders"] is False
             print("OPERATOR_MASTER_MIRROR_AND_PAPER_SCOPE_PASS; full guard owned by dedicated workflow")
+            raise SystemExit(0)
+          # Explicit R31 OKX READ scope: preserve the historic six-file contract,
+          # while certifying the three-file shared Adapter/Market/Trader link delta.
+          r31_paths=[
+            "public/agent_crypto_erith_ia/administrator/index.html",
+            "public/agent_crypto_erith_ia/administrator/js/aether-trust-r28-dual-role.js",
+            "public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js"
+          ]
+          if sorted(modified)==sorted(r31_paths):
+            trust=(root/"administrator/js/aether-trust-r28-dual-role.js").read_text()
+            trust_sha=subprocess.check_output(["git","hash-object",str(root/"administrator/js/aether-trust-r28-dual-role.js")],text=True).strip()
+            assert trust_sha=="ca45ac58213df90c80664ce0f0c5033a9d2c6f5e",trust_sha
+            allowed=trust.split("const OPERATOR_CAPABILITIES = new Set([",1)[1].split("]);",1)[0]
+            for cap in ("history.read","scanner.read","atlas.run","aerith.run","chat.run",
+                        "okx.instruments.read","okx.status.read","okx.account.read",
+                        "okx.orders.read","okx.fills.read","okx.fees.read",
+                        "okx.ledger.read","okx.fee_type.read","okx.order_gates.read"):
+              assert '"'+cap+'"' in allowed,cap
+            for forbidden in ("security.read","book_mirror.publish","oracle_evidence.publish","trade.place","withdraw.write"):
+              assert '"'+forbidden+'"' not in allowed,forbidden
+            assert "verified.role !== role" in trust and "payload.role !== role" in trust
+            assert "readSpotCatalog()" in trust and "payload.orders_enabled !== false" in trust
+            assert index.count("https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/administrator/js/okx-spot-catalog-market-67778ce8.js")==1
+            assert 'adminLink.href="../administrator/yoann.html"' in mirror
+            assert "real_orders:false" in mirror and trader["real_orders"] is False
+            print("OPERATOR_R31_OKX_READ_AND_YOANN_SCOPE_PASS; no historic six-file package")
             raise SystemExit(0)
           assert sorted(modified)==sorted(rootpaths),(modified,rootpaths)
           folder=pathlib.Path("operator_trader_delta")

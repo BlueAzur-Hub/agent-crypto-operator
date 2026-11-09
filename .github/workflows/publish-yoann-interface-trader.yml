@@ -23,7 +23,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Verify canonical Yoann protection (PR only; no deployment)
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s public/agent_crypto_erith_ia/administrator/yoann.html
+          test -s public/agent_crypto_erith_ia/administrator/yohan.html
+          grep -q 'administrator/yoann.html' .github/workflows/publish-yoann-interface-trader.yml
+          grep -q 'administrator/yohan.html' .github/workflows/publish-yoann-interface-trader.yml
+          echo 'YOANN_CANONICAL_ENTRY_PROTECTION_PASS; publication not attempted on PR'
+
       - name: Download pinned public GitHub Pages build
+        if: github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -37,6 +49,7 @@ jobs:
           test -s "$RUNNER_TEMP/yoann-source/artifact.tar"
 
       - name: Install exact web snapshot without changing Operator-specific files
+        if: github.event_name != 'pull_request'
         shell: bash
         run: |
           set -euo pipefail
@@ -114,6 +127,7 @@ jobs:
           PY
 
       - name: Validate prior Operator contract and published JavaScript
+        if: github.event_name != 'pull_request'
         run: |
           set -euo pipefail
           python3 .github/scripts/yohan_operator_406509_guard.py
