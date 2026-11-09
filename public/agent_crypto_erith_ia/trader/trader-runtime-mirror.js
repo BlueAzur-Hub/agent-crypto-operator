@@ -58,7 +58,7 @@ function mount(){
 
   const adminLink=doc.getElementById("traderSurfaceAdminLink");
   if(adminLink){
-    adminLink.href="../administrator/yohan.html";
+    adminLink.href="../administrator/yoann.html";
     adminLink.target="_top";
     adminLink.rel="noopener";
     adminLink.setAttribute("aria-label","Ouvrir Administrator");
