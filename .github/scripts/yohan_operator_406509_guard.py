@@ -21,6 +21,11 @@ contract=json.loads((base/'operator'/'bridge_yohan'/'R19Y1_OPERATOR_CONTROL_CONT
 
 checks={
  'build_719':build.get('build')=='40.6.719',
+ 'historic_delivery_scope':build.get('bridge_manifest_scope')=='LEGACY_R19Y1_SEPARATE_PACKAGE_REFERENCE_NOT_CURRENT_INSTALLED_RUNTIME',
+ 'r31_is_candidate':build.get('r31_candidate',{}).get('release_status')=='DRAFT_ONLY_NOT_PUBLISHED_NOT_CERTIFIED' and build.get('yoann_pc_actual_installation')=='NOT_VERIFIED_YET',
+ 'r31_versions_separate':build.get('r31_candidate',{}).get('bridge_version')=='1.9.25' and build.get('r31_candidate',{}).get('backend_version')=='1.4.6' and build.get('r31_candidate',{}).get('control_center_version')=='2.3.2R31-RECOVERY',
+ 'r31_yoann_not_certified':build.get('r31_candidate',{}).get('yoann_pc_installed') is None and build.get('r31_candidate',{}).get('okx_real_operator_account_verified') is False,
+ 'operator_ui_not_auth':'SAS D’ACCÈS LOCAL' in profile and 'bridgeAuthenticationOwner: "aether-trust"' in profile,
  'shared_administrator_truth':admin_manifest.get('build')=='40.6.719' and admin_manifest.get('administrator_build')=='40.6.719' and admin_manifest.get('engine')=='38.15.11',
  'trader_shared_truth':trader_manifest.get('build')=='40.6.719' and trader_manifest.get('administrator_base')=='40.6.719' and trader_manifest.get('market_core')=='38.15.11',
  'shared_html_boot':'build:"40.6.719",loaded_build:"40.6.719"' in local_admin,

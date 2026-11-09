@@ -48,5 +48,25 @@
   "bridge_exe_sha256": "2d333589fa4352c6aa3b4a43f563df4d19e26ccff312c0e2525ccdf581acca99",
   "backend_sha256": "782e6d1e73b7e1d2c09e1aa19b82e16a17be5d75f49a98a59d6623590f4a5c17",
   "public_market_reference_repository": "BlueAzur-Hub/erith-ia-memory",
-  "public_market_data_source": "https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/"
+  "public_market_data_source": "https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/",
+  "bridge_manifest_scope": "LEGACY_R19Y1_SEPARATE_PACKAGE_REFERENCE_NOT_CURRENT_INSTALLED_RUNTIME",
+  "yoann_pc_actual_installation": "NOT_VERIFIED_YET",
+  "r31_candidate": {
+    "contract": "SAME_BRIDGE_PROGRAM_TWO_INDEPENDENT_WINDOWS_INSTALLATIONS",
+    "release_status": "DRAFT_ONLY_NOT_PUBLISHED_NOT_CERTIFIED",
+    "administrator_pc_observed": "2026-11-09",
+    "bridge_version": "1.9.25",
+    "backend_version": "1.4.6",
+    "control_center_version": "2.3.2R31-RECOVERY",
+    "authentication": "AETHER_TRUST_DUAL_ROLE_LOCAL_BRIDGE",
+    "operator_role": "operator",
+    "private_okx": "READ_ONLY",
+    "okx_real_operator_account_verified": false,
+    "yoann_windows_firefox_end_to_end_verified": false,
+    "yoann_pc_installed": null,
+    "public_master_pull_request": "https://github.com/BlueAzur-Hub/erith-ia-memory/pull/734",
+    "operator_pull_request": "https://github.com/BlueAzur-Hub/agent-crypto-operator/pull/32",
+    "frontend_release_order": "MASTER_FIRST_THEN_OPERATOR",
+    "adapter_blob_sha": "ca45ac58213df90c80664ce0f0c5033a9d2c6f5e"
+  }
 }
