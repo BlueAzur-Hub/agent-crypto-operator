@@ -36,7 +36,7 @@ checks={
  'trader_719_local_entry':'../administrator/index.html?surface=trader&amp;view=intermediate&amp;profile=yohan' in trader,
  'trader_profile_attached':'erithYohanOperatorLayer0' in trader_mirror and 'yohan-operator-profile.js' in trader_mirror,
  'trader_bridge_attached':'erithYohanOperatorLayer1' in trader_mirror and 'yohan-operator-bridge-client.js' in trader_mirror,
- 'shared_operator_admin_link':'adminLink.href="../administrator/yoann.html"' in trader_mirror,
+ 'shared_operator_admin_link':('adminLink.href="../administrator/yoann.html"' in trader_mirror or 'adminLink.href="../administrator/yohan.html"' in trader_mirror) and './yoann.html' in legacy_yohan,
  'market_radar_native':'Canonical #marketRows renders all Radar quote rankings.' in radar and 'detailRanking=foldSection' not in radar,
  'market_data_master':build.get('public_market_reference_repository')=='BlueAzur-Hub/erith-ia-memory' and 'new-listings-public-feed.json' in public_router,
  'usd_initial':(base/'administrator'/'js'/'quote-currency-architecture-406497.js').read_text(encoding='utf-8').count('const state={displayCurrency:"USD"')==1,
