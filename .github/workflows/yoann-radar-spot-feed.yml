@@ -1,0 +1,42 @@
+name: Yoann Radar canonical Spot identity
+
+on:
+  pull_request:
+    paths:
+      - "public/agent_crypto_erith_ia/administrator/js/market-radar-native.js"
+      - "public/agent_crypto_erith_ia/laboratoire/radar.js"
+      - "public/agent_crypto_erith_ia/administrator/tests/test-yoann-radar-spot-registry.cjs"
+      - ".github/workflows/yoann-radar-spot-feed.yml"
+  push:
+    branches: [main]
+    paths:
+      - "public/agent_crypto_erith_ia/administrator/js/market-radar-native.js"
+      - "public/agent_crypto_erith_ia/laboratoire/radar.js"
+      - "public/agent_crypto_erith_ia/administrator/tests/test-yoann-radar-spot-registry.cjs"
+      - ".github/workflows/yoann-radar-spot-feed.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  strict-spot-identity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            public/agent_crypto_erith_ia/administrator/js/market-radar-native.js
+            public/agent_crypto_erith_ia/laboratoire/radar.js
+            public/agent_crypto_erith_ia/administrator/tests/test-yoann-radar-spot-registry.cjs
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate shared read-only Spot registry and exact venue pairing
+        run: |
+          node --check public/agent_crypto_erith_ia/administrator/js/market-radar-native.js
+          node --check public/agent_crypto_erith_ia/laboratoire/radar.js
+          node --test public/agent_crypto_erith_ia/administrator/tests/test-yoann-radar-spot-registry.cjs
