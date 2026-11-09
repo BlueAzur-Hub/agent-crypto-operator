@@ -41,9 +41,23 @@ function verifyPaper(state){
  }));
 }
 function verifyRegistry(obj){
- if(obj?.schema!=="agent_crypto_new_listings_identity_registry_v1")throw Error("Registre identité invalide");
- return new Map(Object.values(obj.identities||{}).filter(x=>x?.verified===true&&x.symbol&&x.coingeckoId)
-  .map(x=>[String(x.symbol).toUpperCase(),x]));
+ // A ticker alone is not contract/venue evidence.
+ if(obj?.schema!=="erith.seven.public-spot-listings-feed.v1"||
+    obj.read_only!==true||obj.trade_permission!==false||obj.real_orders!==0||
+    obj.no_ticker_to_contract_identity_inference!==true||!Array.isArray(obj.entries))
+   throw Error("Catalogue d'identités Spot public invalide");
+ const verified=new Map();
+ for(const x of obj.entries){
+  if(x?.provider!=="bitget"||x.instrument_type!=="SPOT"||
+     x.identity_status!=="EXACT_CONTRACT_AND_VENUE_REGISTRY"||
+     !x.canonicalId||!x.providerSymbol||!x.base||!x.quote||
+     x.pair!==x.base+"/"+x.quote)continue;
+  verified.set(String(x.providerSymbol).toUpperCase(),{
+   symbol:String(x.base).toUpperCase(),pair:x.pair,displayName:x.base,
+   coingeckoId:String(x.canonicalId),image:x.image||""
+  });
+ }
+ return verified;
 }
 function verifyBitget(inst,tickers,registry,now){
  if(String(inst?.code)!=="00000"||!Array.isArray(inst.data)||String(tickers?.code)!=="00000"||!Array.isArray(tickers.data))throw Error("Réponses Spot Bitget invalides");
@@ -57,11 +71,13 @@ function verifyBitget(inst,tickers,registry,now){
      String(row?.isRwa||"NO").toUpperCase()==="YES")continue;
   const t=byTicker.get(symbol),last=Number(t?.lastPrice),turnover=Number(t?.turnover24h),change=Number(t?.price24hPcnt);
   if(!Number.isFinite(last)||last<=0||!Number.isFinite(turnover)||turnover<=0)continue;
-  const identity=registry.get(base),value={symbol:base,name:identity?.displayName||base,
+  const entry=registry.get(symbol);
+  const identity=entry?.symbol===base&&entry?.pair===base+"/"+quote?entry:null;
+  const value={symbol:base,name:identity?.displayName||base,
    providerSymbol:symbol,provider:"bitget",
    venue:"Bitget Spot",pair:base+"/"+quote,quote,price:last,volume:turnover,
    ageDays:(now-start)/DAY,change24h:Number.isFinite(change)?change*100:null,
-   image:identity?.image||'',identityProved:!!identity,status:identity?"IDENTITÉ VÉRIFIÉE":"IDENTITÉ À VÉRIFIER",source:"Bitget Spot launchTime+ticker"};
+   image:identity?.image||'',identityProved:!!identity,status:identity?"CONTRAT + PLACE RAPPROCHÉS":"IDENTITÉ À VÉRIFIER",source:"Bitget Spot launchTime+ticker"};
   if(!found.has(base)||value.volume>found.get(base).volume)found.set(base,value);
  }
  return [...found.values()].sort((a,b)=>a.ageDays-b.ageDays).slice(0,50);
@@ -212,7 +228,7 @@ async function refresh(){
   const sources=await Promise.allSettled([
    get("../data/crypto/latest.json"),
    get("../data/trader_flux/btc_ct_auto_paper/state.json"),
-   get("../administrator/data/new-listings-identities.json")
+   get("https://raw.githubusercontent.com/BlueAzur-Hub/erith-ia-memory/main/public/agent_crypto_erith_ia/administrator/data/new-listings-public-feed.json")
   ]);
   try{market=validMarket(sources[0].value)}catch(e){market=null;errors.push("Top 250 : "+e.message)}
   try{paper=verifyPaper(sources[1].value)}catch(e){paper=null;errors.push("PAPER : "+e.message)}
