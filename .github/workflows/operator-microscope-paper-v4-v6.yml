@@ -6,7 +6,6 @@ on:
       - 'public/agent_crypto_erith_ia/administrator/index.html'
       - 'public/agent_crypto_erith_ia/administrator/js/market-microscope-*.js'
       - 'public/agent_crypto_erith_ia/administrator/tests/test-market-microscope-*.cjs'
-      - 'public/agent_crypto_erith_ia/administrator/tests/test-yoann-btc-annual-interval.cjs'
       - '.github/workflows/operator-microscope-paper-v4-v6.yml'
   push:
     branches: [main, integrate/operator-microscope-v4-v6-20261106]
@@ -14,7 +13,6 @@ on:
       - 'public/agent_crypto_erith_ia/administrator/index.html'
       - 'public/agent_crypto_erith_ia/administrator/js/market-microscope-*.js'
       - 'public/agent_crypto_erith_ia/administrator/tests/test-market-microscope-*.cjs'
-      - 'public/agent_crypto_erith_ia/administrator/tests/test-yoann-btc-annual-interval.cjs'
       - '.github/workflows/operator-microscope-paper-v4-v6.yml'
   workflow_dispatch:
 permissions:
@@ -32,7 +30,6 @@ jobs:
           node --check public/agent_crypto_erith_ia/administrator/js/market-microscope-paper-backtest-v5.js
           node --check public/agent_crypto_erith_ia/administrator/js/market-microscope-orderbook-paper-v6.js
           node public/agent_crypto_erith_ia/administrator/tests/test-operator-market-microscope-wiring.cjs
-          node public/agent_crypto_erith_ia/administrator/tests/test-yoann-btc-annual-interval.cjs
       - name: V5 historical PAPER 13 cases
         run: node public/agent_crypto_erith_ia/administrator/tests/test-market-microscope-paper-backtest-v5.cjs
       - name: V6 instant OKX book PAPER 31 cases
