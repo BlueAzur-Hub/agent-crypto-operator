@@ -50,6 +50,7 @@ jobs:
           prefix = "public/agent_crypto_erith_ia/"
           # Keep the existing Yoann Operator/Bridge contract and its checks intact.
           protected = {
+              "administrator/yoann.html",
               "administrator/yohan.html",
               "administrator/js/yohan-operator-profile.js",
               "administrator/js/yohan-operator-bridge-client.js",
