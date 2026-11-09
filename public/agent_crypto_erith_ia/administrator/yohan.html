@@ -3,41 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="operator-delivery-build" content="40.6.719" />
-  <meta name="operator-runtime" content="canonical-master-shared" />
-  <meta name="operator-profile" content="yohan" />
-  <meta name="operator-bridge" content="Yohan Operator Bridge 1.0.0" />
-  <title>Agent-Crypto · Yoann Operator</title>
-  <style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#020914}#yohanApp{display:block;width:100vw;height:100vh;border:0}</style>
+  <meta http-equiv="refresh" content="0; url=./yoann.html" />
+  <link rel="canonical" href="./yoann.html" />
+  <title>Agent-Crypto · Redirection vers Yoann Operator</title>
 </head>
 <body>
-  <iframe id="yohanApp" title="Agent-Crypto · Yohan Operator 40.6.719"
-    src="./index.html?view=intermediate&amp;operator-entry=40.6.719&amp;profile=yohan"
-    allow="fullscreen"></iframe>
-  <script>
-    (()=>{
-      "use strict";
-      const frame=document.getElementById("yohanApp");
-      const scripts=[
-        "https://blueazur-hub.github.io/agent-crypto-operator/public/agent_crypto_erith_ia/administrator/js/yohan-operator-profile.js",
-        "https://blueazur-hub.github.io/agent-crypto-operator/public/agent_crypto_erith_ia/administrator/js/yohan-operator-bridge-client.js"
-      ];
-      frame.addEventListener("load",()=>{
-        try{
-          const doc=frame.contentDocument;
-          if(!doc)return;
-          scripts.forEach((src,index)=>{
-            const id=`erithYohanOperatorLayer${index}`;
-            if(doc.getElementById(id))return;
-            const script=doc.createElement("script");
-            script.id=id;
-            script.src=src;
-            script.dataset.operatorDeliveryBuild="40.6.719";
-            (doc.body||doc.documentElement).appendChild(script);
-          });
-        }catch(error){console.error("Yohan Operator 40.6.719 layer injection failed",error);}
-      });
-    })();
-  </script>
+  <p>La page Operator est maintenant <a href="./yoann.html">yoann.html</a>.</p>
+  <script>location.replace("./yoann.html" + location.search + location.hash);</script>
 </body>
 </html>
