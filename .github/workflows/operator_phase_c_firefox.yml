@@ -15,6 +15,7 @@ on:
       - ".github/workflows/operator_phase_c_firefox.yml"
       - "public/agent_crypto_erith_ia/administrator/index.html"
       - "public/agent_crypto_erith_ia/administrator/build.json"
+      - "public/agent_crypto_erith_ia/administrator/yoann.html"
       - "public/agent_crypto_erith_ia/administrator/yohan.html"
       - "public/agent_crypto_erith_ia/administrator/js/yohan-operator-profile.js"
       - "public/agent_crypto_erith_ia/operator/build.json"
@@ -29,7 +30,7 @@ permissions:
 
 jobs:
   firefox-operator:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 18
     steps:
       - uses: actions/checkout@v4
