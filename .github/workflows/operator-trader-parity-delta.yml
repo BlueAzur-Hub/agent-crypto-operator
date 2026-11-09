@@ -39,6 +39,8 @@ jobs:
             /public/agent_crypto_erith_ia/administrator/index.html
             /public/agent_crypto_erith_ia/administrator/build.json
             /public/agent_crypto_erith_ia/administrator/js/aether-trust-r28-dual-role.js
+            /public/agent_crypto_erith_ia/administrator/js/yohan-operator-profile.js
+            /public/agent_crypto_erith_ia/operator/build.json
             /public/agent_crypto_erith_ia/administrator/js/graph-native-usd.js
             /public/agent_crypto_erith_ia/administrator/js/market-microscope-candles.js
             /public/agent_crypto_erith_ia/administrator/js/market-microscope-strategy-options.js
@@ -290,6 +292,8 @@ jobs:
           r31_paths=[
             "public/agent_crypto_erith_ia/administrator/index.html",
             "public/agent_crypto_erith_ia/administrator/js/aether-trust-r28-dual-role.js",
+            "public/agent_crypto_erith_ia/administrator/js/yohan-operator-profile.js",
+            "public/agent_crypto_erith_ia/operator/build.json",
             "public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js"
           ]
           if sorted(modified)==sorted(r31_paths):
@@ -304,6 +308,17 @@ jobs:
               assert '"'+cap+'"' in allowed,cap
             for forbidden in ("security.read","book_mirror.publish","oracle_evidence.publish","trade.place","withdraw.write"):
               assert '"'+forbidden+'"' not in allowed,forbidden
+            operator=json.loads((root/"operator/build.json").read_text())
+            profile=(root/"administrator/js/yohan-operator-profile.js").read_text()
+            assert operator["bridge_manifest_scope"]=="LEGACY_R19Y1_SEPARATE_PACKAGE_REFERENCE_NOT_CURRENT_INSTALLED_RUNTIME"
+            assert operator["bridge_version"]=="1.9.13" and operator["backend_version"]=="1.4.4"
+            assert operator["yoann_pc_actual_installation"]=="NOT_VERIFIED_YET"
+            assert operator["r31_candidate"]["bridge_version"]=="1.9.25"
+            assert operator["r31_candidate"]["backend_version"]=="1.4.6"
+            assert operator["r31_candidate"]["yoann_pc_installed"] is None
+            assert operator["r31_candidate"]["okx_real_operator_account_verified"] is False
+            assert 'bridgeAuthenticationOwner: "aether-trust"' in profile
+            assert "SAS D’ACCÈS LOCAL" in profile
             assert "verified.role !== role" in trust and "payload.role !== role" in trust
             assert "readSpotCatalog()" in trust and "payload.orders_enabled !== false" in trust
             assert index.count("https://blueazur-hub.github.io/erith-ia-memory/public/agent_crypto_erith_ia/administrator/js/okx-spot-catalog-market-67778ce8.js")==1
