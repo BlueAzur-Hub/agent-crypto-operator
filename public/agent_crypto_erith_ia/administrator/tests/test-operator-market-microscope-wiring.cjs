@@ -26,7 +26,45 @@ assert.match(desk,/administrator\/index\.html\?surface=trader&amp;view=intermedi
 const yoann=fs.readFileSync(path.join(root,"yoann.html"),"utf8");
 const legacyYohan=fs.readFileSync(path.join(root,"yohan.html"),"utf8");
 assert.match(yoann,/yohan-operator-profile\.js/);
-assert.match(yohan,/yohan-operator-bridge-client\.js/);
+assert.match(yoann,/yohan-operator-bridge-client\.js/);
 assert.match(legacyYohan,/yoann\.html/);
+const trust=fs.readFileSync(path.join(root,"js/aether-trust-r28-dual-role.js"),"utf8");
+const bridgeClient=fs.readFileSync(path.join(root,"js/yohan-operator-bridge-client.js"),"utf8");
+const traderMirror=fs.readFileSync(path.join(root,"../trader/trader-runtime-mirror.js"),"utf8");
+const allowed=(trust.match(/const OPERATOR_CAPABILITIES = new Set\(\[([^\]]+)\]\);/)||[])[1];
+assert.ok(allowed,"Explicit Operator capability allowlist required");
+for(const capability of ["history.read","scanner.read","atlas.run","aerith.run","chat.run",
+  "okx.instruments.read","okx.status.read","okx.account.read","okx.orders.read",
+  "okx.fills.read","okx.fees.read","okx.ledger.read","okx.fee_type.read",
+  "okx.order_gates.read"]){
+  assert.ok(allowed.includes('"' + capability + '"'),"Expected read-only capability: "+capability);
+}
+for(const forbidden of ["security.read","book_mirror.publish","oracle_evidence.publish","trade.place","withdraw.write"]){
+  assert.ok(!allowed.includes('"' + forbidden + '"'),"Forbidden Operator capability: "+forbidden);
+}
+assert.match(trust,/verified\.role !== role/,"Aether Trust must verify the Bridge role");
+assert.match(trust,/readSpotCatalog\(\)/,"Use canonical Aether Trust Spot reader");
+assert.match(trust,/payload\.orders_enabled !== false/,"Catalog must refuse executable orders");
+assert.match(bridgeClient,/session_owner: "aether-trust"/,"Legacy client must reuse canonical session");
+assert.match(bridgeClient,/capabilities\.role !== ROLE/,"Legacy client must verify Operator role");
+assert.doesNotMatch(bridgeClient,/request\("\/auth\/(?:login|register)"/,"No parallel login/registration");
+assert.match(traderMirror,/adminLink\.href="\.\.\/administrator\/yoann\.html"/,"Trader link uses canonical Yoann page");
+const operatorManifest=JSON.parse(fs.readFileSync(path.join(root,"../operator/build.json"),"utf8"));
+const operatorProfile=fs.readFileSync(path.join(root,"js/yohan-operator-profile.js"),"utf8");
+assert.equal(operatorManifest.bridge_version,"1.9.13","Keep historical R19Y1 package reference");
+assert.equal(operatorManifest.backend_version,"1.4.4","Keep historical backend package reference");
+assert.equal(operatorManifest.bridge_manifest_scope,"LEGACY_R19Y1_SEPARATE_PACKAGE_REFERENCE_NOT_CURRENT_INSTALLED_RUNTIME");
+assert.equal(operatorManifest.yoann_pc_actual_installation,"NOT_VERIFIED_YET");
+assert.equal(operatorManifest.r31_candidate.bridge_version,"1.9.25");
+assert.equal(operatorManifest.r31_candidate.backend_version,"1.4.6");
+assert.equal(operatorManifest.r31_candidate.control_center_version,"2.3.2R31-RECOVERY");
+assert.equal(operatorManifest.r31_candidate.yoann_pc_installed,null);
+assert.equal(operatorManifest.r31_candidate.okx_real_operator_account_verified,false);
+assert.equal(operatorManifest.r31_candidate.yoann_windows_firefox_end_to_end_verified,false);
+assert.match(operatorProfile,/bridgeAuthenticationOwner: "aether-trust"/);
+assert.match(operatorProfile,/SAS D’ACCÈS LOCAL/);
+assert.match(operatorProfile,/Interface partagée/);
+assert.match(operatorProfile,/droits vérifiés par le Bridge/);
+assert.match(operatorProfile,/document\.querySelector\(selector\)/);
 assert.match(html,/operator-harmonized|operator-trader-parity/);
 console.log("PASS Operator + Yoann Trader one-runtime V4/V5/V6 wiring, profile and Bridge boundaries");

@@ -53,6 +53,9 @@ jobs:
           node --check public/agent_crypto_erith_ia/trader/ai-ct-contract.js
           node --check public/agent_crypto_erith_ia/trader/technical-reading-data-sync.js
           node --check public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js
+          node --check public/agent_crypto_erith_ia/administrator/js/aether-trust-r28-dual-role.js
+          node --check public/agent_crypto_erith_ia/administrator/js/yohan-operator-bridge-client.js
+          node public/agent_crypto_erith_ia/administrator/tests/test-operator-market-microscope-wiring.cjs
           node --test public/agent_crypto_erith_ia/trader/test-ai-asset-reading-core.cjs
           node --test public/agent_crypto_erith_ia/trader/test-ai-asset-reading-view.cjs
           node --test public/agent_crypto_erith_ia/trader/test-market-fiche-facts.cjs

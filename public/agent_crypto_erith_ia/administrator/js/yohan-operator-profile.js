@@ -9,7 +9,7 @@
     hideProjects: false,
     forceReducedView: false,
     grantsAdministratorSession: false,
-    bridgeAuthenticationOwner: "yohan-local-operator-bridge-v1.0.0",
+    bridgeAuthenticationOwner: "aether-trust",
     publicSecretEmbedded: false
   });
   function apply() {
@@ -21,6 +21,26 @@
       document.body.dataset.yohanProfile = "operator";
       document.body.dataset.yohanOperatorDelivery = "40.6.719";
     }
+    // Presentation only. The shared cockpit is not evidence of the authenticated
+    // Bridge role: Aether Trust and /capabilities remain the sole authorities.
+    const neutralize=(selector,was,now)=>{
+      const el=document.querySelector(selector);
+      if(el && el.textContent.trim()===was) el.textContent=now;
+    };
+    neutralize("#atlasVersionTruthText",
+      "Build 40.6.719 · Administrator","Build 40.6.719 · Interface partagée");
+    neutralize("#atlasV2ReleaseBadge",
+      "Agent-Crypto @erith.IA · Build 40.6.719 · Administrator",
+      "Agent-Crypto @erith.IA · Build 40.6.719 · Interface partagée");
+    neutralize("#atlasAccessDialog .atlas-access-system-identity b",
+      "SAS ADMINISTRATEUR","SAS D’ACCÈS LOCAL");
+    neutralize("#atlasAccessDialog .atlas-access-head .eyebrow",
+      "ACCÈS LOCAL · RYZEN 7","ACCÈS LOCAL · BRIDGE PRIVÉ");
+    neutralize("#atlasAccessDialog .atlas-access-portal-subtitle",
+      "Porte d’accès Administrateur","Choisis un profil · droits vérifiés par le Bridge");
+    const live=document.querySelector("#atlasAccessDialog .atlas-access-live-panel");
+    if(live && live.getAttribute("aria-label")==="Authentification Administrateur")
+      live.setAttribute("aria-label","Authentification locale par profil");
     try {
       document.dispatchEvent(new CustomEvent("erith:yohan-operator-profile-ready", {
         detail: { build: "40.6.719", shared_runtime: true, ui_reduction: false, authorization_granted: false }
