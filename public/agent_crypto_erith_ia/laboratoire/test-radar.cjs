@@ -48,10 +48,15 @@ assert.throws(()=>reader.selectMarket(validated.rows,500),/invalide/i);
 assert.throws(()=>reader.validMarket({...example,source:{provider_id:'unknown'}}),/canonique/i);
 const clash=coins.map(v=>({...v}));clash[3].rank=1;
 assert.throws(()=>reader.validMarket({...example,coins:clash}),/invalide/i);
-const registries={schema:'agent_crypto_new_listings_identity_registry_v1',identities:{
- 'magic-hash':{symbol:'MHA',displayName:'MAGNE.AI',coingeckoId:'magic-hash',image:'./assets/crypto/new-listings/magic-hash.png',verified:true},
- bogus:{symbol:'X',coingeckoId:'made-up',verified:false}
-}};
+const registries={schema:'erith.seven.public-spot-listings-feed.v1',read_only:true,
+ trade_permission:false,real_orders:0,no_ticker_to_contract_identity_inference:true,entries:[
+ {provider:'bitget',instrument_type:'SPOT',identity_status:'EXACT_CONTRACT_AND_VENUE_REGISTRY',
+  canonicalId:'magic-hash',providerSymbol:'MHAUSDT',base:'MHA',quote:'USDT',pair:'MHA/USDT',
+  image:'./assets/crypto/new-listings/magic-hash.png'},
+ {provider:'bitget',instrument_type:'SPOT',identity_status:'VENUE_SYMBOL_ONLY',
+  canonicalId:null,providerSymbol:'XYZUSDT',base:'XYZ',quote:'USDT',pair:'XYZ/USDT'}
+]};
+assert.throws(()=>reader.verifyRegistry({schema:'agent_crypto_new_listings_identity_registry_v1',identities:{}}),/Catalogue d'identités Spot public invalide/);
 const registry=reader.verifyRegistry(registries);
 assert.equal(registry.size,1);
 const launch=now-2*86400000;
