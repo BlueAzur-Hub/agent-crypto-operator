@@ -26,7 +26,7 @@ assert.match(desk,/administrator\/index\.html\?surface=trader&amp;view=intermedi
 const yoann=fs.readFileSync(path.join(root,"yoann.html"),"utf8");
 const legacyYohan=fs.readFileSync(path.join(root,"yohan.html"),"utf8");
 assert.match(yoann,/yohan-operator-profile\.js/);
-assert.match(yohan,/yohan-operator-bridge-client\.js/);
+assert.match(yoann,/yohan-operator-bridge-client\.js/);
 assert.match(legacyYohan,/yoann\.html/);
 assert.match(html,/operator-harmonized|operator-trader-parity/);
 console.log("PASS Operator + Yoann Trader one-runtime V4/V5/V6 wiring, profile and Bridge boundaries");
