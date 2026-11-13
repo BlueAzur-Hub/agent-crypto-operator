@@ -9,8 +9,8 @@ const filenames=[
  "market-microscope-paper-spot-realism-comparison.js"
 ];
 const blobSha=buf=>crypto.createHash("sha1").update(Buffer.from("blob "+buf.length+"\0")).update(buf).digest("hex");
-assert.equal(blobSha(fs.readFileSync(path.join(JS,filenames[0]))),"069162a40c4a65651ff1cd9ac98a837d64f41e9a");
-assert.equal(blobSha(fs.readFileSync(path.join(JS,filenames[1]))),"7ae813cd1268ddd657052cc1e2ca474e8b1aed3b");
+assert.equal(blobSha(fs.readFileSync(path.join(JS,filenames[0]))),"428003b37578b9b516a3f3e97696ee7c0a81836d");
+assert.equal(blobSha(fs.readFileSync(path.join(JS,filenames[1]))),"ed7994ab8c9b8024afb49d0be11bfbc8056228bf");
 const app={},ctx={console,Date,Number,Math,BigInt,Set};ctx.globalThis=ctx;
 for(const filename of filenames)vm.runInNewContext(fs.readFileSync(path.join(JS,filename),"utf8"),ctx,{filename});
 const core=ctx.SevenHeavenSpotPaperLotAdapter,ui=ctx.SevenHeavenPaperSpotRealism,v5=ctx.ErithMarketPaperBacktestV5,v6=ctx.ErithMarketBookPaperV6;
