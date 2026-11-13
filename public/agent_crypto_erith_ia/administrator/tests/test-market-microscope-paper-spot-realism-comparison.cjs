@@ -9,8 +9,8 @@ const filenames=[
  "market-microscope-paper-spot-realism-comparison.js"
 ];
 const blobSha=buf=>crypto.createHash("sha1").update(Buffer.from("blob "+buf.length+"\0")).update(buf).digest("hex");
-assert.equal(blobSha(fs.readFileSync(path.join(JS,filenames[0]))),"069162a40c4a65651ff1cd9ac98a837d64f41e9a");
-assert.equal(blobSha(fs.readFileSync(path.join(JS,filenames[1]))),"7ae813cd1268ddd657052cc1e2ca474e8b1aed3b");
+assert.equal(blobSha(fs.readFileSync(path.join(JS,filenames[0]))),"428003b37578b9b516a3f3e97696ee7c0a81836d");
+assert.equal(blobSha(fs.readFileSync(path.join(JS,filenames[1]))),"ed7994ab8c9b8024afb49d0be11bfbc8056228bf");
 const app={},ctx={console,Date,Number,Math,BigInt,Set};ctx.globalThis=ctx;
 for(const filename of filenames)vm.runInNewContext(fs.readFileSync(path.join(JS,filename),"utf8"),ctx,{filename});
 const core=ctx.SevenHeavenSpotPaperLotAdapter,ui=ctx.SevenHeavenPaperSpotRealism,v5=ctx.ErithMarketPaperBacktestV5,v6=ctx.ErithMarketBookPaperV6;
@@ -123,6 +123,32 @@ test("Operator Trader mirrors the Operator Interface with separate Yoann profile
  assert(html.includes("trader-runtime-mirror.js"));
  const mirror=fs.readFileSync(path.join(ROOT,"..","trader","trader-runtime-mirror.js"),"utf8");
  assert(mirror.includes("traderInterfaceRuntime"));
+});
+test("OKX Spot PAPER fee is 0,10 percent as French display and 0.1 percent as numerical default",()=>{
+ const a=fs.readFileSync(path.join(JS,filenames[0]),"utf8");
+ const b=fs.readFileSync(path.join(JS,filenames[1]),"utf8");
+ const c=fs.readFileSync(path.join(JS,filenames[3]),"utf8");
+ assert.equal(v5.defaults.feePercent,0.1);
+ assert.equal(a.includes('value:"0,10","data-v5":name'),true);
+ assert.equal(b.includes('"data-v6":key,value:"0,10"'),true);
+ assert.equal(a.includes('type:"text",inputmode:"decimal"'),true);
+ assert.equal(b.includes('type:"text",inputmode:"decimal"'),true);
+ assert.equal(a.includes('replace(",",".")'),true);
+ assert.equal(b.includes('replace(",",".")'),true);
+ assert.equal(c.includes('replace(",","."'),true);
+ assert.equal(b.includes('FRESH_MS=15000'),true);
+});
+test("One user click triggers bounded OKX book refresh with no false freshness",()=>{
+ const c=fs.readFileSync(path.join(JS,filenames[3]),"utf8");
+ const b=fs.readFileSync(path.join(JS,filenames[1]),"utf8");
+ assert(c.includes('button.addEventListener("click",async()=>{'));
+ assert(c.includes('if(button.disabled)return;'));
+ assert(c.includes('finally{button.disabled=false;}'));
+ assert(c.includes('await bridge.openDepthAndEstimate('));
+ assert(c.includes('PAIR_CHANGED'));
+ assert(c.includes('["BOOK_CONTEXT","BOOK_STALE"]'));
+ assert(b.includes('await bookService.refresh({asset:matched[1],quote:matched[2]})'));
+ assert(!c.includes('fetch(')&&!c.includes('sendOrder('));
 });
 if(process.exitCode)process.exit(1);
 console.log(JSON.stringify({status:"PASS_SHARED_ADMIN_TRADER_PAPER_UI_MATH",tests:passed,

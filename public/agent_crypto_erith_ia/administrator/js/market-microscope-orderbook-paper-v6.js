@@ -180,7 +180,11 @@
       ["feePercent","Frais Taker (%)",0.1,0,2,0.01]
     ]){
       const lb=el("label",{},label);
-      lb.append(el("input",{type:"number","data-v6":key,value,min,max,step,style:"display:block;width:130px"}));controls.append(lb);
+      const attrs=key==="feePercent"
+        ? {type:"text",inputmode:"decimal","data-v6":key,value:"0,10",
+           "aria-label":"Frais OKX Spot Taker : 0,10 %",style:"display:block;width:130px"}
+        : {type:"number","data-v6":key,value,min,max,step,style:"display:block;width:130px"};
+      lb.append(el("input",attrs));controls.append(lb);
     }
     sec.append(controls);
     const button=el("button",{type:"button","data-v6-run":"true"},"Estimer sur le carnet FRESH");
@@ -190,6 +194,10 @@
     button.addEventListener("click",async()=>{
       if(button.disabled)return;
       const val=key=>sec.querySelector('[data-v6="'+key+'"]')?.value;
+      const numeric=key=>{
+        const raw=val(key);
+        return raw==null||String(raw).trim()===""?NaN:Number(String(raw).trim().replace(",","."));
+      };
       button.disabled=true;
       out.textContent="Ouverture de Lecture technique → Profondeur → lecture du carnet OKX…";
       let result;
@@ -197,7 +205,7 @@
         result=await openDepthAndEstimate(
           globalThis.AgentCryptoOkxMicrostructure,
           globalThis.AgentCryptoMarketMicroscope,
-          {side:val("side"),quoteBudget:Number(val("quoteBudget")),feePercent:Number(val("feePercent"))}
+          {side:val("side"),quoteBudget:numeric("quoteBudget"),feePercent:numeric("feePercent")}
         );
       }finally{button.disabled=false;}
       if(!result.ok){out.textContent="Estimation refusée : "+result.message+" ["+result.code+"]";return;}

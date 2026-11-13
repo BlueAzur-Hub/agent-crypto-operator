@@ -100,7 +100,12 @@
     section.append(node("p",{},"Long uniquement : P↑ → achat fictif à l'ouverture de la bougie suivante ; P↓ → vente fictive. Bougies OKX clôturées, aucune exécution réelle."));
     const inputs=node("div",{class:"erith-row",style:"display:flex;gap:8px;flex-wrap:wrap"});
     for(const [name,title,min,max,step,value] of [["capital","Capital fictif",10,1000000,10,1000],["fee","Frais par côté (%)",0,2,.01,.1],["slippage","Glissement par côté (%)",0,2,.01,.05]]){
-      const label=node("label",{},title);label.append(node("input",{type:"number",min,max,step,value,"data-v5":name,style:"width:110px;display:block"}));inputs.append(label);
+      const label=node("label",{},title);
+      const attrs=name==="fee"
+        ? {type:"text",inputmode:"decimal",value:"0,10","data-v5":name,
+           "aria-label":"Frais OKX Spot Taker par côté : 0,10 %",style:"width:110px;display:block"}
+        : {type:"number",min,max,step,value,"data-v5":name,style:"width:110px;display:block"};
+      label.append(node("input",attrs));inputs.append(label);
     }
     section.append(inputs);
     const action=node("button",{type:"button","data-v5-run":"true"},"Calculer la simulation PAPER");section.append(action);
@@ -112,7 +117,10 @@
     comparisonBody.append(node("p",{},"Cliquez sur « Calculer la simulation PAPER » : le comparatif utilisera les mêmes bougies, le même capital, les mêmes frais et le même glissement."));
     comparisonPanel.append(comparisonBody);section.insertBefore(comparisonPanel,details);
     action.addEventListener("click",()=>{
-      const value=key=>Number(section.querySelector(`[data-v5="${key}"]`)?.value);
+      const value=key=>{
+        const raw=section.querySelector(`[data-v5="${key}"]`)?.value;
+        return raw==null||String(raw).trim()===""?NaN:Number(String(raw).trim().replace(",","."));
+      };
       const source=globalThis.AgentCryptoMarketMicroscope;
       const result=simulate(source?.snapshot?.(),source?.paperEmaCrossSnapshot?.(),{initialCapital:value("capital"),feePercent:value("fee"),slippagePercent:value("slippage")});
       details.replaceChildren();comparisonBody.replaceChildren();
