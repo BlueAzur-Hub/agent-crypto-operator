@@ -1,0 +1,75 @@
+name: Seven Heaven Operator PAPER Spot Lot Mirror Verification
+
+on:
+  push:
+    branches:
+      - feature/paper-okx-lot-inventory-operator-mirror-20261113
+    paths:
+      - '.github/workflows/seven-heaven-paper-spot-lot-operator-mirror-verification.yml'
+      - 'public/agent_crypto_erith_ia/administrator/index.html'
+      - 'public/agent_crypto_erith_ia/administrator/js/market-microscope-paper-spot-*.js'
+      - 'public/agent_crypto_erith_ia/administrator/tests/test-market-microscope-paper-spot-realism-comparison.cjs'
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/seven-heaven-paper-spot-lot-operator-mirror-verification.yml'
+      - 'public/agent_crypto_erith_ia/administrator/index.html'
+      - 'public/agent_crypto_erith_ia/administrator/js/market-microscope-paper-spot-*.js'
+      - 'public/agent_crypto_erith_ia/administrator/tests/test-market-microscope-paper-spot-realism-comparison.cjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  operator-safe-paper-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /public/agent_crypto_erith_ia/administrator/index.html
+            /public/agent_crypto_erith_ia/administrator/js/market-microscope-paper-backtest-v5.js
+            /public/agent_crypto_erith_ia/administrator/js/market-microscope-orderbook-paper-v6.js
+            /public/agent_crypto_erith_ia/administrator/js/market-microscope-paper-spot-lot-inventory-adapter.js
+            /public/agent_crypto_erith_ia/administrator/js/market-microscope-paper-spot-realism-comparison.js
+            /public/agent_crypto_erith_ia/administrator/tests/test-market-microscope-paper-backtest-v5.cjs
+            /public/agent_crypto_erith_ia/administrator/tests/test-market-microscope-orderbook-paper-v6.cjs
+            /public/agent_crypto_erith_ia/administrator/tests/test-market-microscope-paper-spot-realism-comparison.cjs
+            /public/agent_crypto_erith_ia/trader/trading-desk.html
+            /public/agent_crypto_erith_ia/trader/trader-runtime-mirror.js
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Original V5/V6 and identical PAPER comparator syntax
+        run: |
+          set -euo pipefail
+          node --check public/agent_crypto_erith_ia/administrator/js/market-microscope-paper-spot-lot-inventory-adapter.js
+          node --check public/agent_crypto_erith_ia/administrator/js/market-microscope-paper-spot-realism-comparison.js
+          node public/agent_crypto_erith_ia/administrator/tests/test-market-microscope-paper-backtest-v5.cjs
+          node public/agent_crypto_erith_ia/administrator/tests/test-market-microscope-orderbook-paper-v6.cjs
+      - name: Test 10 to 1000 USDC Operator mirror and exact inventory reconciliation
+        run: node public/agent_crypto_erith_ia/administrator/tests/test-market-microscope-paper-spot-realism-comparison.cjs
+      - name: Check no role/Bridge/trader privacy changes and no order APIs
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          b=Path('public/agent_crypto_erith_ia/administrator')
+          h=(b/'index.html').read_text()
+          names=['market-microscope-paper-spot-lot-inventory-adapter.js','market-microscope-paper-spot-realism-comparison.js']
+          for name in names:
+              assert h.count('./js/'+name)==1
+              js=(b/'js'/name).read_text()
+              for forbidden in ('fetch(', 'sendOrder(', '/api/v5/trade/', 'localStorage.setItem('):
+                  assert forbidden not in js, (name, forbidden)
+          assert h.index('market-microscope-orderbook-paper-v6.js')<h.index(names[0])<h.index(names[1])
+          assert 'Build 40.6.719' in h
+          t=Path('public/agent_crypto_erith_ia/trader/trading-desk.html').read_text()
+          assert 'profile=yohan' in t and 'surface=trader' in t
+          assert 'trader-runtime-mirror.js' in t
+          print('PASS: no order code, unchanged build, preserved Yoann Trader profile, one shared frame')
+          PY
