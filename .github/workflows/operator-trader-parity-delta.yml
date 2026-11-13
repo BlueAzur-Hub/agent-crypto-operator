@@ -284,6 +284,29 @@ jobs:
             assert trader["real_orders"] is False
             print("OPERATOR_MASTER_MIRROR_AND_PAPER_SCOPE_PASS; full guard owned by dedicated workflow")
             raise SystemExit(0)
+          # Scoped PAPER Spot fee/FRESH UX patch. It is not the historical
+          # six-file Trader delta; the dedicated PAPER workflows own tests.
+          fee_fresh_paths=[
+            "public/agent_crypto_erith_ia/administrator/index.html",
+            "public/agent_crypto_erith_ia/administrator/js/market-microscope-paper-backtest-v5.js",
+            "public/agent_crypto_erith_ia/administrator/js/market-microscope-orderbook-paper-v6.js",
+            "public/agent_crypto_erith_ia/administrator/js/market-microscope-paper-spot-realism-comparison.js"
+          ]
+          if sorted(modified)==sorted(fee_fresh_paths):
+            js=root/"administrator/js"
+            v5=(js/"market-microscope-paper-backtest-v5.js").read_text()
+            v6=(js/"market-microscope-orderbook-paper-v6.js").read_text()
+            cmp=(js/"market-microscope-paper-spot-realism-comparison.js").read_text()
+            assert 'value:"0,10"' in v5 and 'value:"0,10"' in v6
+            assert "replace(\",\",\".\")" in v5 and "replace(\",\",\".\")" in v6
+            assert "FRESH_MS=15000" in v6
+            assert "await bridge.openDepthAndEstimate(" in cmp
+            assert "PAIR_CHANGED" in cmp and 'if(button.disabled)return;' in cmp
+            assert 'Build 40.6.719' in index
+            assert trader["real_orders"] is False
+            assert all(x not in cmp for x in ("sendOrder(", "/api/v5/trade", "localStorage.setItem("))
+            print("OPERATOR_OKX_SPOT_PAPER_FEE_FRESH_UX_SCOPE_PASS; ZIP owned by release workflow")
+            raise SystemExit(0)
           assert sorted(modified)==sorted(rootpaths),(modified,rootpaths)
           folder=pathlib.Path("operator_trader_delta")
           folder.mkdir(exist_ok=True)
