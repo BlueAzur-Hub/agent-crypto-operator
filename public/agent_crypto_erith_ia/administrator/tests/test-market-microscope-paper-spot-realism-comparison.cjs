@@ -124,6 +124,32 @@ test("Operator Trader mirrors the Operator Interface with separate Yoann profile
  const mirror=fs.readFileSync(path.join(ROOT,"..","trader","trader-runtime-mirror.js"),"utf8");
  assert(mirror.includes("traderInterfaceRuntime"));
 });
+test("OKX Spot PAPER fee is 0,10 percent as French display and 0.1 percent as numerical default",()=>{
+ const a=fs.readFileSync(path.join(JS,filenames[0]),"utf8");
+ const b=fs.readFileSync(path.join(JS,filenames[1]),"utf8");
+ const c=fs.readFileSync(path.join(JS,filenames[3]),"utf8");
+ assert.equal(v5.defaults.feePercent,0.1);
+ assert.equal(a.includes('value:"0,10","data-v5":name'),true);
+ assert.equal(b.includes('"data-v6":key,value:"0,10"'),true);
+ assert.equal(a.includes('type:"text",inputmode:"decimal"'),true);
+ assert.equal(b.includes('type:"text",inputmode:"decimal"'),true);
+ assert.equal(a.includes('replace(",",".")'),true);
+ assert.equal(b.includes('replace(",",".")'),true);
+ assert.equal(c.includes('replace(",","."'),true);
+ assert.equal(b.includes('FRESH_MS=15000'),true);
+});
+test("One user click triggers bounded OKX book refresh with no false freshness",()=>{
+ const c=fs.readFileSync(path.join(JS,filenames[3]),"utf8");
+ const b=fs.readFileSync(path.join(JS,filenames[1]),"utf8");
+ assert(c.includes('button.addEventListener("click",async()=>{'));
+ assert(c.includes('if(button.disabled)return;'));
+ assert(c.includes('finally{button.disabled=false;}'));
+ assert(c.includes('await bridge.openDepthAndEstimate('));
+ assert(c.includes('PAIR_CHANGED'));
+ assert(c.includes('["BOOK_CONTEXT","BOOK_STALE"]'));
+ assert(b.includes('await bookService.refresh({asset:matched[1],quote:matched[2]})'));
+ assert(!c.includes('fetch(')&&!c.includes('sendOrder('));
+});
 if(process.exitCode)process.exit(1);
 console.log(JSON.stringify({status:"PASS_SHARED_ADMIN_TRADER_PAPER_UI_MATH",tests:passed,
   data:"synthetic offline only",fixtures:results.length,positions:results},null,2));
