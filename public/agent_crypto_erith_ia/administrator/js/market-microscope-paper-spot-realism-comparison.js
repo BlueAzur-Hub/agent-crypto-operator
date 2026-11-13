@@ -150,12 +150,16 @@ function mount(){
     "Métadonnées OKX publiques observées le 13/11/2026 à 01:41 UTC, non actualisées. "+
     "Frais en USDC supposés, taille minimale de notionnel et droit du compte EEE non vérifiés. "+
     "Aucune modification des simulations V5/V6."));
-  button.addEventListener("click",()=>{
+  button.addEventListener("click",async()=>{
+    if(button.disabled)return;
+    button.disabled=true;
+    try{
     out.replaceChildren();
     const source=globalThis.AgentCryptoMarketMicroscope;
     const v5Panel=document.getElementById("erithPaperBacktestV5");
     const getV5=(key,defaultValue)=>{
-      const val=Number(v5Panel?.querySelector('[data-v5="'+key+'"]')?.value);
+      const raw=v5Panel?.querySelector('[data-v5="'+key+'"]')?.value;
+      const val=raw==null||String(raw).trim()===""?NaN:Number(String(raw).trim().replace(",","."));
       return Number.isFinite(val)?val:defaultValue;
     };
     const v5Settings={initialCapital:getV5("capital",1000),feePercent:getV5("fee",0.1),slippagePercent:getV5("slippage",0.05)};
@@ -171,12 +175,34 @@ function mount(){
        " · position ouverte : "+historical.rounded_open_quantity_base+" "+historical.pair.split("-")[0]));
     }else out.append(node("p",{},"V5 indisponible : "+historical.message+" ["+historical.code+"]"));
     const v6Panel=document.getElementById("erithBookPaperV6");
-    const quoteInput=Number(v6Panel?.querySelector('[data-v6="quoteBudget"]')?.value);
-    const feeInput=Number(v6Panel?.querySelector('[data-v6="feePercent"]')?.value);
+    const numeric=raw=>raw==null||String(raw).trim()===""?NaN:Number(String(raw).trim().replace(",","."));
+    const quoteInput=numeric(v6Panel?.querySelector('[data-v6="quoteBudget"]')?.value);
+    const feeInput=numeric(v6Panel?.querySelector('[data-v6="feePercent"]')?.value);
     const v6Settings={quoteBudget:Number.isFinite(quoteInput)&&quoteInput>=10?quoteInput:v5Settings.initialCapital,
       feePercent:Number.isFinite(feeInput)&&feeInput>=0?feeInput:v5Settings.feePercent};
     const chart=source?.snapshot?.();
-    const v6Read=compareV6(globalThis.AgentCryptoOkxMicrostructure?.snapshot?.(),chart,v6Settings);
+    const bookService=globalThis.AgentCryptoOkxMicrostructure;
+    let v6Read=compareV6(bookService?.snapshot?.(),chart,v6Settings);
+    if(!v6Read.ok&&["BOOK_CONTEXT","BOOK_STALE"].includes(v6Read.code)){
+      const bridge=globalThis.ErithMarketBookPaperV6;
+      if(bridge?.openDepthAndEstimate&&bookService){
+        const expectedPair=String(chart?.loadedInstrument||"").toUpperCase();
+        const status=node("p",{},"Actualisation du carnet OKX en cours…");
+        out.append(status);
+        let attempt;
+        try{
+          attempt=await bridge.openDepthAndEstimate(bookService,source,
+            {side:"BUY",quoteBudget:v6Settings.quoteBudget,feePercent:v6Settings.feePercent});
+        }finally{status.remove();}
+        const updated=source?.snapshot?.();
+        if(String(updated?.loadedInstrument||"").toUpperCase()!==expectedPair)
+          v6Read=bad("PAIR_CHANGED","La paire a changé pendant l'actualisation : comparaison annulée.");
+        else if(!attempt?.ok)
+          v6Read=bad(attempt?.code||"BOOK_REFRESH_FAILED",attempt?.message||"Actualisation du carnet refusée.");
+        else
+          v6Read=compareV6(bookService.snapshot(),updated,v6Settings);
+      }
+    }
     const v6Hdr=node("p",{},"V6 — carnet FRESH, quantité réelle conservée");
     v6Hdr.style.fontWeight="bold";v6Hdr.style.marginTop="9px";out.append(v6Hdr);
     if(v6Read.ok){
@@ -185,6 +211,9 @@ function mount(){
         " USDC · friction aller-retour : "+money(v6Read.roundtrip_book_friction_usdc)+" USDC."));
     }else out.append(node("p",{},"V6 non calculé : "+v6Read.message+" ["+v6Read.code+"]. Ouvrir Profondeur et actualiser le carnet FRESH si nécessaire."));
     out.append(node("small",{style:"display:block;margin-top:7px;color:#c9bec6"},warn));
+    }catch(error){
+      out.append(node("p",{},"Comparaison refusée : "+String(error?.message||error)));
+    }finally{button.disabled=false;}
   });
   host.append(section);
   return true;
